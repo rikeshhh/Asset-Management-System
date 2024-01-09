@@ -1,5 +1,9 @@
+import Table from "../../../Component/Table/Table";
+
 const Assets = () => {
-  return <div>Assets</div>;
+  return <div>
+    <Table/>
+  </div>;
 };
 
 export default Assets;

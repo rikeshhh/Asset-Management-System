@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import './Signup.css'
+import { Label } from '../../Component/Label/Label';
+import { Link } from 'react-router-dom';
 export const Signup = () => {
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     return (
         <section className='main-container signup'>
-            {/* <div className='user__auth'>
+            <div className='user__auth'>
                 <div>
                     <h2 className='user__auth--heading'>AMS</h2>
                     <div className=''>
@@ -15,7 +17,8 @@ export const Signup = () => {
                 <form action="" className='user__auth--form'>
                     <h3>Signup</h3>
                     <div>
-                        <label htmlFor="username">Username</label>
+                        <Label text ={"username"}></Label>
+                    
                         <input type="text" placeholder='Enter your username' />
                         <label htmlFor="email">Email</label>
                         <input type="email" placeholder='Enter your username' />
@@ -54,12 +57,12 @@ export const Signup = () => {
                     <div>
                         <p>already have an account?<span>Login</span></p>
                     </div>
-                    <button>Signup</button>
+                  <Link to="/"><button>Signup</button></Link> 
                 </form>
                 <div className='user__auth__ques'>
                     <span>Please contact the admin at admin@ams.com for help</span>
                 </div>
-            </div> */}
+            </div>
         </section>
     )
 }
