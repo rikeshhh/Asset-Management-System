@@ -1,4 +1,4 @@
-import "./Assets.css";
+import Table from "../../../Component/Table/Table";
 
 const Assets = () => {
   return (
