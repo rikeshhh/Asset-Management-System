@@ -1,21 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-:root{
-    --primary-color: #000000;
-    --secondary-color: #ffffff;
-    --primary-grey:#E9EAEC;
-    --blue:#527DD0;
-    --red:#E03137;
-    --text-color:#21252B;
-    --light-text:#848D9A;
-    --toast-success:#E4F8EF;
-    --toast-error:#FFE2E3;
-    --toast-error-border:#E03137;
-    --toast-success-border:#0CAF60;
-
+:root {
+  --primary-color: #000000;
+  --secondary-color: #ffffff;
+  --primary-grey: #e9eaec;
+  --main-background: #eff4fe;
+  --blue: #527dd0;
+  --red: #e03137;
+  --text-color: #21252b;
+  --light-text: #848d9a;
+  --toast-success: #e4f8ef;
+  --toast-error: #ffe2e3;
+  --toast-error-border: #e03137;
+  --toast-success-border: #0caf60;
+  --light-grey: #657081;
+  --subheading: #292d32;
 }
 
-*{
-    font-family: 'Inter', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
-
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: var(--main-background);
+}
