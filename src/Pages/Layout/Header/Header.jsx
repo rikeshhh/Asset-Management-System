@@ -46,7 +46,7 @@ const Header = () => {
             </Link>
 
             <div className="plans"></div>
-            <Link to="layout/logout">
+            <Link to="">
               <li>Logout</li>
             </Link>
           </ul>

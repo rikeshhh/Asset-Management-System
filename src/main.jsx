@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     element: <Signup />,
   },
   {
-    path: "/layout",
+    path: "/",
     element: <Layout />,
     children: [
       {
@@ -63,7 +63,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "layout/logout",
+        path: "",
         element: <Logout />,
       },
     ],
