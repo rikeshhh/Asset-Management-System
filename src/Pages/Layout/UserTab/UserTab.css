@@ -1,0 +1,32 @@
+.usertab {
+  width: 100%;
+  background-color: var(--secondary-color);
+  border-bottom: 1px solid var(--primary-grey);
+}
+
+.profile {
+  padding: 1.5rem 2rem;
+  display: flex;
+  width: 100%;
+  align-items: end;
+  justify-content: end;
+  gap: 0.94rem;
+}
+
+.profile__name {
+  color: var(--text-color);
+  text-align: right;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0.00438rem;
+}
+
+.profile__position {
+  color: var(--light-text);
+  text-align: right;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 150%; /* 1.125rem */
+  letter-spacing: 0.00375rem;
+}

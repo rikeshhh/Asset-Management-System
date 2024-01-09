@@ -4,15 +4,13 @@ import Header from "./Pages/Layout/Header/Header";
 
 const Layout = () => {
   return (
-    <>
-      <div className="layout">
-        <Header />
-        <main className="main-content">
-          <UserTab />
-          <Outlet />
-        </main>
-      </div>
-    </>
+    <div className="layout">
+      <Header />
+      <main className="main-content">
+        <UserTab />
+        <Outlet />
+      </main>
+    </div>
   );
 };
 
