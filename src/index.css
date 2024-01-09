@@ -29,3 +29,10 @@ body {
   width: 100%;
   background-color: var(--main-background);
 }
+
+.layout {
+  display: flex;
+}
+
+.main-content {
+}
