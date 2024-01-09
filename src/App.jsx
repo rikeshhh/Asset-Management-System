@@ -1,11 +1,10 @@
-
 import "./App.css";
+import Header from "./Pages/Layout/Header/Header";
 
 function App() {
   return (
     <>
-      <p>ams</p>
-      <h1>rikesh intuji </h1>
+      <Header />
     </>
   );
 }
