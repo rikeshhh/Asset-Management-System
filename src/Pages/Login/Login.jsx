@@ -25,15 +25,16 @@ const Login = () => {
             </div>
           </div>
           <Link to="/layout">
-          <button className="user__auth--button" type="submit">
-            Login
-          </button>
+            <button className="user__auth--button" type="submit">
+              Login
+            </button>
           </Link>
-       
         </form>
         <div className="user__auth--ques">
           <p>Dont have an account?</p>
-          <Link to="/signup"><span>Signup</span></Link>     
+          <Link to="/signup">
+            <span>Signup</span>
+          </Link>
         </div>
         <div className="user__auth--bottom">
           <p>

@@ -15,16 +15,16 @@ const Header = () => {
             System
           </h4>
           <ul className="navbar__list">
-            <Link to="/">
+            <Link to="/layout/">
               <li>Dashboard</li>
             </Link>
-            <Link to="/assets">
+            <Link to="layout/assets">
               <li>Assets</li>
             </Link>
-            <Link to="/procurement">
+            <Link to="layout/procurement">
               <li>Procurement</li>
             </Link>
-            <Link to="/repair">
+            <Link to="layout/repair">
               <li>Repair & Replace</li>
             </Link>
           </ul>
@@ -32,21 +32,21 @@ const Header = () => {
         <div className="bottom__list">
           <h4 className="navbar__title">Listing</h4>
           <ul className="navbar__list">
-            <Link to="/employees">
+            <Link to="layout/employees">
               <li>Employees</li>
             </Link>
-            <Link to="/categories">
+            <Link to="layout/categories">
               <li>Categories</li>
             </Link>
-            <Link to="/location">
+            <Link to="layout/location">
               <li>Locations</li>
             </Link>
-            <Link to="/departments">
+            <Link to="layout/departments">
               <li>Department</li>
             </Link>
 
             <div className="plans"></div>
-            <Link to="/logout">
+            <Link to="layout/logout">
               <li>Logout</li>
             </Link>
           </ul>

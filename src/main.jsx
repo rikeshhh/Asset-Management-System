@@ -19,59 +19,55 @@ const router = createBrowserRouter([
   {
     path: "",
     element: <Login />,
-    children:[
-      {
-        path: "/layout",
-        element: <Layout />,
-        children: [
-          {
-            path: "/",
-            element: <Dashboard />,
-          },
-          
-          {
-            path: "/assets",
-            element: <Assets />,
-          },
-          {
-            path: "/procurement",
-            element: <Procurement />,
-          },
-          {
-            path: "/repair",
-            element: <Repair />,
-          },
-          {
-            path: "/employees",
-            element: <Employees />,
-          },
-          {
-            path: "/categories",
-            element: <Categories />,
-          },
-          {
-            path: "/location",
-            element: <Location />,
-          },
-          {
-            path: "/departments",
-            element: <Departments />,
-          },
-  
-          {
-            path: "/logout",
-            element: <Logout />,
-          },
-        ],
-      }
-    ]
-   
   },
   {
     path: "/signup",
-    element: <Signup/>,
-  }
-  
+    element: <Signup />,
+  },
+  {
+    path: "/layout",
+    element: <Layout />,
+    children: [
+      {
+        path: "/layout/",
+        element: <Dashboard />,
+      },
+
+      {
+        path: "layout/assets",
+        element: <Assets />,
+      },
+      {
+        path: "layout/procurement",
+        element: <Procurement />,
+      },
+      {
+        path: "layout/repair",
+        element: <Repair />,
+      },
+      {
+        path: "layout/employees",
+        element: <Employees />,
+      },
+      {
+        path: "layout/categories",
+        element: <Categories />,
+      },
+      {
+        path: "layout/location",
+        element: <Location />,
+      },
+      {
+        path: "layout/departments",
+        element: <Departments />,
+      },
+
+      {
+        path: "layout/logout",
+        element: <Logout />,
+      },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

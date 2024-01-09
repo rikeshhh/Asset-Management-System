@@ -1,5 +1,3 @@
-import Table from "../../../Component/Table/Table";
-
 const Assets = () => {
   return (
     <section className="content-wrapper">
