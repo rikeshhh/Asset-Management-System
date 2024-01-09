@@ -17,6 +17,14 @@ font-weight: 500;
 line-height: 150%; 
 letter-spacing: 0.07px;
 }
+.loader {
+    z-index: 30;
+    text-align: center;
+    background-color: #f00; /* Red, so I could see it properly */
+    opacity:0.5;
+    filter:alpha(opacity=50); /* For IE8 and earlier */
+    position: relative;
+}
 @media (max-width: 650px) {
     th{
         display: none;
