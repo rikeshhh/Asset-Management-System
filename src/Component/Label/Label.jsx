@@ -1,7 +1,7 @@
 import React from 'react'
 
-export const Label = ({text}) => {
+export const Label = ({text,className}) => {
   return (
-    <label>{text}</label>
+    <label className={className}>{text}</label>
   )
 }

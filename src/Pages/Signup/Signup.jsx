@@ -1,68 +1,48 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Label } from '../../Component/Label/Label'
+import { InputField } from '../../Component/Input/InputField'
+import Button from '../../Component/Button/Button'
 import './Signup.css'
-import { Label } from '../../Component/Label/Label';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 export const Signup = () => {
-    const [password, setPassword] = useState("");
-    const [showPassword, setShowPassword] = useState(false);
-    return (
-        <section className='main-container signup'>
-            <div className='user__auth'>
-                <div>
-                    <h2 className='user__auth--heading'>AMS</h2>
-                    <div className=''>
-                        <p>Asset Management System</p>
-                    </div>
-                </div>
-                <form action="" className='user__auth--form'>
-                    <h3>Signup</h3>
-                    <div>
-                        <Label text ={"username"}></Label>
-                    
-                        <input type="text" placeholder='Enter your username' />
-                        <label htmlFor="email">Email</label>
-                        <input type="email" placeholder='Enter your username' />
-                        <label htmlFor="password">Password</label>
-                        <input placeholder='Enter your password'
-                            type={
-                                showPassword ? "text" : "password"
-                            }
-                            value={password}
-                            onChange={(e) =>
-                                setPassword(e.target.value)
-                            }
-                        />
-                        <label for="retype">Retype password: </label>
-                        <input
-                            id="pass"
-                            type={
-                                showPassword ? "text" : "password"
-                            }
-                            value={password}
-                            onChange={(e) =>
-                                setPassword(e.target.value)
-                            }
-                        />
-
-                        <label for="check">Show Password</label>
-                        <input
-                            id="check"
-                            type="checkbox"
-                            value={showPassword}
-                            onChange={() =>
-                                setShowPassword((prev) => !prev)
-                            }
-                        />
-                    </div>
-                    <div>
-                        <p>already have an account?<span>Login</span></p>
-                    </div>
-                  <Link to="/"><button>Signup</button></Link> 
-                </form>
-                <div className='user__auth__ques'>
-                    <span>Please contact the admin at admin@ams.com for help</span>
-                </div>
+   return (
+      <section className='main-container signup'>
+         <div className="user__auth">
+            <div className="user__auth__content">
+               <div className="user__auth--top">
+                  <div className="user__auth--heading">AMS</div>
+                  <div className="user__auth--para">
+                     <p>Assets management system</p>
+                  </div>
+               </div>
+               <form className="user__auth--form">
+                  <h3 className="user__auth--title">Signup</h3>
+                  <div className="user__auth--input">
+                     <Label text="Username" />
+                     <InputField placeholder="Enter your username"  type="text" maxlength="12" minlength="4"/>
+                     <Label text="Email" />
+                     <InputField placeholder="Enter your email" type="email"  maxlength="12" minlength="4"/>
+                     <Label text="Password" />
+                     <InputField placeholder="Enter your password" type="password"  maxlength="12" minlength="4"/>
+                     <Label text="Retype Password" />
+                     <InputField placeholder="Enter your password" type="password"  maxlength="12" minlength="4"/>
+                     <div className="user__auth--ques">
+                        <p>Already have an account?</p>
+                        <Link to="/login">
+                           <span>Login</span>
+                        </Link>
+                     </div>
+                     <Button text="Signup" className={"user__auth--button"} />
+                  </div>
+               </form>
+               <div className="user__auth--bottom">
+                  <p>
+                     Please contact the admin at{" "}
+                     <a href="mailto:admin@ams.com">admin@ams.com</a> for help
+                  </p>
+               </div>
             </div>
-        </section>
-    )
+         </div>
+      </section>
+   )
 }

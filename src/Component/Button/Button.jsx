@@ -1,15 +1,9 @@
 import React from 'react'
 import './button.css'
 import { Link } from 'react-router-dom'
-const Button = ({text,linkUrl}) => {
+const Button = ({text,className}) => {
   return (
-    <div>
-      {/* <button>Submit</button> */}
-     <Link to={linkUrl}>
-
-     <button className='button'>{text} </button>
-     </Link>  
-    </div>
+     <button className={className}>{text} </button>
   )
 }
 

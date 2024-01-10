@@ -11,16 +11,3 @@
   flex: 1 0 0;
 }
 
-.user__auth--bottom {
-  padding-top: 12.31rem;
-  padding-bottom: 2.25rem;
-  color: var(--light-grey);
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 150%;
-  letter-spacing: 0.00438rem;
-}
-
-.user__auth--bottom a {
-  color: var(--light-grey);
-}

@@ -4,7 +4,13 @@
   padding: 0 15px;
 }
 
-.user__auth {
+.user__auth{
+  width: 720px;
+height: 1024px;
+flex-shrink: 0;
+}
+.user__auth__content{
+ padding:0px 120px ;
 }
 
 .user__auth--top {
@@ -90,7 +96,7 @@
 
 .user__auth--ques {
   display: flex;
-  padding-top: 0.81rem;
+  padding: 0.81rem 0px;
   gap: 0.25rem;
   justify-content: center;
 }
@@ -109,4 +115,17 @@
   font-weight: 500;
   line-height: 150%;
   letter-spacing: 0.00438rem;
+}
+.user__auth--bottom {
+  padding: 4.87rem 0;
+  color: var(--light-grey);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0.00438rem;
+  text-align: center;
+}
+
+.user__auth--bottom a {
+  color: var(--light-grey);
 }

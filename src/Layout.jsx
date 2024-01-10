@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import UserTab from "./Pages/Layout/UserTab/UserTab";
-import Header from "./Pages/Layout/Header/Header";
+import UserTab from "./Pages/UserTab/UserTab";
+import Header from "./Pages/Header/Header";
 
 const Layout = () => {
   return (

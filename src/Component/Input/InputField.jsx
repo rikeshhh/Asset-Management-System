@@ -1,9 +1,14 @@
 import React from 'react'
 
-export const InputField = (props) => {
+export const InputField = ({className,type,id,placeholder,maxlength,minlength}) => {
   return (
-    <div>
-        <input type='' placeholder='' />
-    </div>
+        <input
+        type={type}
+        maxlength={maxlength}
+        minLength={minlength}
+         placeholder={placeholder}
+          className={className} 
+          required
+          />
   )
 }
