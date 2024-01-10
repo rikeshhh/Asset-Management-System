@@ -1,14 +1,32 @@
 import React from 'react'
-
-export const InputField = ({className,type,id,placeholder,maxlength,minlength}) => {
+import { useForm } from 'react-hook-form'
+import './input.css'
+export const InputField = ({
+  className,
+  placeholder,
+  name,
+  register,
+  errors,
+  pattern = null }) => {
   return (
-        <input
-        type={type}
-        maxlength={maxlength}
-        minLength={minlength}
-         placeholder={placeholder}
-          className={className} 
-          required
-          />
+    <>
+      <input
+
+        placeholder={placeholder}
+        className={className}
+        name={name}
+        {...register(name, {
+          required: `${name} is required`,
+          pattern
+        },
+        )}
+      />
+      {errors && errors[name] && (
+        <p className="error-message">{errors[name].message || `${name} `}</p>
+      )}
+    </>
   )
 }
+
+
+
