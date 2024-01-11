@@ -9,6 +9,7 @@ import Departments from "../Pages/Departments/Departments";
 import Logout from "../Pages/Logout/Logout";
 import Login from "../Pages/Login/Login";
 import { Signup } from "../Pages/Signup/Signup";
+import { Profile } from "../Pages/Profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
         {
             path: "/assets",
             element: <Assets/>,
+          },
+          {
+            path: "/profile",
+            element: <Profile/>,
           },
           {
             path: "/procurement",
