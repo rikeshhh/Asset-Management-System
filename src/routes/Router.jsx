@@ -11,12 +11,17 @@ import Login from "../Pages/Login/Login";
 import { Signup } from "../Pages/Signup/Signup";
 import { Profile } from "../Pages/Profile/Profile";
 import Location from "../Pages/Location/Location";
+import Dashboard from "../Pages/Dashboard/Dashboard";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      {
+        path: "/",
+        element: <Dashboard />,
+      },
       {
         path: "/assets",
         element: <Assets />,
@@ -51,7 +56,7 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "",
+        path: "/logout",
         element: <Logout />,
       },
     ],
@@ -62,6 +67,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <Signup/>
-  }   
-  ]);
+    element: <Signup />,
+  },
+]);
