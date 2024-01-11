@@ -11,6 +11,7 @@ import Login from "../Pages/Login/Login";
 import { Signup } from "../Pages/Signup/Signup";
 import { Profile } from "../Pages/Profile/Profile";
 import Location from "../Pages/Location/Location";
+import Table from "../Component/Table/Table";
 
 export const router = createBrowserRouter([
   {
@@ -35,7 +36,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/employees",
-        element: <Employees />,
+        element: <Table/>,
       },
       {
         path: "/categories",

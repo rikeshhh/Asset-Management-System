@@ -1,0 +1,29 @@
+
+table{
+    background-color: #E9EAEC;
+    color: #21252B;
+    border-collapse:collapse ;
+
+}
+th,td{
+    padding: 1rem;
+}
+th{
+    text-align: left;
+    background-color: #EFF4FE;
+    color: #657081;
+    font-size: 14px;
+font-style: normal;
+font-weight: 500;
+letter-spacing: 0.07px;
+
+}
+ol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+ol li {
+    padding: 1rem;
+}

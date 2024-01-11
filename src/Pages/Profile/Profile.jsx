@@ -12,6 +12,7 @@ export const Profile = () => {
         formState: { errors },
         handleSubmit
     } = useForm();
+ 
     return (
         <section className='main-container'>
             <div className='user__profile'>
