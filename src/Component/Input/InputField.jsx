@@ -7,7 +7,8 @@ export const InputField = ({
   name,
   register,
   errors,
-  pattern = null }) => {
+  pattern =null
+}) => {
   return (
     <>
       <input
@@ -19,8 +20,7 @@ export const InputField = ({
         {...register(name, {
           required: `${name} is required`,
           pattern,
-          minLength: 6,
-           maxLength: 12
+
         }
         )}
       />

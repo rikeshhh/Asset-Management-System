@@ -11,7 +11,9 @@ export const Signup = () => {
       formState: { errors },
       handleSubmit
    } = useForm();
-
+const submitData=(data)=> {
+   console.log(data)
+}
    return (
       <section className='main-container signup'>
          <div className="user__auth">
@@ -23,7 +25,7 @@ export const Signup = () => {
                   </div>
                </div>
                <form className="user__auth--form"
-                  onSubmit={handleSubmit()}
+                  onSubmit={handleSubmit(submitData)}
                >
                   <h3 className="user__auth--title">Signup</h3>
                   <div className="user__auth--input">
@@ -34,7 +36,7 @@ export const Signup = () => {
                         pattern={{
                            value: /^[a-zA-Z0-9_]+$/, // Example username pattern (alphanumeric characters and underscores)
                            message: 'Invalid username format (alphanumeric characters and underscores)',
-                        }}
+                       }}
                      />
                      <Label text="Email" />
                      <InputField placeholder="john.doe@example.com" name="Email"
@@ -42,19 +44,22 @@ export const Signup = () => {
                         pattern={{
                            value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
                            message: "Please Enter the valid email address",
-                        }}
+                         }}
                         errors={errors} />
                      <Label text="Password" />
                      <InputField placeholder="(at least 8 characters, at least one letter, and one number)"
                         name="Password"
                         pattern={{
                            value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // Example password pattern (at least 8 characters, at least one letter, and one number)
-                           message: 'Invalid password format (at least 8 characters, at least one letter, and one number)',
-                        }}
+                           message:
+                             "Invalid password format (at least 8 characters, at least one letter, and one number)",
+                         }}
                         register={register}
                         errors={errors} />
                      <Label text="Retype Password" />
-                     <InputField placeholder="Enter your password" name="password" register={register} errors={errors} />
+                     <InputField placeholder="Enter your password" name="password" register={register}
+                     
+                     errors={errors} />
                      <div className="user__auth--ques">
                         <p>Already have an account?</p>
                         <Link to="/login">
