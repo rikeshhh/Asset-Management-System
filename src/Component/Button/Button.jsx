@@ -1,9 +1,9 @@
 import React from 'react'
 import './button.css'
 import { Link } from 'react-router-dom'
-const Button = ({text,className,value}) => {
+const Button = ({text,className,value,isDisabled}) => {
   return (
-     <button className={className} type={value}>{text} </button>
+     <button className={className} type={value} disabled={isDisabled}>{text} </button>
   )
 }
 

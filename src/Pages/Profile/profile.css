@@ -3,6 +3,9 @@
     flex-direction: column;
     background: var(--Netral-White, #FFF);
 }
+.user__profile--header{
+padding: 1.25rem 1.38rem;
+}
 .user__profile--body{
     display: grid;
     grid-template-columns: repeat(2,1fr);
@@ -96,4 +99,14 @@ font-style: normal;
 font-weight: 500;
 line-height: 150%; /* 1.5rem */
 letter-spacing: 0.005rem;
+}
+.jobType{
+display: flex;
+gap: 4rem;
+}
+.checkbox__input--label{
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 4px;
 }

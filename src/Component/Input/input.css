@@ -1,3 +1,14 @@
 .error-message{
     color: red;
 }
+select{
+    display: flex;
+height: 3.5rem;
+padding: 0rem 1rem;
+align-items: center;
+gap: 1rem;
+align-self: stretch;
+border-radius: 0.3125rem;
+border: 1px solid var(--Grey, #E9EAEC);
+background: #EDEDED;
+}
