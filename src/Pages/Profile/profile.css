@@ -25,7 +25,7 @@ align-items: center;
 gap: 1.37rem;
 flex-direction: column;
 border-radius: 0.5rem;
-border: 1px solid var(--Grey, #E9EAEC);
+border: 1px solid var(--primary-grey);
 background: #FFF;
 width: 31.25rem;
 height: 30.75rem;
@@ -36,7 +36,11 @@ flex-shrink: 0;
 height: 11.0625rem;
 flex-shrink: 0;
 border-radius: 11.0625rem;
-border: 1px solid black;
+
+}
+.user__profile--image figure img{
+    object-fit: cover;
+
 }
 .user__profile--image button{
     display: flex;
