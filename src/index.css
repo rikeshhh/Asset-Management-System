@@ -15,7 +15,8 @@
   --toast-success-border: #0caf60;
   --light-grey: #657081;
   --subheading: #292d32;
-  --icon-grey: #989FAB;
+  --icon-grey: #989fab;
+  --disabled-input: #ededed;
 }
 
 * {
@@ -43,4 +44,9 @@ body {
 .content-wrapper {
   padding: 2rem;
   width: 100%;
+}
+
+.content-radius {
+  border-radius: 1rem;
+  background: var(--secondary-color);
 }

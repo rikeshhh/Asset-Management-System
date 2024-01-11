@@ -1,7 +1,7 @@
 const Assets = () => {
   return (
     <section className="content-wrapper">
-      <div className="assets">assets</div>
+      <div className="assets content-radius">assets</div>
     </section>
   );
 };
