@@ -1,9 +1,9 @@
 import './Table.css'
-import Pagination from '../Pagination/Pagination';
 import { useState, useMemo } from 'react';
 import data from "./data/MOCK_DATA.json"
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
+import Pagination from '../Pagination/Pagination';
 
 let PageSize = 10;
 const Table = () => {
