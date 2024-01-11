@@ -7,6 +7,7 @@ export const InputField = ({
   name,
   register,
   errors,
+  isDisabled,
   pattern =null
 }) => {
   return (
@@ -17,6 +18,7 @@ export const InputField = ({
         className={className}
         name={name}
         type={name}
+        disabled={isDisabled}
         {...register(name, {
           required: `${name} is required`,
           pattern,

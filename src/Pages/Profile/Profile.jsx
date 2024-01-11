@@ -4,6 +4,7 @@ import { Label } from '../../Component/Label/Label'
 import { useForm } from 'react-hook-form'
 import './profile.css'
 import Button from '../../Component/Button/Button'
+import { SelectInput } from '../../Component/Input/SelectInput'
 export const Profile = () => {
     const {
         register,
@@ -41,15 +42,19 @@ export const Profile = () => {
                             <InputField placeholder="example123_ABC" name="Username"
                                 register={register}
                                 errors={errors}
+                                isDisabled={true}
                                 pattern={{
                                     value: /^[a-zA-Z0-9_]+$/, // Example username pattern (alphanumeric characters and underscores)
                                     message: 'Invalid username format (alphanumeric characters and underscores)',
                                 }}
                             />
+                             <Label text="Designation"/>
+                             <SelectInput/>
                             <Label text="Designation" />
                             <InputField placeholder="example123_ABC" name="Username"
                                 register={register}
                                 errors={errors}
+                                isDisabled={true}
                                 pattern={{
                                     value: /^[a-zA-Z0-9_]+$/, // Example username pattern (alphanumeric characters and underscores)
                                     message: 'Invalid username format (alphanumeric characters and underscores)',
@@ -59,6 +64,8 @@ export const Profile = () => {
                             <InputField placeholder="example123_ABC" name="Username"
                                 register={register}
                                 errors={errors}
+                                isDisabled={true}
+
                                 pattern={{
                                     value: /^[a-zA-Z0-9_]+$/, // Example username pattern (alphanumeric characters and underscores)
                                     message: 'Invalid username format (alphanumeric characters and underscores)',
@@ -68,6 +75,8 @@ export const Profile = () => {
                             <InputField placeholder="example123_ABC" name="Username"
                                 register={register}
                                 errors={errors}
+                                isDisabled={true}
+
                                 pattern={{
                                     value: /^[a-zA-Z0-9_]+$/, // Example username pattern (alphanumeric characters and underscores)
                                     message: 'Invalid username format (alphanumeric characters and underscores)',
@@ -81,6 +90,8 @@ export const Profile = () => {
                                     value: /^[a-zA-Z0-9_]+$/, // Example username pattern (alphanumeric characters and underscores)
                                     message: 'Invalid username format (alphanumeric characters and underscores)',
                                 }}
+                                isDisabled={true}
+
                             />
                             <Button value="submit" text="cancel" />
                         </form>
