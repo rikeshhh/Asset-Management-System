@@ -1,6 +1,6 @@
 import './Table.css'
 import Pagination from '../Pagination/Pagination';
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import data from "./data/MOCK_DATA.json"
 
 let PageSize = 10;
@@ -31,7 +31,7 @@ let PageSize = 10;
           <tbody>
             {currentTableData.map(item => {
               return (
-                <tr>
+                <tr >
                   <td>{item.productCode}</td>
                   <td>{item.name}</td>
                   <td>{item.category}</td>
