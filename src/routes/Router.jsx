@@ -12,6 +12,7 @@ import { Signup } from "../Pages/Signup/Signup";
 import { Profile } from "../Pages/Profile/Profile";
 import Location from "../Pages/Location/Location";
 import Table from "../Component/Table/Table";
+import Dashboard from "../Pages/Dashboard/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Dashboard />,
+        element: <Dashboard/>,
       },
       {
         path: "/assets",
