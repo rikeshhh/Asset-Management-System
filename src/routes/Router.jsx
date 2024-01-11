@@ -19,6 +19,10 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       {
+        path: "/",
+        element: <Dashboard />,
+      },
+      {
         path: "/assets",
         element: <Assets />,
       },
@@ -52,7 +56,7 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "",
+        path: "/logout",
         element: <Logout />,
       },
     ],
@@ -63,6 +67,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <Signup/>
-  }   
-  ]);
+    element: <Signup />,
+  },
+]);
