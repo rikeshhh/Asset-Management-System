@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import './profile.css'
 import Button from '../../Component/Button/Button'
 import { SelectInput } from '../../Component/Input/SelectInput'
+import userProf from "/src/assets/userProf.svg"
 export const Profile = () => {
     const {
         register,
@@ -24,7 +25,7 @@ export const Profile = () => {
                     <div className="user__profile__body--image">
                         <div className='user__profile--image'>
                             <figure>
-                                <img src="" alt="amod suman" />
+                                <img src={userProf} alt="amod suman" />
                             </figure>
                             <Button text="Upload a new photo" className={'user__profile--image button'} />
                             <span>
