@@ -10,59 +10,58 @@ import Logout from "../Pages/Logout/Logout";
 import Login from "../Pages/Login/Login";
 import { Signup } from "../Pages/Signup/Signup";
 import { Profile } from "../Pages/Profile/Profile";
+import Location from "../Pages/Location/Location";
 
 export const router = createBrowserRouter([
   {
-      path: "/",
-      element: <App/>,
-     children:[
-        {
-            path: "/assets",
-            element: <Assets/>,
-          },
-          
-          {
-            path: "/procurement",
-            element: <Procurement />,
-          },
-          {
-            path: "/repair",
-            element: <Repair />,
-          },
-          {
-            path: "/employees",
-            element: <Employees />,
-          },
-          {
-            path: "/categories",
-            element: <Categories />,
-          },
-          {
-            path: "/location",
-            element: <Location />,
-          },
-          {
-            path: "/departments",
-            element: <Departments />,
-          },
-    
-          {
-            path: "",
-            element: <Logout />,
-          },
-       
-     ]
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "/assets",
+        element: <Assets />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/procurement",
+        element: <Procurement />,
+      },
+      {
+        path: "/repair",
+        element: <Repair />,
+      },
+      {
+        path: "/employees",
+        element: <Employees />,
+      },
+      {
+        path: "/categories",
+        element: <Categories />,
+      },
+      {
+        path: "/location",
+        element: <Location />,
+      },
+      {
+        path: "/departments",
+        element: <Departments />,
+      },
+
+      {
+        path: "",
+        element: <Logout />,
+      },
+    ],
   },
   {
     path: "/login",
-    element: <Login/>
+    element: <Login />,
   },
   {
     path: "/signup",
     element: <Signup/>
-  }, 
-  {
-    path: "/profile",
-    element: <Profile/>,
-  },
+  }   
   ]);

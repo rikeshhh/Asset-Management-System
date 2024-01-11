@@ -4,13 +4,13 @@
   padding: 0 15px;
 }
 
-.user__auth{
+.user__auth {
   width: 720px;
-height: 1024px;
-flex-shrink: 0;
+  height: 1024px;
+  flex-shrink: 0;
 }
-.user__auth__content{
- padding:0px 120px ;
+.user__auth__content {
+  padding: 0px 120px;
 }
 
 .user__auth--top {
@@ -117,7 +117,7 @@ flex-shrink: 0;
   letter-spacing: 0.00438rem;
 }
 .user__auth--bottom {
-  padding: 4.87rem 0;
+  padding: 4.87rem 0 0;
   color: var(--light-grey);
   font-size: 0.875rem;
   font-weight: 500;
