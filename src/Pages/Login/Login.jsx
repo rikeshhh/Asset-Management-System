@@ -11,6 +11,11 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  const onSubmit = (e, data) => {
+    e.preventDefault;
+    console.log("hello");
+  };
   return (
     <section className="main-container login">
       <div className="user__auth">
@@ -21,14 +26,13 @@ const Login = () => {
               <p>Assets management system</p>
             </div>
           </div>
-          <form className="user__auth--form" onSubmit={handleSubmit()}>
+          <form className="user__auth--form" onSubmit={handleSubmit(onSubmit)}>
             <h3 className="user__auth--title">Login</h3>
             <div className="user__auth--input">
               <Label text={"Username"} />
               <InputField
                 name="Username"
                 placeholder="Enter your username"
-                type="text"
                 pattern={{
                   value: /^[a-zA-Z0-9_]+$/,
                   message:
@@ -41,8 +45,7 @@ const Login = () => {
               <Label text={"Password"} />
               <InputField
                 name={"Password"}
-                placeholder={"Enter your username"}
-                type={"password"}
+                placeholder={"Enter your password"}
                 pattern={{
                   value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // Example password pattern (at least 8 characters, at least one letter, and one number)
                   message:
