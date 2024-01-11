@@ -28,16 +28,16 @@ export const Signup = () => {
                   <h3 className="user__auth--title">Signup</h3>
                   <div className="user__auth--input">
                      <Label text="Username" />
-                     <InputField placeholder="Enter your username" name="Username"
+                     <InputField placeholder="example123_ABC" name="Username"
                         register={register}
                         errors={errors}
                         pattern={{
                            value: /^[a-zA-Z0-9_]+$/, // Example username pattern (alphanumeric characters and underscores)
-                           message: 'Invalid username format',
+                           message: 'Invalid username format (alphanumeric characters and underscores)',
                         }}
                      />
                      <Label text="Email" />
-                     <InputField placeholder="Enter your email" name="Email"
+                     <InputField placeholder="john.doe@example.com" name="Email"
                         register={register}
                         pattern={{
                            value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
@@ -45,16 +45,16 @@ export const Signup = () => {
                         }}
                         errors={errors} />
                      <Label text="Password" />
-                     <InputField placeholder="Enter your password"
+                     <InputField placeholder="(at least 8 characters, at least one letter, and one number)"
                         name="Password"
                         pattern={{
                            value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // Example password pattern (at least 8 characters, at least one letter, and one number)
-                           message: 'Invalid password format',
+                           message: 'Invalid password format (at least 8 characters, at least one letter, and one number)',
                         }}
                         register={register}
                         errors={errors} />
                      <Label text="Retype Password" />
-                     <InputField placeholder="Enter your password" name="Password" register={register} errors={errors} />
+                     <InputField placeholder="Enter your password" name="password" register={register} errors={errors} />
                      <div className="user__auth--ques">
                         <p>Already have an account?</p>
                         <Link to="/login">

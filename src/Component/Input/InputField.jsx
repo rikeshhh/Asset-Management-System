@@ -15,14 +15,17 @@ export const InputField = ({
         placeholder={placeholder}
         className={className}
         name={name}
+        type={name}
         {...register(name, {
           required: `${name} is required`,
-          pattern
-        },
+          pattern,
+          minLength: 6,
+           maxLength: 12
+        }
         )}
       />
       {errors && errors[name] && (
-        <p className="error-message">{errors[name].message || `${name} `}</p>
+        <p className="error-message">{errors[name].message}</p>
       )}
     </>
   )
