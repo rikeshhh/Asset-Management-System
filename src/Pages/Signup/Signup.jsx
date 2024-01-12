@@ -5,7 +5,7 @@ import Button from "../../Component/Button/Button";
 import "./Signup.css";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import validationRules from "../../Component/Validation/Validation.json";
+import validationRules from "../../Component/Validation/Validation";
 export const Signup = () => {
   const {
     register,

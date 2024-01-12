@@ -60,9 +60,50 @@
   gap: 0.75rem;
 }
 
-
 .plans {
-  height: 100px;
-  width: 100px;
-  background-color: antiquewhite;
+  background-image: url("/src/assets/plans.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: fit-content;
+  width: fit-content;
+  padding: 1rem 1.25rem 1.25rem;
+  border-radius: 0.3125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: var(--secondary-color);
+  margin: 1.75rem 0 0.67rem 0;
+}
+
+.plans p {
+  color: var(--secondary-color);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 130%;
+  letter-spacing: 0.00438rem;
+}
+
+.plans span {
+  color: var(--secondary-color);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 130%;
+  letter-spacing: 0.00375rem;
+}
+
+.plans__button {
+  width: 12rem;
+  height: 2.25rem;
+  padding: 0rem 1rem;
+  color: var(--blue);
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0.00438rem;
+  border-radius: 0.3125rem;
+  background: var(--secondary-color);
+  border: none;
+  cursor: pointer;
 }

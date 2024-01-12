@@ -1,21 +1,21 @@
-import React from 'react';
-import classnames from 'classnames';
-import { usePagination, DOTS } from './usePagination';
-import './Pagination.css';
- const Pagination = props => {
+import React from "react";
+import classnames from "classnames";
+import { usePagination, DOTS } from "./usePagination";
+import "./Pagination.css";
+const Pagination = (props) => {
   const {
     onPageChange,
     totalCount,
     siblingCount = 1,
     currentPage,
     pageSize,
-    className
+    className,
   } = props;
   const paginationRange = usePagination({
     currentPage,
     totalCount,
     siblingCount,
-    pageSize
+    pageSize,
   });
 
   if (currentPage === 0 || paginationRange.length < 2) {
@@ -23,35 +23,35 @@ import './Pagination.css';
   }
 
   const onNext = () => {
-    onPageChange(currentPage + 1);
+    onPageChange(currentPage + 5);
   };
 
   const onPrevious = () => {
-    onPageChange(currentPage - 1);
+    onPageChange(currentPage - 5);
   };
 
   let lastPage = paginationRange[paginationRange.length - 1];
   return (
     <ul
-      className={classnames('pagination-container', { [className]: className })}
+      className={classnames("pagination-container", { [className]: className })}
     >
       <li
-        className={classnames('pagination-item', {
-          disabled: currentPage === 1
+        className={classnames("pagination-item", {
+          disabled: currentPage === 1,
         })}
         onClick={onPrevious}
       >
         <div className="arrow left" />
       </li>
-      {paginationRange.map(pageNumber => {
+      {paginationRange.map((pageNumber) => {
         if (pageNumber === DOTS) {
           return <li className="pagination-item dots">&#8230;</li>;
         }
 
         return (
           <li
-            className={classnames('pagination-item', {
-              selected: pageNumber === currentPage
+            className={classnames("pagination-item", {
+              selected: pageNumber === currentPage,
             })}
             onClick={() => onPageChange(pageNumber)}
           >
@@ -60,8 +60,8 @@ import './Pagination.css';
         );
       })}
       <li
-        className={classnames('pagination-item', {
-          disabled: currentPage === lastPage
+        className={classnames("pagination-item", {
+          disabled: currentPage === lastPage,
         })}
         onClick={onNext}
       >
@@ -71,4 +71,4 @@ import './Pagination.css';
   );
 };
 
-export default Pagination
+export default Pagination;

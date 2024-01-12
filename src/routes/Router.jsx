@@ -13,6 +13,7 @@ import { Profile } from "../Pages/Profile/Profile";
 import Location from "../Pages/Location/Location";
 import Table from "../Component/Table/Table";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import Plans from "../Pages/Plans/Plans";
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Dashboard/>,
+        element: <Dashboard />,
       },
       {
         path: "/assets",
@@ -41,7 +42,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/employees",
-        element: <Table/>,
+        element: <Table />,
       },
       {
         path: "/categories",
@@ -55,7 +56,10 @@ export const router = createBrowserRouter([
         path: "/departments",
         element: <Departments />,
       },
-
+      {
+        path: "/plans",
+        element: <Plans />,
+      },
       {
         path: "/logout",
         element: <Logout />,

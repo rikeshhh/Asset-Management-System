@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./Header.css";
+import Button from "../../Component/Button/Button";
 const Header = () => {
   return (
     <header className="header ">
@@ -69,7 +70,15 @@ const Header = () => {
               </li>
             </Link>
 
-            <div className="plans"></div>
+            <div className="plans">
+              <p>Want to increase your productivity?</p>
+              <span>
+                Get more from AMS with our business / enterprise plans!
+              </span>
+              <Link to="/plans">
+                <Button className={"plans__button"} text={"Go to plans"} />
+              </Link>
+            </div>
             <Link to="" className="navbar__link">
               <li>
                 <img src="/src/assets/logout.svg" alt="" />
