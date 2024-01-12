@@ -4,6 +4,7 @@ import { Label } from "../../Component/Label/Label";
 import { InputField } from "../../Component/Input/InputField";
 import { useForm } from "react-hook-form";
 import Button from "../../Component/Button/Button";
+import validationRules from "../../Component/Validation/Validation.json";
 
 const Login = () => {
   const {
@@ -29,31 +30,27 @@ const Login = () => {
           <form className="user__auth--form" onSubmit={handleSubmit(onSubmit)}>
             <h3 className="user__auth--title">Login</h3>
             <div className="user__auth--input">
-              <Label text={"Username"} />
-              <InputField
-                name="Username"
-                placeholder="Enter your username"
-                pattern={{
-                  value: /^[a-zA-Z0-9_]+$/,
-                  message:
-                    "Invalid username format (alphanumeric characters and underscores)",
-                }}
-                register={register}
-                errors={errors}
-              />
+              {Object.keys(validationRules).map((fieldName) => {
+                const rule = validationRules[fieldName];
+                if (fieldName === "Username" || fieldName === "Password") {
+                  return (
+                    <>
+                      <Label text={fieldName} />
+                      <InputField
+                        placeholder={rule.placeholder}
+                        name={fieldName}
+                        type={rule.type}
+                        disabled={false}
+                        register={register}
+                        fieldName={fieldName}
+                        rule={rule}
+                        errors={errors}
+                      />
+                    </>
+                  );
+                }
+              })}
 
-              <Label text={"Password"} />
-              <InputField
-                name={"Password"}
-                placeholder={"Enter your password"}
-                pattern={{
-                  value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // Example password pattern (at least 8 characters, at least one letter, and one number)
-                  message:
-                    "Invalid password format (at least 8 characters, at least one letter, and one number)",
-                }}
-                register={register}
-                errors={errors}
-              />
               <div className="user__auth--checkbox">
                 <input type="checkbox" />
                 <span>Remember me</span>
@@ -71,7 +68,7 @@ const Login = () => {
               <span>Signup</span>
             </Link>
           </div>
-          <div className="user__auth--bottom">
+          <div className="user__auth--bottom bottom__padding">
             <p>
               Please contact the admin at{" "}
               <a href="mailto:admin@ams.com">admin@ams.com</a> for help
