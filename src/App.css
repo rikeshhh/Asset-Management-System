@@ -126,3 +126,18 @@
 .user__auth--bottom a {
   color: var(--light-grey);
 }
+
+.button__one {
+  border-radius: 0.3125rem;
+  background: var(--red);
+  width: 8.5rem;
+  height: 3rem;
+  flex-shrink: 0;
+  color: var(--secondary-color);
+  border: none;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0.005rem;
+}
