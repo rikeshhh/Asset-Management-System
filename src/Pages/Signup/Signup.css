@@ -1,18 +1,9 @@
-.signup{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  
+.signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.signup h2{
-    color: var(--blue);
-font-family: Inter;
-font-size: 120px;
-font-style: normal;
-font-weight: 800;
-line-height: 150%; /* 180px */
-letter-spacing: 0.6px;
-}
+
 .error-message {
-    color: red;
-  }
+  color: red;
+}

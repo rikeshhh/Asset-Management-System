@@ -1,6 +1,5 @@
 .user__auth {
-  width: 720px;
-  height: 1024px;
+  width: 45rem;
   flex-shrink: 0;
 }
 .user__auth__content {
@@ -113,6 +112,7 @@
   line-height: 150%;
   letter-spacing: 0.00438rem;
 }
+
 .user__auth--bottom {
   padding: 4.87rem 0 0;
   color: var(--light-grey);
@@ -121,6 +121,7 @@
   line-height: 150%;
   letter-spacing: 0.00438rem;
   text-align: center;
+  padding-bottom: 2.85rem;
 }
 
 .user__auth--bottom a {
