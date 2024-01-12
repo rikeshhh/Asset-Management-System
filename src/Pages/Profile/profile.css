@@ -129,7 +129,7 @@
   background: var(--disabled-input);
 }
 
-.user__profile--form button {
+/* .user__profile--form button {
   width: 8.5rem;
   padding: 0.75rem 1rem;
   border-radius: 0.3125rem;
@@ -141,7 +141,7 @@
   line-height: 150%;
   letter-spacing: 0.005rem;
   margin-bottom: 1.87rem;
-}
+} */
 
 .jobType {
   display: flex;
@@ -154,4 +154,8 @@
   justify-content: center;
   align-items: center;
   gap: 4px;
+}
+
+.button__one {
+  margin-bottom: 1.87rem;
 }

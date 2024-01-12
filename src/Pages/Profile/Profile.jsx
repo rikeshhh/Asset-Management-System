@@ -12,7 +12,7 @@ export const Profile = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
- 
+
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -143,7 +143,12 @@ export const Profile = () => {
                 isDisabled={true}
               />
             </div>
-            <Button value="submit" text="Cancel" isDisabled={true} />
+            <Button
+              className={"button__one"}
+              value="submit"
+              text="Cancel"
+              isDisabled={true}
+            />
           </form>
         </div>
       </div>
