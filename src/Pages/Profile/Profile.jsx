@@ -16,7 +16,7 @@ export const Profile = () => {
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
-        <div className="user__profile--header">
+        <div className="content__header">
           <h2>Amod Suman</h2>
           <span>Developer | Frontend</span>
         </div>

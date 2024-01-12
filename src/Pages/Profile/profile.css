@@ -3,26 +3,6 @@
   flex-direction: column;
 }
 
-.user__profile--header {
-  padding: 1.25rem 1.38rem 0.62rem;
-}
-
-.user__profile--header h2 {
-  color: var(--text-color);
-  font-size: 1.75rem;
-  font-weight: 600;
-  line-height: 150%;
-  letter-spacing: 0.00875rem;
-}
-
-.user__profile--header span {
-  color: var(--text-color);
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 150%;
-  letter-spacing: 0.00438rem;
-}
-
 .user__profile--body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

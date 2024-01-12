@@ -50,3 +50,23 @@ body {
   border-radius: 1rem;
   background: var(--secondary-color);
 }
+
+.content__header {
+  padding: 1.25rem 1.38rem 0.62rem;
+}
+
+.content__header h2 {
+  color: var(--text-color);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: 0.00875rem;
+}
+
+.content__header span {
+  color: var(--text-color);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.00438rem;
+}

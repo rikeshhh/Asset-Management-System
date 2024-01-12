@@ -43,6 +43,10 @@
   margin-top: 1.36rem;
 }
 
+.navbar__link span {
+  font-size: 1.25rem;
+}
+
 .navbar__list {
   text-decoration: none;
   list-style-type: none;

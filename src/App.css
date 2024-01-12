@@ -76,10 +76,8 @@
   border-radius: 0.3125rem;
   background: var(--blue);
   padding: 1rem 0;
-  outline: none;
   border: none;
   color: var(--secondary-color);
-  color: var(--Netral-White, #fff);
   text-align: center;
   font-size: 1rem;
   font-weight: 500;
