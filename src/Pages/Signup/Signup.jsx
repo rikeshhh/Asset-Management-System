@@ -5,6 +5,7 @@ import Button from '../../Component/Button/Button'
 import './Signup.css'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import validationRules from "../../Component/Validation/Validation.json"
 export const Signup = () => {
    const {
       register,
@@ -29,37 +30,33 @@ const submitData=(data)=> {
                >
                   <h3 className="user__auth--title">Signup</h3>
                   <div className="user__auth--input">
-                     <Label text="Username" />
-                     <InputField placeholder="example123_ABC" name="Username"
-                        register={register}
-                        errors={errors}
-                        pattern={{
-                           value: /^[a-zA-Z0-9_]+$/, // Example username pattern (alphanumeric characters and underscores)
-                           message: 'Invalid username format (alphanumeric characters and underscores)',
-                       }}
-                     />
-                     <Label text="Email" />
-                     <InputField placeholder="john.doe@example.com" name="Email"
-                        register={register}
-                        pattern={{
-                           value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-                           message: "Please Enter the valid email address",
-                         }}
-                        errors={errors} />
-                     <Label text="Password" />
-                     <InputField placeholder="(at least 8 characters, at least one letter, and one number)"
-                        name="Password"
-                        pattern={{
-                           value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // Example password pattern (at least 8 characters, at least one letter, and one number)
-                           message:
-                             "Invalid password format (at least 8 characters, at least one letter, and one number)",
-                         }}
-                        register={register}
-                        errors={errors} />
-                     <Label text="Retype Password" />
-                     <InputField placeholder="Enter your password" name="password" register={register}
-                     
-                     errors={errors} />
+
+                  {Object.keys(validationRules).map((fieldName) => {
+  const rule = validationRules[fieldName];
+
+  return (
+    <>
+      <label>{fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}:</label>
+      <input
+        placeholder={rule.placeholder}
+        name={fieldName}
+        type={rule.type === 'password' ? 'password' : 'text'}
+        disabled={false} 
+        {...register(fieldName, {
+          required: rule.required && rule.errorMessage,
+          pattern: rule.type !== 'password' && rule.pattern && {
+            value: new RegExp(rule.pattern.value),
+            message: rule.pattern.message,
+          },
+          minLength: rule.minLength && { value: rule.minLength, message: rule.errorMessage },
+          maxLength: rule.maxLength && { value: rule.maxLength, message: rule.errorMessage },
+        })}
+      />
+      {errors[fieldName] && <p className='error-message'>{errors[fieldName].message || rule.errorMessage}</p>}
+    </>
+  );
+})}
+             
                      <div className="user__auth--ques">
                         <p>Already have an account?</p>
                         <Link to="/login">

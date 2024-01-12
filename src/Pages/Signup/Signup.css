@@ -13,3 +13,6 @@ font-weight: 800;
 line-height: 150%; /* 180px */
 letter-spacing: 0.6px;
 }
+.error-message {
+    color: red;
+  }
