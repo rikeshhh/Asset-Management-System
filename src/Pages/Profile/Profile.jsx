@@ -6,13 +6,16 @@ import "./profile.css";
 import Button from "../../Component/Button/Button";
 import { SelectInput } from "../../Component/Input/SelectInput";
 import userProf from "/src/assets/userProf.svg";
+import Model from "../../Component/Model/Model";
+import { useLocation } from "react-router";
 export const Profile = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-
+  const location = useLocation();
+  const receivedState = location.state;
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -46,16 +49,18 @@ export const Profile = () => {
             <div className="user__profile--section">
               <Label text="Name" />
               <InputField
-                placeholder="example123_ABC"
                 name="Username"
                 register={register}
+                pattern={Model.Username.pattern}
+                required={Model.Username.required}
+                errorMessage={Model.Username.errorMessage}
                 errors={errors}
-                isDisabled={true}
-                pattern={{
-                  value: /^[a-zA-Z0-9_]+$/, // Example username pattern (alphanumeric characters and underscores)
-                  message:
-                    "Invalid username format (alphanumeric characters and underscores)",
-                }}
+                type={Model.Username.type}
+                placeholder={Model.Username.placeholder}
+                minLength={Model.Username.minLength}
+                maxLength={Model.Username.maxLength}
+                isDisabled={receivedState}
+
               />
             </div>
 
@@ -63,33 +68,35 @@ export const Profile = () => {
               <Label text="Job Type" />
               <div style={{ display: "flex", gap: "1.5rem" }}>
                 <div className="checkbox__input--label">
-                  <InputField
-                    placeholder="example123_ABC"
-                    name="radio"
-                    register={register}
-                    errors={errors}
-                    isDisabled={true}
-                    pattern={{
-                      value: /^[a-zA-Z0-9_]+$/, // Example username pattern (alphanumeric characters and underscores)
-                      message:
-                        "Invalid username format (alphanumeric characters and underscores)",
-                    }}
-                  />
+                <InputField
+                name="Radio"
+                register={register}
+                pattern={Model.Radio.pattern}
+                required={Model.Radio.required}
+                errorMessage={Model.Radio.errorMessage}
+                errors={errors}
+                type={Model.Radio.type}
+                placeholder={Model.Radio.placeholder}
+                minLength={Model.Radio.minLength}
+                maxLength={Model.Radio.maxLength}
+                isDisabled={receivedState}
+                />
                   <Label text="Permanent" />
                 </div>
                 <div className="checkbox__input--label">
-                  <InputField
-                    placeholder="example123_ABC"
-                    name="radio"
-                    register={register}
-                    errors={errors}
-                    isDisabled={true}
-                    pattern={{
-                      value: /^[a-zA-Z0-9_]+$/, // Example username pattern (alphanumeric characters and underscores)
-                      message:
-                        "Invalid username format (alphanumeric characters and underscores)",
-                    }}
-                  />
+                <InputField
+                name="Radio"
+                register={register}
+                pattern={Model.Radio.pattern}
+                required={Model.Radio.required}
+                errorMessage={Model.Radio.errorMessage}
+                errors={errors}
+                type={Model.Radio.type}
+                placeholder={Model.Radio.placeholder}
+                minLength={Model.Radio.minLength}
+                maxLength={Model.Radio.maxLength}
+                isDisabled={receivedState}
+                />
                   <Label text="Temporary" />
                 </div>
               </div>
@@ -97,16 +104,18 @@ export const Profile = () => {
             <div className="user__profile--section">
               <Label text="Designation" />
               <InputField
-                placeholder="example123_ABC"
                 name="Username"
                 register={register}
+                pattern={Model.Username.pattern}
+                required={Model.Username.required}
+                errorMessage={Model.Username.errorMessage}
                 errors={errors}
-                isDisabled={true}
-                pattern={{
-                  value: /^[a-zA-Z0-9_]+$/, // Example username pattern (alphanumeric characters and underscores)
-                  message:
-                    "Invalid username format (alphanumeric characters and underscores)",
-                }}
+                type={Model.Username.type}
+                placeholder={Model.Username.placeholder}
+                minLength={Model.Username.minLength}
+                maxLength={Model.Username.maxLength}
+                isDisabled={receivedState}
+
               />
             </div>
             <div className="user__profile--section">
@@ -116,31 +125,35 @@ export const Profile = () => {
             <div className="user__profile--section">
               <Label text="Email" />
               <InputField
-                placeholder="example123_ABC"
-                name="Username"
+                name="Email"
                 register={register}
+                pattern={Model.Email.pattern}
+                required={Model.Email.required}
+                errorMessage={Model.Email.errorMessage}
                 errors={errors}
-                isDisabled={true}
-                pattern={{
-                  value: /^[a-zA-Z0-9_]+$/, // Example username pattern (alphanumeric characters and underscores)
-                  message:
-                    "Invalid username format (alphanumeric characters and underscores)",
-                }}
+                type={Model.Email.type}
+                placeholder={Model.Email.placeholder}
+                minLength={Model.Email.minLength}
+                maxLength={Model.Email.maxLength}
+                isDisabled={receivedState}
+
               />
             </div>
             <div className="user__profile--section">
               <Label text="Phone Number" />
               <InputField
-                placeholder="example123_ABC"
-                name="Username"
+                name="PhoneNumber"
                 register={register}
+                pattern={Model.PhoneNumber.pattern}
+                required={Model.PhoneNumber.required}
+                errorMessage={Model.PhoneNumber.errorMessage}
                 errors={errors}
-                pattern={{
-                  value: /^[a-zA-Z0-9_]+$/, // Example username pattern (alphanumeric characters and underscores)
-                  message:
-                    "Invalid username format (alphanumeric characters and underscores)",
-                }}
-                isDisabled={true}
+                type={Model.PhoneNumber.type}
+                placeholder={Model.PhoneNumber.placeholder}
+                minLength={Model.PhoneNumber.minLength}
+                maxLength={Model.PhoneNumber.maxLength}
+                isDisabled={receivedState}
+
               />
             </div>
             <Button

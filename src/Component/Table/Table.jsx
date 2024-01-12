@@ -41,7 +41,9 @@ const Table = () => {
                 <td>{item.assignedTo}</td>
                 <td>{item.AssignedDate}</td>
                 <td>
-                  <Link to='/profile'> <Button text="Edit" /></Link>
+                <Link to={{ pathname: '/profile', state: false }}>
+                   <Button text="Edit" />
+                   </Link>
                   <button>Delete</button>
                 </td>
               </tr>
