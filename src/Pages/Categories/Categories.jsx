@@ -5,8 +5,15 @@ import { Label } from "../../Component/Label/Label"
 import { SelectInput } from "../../Component/Input/SelectInput"
 import './Categories.css'
 import Button from "../../Component/Button/Button"
+import { useState } from "react"
+
 
 const Categories = () => {
+  const [value,setValue] =useState([]);
+  const [selectedValue, setSelectedValue] = useState([]);
+  const handleSelectChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
   const {
     register,
     formState: { errors },
@@ -16,7 +23,7 @@ const Categories = () => {
     <section className="content-wrapper">
       <div className="category__content content-radius">
         <div>
-        <Category />
+        <Category value={value} selectedValue={selectedValue}/>
         </div>
 
 
@@ -24,7 +31,7 @@ const Categories = () => {
         <div className="add__category">
           <p>Add a category/ Sub Category</p>
           <span>Add a new category/sub category. Assign a sub category to the parent </span>
-          <form action="" onSubmit={handleSubmit()}>
+          <form action="" onSubmit={handleSubmit((data)=>setValue(data))}>
             <Label text="Name" />
             <InputField
               placeholder="Enter The name"
@@ -37,7 +44,7 @@ const Categories = () => {
               }}
             />
             <Label text="Parent Category" />
-            <SelectInput />
+            <SelectInput onSelectChange={handleSelectChange}/>
            <div>
            <Button text="Add Category" />
            </div>

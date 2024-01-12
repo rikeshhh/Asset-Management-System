@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import './CategoryTable.css'
 import Button from '../Button/Button';
-export const Category = () => {
+import { RiDeleteBin5Line, RiEdit2Fill,RiArrowDownSLine,RiArrowUpSLine } from "react-icons/ri";
+export const Category = ({value,selectedValue}) => {
     const [show, setShow] = useState(false);
+    const [edit,setEdit] = useState(false);    
     const handleViewClick = () => {
         setShow((prev) => !prev);
     };
@@ -16,24 +18,25 @@ export const Category = () => {
             <tr>
                 <td>1</td>
                 <td>Category</td>
-                <td>
-                    <Button onClick={handleViewClick} text='View' />
-                    <Button text='Edit' />
-                    <Button text='Delete' />
+                <td >
+                    <Button onClick={handleViewClick}  text={show?<RiArrowUpSLine/>:<RiArrowDownSLine/>} />
+                    <Button text={<RiEdit2Fill/>} />
+                    <Button  text={<RiDeleteBin5Line />}/>
                 </td>
             </tr>
             {show && (
                 <tr>
-                    <td></td>
+                    
                     <td>
-                        <ol type='a'>
-                            <li>Mini</li>
-                            <li>MINI</li>
-                            <li>MAC</li>
-                        </ol>
+                   <input value={value.Username}/>
+
+              
                     </td>
                     <td>
-                        <button>Edit</button>
+                    {selectedValue}
+                    </td>
+                    <td>
+                        <button onClick={()=>setEdit((prev)=>!prev)}>Edit</button>
                         <button>Delete</button>
                     </td>
                 </tr>

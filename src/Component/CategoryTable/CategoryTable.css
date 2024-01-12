@@ -27,3 +27,12 @@ ol {
 ol li {
     padding: 1rem;
 }
+.icon-transition {
+    transition: transform 0.3s ease-in-out; /* Adjust the duration and easing as needed */
+  }
+  
+  .editable {
+    transition: background-color 0.3s ease-in-out; /* Adjust the duration and easing as needed */
+    background-color: lightyellow; /* Change the background color as desired */
+  }
+  

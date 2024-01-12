@@ -1,12 +1,12 @@
 import React from 'react'
 import './input.css'
-export const SelectInput = () => {
+export const SelectInput = ({ onSelectChange }) => {
   return (
-    <select id="cars" name="cars">
-    <option value="volvo">Frontend</option>
-    <option value="saab">Backedn</option>
-    <option value="fiat">QA</option>
-    <option value="audi">UI & UX</option>
+    <select id="cars" name="cars" onChange={onSelectChange}>
+    <option value="Computer">Computer</option>
+    <option value="Routers">Routerss</option>
+    <option value="Acesssories">Acesssories</option>
+    <option value="Backups">Backups</option>
   </select>
   )
 }
