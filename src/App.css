@@ -140,3 +140,28 @@
   line-height: 150%;
   letter-spacing: 0.005rem;
 }
+.button-gap{
+  display: flex;
+gap: 1rem;
+}
+.delete__button{
+  color: var(--red);
+  border-radius: 0.25rem;
+  padding: 0.45rem;
+  border: none;
+background-color: var(--delete-background);
+
+}
+.edit_button{
+color: var(--edit-button);
+border-radius: 0.25rem;
+padding: 0.45rem;
+border: none;
+background-color: var(--edit-background);
+}
+button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.62rem;
+}

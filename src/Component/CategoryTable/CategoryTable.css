@@ -1,16 +1,24 @@
-
-table{
-    background-color: #E9EAEC;
-    color: #21252B;
-    border-collapse:collapse ;
-
+.category{
+padding: 22px 22px;
 }
-th,td{
+.category table{
+    border-collapse:collapse ;
+}
+.category table
+     th,td{
     padding: 1rem;
 }
-th{
+.category tr{
+    background-color: var( --secondary-color);
+    border-bottom: 1px solid black;
+}
+.category tr:last-child{
+    border: none;
+}
+.category table th{
     text-align: left;
     background-color: #EFF4FE;
+    border-radius: 0.5rem;
     color: #657081;
     font-size: 14px;
 font-style: normal;
@@ -18,6 +26,7 @@ font-weight: 500;
 letter-spacing: 0.07px;
 
 }
+
 ol {
     display: flex;
     justify-content: center;
@@ -35,4 +44,3 @@ ol li {
     transition: background-color 0.3s ease-in-out; /* Adjust the duration and easing as needed */
     background-color: lightyellow; /* Change the background color as desired */
   }
-  

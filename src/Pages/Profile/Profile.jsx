@@ -16,6 +16,7 @@ export const Profile = () => {
   } = useForm();
   const location = useLocation();
   const receivedState = location.state;
+  console.log(receivedState)
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">

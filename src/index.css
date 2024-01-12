@@ -17,6 +17,9 @@
   --subheading: #292d32;
   --icon-grey: #989fab;
   --disabled-input: #ededed;
+  --edit-button:#8C62FF;
+  --edit-background: #F4EFFF;
+  --delete-background:#FEE9F1;
 }
 
 * {

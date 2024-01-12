@@ -1,0 +1,112 @@
+.procurement {
+    padding: 1.25rem 1.38rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.procurement__header {
+    display: flex;
+    flex-direction: column;
+}
+
+.procurement__header h2 {
+    color: var(--Foundation-Grey-grey-900, #21252B);
+    font-family: Inter;
+    font-size: 1.75rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.625rem;
+    letter-spacing: 0.00875rem;
+}
+
+.procurement__header p {
+    color: var(--text-color);
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    /* 1.125rem */
+    letter-spacing: 0.00375rem;
+}
+
+.procurement__header span {
+    color: var(--icon-grey);
+
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    /* 1.125rem */
+    letter-spacing: 0.00375rem;
+}
+
+.procurement__request {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.81rem;
+border-bottom: 1px solid var(--primary-grey);
+}
+
+.procurement__request div {
+    display: flex;
+    flex-direction: column;
+}
+
+.procurement__product {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.procurement__product--list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.procurement__product--list h3 {
+    color: var(--Foundation-Grey-grey-900, #21252B);
+    font-family: Inter;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.25rem;
+    /*  */
+    letter-spacing: 0.0075rem;
+}
+
+.procurement__bottom--buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 16.87rem;
+
+}
+
+.procurement--button {
+    border-radius: 0.3125rem;
+    background: var(--blue);
+    padding: 1rem;
+    border: none;
+    color: var(--secondary-color);
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: 0.005rem;
+}
+
+.procurement__error--button {
+    border-radius: 0.3125rem;
+    background: var(--red);
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 150%;
+    /* 1.5rem */
+    letter-spacing: 0.005rem;
+    border: none;
+    color: var(--secondary-color);
+}

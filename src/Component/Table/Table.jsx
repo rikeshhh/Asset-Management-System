@@ -4,9 +4,10 @@ import data from "./data/MOCK_DATA.json"
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import Pagination from '../Pagination/Pagination';
+import { RiDeleteBin5Line, RiEdit2Fill } from "react-icons/ri";
 
-let PageSize = 10;
-const Table = () => {
+const Table = ({size}) => {
+  let PageSize = size?size:10;
   const [isEditMode, setIsEditMode] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -40,24 +41,26 @@ const Table = () => {
                 <td>{item.status}</td>
                 <td>{item.assignedTo}</td>
                 <td>{item.AssignedDate}</td>
-                <td>
-                <Link to={{ pathname: '/profile', state: false }}>
-                   <Button text="Edit" />
+                <td className='button-gap'>
+                {/* <Link  to={{ pathname: '/profile', state: false }}>
+                   </Link> */}
+                   <Link to="/profile" state={{ isDisabled: false }}>
+                   <Button className='edit_button' text={<RiEdit2Fill/>} />
                    </Link>
-                  <button>Delete</button>
+                   <Button className='delete__button' text={<RiDeleteBin5Line/>} />
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
-      <Pagination
+      {/* <Pagination
         className="pagination-bar"
         currentPage={currentPage}
         totalCount={data.length}
         pageSize={PageSize}
         onPageChange={page => setCurrentPage(page)}
-      />
+      /> */}
     </>
   );
 }

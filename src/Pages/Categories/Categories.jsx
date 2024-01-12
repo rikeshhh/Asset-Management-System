@@ -21,6 +21,7 @@ const Categories = () => {
   } = useForm()
   return (
     <section className="content-wrapper">
+        <h2>Category</h2>
       <div className="category__content content-radius">
         <div>
         <Category value={value} selectedValue={selectedValue}/>
@@ -46,7 +47,7 @@ const Categories = () => {
             <Label text="Parent Category" />
             <SelectInput onSelectChange={handleSelectChange}/>
            <div>
-           <Button text="Add Category" />
+           <Button text="Add Category"  className={"user__auth--button"}/>
            </div>
           </form>
         </div>

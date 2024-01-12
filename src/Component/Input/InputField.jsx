@@ -36,7 +36,7 @@ export const InputField = ({
       message: maxLength.errorMessage,
     },
   })}
-  disabled="isDisabled"
+  disabled={isDisabled}
 />
    {errors[name] && <p className='error-message'>{errors[name].message || errors[name].errorMessage}</p>}
     </>

@@ -3,7 +3,7 @@ import "./UserTab.css";
 const UserTab = () => {
   return (
     <section className="usertab">
-   <Link to ={{ pathname: '/profile', state:true }} className="navbar__link">
+                   <Link to="/profile" state={{ isDisabled: true }} className="navbar__link">
    <div className="profile">
         <div className="profile__heading">
           <h4 className="profile__name">Amod Suman</h4>
