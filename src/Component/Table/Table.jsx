@@ -8,7 +8,7 @@ import { RiDeleteBin5Line, RiEdit2Fill } from "react-icons/ri";
 import { InputField } from '../Input/InputField';
 import { useForm } from 'react-hook-form';
 const Table = ({size}) => {
-  let PageSize = size?size:10;
+  let PageSize = size?size:10||8;
   const [isEditMode, setIsEditMode] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const {
@@ -59,13 +59,16 @@ const Table = ({size}) => {
           })}
         </tbody>
       </table>
-      {/* <Pagination
+      {size?
+      (
+        <Pagination
         className="pagination-bar"
         currentPage={currentPage}
         totalCount={data.length}
         pageSize={PageSize}
         onPageChange={page => setCurrentPage(page)}
-      /> */}
+      />
+      ) :''}
     </>
   );
 }
