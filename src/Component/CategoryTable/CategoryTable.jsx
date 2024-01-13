@@ -11,35 +11,28 @@ export const Category = ({ value, selectedValue }) => {
         setShow((prev) => !prev);
     };
     return (
-  <div className="category">
-       <table>
-        <thead>
-            <th>SN <LuArrowDownUp/></th>
-            <th>Category <LuArrowDownUp/></th>
-            <th>Action</th>
-        </thead>
-        <tbody>
-<tr>
-    <td>1</td>
-    <td>Frontend</td>
-    <td>
-        <RiDeleteBin5Line />
-    <RiEdit2Fill/>
-<RiArrowDownSLine/>
-    </td>
-</tr>
-<tr>
-    <td>1</td>
-    <td>Frontend</td>
-    <td>
-        <RiDeleteBin5Line/>
-    <RiEdit2Fill/>
-<RiArrowDownSLine/>
-    </td>
-</tr>
-        </tbody>
-     </table>
-  </div>  
-  
+         <section className="cateogries">
+               <table>
+                <thead>
+                   <tr>
+                   <th>SN <LuArrowDownUp /></th>
+                    <th>Category <LuArrowDownUp /></th>
+                    <th>Action</th>
+                   </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Frontend</td>
+                        <td className='button-gap'>
+                            <Button className='edit_button' text={ <RiArrowDownSLine />} />
+                            <Button className='edit_button' text={<RiEdit2Fill/>} />
+                            <Button className='delete__button' text={<RiDeleteBin5Line/>} />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+         </section>
     )
 }

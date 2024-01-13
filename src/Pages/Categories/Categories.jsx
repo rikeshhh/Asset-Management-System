@@ -5,15 +5,18 @@ import { Label } from "../../Component/Label/Label"
 import { SelectInput } from "../../Component/Input/SelectInput"
 import './Categories.css'
 import Button from "../../Component/Button/Button"
+import Model from "../../Component/Model/Model"
 import { useState } from "react"
-
+import { IoMdAdd } from "react-icons/io";
 
 const Categories = () => {
-  const [value,setValue] =useState([]);
+  
+  const [value, setValue] = useState([]);
   const [selectedValue, setSelectedValue] = useState([]);
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
   };
+
   const {
     register,
     formState: { errors },
@@ -21,39 +24,43 @@ const Categories = () => {
   } = useForm()
   return (
     <section className="content-wrapper">
-        <h2>Category</h2>
-      <div className="category__content content-radius">
-        <div>
-        <Category value={value} selectedValue={selectedValue}/>
-        </div>
+      <div className="content-radius">
+        <div className="category">
+   <div className="category__header">
+    <h2>Categories</h2>
+   </div>
+<div className="category__content">
 
-
-
+          <Category value={value} selectedValue={selectedValue} />
+     
         <div className="add__category">
           <p>Add a category/ Sub Category</p>
           <span>Add a new category/sub category. Assign a sub category to the parent </span>
-          <form action="" onSubmit={handleSubmit((data)=>setValue(data))}>
+          <form action="" onSubmit={handleSubmit((data) => setValue(data))} > 
             <Label text="Name" />
             <InputField
-              placeholder="Enter The name"
               name="Username"
               register={register}
+              pattern={Model.Username.pattern}
+              required={Model.Username.required}
+              errorMessage={Model.Username.errorMessage}
               errors={errors}
-              pattern={{
-                value: /^[a-zA-Z0-9_]+$/,
-                message: 'Invalid username format (alphanumeric characters and underscores)',
-              }}
+              type={Model.Username.type}
+              placeholder={Model.Username.placeholder}
+              minLength={Model.Username.minLength}
+              maxLength={Model.Username.maxLength}
             />
             <Label text="Parent Category" />
-            <SelectInput onSelectChange={handleSelectChange}/>
-           <div>
-           <Button text="Add Category"  className={"user__auth--button"}/>
-           </div>
+            <SelectInput onSelectChange={handleSelectChange} />
+            <div className="">
+            <Button text="Add Category" className={"category--buttons"} icon={<IoMdAdd/>}/>
+            </div>
           </form>
         </div>
       </div>
+</div>
+        </div>
     </section>
   )
 }
-
 export default Categories

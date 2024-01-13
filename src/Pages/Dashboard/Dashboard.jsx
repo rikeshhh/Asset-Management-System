@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import Button from "../../Component/Button/Button";
-
+import "./Dashboard.css"
 const Dashboard = () => {
   return (
-    <div>
+    <section className="dashboard">
       <h3>AMS DASHBOARD</h3>
       <p>Work On Progress</p>
       <span>Please continue checking other ui pages</span>
@@ -12,7 +12,7 @@ const Dashboard = () => {
       <Link to="/login">
         <button>LOGIN</button>
       </Link>
-    </div>
+    </section>
   );
 };
 

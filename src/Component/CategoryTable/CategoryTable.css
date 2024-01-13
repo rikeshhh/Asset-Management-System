@@ -1,22 +1,22 @@
-.category{
-padding: 22px 22px;
-}
-.category table{
+
+.cateogries table{
+    color: #21252B;
     border-collapse:collapse ;
+    width: 100%;
 }
-.category table
-     th,td{
+th{
     padding: 1rem;
+    color: red;
+    text-align: left;
 }
-.category tr{
+.cateogries tr{
     background-color: var( --secondary-color);
     border-bottom: 1px solid black;
 }
-.category tr:last-child{
+.cateogries tr:last-child{
     border: none;
 }
-.category table th{
-    text-align: left;
+.cateogries table th{
     background-color: #EFF4FE;
     border-radius: 0.5rem;
     color: #657081;

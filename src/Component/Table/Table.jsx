@@ -5,12 +5,17 @@ import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import Pagination from '../Pagination/Pagination';
 import { RiDeleteBin5Line, RiEdit2Fill } from "react-icons/ri";
-
+import { InputField } from '../Input/InputField';
+import { useForm } from 'react-hook-form';
 const Table = ({size}) => {
   let PageSize = size?size:10;
   const [isEditMode, setIsEditMode] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;

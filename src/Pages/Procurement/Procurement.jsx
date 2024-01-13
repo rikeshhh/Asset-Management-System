@@ -48,7 +48,7 @@ const Procurement = () => {
             <h3>Product List</h3>
             <Button text="Add a table line" className={"procurement--button"} icon={<IoMdAdd/>}/>
           </div>
-          <Table size='1'/>
+          <Table size='1' />
         <div className="procurement__bottom--buttons">
           <Button text="Fill Procurement"  className={"procurement--button"}/>
           <Button text="Cancel"  className={"procurement__error--button"}/>
@@ -57,6 +57,6 @@ const Procurement = () => {
       </div>
     </section>
   )
-};
+ };
 
 export default Procurement;
