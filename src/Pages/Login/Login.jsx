@@ -14,11 +14,12 @@ const Login = () => {
     handleSubmit,
   } = formMethod;
 
-  const onSubmit = (e, data) => {
-    console.log("hello");
+  const submitData = (data) => {
+    console.log(data);
   };
+
   return (
-    <section className="main-container login">
+    <section className="main-container signup">
       <div className="user__auth">
         <div className="user__auth__content">
           <div className="user__auth--top">
@@ -30,18 +31,17 @@ const Login = () => {
           <FormProvider {...formMethod}>
             <form
               className="user__auth--form"
-              onSubmit={formMethod.handleSubmit(onSubmit)}
+              onSubmit={handleSubmit(submitData)}
             >
               <h3 className="user__auth--title">Login</h3>
               <div className="user__auth--input">
                 <Label text="Username" />
                 <InputField
                   name="Username"
-                  register={formMethod.register}
+                  register={register}
+                  required={Model.Username.required}
                   value={Model.Username.value}
                   message={Model.Username.message}
-                  required={Model.Username.required}
-                  errorMessage={Model.Username.errorMessage}
                   errors={errors}
                   type={Model.Username.type}
                   placeholder={Model.Username.placeholder}
@@ -52,39 +52,31 @@ const Login = () => {
                 <InputField
                   name="Password"
                   register={register}
-                  value={Model.Username.value}
-                  message={Model.Username.message}
+                  value={Model.Password.value}
+                  message={Model.Password.message}
                   required={Model.Password.required}
-                  errorMessage={Model.Password.errorMessage}
                   errors={errors}
                   type={Model.Password.type}
                   placeholder={Model.Password.placeholder}
-                  minLength={Model.Password.minLength}
-                  maxLength={Model.Password.maxLength}
+                  minLength={Model.Email.minLength.value}
+                  maxLength={Model.Email.maxLength.value}
                 />
 
-                <div className="user__auth--checkbox">
-                  <InputField
-                    type={Model.Checkbox.type}
-                    required={Model.Checkbox.required}
-                  />
-                  <span>Remember me</span>
+                <div className="user__auth--ques">
+                  <p>Dont have an account?</p>
+                  <Link to="/signup">
+                    <span>Signup</span>
+                  </Link>
                 </div>
+                <Button
+                  text="Login"
+                  className={"user__auth--button"}
+                  value="submit"
+                />
               </div>
-              <Button
-                className={"user__auth--button"}
-                text="Login"
-                value="submit"
-              />
             </form>
           </FormProvider>
-          <div className="user__auth--ques">
-            <p>Dont have an account?</p>
-            <Link to="/signup">
-              <span>Signup</span>
-            </Link>
-          </div>
-          <div className="user__auth--bottom bottom__padding">
+          <div className="user__auth--bottom">
             <p>
               Please contact the admin at{" "}
               <a href="mailto:admin@ams.com">admin@ams.com</a> for help

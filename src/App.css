@@ -84,6 +84,17 @@
   line-height: 150%;
   letter-spacing: 0.005rem;
 }
+
+.navbar__link--active {
+  text-decoration: none !important;
+}
+
+.navbar__link--active li {
+  border-radius: 0.5rem;
+  color: var(--blue) !important;
+  background-color: var(--main-background);
+}
+
 .navbar__link {
   text-decoration: none !important;
 }
@@ -140,47 +151,45 @@
   line-height: 150%;
   letter-spacing: 0.005rem;
 }
-.button-gap{
+.button-gap {
   display: flex;
-gap: 1rem;
+  gap: 1rem;
 }
-.delete__button{
+.delete__button {
   color: var(--red);
   border-radius: 0.25rem;
   padding: 0.45rem;
   border: none;
-background-color: var(--delete-background);
-
+  background-color: var(--delete-background);
 }
-.edit_button{
-color: var(--edit-button);
-border-radius: 0.25rem;
-padding: 0.45rem;
-border: none;
-background-color: var(--edit-background);
+.edit_button {
+  color: var(--edit-button);
+  border-radius: 0.25rem;
+  padding: 0.45rem;
+  border: none;
+  background-color: var(--edit-background);
 }
-button{
+button {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.62rem;
 }
-.active{
+.active {
   color: var(--blue);
-font-size: 1rem;
-font-style: normal;
-font-weight: 600;
-line-height: 150%;
-letter-spacing: 0.005rem;
-border-bottom: 2px solid var(--blue);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: 0.005rem;
+  border-bottom: 2px solid var(--blue);
 }
-.inActive{
+.inActive {
   color: var(--text-color);
-font-family: Inter;
-font-size: 1rem;
-font-style: normal;
-font-weight: 600;
-line-height: 150%; 
-letter-spacing: 0.005rem;
-
+  font-family: Inter;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: 0.005rem;
 }

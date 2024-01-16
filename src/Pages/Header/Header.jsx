@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 import Button from "../../Component/Button/Button";
 import { RxDashboard } from "react-icons/rx";
@@ -26,93 +26,138 @@ const Header = () => {
             System
           </h4>
           <ul className="navbar__list">
-            <Link to="/" className="navbar__link">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "navbar__link--active" : "navbar__link"
+              }
+            >
               <li>
                 <span>
                   <RxDashboard />
                 </span>
                 Dashboard
               </li>
-            </Link>
-            <Link to="/assets" className="navbar__link">
+            </NavLink>
+            <NavLink
+              to="/assets"
+              className={({ isActive }) =>
+                isActive ? "navbar__link--active" : "navbar__link"
+              }
+            >
               <li>
                 <span>
                   <PiDesktopTower />
                 </span>
                 Assets
               </li>
-            </Link>
-            <Link to="/procurement" className="navbar__link">
+            </NavLink>
+            <NavLink
+              to="/procurement"
+              className={({ isActive }) =>
+                isActive ? "navbar__link--active" : "navbar__link"
+              }
+            >
               <li>
                 <span>
                   <PiShoppingCart />
                 </span>
                 Procurement
               </li>
-            </Link>
-            <Link to="/repair" className="navbar__link">
+            </NavLink>
+            <NavLink
+              to="/repair"
+              className={({ isActive }) =>
+                isActive ? "navbar__link--active" : "navbar__link"
+              }
+            >
               <li>
                 <span>
                   <PiWrench />
                 </span>
                 Repair & Replace
               </li>
-            </Link>
+            </NavLink>
           </ul>
         </div>
         <div className="bottom__list">
           <h4 className="navbar__title">Listing</h4>
           <ul className="navbar__list">
-            <Link to="/employees" className="navbar__link">
+            <NavLink
+              to="/employees"
+              className={({ isActive }) =>
+                isActive ? "navbar__link--active" : "navbar__link"
+              }
+            >
               <li>
                 <span>
                   <HiOutlineUser />
                 </span>
                 Employees
               </li>
-            </Link>
-            <Link to="/categories" className="navbar__link">
+            </NavLink>
+            <NavLink
+              to="/categories"
+              className={({ isActive }) =>
+                isActive ? "navbar__link--active" : "navbar__link"
+              }
+            >
               <li>
                 <span>
                   <PiListMagnifyingGlass />
                 </span>
                 Categories
               </li>
-            </Link>
-            <Link to="/location" className="navbar__link">
+            </NavLink>
+            <NavLink
+              to="/location"
+              className={({ isActive }) =>
+                isActive ? "navbar__link--active" : "navbar__link"
+              }
+            >
               <li>
                 <span>
                   <FiMapPin />
                 </span>
                 Locations
               </li>
-            </Link>
-            <Link to="/departments" className="navbar__link">
+            </NavLink>
+            <NavLink
+              to="/departments"
+              className={({ isActive }) =>
+                isActive ? "navbar__link--active" : "navbar__link"
+              }
+            >
               <li>
                 <span>
                   <GrGroup />
                 </span>
                 Department
               </li>
-            </Link>
+            </NavLink>
 
             <div className="plans">
               <p>Want to increase your productivity?</p>
               <span>
                 Get more from AMS with our business / enterprise plans!
               </span>
-              <Link to="/plans">
+              <Link to="/plans" className="plans__link">
                 <Button className={"plans__button"} text={"Go to plans"} />
               </Link>
             </div>
-            <Link to="" className="navbar__link">
+            <NavLink
+              to=""
+              className={({ isActive }) =>
+                isActive ? "navbar__link--active" : "navbar__link"
+              }
+            >
               <li>
                 <span>
                   <LuLogOut />
                 </span>
                 Logout
               </li>
-            </Link>
+            </NavLink>
           </ul>
         </div>
       </nav>

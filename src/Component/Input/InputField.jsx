@@ -1,4 +1,6 @@
+import { ErrorMessage } from "@hookform/error-message";
 import "./input.css";
+
 export const InputField = ({
   placeholder,
   name,
@@ -9,6 +11,8 @@ export const InputField = ({
   value,
   maxLength,
   minLength,
+  maxMessage,
+  minMessage,
   isDisabled,
   register,
 }) => {
@@ -27,19 +31,22 @@ export const InputField = ({
           },
           minLength: !isDisabled &&
             minLength && {
-              value: minLength.value,
-              message: minLength.errorMessage,
+              value: minLength,
+              message: minMessage,
             },
-          maxLength: !isDisabled &&
-            maxLength && {
-              value: maxLength.value,
-              message: maxLength.errorMessage,
-            },
+          maxLength: !isDisabled && {
+            value: maxLength,
+            message: maxMessage,
+          },
         })}
         disabled={isDisabled}
       />
-      {!isDisabled && errors[name] && (
-        <p className="error-message">{errors[name].message}</p>
+      {!isDisabled && (
+        <ErrorMessage
+          errors={errors}
+          name={name}
+          render={({ message }) => message && <p key={type}>{message}</p>}
+        />
       )}
     </>
   );

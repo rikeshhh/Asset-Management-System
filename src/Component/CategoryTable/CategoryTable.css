@@ -1,45 +1,58 @@
+.cateogries table {
+  color: #21252b;
+  border-collapse: collapse;
+  width: 100%;
+}
+th {
+  padding: 1rem;
+  text-align: left;
+}
 
-.cateogries table{
-    color: #21252B;
-    border-collapse:collapse ;
-    width: 100%;
+th:first-child {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
 }
-th{
-    padding: 1rem;
-    text-align: left;
-}
-.cateogries tr{
-    background-color: var( --secondary-color);
-    border-bottom: 1px solid black;
-}
-.cateogries tr:last-child{
-    border: none;
-}
-.cateogries table th{
-    background-color: #EFF4FE;
-    border-radius: 0.5rem;
-    color: #657081;
-    font-size: 14px;
-font-style: normal;
-font-weight: 500;
-letter-spacing: 0.07px;
 
+th:last-child {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.cateogries tr {
+  background-color: var(--secondary-color);
+  border-bottom: 1px solid black;
+}
+
+.cateogries tr:first-child {
+  border: none;
+}
+
+/* .cateogries tr:last-child {
+  border: none;
+} */
+.cateogries table th {
+  background-color: #eff4fe;
+  color: #657081;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.07px;
 }
 
 ol {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 ol li {
-    padding: 1rem;
+  padding: 1rem;
 }
 .icon-transition {
-    transition: transform 0.3s ease-in-out; /* Adjust the duration and easing as needed */
-  }
-  
-  .editable {
-    transition: background-color 0.3s ease-in-out; /* Adjust the duration and easing as needed */
-    background-color: lightyellow; /* Change the background color as desired */
-  }
+  transition: transform 0.3s ease-in-out; /* Adjust the duration and easing as needed */
+}
+
+.editable {
+  transition: background-color 0.3s ease-in-out; /* Adjust the duration and easing as needed */
+  background-color: lightyellow; /* Change the background color as desired */
+}

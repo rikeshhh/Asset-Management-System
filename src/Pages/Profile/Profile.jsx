@@ -16,7 +16,6 @@ export const Profile = () => {
   } = useForm();
   const location = useLocation();
   const receivedState = location.state;
-  console.log(receivedState);
 
   const fileInputRef = useRef(null);
 
@@ -74,9 +73,9 @@ export const Profile = () => {
               <InputField
                 name="Username"
                 register={register}
-                pattern={Model.Username.pattern}
+                value={Model.Username.value}
+                message={Model.Username.message}
                 required={Model.Username.required}
-                errorMessage={Model.Username.errorMessage}
                 errors={errors}
                 type={Model.Username.type}
                 placeholder={Model.Username.placeholder}
@@ -95,12 +94,8 @@ export const Profile = () => {
                     register={register}
                     pattern={Model.Radio.pattern}
                     required={Model.Radio.required}
-                    errorMessage={Model.Radio.errorMessage}
                     errors={errors}
                     type={Model.Radio.type}
-                    placeholder={Model.Radio.placeholder}
-                    minLength={Model.Radio.minLength}
-                    maxLength={Model.Radio.maxLength}
                     isDisabled={receivedState}
                   />
                   <Label text="Permanent" />
@@ -114,9 +109,6 @@ export const Profile = () => {
                     errorMessage={Model.Radio.errorMessage}
                     errors={errors}
                     type={Model.Radio.type}
-                    placeholder={Model.Radio.placeholder}
-                    minLength={Model.Radio.minLength}
-                    maxLength={Model.Radio.maxLength}
                     isDisabled={receivedState}
                   />
                   <Label text="Temporary" />
@@ -130,7 +122,6 @@ export const Profile = () => {
                 register={register}
                 pattern={Model.Designation.pattern}
                 required={Model.Designation.required}
-                errorMessage={Model.Designation.errorMessage}
                 errors={errors}
                 type={Model.Designation.type}
                 placeholder={Model.Designation.placeholder}
@@ -150,12 +141,13 @@ export const Profile = () => {
                 register={register}
                 pattern={Model.Email.pattern}
                 required={Model.Email.required}
-                errorMessage={Model.Email.errorMessage}
                 errors={errors}
                 type={Model.Email.type}
                 placeholder={Model.Email.placeholder}
-                minLength={Model.Email.minLength}
-                maxLength={Model.Email.maxLength}
+                minLength={Model.Email.minLength.value}
+                minMessage={Model.Email.minLength.message}
+                maxMessage={Model.Email.maxLength.message}
+                maxLength={Model.Email.maxLength.value}
                 isDisabled={receivedState}
               />
             </div>
@@ -166,7 +158,6 @@ export const Profile = () => {
                 register={register}
                 pattern={Model.PhoneNumber.pattern}
                 required={Model.PhoneNumber.required}
-                errorMessage={Model.PhoneNumber.errorMessage}
                 errors={errors}
                 type={Model.PhoneNumber.type}
                 placeholder={Model.PhoneNumber.placeholder}

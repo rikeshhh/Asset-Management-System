@@ -4,10 +4,10 @@ import data from "./data/MOCK_DATA.json";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import Pagination from "../Pagination/Pagination";
-import { RiDeleteBin5Line, RiEdit2Fill } from "react-icons/ri";
-import { InputField } from "../Input/InputField";
+import { GoTrash } from "react-icons/go";
+import { CiEdit } from "react-icons/ci";
 import { useForm } from "react-hook-form";
-const Table = ({ size }) => {
+const Table = ({ size, linkTo }) => {
   let PageSize = size ? size : 10 || 8;
   const [isEditMode, setIsEditMode] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,7 +39,7 @@ const Table = ({ size }) => {
         <tbody>
           {currentTableData.map((item) => {
             return (
-              <tr>
+              <tr key={item.id}>
                 <td>{item.productCode}</td>
                 <td>{item.name}</td>
                 <td>{item.category}</td>
@@ -50,12 +50,9 @@ const Table = ({ size }) => {
                   {/* <Link  to={{ pathname: '/profile', state: false }}>
                    </Link> */}
                   <Link to="/profile" state={isEditMode}>
-                    <Button className="edit_button" text={<RiEdit2Fill />} />
+                    <Button className="edit_button" text={<CiEdit />} />
                   </Link>
-                  <Button
-                    className="delete__button"
-                    text={<RiDeleteBin5Line />}
-                  />
+                  <Button className="delete__button" text={<GoTrash />} />
                 </td>
               </tr>
             );

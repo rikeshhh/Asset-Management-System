@@ -8,23 +8,26 @@ import { SelectInput } from "../../Component/Input/SelectInput";
 import { IoMdAdd } from "react-icons/io";
 import { GrStatusGoodSmall } from "react-icons/gr";
 
-import './Procurement.css'
+import "./Procurement.css";
 const Procurement = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-    return (
+  return (
     <section className="content-wrapper">
       <div className="content-radius procurement">
         <div className="procurement__header">
           <h2>Procurement Form</h2>
-          <p><span>Procurement/</span> <GrStatusGoodSmall color="green"/> Request an asset</p>
+          <p>
+            <span>Procurement/</span> <GrStatusGoodSmall color="green" />{" "}
+            Request an asset
+          </p>
         </div>
         <div className="procurement__request">
           <div className="user__auth--input">
-            <Label text='Requested By' />
+            <Label text="Requested By" />
             <InputField
               name="Username"
               register={register}
@@ -39,24 +42,28 @@ const Procurement = () => {
             />
           </div>
           <div className="user__auth--input">
-            <Label text='Requeat Urgency' />
-         <SelectInput/>
+            <Label text="Requeat Urgency" />
+            <SelectInput />
           </div>
         </div>
         <div className="procurement__product">
           <div className="procurement__product--list">
             <h3>Product List</h3>
-            <Button text="Add a table line" className={"procurement--button"} icon={<IoMdAdd/>}/>
+            <Button
+              text="Add a table line"
+              className={"procurement--button"}
+              icon={<IoMdAdd />}
+            />
           </div>
-          <Table size='1' />
-        <div className="procurement__bottom--buttons">
-          <Button text="Fill Procurement"  className={"procurement--button"}/>
-          <Button text="Cancel"  className={"procurement__error--button"}/>
-        </div>
+          <Table size="1" linkTo={"/"} />
+          <div className="procurement__bottom--buttons">
+            <Button text="Fill Procurement" className={"procurement--button"} />
+            <Button text="Cancel" className={"procurement__error--button"} />
+          </div>
         </div>
       </div>
     </section>
-  )
- };
+  );
+};
 
 export default Procurement;

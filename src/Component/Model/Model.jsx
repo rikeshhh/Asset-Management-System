@@ -1,10 +1,12 @@
 const Model = {
   Username: {
-    type: "string",
+    type: "text",
     required: "Please enter your username",
     placeholder: "Enter your username",
     minLength: 1,
     maxLength: 10,
+    value: "/^[a-zA-Z]+$/",
+    message: "Please enter a valid username",
   },
   Email: {
     type: "email",
@@ -31,7 +33,6 @@ const Model = {
     disabled: true,
     placeholder: "Enter your password",
     maxLength: 10,
-
     value: "^(?=.*[A-Za-z])(?=.*\\d).*$",
     message:
       "Invalid password format (at least 8 characters, at least one letter, and one number)",
@@ -55,8 +56,7 @@ const Model = {
     maxLength: 10,
     placeholder: "Enter your password again",
     value: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",
-    message:
-      "Invalid password format (at least 8 characters, at least one letter, and one number)",
+    message: "Must match the above password",
   },
   PhoneNumber: {
     type: "number",
@@ -73,6 +73,13 @@ const Model = {
     type: "string",
     required: "Please enter your designation",
     placeholder: "Enter your designation",
+    minLength: 1,
+    maxLength: 10,
+  },
+  Categories: {
+    type: "string",
+    required: "Please enter the sub category",
+    placeholder: "Enter the name",
     minLength: 1,
     maxLength: 10,
   },

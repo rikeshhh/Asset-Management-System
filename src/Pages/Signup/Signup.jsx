@@ -41,7 +41,6 @@ export const Signup = () => {
                   pattern={Model.Username.pattern}
                   value={Model.Username.value}
                   message={Model.Username.message}
-                  errorMessage={Model.Username.errorMessage}
                   errors={errors}
                   type={Model.Username.type}
                   placeholder={Model.Username.placeholder}
@@ -55,7 +54,6 @@ export const Signup = () => {
                   value={Model.Email.value}
                   message={Model.Email.message}
                   required={Model.Email.required}
-                  errorMessage={Model.Email.errorMessage}
                   errors={errors}
                   type={Model.Email.type}
                   placeholder={Model.Email.placeholder}
@@ -69,7 +67,6 @@ export const Signup = () => {
                   value={Model.Password.value}
                   message={Model.Password.message}
                   required={Model.Password.required}
-                  errorMessage={Model.Password.errorMessage}
                   errors={errors}
                   type={Model.Password.type}
                   placeholder={Model.Password.placeholder}
@@ -83,7 +80,6 @@ export const Signup = () => {
                   value={Model.RetypePassword.value}
                   message={Model.RetypePassword.message}
                   required={Model.RetypePassword.required}
-                  errorMessage={Model.RetypePassword.errorMessage}
                   errors={errors}
                   type={Model.RetypePassword.type}
                   placeholder={Model.RetypePassword.placeholder}
