@@ -12,6 +12,7 @@ export const Signup = () => {
     register,
     formState: { errors },
     handleSubmit,
+    watch,
   } = formMethod;
   const submitData = (data) => {
     console.log(data);
@@ -38,7 +39,6 @@ export const Signup = () => {
                   name="Username"
                   register={register}
                   required={Model.Username.required}
-                  pattern={Model.Username.pattern}
                   value={Model.Username.value}
                   message={Model.Username.message}
                   errors={errors}
@@ -74,19 +74,19 @@ export const Signup = () => {
                   maxLength={Model.Password.maxLength}
                 />
                 <Label text="RetypePassword" />
-                <InputField
+                <input
                   name="RetypePassword"
-                  register={register}
-                  value={Model.RetypePassword.value}
-                  message={Model.RetypePassword.message}
-                  required={Model.RetypePassword.required}
-                  errors={errors}
-                  type={Model.RetypePassword.type}
-                  placeholder={Model.RetypePassword.placeholder}
-                  minLength={Model.RetypePassword.minLength}
-                  maxLength={Model.RetypePassword.maxLength}
+                  type="password"
+                  placeholder="Enter your password again"
+                  {...register("RetypePassword", {
+                    required: "Retype Password is required",
+                    validate: (value) =>
+                      value === watch("Password") || "Passwords do not match",
+                  })}
                 />
-
+                {errors.RetypePassword && (
+                  <p>{errors.RetypePassword.message}</p>
+                )}
                 <div className="user__auth--ques">
                   <p>Already have an account?</p>
                   <Link to="/login">

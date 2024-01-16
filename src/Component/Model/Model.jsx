@@ -1,11 +1,13 @@
 const Model = {
   Username: {
-    type: "text",
+    type: "string",
     required: "Please enter your username",
     placeholder: "Enter your username",
-    minLength: 1,
-    maxLength: 10,
-    value: "/^[a-zA-Z]+$/",
+    minLength: 4,
+    minMessage: "Username should be at least 4 characters",
+    maxLength: 20,
+    minMessage: "Username should be less than 20 characters",
+    value: "^[a-zA-Z]+$",
     message: "Please enter a valid username",
   },
   Email: {
@@ -27,12 +29,13 @@ const Model = {
 
   Password: {
     type: "password",
-    required: "Password is required",
-    errorMessage: "Password should not be empty",
-    minLength: 5,
-    disabled: true,
+    required: "Password is should not be empty",
     placeholder: "Enter your password",
-    maxLength: 10,
+    minLength: 8,
+    minMessage:
+      "Password should be at least 8 characters and should contain numbeers",
+    maxLength: 20,
+    minMessage: "Password should be less than 20 characters",
     value: "^(?=.*[A-Za-z])(?=.*\\d).*$",
     message:
       "Invalid password format (at least 8 characters, at least one letter, and one number)",
@@ -40,20 +43,20 @@ const Model = {
   Checkbox: {
     type: "checkbox",
     required: "Checkbox must be checked",
-    errorMessage: "Please check the checkbox",
     placeholder: "I agree to the terms and conditions",
   },
   Radio: {
     type: "radio",
     required: "must be selected",
-    errorMessage: "Please select an option",
   },
   RetypePassword: {
     type: "password",
     required: "Must match the password",
     errorMessage: "Incorrect password format",
-    minLength: 1,
-    maxLength: 10,
+    minLength: 4,
+    minMessage: "Password should be at least 4 characters",
+    maxLength: 20,
+    minMessage: "Password should be less than 20 characters",
     placeholder: "Enter your password again",
     value: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",
     message: "Must match the above password",
@@ -61,10 +64,9 @@ const Model = {
   PhoneNumber: {
     type: "number",
     required: "must be valid",
-    errorMessage: "Incorrect password format",
     minLength: 1,
     maxLength: 10,
-    placeholder: "Enter your password again",
+    placeholder: "Enter your valid phone number",
     value: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",
     message:
       "Invalid password format (at least 8 characters, at least one letter, and one number)",
