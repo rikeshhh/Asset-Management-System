@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { InputField } from "../../Component/Input/InputField";
 import { Label } from "../../Component/Label/Label";
 import { useForm } from "react-hook-form";
@@ -16,7 +16,13 @@ export const Profile = () => {
   } = useForm();
   const location = useLocation();
   const receivedState = location.state;
-  console.log(receivedState)
+  console.log(receivedState);
+
+  const fileInputRef = useRef(null);
+
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -30,9 +36,25 @@ export const Profile = () => {
               <figure>
                 <img src={userProf} alt="amod suman" />
               </figure>
+              <input
+                type="file"
+                className="user__profile--none"
+                ref={fileInputRef}
+                accept=".jpg,.png"
+                onChange={(e) => {
+                  // Handle file selection if needed
+                  console.log("Selected file:", e.target.files[0]);
+                }}
+              />
               <Button
-                text="Upload new photo"
-                className={"user__profile--image button"}
+                text={"Upload new photo"}
+                onClick={handleButtonClick}
+                isDisabled={receivedState}
+                className={
+                  receivedState
+                    ? "user__profile--file-disabled"
+                    : "user__profile--file"
+                }
               />
               <span>
                 Max file size: 3MB <br /> Larger image will be resized
@@ -61,7 +83,6 @@ export const Profile = () => {
                 minLength={Model.Username.minLength}
                 maxLength={Model.Username.maxLength}
                 isDisabled={receivedState}
-
               />
             </div>
 
@@ -69,35 +90,35 @@ export const Profile = () => {
               <Label text="Job Type" />
               <div style={{ display: "flex", gap: "1.5rem" }}>
                 <div className="checkbox__input--label">
-                <InputField
-                name="Radio"
-                register={register}
-                pattern={Model.Radio.pattern}
-                required={Model.Radio.required}
-                errorMessage={Model.Radio.errorMessage}
-                errors={errors}
-                type={Model.Radio.type}
-                placeholder={Model.Radio.placeholder}
-                minLength={Model.Radio.minLength}
-                maxLength={Model.Radio.maxLength}
-                isDisabled={receivedState}
-                />
+                  <InputField
+                    name="Radio"
+                    register={register}
+                    pattern={Model.Radio.pattern}
+                    required={Model.Radio.required}
+                    errorMessage={Model.Radio.errorMessage}
+                    errors={errors}
+                    type={Model.Radio.type}
+                    placeholder={Model.Radio.placeholder}
+                    minLength={Model.Radio.minLength}
+                    maxLength={Model.Radio.maxLength}
+                    isDisabled={receivedState}
+                  />
                   <Label text="Permanent" />
                 </div>
                 <div className="checkbox__input--label">
-                <InputField
-                name="Radio"
-                register={register}
-                pattern={Model.Radio.pattern}
-                required={Model.Radio.required}
-                errorMessage={Model.Radio.errorMessage}
-                errors={errors}
-                type={Model.Radio.type}
-                placeholder={Model.Radio.placeholder}
-                minLength={Model.Radio.minLength}
-                maxLength={Model.Radio.maxLength}
-                isDisabled={receivedState}
-                />
+                  <InputField
+                    name="Radio"
+                    register={register}
+                    pattern={Model.Radio.pattern}
+                    required={Model.Radio.required}
+                    errorMessage={Model.Radio.errorMessage}
+                    errors={errors}
+                    type={Model.Radio.type}
+                    placeholder={Model.Radio.placeholder}
+                    minLength={Model.Radio.minLength}
+                    maxLength={Model.Radio.maxLength}
+                    isDisabled={receivedState}
+                  />
                   <Label text="Temporary" />
                 </div>
               </div>
@@ -105,23 +126,22 @@ export const Profile = () => {
             <div className="user__profile--section">
               <Label text="Designation" />
               <InputField
-                name="Username"
+                name="Designation"
                 register={register}
-                pattern={Model.Username.pattern}
-                required={Model.Username.required}
-                errorMessage={Model.Username.errorMessage}
+                pattern={Model.Designation.pattern}
+                required={Model.Designation.required}
+                errorMessage={Model.Designation.errorMessage}
                 errors={errors}
-                type={Model.Username.type}
-                placeholder={Model.Username.placeholder}
-                minLength={Model.Username.minLength}
-                maxLength={Model.Username.maxLength}
+                type={Model.Designation.type}
+                placeholder={Model.Designation.placeholder}
+                minLength={Model.Designation.minLength}
+                maxLength={Model.Designation.maxLength}
                 isDisabled={receivedState}
-
               />
             </div>
             <div className="user__profile--section">
               <Label text="Department" />
-              <SelectInput />
+              <SelectInput isDisabled={receivedState} />
             </div>
             <div className="user__profile--section">
               <Label text="Email" />
@@ -137,7 +157,6 @@ export const Profile = () => {
                 minLength={Model.Email.minLength}
                 maxLength={Model.Email.maxLength}
                 isDisabled={receivedState}
-
               />
             </div>
             <div className="user__profile--section">
@@ -154,15 +173,20 @@ export const Profile = () => {
                 minLength={Model.PhoneNumber.minLength}
                 maxLength={Model.PhoneNumber.maxLength}
                 isDisabled={receivedState}
-
               />
             </div>
-            <Button
-              className={"button__one"}
-              value="submit"
-              text="Cancel"
-              isDisabled={true}
-            />
+            <div className="user__profile--btn">
+              <Button
+                value="submit"
+                text={"Save changes"}
+                className={receivedState ? "profile-btn-none" : "profile-btn"}
+              />
+              <Button
+                className={"button__one"}
+                text="Cancel"
+                isDisabled={receivedState}
+              />
+            </div>
           </form>
         </div>
       </div>

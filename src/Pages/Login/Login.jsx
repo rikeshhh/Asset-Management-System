@@ -2,19 +2,19 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 import { Label } from "../../Component/Label/Label";
 import { InputField } from "../../Component/Input/InputField";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import Button from "../../Component/Button/Button";
-import validationRules from "../../Component/Validation/Validation.json";
+import Model from "../../Component/Model/Model";
 
 const Login = () => {
+  const formMethod = useForm();
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = formMethod;
 
   const onSubmit = (e, data) => {
-    e.preventDefault;
     console.log("hello");
   };
   return (
@@ -27,41 +27,57 @@ const Login = () => {
               <p>Assets management system</p>
             </div>
           </div>
-          <form className="user__auth--form" onSubmit={handleSubmit(onSubmit)}>
-            <h3 className="user__auth--title">Login</h3>
-            <div className="user__auth--input">
-              {Object.keys(validationRules).map((fieldName) => {
-                const rule = validationRules[fieldName];
-                if (fieldName === "Username" || fieldName === "Password") {
-                  return (
-                    <>
-                      <Label text={fieldName} />
-                      <InputField
-                        placeholder={rule.placeholder}
-                        name={fieldName}
-                        type={rule.type}
-                        disabled={false}
-                        register={register}
-                        fieldName={fieldName}
-                        rule={rule}
-                        errors={errors}
-                      />
-                    </>
-                  );
-                }
-              })}
+          <FormProvider {...formMethod}>
+            <form
+              className="user__auth--form"
+              onSubmit={formMethod.handleSubmit(onSubmit)}
+            >
+              <h3 className="user__auth--title">Login</h3>
+              <div className="user__auth--input">
+                <Label text="Username" />
+                <InputField
+                  name="Username"
+                  register={formMethod.register}
+                  value={Model.Username.value}
+                  message={Model.Username.message}
+                  required={Model.Username.required}
+                  errorMessage={Model.Username.errorMessage}
+                  errors={errors}
+                  type={Model.Username.type}
+                  placeholder={Model.Username.placeholder}
+                  minLength={Model.Username.minLength}
+                  maxLength={Model.Username.maxLength}
+                />
+                <Label text="Password" />
+                <InputField
+                  name="Password"
+                  register={register}
+                  value={Model.Username.value}
+                  message={Model.Username.message}
+                  required={Model.Password.required}
+                  errorMessage={Model.Password.errorMessage}
+                  errors={errors}
+                  type={Model.Password.type}
+                  placeholder={Model.Password.placeholder}
+                  minLength={Model.Password.minLength}
+                  maxLength={Model.Password.maxLength}
+                />
 
-              <div className="user__auth--checkbox">
-                <input type="checkbox" />
-                <span>Remember me</span>
+                <div className="user__auth--checkbox">
+                  <InputField
+                    type={Model.Checkbox.type}
+                    required={Model.Checkbox.required}
+                  />
+                  <span>Remember me</span>
+                </div>
               </div>
-            </div>
-            <Button
-              className={"user__auth--button"}
-              text="Login"
-              value="submit"
-            />
-          </form>
+              <Button
+                className={"user__auth--button"}
+                text="Login"
+                value="submit"
+              />
+            </form>
+          </FormProvider>
           <div className="user__auth--ques">
             <p>Dont have an account?</p>
             <Link to="/signup">

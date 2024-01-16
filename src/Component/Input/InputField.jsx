@@ -1,44 +1,46 @@
-import { useForm } from "react-hook-form";
 import "./input.css";
 export const InputField = ({
   placeholder,
   name,
-  type, 
-  register,
+  type,
   required,
   errors,
-  errorMessage,
-  pattern = null,
+  message,
+  value,
   maxLength,
   minLength,
-  isDisabled
+  isDisabled,
+  register,
 }) => {
-  console.log(isDisabled)
   return (
     <>
-    <input
-  placeholder={placeholder}
-  name={name}
-  type={type}
-  {...register(name, {
-    required: required,
-    pattern: type !== "password" &&
-      pattern && {
-        value: new RegExp(pattern.value),
-        message: pattern.message,
-      },
-    minLength: minLength && {
-      value: minLength.minLength,
-      message: minLength.errorMessage,
-    },
-    maxLength: maxLength && {
-      value: maxLength.maxLength,
-      message: maxLength.errorMessage,
-    },
-  })}
-  disabled={isDisabled}
-/>
-   {errors[name] && <p className='error-message'>{errors[name].message || errors[name].errorMessage}</p>}
+      <input
+        className={isDisabled ? "input-disabled" : "input-enabled"}
+        placeholder={placeholder}
+        name={name}
+        type={type}
+        {...register(name, {
+          required: required,
+          pattern: {
+            value: new RegExp(value),
+            message: message,
+          },
+          minLength: !isDisabled &&
+            minLength && {
+              value: minLength.value,
+              message: minLength.errorMessage,
+            },
+          maxLength: !isDisabled &&
+            maxLength && {
+              value: maxLength.value,
+              message: maxLength.errorMessage,
+            },
+        })}
+        disabled={isDisabled}
+      />
+      {!isDisabled && errors[name] && (
+        <p className="error-message">{errors[name].message}</p>
+      )}
     </>
   );
 };
