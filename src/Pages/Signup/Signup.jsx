@@ -39,39 +39,43 @@ export const Signup = () => {
                   name="Username"
                   register={register}
                   required={Model.Username.required}
-                  value={Model.Username.value}
-                  message={Model.Username.message}
+                  value={Model.Username.pattern.value}
+                  message={Model.Username.pattern.message}
                   errors={errors}
                   type={Model.Username.type}
                   placeholder={Model.Username.placeholder}
-                  minLength={Model.Username.minLength}
-                  maxLength={Model.Username.maxLength}
+                  minLength={Model.Username.minLength.value}
+                  minMessage={Model.Username.minLength.message}
+                  maxLength={Model.Username.maxLength.value}
+                  maxMessage={Model.Username.maxLength.message}
                 />
                 <Label text="Email" />
                 <InputField
                   name="Email"
                   register={register}
-                  value={Model.Email.value}
-                  message={Model.Email.message}
+                  value={Model.Username.pattern.value}
+                  message={Model.Username.pattern.message}
                   required={Model.Email.required}
                   errors={errors}
                   type={Model.Email.type}
                   placeholder={Model.Email.placeholder}
-                  minLength={Model.Email.minLength}
-                  maxLength={Model.Email.maxLength}
+                  maxLength={Model.Email.maxLength.value}
+                  maxMessage={Model.Email.maxLength.message}
                 />
                 <Label text="Password" />
                 <InputField
                   name="Password"
                   register={register}
-                  value={Model.Password.value}
-                  message={Model.Password.message}
+                  value={Model.Username.pattern.value}
+                  message={Model.Username.pattern.message}
                   required={Model.Password.required}
                   errors={errors}
                   type={Model.Password.type}
                   placeholder={Model.Password.placeholder}
-                  minLength={Model.Password.minLength}
-                  maxLength={Model.Password.maxLength}
+                  minLength={Model.Password.minLength.value}
+                  minMessage={Model.Password.minLength.message}
+                  maxLength={Model.Password.maxLength.value}
+                  maxMessage={Model.Password.maxLength.message}
                 />
                 <Label text="RetypePassword" />
                 <input

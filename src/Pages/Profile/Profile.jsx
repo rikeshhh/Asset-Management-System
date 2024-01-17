@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { InputField } from "../../Component/Input/InputField";
 import { Label } from "../../Component/Label/Label";
 import { useForm } from "react-hook-form";
@@ -18,6 +18,15 @@ export const Profile = () => {
   const receivedState = location.state;
 
   const fileInputRef = useRef(null);
+
+  const [options, setOptions] = useState([
+    "Frontend",
+    "Backend",
+    "UI UX",
+    "QA",
+    "Project Manager",
+    "DevOps",
+  ]);
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -73,14 +82,16 @@ export const Profile = () => {
               <InputField
                 name="Username"
                 register={register}
-                value={Model.Username.value}
-                message={Model.Username.message}
+                value={Model.Username.pattern.value}
+                message={Model.Username.pattern.message}
                 required={Model.Username.required}
                 errors={errors}
                 type={Model.Username.type}
                 placeholder={Model.Username.placeholder}
-                minLength={Model.Username.minLength}
-                maxLength={Model.Username.maxLength}
+                minLength={Model.Username.minLength.value}
+                minMessage={Model.Username.minLength.message}
+                maxLength={Model.Username.maxLength.value}
+                maxMessage={Model.Username.maxLength.message}
                 isDisabled={receivedState}
               />
             </div>
@@ -88,29 +99,29 @@ export const Profile = () => {
             <div className="user__profile--section">
               <Label text="Job Type" />
               <div style={{ display: "flex", gap: "1.5rem" }}>
-                <div className="checkbox__input--label">
-                  <InputField
-                    name="Radio"
-                    register={register}
-                    pattern={Model.Radio.pattern}
-                    required={Model.Radio.required}
-                    errors={errors}
-                    type={Model.Radio.type}
-                    isDisabled={receivedState}
-                  />
+                <div className="radio__label">
+                  <div className="checkbox__input--label">
+                    <InputField
+                      name="Radio"
+                      register={register}
+                      errors={errors}
+                      type={Model.Radio.type}
+                      isDisabled={receivedState}
+                    />
+                  </div>
                   <Label text="Permanent" />
                 </div>
-                <div className="checkbox__input--label">
-                  <InputField
-                    name="Radio"
-                    register={register}
-                    pattern={Model.Radio.pattern}
-                    required={Model.Radio.required}
-                    errorMessage={Model.Radio.errorMessage}
-                    errors={errors}
-                    type={Model.Radio.type}
-                    isDisabled={receivedState}
-                  />
+                <div className="radio__label">
+                  <div className="checkbox__input--label">
+                    <InputField
+                      name="Radio"
+                      register={register}
+                      required={Model.Radio.required}
+                      errors={errors}
+                      type={Model.Radio.type}
+                      isDisabled={receivedState}
+                    />
+                  </div>
                   <Label text="Temporary" />
                 </div>
               </div>
@@ -120,34 +131,36 @@ export const Profile = () => {
               <InputField
                 name="Designation"
                 register={register}
-                pattern={Model.Designation.pattern}
+                value={Model.Designation.pattern.value}
+                message={Model.Designation.pattern.message}
                 required={Model.Designation.required}
                 errors={errors}
                 type={Model.Designation.type}
                 placeholder={Model.Designation.placeholder}
-                minLength={Model.Designation.minLength}
-                maxLength={Model.Designation.maxLength}
+                minLength={Model.Designation.minLength.value}
+                minMessage={Model.Designation.minLength.message}
+                maxLength={Model.Designation.maxLength.value}
+                maxMessage={Model.Designation.maxLength.message}
                 isDisabled={receivedState}
               />
             </div>
             <div className="user__profile--section">
               <Label text="Department" />
-              <SelectInput isDisabled={receivedState} />
+              <SelectInput isDisabled={receivedState} options={options} />
             </div>
             <div className="user__profile--section">
               <Label text="Email" />
               <InputField
                 name="Email"
                 register={register}
-                pattern={Model.Email.pattern}
+                value={Model.Email.pattern.value}
+                message={Model.Email.pattern.message}
                 required={Model.Email.required}
                 errors={errors}
                 type={Model.Email.type}
                 placeholder={Model.Email.placeholder}
-                minLength={Model.Email.minLength.value}
-                minMessage={Model.Email.minLength.message}
-                maxMessage={Model.Email.maxLength.message}
                 maxLength={Model.Email.maxLength.value}
+                maxMessage={Model.Email.maxLength.message}
                 isDisabled={receivedState}
               />
             </div>
@@ -156,13 +169,16 @@ export const Profile = () => {
               <InputField
                 name="PhoneNumber"
                 register={register}
-                pattern={Model.PhoneNumber.pattern}
+                value={Model.PhoneNumber.pattern.value}
+                message={Model.PhoneNumber.pattern.message}
                 required={Model.PhoneNumber.required}
                 errors={errors}
                 type={Model.PhoneNumber.type}
                 placeholder={Model.PhoneNumber.placeholder}
-                minLength={Model.PhoneNumber.minLength}
-                maxLength={Model.PhoneNumber.maxLength}
+                minLength={Model.PhoneNumber.minLength.value}
+                minMessage={Model.PhoneNumber.minLength.message}
+                maxLength={Model.PhoneNumber.maxLength.value}
+                maxMessage={Model.PhoneNumber.maxLength.message}
                 isDisabled={receivedState}
               />
             </div>

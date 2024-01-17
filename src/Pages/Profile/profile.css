@@ -118,6 +118,11 @@
   letter-spacing: 0.00438rem;
 }
 
+.radio__label {
+  display: flex;
+  gap: 0.5rem;
+}
+
 /* .user__profile--form input {
   display: flex;
   padding: 1.09rem 1rem;

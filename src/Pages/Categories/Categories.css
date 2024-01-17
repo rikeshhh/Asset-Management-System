@@ -27,7 +27,7 @@
   border: 1px solid var(--primary-grey);
   background: var(--secondary-color);
 }
-.add__category p {
+.add__category--title p {
   color: var(--text-color);
   font-size: 1.25rem;
   font-weight: 600;
@@ -61,5 +61,5 @@
 }
 
 .add__category--select select {
-  margin-top: 0.5rem    ;
+  margin-top: 0.5rem;
 }

@@ -17,7 +17,7 @@ export const InputField = ({
   register,
 }) => {
   return (
-    <>
+    <div className={type == "radio" ? "input__field--radio" : "input__field"}>
       <input
         className={isDisabled ? "input-disabled" : "input-enabled"}
         placeholder={placeholder}
@@ -29,11 +29,10 @@ export const InputField = ({
             value: new RegExp(value),
             message: message,
           },
-          minLength: !isDisabled &&
-            minLength && {
-              value: minLength,
-              message: minMessage,
-            },
+          minLength: !isDisabled && {
+            value: minLength,
+            message: minMessage,
+          },
           maxLength: !isDisabled && {
             value: maxLength,
             message: maxMessage,
@@ -45,9 +44,41 @@ export const InputField = ({
         <ErrorMessage
           errors={errors}
           name={name}
-          render={({ message }) => message && <p key={type}>{message}</p>}
+          render={({ message }) =>
+            message && (
+              <p className="error-message" key={type}>
+                {message}
+              </p>
+            )
+          }
         />
       )}
-    </>
+      {!isDisabled && (
+        <ErrorMessage
+          errors={errors}
+          name={name}
+          render={({ minMessage }) =>
+            minMessage && (
+              <p className="error-message" key={type}>
+                {minMessage}
+              </p>
+            )
+          }
+        />
+      )}
+      {!isDisabled && (
+        <ErrorMessage
+          errors={errors}
+          name={name}
+          render={({ maxMessage }) =>
+            maxMessage && (
+              <p className="error-message" key={type}>
+                {maxMessage}
+              </p>
+            )
+          }
+        />
+      )}
+    </div>
   );
 };

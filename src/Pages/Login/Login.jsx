@@ -40,26 +40,30 @@ const Login = () => {
                   name="Username"
                   register={register}
                   required={Model.Username.required}
-                  value={Model.Username.value}
-                  message={Model.Username.message}
+                  value={Model.Username.pattern.value}
+                  message={Model.Username.pattern.message}
                   errors={errors}
                   type={Model.Username.type}
                   placeholder={Model.Username.placeholder}
-                  minLength={Model.Username.minLength}
-                  maxLength={Model.Username.maxLength}
+                  minLength={Model.Username.minLength.value}
+                  minMessage={Model.Username.minLength.message}
+                  maxLength={Model.Username.maxLength.value}
+                  maxMessage={Model.Username.maxLength.message}
                 />
                 <Label text="Password" />
                 <InputField
                   name="Password"
                   register={register}
-                  value={Model.Password.value}
-                  message={Model.Password.message}
+                  value={Model.Username.pattern.value}
+                  message={Model.Username.pattern.message}
                   required={Model.Password.required}
                   errors={errors}
                   type={Model.Password.type}
                   placeholder={Model.Password.placeholder}
-                  minLength={Model.Email.minLength.value}
-                  maxLength={Model.Email.maxLength.value}
+                  minLength={Model.Password.minLength.value}
+                  minMessage={Model.Password.minLength.message}
+                  maxLength={Model.Password.maxLength.value}
+                  maxMessage={Model.Password.maxLength.message}
                 />
 
                 <div className="user__auth--ques">

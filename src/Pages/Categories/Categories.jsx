@@ -16,6 +16,13 @@ const Categories = () => {
     setSelectedValue(event.target.value);
   };
 
+  const [options, setOptions] = useState([
+    "Computer",
+    "Routers",
+    "Accesories",
+    "Backups",
+  ]);
+
   const {
     register,
     formState: { errors },
@@ -32,7 +39,7 @@ const Categories = () => {
             <Category value={value} selectedValue={selectedValue} />
 
             <div className="add__category">
-              <div>
+              <div className="add__category--title">
                 <p>Add a category/ Sub Category</p>
                 <span>
                   Add a new category/sub category. Assign a sub category to the
@@ -55,7 +62,10 @@ const Categories = () => {
                 </div>
                 <div className="add__category--select">
                   <Label text="Parent Category" />
-                  <SelectInput onSelectChange={handleSelectChange} />
+                  <SelectInput
+                    onSelectChange={handleSelectChange}
+                    options={options}
+                  />
                 </div>
                 <div className="">
                   <Button

@@ -1,6 +1,6 @@
 import React from "react";
 import "./input.css";
-export const SelectInput = ({ onSelectChange, isDisabled }) => {
+export const SelectInput = ({ onSelectChange, isDisabled, options }) => {
   return (
     <select
       id="cars"
@@ -8,11 +8,16 @@ export const SelectInput = ({ onSelectChange, isDisabled }) => {
       disabled={isDisabled}
       className={isDisabled ? "select__disabled" : "select__enabled"}
       onChange={onSelectChange}
+      required
     >
-      <option value="Computer">Computer</option>
-      <option value="Routers">Routerss</option>
-      <option value="Acesssories">Acesssories</option>
-      <option value="Backups">Backups</option>
+      <option value="" disabled selected>
+        Select an option
+      </option>
+      {options.map((option, index) => (
+        <option key={index} value={option}>
+          {option}
+        </option>
+      ))}
     </select>
   );
 };
