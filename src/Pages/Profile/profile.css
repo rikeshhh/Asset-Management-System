@@ -1,7 +1,7 @@
 .user__profile {
   display: flex;
   flex-direction: column;
-}
+}   
 
 .user__profile--body {
   display: grid;

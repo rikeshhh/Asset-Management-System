@@ -92,7 +92,7 @@ const Model = {
       message: "Please enter a valid designation",
     },
   },
-  Categories: {
+  Group: {
     type: "string",
     required: "Please enter the sub category",
     placeholder: "Enter the name",

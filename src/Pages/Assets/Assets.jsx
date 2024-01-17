@@ -23,7 +23,7 @@ const Assets = () => {
   return (
     <section className="content-wrapper">
       <div className="assets content-radius">
-        <div className="assets__header">
+        <div className="content__header assets__header">
           <h2>Assets</h2>
           <Button
             text="Add Category"
@@ -32,39 +32,38 @@ const Assets = () => {
           />
         </div>
 
-        <div className="assets__navigation">
-          <Button
-            text="Hardware"
-            onClick={handleButtonClick}
-            isActive={isActive}
-          />
-          <Button
-            text="Software"
-            onClick={handleButtonClick}
-            isActive={!isActive}
-          />
-        </div>
+        <div className="assets__content">
+          <div className="assets__navigation">
+            <Button
+              text="Hardware"
+              onClick={handleButtonClick}
+              isActive={isActive}
+            />
+            <Button
+              text="Software"
+              onClick={handleButtonClick}
+              isActive={!isActive}
+            />
+          </div>
 
-        <div className="assets__filter ">
-          <InputField
-            name="Username"
-            register={register}
-            pattern={Model.Username.pattern}
-            required={Model.Username.required}
-            errorMessage={Model.Username.errorMessage}
-            errors={errors}
-            type="search"
-            placeholder={Model.Username.placeholder}
-            minLength={Model.Username.minLength}
-            maxLength={Model.Username.maxLength}
-          />
-          <Button
-            text="Filter"
-            icon={<BsFunnel />}
-            className="assets__filter__button"
-          />
+          <div className="assets__filter ">
+            <InputField
+              name="Assets"
+              register={register}
+              pattern={Model.Group.pattern}
+              required={Model.Group.required}
+              errors={errors}
+              type="search"
+              placeholder="Search"
+            />
+            <Button
+              text="Filter"
+              icon={<BsFunnel />}
+              className="assets__filter__button"
+            />
+          </div>
+          {isActive && <Table size="8" />}
         </div>
-        {isActive && <Table size="8" />}
       </div>
     </section>
   );

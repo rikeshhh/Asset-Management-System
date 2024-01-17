@@ -1,13 +1,21 @@
 import React from "react";
 import "./button.css";
-import { Link } from "react-router-dom";
-const Button = ({ text, className, type, onClick, icon, isDisabled }) => {
+const Button = ({
+  text,
+  className,
+  type,
+  hanldeClick,
+  icon,
+  isDisabled,
+  isActive,
+}) => {
   return (
     <button
       className={`${className}`}
       type={type}
-      onClick={onClick}
+      onClick={hanldeClick}
       disabled={isDisabled}
+      isActive={isActive}
     >
       {icon} {text}
     </button>

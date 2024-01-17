@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import "./CategoryTable.css";
+import "./DataTable.css";
 import Button from "../Button/Button";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
 import { LuArrowDownUp } from "react-icons/lu";
 
-export const Category = ({ value, selectedValue }) => {
+export const DataTable = ({ value, selectedValue, showDownButton }) => {
   const [show, setShow] = useState(false);
   const [edit, setEdit] = useState(false);
   const handleViewClick = () => {
@@ -31,7 +31,7 @@ export const Category = ({ value, selectedValue }) => {
             <td>1</td>
             <td>Frontend</td>
             <td className="button-gap">
-              <Button className="edit_button" text={<RiArrowDownSLine />} />
+              {showDownButton && <Button className="edit_button" text={<RiArrowDownSLine />} />}
               <Button className="edit_button" text={<CiEdit />} />
               <Button className="delete__button" text={<GoTrash />} />
             </td>

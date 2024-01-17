@@ -11,7 +11,6 @@ import Login from "../Pages/Login/Login";
 import { Signup } from "../Pages/Signup/Signup";
 import { Profile } from "../Pages/Profile/Profile";
 import Location from "../Pages/Location/Location";
-import Table from "../Component/Table/Table";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Plans from "../Pages/Plans/Plans";
 
@@ -42,7 +41,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/employees",
-        element: <Table />,
+        element: <Employees />,
       },
       {
         path: "/categories",

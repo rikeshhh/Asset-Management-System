@@ -7,9 +7,11 @@ import Model from "../../Component/Model/Model";
 import { SelectInput } from "../../Component/Input/SelectInput";
 import { IoMdAdd } from "react-icons/io";
 import { GrStatusGoodSmall } from "react-icons/gr";
-
 import "./Procurement.css";
+import { useState } from "react";
+
 const Procurement = () => {
+  const [options, setOptions] = useState(["Urgent", "High", "Low", "Very Low"]);
   const {
     register,
     formState: { errors },
@@ -43,7 +45,7 @@ const Procurement = () => {
           </div>
           <div className="user__auth--input">
             <Label text="Requeat Urgency" />
-            <SelectInput />
+            <SelectInput options={options} />
           </div>
         </div>
         <div className="procurement__product">

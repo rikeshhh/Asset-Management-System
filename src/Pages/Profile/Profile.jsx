@@ -8,6 +8,7 @@ import { SelectInput } from "../../Component/Input/SelectInput";
 import userProf from "/src/assets/userProf.svg";
 import Model from "../../Component/Model/Model";
 import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
 export const Profile = () => {
   const {
     register,
@@ -31,6 +32,9 @@ export const Profile = () => {
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
+
+  const handleCancel = () => <Link to="/employees"></Link>;
+
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -192,6 +196,7 @@ export const Profile = () => {
                 className={"button__one"}
                 text="Cancel"
                 isDisabled={receivedState}
+                hanldeClick={handleCancel}
               />
             </div>
           </form>
