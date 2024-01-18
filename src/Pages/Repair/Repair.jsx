@@ -26,7 +26,7 @@ const Repair = () => {
         <div className="content__header repair__header">
           <h2>Repair & Replace</h2>
           <Button
-            text="Add Category"
+            text="Send for Repair / Replace"
             className={"category--buttons button__blue"}
             icon={<IoMdAdd />}
           />

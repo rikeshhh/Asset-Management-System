@@ -7,6 +7,7 @@ import Model from "../../Component/Model/Model";
 import { SelectInput } from "../../Component/Input/SelectInput";
 import Button from "../../Component/Button/Button";
 import DropzoneArea from "../../Component/Dropzone/DropzoneArea";
+import { Link } from "react-router-dom";
 
 const AssetsForm = ({
   formHeading,
@@ -149,11 +150,9 @@ const AssetsForm = ({
                 text={buttonText}
                 className={"button__blue"}
               />
-              <Button
-                value="submit"
-                text={buttonCancelText}
-                className={"button__red"}
-              />
+              <Link to="/assets" className="link">
+                <Button text={buttonCancelText} className={"button__red"} />
+              </Link>
             </div>
           </div>
         </form>

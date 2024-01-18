@@ -15,6 +15,7 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import Plans from "../Pages/Plans/Plans";
 import AddAssets from "../Pages/Assets/AddAssets";
 import EditAssets from "../Pages/Assets/EditAssets";
+import ProcurementForm from "../Pages/Procurement/ProcurementForm";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
       {
         path: "/editAssets",
         element: <EditAssets />,
+      },
+      {
+        path: "/procurementForm",
+        element: <ProcurementForm />,
       },
       {
         path: "/logout",

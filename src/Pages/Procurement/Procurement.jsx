@@ -1,17 +1,14 @@
-import { useForm } from "react-hook-form";
 import Button from "../../Component/Button/Button";
-import { InputField } from "../../Component/Input/InputField";
-import { Label } from "../../Component/Label/Label";
-import Table from "../../Component/Table/Table";
-import Model from "../../Component/Model/Model";
-import { SelectInput } from "../../Component/Input/SelectInput";
 import { IoMdAdd } from "react-icons/io";
-import { GrStatusGoodSmall } from "react-icons/gr";
 import "./Procurement.css";
-import { useState } from "react";
+import { InputField } from "../../Component/Input/InputField";
+import { useForm } from "react-hook-form";
+import Model from "../../Component/Model/Model";
+import { BsFunnel } from "react-icons/bs";
+import Table from "../../Component/Table/Table";
+import { Link } from "react-router-dom";
 
 const Procurement = () => {
-  const [options, setOptions] = useState(["Urgent", "High", "Low", "Very Low"]);
   const {
     register,
     formState: { errors },
@@ -20,48 +17,34 @@ const Procurement = () => {
   return (
     <section className="content-wrapper">
       <div className="content-radius procurement">
-        <div className="procurement__header">
-          <h2>Procurement Form</h2>
-          <p>
-            <span>Procurement/</span> <GrStatusGoodSmall color="green" />{" "}
-            Request an asset
-          </p>
-        </div>
-        <div className="procurement__request">
-          <div className="user__auth--input">
-            <Label text="Requested By" />
-            <InputField
-              name="Username"
-              register={register}
-              pattern={Model.Username.pattern}
-              required={Model.Username.required}
-              errorMessage={Model.Username.errorMessage}
-              errors={errors}
-              type={Model.Username.type}
-              placeholder={Model.Username.placeholder}
-              minLength={Model.Username.minLength}
-              maxLength={Model.Username.maxLength}
-            />
-          </div>
-          <div className="user__auth--input">
-            <Label text="Requeat Urgency" />
-            <SelectInput options={options} />
-          </div>
-        </div>
-        <div className="procurement__product">
-          <div className="procurement__product--list">
-            <h3>Product List</h3>
+        <div className="procurement__header procurement__header--display">
+          <h2>Procurement </h2>
+          <Link to={"/procurementForm"} className="link">
             <Button
-              text="Add a table line"
-              className={"button__blue"}
+              className="button__blue"
               icon={<IoMdAdd />}
+              text="Fill Procurement"
             />
-          </div>
-          <Table size="1" linkTo={"/"} />
-          <div className="procurement__bottom--buttons">
-            <Button text="Fill Procurement" className={"procurement--button"} />
-            <Button text="Cancel" className={"procurement__error--button"} />
-          </div>
+          </Link>
+        </div>
+        <div className="procurement__filter ">
+          <InputField
+            name="Procurement"
+            register={register}
+            pattern={Model.Group.pattern}
+            required={Model.Group.required}
+            errors={errors}
+            type="search"
+            placeholder="Search"
+          />
+          <Button
+            text="Filter"
+            icon={<BsFunnel />}
+            className="filter--button"
+          />
+        </div>
+        <div className="procurement__table">
+          <Table linkTo={"/procurementForm"} />
         </div>
       </div>
     </section>
