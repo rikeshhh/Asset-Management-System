@@ -25,11 +25,13 @@ const Assets = () => {
       <div className="assets content-radius">
         <div className="content__header assets__header">
           <h2>Assets</h2>
-          <Button
-            text="Add an Asset"
-            className={"button__blue"}
-            icon={<IoMdAdd />}
-          />
+          <Link to="/addAssets" className="link">
+            <Button
+              text="Add an Asset"
+              className={"button__blue"}
+              icon={<IoMdAdd />}
+            />
+          </Link>
         </div>
 
         <div className="assets__content">
@@ -64,7 +66,7 @@ const Assets = () => {
               className="filter--button"
             />
           </div>
-          {isActive && <Table size="8" />}
+          {isActive && <Table linkTo={"/editAssets"} size="8" />}
         </div>
       </div>
     </section>

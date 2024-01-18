@@ -142,7 +142,10 @@ const Header = () => {
                 Get more from AMS with our business / enterprise plans!
               </span>
               <Link to="/plans" className="plans__link">
-                <Button className={"button__style plans__button"} text={"Go to plans"} />
+                <Button
+                  className={"button__style plans__button"}
+                  text={"Go to plans"}
+                />
               </Link>
             </div>
             <NavLink

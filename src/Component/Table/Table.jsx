@@ -48,7 +48,7 @@ const Table = ({ size, linkTo }) => {
                 <td className="button-gap">
                   {/* <Link  to={{ pathname: '/profile', state: false }}>
                    </Link> */}
-                  <Link to="/profile" state={false}>
+                  <Link to={linkTo} state={false}>
                     <Button className="edit__button" text={<CiEdit />} />
                   </Link>
                   <Button className="delete__button" text={<GoTrash />} />

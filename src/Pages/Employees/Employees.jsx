@@ -43,7 +43,7 @@ const Employees = () => {
               className="filter--button"
             />
           </div>
-          <Table />
+          <Table linkTo={"/profile"} />
         </div>
       </div>
     </section>

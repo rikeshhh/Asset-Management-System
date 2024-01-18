@@ -10,6 +10,10 @@
   width: 100%;
   align-items: end;
   justify-content: end;
+}
+
+.profile > .link {
+  display: flex;
   gap: 0.94rem;
 }
 

@@ -13,6 +13,8 @@ import { Profile } from "../Pages/Profile/Profile";
 import Location from "../Pages/Location/Location";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Plans from "../Pages/Plans/Plans";
+import AddAssets from "../Pages/Assets/AddAssets";
+import EditAssets from "../Pages/Assets/EditAssets";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +60,14 @@ export const router = createBrowserRouter([
       {
         path: "/plans",
         element: <Plans />,
+      },
+      {
+        path: "/addAssets",
+        element: <AddAssets />,
+      },
+      {
+        path: "/editAssets",
+        element: <EditAssets />,
       },
       {
         path: "/logout",
