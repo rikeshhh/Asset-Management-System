@@ -1,21 +1,12 @@
 import React from "react";
 import "./button.css";
-const Button = ({
-  text,
-  className,
-  type,
-  hanldeClick,
-  icon,
-  isDisabled,
-  isActive,
-}) => {
+const Button = ({ text, className, type, handleClick, icon, isDisabled }) => {
   return (
     <button
-      className={`${className}`}
+      className={`${className} button__style`}
       type={type}
-      onClick={hanldeClick}
+      onClick={handleClick}
       disabled={isDisabled}
-      isActive={isActive}
     >
       {icon} {text}
     </button>

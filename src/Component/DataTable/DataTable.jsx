@@ -31,8 +31,10 @@ export const DataTable = ({ value, selectedValue, showDownButton }) => {
             <td>1</td>
             <td>Frontend</td>
             <td className="button-gap">
-              {showDownButton && <Button className="edit_button" text={<RiArrowDownSLine />} />}
-              <Button className="edit_button" text={<CiEdit />} />
+              {showDownButton && (
+                <Button className="edit__button" text={<RiArrowDownSLine />} />
+              )}
+              <Button className="edit__button" text={<CiEdit />} />
               <Button className="delete__button" text={<GoTrash />} />
             </td>
           </tr>

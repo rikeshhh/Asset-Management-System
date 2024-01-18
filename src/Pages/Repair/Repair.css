@@ -31,27 +31,6 @@
   padding: 1.09rem 1rem;
   margin-bottom: 1.5rem;
 }
-.repair__filter__button {
-  padding: 0.5rem;
-  border: none;
-  background-color: transparent;
-  color: var(--blue);
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;
-  letter-spacing: 0.00438rem;
-}
-.repair__navigation button {
-  background-color: transparent;
-  border: none;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 150%;
-  letter-spacing: 0.005rem;
-  cursor: pointer;
-}
 
 .assets__navigation--btn {
   border-bottom: 2px solid #527dd0;

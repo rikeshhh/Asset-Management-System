@@ -73,7 +73,7 @@ const Categories = () => {
               <div className="">
                 <Button
                   text="Add Category"
-                  className={"category--buttons"}
+                  className={"category--button button__blue"}
                   icon={<IoMdAdd />}
                 />
               </div>

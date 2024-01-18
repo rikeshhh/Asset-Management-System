@@ -24,10 +24,10 @@ const Repair = () => {
     <section className="content-wrapper">
       <div className="repair content-radius">
         <div className="content__header repair__header">
-          <h2>Assets</h2>
+          <h2>Repair & Replace</h2>
           <Button
             text="Add Category"
-            className={"category--buttons"}
+            className={"category--buttons button__blue"}
             icon={<IoMdAdd />}
           />
         </div>
@@ -38,11 +38,13 @@ const Repair = () => {
               text="Repair"
               onClick={handleButtonClick}
               isActive={isActive}
+              className="assets__btn"
             />
             <Button
               text="Replace"
               onClick={handleButtonClick}
               isActive={!isActive}
+              className="assets__btn"
             />
           </div>
 
@@ -59,7 +61,7 @@ const Repair = () => {
             <Button
               text="Filter"
               icon={<BsFunnel />}
-              className="repair__filter__button"
+              className="filter--button"
             />
           </div>
           {isActive && <Table size="8" />}

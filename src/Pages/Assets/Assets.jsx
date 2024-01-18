@@ -26,8 +26,8 @@ const Assets = () => {
         <div className="content__header assets__header">
           <h2>Assets</h2>
           <Button
-            text="Add Category"
-            className={"category--buttons"}
+            text="Add an Asset"
+            className={"button__blue"}
             icon={<IoMdAdd />}
           />
         </div>
@@ -36,13 +36,15 @@ const Assets = () => {
           <div className="assets__navigation">
             <Button
               text="Hardware"
-              onClick={handleButtonClick}
+              onhandle={handleButtonClick}
               isActive={isActive}
+              className="assets__btn"
             />
             <Button
               text="Software"
-              onClick={handleButtonClick}
+              onhandle={handleButtonClick}
               isActive={!isActive}
+              className="assets__btn"
             />
           </div>
 
@@ -59,7 +61,7 @@ const Assets = () => {
             <Button
               text="Filter"
               icon={<BsFunnel />}
-              className="assets__filter__button"
+              className="filter--button"
             />
           </div>
           {isActive && <Table size="8" />}

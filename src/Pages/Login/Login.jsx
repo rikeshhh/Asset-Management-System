@@ -54,8 +54,8 @@ const Login = () => {
                 <InputField
                   name="Password"
                   register={register}
-                  value={Model.Username.pattern.value}
-                  message={Model.Username.pattern.message}
+                  value={Model.Password.pattern.value}
+                  message={Model.Password.pattern.message}
                   required={Model.Password.required}
                   errors={errors}
                   type={Model.Password.type}
@@ -80,7 +80,7 @@ const Login = () => {
               </div>
             </form>
           </FormProvider>
-          <div className="user__auth--bottom">
+          <div className="user__auth--bottom user__auth--bottom__padding">
             <p>
               Please contact the admin at{" "}
               <a href="mailto:admin@ams.com">admin@ams.com</a> for help

@@ -29,7 +29,7 @@ const Header = () => {
             <NavLink
               to="/"
               className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "navbar__link"
+                isActive ? "navbar__link--active" : "link"
               }
             >
               <li>
@@ -42,7 +42,7 @@ const Header = () => {
             <NavLink
               to="/assets"
               className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "navbar__link"
+                isActive ? "navbar__link--active" : "link"
               }
             >
               <li>
@@ -55,7 +55,7 @@ const Header = () => {
             <NavLink
               to="/procurement"
               className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "navbar__link"
+                isActive ? "navbar__link--active" : "link"
               }
             >
               <li>
@@ -68,7 +68,7 @@ const Header = () => {
             <NavLink
               to="/repair"
               className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "navbar__link"
+                isActive ? "navbar__link--active" : "link"
               }
             >
               <li>
@@ -86,7 +86,7 @@ const Header = () => {
             <NavLink
               to="/employees"
               className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "navbar__link"
+                isActive ? "navbar__link--active" : "link"
               }
             >
               <li>
@@ -99,7 +99,7 @@ const Header = () => {
             <NavLink
               to="/categories"
               className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "navbar__link"
+                isActive ? "navbar__link--active" : "link"
               }
             >
               <li>
@@ -112,7 +112,7 @@ const Header = () => {
             <NavLink
               to="/location"
               className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "navbar__link"
+                isActive ? "navbar__link--active" : "link"
               }
             >
               <li>
@@ -125,7 +125,7 @@ const Header = () => {
             <NavLink
               to="/departments"
               className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "navbar__link"
+                isActive ? "navbar__link--active" : "link"
               }
             >
               <li>
@@ -142,13 +142,13 @@ const Header = () => {
                 Get more from AMS with our business / enterprise plans!
               </span>
               <Link to="/plans" className="plans__link">
-                <Button className={"plans__button"} text={"Go to plans"} />
+                <Button className={"button__style plans__button"} text={"Go to plans"} />
               </Link>
             </div>
             <NavLink
               to=""
               className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "navbar__link"
+                isActive ? "navbar__link--active" : "link"
               }
             >
               <li>

@@ -60,7 +60,7 @@ const Location = () => {
                 <Button
                   text="Add Location"
                   type="submit"
-                  className={"category--buttons"}
+                  className={"category--button button__blue"}
                   icon={<IoMdAdd />}
                 />
               </div>

@@ -53,8 +53,8 @@ export const Signup = () => {
                 <InputField
                   name="Email"
                   register={register}
-                  value={Model.Username.pattern.value}
-                  message={Model.Username.pattern.message}
+                  value={Model.Email.pattern.value}
+                  message={Model.Email.pattern.message}
                   required={Model.Email.required}
                   errors={errors}
                   type={Model.Email.type}
@@ -66,8 +66,8 @@ export const Signup = () => {
                 <InputField
                   name="Password"
                   register={register}
-                  value={Model.Username.pattern.value}
-                  message={Model.Username.pattern.message}
+                  value={Model.Password.pattern.value}
+                  message={Model.Password.pattern.message}
                   required={Model.Password.required}
                   errors={errors}
                   type={Model.Password.type}
@@ -89,7 +89,9 @@ export const Signup = () => {
                   })}
                 />
                 {errors.RetypePassword && (
-                  <p>{errors.RetypePassword.message}</p>
+                  <p className="retype__error">
+                    {errors.RetypePassword.message}
+                  </p>
                 )}
                 <div className="user__auth--ques">
                   <p>Already have an account?</p>

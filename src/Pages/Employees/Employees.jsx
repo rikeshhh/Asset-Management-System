@@ -21,7 +21,7 @@ const Employees = () => {
           <h2>Employees</h2>
           <Button
             text={"Add A Profile"}
-            className={"employees__header--button"}
+            className={" button__blue"}
             icon={<IoMdAdd />}
           />
         </div>
@@ -40,7 +40,7 @@ const Employees = () => {
             <Button
               text="Filter"
               icon={<BsFunnel />}
-              className="assets__filter__button"
+              className="filter--button"
             />
           </div>
           <Table />

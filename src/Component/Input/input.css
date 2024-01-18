@@ -45,7 +45,3 @@ select {
 .error-message {
   color: var(--red) !important;
 }
-
-.error-border {
-  border: 1px solid var(--red);
-}

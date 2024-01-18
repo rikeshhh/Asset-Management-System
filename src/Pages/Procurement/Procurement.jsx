@@ -53,7 +53,7 @@ const Procurement = () => {
             <h3>Product List</h3>
             <Button
               text="Add a table line"
-              className={"procurement--button"}
+              className={"button__blue"}
               icon={<IoMdAdd />}
             />
           </div>

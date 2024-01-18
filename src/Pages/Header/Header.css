@@ -44,7 +44,7 @@
 }
 
 .navbar__link--active span,
-.navbar__link span {
+.link span {
   font-size: 1.25rem;
 }
 
@@ -102,17 +102,7 @@
 }
 
 .plans__button {
-  width: 12rem;
-  height: 2.25rem;
-  padding: 0rem 1rem;
-  color: var(--blue);
-  text-align: center;
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 150%;
-  letter-spacing: 0.00438rem;
-  border-radius: 0.3125rem;
+  width: 12rem !important;
+  color: var(--blue) !important;
   background: var(--secondary-color);
-  border: none;
-  cursor: pointer;
 }

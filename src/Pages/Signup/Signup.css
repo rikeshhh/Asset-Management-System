@@ -5,5 +5,9 @@
 }
 
 .error-message {
-  color: red;
+  color: var(--red);
+}
+
+.retype__error {
+  color: var(--red);
 }

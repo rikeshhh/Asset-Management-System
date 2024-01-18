@@ -33,8 +33,6 @@ export const Profile = () => {
     fileInputRef.current.click();
   };
 
-  const handleCancel = () => <Link to="/employees"></Link>;
-
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -60,12 +58,12 @@ export const Profile = () => {
               />
               <Button
                 text={"Upload new photo"}
-                onClick={handleButtonClick}
+                handleClick={handleButtonClick}
                 isDisabled={receivedState}
                 className={
                   receivedState
                     ? "user__profile--file-disabled"
-                    : "user__profile--file"
+                    : "button__blue upload__btn"
                 }
               />
               <span>
@@ -186,18 +184,35 @@ export const Profile = () => {
                 isDisabled={receivedState}
               />
             </div>
-            <div className="user__profile--btn">
+            <div
+              className={
+                receivedState
+                  ? "user__profile--btn-right"
+                  : "user__profile--btn"
+              }
+            >
               <Button
                 value="submit"
                 text={"Save changes"}
-                className={receivedState ? "profile-btn-none" : "profile-btn"}
+                className={receivedState ? "profile-btn-none" : "button__blue"}
               />
-              <Button
-                className={"button__one"}
-                text="Cancel"
-                isDisabled={receivedState}
-                hanldeClick={handleCancel}
-              />
+              <Link to="/employees" className="link">
+                <Button
+                  className={receivedState ? "profile-btn-none" : "button__red"}
+                  text="Cancel"
+                  isDisabled={receivedState}
+                />
+              </Link>
+
+              <Link to="/" className="link">
+                <Button
+                  className={
+                    receivedState ? "button__red " : "profile-btn-none"
+                  }
+                  text="Close"
+                  isDisabled={false}
+                />
+              </Link>
             </div>
           </form>
         </div>

@@ -1,7 +1,8 @@
 .user__profile {
   display: flex;
   flex-direction: column;
-}   
+  padding-bottom: 2rem;
+}
 
 .user__profile--body {
   display: grid;
@@ -48,9 +49,7 @@
 
 .user__profile--file-disabled {
   display: flex;
-  width: 11.875rem;
-  height: 2.25rem;
-  padding: 0rem 1rem;
+  padding: 0.75rem 1.5rem;
   margin-top: 1.88rem;
   justify-content: center;
   align-items: center;
@@ -61,19 +60,8 @@
   border: none;
 }
 
-.user__profile--file {
-  display: flex;
-  width: 11.875rem;
-  height: 2.25rem;
-  padding: 0rem 1rem;
+.upload__btn {
   margin-top: 1.88rem;
-  justify-content: center;
-  align-items: center;
-  color: var(--secondary-color);
-  gap: 0.625rem;
-  border-radius: 0.3125rem;
-  background: var(--blue);
-  border: none;
 }
 
 .user__profile--image span {
@@ -161,33 +149,17 @@
   gap: 4px;
 }
 
-.button__one {
-  margin-bottom: 1.87rem;
-}
-
 .user__profile--btn {
   display: flex;
   gap: 1rem;
 }
 
-.profile-btn-none {
-  display: none;
+.user__profile--btn-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-.profile-btn {
-  width: 11.875rem;
-  height: fit-content;
-  color: var(--secondary-color);
-  text-align: center;
-  font-family: Inter;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 150%; /* 1.5rem */
-  letter-spacing: 0.005rem;
-  padding: 0.75rem 0rem;
-  outline: none;
-  border: none;
-  background-color: var(--blue);
-  border-radius: 0.3125rem;
+.profile-btn-none {
+  display: none;
 }

@@ -9,7 +9,6 @@ import { CiEdit } from "react-icons/ci";
 import { useForm } from "react-hook-form";
 const Table = ({ size, linkTo }) => {
   let PageSize = size ? size : 10 || 8;
-  const [isEditMode, setIsEditMode] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const {
     register,
@@ -49,8 +48,8 @@ const Table = ({ size, linkTo }) => {
                 <td className="button-gap">
                   {/* <Link  to={{ pathname: '/profile', state: false }}>
                    </Link> */}
-                  <Link to="/profile" state={isEditMode}>
-                    <Button className="edit_button" text={<CiEdit />} />
+                  <Link to="/profile" state={false}>
+                    <Button className="edit__button" text={<CiEdit />} />
                   </Link>
                   <Button className="delete__button" text={<GoTrash />} />
                 </td>
