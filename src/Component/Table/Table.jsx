@@ -23,7 +23,7 @@ const Table = ({ size, linkTo }) => {
 
   return (
     <>
-      <table>
+      <table className="main__table">
         <thead>
           <tr>
             <th>ProductCode</th>

@@ -1,13 +1,12 @@
-table {
+.main__table  {
   color: #21252b;
   border-collapse: collapse;
   width: 100%;
 }
-th,
-td {
+.main__table  th, .main__table td {
   padding: 1rem;
 }
-th {
+.main__table  th {
   text-align: left;
   background-color: #eff4fe;
   color: #657081;
@@ -26,14 +25,14 @@ th {
   position: relative;
 }
 @media (max-width: 650px) {
-  th {
+  .main__table  th {
     display: none;
   }
-  td {
+  .main__table  td {
     display: block;
     padding: 0.5rem 1 rem;
   }
-  td::after {
+  .main__table td::after {
     content: attr(data-cell) ":";
     font-weight: 700;
     text-transform: capitalize;

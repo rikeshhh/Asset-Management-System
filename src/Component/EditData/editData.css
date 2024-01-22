@@ -1,0 +1,11 @@
+.editData{
+
+position: relative;
+justify-content: center;
+align-items: center;
+}
+.editData .category__buttons{
+position: absolute;
+right:0;
+top: 10px;
+}

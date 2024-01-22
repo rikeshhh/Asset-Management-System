@@ -1,21 +1,17 @@
-import React from "react";
 import "./input.css";
-export const SelectInput = ({ onSelectChange, isDisabled, options }) => {
+export const SelectInput = ({  value, onChange ,isDisabled, options }) => {
   return (
     <select
-      id="cars"
-      name="cars"
+    value={value}
+     onChange={onChange}
       disabled={isDisabled}
       className={isDisabled ? "select__disabled" : "select__enabled"}
-      onChange={onSelectChange}
       required
     >
-      <option value="" disabled selected>
-        Select an option
-      </option>
-      {options.map((option, index) => (
-        <option key={index} value={option}>
-          {option}
+       <option value="None">None</option>
+      {options.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
         </option>
       ))}
     </select>

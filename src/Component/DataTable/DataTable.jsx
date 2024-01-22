@@ -5,13 +5,25 @@ import { RiArrowDownSLine } from "react-icons/ri";
 import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
 import { LuArrowDownUp } from "react-icons/lu";
-
-export const DataTable = ({ value, selectedValue, showDownButton }) => {
+import { InputField } from "../Input/InputField";
+import { useForm } from "react-hook-form";
+import Model from "../Model/Model";
+import EditData from "../EditData/EditData";
+export const DataTable = ({ formDataArray, showDownButton, onDelete, setFormDataArray }) => {
   const [show, setShow] = useState(false);
-  const [edit, setEdit] = useState(false);
+  
   const handleViewClick = () => {
     setShow((prev) => !prev);
   };
+  const [isEdit, setIsEdit] = useState(true);
+  const handleEditClick = () => {
+    setIsEdit((prev) => !prev);
+  };
+
+console.log(formDataArray.Location);
+
+
+
   return (
     <section className="cateogries">
       <table>
@@ -26,19 +38,51 @@ export const DataTable = ({ value, selectedValue, showDownButton }) => {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Frontend</td>
-            <td className="button-gap">
-              {showDownButton && (
-                <Button className="edit__button" text={<RiArrowDownSLine />} />
-              )}
-              <Button className="edit__button" text={<CiEdit />} />
-              <Button className="delete__button" text={<GoTrash />} />
-            </td>
-          </tr>
-        </tbody>
+      
+        {formDataArray.map((formData, index) => (
+          <tbody key={index + 1}>
+            <tr>
+              <td>{index + 1}</td>
+
+
+              <td className="category_edit--row">
+                {
+                  isEdit ? 
+                  `${formData.ParentCategory || formData.Location || formData.Department}`
+                  :
+                    <EditData value={formData.ParentCategory || formData.Location || formData.Department}  setFormDataArray={setFormDataArray}/>
+                }
+              </td>
+
+
+              {/* Additional columns as needed */}
+              <td className="button-gap">
+                {showDownButton && (
+                  <Button className="edit__button" text={<RiArrowDownSLine />} handleClick={handleViewClick} />
+                )}
+                <Button className="edit__button" text={<CiEdit />} handleClick={handleEditClick} />
+                <Button className="delete__button" text={<GoTrash />} handleClick={() => onDelete(index)} />
+              </td>
+            </tr>
+            {show ?
+
+              <tr>
+                <td colSpan='2'>
+                  <ol type="a">
+                    <li>{formData.ChildCategory}</li>
+                  </ol>
+                </td>
+
+                <td className="button-gap">
+                  <Button className="edit__button" text={<CiEdit />} handleClick={handleEditClick} />
+                  <Button className="delete__button" text={<GoTrash />} handleClick={() => onDelete(index)} />
+                </td>
+              </tr>
+
+              : ''}
+
+          </tbody>
+        ))}
       </table>
     </section>
   );

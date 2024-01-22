@@ -8,25 +8,20 @@ th {
   text-align: left;
 }
 
-th:first-child {
-  border-top-left-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-}
 
-th:last-child {
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-}
 
 .cateogries tr {
   background-color: var(--secondary-color);
   border-bottom: 1px solid black;
+  padding: 1.09rem 0rem;
 }
 
 .cateogries tr:first-child {
   border: none;
 }
-
+.cateogries td {
+  padding: 1.09rem 0.69rem;
+}
 /* .cateogries tr:last-child {
   border: none;
 } */
@@ -38,7 +33,9 @@ th:last-child {
   font-weight: 500;
   letter-spacing: 0.07px;
 }
-
+.cateogries table th:nth-child(2) {
+padding-right: 10rem;
+}
 ol {
   display: flex;
   justify-content: center;
@@ -55,4 +52,15 @@ ol li {
 .editable {
   transition: background-color 0.3s ease-in-out; /* Adjust the duration and easing as needed */
   background-color: lightyellow; /* Change the background color as desired */
+}
+.category__input{
+  display: flex;
+  position: relative;
+}
+.category_edit--row{
+padding: 1rem 0.69rem;
+}
+.category__buttons{
+ display: flex;
+ justify-content: center;
 }
