@@ -8,7 +8,7 @@ import { PricingProvider } from "./Component/Context/PricingContext.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <PricingProvider>
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
     </PricingProvider>
   </React.StrictMode>
 );

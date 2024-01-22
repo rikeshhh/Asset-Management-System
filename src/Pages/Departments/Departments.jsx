@@ -21,6 +21,19 @@ const Departments = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const [formDataArray, setFormDataArray] = useState([
+    {
+      ParentCategory: "Department",
+    }
+  ]);
+
+  const onSubmit = (data) => {
+    const newData = {
+      ParentCategory: data.Department,
+    };
+    console.log(newData)
+    setFormDataArray((prevDataArray) => [...prevDataArray, newData]);
+  }
   return (
     <section className="content-wrapper">
       <div className="content-radius category">
@@ -29,8 +42,7 @@ const Departments = () => {
         </div>
         <div className="category__content">
           <DataTable
-            value={value}
-            selectedValue={selectedValue}
+           formDataArray={formDataArray}
             showDownButton={false}
           />
 
@@ -41,7 +53,7 @@ const Departments = () => {
                 Enter the department to list in the employees section.
               </span>
             </div>
-            <form action="" onSubmit={handleSubmit((data) => setValue(data))}>
+            <form action="" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <Label text="Department Name" />
                 <InputField
