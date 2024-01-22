@@ -81,30 +81,12 @@
   margin-bottom: 1.37rem;
 }
 
-.user__profile--form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding-right: 1.5rem;
-}
+
 
 .user__profile--none[type="file"] {
   display: none;
 }
 
-.user__profile--section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.user__profile--section label {
-  color: var(--text-color);
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 150%;
-  letter-spacing: 0.00438rem;
-}
 
 .radio__label {
   display: flex;

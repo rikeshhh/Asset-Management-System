@@ -12,7 +12,7 @@ const Model = {
       message: "Username should be less than 20 characters",
     },
     pattern: {
-      value: "^[a-zA-Z]+$",
+      value: "^[a-zA-Z0-9 ]+$",
       message: "Please enter a valid username",
     },
   },
@@ -107,6 +107,23 @@ const Model = {
     pattern: {
       value: "^[a-zA-Z]+$",
       message: "Please enter a valid categories containing alphabets",
+    },
+  },
+  ZipCode: {
+    type: "text",
+    required: "must be valid",
+    // minLength: {
+    //   value: 10,
+    //   message: "Phone number must be 10 in length",
+    // },
+    // maxLength: {
+    //   value: 10,
+    //   message: "Phone number must be 10 in length",
+    // },
+    placeholder: "Enter a valid zip code",
+    pattern: {
+      value: "^[0-9]+$",
+      message: "Enter a valid numeric zip code",
     },
   },
 };

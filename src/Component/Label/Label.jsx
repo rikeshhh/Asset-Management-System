@@ -1,5 +1,8 @@
-import React from "react";
 
-export const Label = ({ text, className }) => {
-  return <label className={className}>{text}</label>;
+export const Label = ({ text, className, sup }) => {
+  return (
+    <label className={className}>
+      {text} <span>{sup}</span>
+    </label>
+  );
 };

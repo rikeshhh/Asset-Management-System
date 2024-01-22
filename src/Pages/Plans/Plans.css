@@ -193,6 +193,7 @@
   border-radius: 0.5rem;
   border: 1px solid var(--primary-grey);
   background: var(--secondary-color);
+  height: fit-content;
 }
 
 .pricing__form {
@@ -219,4 +220,234 @@
 .payment__dets {
   color: var(--text-color);
   border-bottom: 3px solid var(--primary-grey);
+}
+
+.basic__dets--country {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.94rem;
+}
+
+.pricing__policy {
+  color: var(--text-color);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 150%; /* 1.3125rem */
+  letter-spacing: 0.00438rem;
+}
+
+.pricing__policy span {
+  color: var(--blue);
+}
+
+.pricing__flex--end {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 6.12rem;
+}
+
+.pricing__button {
+  display: flex;
+  gap: 1rem;
+}
+
+.basic__dets--toggleBtn {
+  margin: 1.13rem 0 1.25rem;
+  width: 100%;
+}
+
+.basic__dets--toggleBtn button {
+  width: 100%;
+}
+
+.pricing__content__left {
+  padding: 1rem;
+  background: var(--secondary-color);
+  height: fit-content;
+}
+
+.payment__active {
+  display: flex;
+  gap: 1.94rem;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: var(--main-background);
+  cursor: pointer;
+}
+
+.pricing__payment {
+  display: flex;
+  gap: 1.94rem;
+  align-items: center;
+  padding: 0.75rem;
+  cursor: pointer;
+}
+
+.pricing__paypal {
+  border-bottom: 1px solid var(--primary-grey);
+}
+
+.payment__left--title {
+  color: var(--text-color);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 150%; /* 1.3125rem */
+  letter-spacing: 0.00438rem;
+}
+
+.credit__svg {
+  padding: 0.94rem;
+}
+
+.paypal__svg {
+  padding: 1.41rem 0.28rem;
+}
+
+.paypal__svg img {
+  width: 3.0625rem;
+  height: 0.8125rem;
+}
+
+.pricing__plans--border {
+  border-radius: 0.5rem;
+  border: 1px solid var(--primary-grey);
+  padding: 0.81rem 1.31rem;
+  margin-top: 5.16rem;
+}
+
+.pricing__feature {
+  border-bottom: 1px solid var(--primary-grey);
+  padding-bottom: 1.63rem;
+}
+
+.pricing__money {
+  padding-top: 1.06rem;
+}
+
+.pricing__money h3,
+.pricing__money h4 {
+  color: var(--text-color);
+
+  line-height: 150%; /* 1.40625rem */
+  letter-spacing: 0.00469rem;
+}
+
+.pricing__money h3 {
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.pricing__money h4 {
+  font-size: 3.125rem;
+  font-weight: 600;
+  letter-spacing: 0.01563rem;
+}
+
+.pricing__money > h4 > span {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 150%; /* 1.3125rem */
+  letter-spacing: 0.00438rem;
+}
+
+.payment__dets--border {
+  border-bottom: 1px solid var(--primary-grey);
+  padding-bottom: 0.63rem;
+}
+
+.payment__pricing--top {
+  padding-top: 0 !important;
+}
+
+.payment__pricing--top h4 {
+  font-size: 2.125rem;
+  font-weight: 600;
+  line-height: 150%; /* 3.1875rem */
+  letter-spacing: 0.01063rem;
+}
+
+.card__types--title {
+  padding: 0.75rem 1rem;
+  border-radius: 0.3125rem;
+  border: 1px solid var(--primary-grey);
+  background: #f9f9f9;
+}
+
+.card__types--image {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card__types--figure {
+  width: 3.375rem;
+  height: 2.0625rem;
+  padding: 0.44rem 0.37rem;
+  flex-shrink: 0;
+  border-radius: 0.3125rem;
+  border: 1px solid var(--primary-grey);
+  background: var(--secondary-color);
+}
+
+.card__types--figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.card__types--figure:nth-child(4) {
+  border: 1px solid #006cb7;
+  background: #006cb7;
+}
+
+.card__warning {
+  color: #b8bdc5;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 150%; /* 1.125rem */
+  letter-spacing: 0.00375rem;
+}
+
+.paypal__section {
+  width: 100%;
+}
+
+.paypal__section--top {
+  display: flex;
+  justify-content: center;
+}
+
+.paypal__section--image {
+  display: flex;
+  flex-direction: column;
+  gap: 0.56rem;
+  align-items: center;
+}
+
+.paypal__section--image img {
+  width: 7rem;
+  height: 1.875rem;
+}
+
+.paypal__section--title {
+  color: var(--text-color);
+  text-align: center;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 1.875rem */
+  letter-spacing: 0.00625rem;
+}
+
+.paypal__button {
+  width: 100%;
+}
+
+.paypal__ques {
+  color: var(--text-color);
+  text-align: center;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 1.3125rem */
+  letter-spacing: 0.00438rem;
 }

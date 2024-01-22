@@ -78,8 +78,8 @@ export const Profile = ({ title, description, buttonBlueText }) => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit()} className="user__profile--form">
-            <div className="user__profile--section">
+          <form onSubmit={handleSubmit()} className="group__form">
+            <div className="form__input--section">
               <Label text="Name" />
               <InputField
                 name="Username"
@@ -98,7 +98,7 @@ export const Profile = ({ title, description, buttonBlueText }) => {
               />
             </div>
 
-            <div className="user__profile--section">
+            <div className="form__input--section">
               <Label text="Job Type" />
               <div style={{ display: "flex", gap: "1.5rem" }}>
                 <div className="radio__label">
@@ -128,7 +128,7 @@ export const Profile = ({ title, description, buttonBlueText }) => {
                 </div>
               </div>
             </div>
-            <div className="user__profile--section">
+            <div className="form__input--section">
               <Label text="Designation" />
               <InputField
                 name="Designation"
@@ -146,11 +146,11 @@ export const Profile = ({ title, description, buttonBlueText }) => {
                 isDisabled={receivedState}
               />
             </div>
-            <div className="user__profile--section">
+            <div className="form__input--section">
               <Label text="Department" />
               <SelectInput isDisabled={receivedState} options={options} />
             </div>
-            <div className="user__profile--section">
+            <div className="form__input--section">
               <Label text="Email" />
               <InputField
                 name="Email"
@@ -166,7 +166,7 @@ export const Profile = ({ title, description, buttonBlueText }) => {
                 isDisabled={receivedState}
               />
             </div>
-            <div className="user__profile--section">
+            <div className="form__input--section">
               <Label text="Phone Number" />
               <InputField
                 name="PhoneNumber"

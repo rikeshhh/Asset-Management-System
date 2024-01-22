@@ -6,6 +6,7 @@
   align-items: center;
   gap: 0.625rem;
   flex-shrink: 0;
+  width: fit-content;
   /* text */
   color: var(--secondary-color);
   text-align: center;

@@ -20,6 +20,7 @@ import EditProfile from "../Pages/Profile/EditProfile";
 import { ViewProfile } from "../Pages/Profile/ViewProfile";
 import PricingForm from "../Pages/Plans/PricingForm";
 import PricingPayment from "../Pages/Plans/PricingPayment";
+import PaymentSuccess from "../Pages/Plans/PaymentSuccess";
 
 export const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ export const router = createBrowserRouter([
       {
         path: "/payment",
         element: <PricingPayment />,
+      },
+      {
+        path: "/success",
+        element: <PaymentSuccess />,
       },
       {
         path: "/addAssets",

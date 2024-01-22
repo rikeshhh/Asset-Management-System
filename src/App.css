@@ -261,3 +261,24 @@
 .add__category--select select {
   margin-top: 0.5rem;
 }
+
+.group__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.form__input--section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form__input--section label {
+  color: var(--text-color);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.00438rem;
+}

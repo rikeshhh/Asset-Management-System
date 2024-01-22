@@ -6,7 +6,7 @@ import { Label } from "../../Component/Label/Label";
 import { InputField } from "../../Component/Input/InputField";
 import Model from "../../Component/Model/Model";
 import { SelectInput } from "../../Component/Input/SelectInput";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { usePricingContext } from "../../Component/Context/PricingContext";
 
 const PricingForm = () => {
@@ -20,6 +20,23 @@ const PricingForm = () => {
 
   const location = useLocation();
   const receivedFeature = location.state;
+
+  const navigate = useNavigate();
+
+  const submitData = (data) => {
+    console.log(data);
+    navigate("/payment", { state: receivedFeature });
+  };
+
+  // const options = { value: "Nepal", label: "Nepal" };
+  const [options, setOptions] = useState([
+    "Frontend",
+    "Backend",
+    "UI UX",
+    "QA",
+    "Project Manager",
+    "DevOps",
+  ]);
 
   return (
     <section className="content-wrapper">
@@ -47,7 +64,7 @@ const PricingForm = () => {
             {receivedFeature.title === "Basics Plan" ? (
               <></>
             ) : (
-              <div className="plans__top--right">
+              <div className="plans__top--right basic__dets--toggleBtn">
                 <button
                   onClick={toggleBilling}
                   disabled={isAnnualBilling}
@@ -68,7 +85,7 @@ const PricingForm = () => {
             <div className="plans__offer--features">
               <h4>Features</h4>
               <span className="plans__offer-desc">{receivedFeature.label}</span>
-              <div className="features__list">
+              <div className="features__list pricing__feature">
                 <p>
                   <span>
                     <FcOk />
@@ -104,34 +121,34 @@ const PricingForm = () => {
                 <h3>Total Due</h3>
                 {receivedFeature.title === "Basics Plan" && <h3>Free</h3>}
                 {receivedFeature.title === "Business Plan" && (
-                  <h3>
-                    ${getBusinessRate}{" "}
+                  <h4>
+                    ${getBusinessRate}.00{" "}
                     {isAnnualBilling === true ? (
                       <span>/ Month</span>
                     ) : (
                       <span>/ Year</span>
                     )}
-                  </h3>
+                  </h4>
                 )}
                 {receivedFeature.title === "Enterprise Plan" && (
-                  <h3>
-                    ${getEnterpriseRate}{" "}
+                  <h4>
+                    ${getEnterpriseRate}.00{" "}
                     {isAnnualBilling === true ? (
                       <span>/ Month</span>
                     ) : (
                       <span>/ Year</span>
                     )}
-                  </h3>
+                  </h4>
                 )}
               </div>
             </div>
           </div>
           <div className="pricing__content--right">
             <form
-              onSubmit={handleSubmit()}
-              className="user__profile--form pricing__form"
+              onSubmit={handleSubmit(submitData)}
+              className="group__form pricing__form"
             >
-              <div className="user__profile--section">
+              <div className="form__input--section">
                 <Label text="Name" />
                 <InputField
                   name="Username"
@@ -149,7 +166,7 @@ const PricingForm = () => {
                 />
               </div>
 
-              <div className="user__profile--section">
+              <div className="form__input--section">
                 <Label text="Email" />
                 <InputField
                   name="Email"
@@ -164,7 +181,30 @@ const PricingForm = () => {
                   maxMessage={Model.Email.maxLength.message}
                 />
               </div>
-              <div className="user__profile--section">
+              <div className="basic__dets--country">
+                <div className="form__input--section">
+                  <Label text="Country" />
+                  <SelectInput options={options} />
+                </div>
+                <div className="form__input--section">
+                  <Label text={"ZipCode"} />
+                  <InputField
+                    name="ZipCode"
+                    register={register}
+                    value={Model.ZipCode.pattern.value}
+                    message={Model.ZipCode.pattern.message}
+                    required={Model.ZipCode.required}
+                    errors={errors}
+                    type={Model.ZipCode.type}
+                    placeholder={Model.ZipCode.placeholder}
+                    // minLength={Model.ZipCode.minLength.value}
+                    // minMessage={Model.ZipCode.minLength.message}
+                    // maxLength={Model.ZipCode.maxLength.value}
+                    // maxMessage={Model.ZipCode.maxLength.message}
+                  />
+                </div>
+              </div>
+              <div className="form__input--section">
                 <Label text="Phone Number" />
                 <InputField
                   name="PhoneNumber"
@@ -181,14 +221,26 @@ const PricingForm = () => {
                   maxMessage={Model.PhoneNumber.maxLength.message}
                 />
               </div>
-              <div>
-                <Link to="/payment" state={receivedFeature} className="link">
-                  <Button className="button__blue" text="Continue" />
-                </Link>
+              <div className="form__input--section">
+                <p className="pricing__policy">
+                  By proceeding I agree to AMS’s <span>Terms of Service</span>{" "}
+                  and <span>Privacy Policy</span>
+                </p>
+              </div>
+              <div className="pricing__flex--end">
+                <div className="pricing__button">
+                  {/* <Link to="/payment" state={receivedFeature} className="link"> */}
+                  <Button
+                    type="submit"
+                    className="button__blue"
+                    text="Continue"
+                  />
+                  {/* </Link> */}
 
-                <Link to="/plans" className="link">
-                  <Button className="button__red" text="Cancel" />
-                </Link>
+                  <Link to="/plans" className="link">
+                    <Button className="button__red" text="Cancel" />
+                  </Link>
+                </div>
               </div>
             </form>
           </div>
