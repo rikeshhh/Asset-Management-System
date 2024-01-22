@@ -72,7 +72,7 @@ const AssetsForm = ({
             </div>
 
             <div className="assets__form--input">
-              <Label text="ID / Product Code" />
+              <Label text="Name / Title" />
               <InputField
                 name="ID / Product Code"
                 register={register}
@@ -89,21 +89,21 @@ const AssetsForm = ({
               />
             </div>
             <div className="assets__form--input">
-              <Label text="ID / Product Code" />
+              <Label text="Asset Type" />
               <SelectInput options={options} />
             </div>
             <div className="assets__form--input">
-              <Label text="ID / Product Code" />
+              <Label text="Category" />
               <SelectInput options={options} />
             </div>
             <div className="assets__form--input">
-              <Label text="ID / Product Code" />
+              <Label text="Sub-Category" />
               <SelectInput options={options} />
             </div>
           </div>
           <div className="form--content__left">
             <div className="assets__form--input">
-              <Label text="ID / Product Code" />
+              <Label text="Brand / Company" />
               <InputField
                 name="ID / Product Code"
                 register={register}
@@ -120,14 +120,15 @@ const AssetsForm = ({
               />
             </div>
             <div className="assets__form--input">
-              <Label text="ID / Product Code" />
+              <Label text="Location" />
               <SelectInput options={options} />
             </div>
             <div className="assets__form--input">
-              <Label text="ID / Product Code" />
+              <Label text="Assigned to" />
               <SelectInput options={options} />
             </div>
             <div className="assets__form--input assets__switch">
+            <Label text="Status" />
               <label className={`switch ${isActive ? "active" : "inactive"}`}>
                 <input
                   type="checkbox"

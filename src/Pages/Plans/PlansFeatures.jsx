@@ -1,0 +1,32 @@
+export const features = {
+  basic: {
+    title: "Basics Plan",
+    desc: "Basic features for up to 10 users.",
+    label: "Popular features amongst begineers.",
+    one: "Basic reporting and analytics",
+    two: "Daily Synchronization",
+    three: "Up to 10 individual users",
+    four: "20GB individual data each user",
+    five: "Basic chat and email support",
+  },
+  business: {
+    title: "Business Plan",
+    desc: "Growing teams up to 20 users.",
+    label: "Everything in our free plan plus..",
+    one: "Access to basic features",
+    two: "Hourly Synchronization",
+    three: "Advance reporting and analysis",
+    four: "40GB individual data each user",
+    five: "Priority chat and email support",
+  },
+  enterprise: {
+    title: "Enterprise Plan",
+    desc: "Advance features + Unlimited users.",
+    label: "Everything in our business plan plus..",
+    one: "Advance custom fields",
+    two: "Audit log and data history",
+    three: "Unlimited individual users",
+    four: "Unlimited individual data",
+    five: " Personalised + Priority Service",
+  },
+};

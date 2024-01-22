@@ -10,6 +10,15 @@ import { PiListMagnifyingGlass } from "react-icons/pi";
 import { FiMapPin } from "react-icons/fi";
 import { GrGroup } from "react-icons/gr";
 import { LuLogOut } from "react-icons/lu";
+import { DashboardSvg } from "../../Component/svg/DashboardSvg";
+import { AssetsSvg } from "../../Component/svg/AssetsSvg";
+import { ProcurementSvg } from "../../Component/svg/ProcurementSvg";
+import { RepairSvg } from "../../Component/svg/RepairSvg";
+import { EmployeeSvg } from "../../Component/svg/EmployeeSvg";
+import { CategorySvg } from "../../Component/svg/CategorySvg";
+import { LocationSvg } from "../../Component/svg/LocationSvg";
+import { DepartmentSvg } from "../../Component/svg/DepartmentSvg";
+import { LogoutSvg } from "../../Component/svg/LogoutSvg";
 
 const Header = () => {
   return (
@@ -34,7 +43,8 @@ const Header = () => {
             >
               <li>
                 <span>
-                  <RxDashboard />
+                  {/* <RxDashboard /> */}
+                  <DashboardSvg />
                 </span>
                 Dashboard
               </li>
@@ -47,7 +57,8 @@ const Header = () => {
             >
               <li>
                 <span>
-                  <PiDesktopTower />
+                  {/* <PiDesktopTower /> */}
+                  <AssetsSvg />
                 </span>
                 Assets
               </li>
@@ -60,7 +71,8 @@ const Header = () => {
             >
               <li>
                 <span>
-                  <PiShoppingCart />
+                  {/* <PiShoppingCart /> */}
+                  <ProcurementSvg />
                 </span>
                 Procurement
               </li>
@@ -73,7 +85,8 @@ const Header = () => {
             >
               <li>
                 <span>
-                  <PiWrench />
+                  {/* <PiWrench /> */}
+                  <RepairSvg />
                 </span>
                 Repair & Replace
               </li>
@@ -91,7 +104,8 @@ const Header = () => {
             >
               <li>
                 <span>
-                  <HiOutlineUser />
+                  {/* <HiOutlineUser /> */}
+                  <EmployeeSvg />
                 </span>
                 Employees
               </li>
@@ -104,7 +118,8 @@ const Header = () => {
             >
               <li>
                 <span>
-                  <PiListMagnifyingGlass />
+                  {/* <PiListMagnifyingGlass /> */}
+                  <CategorySvg />
                 </span>
                 Categories
               </li>
@@ -117,7 +132,8 @@ const Header = () => {
             >
               <li>
                 <span>
-                  <FiMapPin />
+                  {/* <FiMapPin /> */}
+                  <LocationSvg />
                 </span>
                 Locations
               </li>
@@ -130,7 +146,8 @@ const Header = () => {
             >
               <li>
                 <span>
-                  <GrGroup />
+                  {/* <GrGroup /> */}
+                  <DepartmentSvg />
                 </span>
                 Department
               </li>
@@ -156,7 +173,8 @@ const Header = () => {
             >
               <li>
                 <span>
-                  <LuLogOut />
+                  {/* <LuLogOut /> */}
+                  <LogoutSvg />
                 </span>
                 Logout
               </li>

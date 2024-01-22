@@ -10,6 +10,7 @@
   border: 1px solid var(--primary-grey);
   display: flex;
   gap: 0.25rem;
+  width: fit-content;
 }
 
 .plans__top--right button {
@@ -35,9 +36,36 @@
   flex-direction: column;
   gap: 1.5rem;
   border-radius: 0.3125rem;
-  border: 2px solid var(--Grey, #e9eaec);
+  border: 2px solid var(--primary-grey);
   background: #fff;
   padding: 1.5rem;
+  transition: all 0.5s ease;
+}
+
+.plans__offer--content:hover {
+  border: 2px solid var(--blue);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.plans__offer--content:nth-child(2) figure {
+  display: flex;
+  justify-content: space-between;
+}
+
+.plans__popular {
+  display: flex;
+  padding: 0.25rem 0.35rem;
+  height: fit-content;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 1.9375rem;
+  background: var(--blue);
+  color: var(--secondary-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0.00438rem;
 }
 
 .plans__offer--info {
@@ -145,4 +173,50 @@
   background-color: var(--blue);
   color: var(--secondary-color);
   transition: background-color 1s ease;
+}
+
+.pricing__header--btn {
+  display: flex;
+  gap: 1.56rem;
+}
+
+.pricing__content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.75rem;
+  padding: 1.25rem 1.5rem 2.06rem 1.5rem;
+  width: 100%;
+}
+
+.pricing__content--left {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--primary-grey);
+  background: var(--secondary-color);
+}
+
+.pricing__form {
+  padding-right: 0rem !important;
+}
+
+.basic__dets,
+.payment__dets {
+  background: transparent !important;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 150%; /* 1.3125rem */
+  letter-spacing: 0.00438rem;
+  border-radius: 0;
+  padding: 0 0 0.44rem 0;
+  cursor: default;
+}
+
+.basic__dets {
+  color: var(--blue) !important;
+  border-bottom: 3px solid var(--blue);
+}
+
+.payment__dets {
+  color: var(--text-color);
+  border-bottom: 3px solid var(--primary-grey);
 }

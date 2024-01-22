@@ -56,7 +56,7 @@ const ProcurementForm = () => {
               icon={<IoMdAdd />}
             />
           </div>
-          <Table size="1" linkTo={"/"} />
+          <Table size="5" linkTo={"/"} />
           <div className="procurement__bottom--buttons">
             <Button text="Fill Procurement" className={"procurement--button"} />
             <Button text="Cancel" className={"procurement__error--button"} />

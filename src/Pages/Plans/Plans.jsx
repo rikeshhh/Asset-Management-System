@@ -2,24 +2,14 @@ import { useState } from "react";
 import Button from "../../Component/Button/Button";
 import "./Plans.css";
 import { FcOk } from "react-icons/fc";
+import { PlansStar } from "../../Component/svg/PlansStar";
+import { Link } from "react-router-dom";
+import { usePricingContext } from "../../Component/Context/PricingContext";
+import { features } from "./PlansFeatures";
 
 const Plans = () => {
-  const [isAnnualBilling, setIsAnnualBilling] = useState(false);
-  const businessMonthlyRate = 25;
-  const businessAnnualRate = 275;
-  const enterpriseMonthlyRate = 75;
-  const enterpriseAnnualRate = 750;
-
-  const handleBilling = () => {
-    setIsAnnualBilling((prevIsAnnual) => !prevIsAnnual);
-  };
-
-  const getBusinessRate = isAnnualBilling
-    ? businessMonthlyRate
-    : businessAnnualRate;
-  const getEnterpriseRate = isAnnualBilling
-    ? enterpriseMonthlyRate
-    : enterpriseAnnualRate;
+  const { isAnnualBilling, toggleBilling, getBusinessRate, getEnterpriseRate } =
+    usePricingContext();
 
   return (
     <section className="content-wrapper">
@@ -33,14 +23,14 @@ const Plans = () => {
           </div>
           <div className="plans__top--right">
             <button
-              onClick={handleBilling}
+              onClick={toggleBilling}
               disabled={isAnnualBilling}
               className={isAnnualBilling ? "plans__btn" : ""}
             >
               Monthly Billing
             </button>
             <button
-              onClick={handleBilling}
+              onClick={toggleBilling}
               disabled={!isAnnualBilling}
               className={!isAnnualBilling ? "plans__btn" : ""}
             >
@@ -55,12 +45,17 @@ const Plans = () => {
             </figure>
             <div className="plans__offer--info">
               <div>
-                <span>Basic Plan</span>
+                <span>{features.basic.title}</span>
                 <h3>Free</h3>
-                <p>Basic features for up to 10 users.</p>
+                <p>{features.basic.desc}</p>
               </div>
               <div>
-                <Button className={"plans__button--one"} text={"Get Started"} />
+                <Link to="/pricingForm" state={features.basic} className="link">
+                  <Button
+                    className={"plans__button--one"}
+                    text={"Get Started"}
+                  />
+                </Link>
                 <Button
                   className={"plans__button--two"}
                   text={"Talk to Sales"}
@@ -77,47 +72,60 @@ const Plans = () => {
                   <span>
                     <FcOk />
                   </span>
-                  Basic reporting and analytics
+                  {features.basic.one}
                 </p>
                 <p>
                   <span>
                     <FcOk />
                   </span>
-                  Daily Synchronization
+                  {features.basic.two}
                 </p>
                 <p>
                   <span>
                     <FcOk />
                   </span>
-                  Up to 10 individual users
+                  {features.basic.three}
                 </p>
                 <p>
                   <span>
                     <FcOk />
                   </span>
-                  20GB individual data each user
+                  {features.basic.four}
                 </p>
                 <p>
                   <span>
                     <FcOk />
                   </span>
-                  Basic chat and email support
+                  {features.basic.five}
                 </p>
               </div>
             </div>
           </div>
           <div className="plans__offer--content">
             <figure>
-              <img src="/src/assets/Buildings.svg" alt="" />
+              <img src="/src/assets/Building.svg" alt="" />
+              <div className="plans__popular">
+                <PlansStar /> Most Popular
+              </div>
             </figure>
+
             <div className="plans__offer--info">
               <div>
-                <span>Business Plan</span>
+                <span>{features.basic.title}</span>
                 <h3>${getBusinessRate}</h3>
-                <p>Growing teams up to 20 users.</p>
+                <p>{features.business.desc}</p>
               </div>
               <div>
-                <Button className={"plans__button--one"} text={"Get Started"} />
+                <Link
+                  to="/pricingForm"
+                  className="link"
+                  state={features.business}
+                >
+                  <Button
+                    className={"plans__button--one"}
+                    text={"Get Started"}
+                  />
+                </Link>
                 <Button
                   className={"plans__button--two"}
                   text={"Talk to Sales"}
@@ -134,31 +142,31 @@ const Plans = () => {
                   <span>
                     <FcOk />
                   </span>
-                  Access to basic features
+                  {features.business.one}
                 </p>
                 <p>
                   <span>
                     <FcOk />
                   </span>
-                  Hourly Synchronization
+                  {features.business.two}
                 </p>
                 <p>
                   <span>
                     <FcOk />
                   </span>
-                  Advance reporting and analysis
+                  {features.business.three}
                 </p>
                 <p>
                   <span>
                     <FcOk />
                   </span>
-                  40GB individual data each user
+                  {features.business.four}
                 </p>
                 <p>
                   <span>
                     <FcOk />
                   </span>
-                  Priority chat and email support
+                  {features.business.five}
                 </p>
               </div>
             </div>
@@ -169,12 +177,21 @@ const Plans = () => {
             </figure>
             <div className="plans__offer--info">
               <div>
-                <span>Enterprise Plan</span>
+                <span>{features.basic.title}</span>
                 <h3>${getEnterpriseRate}</h3>
-                <p>Advance features + Unlimited users.</p>
+                <p>{features.enterprise.desc}</p>
               </div>
               <div>
-                <Button className={"plans__button--one"} text={"Get Started"} />
+                <Link
+                  to="/pricingForm"
+                  state={features.enterprise}
+                  className="link"
+                >
+                  <Button
+                    className={"plans__button--one"}
+                    text={"Get Started"}
+                  />
+                </Link>
                 <Button
                   className={"plans__button--two"}
                   text={"Talk to Sales"}
@@ -191,31 +208,31 @@ const Plans = () => {
                   <span>
                     <FcOk />
                   </span>
-                  Advance custom fields
+                  {features.enterprise.one}
                 </p>
                 <p>
                   <span>
                     <FcOk />
                   </span>
-                  Audit log and data history
+                  {features.enterprise.two}
                 </p>
                 <p>
                   <span>
                     <FcOk />
                   </span>
-                  Unlimited individual users
+                  {features.enterprise.three}
                 </p>
                 <p>
                   <span>
                     <FcOk />
                   </span>
-                  Unlimited individual data
+                  {features.enterprise.four}
                 </p>
                 <p>
                   <span>
                     <FcOk />
                   </span>
-                  Personalised + Priority Service
+                  {features.enterprise.five}
                 </p>
               </div>
             </div>

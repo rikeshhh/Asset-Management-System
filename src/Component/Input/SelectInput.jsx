@@ -10,8 +10,8 @@ export const SelectInput = ({ onSelectChange, isDisabled, options }) => {
       onChange={onSelectChange}
       required
     >
-      <option value="" disabled selected>
-        Select an option
+      <option value="" selected>
+        None
       </option>
       {options.map((option, index) => (
         <option key={index} value={option}>

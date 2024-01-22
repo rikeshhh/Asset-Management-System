@@ -1,4 +1,5 @@
 import { useDropzone } from "react-dropzone";
+import { Label } from "../Label/Label";
 
 const DropzoneArea = () => {
   const onDrop = (acceptedFiles) => {
@@ -15,6 +16,7 @@ const DropzoneArea = () => {
         {...getRootProps()}
         className={`dropzone ${isDragActive ? "active" : ""}`}
       >
+        <Label text="Upload asset image" />
         <input {...getInputProps()} />
         <p>Drag and drop files here, or click to select files</p>
       </div>

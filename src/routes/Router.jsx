@@ -9,13 +9,17 @@ import Departments from "../Pages/Departments/Departments";
 import Logout from "../Pages/Logout/Logout";
 import Login from "../Pages/Login/Login";
 import { Signup } from "../Pages/Signup/Signup";
-import { Profile } from "../Pages/Profile/Profile";
 import Location from "../Pages/Location/Location";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Plans from "../Pages/Plans/Plans";
 import AddAssets from "../Pages/Assets/AddAssets";
 import EditAssets from "../Pages/Assets/EditAssets";
 import ProcurementForm from "../Pages/Procurement/ProcurementForm";
+import AddProfile from "../Pages/Profile/AddProfile";
+import EditProfile from "../Pages/Profile/EditProfile";
+import { ViewProfile } from "../Pages/Profile/ViewProfile";
+import PricingForm from "../Pages/Plans/PricingForm";
+import PricingPayment from "../Pages/Plans/PricingPayment";
 
 export const router = createBrowserRouter([
   {
@@ -31,8 +35,16 @@ export const router = createBrowserRouter([
         element: <Assets />,
       },
       {
-        path: "/profile",
-        element: <Profile />,
+        path: "/viewProfile",
+        element: <ViewProfile />,
+      },
+      {
+        path: "/addProfile",
+        element: <AddProfile />,
+      },
+      {
+        path: "/editProfile",
+        element: <EditProfile />,
       },
       {
         path: "/procurement",
@@ -61,6 +73,14 @@ export const router = createBrowserRouter([
       {
         path: "/plans",
         element: <Plans />,
+      },
+      {
+        path: "/pricingForm",
+        element: <PricingForm />,
+      },
+      {
+        path: "/payment",
+        element: <PricingPayment />,
       },
       {
         path: "/addAssets",

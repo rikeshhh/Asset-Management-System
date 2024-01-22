@@ -7,6 +7,7 @@ import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import Button from "../../Component/Button/Button";
 import { IoMdAdd } from "react-icons/io";
 import { BsFunnel } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Employees = () => {
   const {
@@ -19,11 +20,13 @@ const Employees = () => {
       <div className="content-radius employees">
         <div className="content__header employees__top">
           <h2>Employees</h2>
-          <Button
-            text={"Add A Profile"}
-            className={" button__blue"}
-            icon={<IoMdAdd />}
-          />
+          <Link to="/addProfile" className="link">
+            <Button
+              text={"Add A Profile"}
+              className={" button__blue"}
+              icon={<IoMdAdd />}
+            />
+          </Link>
         </div>
         <div className="employees__table">
           <div className="employees__table--top">
@@ -31,7 +34,7 @@ const Employees = () => {
               name="Search"
               register={register}
               errors={errors}
-              placeholder={Model.Group.placeholder}
+              placeholder={"Search"}
               type={Model.Group.type}
               value={Model.Group.pattern.value}
               message={Model.Group.pattern.message}
@@ -43,7 +46,7 @@ const Employees = () => {
               className="filter--button"
             />
           </div>
-          <Table linkTo={"/profile"} />
+          <Table linkTo={"/editProfile"} />
         </div>
       </div>
     </section>

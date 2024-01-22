@@ -9,7 +9,7 @@ import userProf from "/src/assets/userProf.svg";
 import Model from "../../Component/Model/Model";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
-export const Profile = () => {
+export const Profile = ({ title, description, buttonBlueText }) => {
   const {
     register,
     formState: { errors },
@@ -37,8 +37,8 @@ export const Profile = () => {
     <section className="content-wrapper">
       <div className="user__profile content-radius">
         <div className="content__header">
-          <h2>Amod Suman</h2>
-          <span>Developer | Frontend</span>
+          <h2>{title}</h2>
+          <span>{description}</span>
         </div>
         <div className="user__profile--body">
           <div className="user__profile--left">
@@ -193,7 +193,7 @@ export const Profile = () => {
             >
               <Button
                 value="submit"
-                text={"Save changes"}
+                text={buttonBlueText}
                 className={receivedState ? "profile-btn-none" : "button__blue"}
               />
               <Link to="/employees" className="link">

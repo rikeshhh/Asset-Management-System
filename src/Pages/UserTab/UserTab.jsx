@@ -4,7 +4,7 @@ const UserTab = () => {
   return (
     <section className="usertab">
       <div className="profile">
-        <Link to="/profile" state={{ isDisabled: true }} className="link">
+        <Link to="/viewProfile" state={{ isDisabled: true }} className="link">
           <div className="profile__heading">
             <h4 className="profile__name">Amod Suman</h4>
             <h6 className="profile__position">Admin</h6>
