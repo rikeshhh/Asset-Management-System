@@ -111,7 +111,7 @@ const Model = {
   },
   ZipCode: {
     type: "text",
-    required: "must be valid",
+    required: "Required ",
     // minLength: {
     //   value: 10,
     //   message: "Phone number must be 10 in length",
@@ -124,6 +124,14 @@ const Model = {
     pattern: {
       value: "^[0-9]+$",
       message: "Enter a valid numeric zip code",
+    },
+  },
+  Date: {
+    type: "date",
+    placeholder: "Filter by Date",
+    pattern: {
+      value: "^d{2}/d{2}/d{4}$",
+      message: "Date should be in MM/DD/YYYY format",
     },
   },
 };

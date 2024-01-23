@@ -6,7 +6,7 @@ import { PlansStar } from "../../Component/svg/PlansStar";
 import { Link } from "react-router-dom";
 import { usePricingContext } from "../../Component/Context/PricingContext";
 import { features } from "./PlansFeatures";
-import { house,building,factory } from "../../Component/Images/Image";
+import { house, building, factory } from "../../Component/Images/Image";
 const Plans = () => {
   const { isAnnualBilling, toggleBilling, getBusinessRate, getEnterpriseRate } =
     usePricingContext();
