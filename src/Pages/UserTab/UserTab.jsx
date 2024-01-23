@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./UserTab.css";
+import { building, profile } from "../../Component/Images/Image";
 const UserTab = () => {
   return (
     <section className="usertab">
@@ -10,7 +11,8 @@ const UserTab = () => {
             <h6 className="profile__position">Admin</h6>
           </div>
           <figure>
-            <img src="../../assets/profile.svg" alt="profile-image" />
+            <img src={profile} alt="profile-image" />
+            <img src={building} alt="profile-image" />
           </figure>
         </Link>
       </div>
