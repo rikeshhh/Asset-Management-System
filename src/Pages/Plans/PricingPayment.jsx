@@ -7,6 +7,7 @@ import { CreditCard } from "../../Component/svg/CreditCard";
 import { Label } from "../../Component/Label/Label";
 import { InputField } from "../../Component/Input/InputField";
 import Model from "../../Component/Model/Model";
+import { amex, jcb, mastercard, paypal, rupay, unionpay, visa } from "../../Component/Images/Image";
 
 const PricingPayment = () => {
   const {
@@ -93,7 +94,7 @@ const PricingPayment = () => {
               onClick={handlePayPalClick}
             >
               <figure className="paypal__svg">
-                <img src="/src/assets/paypal.png" alt="" />
+                <img src={paypal} alt="paypal" />
               </figure>
               <div className="payment__left--content">
                 <div className="payment__left--title">
@@ -151,22 +152,22 @@ const PricingPayment = () => {
                   <Label text={"Card Types Accepted"} />
                   <div className="card__types--image">
                     <figure className="card__types--figure">
-                      <img src="/src/assets/rupay.png" alt="Rupay" />
+                      <img src={rupay} alt="Rupay" />
                     </figure>
                     <figure className="card__types--figure">
-                      <img src="/src/assets/visa.png" alt="Rupay" />
+                      <img src={visa} alt="visa" />
                     </figure>
                     <figure className="card__types--figure">
-                      <img src="/src/assets/mastercard.png" alt="Rupay" />
+                      <img src={mastercard} alt="mastercard" />
                     </figure>
                     <figure className="card__types--figure">
-                      <img src="/src/assets/amex.png" alt="Rupay" />
+                      <img src={amex} alt="amex" />
                     </figure>
                     <figure className="card__types--figure">
-                      <img src="/src/assets/jcb.png" alt="Rupay" />
+                      <img src={jcb} alt="jcb" />
                     </figure>
                     <figure className="card__types--figure">
-                      <img src="/src/assets/unionpay.png" alt="Rupay" />
+                      <img src={unionpay} alt="unionpay" />
                     </figure>
                   </div>
                   <div className="card__warning">
@@ -237,7 +238,7 @@ const PricingPayment = () => {
               <div className="paypal__section">
                 <div className="paypal__section--top">
                   <figure className="paypal__section--image">
-                    <img src="/src/assets/paypal.png" alt="Paypal" />
+                    <img src={paypal} alt="Paypal" />
                     <figcaption className="paypal__section--title">
                       Pay with PayPal
                     </figcaption>

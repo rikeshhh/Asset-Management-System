@@ -6,7 +6,7 @@ import { PlansStar } from "../../Component/svg/PlansStar";
 import { Link } from "react-router-dom";
 import { usePricingContext } from "../../Component/Context/PricingContext";
 import { features } from "./PlansFeatures";
-
+import { house,building,factory } from "../../Component/Images/Image";
 const Plans = () => {
   const { isAnnualBilling, toggleBilling, getBusinessRate, getEnterpriseRate } =
     usePricingContext();
@@ -41,7 +41,7 @@ const Plans = () => {
         <div className="plans__offer">
           <div className="plans__offer--content">
             <figure>
-              <img src="/src/assets/House.svg" alt="" />
+              <img src={house} alt="" />
             </figure>
             <div className="plans__offer--info">
               <div>
@@ -103,7 +103,7 @@ const Plans = () => {
           </div>
           <div className="plans__offer--content">
             <figure>
-              <img src="/src/assets/Building.svg" alt="" />
+              <img src={building} alt="" />
               <div className="plans__popular">
                 <PlansStar /> Most Popular
               </div>
@@ -173,7 +173,7 @@ const Plans = () => {
           </div>
           <div className="plans__offer--content">
             <figure>
-              <img src="/src/assets/Factory.svg" alt="" />
+              <img src={factory} alt="" />
             </figure>
             <div className="plans__offer--info">
               <div>

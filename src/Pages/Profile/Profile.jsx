@@ -5,10 +5,11 @@ import { useForm } from "react-hook-form";
 import "./profile.css";
 import Button from "../../Component/Button/Button";
 import { SelectInput } from "../../Component/Input/SelectInput";
-import userProf from "/src/assets/userProf.svg";
+
 import Model from "../../Component/Model/Model";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
+import { userProf } from "../../Component/Images/Image";
 export const Profile = ({ title, description, buttonBlueText }) => {
   const {
     register,
