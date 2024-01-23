@@ -10,8 +10,9 @@ import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 
 const Location = () => {
-  const [value, setValue] = useState([]);
-  const [selectedValue, setSelectedValue] = useState([]);
+  const [value, setValue] = useState([{
+    ParentCategory:"Kathmandu"
+  }]);
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
   };
@@ -21,6 +22,26 @@ const Location = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const [formDataArray, setFormDataArray] = useState([
+    {
+      ParentCategory: "GroundFloor",
+    }
+  ]);
+
+  const onSubmit = (data) => {
+    const newData = {
+      ParentCategory: data.Location,
+    };
+    console.log(newData)
+    setFormDataArray((prevDataArray) => [...prevDataArray, newData]);
+  }
+  const handleDelete = (index) => {
+    const updatedFormDataArray = [...formDataArray];
+    updatedFormDataArray.splice(index, 1);
+    console.log('item Deleted');
+    setFormDataArray(updatedFormDataArray);
+    console.log(updatedFormDataArray); // Log the updated state
+  };
   return (
     <section className="content-wrapper">
       <div className="content-radius category">
@@ -29,9 +50,9 @@ const Location = () => {
         </div>
         <div className="category__content">
           <DataTable
-            value={value}
-            selectedValue={selectedValue}
+           formDataArray={formDataArray}
             showDownButton={false}
+            onDelete={handleDelete}
           />
 
           <div className="add__category">
@@ -42,7 +63,7 @@ const Location = () => {
                 located.
               </span>
             </div>
-            <form action="" onSubmit={handleSubmit((data) => setValue(data))}>
+            <form action="" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <Label text="Location Name" />
                 <InputField
