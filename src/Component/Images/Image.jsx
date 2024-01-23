@@ -16,6 +16,7 @@ export {
   profile,
   building,
   factory,
+  house,
   jcb,
   amex,
   paypal,
