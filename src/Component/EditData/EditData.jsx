@@ -12,6 +12,7 @@ const EditData = ({ value,handleClick,setFormDataArray   }) => {
     register,
     formState: { errors },
     handleSubmit,
+    reset
   } = useForm();
   const [updatedValue, setUpdatedValue] = useState(value); 
   const onSubmit = (data) => {
@@ -25,7 +26,7 @@ const EditData = ({ value,handleClick,setFormDataArray   }) => {
       )
     );
     handleClick();
-
+reset();
   
   };
 
