@@ -17,7 +17,8 @@ const Categories = () => {
     register,
     formState: { errors },
     handleSubmit,
-    control 
+    control,
+    reset
   } = useForm(
     
   );
@@ -61,6 +62,7 @@ const Categories = () => {
   
       setFormDataArray((prevDataArray) => [...prevDataArray, newData]);
     }
+    reset();
   };
   
   const handleCategoryDelete = (index) => {

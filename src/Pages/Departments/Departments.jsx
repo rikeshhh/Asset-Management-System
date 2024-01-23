@@ -20,6 +20,7 @@ const Departments = () => {
     register,
     formState: { errors },
     handleSubmit,
+    reset
   } = useForm();
   const [formDataArray, setFormDataArray] = useState([
     {
@@ -33,6 +34,7 @@ const Departments = () => {
     };
     console.log(newData)
     setFormDataArray((prevDataArray) => [...prevDataArray, newData]);
+    reset();
   }
   return (
     <section className="content-wrapper">

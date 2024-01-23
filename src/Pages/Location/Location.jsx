@@ -21,6 +21,7 @@ const Location = () => {
     register,
     formState: { errors },
     handleSubmit,
+    reset
   } = useForm();
   const [formDataArray, setFormDataArray] = useState([
     {
@@ -34,6 +35,7 @@ const Location = () => {
     };
     console.log(newData)
     setFormDataArray((prevDataArray) => [...prevDataArray, newData]);
+    reset();
   }
   const handleDelete = (index) => {
     const updatedFormDataArray = [...formDataArray];
