@@ -121,3 +121,25 @@
   color: var(--blue) !important;
   background: var(--secondary-color);
 }
+
+@media (width<=1024px) {
+  .header__title {
+    display: none;
+  }
+  .header {
+    width: fit-content;
+  }
+
+  .navbar__list {
+    width: fit-content;
+  }
+  .navbar__list li span {
+    display: block !important;
+  }
+  .navbar__list li p {
+    display: none;
+  }
+  .plans {
+    display: none;
+  }
+}

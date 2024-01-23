@@ -109,15 +109,20 @@ export const Credit = ({ goback, navigate }) => {
             />
           </div>
         </div>
-        <div className="pricing__flex--end padding__right--goback">
+        <div className="pricing__flex--end ">
           <div className="pricing__button">
             {/* <Link to="/payment" state={receivedFeature} className="link"> */}
             <Button type="submit" className="button__blue" text="Continue" />
             {/* </Link> */}
+            <Button
+              type="button"
+              className="button__red "
+              text="Go back"
+              handleClick={goback}
+            />
           </div>
         </div>
       </form>
-      <Button className="button__red button__back" text="Go back" handleClick={goback} />
     </>
   );
 };

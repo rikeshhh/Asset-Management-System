@@ -46,7 +46,7 @@ const Header = () => {
                   {/* <RxDashboard /> */}
                   <DashboardSvg />
                 </span>
-                Dashboard
+                <p>Dashboard</p>
               </li>
             </NavLink>
             <NavLink
@@ -60,7 +60,7 @@ const Header = () => {
                   {/* <PiDesktopTower /> */}
                   <AssetsSvg />
                 </span>
-                Assets
+                <p>Assets</p>
               </li>
             </NavLink>
             <NavLink
@@ -74,7 +74,7 @@ const Header = () => {
                   {/* <PiShoppingCart /> */}
                   <ProcurementSvg />
                 </span>
-                Procurement
+                <p>Procurement</p>
               </li>
             </NavLink>
             <NavLink
@@ -88,7 +88,7 @@ const Header = () => {
                   {/* <PiWrench /> */}
                   <RepairSvg />
                 </span>
-                Repair & Replace
+                <p>Repair & Replace</p>
               </li>
             </NavLink>
           </ul>
@@ -107,7 +107,7 @@ const Header = () => {
                   {/* <HiOutlineUser /> */}
                   <EmployeeSvg />
                 </span>
-                Employees
+                <p>Employees</p>
               </li>
             </NavLink>
             <NavLink
@@ -121,7 +121,7 @@ const Header = () => {
                   {/* <PiListMagnifyingGlass /> */}
                   <CategorySvg />
                 </span>
-                Categories
+                <p>Categories</p>
               </li>
             </NavLink>
             <NavLink
@@ -135,7 +135,7 @@ const Header = () => {
                   {/* <FiMapPin /> */}
                   <LocationSvg />
                 </span>
-                Locations
+                <p>Locations</p>
               </li>
             </NavLink>
             <NavLink
@@ -149,7 +149,7 @@ const Header = () => {
                   {/* <GrGroup /> */}
                   <DepartmentSvg />
                 </span>
-                Department
+                <p>Department</p>
               </li>
             </NavLink>
 
@@ -176,7 +176,7 @@ const Header = () => {
                   {/* <LuLogOut /> */}
                   <LogoutSvg />
                 </span>
-                Logout
+                <p>Logout</p>
               </li>
             </NavLink>
           </ul>

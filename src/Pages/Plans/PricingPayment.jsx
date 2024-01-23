@@ -1,25 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Button from "../../Component/Button/Button";
-import { useForm } from "react-hook-form";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { usePricingContext } from "../../Component/Context/PricingContext";
 import { CreditCard } from "../../Component/svg/CreditCard";
-import { Label } from "../../Component/Label/Label";
-import { InputField } from "../../Component/Input/InputField";
-import Model from "../../Component/Model/Model";
-
 import { Paypal } from "./Paypal";
 import { Credit } from "./Credit";
 import { paypal } from "../../Component/Images/Image";
 
 const PricingPayment = () => {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    clearErrors,
-  } = useForm();
-
   const location = useLocation();
   const receivedFeature = location.state;
 
@@ -38,11 +26,10 @@ const PricingPayment = () => {
     setSelectedPaymentMethod("paypal");
   };
 
-    const goBack = () => {
-      // back("/pricingForm", { state: receivedFeature });
-      clearErrors();
-      navigate(-1);
-    };
+  const goBack = () => {
+    // back("/pricingForm", { state: receivedFeature });
+    navigate(-1);
+  };
 
   return (
     <section className="content-wrapper">
