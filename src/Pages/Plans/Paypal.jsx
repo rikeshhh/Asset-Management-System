@@ -11,7 +11,7 @@ export const Paypal = ({ navigate, goback }) => {
     register,
     formState: { errors },
     handleSubmit,
-    clearErrors
+    clearErrors,
   } = useForm();
 
   const paypalSubmit = (data) => {
@@ -79,6 +79,7 @@ export const Paypal = ({ navigate, goback }) => {
             {/* </Link> */}
 
             <Button
+              type="button"
               className="button__red"
               text="Go back"
               handleClick={goback}
