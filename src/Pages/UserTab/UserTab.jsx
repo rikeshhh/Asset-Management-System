@@ -10,7 +10,7 @@ const UserTab = () => {
             <h6 className="profile__position">Admin</h6>
           </div>
           <figure>
-            <img src="/src/assets/profile.svg" alt="profile-image" />
+            <img src="../../assets/profile.svg" alt="profile-image" />
           </figure>
         </Link>
       </div>
