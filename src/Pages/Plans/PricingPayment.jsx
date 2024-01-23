@@ -19,7 +19,6 @@ const PricingPayment = () => {
   const receivedFeature = location.state;
 
   const navigate = useNavigate();
-  const back = useNavigate();
 
   const { getBusinessRate, getEnterpriseRate } = usePricingContext();
 
@@ -40,7 +39,8 @@ const PricingPayment = () => {
   };
 
   const goBack = () => {
-    back("/pricingForm", { state: receivedFeature });
+    // back("/pricingForm", { state: receivedFeature });
+    navigate(-1);
   };
 
   const paypalSubmit = (data) => {

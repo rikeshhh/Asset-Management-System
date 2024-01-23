@@ -1,0 +1,30 @@
+.filter {
+  padding: 1.63rem 1.25rem 0;
+  border-left: 1px solid var(--primary-grey);
+  background: var(--secondary-color);
+  width: 22.75rem;
+  height: 100%;
+  flex-shrink: 0;
+  position: absolute;
+  top: 5.438rem;
+  right: 0;
+}
+
+.filter__heading {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+
+.filter__heading h3 {
+  color: var(--text-color);
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 1.875rem */
+  letter-spacing: 0.00625rem;
+}
+
+.filter__heading--icon {
+  font-size: 1.1rem;
+}
