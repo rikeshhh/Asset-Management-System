@@ -83,6 +83,7 @@
   font-weight: 500;
   line-height: 150%;
   letter-spacing: 0.005rem;
+  width: 100% !important;
 }
 
 .navbar__link--active {

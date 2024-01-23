@@ -7,13 +7,17 @@ import { CreditCard } from "../../Component/svg/CreditCard";
 import { Label } from "../../Component/Label/Label";
 import { InputField } from "../../Component/Input/InputField";
 import Model from "../../Component/Model/Model";
-import { amex, jcb, mastercard, paypal, rupay, unionpay, visa } from "../../Component/Images/Image";
+
+import { Paypal } from "./Paypal";
+import { Credit } from "./Credit";
+import { paypal } from "../../Component/Images/Image";
 
 const PricingPayment = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
+    clearErrors,
   } = useForm();
 
   const location = useLocation();
@@ -34,19 +38,11 @@ const PricingPayment = () => {
     setSelectedPaymentMethod("paypal");
   };
 
-  const submitData = (data) => {
-    console.log(data);
-    navigate("/success");
-  };
-
-  const goBack = () => {
-    // back("/pricingForm", { state: receivedFeature });
-    navigate(-1);
-  };
-
-  const paypalSubmit = (data) => {
-    console.log(data);
-  };
+    const goBack = () => {
+      // back("/pricingForm", { state: receivedFeature });
+      clearErrors();
+      navigate(-1);
+    };
 
   return (
     <section className="content-wrapper">
@@ -127,171 +123,10 @@ const PricingPayment = () => {
           </div>
           <div className="pricing__content--right">
             {selectedPaymentMethod === "creditCard" && (
-              <form
-                onSubmit={handleSubmit(submitData)}
-                className="group__form "
-              >
-                <div className="form__input--section">
-                  <Label text="Name on Card" />
-                  <InputField
-                    name="Card Name"
-                    register={register}
-                    value={Model.Username.pattern.value}
-                    message={Model.Username.pattern.message}
-                    required={Model.Username.required}
-                    errors={errors}
-                    type={Model.Username.type}
-                    placeholder={Model.Username.placeholder}
-                    minLength={Model.Username.minLength.value}
-                    minMessage={Model.Username.minLength.message}
-                    maxLength={Model.Username.maxLength.value}
-                    maxMessage={Model.Username.maxLength.message}
-                  />
-                </div>
-                <div className="form__input--section card__types--title">
-                  <Label text={"Card Types Accepted"} />
-                  <div className="card__types--image">
-                    <figure className="card__types--figure">
-                      <img src={rupay} alt="Rupay" />
-                    </figure>
-                    <figure className="card__types--figure">
-                      <img src={visa} alt="visa" />
-                    </figure>
-                    <figure className="card__types--figure">
-                      <img src={mastercard} alt="mastercard" />
-                    </figure>
-                    <figure className="card__types--figure">
-                      <img src={amex} alt="amex" />
-                    </figure>
-                    <figure className="card__types--figure">
-                      <img src={jcb} alt="jcb" />
-                    </figure>
-                    <figure className="card__types--figure">
-                      <img src={unionpay} alt="unionpay" />
-                    </figure>
-                  </div>
-                  <div className="card__warning">
-                    Your card issuer may charge a fee
-                  </div>
-                </div>
-                <div className="form__input--section">
-                  <Label text="Card Number" />
-                  <InputField
-                    name="Card Number"
-                    register={register}
-                    value={Model.ZipCode.pattern.value}
-                    message={"Enter a valid card number"}
-                    required={Model.ZipCode.required}
-                    errors={errors}
-                    type={Model.ZipCode.type}
-                    placeholder={"Enter your card number"}
-                  />
-                </div>
-                <div className="basic__dets--country">
-                  <div className="form__input--section">
-                    <Label text="Expiration Date" />
-                    <InputField
-                      name="Expiration Date"
-                      register={register}
-                      value={Model.ZipCode.pattern.value}
-                      message={"Enter a valid expiration date"}
-                      required={Model.ZipCode.required}
-                      errors={errors}
-                      type={Model.ZipCode.type}
-                      placeholder={"Enter your date of expiry"}
-                    />
-                  </div>
-                  <div className="form__input--section">
-                    <Label text="Security Code" />
-                    <InputField
-                      name="Expiration Date"
-                      register={register}
-                      value={Model.ZipCode.pattern.value}
-                      message={"Enter a valid security code"}
-                      required={Model.ZipCode.required}
-                      errors={errors}
-                      type={Model.ZipCode.type}
-                      placeholder={"Enter the security code"}
-                    />
-                  </div>
-                </div>
-                <div className="pricing__flex--end">
-                  <div className="pricing__button">
-                    {/* <Link to="/payment" state={receivedFeature} className="link"> */}
-                    <Button
-                      type="submit"
-                      className="button__blue"
-                      text="Continue"
-                    />
-                    {/* </Link> */}
-
-                    <Button
-                      className="button__red"
-                      text="Go back"
-                      handleClick={goBack}
-                    />
-                  </div>
-                </div>
-              </form>
+              <Credit goback={goBack} navigate={navigate} />
             )}
             {selectedPaymentMethod === "paypal" && (
-              <div className="paypal__section">
-                <div className="paypal__section--top">
-                  <figure className="paypal__section--image">
-                    <img src={paypal} alt="Paypal" />
-                    <figcaption className="paypal__section--title">
-                      Pay with PayPal
-                    </figcaption>
-                  </figure>
-                </div>
-                <form
-                  onSubmit={handleSubmit(paypalSubmit)}
-                  className="group__form"
-                >
-                  <div className="form__input--section">
-                    <Label text="Email" />
-                    <InputField
-                      name="Email"
-                      register={register}
-                      value={Model.Email.pattern.value}
-                      message={Model.Email.pattern.message}
-                      required={Model.Email.required}
-                      errors={errors}
-                      type={Model.Email.type}
-                      placeholder={Model.Email.placeholder}
-                      maxLength={Model.Email.maxLength.value}
-                      maxMessage={Model.Email.maxLength.message}
-                    />
-                  </div>
-                  <div className="form__input--section">
-                    <Label text="Password" />
-                    <InputField
-                      name="Password"
-                      register={register}
-                      value={Model.Password.pattern.value}
-                      message={Model.Password.pattern.message}
-                      required={Model.Password.required}
-                      errors={errors}
-                      type={Model.Password.type}
-                      placeholder={Model.Password.placeholder}
-                      minLength={Model.Password.minLength.value}
-                      minMessage={Model.Password.minLength.message}
-                      maxLength={Model.Password.maxLength.value}
-                      maxMessage={Model.Password.maxLength.message}
-                    />
-                  </div>
-                  <div className="form__input--section">
-                    <Button
-                      text="Login"
-                      className={"button__blue paypal__button"}
-                      value="submit"
-                    />
-                  </div>
-                  <div className="form__input--section">
-                    <p className="paypal__ques">Having trouble loggin in?</p>
-                  </div>
-                </form>
-              </div>
+              <Paypal navigate={navigate} goback={goBack} />
             )}
           </div>
         </div>

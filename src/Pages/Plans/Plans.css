@@ -246,6 +246,10 @@
   padding-top: 6.12rem;
 }
 
+.padding__right--goback {
+  padding-right: 8rem;
+}
+
 .pricing__button {
   display: flex;
   gap: 1rem;
@@ -450,4 +454,10 @@
   font-weight: 400;
   line-height: 150%; /* 1.3125rem */
   letter-spacing: 0.00438rem;
+}
+
+.button__back {
+  position: absolute;
+  right: 5rem;
+  bottom: -7.2rem;
 }

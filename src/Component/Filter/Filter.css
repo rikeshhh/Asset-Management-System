@@ -1,19 +1,34 @@
 .filter {
-  padding: 1.63rem 1.25rem 0;
+  padding: 1.63rem 1.25rem 2.5rem 1.31rem;
   border-left: 1px solid var(--primary-grey);
   background: var(--secondary-color);
   width: 22.75rem;
   height: 100%;
   flex-shrink: 0;
   position: absolute;
-  top: 5.438rem;
+  top: 5.52rem;
   right: 0;
+  animation-duration: 0.5s;
+}
+
+.filter.open {
+  animation-name: slideIn;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 .filter__heading {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
+  padding-bottom: 1.75rem;
 }
 
 .filter__heading h3 {
@@ -25,6 +40,42 @@
   letter-spacing: 0.00625rem;
 }
 
+.filter__hide {
+  cursor: pointer;
+}
+
 .filter__heading--icon {
   font-size: 1.1rem;
+}
+.filter__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
+}
+
+.filter__gap {
+  gap: 2.5rem;
+  padding-right: 0;
+  justify-content: space-between;
+}
+
+.filter__button {
+  width: 100%;
+}
+
+.filter__button--flex {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.filter--visible {
+  opacity: 1;
+  transition: opacity 1000ms ease-in-out;
+}
+
+.filter--hidden {
+  opacity: 0;
+  transition: opacity 1000ms ease-in-out;
 }
