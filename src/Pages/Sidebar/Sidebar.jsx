@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import "./Header.css";
+import "./Sidebar.css";
 import { FiChevronRight } from "react-icons/fi";
 import Button from "../../Component/Button/Button";
 import { DashboardSvg } from "../../Component/svg/DashboardSvg";
@@ -13,21 +13,21 @@ import { DepartmentSvg } from "../../Component/svg/DepartmentSvg";
 import { LogoutSvg } from "../../Component/svg/LogoutSvg";
 import { useState } from "react";
 
-const Header = () => {
+const Sidebar = () => {
   const [toggleNavbar, setToggleNavbar] = useState(false);
 
   const handleNavbar = () => {
-    setToggleNavbar((prev) => !prev);
+    setToggleNavbar(!toggleNavbar);
   };
 
   return (
-    <header className={toggleNavbar ? " header" : "header__res header "}>
-      <div className="header__arrow" onClick={handleNavbar}>
+    <header className={toggleNavbar ? " sidebar" : " sidebar sidebar__res"}>
+      <div className="sidebar__arrow" onClick={handleNavbar}>
         <FiChevronRight className={toggleNavbar ? "arrow" : "arrow__close"} />
       </div>
-      <div className="header__title">
-        <h3 className="header__heading">AMS</h3>
-        <div className="header__subheading">
+      <div className="sidebar__title">
+        <h3 className="sidebar__heading">AMS</h3>
+        <div className="sidebar__subheading">
           <p>Assets management system</p>
         </div>
       </div>
@@ -192,4 +192,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Sidebar;

@@ -1,18 +1,18 @@
 import { Outlet } from "react-router-dom";
 import "./App.css";
-import Header from "./Pages/Header/Header";
+import Sidebar from "./Pages/Sidebar/Sidebar";
 import UserTab from "./Pages/UserTab/UserTab";
 
 function App() {
   return (
     <div className="layout">
-    <Header />
-    <main className="main-content">
+      <Sidebar />
       <UserTab />
-      <Outlet />
-    </main>
-  </div>
-);
+      <main className="main-content">
+        <Outlet />
+      </main>
+    </div>
+  );
 }
 
 export default App;
