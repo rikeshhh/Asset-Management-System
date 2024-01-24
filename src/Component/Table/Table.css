@@ -1,12 +1,15 @@
-.main__table  {
+.main__table {
   color: #21252b;
   border-collapse: collapse;
   width: 100%;
 }
-.main__table  th, .main__table td {
+
+.main__table th,
+.main__table td {
   padding: 1rem;
 }
-.main__table  th {
+
+.main__table th {
   text-align: left;
   background-color: #eff4fe;
   color: #657081;
@@ -16,26 +19,18 @@
   line-height: 150%;
   letter-spacing: 0.07px;
 }
+
 .loader {
   z-index: 30;
   text-align: center;
-  background-color: #f00; /* Red, so I could see it properly */
+  background-color: #f00;
   opacity: 0.5;
-  filter: alpha(opacity=50); /* For IE8 and earlier */
+  filter: alpha(opacity=50);
   position: relative;
 }
-@media (max-width: 650px) {
-  .main__table  th {
-    display: none;
-  }
-  .main__table  td {
-    display: block;
-    padding: 0.5rem 1 rem;
-  }
-  .main__table td::after {
-    content: attr(data-cell) ":";
-    font-weight: 700;
-    text-transform: capitalize;
-    /* datacell */
+
+@media (width < 1024px) {
+  .table__container {
+    overflow-x: scroll;
   }
 }

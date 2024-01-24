@@ -22,7 +22,7 @@ const Table = ({ size, linkTo }) => {
   }, [currentPage]);
 
   return (
-    <>
+    <div className="table__container">
       <table className="main__table">
         <thead>
           <tr>
@@ -69,7 +69,7 @@ const Table = ({ size, linkTo }) => {
       ) : (
         ""
       )}
-    </>
+    </div>
   );
 };
 export default Table;

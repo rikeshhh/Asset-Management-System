@@ -27,6 +27,19 @@
   letter-spacing: 0.0025rem;
 }
 
+.header__arrow {
+  display: none;
+}
+
+.header__arrow .arrow {
+  transform: rotate(180deg);
+  /* transition: all 0.4s ease-in-out; */
+}
+/* 
+.arrow__close {
+  transition: all 0.4s ease-in-out;
+} */
+
 .navbar__title {
   padding: 0.47rem 1.25rem;
   color: var(--text-color);
@@ -66,6 +79,7 @@
 .navbar__list {
   text-decoration: none;
   list-style-type: none;
+  transition: all 0.5s;
 }
 
 .navbar__list li {
@@ -78,6 +92,10 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+.navbar__list NavLink {
+  transition: all 0.5s;
 }
 
 .plans {
@@ -123,23 +141,74 @@
 }
 
 @media (width<=1024px) {
-  .header__title {
-    display: none;
-  }
   .header {
-    width: fit-content;
+    min-height: 100vh;
+    position: relative;
   }
 
-  .navbar__list {
+  .header__res {
+    position: relative;
     width: fit-content;
+    padding: 1.37rem 0.2rem !important;
   }
-  .navbar__list li span {
-    display: block !important;
+
+  .header__res {
+    padding: 1.37rem 0;
   }
-  .navbar__list li p {
+
+  .header__title {
+    text-align: center;
+    padding: 0 0.2rem;
+  }
+
+  .header__heading {
+    font-size: 2rem;
+  }
+
+  .header__subheading {
+    font-size: 0.5rem;
+    margin-top: -0.8rem;
+  }
+
+  .header__arrow {
+    display: block;
+    position: absolute;
+    font-size: 1.5rem;
+    top: 20rem;
+    left: 100%;
+    background-color: var(--secondary-color);
+    padding: 1rem 0.1rem;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid var(--primary-grey);
+    border-left: none;
+  }
+
+  .header__arrow .arrow {
+    transform: rotate(180deg);
+  }
+
+  .header__res .top__list,
+  .header__res .bottom__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* .header__res .navbar__title {
+    padding-bottom: 1rem;
+  } */
+
+  .navbar__list--point p {
+    transition: all 0.5s;
+  }
+
+  .navbar__list--toggle p {
     display: none;
   }
-  .plans {
+
+  .header__res .plans {
     display: none;
   }
 }
