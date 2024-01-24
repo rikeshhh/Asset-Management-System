@@ -1,16 +1,33 @@
-.header {
+.sidebar {
   padding: 1.37rem 1.5rem;
-  min-height: 100vh;
   background-color: var(--secondary-color);
   border-right: 1px solid var(--primary-grey);
   width: 17.5rem;
+  z-index: 1;
+  position: fixed;
+  height: 100%;
+  overflow-y: hidden;
 }
 
-.header__title {
+.sidebar:hover {
+  overflow-y: scroll;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 7px;
+  height: 1rem;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: var(--blue);
+  border-radius: 15px;
+}
+
+.sidebar__title {
   padding: 0 1rem;
 }
 
-.header__heading {
+.sidebar__heading {
   color: var(--blue);
   font-size: 3.125rem;
   font-weight: 800;
@@ -18,7 +35,7 @@
   letter-spacing: 0.01563rem;
 }
 
-.header__subheading {
+.sidebar__subheading {
   color: var(--subheading);
   margin-top: -1rem;
   font-size: 0.5rem;
@@ -27,11 +44,11 @@
   letter-spacing: 0.0025rem;
 }
 
-.header__arrow {
+.sidebar__arrow {
   display: none;
 }
 
-.header__arrow .arrow {
+.sidebar__arrow .arrow {
   transform: rotate(180deg);
   /* transition: all 0.4s ease-in-out; */
 }
@@ -141,41 +158,31 @@
 }
 
 @media (width<=1024px) {
-  .header {
-    min-height: 100vh;
-    position: relative;
-  }
-
-  .header__res {
-    position: relative;
-    width: fit-content;
-    padding: 1.37rem 0.2rem !important;
-  }
-
-  .header__res {
+  .sidebar__res {
     padding: 1.37rem 0;
+    width: fit-content;
+    
   }
 
-  .header__title {
+  .sidebar__title {
     text-align: center;
     padding: 0 0.2rem;
   }
 
-  .header__heading {
+  .sidebar__heading {
     font-size: 2rem;
   }
 
-  .header__subheading {
+  .sidebar__subheading {
     font-size: 0.5rem;
     margin-top: -0.8rem;
   }
 
-  .header__arrow {
+  .sidebar__arrow {
     display: block;
     position: absolute;
     font-size: 1.5rem;
     top: 20rem;
-    left: 100%;
     background-color: var(--secondary-color);
     padding: 1rem 0.1rem;
     border-top-right-radius: 10px;
@@ -184,19 +191,19 @@
     border-left: none;
   }
 
-  .header__arrow .arrow {
+  .sidebar__arrow .arrow {
     transform: rotate(180deg);
   }
 
-  .header__res .top__list,
-  .header__res .bottom__list {
+  .sidebar__res .top__list,
+  .sidebar__res .bottom__list {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
-  /* .header__res .navbar__title {
+  /* .sidebar__res .navbar__title {
     padding-bottom: 1rem;
   } */
 
@@ -208,7 +215,7 @@
     display: none;
   }
 
-  .header__res .plans {
+  .sidebar__res .plans {
     display: none;
   }
 }

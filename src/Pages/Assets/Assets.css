@@ -125,8 +125,8 @@ input:checked + .slider {
   border-color: #2196f3;
 }
 
-@media (width < 1024px) {
-  .assets{
-    
+@media (width < 850px) {
+  .assets__header {
+    flex-direction: column;
   }
 }
