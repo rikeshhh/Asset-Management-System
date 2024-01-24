@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
+import { FiChevronRight } from "react-icons/fi";
 import Button from "../../Component/Button/Button";
 import { DashboardSvg } from "../../Component/svg/DashboardSvg";
 import { AssetsSvg } from "../../Component/svg/AssetsSvg";
@@ -10,10 +11,20 @@ import { CategorySvg } from "../../Component/svg/CategorySvg";
 import { LocationSvg } from "../../Component/svg/LocationSvg";
 import { DepartmentSvg } from "../../Component/svg/DepartmentSvg";
 import { LogoutSvg } from "../../Component/svg/LogoutSvg";
+import { useState } from "react";
 
 const Header = () => {
+  const [toggleNavbar, setToggleNavbar] = useState(false);
+
+  const handleNavbar = () => {
+    setToggleNavbar((prev) => !prev);
+  };
+
   return (
-    <header className="header ">
+    <header className={toggleNavbar ? " header" : "header__res header "}>
+      <div className="header__arrow" onClick={handleNavbar}>
+        <FiChevronRight className={toggleNavbar ? "arrow" : "arrow__close"} />
+      </div>
       <div className="header__title">
         <h3 className="header__heading">AMS</h3>
         <div className="header__subheading">
@@ -32,7 +43,11 @@ const Header = () => {
                 isActive ? "navbar__link--active" : "link"
               }
             >
-              <li>
+              <li
+                className={
+                  toggleNavbar ? "navbar__list--point" : "navbar__list--toggle"
+                }
+              >
                 <span>
                   {/* <RxDashboard /> */}
                   <DashboardSvg />
@@ -46,8 +61,8 @@ const Header = () => {
                 isActive ? "navbar__link--active" : "link"
               }
             >
-              <li>
-                <span>
+              <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
+                <span title="Assets">
                   {/* <PiDesktopTower /> */}
                   <AssetsSvg />
                 </span>
@@ -60,7 +75,7 @@ const Header = () => {
                 isActive ? "navbar__link--active" : "link"
               }
             >
-              <li>
+              <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
                 <span>
                   {/* <PiShoppingCart /> */}
                   <ProcurementSvg />
@@ -74,7 +89,7 @@ const Header = () => {
                 isActive ? "navbar__link--active" : "link"
               }
             >
-              <li>
+              <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
                 <span>
                   {/* <PiWrench /> */}
                   <RepairSvg />
@@ -93,7 +108,7 @@ const Header = () => {
                 isActive ? "navbar__link--active" : "link"
               }
             >
-              <li>
+              <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
                 <span>
                   {/* <HiOutlineUser /> */}
                   <EmployeeSvg />
@@ -107,7 +122,7 @@ const Header = () => {
                 isActive ? "navbar__link--active" : "link"
               }
             >
-              <li>
+              <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
                 <span>
                   {/* <PiListMagnifyingGlass /> */}
                   <CategorySvg />
@@ -121,7 +136,7 @@ const Header = () => {
                 isActive ? "navbar__link--active" : "link"
               }
             >
-              <li>
+              <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
                 <span>
                   {/* <FiMapPin /> */}
                   <LocationSvg />
@@ -135,7 +150,7 @@ const Header = () => {
                 isActive ? "navbar__link--active" : "link"
               }
             >
-              <li>
+              <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
                 <span>
                   {/* <GrGroup /> */}
                   <DepartmentSvg />
@@ -162,7 +177,7 @@ const Header = () => {
                 isActive ? "navbar__link--active" : "link"
               }
             >
-              <li>
+              <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
                 <span>
                   {/* <LuLogOut /> */}
                   <LogoutSvg />
