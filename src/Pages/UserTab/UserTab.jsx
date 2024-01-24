@@ -11,11 +11,7 @@ const UserTab = () => {
             <h6 className="profile__position">Admin</h6>
           </div>
           <figure>
-            <img
-              src="/public/amex.png"
-              style={{ height: "50px", width: "50px" }}
-              alt="profile-image"
-            />
+            <img src={profile} alt="profile-image" />
           </figure>
         </Link>
       </div>
