@@ -1,15 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 import Button from "../../Component/Button/Button";
-import { RxDashboard } from "react-icons/rx";
-import { PiDesktopTower } from "react-icons/pi";
-import { PiShoppingCart } from "react-icons/pi";
-import { PiWrench } from "react-icons/pi";
-import { HiOutlineUser } from "react-icons/hi2";
-import { PiListMagnifyingGlass } from "react-icons/pi";
-import { FiMapPin } from "react-icons/fi";
-import { GrGroup } from "react-icons/gr";
-import { LuLogOut } from "react-icons/lu";
 import { DashboardSvg } from "../../Component/svg/DashboardSvg";
 import { AssetsSvg } from "../../Component/svg/AssetsSvg";
 import { ProcurementSvg } from "../../Component/svg/ProcurementSvg";
