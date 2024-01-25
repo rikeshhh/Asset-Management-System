@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Sidebar.css";
-import { FiChevronRight } from "react-icons/fi";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { IoClose } from "react-icons/io5";
 import Button from "../../Component/Button/Button";
 import { DashboardSvg } from "../../Component/svg/DashboardSvg";
 import { AssetsSvg } from "../../Component/svg/AssetsSvg";
@@ -11,14 +12,15 @@ import { CategorySvg } from "../../Component/svg/CategorySvg";
 import { LocationSvg } from "../../Component/svg/LocationSvg";
 import { DepartmentSvg } from "../../Component/svg/DepartmentSvg";
 import { LogoutSvg } from "../../Component/svg/LogoutSvg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Sidebar = () => {
   const [toggleNavbar, setToggleNavbar] = useState(false);
 
-  const handleNavbar = () => {
+  const handleToggle = () => {
     setToggleNavbar(!toggleNavbar);
   };
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -26,12 +28,18 @@ const Sidebar = () => {
         <div
           className={
             toggleNavbar
-              ? "sidebar__arrow--extended sidebar__arrow"
-              : "sidebar__arrow "
+              ? "sidebar__toggle--extended sidebar__toggle"
+              : "sidebar__toggle "
           }
-          onClick={handleNavbar}
         >
-          <FiChevronRight className={toggleNavbar ? "arrow" : "arrow__close"} />
+          <RxHamburgerMenu
+            onClick={handleToggle}
+            className={toggleNavbar ? "hamburger__none" : "hamburger"}
+          />
+          <IoClose
+            onClick={handleToggle}
+            className={toggleNavbar ? "hamburger" : "hamburger__none"}
+          />
         </div>
         <div className="sidebar__title">
           <div>
@@ -49,6 +57,9 @@ const Sidebar = () => {
             <ul className="navbar__list">
               <NavLink
                 to="/"
+                onClick={() =>
+                  toggleNavbar ? setToggleNavbar(!toggleNavbar) : null
+                }
                 className={({ isActive }) =>
                   isActive ? "navbar__link--active" : "link"
                 }
@@ -69,6 +80,9 @@ const Sidebar = () => {
               </NavLink>
               <NavLink
                 to="/assets"
+                onClick={() =>
+                  toggleNavbar ? setToggleNavbar(!toggleNavbar) : null
+                }
                 className={({ isActive }) =>
                   isActive ? "navbar__link--active" : "link"
                 }
@@ -83,6 +97,9 @@ const Sidebar = () => {
               </NavLink>
               <NavLink
                 to="/procurement"
+                onClick={() =>
+                  toggleNavbar ? setToggleNavbar(!toggleNavbar) : null
+                }
                 className={({ isActive }) =>
                   isActive ? "navbar__link--active" : "link"
                 }
@@ -97,6 +114,9 @@ const Sidebar = () => {
               </NavLink>
               <NavLink
                 to="/repair"
+                onClick={() =>
+                  toggleNavbar ? setToggleNavbar(!toggleNavbar) : null
+                }
                 className={({ isActive }) =>
                   isActive ? "navbar__link--active" : "link"
                 }
@@ -116,6 +136,9 @@ const Sidebar = () => {
             <ul className="navbar__list">
               <NavLink
                 to="/employees"
+                onClick={() =>
+                  toggleNavbar ? setToggleNavbar(!toggleNavbar) : null
+                }
                 className={({ isActive }) =>
                   isActive ? "navbar__link--active" : "link"
                 }
@@ -130,6 +153,9 @@ const Sidebar = () => {
               </NavLink>
               <NavLink
                 to="/categories"
+                onClick={() =>
+                  toggleNavbar ? setToggleNavbar(!toggleNavbar) : null
+                }
                 className={({ isActive }) =>
                   isActive ? "navbar__link--active" : "link"
                 }
@@ -144,6 +170,9 @@ const Sidebar = () => {
               </NavLink>
               <NavLink
                 to="/location"
+                onClick={() =>
+                  toggleNavbar ? setToggleNavbar(!toggleNavbar) : null
+                }
                 className={({ isActive }) =>
                   isActive ? "navbar__link--active" : "link"
                 }
@@ -158,6 +187,9 @@ const Sidebar = () => {
               </NavLink>
               <NavLink
                 to="/departments"
+                onClick={() =>
+                  toggleNavbar ? setToggleNavbar(!toggleNavbar) : null
+                }
                 className={({ isActive }) =>
                   isActive ? "navbar__link--active" : "link"
                 }

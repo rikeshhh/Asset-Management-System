@@ -42,10 +42,11 @@ const AssetsForm = ({
   return (
     <div className="content-wrapper">
       <div className="content-radius">
-        <div className="content__header ">
+        <div className="content__header form--header">
           <h2>{formHeading}</h2>
           <p>
-            <span>Assets /</span> <GrStatusGoodSmall color="green" /> {formType}
+            <span>Assets /</span> <GrStatusGoodSmall className="form__circle" />{" "}
+            {formType}
           </p>
         </div>
         <form
@@ -54,7 +55,7 @@ const AssetsForm = ({
         >
           <div className="form--content__right">
             <div className="assets__form--input">
-              <Label text="ID / Product Code" />
+              <Label text="ID / Product Code" sup={"*"} />
               <InputField
                 name="ID / Product Code"
                 register={register}
@@ -72,7 +73,7 @@ const AssetsForm = ({
             </div>
 
             <div className="assets__form--input">
-              <Label text="Name / Title" />
+              <Label text="Name / Title" sup={"*"} />
               <InputField
                 name="ID / Product Code"
                 register={register}
@@ -89,11 +90,11 @@ const AssetsForm = ({
               />
             </div>
             <div className="assets__form--input">
-              <Label text="Asset Type" />
+              <Label text="Asset Type" sup={"*"} />
               <SelectInput options={options} />
             </div>
             <div className="assets__form--input">
-              <Label text="Category" />
+              <Label text="Category" sup={"*"} />
               <SelectInput options={options} />
             </div>
             <div className="assets__form--input">
@@ -120,15 +121,15 @@ const AssetsForm = ({
               />
             </div>
             <div className="assets__form--input">
-              <Label text="Location" />
+              <Label text="Location" sup={"*"} />
               <SelectInput options={options} />
             </div>
             <div className="assets__form--input">
-              <Label text="Assigned to" />
+              <Label text="Assigned to" sup={"*"} />
               <SelectInput options={options} />
             </div>
             <div className="assets__form--input assets__switch">
-            <Label text="Status" />
+              <Label text="Status" />
               <label className={`switch ${isActive ? "active" : "inactive"}`}>
                 <input
                   type="checkbox"

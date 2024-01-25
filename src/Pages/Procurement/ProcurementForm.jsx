@@ -19,11 +19,11 @@ const ProcurementForm = () => {
   return (
     <section className="content-wrapper">
       <div className="content-radius procurement">
-        <div className="procurement__header">
+        <div className="procurement__header form--header">
           <h2>Procurement Form</h2>
           <p>
-            <span>Procurement/</span> <GrStatusGoodSmall color="green" />{" "}
-            Request an asset
+            <span>Procurement /</span>{" "}
+            <GrStatusGoodSmall className="form__circle" /> Request an asset
           </p>
         </div>
         <div className="procurement__request">

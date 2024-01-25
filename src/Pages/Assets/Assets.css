@@ -1,8 +1,9 @@
 .assets {
-  background-color: white;
+  background-color: var(--secondary-color);
   display: flex;
   flex-direction: column;
 }
+
 .assets__header {
   display: flex;
   justify-content: space-between;
@@ -29,7 +30,6 @@
   border-radius: 0.3125rem;
   border: 1px solid var(--primary-grey);
   padding: 1.09rem 1rem;
-  margin-bottom: 1.5rem;
 }
 
 .assets__btn {
@@ -126,7 +126,8 @@ input:checked + .slider {
 }
 
 @media (width < 850px) {
-  .assets__header {
-    flex-direction: column;
+  .assets__form--content {
+    grid-template-rows: repeat(1, 1fr);
+    gap: 1rem;
   }
 }
