@@ -21,174 +21,187 @@ const Sidebar = () => {
   };
 
   return (
-    <header className={toggleNavbar ? " sidebar" : " sidebar sidebar__res"}>
-      <div className="sidebar__arrow" onClick={handleNavbar}>
-        <FiChevronRight className={toggleNavbar ? "arrow" : "arrow__close"} />
-      </div>
-      <div className="sidebar__title">
-        <h3 className="sidebar__heading">AMS</h3>
-        <div className="sidebar__subheading">
-          <p>Assets management system</p>
+    <>
+      <header className={toggleNavbar ? " sidebar" : " sidebar sidebar__res"}>
+        <div
+          className={
+            toggleNavbar
+              ? "sidebar__arrow--extended sidebar__arrow"
+              : "sidebar__arrow "
+          }
+          onClick={handleNavbar}
+        >
+          <FiChevronRight className={toggleNavbar ? "arrow" : "arrow__close"} />
         </div>
-      </div>
-      <nav className="navbar">
-        <div className="top__list">
-          <h4 className="navbar__title " id="top__title">
-            System
-          </h4>
-          <ul className="navbar__list">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "link"
-              }
-            >
-              <li
-                className={
-                  toggleNavbar ? "navbar__list--point" : "navbar__list--toggle"
+        <div className="sidebar__title">
+          <div>
+            <h3 className="sidebar__heading">AMS</h3>
+            <div className="sidebar__subheading">
+              <p>Assets management system</p>
+            </div>
+          </div>
+        </div>
+        <nav className="navbar">
+          <div className="top__list">
+            <h4 className="navbar__title " id="top__title">
+              System
+            </h4>
+            <ul className="navbar__list">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "navbar__link--active" : "link"
                 }
               >
-                <span>
-                  {/* <RxDashboard /> */}
-                  <DashboardSvg />
-                </span>
-                <p>Dashboard</p>
-              </li>
-            </NavLink>
-            <NavLink
-              to="/assets"
-              className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "link"
-              }
-            >
-              <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
-                <span title="Assets">
-                  {/* <PiDesktopTower /> */}
-                  <AssetsSvg />
-                </span>
-                <p>Assets</p>
-              </li>
-            </NavLink>
-            <NavLink
-              to="/procurement"
-              className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "link"
-              }
-            >
-              <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
-                <span>
-                  {/* <PiShoppingCart /> */}
-                  <ProcurementSvg />
-                </span>
-                <p>Procurement</p>
-              </li>
-            </NavLink>
-            <NavLink
-              to="/repair"
-              className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "link"
-              }
-            >
-              <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
-                <span>
-                  {/* <PiWrench /> */}
-                  <RepairSvg />
-                </span>
-                <p>Repair & Replace</p>
-              </li>
-            </NavLink>
-          </ul>
-        </div>
-        <div className="bottom__list">
-          <h4 className="navbar__title">Listing</h4>
-          <ul className="navbar__list">
-            <NavLink
-              to="/employees"
-              className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "link"
-              }
-            >
-              <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
-                <span>
-                  {/* <HiOutlineUser /> */}
-                  <EmployeeSvg />
-                </span>
-                <p>Employees</p>
-              </li>
-            </NavLink>
-            <NavLink
-              to="/categories"
-              className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "link"
-              }
-            >
-              <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
-                <span>
-                  {/* <PiListMagnifyingGlass /> */}
-                  <CategorySvg />
-                </span>
-                <p>Categories</p>
-              </li>
-            </NavLink>
-            <NavLink
-              to="/location"
-              className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "link"
-              }
-            >
-              <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
-                <span>
-                  {/* <FiMapPin /> */}
-                  <LocationSvg />
-                </span>
-                <p>Locations</p>
-              </li>
-            </NavLink>
-            <NavLink
-              to="/departments"
-              className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "link"
-              }
-            >
-              <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
-                <span>
-                  {/* <GrGroup /> */}
-                  <DepartmentSvg />
-                </span>
-                <p>Department</p>
-              </li>
-            </NavLink>
+                <li
+                  className={
+                    toggleNavbar
+                      ? "navbar__list--point"
+                      : "navbar__list--toggle"
+                  }
+                >
+                  <span>
+                    {/* <RxDashboard /> */}
+                    <DashboardSvg />
+                  </span>
+                  <p>Dashboard</p>
+                </li>
+              </NavLink>
+              <NavLink
+                to="/assets"
+                className={({ isActive }) =>
+                  isActive ? "navbar__link--active" : "link"
+                }
+              >
+                <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
+                  <span title="Assets">
+                    {/* <PiDesktopTower /> */}
+                    <AssetsSvg />
+                  </span>
+                  <p>Assets</p>
+                </li>
+              </NavLink>
+              <NavLink
+                to="/procurement"
+                className={({ isActive }) =>
+                  isActive ? "navbar__link--active" : "link"
+                }
+              >
+                <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
+                  <span>
+                    {/* <PiShoppingCart /> */}
+                    <ProcurementSvg />
+                  </span>
+                  <p>Procurement</p>
+                </li>
+              </NavLink>
+              <NavLink
+                to="/repair"
+                className={({ isActive }) =>
+                  isActive ? "navbar__link--active" : "link"
+                }
+              >
+                <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
+                  <span>
+                    {/* <PiWrench /> */}
+                    <RepairSvg />
+                  </span>
+                  <p>Repair & Replace</p>
+                </li>
+              </NavLink>
+            </ul>
+          </div>
+          <div className="bottom__list">
+            <h4 className="navbar__title">Listing</h4>
+            <ul className="navbar__list">
+              <NavLink
+                to="/employees"
+                className={({ isActive }) =>
+                  isActive ? "navbar__link--active" : "link"
+                }
+              >
+                <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
+                  <span>
+                    {/* <HiOutlineUser /> */}
+                    <EmployeeSvg />
+                  </span>
+                  <p>Employees</p>
+                </li>
+              </NavLink>
+              <NavLink
+                to="/categories"
+                className={({ isActive }) =>
+                  isActive ? "navbar__link--active" : "link"
+                }
+              >
+                <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
+                  <span>
+                    {/* <PiListMagnifyingGlass /> */}
+                    <CategorySvg />
+                  </span>
+                  <p>Categories</p>
+                </li>
+              </NavLink>
+              <NavLink
+                to="/location"
+                className={({ isActive }) =>
+                  isActive ? "navbar__link--active" : "link"
+                }
+              >
+                <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
+                  <span>
+                    {/* <FiMapPin /> */}
+                    <LocationSvg />
+                  </span>
+                  <p>Locations</p>
+                </li>
+              </NavLink>
+              <NavLink
+                to="/departments"
+                className={({ isActive }) =>
+                  isActive ? "navbar__link--active" : "link"
+                }
+              >
+                <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
+                  <span>
+                    {/* <GrGroup /> */}
+                    <DepartmentSvg />
+                  </span>
+                  <p>Department</p>
+                </li>
+              </NavLink>
 
-            <div className="plans">
-              <p>Want to increase your productivity?</p>
-              <span>
-                Get more from AMS with our business / enterprise plans!
-              </span>
-              <Link to="/plans" className="plans__link">
-                <Button
-                  className={"button__style plans__button"}
-                  text={"Go to plans"}
-                />
-              </Link>
-            </div>
-            <NavLink
-              to=""
-              className={({ isActive }) =>
-                isActive ? "navbar__link--active" : "link"
-              }
-            >
-              <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
+              <div className="plans">
+                <p>Want to increase your productivity?</p>
                 <span>
-                  {/* <LuLogOut /> */}
-                  <LogoutSvg />
+                  Get more from AMS with our business / enterprise plans!
                 </span>
-                <p>Logout</p>
-              </li>
-            </NavLink>
-          </ul>
-        </div>
-      </nav>
-    </header>
+                <Link to="/plans" className="plans__link">
+                  <Button
+                    className={"button__style plans__button"}
+                    text={"Go to plans"}
+                  />
+                </Link>
+              </div>
+              <NavLink
+                to=""
+                className={({ isActive }) =>
+                  isActive ? "navbar__link--active" : "link"
+                }
+              >
+                <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
+                  <span>
+                    {/* <LuLogOut /> */}
+                    <LogoutSvg />
+                  </span>
+                  <p>Logout</p>
+                </li>
+              </NavLink>
+            </ul>
+          </div>
+        </nav>
+      </header>
+    </>
   );
 };
 
