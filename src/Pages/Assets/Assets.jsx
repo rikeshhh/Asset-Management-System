@@ -1,9 +1,9 @@
+import "./Assets.css";
 import { Link } from "react-router-dom";
 import Button from "../../Component/Button/Button";
 import { InputField } from "../../Component/Input/InputField";
 import { useForm } from "react-hook-form";
 import { IoMdAdd } from "react-icons/io";
-import "./Assets.css";
 import Model from "../../Component/Model/Model";
 import { useState } from "react";
 import Table from "../../Component/Table/Table";
