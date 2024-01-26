@@ -47,44 +47,46 @@ const PricingPayment = () => {
           </div>
         </div>
         <div className="pricing__content">
-          <div className="pricing__content__left">
-            <div
-              className={
-                selectedPaymentMethod === "creditCard"
-                  ? "payment__active"
-                  : "pricing__payment"
-              }
-              onClick={handleCreditClick}
-            >
-              <figure className="credit__svg">
-                <CreditCard />
-              </figure>
-              <div className="payment__left--content">
-                <div className="payment__left--title">
-                  <p>Credit / Debit Card</p>
-                </div>
-                <div className="payment__left--desc">
-                  <p>Visa, Mastercard, Amex, Rupay & more</p>
+          <div className="pricing__content__left payment__left">
+            <div>
+              <div
+                className={
+                  selectedPaymentMethod === "creditCard"
+                    ? "payment__active"
+                    : "pricing__payment"
+                }
+                onClick={handleCreditClick}
+              >
+                <figure className="credit__svg">
+                  <CreditCard />
+                </figure>
+                <div className="payment__left--content">
+                  <div className="payment__left--title">
+                    <p>Credit / Debit Card</p>
+                  </div>
+                  <div className="payment__left--desc">
+                    <p>Visa, Mastercard, Amex, Rupay & more</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div
-              className={
-                selectedPaymentMethod === "paypal"
-                  ? "payment__active"
-                  : "pricing__payment pricing__paypal"
-              }
-              onClick={handlePayPalClick}
-            >
-              <figure className="paypal__svg">
-                <img src={paypal} alt="paypal" />
-              </figure>
-              <div className="payment__left--content">
-                <div className="payment__left--title">
-                  <p>PayPal</p>
-                </div>
-                <div className="payment__left--desc">
-                  <p>Pay using your Paypal</p>
+              <div
+                className={
+                  selectedPaymentMethod === "paypal"
+                    ? "payment__active"
+                    : "pricing__payment pricing__paypal"
+                }
+                onClick={handlePayPalClick}
+              >
+                <figure className="paypal__svg">
+                  <img src={paypal} alt="paypal" />
+                </figure>
+                <div className="payment__left--content">
+                  <div className="payment__left--title">
+                    <p>PayPal</p>
+                  </div>
+                  <div className="payment__left--desc">
+                    <p>Pay using your Paypal</p>
+                  </div>
                 </div>
               </div>
             </div>

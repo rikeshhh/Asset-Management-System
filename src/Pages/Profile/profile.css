@@ -81,12 +81,9 @@
   margin-bottom: 1.37rem;
 }
 
-
-
 .user__profile--none[type="file"] {
   display: none;
 }
-
 
 .radio__label {
   display: flex;
@@ -144,4 +141,31 @@
 
 .profile-btn-none {
   display: none;
+}
+
+@media (width<=1024px) {
+  .user__profile--body {
+    gap: 2rem;
+  }
+
+  .user__profile--image {
+    width: 25rem;
+  }
+}
+
+@media (width<= 850px) {
+  .user__profile--body {
+    grid-template-columns: 1fr;
+    align-items: center;
+  }
+
+  .user__profile--left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .profile__form {
+    padding: 2rem;
+  }
 }
