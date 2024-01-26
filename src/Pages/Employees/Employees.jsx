@@ -38,7 +38,7 @@ const Employees = () => {
             </Link>
           </div>
           <div className="employees__table">
-            <div className="assets__filter">
+            <div className="ams__filter">
               <InputField
                 name="Search"
                 register={register}

@@ -48,7 +48,7 @@ const Repair = () => {
             />
           </div>
 
-          <div className="repair__filter ">
+          <div className="ams__filter ">
             <InputField
               name="Repair"
               register={register}

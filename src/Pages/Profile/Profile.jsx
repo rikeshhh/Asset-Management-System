@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import "./profile.css";
 import Button from "../../Component/Button/Button";
 import { SelectInput } from "../../Component/Input/SelectInput";
-
 import Model from "../../Component/Model/Model";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
@@ -37,7 +36,7 @@ export const Profile = ({ title, description, buttonBlueText }) => {
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
-        <div className="content__header">
+        <div className="content__header form--header">
           <h2>{title}</h2>
           <span>{description}</span>
         </div>

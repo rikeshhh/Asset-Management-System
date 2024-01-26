@@ -18,14 +18,8 @@
   padding-right: 0;
 }
 
-.procurement__filter {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.75rem 0;
-}
-
 .procurement__header h2 {
-  color: var(--Foundation-Grey-grey-900, #21252b);
+  color: var(--text-color);
   font-family: Inter;
   font-size: 1.75rem;
   font-style: normal;
