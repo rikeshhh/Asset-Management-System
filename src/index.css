@@ -37,7 +37,6 @@ body {
 
 ::-webkit-scrollbar {
   width: 7px;
-  height: 1rem;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -93,5 +92,12 @@ body {
   .main-content {
     width: calc(100% - 7rem);
     margin-left: 7rem;
+  }
+}
+
+@media (width<=500px) {
+  .main-content {
+    width: 100%;
+    margin-left: 0;
   }
 }
