@@ -79,7 +79,7 @@ export const Profile = ({ title, description, buttonBlueText }) => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit()} className="group__form">
+          <form onSubmit={handleSubmit()} className="group__form profile__form">
             <div className="form__input--section">
               <Label text="Name" />
               <InputField

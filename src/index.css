@@ -35,6 +35,16 @@ body {
   background-color: var(--main-background);
 }
 
+::-webkit-scrollbar {
+  width: 7px;
+  height: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--blue);
+  border-radius: 15px;
+}
+
 .layout {
   display: flex;
   width: 100%;

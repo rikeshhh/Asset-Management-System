@@ -329,3 +329,12 @@ th:last-child {
   margin-right: 0.25rem;
   color: #0caf60;
 }
+
+@media (width<=850px) {
+  .category__content {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+  
+}

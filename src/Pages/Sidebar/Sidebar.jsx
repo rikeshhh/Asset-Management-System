@@ -210,6 +210,9 @@ const Sidebar = () => {
                 </span>
                 <Link to="/plans" className="plans__link">
                   <Button
+                    handleClick={() =>
+                      toggleNavbar ? setToggleNavbar(!toggleNavbar) : null
+                    }
                     className={"button__style plans__button"}
                     text={"Go to plans"}
                   />

@@ -13,15 +13,6 @@
   overflow-y: scroll;
 }
 
-.sidebar::-webkit-scrollbar {
-  width: 7px;
-  height: 1rem;
-}
-
-.sidebar::-webkit-scrollbar-thumb {
-  background-color: var(--blue);
-  border-radius: 15px;
-}
 
 .sidebar__title {
   padding: 0 1rem;
