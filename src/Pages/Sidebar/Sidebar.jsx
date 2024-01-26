@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import "./Sidebar.css";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoClose } from "react-icons/io5";
+import { FaAngleRight } from "react-icons/fa6";
 import Button from "../../Component/Button/Button";
 import { DashboardSvg } from "../../Component/svg/DashboardSvg";
 import { AssetsSvg } from "../../Component/svg/AssetsSvg";
@@ -20,7 +21,10 @@ const Sidebar = () => {
   const handleToggle = () => {
     setToggleNavbar(!toggleNavbar);
   };
-  useEffect(() => {}, []);
+
+  const handleSmallToggle = () => {
+    setToggleNavbar(!toggleNavbar);
+  };
 
   return (
     <>

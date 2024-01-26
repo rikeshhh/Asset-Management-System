@@ -1,3 +1,4 @@
+
 label {
   color: var(--text-color);
   font-size: 0.875rem;
@@ -336,5 +337,4 @@ th:last-child {
     flex-direction: column-reverse;
     gap: 1rem;
   }
-  
 }
