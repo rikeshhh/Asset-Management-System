@@ -58,7 +58,7 @@ const Assets = () => {
               />
             </div>
 
-            <div className="assets__filter ">
+            <div className="ams__filter ">
               <InputField
                 name="Assets"
                 register={register}

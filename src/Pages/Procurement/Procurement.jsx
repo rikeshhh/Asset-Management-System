@@ -27,7 +27,7 @@ const Procurement = () => {
             />
           </Link>
         </div>
-        <div className="procurement__filter ">
+        <div className="ams__filter ">
           <InputField
             name="Procurement"
             register={register}

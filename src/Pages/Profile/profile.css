@@ -169,3 +169,29 @@
     padding: 2rem;
   }
 }
+
+@media (width<= 500px) {
+  .user__profile--body {
+    gap: 1rem;
+  }
+  .user__profile--left {
+    padding: 1.5rem 1.5rem 0;
+  }
+  .user__profile--image {
+    padding: 0 2rem;
+    width: fit-content;
+  }
+}
+
+@media (width< 375px) {
+  .user__profile--left {
+    padding: 1.5rem 0.5rem 0;
+  }
+  .user__profile--image {
+    padding: 0.5rem;
+  }
+
+  .profile__form {
+    padding: 0.5rem;
+  }
+}

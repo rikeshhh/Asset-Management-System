@@ -139,6 +139,7 @@
 
 .plans__link {
   text-decoration: none;
+  width: fit-content;
 }
 
 .plans__button {
@@ -251,6 +252,14 @@
 
   .sidebar__res .navbar {
     display: none;
+  }
+
+  .plans {
+    padding: 1rem 1rem;
+  }
+
+  .plans__button {
+    width: 14rem !important;
   }
 }
 

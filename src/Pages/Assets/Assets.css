@@ -21,18 +21,6 @@
   border-bottom: 1px solid var(--primary-grey);
 }
 
-.assets__filter {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem 0;
-}
-.assets__filter input {
-  border-radius: 0.3125rem;
-  border: 1px solid var(--primary-grey);
-  padding: 1.09rem 1rem;
-}
-
 .assets__btn {
   color: var(--text-color) !important;
   padding: 0.62rem !important;
