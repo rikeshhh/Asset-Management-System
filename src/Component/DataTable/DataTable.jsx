@@ -40,7 +40,7 @@ export const DataTable = ({ formDataArray, showDownButton, onDelete, setFormData
     setEditSubIndex(null);
   };
   return (
-    <section className="cateogries">
+    <section className="cateogries table__container">
       <table>
         <thead>
           <tr>

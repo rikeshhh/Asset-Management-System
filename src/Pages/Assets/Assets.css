@@ -24,6 +24,7 @@
 .assets__filter {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0.75rem 0;
 }
 .assets__filter input {
@@ -130,5 +131,12 @@ input:checked + .slider {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+}
+
+@media (width < 500px) {
+  .form--content__right,
+  .form--content__left {
+    padding-right: 0;
   }
 }
