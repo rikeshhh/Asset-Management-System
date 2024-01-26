@@ -19,7 +19,7 @@ const ProcurementForm = () => {
   return (
     <section className="content-wrapper">
       <div className="content-radius procurement">
-        <div className="procurement__header form--header">
+        <div className="procurement__header--form form--header">
           <h2>Procurement Form</h2>
           <p>
             <span>Procurement /</span>{" "}
@@ -27,7 +27,7 @@ const ProcurementForm = () => {
           </p>
         </div>
         <div className="procurement__request">
-          <div className="user__auth--input">
+          <div className="user__auth--input procurement__form--input">
             <Label text="Requested By" />
             <InputField
               name="Username"

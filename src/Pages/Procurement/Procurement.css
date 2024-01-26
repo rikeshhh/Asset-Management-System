@@ -1,18 +1,21 @@
 .procurement {
-  padding: 1.25rem 1.38rem;
+  padding: 0 1.38rem 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
 }
 
-.procurement__header {
+.procurement__header--form {
   display: flex;
   flex-direction: column;
+  padding-top: 1.25rem;
 }
 
-.procurement__header--display {
-  flex-direction: row !important;
+.procurement__header {
+  display: flex;
   justify-content: space-between;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .procurement__filter {
@@ -119,4 +122,23 @@
   letter-spacing: 0.005rem;
   border: none;
   color: var(--secondary-color);
+}
+
+@media (width<=500px) {
+  .procurement__request {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .procurement__form--input input {
+    margin-bottom: 0;
+  }
+
+  .procurement__product--list {
+    flex-direction: column;
+  }
+
+  .procurement__product--list h3 {
+    padding-bottom: 0.75rem;
+  }
 }

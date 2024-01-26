@@ -17,7 +17,7 @@ const Procurement = () => {
   return (
     <section className="content-wrapper">
       <div className="content-radius procurement">
-        <div className="procurement__header procurement__header--display">
+        <div className="content__header procurement__header">
           <h2>Procurement </h2>
           <Link to={"/procurementForm"} className="link">
             <Button

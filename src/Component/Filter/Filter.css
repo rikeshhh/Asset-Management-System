@@ -11,18 +11,18 @@
   animation-duration: 0.5s;
 }
 
-.filter.open {
+/* .filter.open {
   animation-name: slideIn;
-}
+} */
 
-@keyframes slideIn {
+/* @keyframes slideIn {
   from {
     transform: translateX(100%);
   }
   to {
     transform: translateX(0);
   }
-}
+} */
 
 .filter__heading {
   display: flex;
@@ -70,7 +70,7 @@
   justify-content: space-between;
 }
 
-.filter--visible {
+/* .filter--visible {
   opacity: 1;
   transition: opacity 1000ms ease-in-out;
 }
@@ -78,4 +78,4 @@
 .filter--hidden {
   opacity: 0;
   transition: opacity 1000ms ease-in-out;
-}
+} */

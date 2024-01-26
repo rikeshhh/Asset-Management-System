@@ -1,4 +1,3 @@
-
 label {
   color: var(--text-color);
   font-size: 0.875rem;
@@ -108,6 +107,7 @@ label {
 
 .link {
   text-decoration: none !important;
+  width: fit-content;
 }
 
 .user__auth--ques {
