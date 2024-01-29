@@ -8,7 +8,8 @@ import { SelectInput } from "../../Component/Input/SelectInput";
 import Model from "../../Component/Model/Model";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
-import { userProf } from "../../Component/Images/Image";
+import { profileCover } from "../../Component/Images/Image";
+import { GoTrash } from "react-icons/go";
 export const Profile = ({ title, description, buttonBlueText }) => {
   const {
     register,
@@ -19,6 +20,20 @@ export const Profile = ({ title, description, buttonBlueText }) => {
   const receivedState = location.state;
 
   const fileInputRef = useRef(null);
+
+  const [profileImage, setProfileImage] = useState(profileCover);
+
+  const handleProfileUpdate = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const profileUrl = URL.createObjectURL(file);
+      setProfileImage(profileUrl);
+    }
+  };
+
+  const deleteProfile = () => {
+    setProfileImage(profileCover);
+  };
 
   const [options, setOptions] = useState([
     "Frontend",
@@ -44,17 +59,22 @@ export const Profile = ({ title, description, buttonBlueText }) => {
           <div className="user__profile--left">
             <div className="user__profile--image">
               <figure>
-                <img src={userProf} alt="amod suman" />
+                <img src={profileImage} alt="Profile Picture" />
+                <div className="profile__button--container">
+                  <Button
+                    type={"button"}
+                    icon={<GoTrash />}
+                    className={"button__red profile__delete--button"}
+                    handleClick={deleteProfile}
+                  />
+                </div>
               </figure>
               <input
                 type="file"
                 className="user__profile--none"
                 ref={fileInputRef}
                 accept=".jpg,.png"
-                onChange={(e) => {
-                  // Handle file selection if needed
-                  console.log("Selected file:", e.target.files[0]);
-                }}
+                onChange={handleProfileUpdate}
               />
               <Button
                 text={"Upload new photo"}

@@ -36,15 +36,30 @@
 }
 
 .user__profile--image figure {
-  width: 11.0625rem;
-  height: 11.0625rem;
   padding-top: 2.06rem;
   flex-shrink: 0;
-  border-radius: 11.0625rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .user__profile--image img {
+  width: 11.0625rem;
+  height: 11.0625rem;
   object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile__button--container {
+  position: relative;
+}
+
+.profile__delete--button {
+  padding: 0.5rem 0.56rem;
+  border-radius: 1.9375rem;
+  position: absolute;
+  right: 1.28rem;
+  bottom: 0.1rem;
 }
 
 .user__profile--file-disabled {
@@ -58,10 +73,6 @@
   border-radius: 0.3125rem;
   background: var(--icon-grey);
   border: none;
-}
-
-.upload__btn {
-  margin-top: 1.88rem;
 }
 
 .user__profile--image span {
