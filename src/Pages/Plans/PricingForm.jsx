@@ -149,7 +149,7 @@ const PricingForm = () => {
               className="group__form pricing__form"
             >
               <div className="form__input--section">
-                <Label text="Name" />
+                <Label sup={"*"} text="Name" />
                 <InputField
                   name="Username"
                   register={register}
@@ -167,7 +167,7 @@ const PricingForm = () => {
               </div>
 
               <div className="form__input--section">
-                <Label text="Email" />
+                <Label sup={"*"} text="Email" />
                 <InputField
                   name="Email"
                   register={register}
@@ -183,7 +183,7 @@ const PricingForm = () => {
               </div>
               <div className="basic__dets--country">
                 <div className="form__input--section">
-                  <Label text="Country" />
+                  <Label sup={"*"} text="Country" />
                   <SelectInput options={options} />
                 </div>
                 <div className="form__input--section">
@@ -193,7 +193,6 @@ const PricingForm = () => {
                     register={register}
                     value={Model.ZipCode.pattern.value}
                     message={Model.ZipCode.pattern.message}
-                    required={Model.ZipCode.required}
                     errors={errors}
                     type={Model.ZipCode.type}
                     placeholder={Model.ZipCode.placeholder}
@@ -205,7 +204,7 @@ const PricingForm = () => {
                 </div>
               </div>
               <div className="form__input--section">
-                <Label text="Phone Number" />
+                <Label sup={"*"} text="Phone Number" />
                 <InputField
                   name="PhoneNumber"
                   register={register}

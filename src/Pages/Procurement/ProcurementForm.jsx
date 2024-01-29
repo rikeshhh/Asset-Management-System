@@ -28,7 +28,7 @@ const ProcurementForm = () => {
         </div>
         <div className="procurement__request">
           <div className="user__auth--input procurement__form--input">
-            <Label text="Requested By" />
+            <Label sup={"*"} text="Requested By" />
             <InputField
               name="Username"
               register={register}
@@ -43,7 +43,7 @@ const ProcurementForm = () => {
             />
           </div>
           <div className="user__auth--input">
-            <Label text="Requeat Urgency" />
+            <Label sup={"*"} text="Requeat Urgency" />
             <SelectInput options={options} />
           </div>
         </div>

@@ -28,7 +28,7 @@ export const Credit = ({ goback, navigate }) => {
     <>
       <form onSubmit={handleSubmit(submitData)} className="group__form ">
         <div className="form__input--section">
-          <Label text="Name on Card" />
+          <Label sup={"*"} text="Name on Card" />
           <InputField
             name="Card Name"
             register={register}
@@ -69,7 +69,7 @@ export const Credit = ({ goback, navigate }) => {
           <div className="card__warning">Your card issuer may charge a fee</div>
         </div>
         <div className="form__input--section">
-          <Label text="Card Number" />
+          <Label sup={"*"} text="Card Number" />
           <InputField
             name="Card Number"
             register={register}
@@ -83,7 +83,7 @@ export const Credit = ({ goback, navigate }) => {
         </div>
         <div className="basic__dets--country">
           <div className="form__input--section">
-            <Label text="Expiration Date" />
+            <Label sup={"*"} text="Expiration Date" />
             <InputField
               name="Expiration Date"
               register={register}
@@ -102,7 +102,6 @@ export const Credit = ({ goback, navigate }) => {
               register={register}
               value={Model.ZipCode.pattern.value}
               message={"Enter a valid security code"}
-              required={Model.ZipCode.required}
               errors={errors}
               type={Model.ZipCode.type}
               placeholder={"Enter the security code"}

@@ -115,7 +115,7 @@ const Categories = () => {
             </div>
             <form action="" onSubmit={handleSubmit(onSubmit)}>
               <div>
-                <Label text="Name" />
+                <Label sup={"*"} text="Name" />
                 <InputField
                   name="ChildCategory"
                   register={register}
@@ -128,7 +128,7 @@ const Categories = () => {
                 />
               </div>
               <div className="add__category--select">
-                <Label text="Parent Category" />
+                <Label sup={"*"} text="Parent Category" />
                 <Controller
                   name="ParentCategory"
                   control={control}

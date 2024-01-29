@@ -16,10 +16,14 @@ export const InputField = ({
   isDisabled,
   register,
 }) => {
+  const hasError = errors[name];
+
   return (
     <div className={type == "radio" ? "input__field--radio" : "input__field"}>
       <input
-        className={isDisabled ? "input-disabled" : "input-enabled"}
+        className={`${isDisabled ? "input-disabled" : "input-enabled"} ${
+          hasError ? "input__error" : ""
+        } ${hasError && type == "radio" ? "input__radio" : ""}`}
         placeholder={placeholder}
         name={name}
         type={type}

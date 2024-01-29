@@ -44,6 +44,16 @@ body {
   border-radius: 15px;
 }
 
+input:focus,
+select:focus {
+  outline: 1px solid var(--blue);
+}
+
+select:focus {
+  border: none;
+}
+
+
 .layout {
   display: flex;
   width: 100%;
