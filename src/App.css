@@ -60,25 +60,14 @@ label {
   letter-spacing: 0.0125rem;
 }
 
-.user__auth--input {
-  display: flex;
-  flex-direction: column;
+.auth--form {
+  padding-right: 0 !important;
 }
 
-.user__auth--input label {
-  color: var(--text-color);
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 150%;
-  letter-spacing: 0.00438rem;
-  margin-bottom: 0.5rem;
-}
-
-.user__auth--input input {
+.retype-password {
   border-radius: 0.3125rem;
   border: 1px solid var(--primary-grey);
   padding: 1.09rem 1rem;
-  margin-bottom: 1.5rem;
 }
 
 .user__auth--button {
@@ -112,9 +101,12 @@ label {
 
 .user__auth--ques {
   display: flex;
-  padding: 0.81rem 0px;
   gap: 0.25rem;
   justify-content: center;
+}
+
+.login__ques {
+  padding-top: 0.81rem;
 }
 
 .user__auth--ques p {
@@ -130,6 +122,25 @@ label {
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 150%;
+  letter-spacing: 0.00438rem;
+}
+
+.login__remember {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.login__remember input {
+  accent-color: var(--blue);
+}
+
+.login__remember label {
+  color: var(--light-grey);
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 1.3125rem */
   letter-spacing: 0.00438rem;
 }
 
@@ -284,6 +295,10 @@ label {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+.form__input--section input:focus {
+  outline: 1px solid var(--blue);
 }
 
 .form__input--section label {

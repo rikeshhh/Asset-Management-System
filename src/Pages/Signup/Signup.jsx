@@ -33,71 +33,81 @@ export const Signup = () => {
               onSubmit={handleSubmit(submitData)}
             >
               <h3 className="user__auth--title">Signup</h3>
-              <div className="user__auth--input">
-                <Label text="Username" />
-                <InputField
-                  name="Username"
-                  register={register}
-                  required={Model.Username.required}
-                  value={Model.Username.pattern.value}
-                  message={Model.Username.pattern.message}
-                  errors={errors}
-                  type={Model.Username.type}
-                  placeholder={Model.Username.placeholder}
-                  minLength={Model.Username.minLength.value}
-                  minMessage={Model.Username.minLength.message}
-                  maxLength={Model.Username.maxLength.value}
-                  maxMessage={Model.Username.maxLength.message}
-                />
-                <Label text="Email" />
-                <InputField
-                  name="Email"
-                  register={register}
-                  value={Model.Email.pattern.value}
-                  message={Model.Email.pattern.message}
-                  required={Model.Email.required}
-                  errors={errors}
-                  type={Model.Email.type}
-                  placeholder={Model.Email.placeholder}
-                  maxLength={Model.Email.maxLength.value}
-                  maxMessage={Model.Email.maxLength.message}
-                />
-                <Label text="Password" />
-                <InputField
-                  name="Password"
-                  register={register}
-                  value={Model.Password.pattern.value}
-                  message={Model.Password.pattern.message}
-                  required={Model.Password.required}
-                  errors={errors}
-                  type={Model.Password.type}
-                  placeholder={Model.Password.placeholder}
-                  minLength={Model.Password.minLength.value}
-                  minMessage={Model.Password.minLength.message}
-                  maxLength={Model.Password.maxLength.value}
-                  maxMessage={Model.Password.maxLength.message}
-                />
-                <Label text="RetypePassword" />
-                <input
-                  name="RetypePassword"
-                  type="password"
-                  placeholder="Enter your password again"
-                  {...register("RetypePassword", {
-                    required: "Retype Password is required",
-                    validate: (value) =>
-                      value === watch("Password") || "Passwords do not match",
-                  })}
-                />
-                {errors.RetypePassword && (
-                  <p className="retype__error">
-                    {errors.RetypePassword.message}
-                  </p>
-                )}
-                <div className="user__auth--ques">
-                  <p>Already have an account?</p>
-                  <Link to="/login">
-                    <span>Login</span>
-                  </Link>
+              <div className="group__form auth--form">
+                <div className="form__input--section">
+                  <Label text="Username" />
+                  <InputField
+                    name="Username"
+                    register={register}
+                    required={Model.Username.required}
+                    value={Model.Username.pattern.value}
+                    message={Model.Username.pattern.message}
+                    errors={errors}
+                    type={Model.Username.type}
+                    placeholder={Model.Username.placeholder}
+                    minLength={Model.Username.minLength.value}
+                    minMessage={Model.Username.minLength.message}
+                    maxLength={Model.Username.maxLength.value}
+                    maxMessage={Model.Username.maxLength.message}
+                  />
+                </div>
+                <div className="form__input--section">
+                  <Label text="Email" />
+                  <InputField
+                    name="Email"
+                    register={register}
+                    value={Model.Email.pattern.value}
+                    message={Model.Email.pattern.message}
+                    required={Model.Email.required}
+                    errors={errors}
+                    type={Model.Email.type}
+                    placeholder={Model.Email.placeholder}
+                    maxLength={Model.Email.maxLength.value}
+                    maxMessage={Model.Email.maxLength.message}
+                  />
+                </div>
+                <div className="form__input--section">
+                  <Label text="Password" />
+                  <InputField
+                    name="Password"
+                    register={register}
+                    value={Model.Password.pattern.value}
+                    message={Model.Password.pattern.message}
+                    required={Model.Password.required}
+                    errors={errors}
+                    type={Model.Password.type}
+                    placeholder={Model.Password.placeholder}
+                    minLength={Model.Password.minLength.value}
+                    minMessage={Model.Password.minLength.message}
+                    maxLength={Model.Password.maxLength.value}
+                    maxMessage={Model.Password.maxLength.message}
+                  />
+                </div>
+                <div className="form__input--section">
+                  <Label text="RetypePassword" />
+                  <input
+                    className="retype-password"
+                    name="RetypePassword"
+                    type="password"
+                    placeholder="Enter your password again"
+                    {...register("RetypePassword", {
+                      required: "Retype Password is required",
+                      validate: (value) =>
+                        value === watch("Password") || "Passwords do not match",
+                    })}
+                  />
+                  {errors.RetypePassword && (
+                    <p className="retype__error">
+                      {errors.RetypePassword.message}
+                    </p>
+                  )}
+
+                  <div className="user__auth--ques">
+                    <p>Already have an account?</p>
+                    <Link to="/login">
+                      <span>Login</span>
+                    </Link>
+                  </div>
                 </div>
                 <Button
                   text="Signup"

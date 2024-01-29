@@ -20,22 +20,22 @@ const Departments = () => {
     register,
     formState: { errors },
     handleSubmit,
-    reset
+    reset,
   } = useForm();
   const [formDataArray, setFormDataArray] = useState([
     {
       ParentCategory: "Department",
-    }
+    },
   ]);
 
   const onSubmit = (data) => {
     const newData = {
       ParentCategory: data.Department,
     };
-    console.log(newData)
+    console.log(newData);
     setFormDataArray((prevDataArray) => [...prevDataArray, newData]);
     reset();
-  }
+  };
   return (
     <section className="content-wrapper">
       <div className="content-radius category">
@@ -43,10 +43,7 @@ const Departments = () => {
           <h2>Department</h2>
         </div>
         <div className="category__content">
-          <DataTable
-           formDataArray={formDataArray}
-            showDownButton={false}
-          />
+          <DataTable formDataArray={formDataArray} showDownButton={false} />
 
           <div className="add__category">
             <div className="add__category--title">
@@ -57,7 +54,7 @@ const Departments = () => {
             </div>
             <form action="" onSubmit={handleSubmit(onSubmit)}>
               <div>
-                <Label text="Department Name" />
+                <Label sup={"*"} text="Department Name" />
                 <InputField
                   name="Department"
                   register={register}

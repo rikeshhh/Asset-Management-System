@@ -10,9 +10,11 @@ import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 
 const Location = () => {
-  const [value, setValue] = useState([{
-    ParentCategory:"Kathmandu"
-  }]);
+  const [value, setValue] = useState([
+    {
+      ParentCategory: "Kathmandu",
+    },
+  ]);
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
   };
@@ -21,26 +23,26 @@ const Location = () => {
     register,
     formState: { errors },
     handleSubmit,
-    reset
+    reset,
   } = useForm();
   const [formDataArray, setFormDataArray] = useState([
     {
       ParentCategory: "GroundFloor",
-    }
+    },
   ]);
 
   const onSubmit = (data) => {
     const newData = {
       ParentCategory: data.Location,
     };
-    console.log(newData)
+    console.log(newData);
     setFormDataArray((prevDataArray) => [...prevDataArray, newData]);
     reset();
-  }
+  };
   const handleDelete = (index) => {
     const updatedFormDataArray = [...formDataArray];
     updatedFormDataArray.splice(index, 1);
-    console.log('item Deleted');
+    console.log("item Deleted");
     setFormDataArray(updatedFormDataArray);
     console.log(updatedFormDataArray); // Log the updated state
   };
@@ -52,7 +54,7 @@ const Location = () => {
         </div>
         <div className="category__content">
           <DataTable
-           formDataArray={formDataArray}
+            formDataArray={formDataArray}
             showDownButton={false}
             onDelete={handleDelete}
           />
@@ -67,7 +69,7 @@ const Location = () => {
             </div>
             <form action="" onSubmit={handleSubmit(onSubmit)}>
               <div>
-                <Label text="Location Name" />
+                <Label sup={"*"} text="Location Name" />
                 <InputField
                   name="Location"
                   register={register}

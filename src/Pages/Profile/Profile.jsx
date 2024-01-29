@@ -80,7 +80,7 @@ export const Profile = ({ title, description, buttonBlueText }) => {
 
           <form onSubmit={handleSubmit()} className="group__form profile__form">
             <div className="form__input--section">
-              <Label text="Name" />
+              <Label sup={"*"} text="Name" />
               <InputField
                 name="Username"
                 register={register}
@@ -99,7 +99,7 @@ export const Profile = ({ title, description, buttonBlueText }) => {
             </div>
 
             <div className="form__input--section">
-              <Label text="Job Type" />
+              <Label sup={"*"} text="Job Type" />
               <div style={{ display: "flex", gap: "1.5rem" }}>
                 <div className="radio__label">
                   <div className="checkbox__input--label">
@@ -129,7 +129,7 @@ export const Profile = ({ title, description, buttonBlueText }) => {
               </div>
             </div>
             <div className="form__input--section">
-              <Label text="Designation" />
+              <Label sup={"*"} text="Designation" />
               <InputField
                 name="Designation"
                 register={register}
@@ -147,11 +147,11 @@ export const Profile = ({ title, description, buttonBlueText }) => {
               />
             </div>
             <div className="form__input--section">
-              <Label text="Department" />
+              <Label sup={"*"} text="Department" />
               <SelectInput isDisabled={receivedState} options={options} />
             </div>
             <div className="form__input--section">
-              <Label text="Email" />
+              <Label sup={"*"} text="Email" />
               <InputField
                 name="Email"
                 register={register}
@@ -167,7 +167,7 @@ export const Profile = ({ title, description, buttonBlueText }) => {
               />
             </div>
             <div className="form__input--section">
-              <Label text="Phone Number" />
+              <Label sup={"*"} text="Phone Number" />
               <InputField
                 name="PhoneNumber"
                 register={register}

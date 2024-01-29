@@ -7,10 +7,22 @@
   background: var(--disabled-input);
 }
 
+.input__error {
+  outline: 1px solid var(--red);
+}
+
+.input__radio {
+  outline: none;
+}
+
 select {
   padding: 1.09rem 1rem;
   gap: 1rem;
   border-radius: 0.3125rem;
+}
+
+.select__error {
+  outline: 1px solid var(--red);
 }
 
 .select__option {

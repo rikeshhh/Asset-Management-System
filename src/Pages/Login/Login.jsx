@@ -34,49 +34,64 @@ const Login = () => {
               onSubmit={handleSubmit(submitData)}
             >
               <h3 className="user__auth--title">Login</h3>
-              <div className="user__auth--input">
-                <Label text="Username" />
-                <InputField
-                  name="Username"
-                  register={register}
-                  required={Model.Username.required}
-                  value={Model.Username.pattern.value}
-                  message={Model.Username.pattern.message}
-                  errors={errors}
-                  type={Model.Username.type}
-                  placeholder={Model.Username.placeholder}
-                  minLength={Model.Username.minLength.value}
-                  minMessage={Model.Username.minLength.message}
-                  maxLength={Model.Username.maxLength.value}
-                  maxMessage={Model.Username.maxLength.message}
-                />
-                <Label text="Password" />
-                <InputField
-                  name="Password"
-                  register={register}
-                  value={Model.Password.pattern.value}
-                  message={Model.Password.pattern.message}
-                  required={Model.Password.required}
-                  errors={errors}
-                  type={Model.Password.type}
-                  placeholder={Model.Password.placeholder}
-                  minLength={Model.Password.minLength.value}
-                  minMessage={Model.Password.minLength.message}
-                  maxLength={Model.Password.maxLength.value}
-                  maxMessage={Model.Password.maxLength.message}
-                />
-
-                <div className="user__auth--ques">
-                  <p>Dont have an account?</p>
-                  <Link to="/signup">
-                    <span>Signup</span>
-                  </Link>
+              <div className="group__form auth--form">
+                <div className="form__input--section">
+                  <Label text="Username" />
+                  <InputField
+                    name="Username"
+                    register={register}
+                    required={Model.Username.required}
+                    value={Model.Username.pattern.value}
+                    message={Model.Username.pattern.message}
+                    errors={errors}
+                    type={Model.Username.type}
+                    placeholder={Model.Username.placeholder}
+                    minLength={Model.Username.minLength.value}
+                    minMessage={Model.Username.minLength.message}
+                    maxLength={Model.Username.maxLength.value}
+                    maxMessage={Model.Username.maxLength.message}
+                  />
                 </div>
-                <Button
-                  text="Login"
-                  className={"user__auth--button"}
-                  value="submit"
-                />
+                <div className="form__input--section">
+                  <Label text="Password" />
+                  <InputField
+                    name="Password"
+                    register={register}
+                    value={Model.Password.pattern.value}
+                    message={Model.Password.pattern.message}
+                    required={Model.Password.required}
+                    errors={errors}
+                    type={Model.Password.type}
+                    placeholder={Model.Password.placeholder}
+                    minLength={Model.Password.minLength.value}
+                    minMessage={Model.Password.minLength.message}
+                    maxLength={Model.Password.maxLength.value}
+                    maxMessage={Model.Password.maxLength.message}
+                  />
+                </div>
+                <div className="form__input--secion login__remember">
+                  <InputField
+                    name="Checkbox"
+                    register={register}
+                    errors={errors}
+                    type={Model.Checkbox.type}
+                  />
+                  <Label text="Remember Me" />
+                </div>
+
+                <div className="login__btn">
+                  <Button
+                    text="Login"
+                    className={"user__auth--button"}
+                    value="submit"
+                  />
+                  <div className="user__auth--ques login__ques">
+                    <p>Dont have an account?</p>
+                    <Link to="/signup">
+                      <span>Signup</span>
+                    </Link>
+                  </div>
+                </div>
               </div>
             </form>
           </FormProvider>
