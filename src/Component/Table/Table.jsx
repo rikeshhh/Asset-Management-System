@@ -7,14 +7,16 @@ import Pagination from "../Pagination/Pagination";
 import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
 import { useForm } from "react-hook-form";
-const Table = ({ size, linkTo }) => {
+const Table = ({ size, linkTo, handleTableEdit }) => {
   let PageSize = size ? size : 10 || 8;
   const [currentPage, setCurrentPage] = useState(1);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
@@ -48,10 +50,19 @@ const Table = ({ size, linkTo }) => {
                 <td className="button-gap">
                   {/* <Link  to={{ pathname: '/profile', state: false }}>
                    </Link> */}
-                  <Link to={linkTo} state={false}>
-                    <Button className="edit__button" text={<CiEdit />} />
+                  <Link to={linkTo} className="link">
+                    <Button
+                      type={"button"}
+                      className="edit__button"
+                      onClick={handleTableEdit}
+                      text={<CiEdit />}
+                    />
                   </Link>
-                  <Button className="delete__button" text={<GoTrash />} />
+                  <Button
+                    type={"button"}
+                    className="delete__button"
+                    text={<GoTrash />}
+                  />
                 </td>
               </tr>
             );
