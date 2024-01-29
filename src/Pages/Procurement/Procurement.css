@@ -51,26 +51,31 @@
   letter-spacing: 0.00375rem;
 }
 
-.procurement__request {
+.procurement__employee--dets {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2.81rem;
+  padding-bottom: 1.25rem;
   border-bottom: 1px solid var(--primary-grey);
+  gap: 2.81rem;
 }
 
-.procurement__request div {
+.procurement__form--input {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 .procurement__product {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  padding-top: 1.25rem;
 }
 
 .procurement__product--list {
   display: flex;
+  flex-direction: row !important;
   justify-content: space-between;
 }
 
