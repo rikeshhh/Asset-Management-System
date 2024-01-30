@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Button from "../../Component/Button/Button";
-import "./Dashboard.css"
+import "./Dashboard.css";
 const Dashboard = () => {
   return (
     <section className="dashboard">

@@ -5,8 +5,15 @@ import { InputField } from "../../Component/Input/InputField";
 import { FormProvider, useForm } from "react-hook-form";
 import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
+import { ApiUrl } from "../../Component/APIUrl/ApiUrl";
 
 const Login = () => {
+  // const mutation = useMutation({
+  //   mutationFn: (newTodo) => {
+  //     return axios.post(`${ApiUrl}/login`, username, password);
+  //   },
+  // });
+
   const formMethod = useForm();
   const {
     register,
@@ -15,7 +22,7 @@ const Login = () => {
   } = formMethod;
 
   const submitData = (data) => {
-    console.log(data);
+    console.log(data.username, data.password);
   };
 
   return (
@@ -38,7 +45,7 @@ const Login = () => {
                 <div className="form__input--section">
                   <Label text="Username" />
                   <InputField
-                    name="Username"
+                    name="username"
                     register={register}
                     required={Model.Username.required}
                     value={Model.Username.pattern.value}
@@ -55,7 +62,7 @@ const Login = () => {
                 <div className="form__input--section">
                   <Label text="Password" />
                   <InputField
-                    name="Password"
+                    name="password"
                     register={register}
                     value={Model.Password.pattern.value}
                     message={Model.Password.pattern.message}
