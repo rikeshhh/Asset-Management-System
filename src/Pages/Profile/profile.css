@@ -29,7 +29,6 @@
   flex-direction: column;
   border-radius: 0.5rem;
   width: 31.25rem;
-  height: 30.75rem;
   display: flex;
   justify-content: center;
   border: 1px solid var(--primary-grey);
@@ -152,6 +151,12 @@
 
 .profile-btn-none {
   display: none;
+}
+
+@media (width>1600px) {
+  .user__profile--image {
+    width: auto;
+  }
 }
 
 @media (width<=1024px) {

@@ -451,6 +451,13 @@
   letter-spacing: 0.00438rem;
 }
 
+@media (width>1600px) {
+  .plans__offer {
+    justify-content: center;
+    gap: 5rem;
+  }
+}
+
 @media (width<=1024px) {
   .plans__offer {
     flex-wrap: wrap;
