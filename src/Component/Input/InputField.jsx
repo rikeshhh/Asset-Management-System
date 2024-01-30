@@ -15,6 +15,7 @@ export const InputField = ({
   minMessage,
   isDisabled,
   register,
+  className,
 }) => {
   const hasError = errors[name];
 
@@ -23,7 +24,7 @@ export const InputField = ({
       <input
         className={`${isDisabled ? "input-disabled" : "input-enabled"} ${
           hasError ? "input__error" : ""
-        } ${hasError && type == "radio" ? "input__radio" : ""}`}
+        } ${hasError && type == "radio" ? "input__radio" : ""} ${className}`}
         placeholder={placeholder}
         name={name}
         type={type}

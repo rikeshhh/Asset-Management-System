@@ -1,8 +1,8 @@
 import "./input.css";
-export const SelectInput = ({ value, onChange, isDisabled, options }) => {
+export const SelectInput = ({ onChange, isDisabled, options }) => {
   return (
     <select
-      value={value}
+      value={options.value}
       onChange={onChange}
       disabled={isDisabled}
       className={isDisabled ? "select__disabled" : "select__enabled"}
@@ -12,8 +12,8 @@ export const SelectInput = ({ value, onChange, isDisabled, options }) => {
         None
       </option>
       {options.map((option, index) => (
-        <option className="select__option" key={index} value={option}>
-          {option}
+        <option className="select__option" key={index} value={option.value}>
+          {option.options}
         </option>
       ))}
     </select>

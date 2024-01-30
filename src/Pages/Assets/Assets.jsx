@@ -9,6 +9,7 @@ import { useState } from "react";
 import Table from "../../Component/Table/Table";
 import { BsFunnel } from "react-icons/bs";
 import Filter from "../../Component/Filter/Filter";
+import { SearchInput } from "../../Component/SearchInput/SearchInput";
 
 const Assets = () => {
   const {
@@ -59,15 +60,7 @@ const Assets = () => {
             </div>
 
             <div className="ams__filter ">
-              <InputField
-                name="Assets"
-                register={register}
-                pattern={Model.Group.pattern}
-                required={Model.Group.required}
-                errors={errors}
-                type="search"
-                placeholder="Search"
-              />
+              <SearchInput />
               <Button
                 text="Filter"
                 icon={<BsFunnel />}

@@ -3,12 +3,19 @@
   border-left: 1px solid var(--primary-grey);
   background: var(--secondary-color);
   width: 22.75rem;
-  height: 100%;
+  height: calc(100vh - 5.52rem);
+  max-height: calc(100vh - 5.52rem);
   flex-shrink: 0;
-  position: absolute;
   top: 5.52rem;
+  position: fixed;
   right: 0;
   animation-duration: 0.5s;
+  overflow-y: scroll;
+}
+
+.filter::-webkit-scrollbar-thumb {
+  background-color: var(--text-color);
+  border-radius: 15px;
 }
 
 /* .filter.open {
@@ -62,6 +69,7 @@
 
 .filter__button {
   width: 100%;
+  padding: 2rem 0;
 }
 
 .filter__button--flex {

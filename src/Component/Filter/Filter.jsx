@@ -15,19 +15,12 @@ const Filter = ({ handleClick, filterShow }) => {
     handleSubmit,
   } = useForm();
 
-  const [options, setOptions] = useState([
-    "Frontend",
-    "Backend",
-    "UI UX",
-    "QA",
-    "Project Manager",
-    "DevOps",
-  ]);
+  const options = [{ options: "frontend", value: "frontend" }];
 
   const filterSubmit = (data) => console.log(data);
 
   return (
-    <div className={`filter ${filterShow ? "open" : "close"} `}>
+    <div className={`filter ${filterShow ? "open" : ""} `}>
       <div className="filter__heading">
         <h3>Filter</h3>
         <div className="filter__hide" onClick={handleClick}>
@@ -38,6 +31,14 @@ const Filter = ({ handleClick, filterShow }) => {
         <div className="group__form filter__gap ">
           <div className="form__input--section ">
             <Label text={"Categories"} />
+            <SelectInput options={options} />
+          </div>
+          <div className="form__input--section ">
+            <Label text={"Status"} />
+            <SelectInput options={options} />
+          </div>
+          <div className="form__input--section ">
+            <Label text={"Status"} />
             <SelectInput options={options} />
           </div>
           <div className="form__input--section ">
