@@ -5,14 +5,18 @@ import { InputField } from "../../Component/Input/InputField";
 import { FormProvider, useForm } from "react-hook-form";
 import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
-import { ApiUrl } from "../../Component/APIUrl/ApiUrl";
+import { useMutation } from "@tanstack/react-query";
+import { verifyUser } from "./LoginApiSlice";
 
 const Login = () => {
-  // const mutation = useMutation({
-  //   mutationFn: (newTodo) => {
-  //     return axios.post(`${ApiUrl}/login`, username, password);
-  //   },
-  // });
+  const mutation = useMutation({
+    mutationFn: (formData) => {
+      return verifyUser(formData.username, formData.password);
+    },
+    onSuccess: (data) => {
+      console.log(data);
+    },
+  });
 
   const formMethod = useForm();
   const {
@@ -22,7 +26,7 @@ const Login = () => {
   } = formMethod;
 
   const submitData = (data) => {
-    console.log(data.username, data.password);
+    mutation.mutate(data);
   };
 
   return (
@@ -64,16 +68,16 @@ const Login = () => {
                   <InputField
                     name="password"
                     register={register}
-                    value={Model.Password.pattern.value}
-                    message={Model.Password.pattern.message}
+                    // value={Model.Password.pattern.value}
+                    // message={Model.Password.pattern.message}
                     required={Model.Password.required}
                     errors={errors}
                     type={Model.Password.type}
                     placeholder={Model.Password.placeholder}
-                    minLength={Model.Password.minLength.value}
-                    minMessage={Model.Password.minLength.message}
-                    maxLength={Model.Password.maxLength.value}
-                    maxMessage={Model.Password.maxLength.message}
+                    // minLength={Model.Password.minLength.value}
+                    // minMessage={Model.Password.minLength.message}
+                    // maxLength={Model.Password.maxLength.value}
+                    // maxMessage={Model.Password.maxLength.message}
                   />
                 </div>
                 <div className="form__input--secion login__remember">

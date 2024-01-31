@@ -66,6 +66,7 @@ export const Profile = ({ title, description, buttonBlueText }) => {
                     icon={<GoTrash />}
                     className={"button__red profile__delete--button"}
                     handleClick={deleteProfile}
+                    isDisabled={receivedState}
                   />
                 </div>
               </figure>
