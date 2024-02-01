@@ -1,13 +1,14 @@
 import { createContext, useContext, useState } from "react";
 
-const PricingContext = createContext();
+const AmsContext = createContext();
 
-export const usePricingContext = () => {
-  return useContext(PricingContext);
+export const useAmsContext = () => {
+  return useContext(AmsContext);
 };
 
-export const PricingProvider = ({ children }) => {
+export const AmsProvider = ({ children }) => {
   const [isAnnualBilling, setIsAnnualBilling] = useState(true);
+  const [auth, setAuth] = useState("");
 
   const businessMonthlyRate = 25;
   const businessAnnualRate = 275;
@@ -30,11 +31,11 @@ export const PricingProvider = ({ children }) => {
     toggleBilling,
     getBusinessRate,
     getEnterpriseRate,
+    auth,
+    setAuth,
   };
 
   return (
-    <PricingContext.Provider value={contextValue}>
-      {children}
-    </PricingContext.Provider>
+    <AmsContext.Provider value={contextValue}>{children}</AmsContext.Provider>
   );
 };

@@ -4,12 +4,12 @@ import "./Plans.css";
 import { FcOk } from "react-icons/fc";
 import { PlansStar } from "../../Component/svg/PlansStar";
 import { Link } from "react-router-dom";
-import { usePricingContext } from "../../Component/Context/PricingContext";
+import { useAmsContext } from "../../Component/Context/AmsContext";
 import { features } from "./PlansFeatures";
 import { house, building, factory } from "../../Component/Images/Image";
 const Plans = () => {
   const { isAnnualBilling, toggleBilling, getBusinessRate, getEnterpriseRate } =
-    usePricingContext();
+    useAmsContext();
 
   return (
     <section className="content-wrapper">

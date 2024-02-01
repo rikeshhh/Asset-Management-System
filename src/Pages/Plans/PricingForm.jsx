@@ -7,7 +7,7 @@ import { InputField } from "../../Component/Input/InputField";
 import Model from "../../Component/Model/Model";
 import { SelectInput } from "../../Component/Input/SelectInput";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { usePricingContext } from "../../Component/Context/PricingContext";
+import { useAmsContext } from "../../Component/Context/AmsContext";
 
 const PricingForm = () => {
   const {
@@ -16,7 +16,7 @@ const PricingForm = () => {
     handleSubmit,
   } = useForm();
   const { isAnnualBilling, toggleBilling, getBusinessRate, getEnterpriseRate } =
-    usePricingContext();
+    useAmsContext();
 
   const location = useLocation();
   const receivedFeature = location.state;
