@@ -1,7 +1,7 @@
-import axios from "../../axios/Axios";
+import instance from "../../axios/Axios";
 
 export const verifyUser = async (username, password) => {
-  const userResponse = await axios.post("/login", {
+  const userResponse = await instance.post("/login", {
     username: username,
     password: password,
   });

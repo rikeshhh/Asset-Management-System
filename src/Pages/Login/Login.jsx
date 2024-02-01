@@ -9,7 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { verifyUser } from "./LoginApiSlice";
 
 const Login = () => {
-  const mutation = useMutation({
+  const verifyUserMutation = useMutation({
     mutationFn: (formData) => {
       return verifyUser(formData.username, formData.password);
     },
@@ -26,7 +26,8 @@ const Login = () => {
   } = formMethod;
 
   const submitData = (data) => {
-    mutation.mutate(data);
+    console.log(data);
+    verifyUserMutation.mutate(data);
   };
 
   return (
