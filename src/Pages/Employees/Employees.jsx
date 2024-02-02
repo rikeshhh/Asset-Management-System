@@ -56,7 +56,7 @@ const Employees = () => {
                 className="filter--button"
               />
             </div>
-            <Table linkTo={"/editProfile"} />
+            <Table serverPath={"/user"} linkTo={"/editProfile"} />
           </div>
         </div>
       </section>

@@ -8,12 +8,11 @@ import Model from "../../Component/Model/Model";
 import { useMutation } from "@tanstack/react-query";
 import { verifyUser } from "./LoginApiSlice";
 import { useState } from "react";
-import { useAmsContext } from "../../Component/Context/AmsContext";
+import { setTokenToLocalStorage } from "../../utils/StorageUtils";
 
 const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
-  const { auth, setAuth } = useAmsContext();
 
   const verifyUserMutation = useMutation({
     mutationFn: (formData) => {
@@ -22,8 +21,8 @@ const Login = () => {
     onSuccess: (data) => {
       if (data.status === true) {
         navigate("/");
-        setAuth(data);
-        console.log(auth);
+        console.log("accessToken", data.payload.access_token);
+        setTokenToLocalStorage(data.payload.access_token);
       }
     },
     onError: (error) => {
