@@ -30,7 +30,12 @@ export const DataTable = ({ CategoryOptions }) => {
     console.log("name", optionName);
     DeleteDepartment.mutate(optionName);
   };
-
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } =useForm();
+const [show,setShow] = useState(true)
   return (
     <section className="cateogries table__container">
       <table>
@@ -65,7 +70,7 @@ export const DataTable = ({ CategoryOptions }) => {
                 </td>}
             
               <td className="button-gap">
-                <Button className="edit__button" text={<CiEdit />} />
+                <Button className="edit__button" text={<CiEdit />} handleClick={()=>setShow((prev)=>!prev)}/>
                 <Button
                   className="delete__button"
                   text={<GoTrash />}
