@@ -10,7 +10,7 @@ import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { useMutation, useQueries, useQuery } from "@tanstack/react-query";
 import { getTokenFromLocalStorage } from "../../utils/StorageUtils";
-import {departmentAdd, getDepartmentData} from "./DepartmentApiSlice";
+import { departmentAdd, getDepartmentData } from "./DepartmentApiSlice";
 
 const Departments = () => {
   const handleSelectChange = (event) => {
@@ -28,32 +28,31 @@ const Departments = () => {
       return departmentAdd(formData.department);
     },
     onSuccess: (data) => {
-      console.log(data)
+      console.log(data);
     },
     onError: (error) => {
       if (error.response.status === 401) {
         console.log("Unauthorized: Please log in with valid id.");
       }
     },
-})
+  });
   const onSubmit = (data) => {
-    addDepartment.mutate(data)
+    addDepartment.mutate(data);
   };
- 
+
   const {
     isPending,
     error,
     data: DepartmentData,
   } = useQuery({
     queryKey: ["DepartmentData"],
-    queryFn:  getDepartmentData
-    ,
+    queryFn: getDepartmentData,
   });
 
   if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
-  
+
   return (
     <section className="content-wrapper">
       <div className="content-radius category">

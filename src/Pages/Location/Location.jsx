@@ -8,27 +8,10 @@ import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
 import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
+import { getLocationData, locationAdd } from "./LocationApiSlice";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const Location = () => {
-
-const LocationOptions=[
-  {
-    key: 1,
-    value: 'GroundFloor'
-  },
-  {
-    key: 2,
-    value: 'FirstFloor'
-  },
-  {
-    key: 3,
-    value: 'SecondFloor'
-  },
-  {
-    key: 4,
-    value: 'ThirdFloor'
-  },
-]
   const {
     register,
     formState: { errors },
@@ -36,11 +19,53 @@ const LocationOptions=[
     reset,
   } = useForm();
 
-
   const onSubmit = (data) => {
-   console.log(data)
+    addLocation.mutate(data);
   };
-  
+
+  const {
+    isPending,
+    error,
+    data: LocationData,
+  } = useQuery({
+    queryKey: ["LocationData"],
+    queryFn: getLocationData,
+  });
+
+  const addLocation = useMutation({
+    mutationFn: (formData) => {
+      console.log("fromdata", formData);
+      return locationAdd(formData.location);
+    },
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      if (error.response.status === 401) {
+        console.log("Unauthorized: Please log in with valid id.");
+      }
+    },
+  });
+
+  const deleteLocation = useMutation({
+    mutationFn: (formData) => {
+      console.log("fromdata", formData);
+      return locatio(formData.location);
+    },
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      if (error.response.status === 401) {
+        console.log("Unauthorized: Please log in with valid id.");
+      }
+    },
+  });
+
+  if (isPending) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
+
   return (
     <section className="content-wrapper">
       <div className="content-radius category">
@@ -48,9 +73,7 @@ const LocationOptions=[
           <h2>Locations</h2>
         </div>
         <div className="category__content">
-          <DataTable
-           CategoryOptions={LocationOptions}
-          />
+          <DataTable CategoryOptions={LocationData} />
 
           <div className="add__category">
             <div className="add__category--title">
@@ -64,7 +87,7 @@ const LocationOptions=[
               <div>
                 <Label sup={"*"} text="Location Name" />
                 <InputField
-                  name="Location"
+                  name="location"
                   register={register}
                   required={Model.Group.required}
                   errors={errors}
