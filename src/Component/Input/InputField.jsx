@@ -16,6 +16,7 @@ export const InputField = ({
   isDisabled,
   register,
   className,
+  dataValue
 }) => {
   const hasError = errors[name];
 
@@ -28,6 +29,7 @@ export const InputField = ({
         placeholder={placeholder}
         name={name}
         type={type}
+        value={dataValue}
         {...register(name, {
           required: required,
           pattern: {
