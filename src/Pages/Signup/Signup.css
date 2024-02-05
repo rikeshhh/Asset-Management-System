@@ -11,3 +11,24 @@
 .retype__error {
   color: var(--red);
 }
+
+.form__input--section__password {
+  position: relative;
+}
+.toggleBtn__signUp {
+  position: absolute;
+  left: 95%;
+  top: 55%;
+  outline: none;
+  border: none;
+  background: none;
+}
+.toggleBtn__signUp__retype__password {
+  position: absolute;
+  left: 95%;
+  top: 45%;
+  outline: none;
+  border: none;
+  background: none;
+  margin: auto;
+}

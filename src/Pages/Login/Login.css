@@ -14,4 +14,15 @@
 .bottom__padding {
   padding-top: 12.81rem;
 }
+.form__input--section__password {
+  position: relative;
+}
+.toggleBtn__login {
+  position: absolute;
+  left: 95%;
+  top: 50%;
+  outline: none;
+  border: none;
+  background: none;
 
+}

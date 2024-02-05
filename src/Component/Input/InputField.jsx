@@ -16,8 +16,12 @@ export const InputField = ({
   isDisabled,
   register,
   className,
+  showPassword,
+  visiblePasswordFn,
+  children
 }) => {
   const hasError = errors[name];
+
 
   return (
     <div className={type == "radio" ? "input__field--radio" : "input__field"}>
@@ -27,7 +31,7 @@ export const InputField = ({
         } ${hasError && type == "radio" ? "input__radio" : ""} ${className}`}
         placeholder={placeholder}
         name={name}
-        type={type}
+        type={showPassword?'text':type}
         {...register(name, {
           required: required,
           pattern: {
@@ -45,6 +49,12 @@ export const InputField = ({
         })}
         disabled={isDisabled}
       />
+      {children && (
+        <div className="password-toggle-button" onClick={visiblePasswordFn}>
+          {children}
+        </div>
+      )}
+
       {!isDisabled && (
         <ErrorMessage
           errors={errors}

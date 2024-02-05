@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Label } from "../../Component/Label/Label";
 import { InputField } from "../../Component/Input/InputField";
 import Button from "../../Component/Button/Button";
@@ -6,6 +6,8 @@ import "./Signup.css";
 import { Link } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
+import { BiSolidShow, BiSolidHide } from "react-icons/bi";
+
 export const Signup = () => {
   const formMethod = useForm();
   const {
@@ -17,6 +19,16 @@ export const Signup = () => {
   const submitData = (data) => {
     console.log(data);
   };
+  const [showPassword, setShowPassword] = useState(false)
+  const[showResetPassword,setShowResetPassword]=useState(false)
+  const visiblePasswordFn = (e) => (
+    e.preventDefault(),
+    setShowPassword((prev) => !prev)
+  )
+  const visibleResePasswordFn = (e) => (
+    e.preventDefault(),
+    setShowResetPassword((prev) => !prev)
+  )
   return (
     <section className="main-container signup">
       <div className="user__auth">
@@ -66,7 +78,7 @@ export const Signup = () => {
                     maxMessage={Model.Email.maxLength.message}
                   />
                 </div>
-                <div className="form__input--section">
+                <div className="form__input--section form__input--section__password">
                   <Label text="Password" />
                   <InputField
                     name="Password"
@@ -81,14 +93,20 @@ export const Signup = () => {
                     minMessage={Model.Password.minLength.message}
                     maxLength={Model.Password.maxLength.value}
                     maxMessage={Model.Password.maxLength.message}
-                  />
+                    showPassword={showPassword}
+                    visiblePasswordFn={visiblePasswordFn}
+                  >
+                    <button className="toggleBtn__signUp" >
+                      {showPassword?<BiSolidShow />:<BiSolidHide />}
+                      </button>
+                    </InputField>
                 </div>
-                <div className="form__input--section">
+                <div className="form__input--section form__input--section__password">
                   <Label text="RetypePassword" />
                   <input
                     className="retype-password"
                     name="RetypePassword"
-                    type="password"
+                    type={showResetPassword?'text':'password'}
                     placeholder="Enter your password again"
                     {...register("RetypePassword", {
                       required: "Retype Password is required",
@@ -96,6 +114,10 @@ export const Signup = () => {
                         value === watch("Password") || "Passwords do not match",
                     })}
                   />
+                    <button onClick={visibleResePasswordFn} className="toggleBtn__signUp__retype__password">
+                      {showResetPassword?<BiSolidShow />:<BiSolidHide />}
+                      </button>
+              
                   {errors.RetypePassword && (
                     <p className="retype__error">
                       {errors.RetypePassword.message}

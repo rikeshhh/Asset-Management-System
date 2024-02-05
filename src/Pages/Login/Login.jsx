@@ -7,6 +7,10 @@ import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
 import { useMutation } from "@tanstack/react-query";
 import { verifyUser } from "./LoginApiSlice";
+import { BiSolidShow, BiSolidHide } from "react-icons/bi";
+import { useState } from "react";
+
+
 
 const Login = () => {
   const verifyUserMutation = useMutation({
@@ -29,6 +33,12 @@ const Login = () => {
     console.log(data);
     verifyUserMutation.mutate(data);
   };
+  const [showPassword, setShowPassword] = useState(false)
+  const visiblePasswordFn = (e) => (
+    e.preventDefault(),
+    setShowPassword(prev => !prev)
+  )
+
 
   return (
     <section className="main-container signup">
@@ -64,7 +74,7 @@ const Login = () => {
                     maxMessage={Model.Username.maxLength.message}
                   />
                 </div>
-                <div className="form__input--section">
+                <div className="form__input--section form__input--section__password">
                   <Label text="Password" />
                   <InputField
                     name="password"
@@ -79,7 +89,13 @@ const Login = () => {
                     // minMessage={Model.Password.minLength.message}
                     // maxLength={Model.Password.maxLength.value}
                     // maxMessage={Model.Password.maxLength.message}
-                  />
+                    showPassword={showPassword}
+                    visiblePasswordFn={visiblePasswordFn}
+                  >
+                    <button className="toggleBtn__login">
+                      {showPassword?<BiSolidShow />:<BiSolidHide />}
+                      </button>
+                    </InputField>
                 </div>
                 <div className="form__input--secion login__remember">
                   <InputField
