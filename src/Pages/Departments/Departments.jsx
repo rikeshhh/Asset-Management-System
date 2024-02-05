@@ -1,22 +1,16 @@
+import "./Departments.css";
 import { useForm } from "react-hook-form";
 import { DataTable } from "../../Component/DataTable/DataTable";
 import { InputField } from "../../Component/Input/InputField";
 import { Label } from "../../Component/Label/Label";
-import { SelectInput } from "../../Component/Input/SelectInput";
-import "./Departments.css";
 import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
-import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
-import { useMutation, useQueries, useQuery } from "@tanstack/react-query";
-import { getTokenFromLocalStorage } from "../../utils/StorageUtils";
-import {  departmentAdd, departmentDelete, getDepartmentData } from "./DepartmentApiSlice";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { departmentAdd, getDepartmentData } from "./DepartmentApiSlice";
+import { queryClient } from "../../Component/Query/Query";
 
 const Departments = () => {
-  const handleSelectChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
-
   const {
     register,
     formState: { errors },
@@ -27,20 +21,19 @@ const Departments = () => {
     mutationFn: (formData) => {
       return departmentAdd(formData.department);
     },
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
+      queryClient.invalidateQueries("DepartmentData");
     },
     onError: (error) => {
       if (error.response.status === 401) {
         console.log("Unauthorized: Please log in with valid id.");
       }
     },
-  })
-
- 
+  });
 
   const onSubmit = (data) => {
     addDepartment.mutate(data);
+    reset();
   };
 
   const {
@@ -49,8 +42,7 @@ const Departments = () => {
     data: DepartmentData,
   } = useQuery({
     queryKey: ["DepartmentData"],
-    queryFn: getDepartmentData
-    ,
+    queryFn: getDepartmentData,
   });
 
   if (isPending) return "Loading...";

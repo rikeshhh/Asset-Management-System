@@ -9,7 +9,8 @@ import Model from "../../Component/Model/Model";
 import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { getLocationData, locationAdd } from "./LocationApiSlice";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { queryClient } from "../../Component/Query/Query";
 
 const Location = () => {
   const {
@@ -38,22 +39,7 @@ const Location = () => {
       return locationAdd(formData.location);
     },
     onSuccess: (data) => {
-      console.log(data);
-    },
-    onError: (error) => {
-      if (error.response.status === 401) {
-        console.log("Unauthorized: Please log in with valid id.");
-      }
-    },
-  });
-
-  const deleteLocation = useMutation({
-    mutationFn: (formData) => {
-      console.log("fromdata", formData);
-      return locatio(formData.location);
-    },
-    onSuccess: (data) => {
-      console.log(data);
+      queryClient.invalidateQueries("LocationData");
     },
     onError: (error) => {
       if (error.response.status === 401) {
@@ -73,7 +59,7 @@ const Location = () => {
           <h2>Locations</h2>
         </div>
         <div className="category__content">
-          <DataTable CategoryOptions={LocationData} />
+          <DataTable CategoryOptions={LocationData} deleteName={"location"} />
 
           <div className="add__category">
             <div className="add__category--title">

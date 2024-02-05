@@ -10,25 +10,27 @@ import Model from "../Model/Model";
 import EditData from "../EditData/EditData";
 import { useMutation } from "@tanstack/react-query";
 import { departmentDelete } from "../../Pages/Departments/DepartmentApiSlice";
+import { queryClient } from "../Query/Query";
+
 export const DataTable = ({ CategoryOptions }) => {
   const DeleteDepartment = useMutation({
-    mutationFn: (department) => {
-      return departmentDelete(department);
+    mutationFn: (optionName) => {
+      return departmentDelete(optionName);
     },
     onSuccess: (data) => {
-      console.log(data)
+      queryClient.invalidateQueries(data);
     },
     onError: (error) => {
       if (error.response.status === 401) {
         console.log("Unauthorized: Please log in with valid id.");
       }
     },
-  })
-const onDeleteData = (department)=>{
-  console.log(department)
-  DeleteDepartment.mutate(department);
-}
-   
+  });
+  const onDeleteData = (optionName) => {
+    console.log("name", optionName);
+    DeleteDepartment.mutate(optionName);
+  };
+
   return (
     <section className="cateogries table__container">
       <table>
@@ -49,8 +51,14 @@ const onDeleteData = (department)=>{
               <td>{options.id}</td>
               <td>{options.location || options.department}</td>
               <td className="button-gap">
-                <Button className="edit__button" text={<CiEdit />}   />
-                <Button className="delete__button" text={<GoTrash />} handleClick={()=>onDeleteData(options.department)} />
+                <Button className="edit__button" text={<CiEdit />} />
+                <Button
+                  className="delete__button"
+                  text={<GoTrash />}
+                  handleClick={() =>
+                    onDeleteData(options.department || options.location)
+                  }
+                />
               </td>
             </tr>
           ))}
