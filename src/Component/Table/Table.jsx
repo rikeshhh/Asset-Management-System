@@ -9,6 +9,7 @@ import { CiEdit } from "react-icons/ci";
 import { useForm } from "react-hook-form";
 import { getTableData } from "./TableApiSlice";
 import { useQuery } from "@tanstack/react-query";
+import instance from "../../axios/Axios";
 
 const Table = ({ size, linkTo, handleTableEdit, serverPath }) => {
   const {
@@ -17,7 +18,14 @@ const Table = ({ size, linkTo, handleTableEdit, serverPath }) => {
     data: tableData,
   } = useQuery({
     queryKey: ["tableData"],
-    queryFn: getTableData(),
+    queryFn: () => {
+      const response = instance
+        .get("https://dummyjson.com/products")
+        .then((resp) => {
+          resp = response.data;
+          console.log("api response: ", resp);
+        });
+    },
   });
 
   if (isPending) return "Loading...";
