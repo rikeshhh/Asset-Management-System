@@ -49,7 +49,21 @@ export const DataTable = ({ CategoryOptions }) => {
           {CategoryOptions.map((options) => (
             <tr key={options.id}>
               <td>{options.id}</td>
-              <td>{options.location || options.department}</td>
+              {show?<td>{options.location || options.department}</td>:<td>
+                <InputField 
+                 name="department"
+                 register={register}
+                 dataValue={options.location || options.department}
+                 required={Model.Group.required}
+                 errors={errors}
+                 type={Model.Group.type}
+                 placeholder={options.location || options.department}
+                 minLength={Model.Group.minLength}
+                 maxLength={Model.Group.maxLength}
+                />
+                
+                </td>}
+            
               <td className="button-gap">
                 <Button className="edit__button" text={<CiEdit />} />
                 <Button
