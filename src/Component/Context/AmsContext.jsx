@@ -1,13 +1,21 @@
 import { createContext, useContext, useState } from "react";
 
-const PricingContext = createContext();
+const AmsContext = createContext();
 
-export const usePricingContext = () => {
-  return useContext(PricingContext);
+export const useAmsContext = () => {
+  return useContext(AmsContext);
 };
 
-export const PricingProvider = ({ children }) => {
+export const AmsProvider = ({ children }) => {
   const [isAnnualBilling, setIsAnnualBilling] = useState(true);
+  const storeTokenLS = (serverToken) => {
+    return localStorage.setItem("Token", serverToken);
+  };
+
+  const getTokenLS = () => {
+    const token = localStorage.getItem("Token");
+    return token;
+  };
 
   const businessMonthlyRate = 25;
   const businessAnnualRate = 275;
@@ -30,11 +38,11 @@ export const PricingProvider = ({ children }) => {
     toggleBilling,
     getBusinessRate,
     getEnterpriseRate,
+    storeTokenLS,
+    getTokenLS,
   };
 
   return (
-    <PricingContext.Provider value={contextValue}>
-      {children}
-    </PricingContext.Provider>
+    <AmsContext.Provider value={contextValue}>{children}</AmsContext.Provider>
   );
 };

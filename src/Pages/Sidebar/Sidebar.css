@@ -6,10 +6,6 @@
   z-index: 1;
   position: fixed;
   height: 100%;
-  overflow-y: hidden;
-}
-
-.sidebar:hover {
   overflow-y: scroll;
 }
 
@@ -186,6 +182,10 @@
   .sidebar__toggle--extended {
     left: 14.5rem;
     top: 4.95rem;
+  }
+
+  .hamburger {
+    cursor: pointer;
   }
 
   .hamburger__none {

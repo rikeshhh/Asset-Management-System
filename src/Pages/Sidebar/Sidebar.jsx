@@ -13,7 +13,7 @@ import { CategorySvg } from "../../Component/svg/CategorySvg";
 import { LocationSvg } from "../../Component/svg/LocationSvg";
 import { DepartmentSvg } from "../../Component/svg/DepartmentSvg";
 import { LogoutSvg } from "../../Component/svg/LogoutSvg";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 const Sidebar = () => {
   const [toggleNavbar, setToggleNavbar] = useState(false);

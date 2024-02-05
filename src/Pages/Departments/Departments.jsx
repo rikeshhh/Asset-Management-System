@@ -8,10 +8,11 @@ import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
 import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
+import { useMutation, useQueries, useQuery } from "@tanstack/react-query";
+import { getTokenFromLocalStorage } from "../../utils/StorageUtils";
+import {departmentAdd, getDepartmentData} from "./DepartmentApiSlice";
 
 const Departments = () => {
-  const [value, setValue] = useState([]);
-  const [selectedValue, setSelectedValue] = useState([]);
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
   };
@@ -22,20 +23,37 @@ const Departments = () => {
     handleSubmit,
     reset,
   } = useForm();
-  const [formDataArray, setFormDataArray] = useState([
-    {
-      ParentCategory: "Department",
+  const addDepartment = useMutation({
+    mutationFn: (formData) => {
+      return departmentAdd(formData.department);
     },
-  ]);
-
+    onSuccess: (data) => {
+      console.log(data)
+    },
+    onError: (error) => {
+      if (error.response.status === 401) {
+        console.log("Unauthorized: Please log in with valid id.");
+      }
+    },
+})
   const onSubmit = (data) => {
-    const newData = {
-      ParentCategory: data.Department,
-    };
-    console.log(newData);
-    setFormDataArray((prevDataArray) => [...prevDataArray, newData]);
-    reset();
+    addDepartment.mutate(data)
   };
+ 
+  const {
+    isPending,
+    error,
+    data: DepartmentData,
+  } = useQuery({
+    queryKey: ["DepartmentData"],
+    queryFn:  getDepartmentData
+    ,
+  });
+
+  if (isPending) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
+  
   return (
     <section className="content-wrapper">
       <div className="content-radius category">
@@ -43,7 +61,7 @@ const Departments = () => {
           <h2>Department</h2>
         </div>
         <div className="category__content">
-          <DataTable formDataArray={formDataArray} showDownButton={false} />
+          <DataTable CategoryOptions={DepartmentData} />
 
           <div className="add__category">
             <div className="add__category--title">
@@ -56,7 +74,7 @@ const Departments = () => {
               <div>
                 <Label sup={"*"} text="Department Name" />
                 <InputField
-                  name="Department"
+                  name="department"
                   register={register}
                   required={Model.Group.required}
                   errors={errors}

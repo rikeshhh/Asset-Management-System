@@ -18,6 +18,15 @@ const Employees = () => {
     handleSubmit,
   } = useForm();
 
+  // const userData = async () => {
+  //   const response = await axios.get("https://ams.webo.dev/user", {
+  //     headers: { Authorization: `Bearer ${token}` },
+  //   });
+  //   const respData = await response.data;
+  //   console.log(respData);
+  //   return;
+  // };
+  // userData();
   const [filterShow, setFilterShow] = useState(false);
 
   const onFilterClick = (showHide) => {

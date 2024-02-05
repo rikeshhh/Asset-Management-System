@@ -10,42 +10,37 @@ import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 
 const Location = () => {
-  const [value, setValue] = useState([
-    {
-      ParentCategory: "Kathmandu",
-    },
-  ]);
-  const handleSelectChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
 
+const LocationOptions=[
+  {
+    key: 1,
+    value: 'GroundFloor'
+  },
+  {
+    key: 2,
+    value: 'FirstFloor'
+  },
+  {
+    key: 3,
+    value: 'SecondFloor'
+  },
+  {
+    key: 4,
+    value: 'ThirdFloor'
+  },
+]
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
   } = useForm();
-  const [formDataArray, setFormDataArray] = useState([
-    {
-      ParentCategory: "GroundFloor",
-    },
-  ]);
+
 
   const onSubmit = (data) => {
-    const newData = {
-      ParentCategory: data.Location,
-    };
-    console.log(newData);
-    setFormDataArray((prevDataArray) => [...prevDataArray, newData]);
-    reset();
+   console.log(data)
   };
-  const handleDelete = (index) => {
-    const updatedFormDataArray = [...formDataArray];
-    updatedFormDataArray.splice(index, 1);
-    console.log("item Deleted");
-    setFormDataArray(updatedFormDataArray);
-    console.log(updatedFormDataArray); // Log the updated state
-  };
+  
   return (
     <section className="content-wrapper">
       <div className="content-radius category">
@@ -54,9 +49,7 @@ const Location = () => {
         </div>
         <div className="category__content">
           <DataTable
-            formDataArray={formDataArray}
-            showDownButton={false}
-            onDelete={handleDelete}
+           CategoryOptions={LocationOptions}
           />
 
           <div className="add__category">

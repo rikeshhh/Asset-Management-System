@@ -10,7 +10,25 @@ import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 
 const Categories = () => {
-  const options = ["Computer", "Backup", "Accessories", "Router"];
+  const CategoryOptions = [
+    {
+      key:1,
+      value:'Computer'
+    },
+    {
+      key:2,
+      value:'Backup'
+    },
+    {
+      key:3,
+      value:'Accessories'
+    },
+    {
+      key:4,
+      value:'Router'
+    }
+];
+const options=["Frontend"]
   const {
     register,
     formState: { errors },
@@ -18,77 +36,11 @@ const Categories = () => {
     control,
     reset,
   } = useForm();
-  const [formDataArray, setFormDataArray] = useState([
-    {
-      ParentCategory: "Router",
-      CateogryChild: "Rikesh",
-      Location: "First Floor",
-      Department: "Frontend Team",
-    },
-  ]);
+
 
   const onSubmit = (data) => {
     console.log(data.ChildCategory);
     console.log(data.ParentCategory);
-
-    const existingCategoryIndex = formDataArray.findIndex(
-      (formData) => formData.ParentCategory === data.ParentCategory
-    );
-
-    if (existingCategoryIndex !== -1) {
-      // Parent category already exists, add subcategory to it
-      const updatedFormDataArray = [...formDataArray];
-      const existingParentCategory =
-        updatedFormDataArray[existingCategoryIndex];
-
-      // Check if ChildCategory property exists, and if not, create it as an array
-      if (!existingParentCategory.ChildCategory) {
-        existingParentCategory.ChildCategory = [];
-      }
-
-      // Add the new subcategory to the existing parent category
-      existingParentCategory.ChildCategory.push(data.ChildCategory);
-
-      setFormDataArray(updatedFormDataArray);
-    } else {
-      // Parent category doesn't exist, add a new entry
-      const newData = {
-        ParentCategory: data.ParentCategory,
-        ChildCategory: [data.ChildCategory], // Create an array for subcategories
-      };
-
-      setFormDataArray((prevDataArray) => [...prevDataArray, newData]);
-    }
-    reset();
-  };
-
-  const handleCategoryDelete = (index) => {
-    const updatedFormDataArray = [...formDataArray];
-    const deletedCategory = updatedFormDataArray.splice(index, 1)[0];
-    console.log("Category deleted:", deletedCategory);
-    setFormDataArray(updatedFormDataArray);
-  };
-
-  const handleChildDelete = (parentIndex, childIndex) => {
-    const updatedFormDataArray = [...formDataArray];
-    const parentCategory = updatedFormDataArray[parentIndex];
-
-    if (parentCategory && parentCategory.ChildCategory) {
-      // Check if the parent category has children
-      if (parentCategory.ChildCategory.length > 1) {
-        // If there are multiple subcategories, remove the selected one
-        const deletedChild = parentCategory.ChildCategory.splice(
-          childIndex,
-          1
-        )[0];
-        console.log("Child deleted:", deletedChild);
-      } else {
-        // If there's only one subcategory, remove the entire ChildCategory property
-        delete parentCategory.ChildCategory;
-      }
-    }
-
-    setFormDataArray(updatedFormDataArray);
   };
   return (
     <section className="content-wrapper">
@@ -98,11 +50,7 @@ const Categories = () => {
         </div>
         <div className="category__content">
           <DataTable
-            formDataArray={formDataArray}
-            setFormDataArray={setFormDataArray}
-            showDownButton={true}
-            onDelete={handleCategoryDelete}
-            onDeleteSub={handleChildDelete}
+           CategoryOptions={CategoryOptions}
           />
 
           <div className="add__category">

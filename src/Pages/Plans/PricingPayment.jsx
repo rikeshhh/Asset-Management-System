@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../../Component/Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
-import { usePricingContext } from "../../Component/Context/PricingContext";
+import { useAmsContext } from "../../Component/Context/AmsContext";
 import { CreditCard } from "../../Component/svg/CreditCard";
 import { Paypal } from "./Paypal";
 import { Credit } from "./Credit";
@@ -13,7 +13,7 @@ const PricingPayment = () => {
 
   const navigate = useNavigate();
 
-  const { getBusinessRate, getEnterpriseRate } = usePricingContext();
+  const { getBusinessRate, getEnterpriseRate } = useAmsContext();
 
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState("creditCard");

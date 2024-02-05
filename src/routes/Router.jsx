@@ -6,7 +6,6 @@ import Employees from "../Pages/Employees/Employees";
 import Repair from "../Pages/Repair/Repair";
 import Procurement from "../Pages/Procurement/Procurement";
 import Departments from "../Pages/Departments/Departments";
-import Logout from "../Pages/Logout/Logout";
 import Login from "../Pages/Login/Login";
 import { Signup } from "../Pages/Signup/Signup";
 import Location from "../Pages/Location/Location";
@@ -21,11 +20,16 @@ import { ViewProfile } from "../Pages/Profile/ViewProfile";
 import PricingForm from "../Pages/Plans/PricingForm";
 import PricingPayment from "../Pages/Plans/PricingPayment";
 import PaymentSuccess from "../Pages/Plans/PaymentSuccess";
+import ProtectedRoute from "./ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <ProtectedRoute>
+        <App />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "/",
@@ -98,10 +102,6 @@ export const router = createBrowserRouter([
       {
         path: "/procurementForm",
         element: <ProcurementForm />,
-      },
-      {
-        path: "/logout",
-        element: <Logout />,
       },
     ],
   },
