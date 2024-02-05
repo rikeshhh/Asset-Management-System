@@ -4,12 +4,11 @@ import { getTokenFromLocalStorage } from "../../utils/StorageUtils";
 const token = getTokenFromLocalStorage();
 export const getTableData = async () => {
   try {
-    const getTableResp = await instance.get("https://dummyjson.com/products");
-    const resp = getTableResp.data;
-    console.log("api response", resp);
-    return resp;
+    const response = await instance.get("/user", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data.data;
   } catch (error) {
-    // Log the error or handle it as needed
     console.error("Axios error:", error);
     throw error;
   }
