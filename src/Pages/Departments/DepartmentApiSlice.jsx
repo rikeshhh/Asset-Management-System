@@ -23,3 +23,22 @@ const departmentData = await instance.post('/department',{
   }
 })
 }
+
+
+export const departmentDelete = async(department)=> {
+  try {
+    const response = await instance.delete('/department', {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      data: {
+        department: department
+      }
+    });
+
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+}
