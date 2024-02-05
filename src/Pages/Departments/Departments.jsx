@@ -28,7 +28,7 @@ const Departments = () => {
       return departmentAdd(formData.department);
     },
     onSuccess: (data) => {
-      console.log(data)
+      console.log(data);
     },
     onError: (error) => {
       if (error.response.status === 401) {
@@ -40,7 +40,7 @@ const Departments = () => {
  
 
   const onSubmit = (data) => {
-    addDepartment.mutate(data)
+    addDepartment.mutate(data);
   };
 
   const {

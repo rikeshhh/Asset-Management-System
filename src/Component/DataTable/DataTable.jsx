@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./DataTable.css";
 import Button from "../Button/Button";
-import { RiArrowDownSLine } from "react-icons/ri";
 import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
 import { LuArrowDownUp } from "react-icons/lu";
@@ -48,7 +47,7 @@ const onDeleteData = (department)=>{
           {CategoryOptions.map((options) => (
             <tr key={options.id}>
               <td>{options.id}</td>
-              <td>{options.department}</td>
+              <td>{options.location || options.department}</td>
               <td className="button-gap">
                 <Button className="edit__button" text={<CiEdit />}   />
                 <Button className="delete__button" text={<GoTrash />} handleClick={()=>onDeleteData(options.department)} />
@@ -56,7 +55,6 @@ const onDeleteData = (department)=>{
             </tr>
           ))}
         </tbody>
-
       </table>
     </section>
   );
