@@ -19,6 +19,7 @@ export const Signup = () => {
   const submitData = (data) => {
     console.log(data);
   };
+  // password showing features
   const [showPassword, setShowPassword] = useState(false)
   const[showResetPassword,setShowResetPassword]=useState(false)
   const visiblePasswordFn = (e) => (
