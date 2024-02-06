@@ -7,6 +7,8 @@ import { useState } from "react";
 import Button from "../../Component/Button/Button";
 import { locationDelete } from "./LocationApiSlice";
 import { queryClient } from "../../Component/Query/Query";
+import { useForm } from "react-hook-form";
+import Model from "../../Component/Model/Model";
 
 const LocationDataTable = ({ LocationData }) => {
   const DeleteLocation = useMutation({
@@ -22,6 +24,12 @@ const LocationDataTable = ({ LocationData }) => {
       }
     },
   });
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm();
   const onDeleteData = (location) => {
     DeleteLocation.mutate(location);
   };
@@ -51,7 +59,7 @@ const LocationDataTable = ({ LocationData }) => {
                   <InputField
                     name="department"
                     register={register}
-                    dataValue={options.location}
+                    inputValue={options.location}
                     required={Model.Group.required}
                     errors={errors}
                     type={Model.Group.type}

@@ -58,7 +58,7 @@ const DepartmentDataTable = ({ DepartmentData }) => {
                       <InputField
                         name="department"
                         register={register}
-                        dataValue={options.location}
+                        inputValue={options.location}
                         required={Model.Group.required}
                         errors={errors}
                         type={Model.Group.type}
