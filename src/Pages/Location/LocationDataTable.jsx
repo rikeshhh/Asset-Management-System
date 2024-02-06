@@ -5,7 +5,7 @@ import { CiEdit } from "react-icons/ci";
 import { GoTrash } from "react-icons/go";
 import { useState } from "react";
 import Button from "../../Component/Button/Button";
-import { locationDelete } from "./LocationApiSlice";
+import { locationDelete, locationEdit } from "./LocationApiSlice";
 import { queryClient } from "../../Component/Query/Query";
 import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
@@ -24,12 +24,46 @@ const LocationDataTable = ({ LocationData }) => {
       }
     },
   });
+
+  const EditLocation = useMutation({
+    mutationFn: (editData) => {
+      return locationEdit(editData.data, editData.previousLocation);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("LocationData");
+    },
+    onError: (error) => {
+      if (error.response.status === 401) {
+        console.log("Unauthorized: Please log in with valid id.");
+      }
+    },
+  });
+
+  const [previousLocation, setPreviousLocation] = useState("");
+
+  const handleEditButtonClick = (location) => {
+    // setEditedLocation(location);
+    setPreviousLocation(location);
+    setShow(false);
+  };
+
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm();
+  } = useForm({
+    defaultValues: { location: previousLocation },
+  });
+
+  const onLocationEditSubmit = (data) => {
+    const editData = {
+      data: data.location,
+      editedLocation: previousLocation,
+    };
+    EditLocation.mutate(editData);
+  };
+
   const onDeleteData = (location) => {
     DeleteLocation.mutate(location);
   };
@@ -56,17 +90,18 @@ const LocationDataTable = ({ LocationData }) => {
                 <td>{options.location}</td>
               ) : (
                 <td>
-                  <InputField
-                    name="department"
-                    register={register}
-                    inputValue={options.location}
-                    required={Model.Group.required}
-                    errors={errors}
-                    type={Model.Group.type}
-                    placeholder={options.location}
-                    minLength={Model.Group.minLength}
-                    maxLength={Model.Group.maxLength}
-                  />
+                  <form onSubmit={handleSubmit(onLocationEditSubmit)}>
+                    <InputField
+                      name="location"
+                      register={register}
+                      required={Model.Group.required}
+                      errors={errors}
+                      type={Model.Group.type}
+                      placeholder={options.location}
+                      minLength={Model.Group.minLength}
+                      maxLength={Model.Group.maxLength}
+                    />
+                  </form>
                 </td>
               )}
 
@@ -74,7 +109,7 @@ const LocationDataTable = ({ LocationData }) => {
                 <Button
                   className="edit__button"
                   text={<CiEdit />}
-                  handleClick={() => setShow((prev) => !prev)}
+                  handleClick={() => handleEditButtonClick(options.location)}
                 />
                 <Button
                   className="delete__button"
