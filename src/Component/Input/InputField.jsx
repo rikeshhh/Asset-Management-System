@@ -18,7 +18,7 @@ export const InputField = ({
   className,
   showPassword,
   visiblePasswordFn,
-  dataValue,
+  showHideButton
 }) => {
   const hasError = errors[name];
 
