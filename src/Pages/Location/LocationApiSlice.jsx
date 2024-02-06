@@ -26,7 +26,7 @@ export const locationAdd = async (location) => {
 };
 
 export const locationDelete = async (location) => {
-  const locationData = await instance.delete("/location", {
+  const locationDelete = await instance.delete("/location", {
     data: {
       location: location,
     },
@@ -36,4 +36,28 @@ export const locationDelete = async (location) => {
       "Content-Type": "application/json",
     },
   });
+};
+
+export const locationEdit = async (newLocation, prevLocation) => {
+  // let bodyContent = {
+  //   previousLocation: prevLocation,
+  //   newLocation: newLocation,
+  // };
+  // let headerContent = {
+  //   Authorization: `Bearer ${token}`,
+  //   "Content-Type": "application/json",
+  // };
+  const locationEdit = await instance.put(
+    "/location",
+    {
+      previousLocation: prevLocation,
+      newLocation: newLocation,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };

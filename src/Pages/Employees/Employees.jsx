@@ -10,6 +10,7 @@ import { BsFunnel } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Filter from "../../Component/Filter/Filter";
 import { useState } from "react";
+import EmployeeDataTable from "./EmployeeDataTable";
 
 const Employees = () => {
   const {
@@ -18,15 +19,6 @@ const Employees = () => {
     handleSubmit,
   } = useForm();
 
-  // const userData = async () => {
-  //   const response = await axios.get("https://ams.webo.dev/user", {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   });
-  //   const respData = await response.data;
-  //   console.log(respData);
-  //   return;
-  // };
-  // userData();
   const [filterShow, setFilterShow] = useState(false);
 
   const onFilterClick = (showHide) => {
@@ -65,7 +57,7 @@ const Employees = () => {
                 className="filter--button"
               />
             </div>
-            <Table linkTo={"/editProfile"} />
+            <EmployeeDataTable linkTo={"/editProfile"} />
           </div>
         </div>
       </section>

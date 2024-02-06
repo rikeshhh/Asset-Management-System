@@ -19,11 +19,10 @@ export const InputField = ({
   showPassword,
   inputValue,
   visiblePasswordFn,
-  onChange,
+  onEditChange,
   children,
 }) => {
   const hasError = errors[name];
-
 
   return (
     <div className={type == "radio" ? "input__field--radio" : "input__field"}>
@@ -34,8 +33,8 @@ export const InputField = ({
         placeholder={placeholder}
         name={name}
         value={inputValue}
-        onChange={onChange}
-        type={showPassword?'text':type}
+        onChange={onEditChange}
+        type={showPassword ? "text" : type}
         {...register(name, {
           required: required,
           pattern: {

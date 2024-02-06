@@ -8,6 +8,7 @@ import Model from "../../Component/Model/Model";
 import { useState } from "react";
 import Table from "../../Component/Table/Table";
 import { BsFunnel } from "react-icons/bs";
+import RepairDataTable from "./RepairDataTable";
 
 const Repair = () => {
   const {
@@ -64,7 +65,7 @@ const Repair = () => {
               className="filter--button"
             />
           </div>
-          {isActive && <Table size="8" />}
+          {isActive && <RepairDataTable size="8" />}
         </div>
       </div>
     </section>

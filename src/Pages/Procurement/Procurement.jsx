@@ -5,6 +5,7 @@ import { BsFunnel } from "react-icons/bs";
 import Table from "../../Component/Table/Table";
 import { Link } from "react-router-dom";
 import { SearchInput } from "../../Component/SearchInput/SearchInput";
+import ProcurementDataTable from "./ProcurementDataTable";
 
 const Procurement = () => {
   return (
@@ -30,7 +31,7 @@ const Procurement = () => {
           />
         </div>
         <div className="procurement__table">
-          <Table linkTo={"/procurementForm"} />
+          <ProcurementDataTable linkTo={"/procurementForm"} />
         </div>
       </div>
     </section>
