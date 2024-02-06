@@ -18,6 +18,7 @@ export const InputField = ({
   className,
   showPassword,
   visiblePasswordFn,
+  showHideButton
 }) => {
   const hasError = errors[name];
 
