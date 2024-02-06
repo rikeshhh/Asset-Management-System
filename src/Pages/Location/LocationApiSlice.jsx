@@ -24,3 +24,16 @@ export const locationAdd = async (location) => {
     }
   );
 };
+
+export const locationDelete = async (location) => {
+  const locationData = await instance.delete("/location", {
+    data: {
+      location: location,
+    },
+
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+};

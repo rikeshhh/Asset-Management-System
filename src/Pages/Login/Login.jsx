@@ -8,11 +8,7 @@ import Model from "../../Component/Model/Model";
 import { useMutation } from "@tanstack/react-query";
 import { verifyUser } from "./LoginApiSlice";
 import { useState } from "react";
-import {
-  getTokenFromLocalStorage,
-  setTokenToLocalStorage,
-} from "../../utils/StorageUtils";
-import axios from "axios";
+import { setTokenToLocalStorage } from "../../utils/StorageUtils";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -35,8 +31,6 @@ const Login = () => {
       }
     },
   });
-
-
 
   const formMethod = useForm();
   const {

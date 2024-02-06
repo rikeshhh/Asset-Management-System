@@ -11,6 +11,7 @@ import { IoMdAdd } from "react-icons/io";
 import { getLocationData, locationAdd } from "./LocationApiSlice";
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
+import LocationDataTable from "./LocationDataTable";
 
 const Location = () => {
   const {
@@ -35,7 +36,6 @@ const Location = () => {
 
   const addLocation = useMutation({
     mutationFn: (formData) => {
-      console.log("fromdata", formData);
       return locationAdd(formData.location);
     },
     onSuccess: (data) => {
@@ -59,7 +59,7 @@ const Location = () => {
           <h2>Locations</h2>
         </div>
         <div className="category__content">
-          <DataTable CategoryOptions={LocationData} deleteName={"location"} />
+          <LocationDataTable LocationData={LocationData} />
 
           <div className="add__category">
             <div className="add__category--title">
