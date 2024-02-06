@@ -41,3 +41,28 @@ export const departmentDelete = async (department) => {
     console.error(error);
   }
 };
+
+export const updateDepartmentData = async (editData) => {
+  try {
+    const response = await instance.put(
+      "/department",
+      {
+        "previousDepartment": editData.previousData,
+        "newDepartment": editData.newData
+   
+    },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+    // Assuming you want to return the response data
+  } catch (error) {
+    console.error(error);
+    throw error; // Rethrow the error so that the caller can handle it if necessary
+  }
+};
+
+
