@@ -8,7 +8,7 @@ import Button from "../../Component/Button/Button";
 import { locationDelete } from "./LocationApiSlice";
 import { queryClient } from "../../Component/Query/Query";
 
-const LocationDataTable = ({ LocationData, queryKey }) => {
+const LocationDataTable = ({ LocationData }) => {
   const DeleteLocation = useMutation({
     mutationFn: (location) => {
       return locationDelete(location);
