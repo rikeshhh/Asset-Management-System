@@ -46,8 +46,7 @@ const Login = () => {
     setError(null);
   };
   const [showPassword, setShowPassword] = useState(false)
-  const visiblePasswordFn = (e) => (
-    e.preventDefault(),
+  const visiblePasswordFn = () => (
     setShowPassword(prev => !prev)
   )
 

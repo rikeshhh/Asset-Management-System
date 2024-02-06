@@ -26,8 +26,7 @@ export const Signup = () => {
     e.preventDefault(),
     setShowPassword((prev) => !prev)
   )
-  const visibleResetPasswordFn = (e) => (
-    e.preventDefault(),
+  const visibleResetPasswordFn = () => (
     setShowResetPassword((prev) => !prev)
   )
   return (
