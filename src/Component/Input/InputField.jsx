@@ -16,13 +16,10 @@ export const InputField = ({
   isDisabled,
   register,
   className,
-<<<<<<< HEAD
   showPassword,
   visiblePasswordFn,
   children
-=======
   dataValue
->>>>>>> 9b31d521bfe38c2538d0d6800299bc96d8e11407
 }) => {
   const hasError = errors[name];
 
@@ -35,12 +32,9 @@ export const InputField = ({
         } ${hasError && type == "radio" ? "input__radio" : ""} ${className}`}
         placeholder={placeholder}
         name={name}
-<<<<<<< HEAD
         type={showPassword?'text':type}
-=======
         type={type}
         value={dataValue}
->>>>>>> 9b31d521bfe38c2538d0d6800299bc96d8e11407
         {...register(name, {
           required: required,
           pattern: {
