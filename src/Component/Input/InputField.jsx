@@ -18,7 +18,7 @@ export const InputField = ({
   className,
   showPassword,
   visiblePasswordFn,
-  children
+  dataValue,
 }) => {
   const hasError = errors[name];
 
@@ -32,6 +32,7 @@ export const InputField = ({
         placeholder={placeholder}
         name={name}
         type={showPassword?'text':type}
+        value={dataValue}
         {...register(name, {
           required: required,
           pattern: {
@@ -49,9 +50,9 @@ export const InputField = ({
         })}
         disabled={isDisabled}
       />
-      {children && (
+      {showHideButton && (
         <div className="password-toggle-button" onClick={visiblePasswordFn}>
-          {children}
+          {showHideButton}
         </div>
       )}
 
