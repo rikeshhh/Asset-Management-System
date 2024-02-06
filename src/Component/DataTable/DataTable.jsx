@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./DataTable.css";
 import Button from "../Button/Button";
-import { RiArrowDownSLine } from "react-icons/ri";
 import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
 import { LuArrowDownUp } from "react-icons/lu";
@@ -9,8 +8,34 @@ import { InputField } from "../Input/InputField";
 import { useForm } from "react-hook-form";
 import Model from "../Model/Model";
 import EditData from "../EditData/EditData";
-export const DataTable = ({ CategoryOptions }) => {
+import { useMutation } from "@tanstack/react-query";
+import { departmentDelete } from "../../Pages/Departments/DepartmentApiSlice";
+import { queryClient } from "../Query/Query";
 
+export const DataTable = ({ CategoryOptions }) => {
+  const DeleteDepartment = useMutation({
+    mutationFn: (optionName) => {
+      return departmentDelete(optionName);
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries(data);
+    },
+    onError: (error) => {
+      if (error.response.status === 401) {
+        console.log("Unauthorized: Please log in with valid id.");
+      }
+    },
+  });
+  const onDeleteData = (optionName) => {
+    console.log("name", optionName);
+    DeleteDepartment.mutate(optionName);
+  };
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } =useForm();
+const [show,setShow] = useState(true)
   return (
     <section className="cateogries table__container">
       <table>
@@ -29,15 +54,34 @@ export const DataTable = ({ CategoryOptions }) => {
           {CategoryOptions.map((options) => (
             <tr key={options.id}>
               <td>{options.id}</td>
-              <td>{options.department}</td>
+              {show?<td>{options.location || options.department}</td>:<td>
+                <InputField 
+                 name="department"
+                 register={register}
+                 dataValue={options.location || options.department}
+                 required={Model.Group.required}
+                 errors={errors}
+                 type={Model.Group.type}
+                 placeholder={options.location || options.department}
+                 minLength={Model.Group.minLength}
+                 maxLength={Model.Group.maxLength}
+                />
+                
+                </td>}
+            
               <td className="button-gap">
-                <Button className="edit__button" text={<CiEdit />} />
-                <Button className="delete__button" text={<GoTrash />} />
+                <Button className="edit__button" text={<CiEdit />} handleClick={()=>setShow((prev)=>!prev)}/>
+                <Button
+                  className="delete__button"
+                  text={<GoTrash />}
+                  handleClick={() =>
+                    onDeleteData(options.department || options.location)
+                  }
+                />
               </td>
             </tr>
           ))}
         </tbody>
-
       </table>
     </section>
   );
