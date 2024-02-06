@@ -54,11 +54,13 @@ const [show,setShow] = useState(true)
           {CategoryOptions.map((options) => (
             <tr key={options.id}>
               <td>{options.id}</td>
-              {show?<td>{options.location || options.department}</td>:<td>
+              {show?<td>{options.location || options.department}</td>:
+              <td>
+                <>
                 <InputField 
                  name="department"
                  register={register}
-                 dataValue={options.location || options.department}
+                 
                  required={Model.Group.required}
                  errors={errors}
                  type={Model.Group.type}
@@ -66,11 +68,18 @@ const [show,setShow] = useState(true)
                  minLength={Model.Group.minLength}
                  maxLength={Model.Group.maxLength}
                 />
-                
+                <div>
+                <Button className="edit__button" text={<CiEdit />} handleClick={()=>setShow(true)}/>
+                <Button
+                  className="delete__button"
+                  text={<GoTrash />}
+                />
+                </div>
+                </>
                 </td>}
             
               <td className="button-gap">
-                <Button className="edit__button" text={<CiEdit />} handleClick={()=>setShow((prev)=>!prev)}/>
+                <Button className="edit__button" text={<CiEdit />} handleClick={()=>setShow(false)}/>
                 <Button
                   className="delete__button"
                   text={<GoTrash />}

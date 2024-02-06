@@ -9,6 +9,7 @@ import { IoMdAdd } from "react-icons/io";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { departmentAdd, getDepartmentData } from "./DepartmentApiSlice";
 import { queryClient } from "../../Component/Query/Query";
+import DepartmentDataTable from "./DepartmentDataTable";
 
 const Departments = () => {
   const {
@@ -56,7 +57,7 @@ const Departments = () => {
           <h2>Department</h2>
         </div>
         <div className="category__content">
-          <DataTable CategoryOptions={DepartmentData} />
+          <DepartmentDataTable DepartmentData={DepartmentData} />
 
           <div className="add__category">
             <div className="add__category--title">
