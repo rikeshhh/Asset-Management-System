@@ -26,7 +26,7 @@ export const Signup = () => {
     e.preventDefault(),
     setShowPassword((prev) => !prev)
   )
-  const visibleResePasswordFn = (e) => (
+  const visibleResetPasswordFn = (e) => (
     e.preventDefault(),
     setShowResetPassword((prev) => !prev)
   )
@@ -97,7 +97,7 @@ export const Signup = () => {
                     showPassword={showPassword}
                     visiblePasswordFn={visiblePasswordFn}
                   >
-                    <button className="toggleBtn__signUp" >
+                    <button className="toggleBtn__signUp"  type="button">
                       {showPassword?<BiSolidShow />:<BiSolidHide />}
                       </button>
                     </InputField>
@@ -115,7 +115,7 @@ export const Signup = () => {
                         value === watch("Password") || "Passwords do not match",
                     })}
                   />
-                    <button onClick={visibleResePasswordFn} className="toggleBtn__signUp__retype__password">
+                    <button onClick={visibleResetPasswordFn} className="toggleBtn__signUp__retype__password"  type="button">
                       {showResetPassword?<BiSolidShow />:<BiSolidHide />}
                       </button>
               

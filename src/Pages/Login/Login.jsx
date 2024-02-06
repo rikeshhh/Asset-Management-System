@@ -106,7 +106,7 @@ const Login = () => {
                       visiblePasswordFn={visiblePasswordFn}
 
                     >
-                      <button className="toggleBtn__login" >
+                      <button className="toggleBtn__login" type="button" >
                       {showPassword?<BiSolidShow/>:<BiSolidHide/>}
                       </button>
                       </InputField>
