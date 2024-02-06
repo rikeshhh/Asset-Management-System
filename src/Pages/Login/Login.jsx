@@ -13,6 +13,7 @@ import {
   setTokenToLocalStorage,
 } from "../../utils/StorageUtils";
 import axios from "axios";
+import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -92,7 +93,7 @@ const Login = () => {
                       maxMessage={Model.Username.maxLength.message}
                     />
                   </div>
-                  <div className="form__input--section">
+                  <div className="form__input--section form__input--section__password">
                     <Label text="Password" />
                     <InputField
                       name="password"
@@ -107,7 +108,14 @@ const Login = () => {
                       // minMessage={Model.Password.minLength.message}
                       // maxLength={Model.Password.maxLength.value}
                       // maxMessage={Model.Password.maxLength.message}
-                    />
+                      showPassword={showPassword}
+                      visiblePasswordFn={visiblePasswordFn}
+
+                    >
+                      <button className="toggleBtn__login" >
+                      {showPassword?<BiSolidShow/>:<BiSolidHide/>}
+                      </button>
+                      </InputField>
                   </div>
                   <div className="form__input--secion login__remember">
                     <InputField
