@@ -9,6 +9,7 @@ import { queryClient } from "../../Component/Query/Query";
 import { departmentDelete, updateDepartmentData } from "./DepartmentApiSlice";
 import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
+import './Departments.css'
 const DepartmentDataTable = ({ DepartmentData }) => {
   const DeleteLocation = useMutation({
     mutationFn: (department) => {
@@ -23,24 +24,18 @@ const DepartmentDataTable = ({ DepartmentData }) => {
       }
     },
   });
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = useForm();
-  const onDeleteData = (location) => {
-    DeleteLocation.mutate(location);
+ 
+
+  const onDeleteData = (department) => {
+    DeleteLocation.mutate(department);
   };
 const EditDepartment  =  useMutation ({
- 
-  mutationFn: (editData)=>{
-    console.log(editData)
-    return updateDepartmentData(editData);
-
+  mutationFn: (editData) => {
+    return updateDepartmentData(editData.data, editData.editedDepartment);
   },
   onSuccess: () => {
     queryClient.invalidateQueries("DepartmentData");
+  setShow(false)
   },
   onError: (error) => {
     if (error.response.status === 401) {
@@ -48,16 +43,35 @@ const EditDepartment  =  useMutation ({
     }
   },
 })
-const [prevData,setPrevData] = useState('')
-  const [show, setShow] = useState(true);
+
+ const [show, setShow] = useState(false);
   const onUpdateData = (data) => {
-  
-    const editData ={
-      newData:data,
-      previousData: prevData
-    }
+    const editData = {
+      data: data.department,
+      editedDepartment: previousDepartment,
+    };
+
     EditDepartment.mutate(editData);
 
+  }
+  const [previousDepartment, setPreviousDepartment] = useState(""); 
+const [departmentId,setDepartmentId] = useState("");
+  const handleEditButtonClick = (option) => {
+    setPreviousDepartment(option.department);
+    setDepartmentId(option.id)
+    setShow(true);
+  };
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm({
+    defaultValues: { location: previousDepartment },
+  });
+  const onMiniDelete = ()=>{
+    setShow(false)
+   reset();
   }
   return (
     <section className="cateogries table__container">
@@ -77,38 +91,42 @@ const [prevData,setPrevData] = useState('')
           {DepartmentData.map((options, index) => (
             <tr key={index}>
               <td>{options.id}</td>
-              {show ? (
-                <td>{options.department}</td>
-              ) : (
-                <td>
-                  <form onSubmit={onUpdateData}>
-                    <InputField
-                      name="department"
-                      register={register}
-                      // inputValue={options.department}
-                      required={Model.Group.required}
-                      errors={errors}
-                      type={Model.Group.type}
-                      placeholder={options.department}
-                      minLength={Model.Group.minLength}
-                      maxLength={Model.Group.maxLength}
+              {departmentId===options.id &&show ? (
+                <td className="Department__Container">
+                <form onSubmit={handleSubmit(onUpdateData)} className="Department__Form">
+                  <InputField
+                    name="department"
+                    register={register}
+                    // inputValue={options.department}
+                    required={Model.Group.required}
+                    errors={errors}
+                    type={Model.Group.type}
+                    placeholder={options.department}
+                    minLength={Model.Group.minLength}
+                    maxLength={Model.Group.maxLength}
+                  />
+                  <div className="Department__Form--Button">
+                    <Button className="edit__button" text={<CiEdit />} />
+                    <Button
+                    type='button'
+                      className="delete__button"
+                      text={<GoTrash />}
+                      handleClick={onMiniDelete}
                     />
-                    <div>
-                      <Button className="edit__button" text={<CiEdit />} handleClick={()=>setPrevData(options.department)}/>
-                      <Button
-                        className="delete__button"
-                        text={<GoTrash />}
-                      />
-                    </div>
-                  </form>
-                </td>
+                  </div>
+                </form>
+              </td>
+
+              ) : (
+                <td>{options.department}</td>
+
               )}
 
               <td className="button-gap">
                 <Button
                   className="edit__button"
                   text={<CiEdit />}
-                  handleClick={() => setShow(false)}
+                  handleClick={() => handleEditButtonClick(options)}
                 />
                 <Button
                   className="delete__button"

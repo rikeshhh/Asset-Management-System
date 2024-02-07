@@ -42,15 +42,14 @@ export const departmentDelete = async (department) => {
   }
 };
 
-export const updateDepartmentData = async (editData) => {
+export const updateDepartmentData = async (newDepartment, prevDepartment) => {
   try {
     const response = await instance.put(
       "/department",
       {
-        "previousDepartment": editData.previousData,
-        "newDepartment": editData.newData
-   
-    },
+        previousDepartment: prevDepartment,
+        newDepartment: newDepartment,
+      },
       {
         headers: {
           Authorization: `Bearer ${token}`,
