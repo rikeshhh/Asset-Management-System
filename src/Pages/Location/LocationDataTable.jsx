@@ -72,7 +72,7 @@ const LocationDataTable = ({ LocationData }) => {
     };
     EditLocation.mutate(editData);
   };
-  const successMessage ="Location has been updated successfully"
+  const successMessage = "Location has been updated successfully"
 
   const handleEditCancel = () => {
     setShow(false);
@@ -82,9 +82,9 @@ const LocationDataTable = ({ LocationData }) => {
   const onDeleteData = (location) => {
     DeleteLocation.mutate(location);
   };
-  const onMiniDelete = ()=>{
+  const onMiniDelete = () => {
     setShow(false)
-   reset();
+    reset();
   }
   return (
     <section className="cateogries table__container">
@@ -105,7 +105,7 @@ const LocationDataTable = ({ LocationData }) => {
             <tr key={index}>
               <td>{index + 1}</td>
               {options.id === previousLocationId && show ? (
-                <td className={show?"universal__td--border" : ""}>
+                <td className={show ? "universal__td--border" : ""}>
                   <form className="universal__update--form" onSubmit={handleSubmit(onLocationEditSubmit)}>
                     <InputField
                       name="location"
@@ -114,20 +114,20 @@ const LocationDataTable = ({ LocationData }) => {
                       errors={errors}
                       autoComplete={"off"}
                       type={Model.Group.type}
-                      className={show?"universal__table--input":''}
+                      className={show ? "universal__table--input" : ''}
                       placeholder={options.location}
                       minLength={Model.Group.minLength}
                       maxLength={Model.Group.maxLength}
                     ></InputField>
                     <div className="Universal__FormButton">
-                    <Button className="" text={ <IoMdCheckmark />}  />
-                    <Button
-                    type='button'
-                      className=""
-                      text={<RxCross1 />                    }
-                      handleClick={onMiniDelete}
-                    />
-                  </div>
+                      <Button className="" text={<IoMdCheckmark />} />
+                      <Button
+                        type='button'
+                        className=""
+                        text={<RxCross1 />}
+                        handleClick={onMiniDelete}
+                      />
+                    </div>
                   </form>
                 </td>
               ) : (
@@ -149,8 +149,8 @@ const LocationDataTable = ({ LocationData }) => {
           ))}
         </tbody>
       </table>
-     
- </section>
+
+    </section>
   );
 };
 
