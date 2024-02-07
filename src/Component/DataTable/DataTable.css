@@ -59,3 +59,44 @@ ol li {
   display: flex;
   justify-content: center;
 }
+
+.Universal__update--form{
+  position: relative;
+  width: 100%;
+
+
+}
+.Universal__update--form input{
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  width: 100%;
+
+  
+}
+.Universal__FormButton{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ position: absolute;
+ height: 100%;
+ color: #fff;
+ cursor: pointer;
+ right: 1rem;
+ top: 0;
+}
+.Universal__FormButton button{
+  background-color: transparent;
+  color: black;
+  padding: 8px;
+}
+.Universal__FormButton button:first-child{
+  border-right: 1px solid grey;
+  border-radius: 0px;
+  color: greenyellow;
+}
+.Universal__FormButton button:nth-child(2){
+  color: red;
+}

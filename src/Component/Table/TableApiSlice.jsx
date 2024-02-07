@@ -13,3 +13,5 @@ export const getTableData = async () => {
     throw error;
   }
 };
+
+

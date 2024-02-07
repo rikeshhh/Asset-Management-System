@@ -23,6 +23,7 @@ const Table = ({ size, linkTo, handleTableEdit }) => {
 
   return (
     <div className="table__container">
+      
       <table className="main__table">
         <thead>
           <tr>

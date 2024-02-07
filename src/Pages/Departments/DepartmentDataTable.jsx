@@ -7,9 +7,12 @@ import { useState } from "react";
 import Button from "../../Component/Button/Button";
 import { queryClient } from "../../Component/Query/Query";
 import { departmentDelete, updateDepartmentData } from "./DepartmentApiSlice";
+import { FaCheck } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
 import './Departments.css'
+import { RxCross1 } from "react-icons/rx";
+
 const DepartmentDataTable = ({ DepartmentData }) => {
   const DeleteLocation = useMutation({
     mutationFn: (department) => {
@@ -92,25 +95,26 @@ const [departmentId,setDepartmentId] = useState("");
             <tr key={index}>
               <td>{index + 1}</td>
               {departmentId===options.id &&show ? (
-                <td className="Department__Container">
-                <form onSubmit={handleSubmit(onUpdateData)} className="Department__Form">
+                <td className="Department__update">
+                <form onSubmit={handleSubmit(onUpdateData)} className="Universal__update--form">
                   <InputField
                     name="department"
                     register={register}
                     // inputValue={options.department}
                     required={Model.Group.required}
                     errors={errors}
+                    className="Department__Form"
                     type={Model.Group.type}
                     placeholder={options.department}
                     minLength={Model.Group.minLength}
                     maxLength={Model.Group.maxLength}
                   />
-                  <div className="Department__Form--Button">
-                    <Button className="edit__button" text={<CiEdit />} />
+                  <div className="Universal__FormButton">
+                    <Button className="" text={<FaCheck />} />
                     <Button
                     type='button'
-                      className="delete__button"
-                      text={<GoTrash />}
+                      className=""
+                      text={<RxCross1 />                    }
                       handleClick={onMiniDelete}
                     />
                   </div>
