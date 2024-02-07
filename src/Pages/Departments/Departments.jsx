@@ -46,7 +46,7 @@ const Departments = () => {
     queryFn: getDepartmentData,
   });
 
-  if (isPending) return "Loading...";
+  // if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
 
@@ -57,7 +57,7 @@ const Departments = () => {
           <h2>Department</h2>
         </div>
         <div className="category__content">
-          <DepartmentDataTable DepartmentData={DepartmentData} />
+          <DepartmentDataTable DepartmentData={DepartmentData} isPending={isPending} />
 
           <div className="add__category">
             <div className="add__category--title">

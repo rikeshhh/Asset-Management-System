@@ -11,8 +11,10 @@ import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
 import { IoMdCheckmark } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
+import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
+import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
 
-const LocationDataTable = ({ LocationData }) => {
+const LocationDataTable = ({ LocationData,isPending }) => {
   const [show, setShow] = useState(false);
 
   const DeleteLocation = useMutation({
@@ -83,7 +85,8 @@ const LocationDataTable = ({ LocationData }) => {
     <section className="cateogries table__container">
       <table>
         <thead>
-          <tr>
+          {isPending ? <SmallTablePendingHead /> :
+            <tr>
             <th>
               SN <LuArrowDownUp />
             </th>
@@ -92,49 +95,52 @@ const LocationDataTable = ({ LocationData }) => {
             </th>
             <th>Action</th>
           </tr>
+          }
         </thead>
         <tbody>
-          {LocationData.map((options, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              {options.id === previousLocationId && show ? (
-                <td>
-                  <form onSubmit={handleSubmit(onLocationEditSubmit)}>
-                    <InputField
-                      name="location"
-                      register={register}
-                      required={Model.Group.required}
-                      errors={errors}
-                      type={Model.Group.type}
-                      placeholder={options.location}
-                      minLength={Model.Group.minLength}
-                      maxLength={Model.Group.maxLength}
-                    ></InputField>
-                    <button>
-                      <IoMdCheckmark />
-                    </button>
-                    <button type="button" onClick={handleEditCancel}>
-                      <RxCross1 />
-                    </button>
-                  </form>
-                </td>
-              ) : (
-                <td>{options.location}</td>
-              )}
-              <td className="button-gap">
-                <Button
-                  className="edit__button"
-                  text={<CiEdit />}
-                  handleClick={() => handleEditButtonClick(options)}
-                />
-                <Button
-                  className="delete__button"
-                  text={<GoTrash />}
-                  handleClick={() => onDeleteData(options.location)}
-                />
+          {isPending ? <SmallTablePendingBody /> :
+         ( LocationData.map((options, index) => (
+          <tr key={index}>
+            <td>{index + 1}</td>
+            {options.id === previousLocationId && show ? (
+              <td>
+                <form onSubmit={handleSubmit(onLocationEditSubmit)}>
+                  <InputField
+                    name="location"
+                    register={register}
+                    required={Model.Group.required}
+                    errors={errors}
+                    type={Model.Group.type}
+                    placeholder={options.location}
+                    minLength={Model.Group.minLength}
+                    maxLength={Model.Group.maxLength}
+                  ></InputField>
+                  <button>
+                    <IoMdCheckmark />
+                  </button>
+                  <button type="button" onClick={handleEditCancel}>
+                    <RxCross1 />
+                  </button>
+                </form>
               </td>
-            </tr>
-          ))}
+            ) : (
+              <td>{options.location}</td>
+            )}
+            <td className="button-gap">
+              <Button
+                className="edit__button"
+                text={<CiEdit />}
+                handleClick={() => handleEditButtonClick(options)}
+              />
+              <Button
+                className="delete__button"
+                text={<GoTrash />}
+                handleClick={() => onDeleteData(options.location)}
+              />
+            </td>
+          </tr>
+         ))
+            )}
         </tbody>
       </table>
     </section>

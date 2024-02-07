@@ -12,8 +12,10 @@ import { IoMdCheckmark } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
 import { IoChevronDown } from "react-icons/io5";
 import { categoryDelete, categoryEdit } from "./CategoryApiSice";
+import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
+import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
 
-const CategoryDataTable = ({ CategoryData }) => {
+const CategoryDataTable = ({ CategoryData ,isPending}) => {
   const [show, setShow] = useState(false);
   const [showSubCatrgory, setShowSubCatrgory] = useState(false);
 
@@ -89,61 +91,64 @@ const CategoryDataTable = ({ CategoryData }) => {
     <section className="cateogries table__container">
       <table>
         <thead>
+          {isPending ? <SmallTablePendingHead /> :
           <tr>
-            <th>
-              SN <LuArrowDownUp />
-            </th>
-            <th>
-              Category <LuArrowDownUp />
-            </th>
-            <th>Action</th>
-          </tr>
+          <th>
+            SN <LuArrowDownUp />
+          </th>
+          <th>
+            Category <LuArrowDownUp />
+          </th>
+          <th>Action</th>
+        </tr>}
         </thead>
         <tbody>
-          {CategoryData.map((options, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              {options.id === previousCategoryId && show ? (
-                <td>
-                  <form onSubmit={handleSubmit(onCategoryEditSubmit)}>
-                    <InputField
-                      name="parent"
-                      register={register}
-                      required={Model.Group.required}
-                      errors={errors}
-                      type={Model.Group.type}
-                      placeholder={options.parent}
-                      minLength={Model.Group.minLength}
-                      maxLength={Model.Group.maxLength}
-                    ></InputField>
-                    <button>
-                      <IoChevronDown onClick={handleSubCategoryClick} />
-                    </button>
-                    <button>
-                      <IoMdCheckmark />
-                    </button>
-                    <button type="button" onClick={handleEditCancel}>
-                      <RxCross1 />
-                    </button>
-                  </form>
+          {isPending ? <SmallTablePendingBody /> : (
+             CategoryData.map((options, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                {options.id === previousCategoryId && show ? (
+                  <td>
+                    <form onSubmit={handleSubmit(onCategoryEditSubmit)}>
+                      <InputField
+                        name="parent"
+                        register={register}
+                        required={Model.Group.required}
+                        errors={errors}
+                        type={Model.Group.type}
+                        placeholder={options.parent}
+                        minLength={Model.Group.minLength}
+                        maxLength={Model.Group.maxLength}
+                      ></InputField>
+                      <button>
+                        <IoChevronDown onClick={handleSubCategoryClick} />
+                      </button>
+                      <button>
+                        <IoMdCheckmark />
+                      </button>
+                      <button type="button" onClick={handleEditCancel}>
+                        <RxCross1 />
+                      </button>
+                    </form>
+                  </td>
+                ) : (
+                  <td>{options.parent}</td>
+                )}
+                <td className="button-gap">
+                  <Button
+                    className="edit__button"
+                    text={<CiEdit />}
+                    handleClick={() => handleEditButtonClick(options)}
+                  />
+                  <Button
+                    className="delete__button"
+                    text={<GoTrash />}
+                    handleClick={() => onDeleteData(options.parent)}
+                  />
                 </td>
-              ) : (
-                <td>{options.parent}</td>
-              )}
-              <td className="button-gap">
-                <Button
-                  className="edit__button"
-                  text={<CiEdit />}
-                  handleClick={() => handleEditButtonClick(options)}
-                />
-                <Button
-                  className="delete__button"
-                  text={<GoTrash />}
-                  handleClick={() => onDeleteData(options.parent)}
-                />
-              </td>
-            </tr>
-          ))}
+              </tr>
+            ))
+         )}
         </tbody>
       </table>
     </section>
