@@ -12,6 +12,10 @@ import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
 import './Departments.css'
 import { RxCross1 } from "react-icons/rx";
+import { IoMdCheckmark } from "react-icons/io";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { notify } from "../../Component/Toast/Toast";
 
 const DepartmentDataTable = ({ DepartmentData }) => {
   const DeleteLocation = useMutation({
@@ -37,6 +41,7 @@ const EditDepartment  =  useMutation ({
     return updateDepartmentData(editData.data, editData.editedDepartment);
   },
   onSuccess: () => {
+    notify(successMessage)
     queryClient.invalidateQueries("DepartmentData");
   setShow(false)
   },
@@ -76,6 +81,8 @@ const [departmentId,setDepartmentId] = useState("");
     setShow(false)
    reset();
   }
+  const successMessage = "Department has been updated Successfully!"
+  
   return (
     <section className="cateogries table__container">
       <table>
@@ -96,7 +103,7 @@ const [departmentId,setDepartmentId] = useState("");
               <td>{index + 1}</td>
               {departmentId===options.id &&show ? (
                 <td className={show?"universal__td--border" : ""}>
-                <form onSubmit={handleSubmit(onUpdateData)} className="Universal__update--form">
+                <form onSubmit={handleSubmit(onUpdateData)} className="universal__update--form">
                   <InputField
                     name="department"
                     register={register}
@@ -109,7 +116,7 @@ const [departmentId,setDepartmentId] = useState("");
                     placeholder={options.department}
                   />
                   <div className="Universal__FormButton">
-                    <Button className="" text={<FaCheck />} />
+                    <Button className="" text={ <IoMdCheckmark />}  />
                     <Button
                     type='button'
                       className=""
@@ -141,6 +148,18 @@ const [departmentId,setDepartmentId] = useState("");
           ))}
         </tbody>
       </table>
+      <ToastContainer
+position="bottom-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
     </section>
   );
 };

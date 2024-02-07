@@ -12,6 +12,8 @@ import { getLocationData, locationAdd } from "./LocationApiSlice";
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
 import LocationDataTable from "./LocationDataTable";
+import { ToastContainer } from "react-toastify";
+import { notify } from "../../Component/Toast/Toast";
 
 const Location = () => {
   const {
@@ -34,13 +36,16 @@ const Location = () => {
     queryKey: ["LocationData"],
     queryFn: getLocationData,
   });
-
+  const successMessage = "Location has been added successfully";
   const addLocation = useMutation({
     mutationFn: (formData) => {
       return locationAdd(formData.location);
     },
     onSuccess: (data) => {
+
       queryClient.invalidateQueries("LocationData");
+      notify(successMessage)
+
     },
     onError: (error) => {
       if (error.response.status === 401) {
@@ -96,6 +101,18 @@ const Location = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+position="bottom-right"
+autoClose={5000}
+hideProgressBar={true}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
     </section>
   );
 };

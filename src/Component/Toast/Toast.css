@@ -1,0 +1,3 @@
+.success-bar{
+    border-left: 4px solid var(--toast-success-border);
+  }

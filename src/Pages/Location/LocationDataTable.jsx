@@ -11,6 +11,8 @@ import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
 import { IoMdCheckmark } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
+import { notify } from "../../Component/Toast/Toast";
+import { ToastContainer } from "react-toastify";
 
 const LocationDataTable = ({ LocationData }) => {
   const [show, setShow] = useState(false);
@@ -34,6 +36,7 @@ const LocationDataTable = ({ LocationData }) => {
       return locationEdit(editData.data, editData.previousLocation);
     },
     onSuccess: () => {
+      notify(successMessage)
       queryClient.invalidateQueries("LocationData");
       setShow(false);
       reset();
@@ -69,6 +72,7 @@ const LocationDataTable = ({ LocationData }) => {
     };
     EditLocation.mutate(editData);
   };
+  const successMessage ="Location has been updated successfully"
 
   const handleEditCancel = () => {
     setShow(false);
@@ -78,7 +82,10 @@ const LocationDataTable = ({ LocationData }) => {
   const onDeleteData = (location) => {
     DeleteLocation.mutate(location);
   };
-
+  const onMiniDelete = ()=>{
+    setShow(false)
+   reset();
+  }
   return (
     <section className="cateogries table__container">
       <table>
@@ -98,24 +105,29 @@ const LocationDataTable = ({ LocationData }) => {
             <tr key={index}>
               <td>{index + 1}</td>
               {options.id === previousLocationId && show ? (
-                <td>
-                  <form onSubmit={handleSubmit(onLocationEditSubmit)}>
+                <td className={show?"universal__td--border" : ""}>
+                  <form className="universal__update--form" onSubmit={handleSubmit(onLocationEditSubmit)}>
                     <InputField
                       name="location"
                       register={register}
                       required={Model.Group.required}
                       errors={errors}
+                      autoComplete={"off"}
                       type={Model.Group.type}
+                      className={show?"universal__table--input":''}
                       placeholder={options.location}
                       minLength={Model.Group.minLength}
                       maxLength={Model.Group.maxLength}
                     ></InputField>
-                    <button>
-                      <IoMdCheckmark />
-                    </button>
-                    <button type="button" onClick={handleEditCancel}>
-                      <RxCross1 />
-                    </button>
+                    <div className="Universal__FormButton">
+                    <Button className="" text={ <IoMdCheckmark />}  />
+                    <Button
+                    type='button'
+                      className=""
+                      text={<RxCross1 />                    }
+                      handleClick={onMiniDelete}
+                    />
+                  </div>
                   </form>
                 </td>
               ) : (
@@ -137,7 +149,19 @@ const LocationDataTable = ({ LocationData }) => {
           ))}
         </tbody>
       </table>
-    </section>
+      <ToastContainer
+position="bottom-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>   
+ </section>
   );
 };
 

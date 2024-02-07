@@ -10,6 +10,8 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { departmentAdd, getDepartmentData } from "./DepartmentApiSlice";
 import { queryClient } from "../../Component/Query/Query";
 import DepartmentDataTable from "./DepartmentDataTable";
+import { ToastContainer } from "react-toastify";
+import { notify } from "../../Component/Toast/Toast";
 
 const Departments = () => {
   const {
@@ -23,7 +25,9 @@ const Departments = () => {
       return departmentAdd(formData.department);
     },
     onSuccess: () => {
+      notify(successMessage)
       queryClient.invalidateQueries("DepartmentData");
+
     },
     onError: (error) => {
       if (error.response.status === 401) {
@@ -31,7 +35,7 @@ const Departments = () => {
       }
     },
   });
-
+  const successMessage = "Department has been added successfully"
   const onSubmit = (data) => {
     addDepartment.mutate(data);
     reset();
@@ -92,6 +96,18 @@ const Departments = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </section>
   );
 };

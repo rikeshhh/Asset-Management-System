@@ -60,7 +60,7 @@ ol li {
   justify-content: center;
 }
 
-.Universal__update--form{
+.universal__update--form{
   position: relative;
   width: 100%;
 
@@ -76,9 +76,10 @@ ol li {
  align-items: center;
  position: absolute;
  height: 100%;
+ width: fit-content;
  color: #fff;
  cursor: pointer;
- right: 1rem;
+ right: 5px;
  top: 0;
 }
 .universal__table--input{
@@ -101,13 +102,15 @@ font-size: 14px;
 .Universal__FormButton button{
   background-color: transparent;
   color: black;
-  padding: 8px;
 }
 .Universal__FormButton button:first-child{
   border-right: 1px solid grey;
   border-radius: 0px;
-  color: greenyellow;
+  color: var(--toast-success-border);
+  padding-left: 3px;
 }
 .Universal__FormButton button:nth-child(2){
-  color: red;
+  color: var(--red);
+  padding-right: 3px;
+
 }
