@@ -74,7 +74,7 @@ const LocationDataTable = ({ LocationData,isPending }) => {
     };
     EditLocation.mutate(editData);
   };
-  const successMessage ="Location has been updated successfully"
+  const successMessage = "Location has been updated successfully"
 
   const handleEditCancel = () => {
     setShow(false);
@@ -84,9 +84,9 @@ const LocationDataTable = ({ LocationData,isPending }) => {
   const onDeleteData = (location) => {
     DeleteLocation.mutate(location);
   };
-  const onMiniDelete = ()=>{
+  const onMiniDelete = () => {
     setShow(false)
-   reset();
+    reset();
   }
   return (
     <section className="cateogries table__container">
@@ -150,8 +150,8 @@ const LocationDataTable = ({ LocationData,isPending }) => {
             )}
         </tbody>
       </table>
-     
- </section>
+
+    </section>
   );
 };
 
