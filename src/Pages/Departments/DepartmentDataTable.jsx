@@ -90,7 +90,7 @@ const [departmentId,setDepartmentId] = useState("");
         <tbody>
           {DepartmentData.map((options, index) => (
             <tr key={index}>
-              <td>{options.id}</td>
+              <td>{index + 1}</td>
               {departmentId===options.id &&show ? (
                 <td className="Department__Container">
                 <form onSubmit={handleSubmit(onUpdateData)} className="Department__Form">
