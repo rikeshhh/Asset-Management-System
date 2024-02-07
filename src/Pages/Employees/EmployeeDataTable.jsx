@@ -5,17 +5,26 @@ import { CiEdit } from "react-icons/ci";
 import { getEmployeeTableData } from "./EmployeeApiSlice";
 import { useQuery } from "@tanstack/react-query";
 import Button from "../../Component/Button/Button";
+import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 
-const EmployeeDataTable = ({ size, linkTo, handleTableEdit }) => {
+const EmployeeDataTable = ({
+  size,
+  linkTo,
+  handleTableEdit,
+  handleDeleteClick,
+}) => {
   const {
     isPending,
     error,
     data: tableData,
   } = useQuery({
-    queryKey: ["tableData"],
+    queryKey: ["EmployeeData"],
     queryFn: getEmployeeTableData,
-    staleTime: 10000,
   });
+
+  const handleDeleteEmployee = (employeeId) => {
+    handleDeleteClick(employeeId);
+  };
 
   if (isPending) return "Loading...";
 
@@ -59,6 +68,7 @@ const EmployeeDataTable = ({ size, linkTo, handleTableEdit }) => {
                   type={"button"}
                   className="delete__button"
                   text={<GoTrash />}
+                  handleClick={() => handleDeleteEmployee(tableItem.id)}
                 />
               </td>
             </tr>

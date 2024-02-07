@@ -11,6 +11,10 @@ import { Link } from "react-router-dom";
 import Filter from "../../Component/Filter/Filter";
 import { useState } from "react";
 import EmployeeDataTable from "./EmployeeDataTable";
+import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
+import { employeeDelete } from "./EmployeeApiSlice";
+import { useMutation } from "@tanstack/react-query";
+import { queryClient } from "../../Component/Query/Query";
 
 const Employees = () => {
   const {
@@ -19,13 +23,52 @@ const Employees = () => {
     handleSubmit,
   } = useForm();
 
+  const DeleteEmployee = useMutation({
+    mutationFn: (employeeId) => {
+      return employeeDelete(employeeId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("EmployeeData");
+    },
+    onError: (error) => {
+      if (error.response.status === 401) {
+        console.log("Unauthorized: Please log in with valid id.");
+      }
+    },
+  });
+
   const [filterShow, setFilterShow] = useState(false);
+  const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
+  const [employeeId, setEmployeeId] = useState("");
 
   const onFilterClick = (showHide) => {
     setFilterShow(showHide);
   };
+
+  const handleDeleteClick = (employee) => {
+    setDeleteConfirationShow(true);
+    setEmployeeId(employee);
+  };
+
+  const handleCancelClick = () => {
+    setDeleteConfirationShow(false);
+  };
+
+  const handleProceedClick = () => {
+    DeleteEmployee.mutate(employeeId);
+    setDeleteConfirationShow(false);
+  };
   return (
     <>
+      {deleteConfirationShow ? (
+        <DeleteConfirmation
+        deleteName="employee"
+          handleCancelClick={handleCancelClick}
+          handleProceedClick={handleProceedClick}
+        />
+      ) : (
+        <></>
+      )}
       <section className="content-wrapper">
         <div className="content-radius employees">
           <div className="content__header employees__top">
@@ -57,7 +100,11 @@ const Employees = () => {
                 className="filter--button"
               />
             </div>
-            <EmployeeDataTable linkTo={"/editProfile"} />
+            <EmployeeDataTable
+              linkTo={"/editProfile"}
+              handleDeleteClick={handleDeleteClick}
+              handleProceedClick={handleProceedClick}
+            />
           </div>
         </div>
       </section>

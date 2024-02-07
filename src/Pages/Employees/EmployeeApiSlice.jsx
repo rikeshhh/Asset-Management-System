@@ -13,3 +13,15 @@ export const getEmployeeTableData = async () => {
     throw error;
   }
 };
+
+export const employeeDelete = async (employeeId) => {
+  const employeeDeleteRequest = await instance.delete("/user", {
+    params: {
+      id: employeeId,
+    },
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+};
