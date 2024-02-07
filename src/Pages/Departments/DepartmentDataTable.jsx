@@ -115,7 +115,7 @@ const [departmentId,setDepartmentId] = useState("");
                     type={Model.Group.type}
                     placeholder={options.department}
                   />
-                  <div className="Universal__FormButton">
+                  <div className="universal__FormButton">
                     <Button className="" text={ <IoMdCheckmark />}  />
                     <Button
                     type='button'

@@ -70,7 +70,7 @@ ol li {
   width: 100%;
   transition: 0.2s all; 
 } */
-.Universal__FormButton{
+.universal__FormButton{
  display: flex;
  justify-content: center;
  align-items: center;
@@ -99,17 +99,17 @@ font-size: 14px;
   border: 1px solid var(--blue);
 }
 
-.Universal__FormButton button{
+.universal__FormButton button{
   background-color: transparent;
   color: black;
 }
-.Universal__FormButton button:first-child{
+.universal__FormButton button:first-child{
   border-right: 1px solid grey;
   border-radius: 0px;
   color: var(--toast-success-border);
   padding-left: 3px;
 }
-.Universal__FormButton button:nth-child(2){
+.universal__FormButton button:nth-child(2){
   color: var(--red);
   padding-right: 3px;
 
