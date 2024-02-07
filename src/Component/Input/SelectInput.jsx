@@ -8,7 +8,7 @@ export const SelectInput = ({ onChange, isDisabled, options }) => {
       className={isDisabled ? "select__disabled" : "select__enabled"}
       required
     >
-      <option className="select__option" value="" defaultValue={"None"}>
+      <option className="select__option" value="none" defaultValue={"None"}>
         None
       </option>
       {options.map((option, index) => (
