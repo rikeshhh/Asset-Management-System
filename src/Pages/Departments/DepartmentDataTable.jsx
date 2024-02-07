@@ -16,8 +16,10 @@ import { IoMdCheckmark } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { notify } from "../../Component/Toast/Toast";
+import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
+import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
 
-const DepartmentDataTable = ({ DepartmentData }) => {
+const DepartmentDataTable = ({ DepartmentData,isPending }) => {
   const DeleteLocation = useMutation({
     mutationFn: (department) => {
       return departmentDelete(department);
@@ -87,65 +89,69 @@ const [departmentId,setDepartmentId] = useState("");
     <section className="cateogries table__container">
       <table>
         <thead>
+          {isPending ? <SmallTablePendingHead /> :
           <tr>
-            <th>
-              SN <LuArrowDownUp />
-            </th>
-            <th>
-              Category <LuArrowDownUp />
-            </th>
-            <th>Action</th>
-          </tr>
+          <th>
+            SN <LuArrowDownUp />
+          </th>
+          <th>
+            Category <LuArrowDownUp />
+          </th>
+          <th>Action</th>
+        </tr>}
+          
         </thead>
         <tbody>
-          {DepartmentData.map((options, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              {departmentId===options.id &&show ? (
-                <td className={show?"universal__td--border" : ""}>
-                <form onSubmit={handleSubmit(onUpdateData)} className="universal__update--form">
-                  <InputField
-                    name="department"
-                    register={register}
-                    // inputValue={options.department}
-                    required={Model.Group.required}
-                    autoComplete={"off"}
-                    errors={errors}
-                    className={show?"universal__table--input":''}
-                    type={Model.Group.type}
-                    placeholder={options.department}
-                  />
-                  <div className="Universal__FormButton">
-                    <Button className="" text={ <IoMdCheckmark />}  />
-                    <Button
-                    type='button'
-                      className=""
-                      text={<RxCross1 />                    }
-                      handleClick={onMiniDelete}
+          {isPending ? <SmallTablePendingBody /> : (
+             DepartmentData.map((options, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                {departmentId===options.id &&show ? (
+                  <td className={show?"universal__td--border" : ""}>
+                  <form onSubmit={handleSubmit(onUpdateData)} className="Universal__update--form">
+                    <InputField
+                      name="department"
+                      register={register}
+                      // inputValue={options.department}
+                      required={Model.Group.required}
+                      autoComplete={"off"}
+                      errors={errors}
+                      className={show?"universal__table--input":''}
+                      type={Model.Group.type}
+                      placeholder={options.department}
                     />
-                  </div>
-                </form>
-              </td>
-
-              ) : (
-                <td>{options.department}</td>
-
-              )}
-
-              <td className="button-gap">
-                <Button
-                  className="edit__button"
-                  text={<CiEdit />}
-                  handleClick={() => handleEditButtonClick(options)}
-                />
-                <Button
-                  className="delete__button"
-                  text={<GoTrash />}
-                  handleClick={() => onDeleteData(options.department)}
-                />
-              </td>
-            </tr>
-          ))}
+                    <div className="Universal__FormButton">
+                      <Button className="" text={<FaCheck />} />
+                      <Button
+                      type='button'
+                        className=""
+                        text={<RxCross1 />                    }
+                        handleClick={onMiniDelete}
+                      />
+                    </div>
+                  </form>
+                </td>
+  
+                ) : (
+                  <td>{options.department}</td>
+  
+                )}
+  
+                <td className="button-gap">
+                  <Button
+                    className="edit__button"
+                    text={<CiEdit />}
+                    handleClick={() => handleEditButtonClick(options)}
+                  />
+                  <Button
+                    className="delete__button"
+                    text={<GoTrash />}
+                    handleClick={() => onDeleteData(options.department)}
+                  />
+                </td>
+              </tr>
+            ))
+         )}
         </tbody>
       </table>
      

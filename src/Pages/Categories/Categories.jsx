@@ -48,7 +48,7 @@ const Categories = () => {
     },
   });
 
-  if (isPending) return "Loading...";
+  // if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
   return (
@@ -58,7 +58,7 @@ const Categories = () => {
           <h2>Categories</h2>
         </div>
         <div className="category__content">
-          <CategoryDataTable CategoryData={CategoryData} />
+          <CategoryDataTable CategoryData={CategoryData} isPending={ isPending} />
 
           <div className="add__category">
             <div className="add__category--title">

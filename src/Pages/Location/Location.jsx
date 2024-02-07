@@ -52,7 +52,7 @@ const Location = () => {
     },
   });
 
-  if (isPending) return "Loading...";
+  // if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
 
@@ -63,7 +63,7 @@ const Location = () => {
           <h2>Locations</h2>
         </div>
         <div className="category__content">
-          <LocationDataTable LocationData={LocationData} />
+          <LocationDataTable LocationData={LocationData} isPending={isPending} />
 
           <div className="add__category">
             <div className="add__category--title">
