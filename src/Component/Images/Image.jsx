@@ -12,11 +12,13 @@ import plans from "/src/assets/plans.jpeg";
 import unionpay from "/src/assets/unionpay.png";
 import userProf from "/src/assets/userProf.svg";
 import profileCover from "/src/assets/profilecover.png";
+import deleteIcon from "/src/assets/deleteIcon.svg";
 
 export {
   profile,
   building,
   factory,
+  deleteIcon,
   house,
   jcb,
   amex,
