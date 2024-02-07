@@ -108,7 +108,7 @@ const [departmentId,setDepartmentId] = useState("");
                 <td>{index + 1}</td>
                 {departmentId===options.id &&show ? (
                   <td className={show?"universal__td--border" : ""}>
-                  <form onSubmit={handleSubmit(onUpdateData)} className="Universal__update--form">
+                  <form onSubmit={handleSubmit(onUpdateData)} className="universal__update--form">
                     <InputField
                       name="department"
                       register={register}
@@ -120,7 +120,7 @@ const [departmentId,setDepartmentId] = useState("");
                       type={Model.Group.type}
                       placeholder={options.department}
                     />
-                    <div className="Universal__FormButton">
+                    <div className="universal__FormButton">
                       <Button className="" text={<FaCheck />} />
                       <Button
                       type='button'
