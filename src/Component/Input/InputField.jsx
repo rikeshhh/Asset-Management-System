@@ -20,6 +20,7 @@ export const InputField = ({
   inputValue,
   visiblePasswordFn,
   onEditChange,
+  autoComplete,
   children,
 }) => {
   const hasError = errors[name];
@@ -34,6 +35,7 @@ export const InputField = ({
         name={name}
         value={inputValue}
         onChange={onEditChange}
+        autoComplete={autoComplete}
         type={showPassword ? "text" : type}
         {...register(name, {
           required: required,

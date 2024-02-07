@@ -66,16 +66,10 @@ ol li {
 
 
 }
-.Universal__update--form input{
+/* .Universal__update--form input{
   width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-  font-size: 16px;
-  width: 100%;
-
-  
-}
+  transition: 0.2s all; 
+} */
 .Universal__FormButton{
  display: flex;
  justify-content: center;
@@ -87,6 +81,23 @@ ol li {
  right: 1rem;
  top: 0;
 }
+.universal__table--input{
+border: none;
+padding: 5px 0px;
+outline: none;
+font-size: 14px;
+}
+.universal__table--input:focus{
+  outline: none !important;;
+}
+
+.universal__table--input::placeholder{
+font-size: 14px;
+}
+.universal__td--border{
+  border: 1px solid var(--blue);
+}
+
 .Universal__FormButton button{
   background-color: transparent;
   color: black;

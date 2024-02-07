@@ -95,19 +95,18 @@ const [departmentId,setDepartmentId] = useState("");
             <tr key={index}>
               <td>{index + 1}</td>
               {departmentId===options.id &&show ? (
-                <td className="Department__update">
+                <td className={show?"universal__td--border" : ""}>
                 <form onSubmit={handleSubmit(onUpdateData)} className="Universal__update--form">
                   <InputField
                     name="department"
                     register={register}
                     // inputValue={options.department}
                     required={Model.Group.required}
+                    autoComplete={"off"}
                     errors={errors}
-                    className="Department__Form"
+                    className={show?"universal__table--input":''}
                     type={Model.Group.type}
                     placeholder={options.department}
-                    minLength={Model.Group.minLength}
-                    maxLength={Model.Group.maxLength}
                   />
                   <div className="Universal__FormButton">
                     <Button className="" text={<FaCheck />} />
