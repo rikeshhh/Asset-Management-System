@@ -68,18 +68,7 @@ ol li {
   width: 100%;
   transition: 0.2s all; 
 } */
-.universal__FormButton{
- display: flex;
- justify-content: center;
- align-items: center;
- position: absolute;
- height: 100%;
- width: fit-content;
- color: #fff;
- cursor: pointer;
- right: 5px;
- top: 0;
-.universal__FormButton {
+.Universal__FormButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,20 +97,17 @@ ol li {
   border: 1px solid var(--blue);
 }
 
-.universal__FormButton button {
-.universal__FormButton button{
+.Universal__FormButton button {
   background-color: transparent;
   color: black;
 }
-.universal__FormButton button:first-child {
-.universal__FormButton button:first-child{
+.Universal__FormButton button:first-child {
   border-right: 1px solid grey;
   border-radius: 0px;
   color: var(--toast-success-border);
   padding-left: 3px;
 }
-.universal__FormButton button:nth-child(2){
-.universal__FormButton button:nth-child(2) {
+.Universal__FormButton button:nth-child(2) {
   color: var(--red);
   padding-right: 3px;
 }
