@@ -10,6 +10,7 @@ import Table from "../../Component/Table/Table";
 import { BsFunnel } from "react-icons/bs";
 import Filter from "../../Component/Filter/Filter";
 import { SearchInput } from "../../Component/SearchInput/SearchInput";
+import AssetsTableData from "./AssetsTableData";
 
 const Assets = () => {
   const {
@@ -68,7 +69,7 @@ const Assets = () => {
                 handleClick={() => onFilterClick(!filterShow)}
               />
             </div>
-            {isActive && <Table linkTo={"/editAssets"} size="8" />}
+            {isActive && <AssetsTableData linkTo={"/editAssets"} size="8" />}
           </div>
         </div>
       </section>

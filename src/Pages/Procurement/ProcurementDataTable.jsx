@@ -6,6 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import { getProcurementTableData } from "./ProcurementApiSlice";
 import Button from "../../Component/Button/Button";
 
+import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
+import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
+
 const ProcurementDataTable = ({ size, linkTo, handleTableEdit }) => {
   const {
     isPending,
@@ -17,7 +20,7 @@ const ProcurementDataTable = ({ size, linkTo, handleTableEdit }) => {
     staleTime: 10000,
   });
 
-  if (isPending) return "Loading...";
+  // if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
 
@@ -25,6 +28,9 @@ const ProcurementDataTable = ({ size, linkTo, handleTableEdit }) => {
     <div className="table__container">
       <table className="main__table">
         <thead>
+          {isPending ?
+          <PendingTableHead/>
+          : 
           <tr>
             <th>ID</th>
             <th>Name</th>
@@ -33,36 +39,37 @@ const ProcurementDataTable = ({ size, linkTo, handleTableEdit }) => {
             <th>Email</th>
             <th>Phone</th>
             <th>Action</th>
-          </tr>
+          </tr>}
+          
         </thead>
         <tbody>
-          {tableData.map((tableItem, index) => (
-            <tr key={index}>
-              <td>{tableItem.id}</td>
-              <td>{tableItem.name}</td>
-              <td>{tableItem.designation}</td>
-              <td>{tableItem.department}</td>
-              <td>{tableItem.email}</td>
-              <td>{tableItem.phone}</td>
-              <td className="button-gap">
-                {/* <Link  to={{ pathname: '/profile', state: false }}>
-                   </Link> */}
-                <Link to={linkTo} className="link">
+        {isPending ? <PendingTableBody/> : (
+            tableData.map((tableItem, index) => (
+              <tr key={index}>
+                <td>{tableItem.id}</td>
+                <td>{tableItem.name}</td>
+                <td>{tableItem.designation}</td>
+                <td>{tableItem.department}</td>
+                <td>{tableItem.email}</td>
+                <td>{tableItem.phone}</td>
+                <td className="button-gap">
+                  <Link to={linkTo} className="link">
+                    <Button
+                      type={'button'}
+                      className="edit__button"
+                      onClick={handleTableEdit}
+                      text={<CiEdit />}
+                    />
+                  </Link>
                   <Button
-                    type={"button"}
-                    className="edit__button"
-                    onClick={handleTableEdit}
-                    text={<CiEdit />}
+                    type={'button'}
+                    className="delete__button"
+                    text={<GoTrash />}
                   />
-                </Link>
-                <Button
-                  type={"button"}
-                  className="delete__button"
-                  text={<GoTrash />}
-                />
-              </td>
-            </tr>
-          ))}
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
