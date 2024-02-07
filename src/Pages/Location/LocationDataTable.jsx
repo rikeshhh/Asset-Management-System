@@ -9,8 +9,12 @@ import { locationDelete, locationEdit } from "./LocationApiSlice";
 import { queryClient } from "../../Component/Query/Query";
 import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
+import { IoMdCheckmark } from "react-icons/io";
+import { RxCross1 } from "react-icons/rx";
 
 const LocationDataTable = ({ LocationData }) => {
+  const [show, setShow] = useState(false);
+
   const DeleteLocation = useMutation({
     mutationFn: (location) => {
       return locationDelete(location);
@@ -31,6 +35,8 @@ const LocationDataTable = ({ LocationData }) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries("LocationData");
+      setShow(false);
+      reset();
     },
     onError: (error) => {
       if (error.response.status === 401) {
@@ -40,11 +46,13 @@ const LocationDataTable = ({ LocationData }) => {
   });
 
   const [previousLocation, setPreviousLocation] = useState("");
+  const [previousLocationId, setPreviousLocationId] = useState("");
 
-  const handleEditButtonClick = (location) => {
-    // setEditedLocation(location);
-    setPreviousLocation(location);
-    setShow(false);
+  const handleEditButtonClick = (options) => {
+    setPreviousLocation(options.location);
+    setPreviousLocationId(options.id);
+    setShow(true);
+    reset();
   };
 
   const {
@@ -52,22 +60,25 @@ const LocationDataTable = ({ LocationData }) => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm({
-    defaultValues: { location: previousLocation },
-  });
+  } = useForm();
 
   const onLocationEditSubmit = (data) => {
     const editData = {
       data: data.location,
-      editedLocation: previousLocation,
+      previousLocation: previousLocation,
     };
     EditLocation.mutate(editData);
+  };
+
+  const handleEditCancel = () => {
+    setShow(false);
+    reset();
   };
 
   const onDeleteData = (location) => {
     DeleteLocation.mutate(location);
   };
-  const [show, setShow] = useState(true);
+
   return (
     <section className="cateogries table__container">
       <table>
@@ -85,10 +96,8 @@ const LocationDataTable = ({ LocationData }) => {
         <tbody>
           {LocationData.map((options, index) => (
             <tr key={index}>
-              <td>{options.id}</td>
-              {show ? (
-                <td>{options.location}</td>
-              ) : (
+              <td>{index + 1}</td>
+              {options.id === previousLocationId && show ? (
                 <td>
                   <form onSubmit={handleSubmit(onLocationEditSubmit)}>
                     <InputField
@@ -100,16 +109,23 @@ const LocationDataTable = ({ LocationData }) => {
                       placeholder={options.location}
                       minLength={Model.Group.minLength}
                       maxLength={Model.Group.maxLength}
-                    />
+                    ></InputField>
+                    <button>
+                      <IoMdCheckmark />
+                    </button>
+                    <button type="button" onClick={handleEditCancel}>
+                      <RxCross1 />
+                    </button>
                   </form>
                 </td>
+              ) : (
+                <td>{options.location}</td>
               )}
-
               <td className="button-gap">
                 <Button
                   className="edit__button"
                   text={<CiEdit />}
-                  handleClick={() => handleEditButtonClick(options.location)}
+                  handleClick={() => handleEditButtonClick(options)}
                 />
                 <Button
                   className="delete__button"

@@ -23,6 +23,7 @@ const Location = () => {
 
   const onSubmit = (data) => {
     addLocation.mutate(data);
+    reset();
   };
 
   const {

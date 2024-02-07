@@ -8,17 +8,12 @@ th {
   text-align: left;
 }
 
-
-
 .cateogries tr {
   background-color: var(--secondary-color);
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--primary-grey);
   padding: 1.09rem 0rem;
 }
 
-.cateogries tr:first-child {
-  border: none;
-}
 .cateogries td {
   padding: 1.09rem 0.69rem;
 }
@@ -34,7 +29,7 @@ th {
   letter-spacing: 0.07px;
 }
 .cateogries table th:nth-child(2) {
-padding-right: 10rem;
+  padding-right: 10rem;
 }
 ol {
   display: flex;
@@ -53,14 +48,14 @@ ol li {
   transition: background-color 0.3s ease-in-out; /* Adjust the duration and easing as needed */
   background-color: lightyellow; /* Change the background color as desired */
 }
-.category__input{
+.category__input {
   display: flex;
   position: relative;
 }
-.category_edit--row{
-padding: 1rem 0.69rem;
+.category_edit--row {
+  padding: 1rem 0.69rem;
 }
-.category__buttons{
- display: flex;
- justify-content: center;
+.category__buttons {
+  display: flex;
+  justify-content: center;
 }
