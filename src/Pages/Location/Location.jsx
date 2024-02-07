@@ -42,10 +42,8 @@ const Location = () => {
       return locationAdd(formData.location);
     },
     onSuccess: (data) => {
-
-      queryClient.invalidateQueries("LocationData");
       notify(successMessage)
-
+      queryClient.invalidateQueries("LocationData");
     },
     onError: (error) => {
       if (error.response.status === 401) {
@@ -105,14 +103,14 @@ const Location = () => {
 position="bottom-right"
 autoClose={5000}
 hideProgressBar={true}
-newestOnTop={false}
+newestOnTop={true}
 closeOnClick
 rtl={false}
 pauseOnFocusLoss
 draggable
 pauseOnHover
 theme="light"
-/>
+/>   
     </section>
   );
 };

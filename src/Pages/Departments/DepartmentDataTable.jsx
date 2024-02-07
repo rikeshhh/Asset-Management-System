@@ -36,6 +36,8 @@ const DepartmentDataTable = ({ DepartmentData }) => {
   const onDeleteData = (department) => {
     DeleteLocation.mutate(department);
   };
+  const successMessage ="Department has been updated successfully"
+
 const EditDepartment  =  useMutation ({
   mutationFn: (editData) => {
     return updateDepartmentData(editData.data, editData.editedDepartment);
@@ -51,7 +53,6 @@ const EditDepartment  =  useMutation ({
     }
   },
 })
-
  const [show, setShow] = useState(false);
   const onUpdateData = (data) => {
     const editData = {
@@ -81,7 +82,6 @@ const [departmentId,setDepartmentId] = useState("");
     setShow(false)
    reset();
   }
-  const successMessage = "Department has been updated Successfully!"
   
   return (
     <section className="cateogries table__container">
@@ -148,18 +148,7 @@ const [departmentId,setDepartmentId] = useState("");
           ))}
         </tbody>
       </table>
-      <ToastContainer
-position="bottom-right"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="light"
-/>
+     
     </section>
   );
 };
