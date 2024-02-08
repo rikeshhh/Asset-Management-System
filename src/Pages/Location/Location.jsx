@@ -8,12 +8,13 @@ import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
 import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
-import { getLocationData, locationAdd } from "./LocationApiSlice";
+import { getLocationData, locationAdd, locationDelete } from "./LocationApiSlice";
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
 import LocationDataTable from "./LocationDataTable";
 import { ToastContainer } from "react-toastify";
-import { notifySuccess } from "../../Component/Toast/Toast";
+import { notifyDelete, notifySuccess } from "../../Component/Toast/Toast";
+import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 
 const Location = () => {
   const {
@@ -52,18 +53,60 @@ const Location = () => {
     },
   });
 
+  const deleteMessage = "Location has been deleted successfully"
+  const DeleteLocation = useMutation({
+    mutationFn: (location) => {
+      return locationDelete(location)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries('LocationData')
+      notifyDelete(deleteMessage)
+    },
+    onError: (error) => {
+      if (error.response.status === 401) {
+        console.log("Unauthorized: Please log in with valid id.");
+      }
+    },
+  });
+  const [locationName, setLocationName] = useState()
+  const [deleteConfirmationShow, setDeleteConfirmationShow] = useState(false)
+  
+  const handleCancelClick = () => {
+    setDeleteConfirmationShow(false)
+  }
+  const handleProceedClick = () => {
+    DeleteLocation.mutate(locationName)
+    setDeleteConfirmationShow(false)
+  }
+
+  const handleDeleteClick = (location) => {
+    setDeleteConfirmationShow(true)
+    setLocationName(location)
+  }
   // if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
 
   return (
+    <>
+      {deleteConfirmationShow?(
+       <DeleteConfirmation
+          deleteName="location"
+          handleCancelClick={handleCancelClick}
+          handleProceedClick={handleProceedClick}
+          />) : (
+          <></>
+      )}
     <section className="content-wrapper">
       <div className="content-radius category">
         <div className="content__header">
           <h2>Locations</h2>
         </div>
         <div className="category__content">
-          <LocationDataTable LocationData={LocationData} isPending={isPending} />
+            <LocationDataTable LocationData={LocationData} isPending={isPending}
+            handleDeleteClick={handleDeleteClick}
+             handleProceedClick={handleProceedClick}
+            />
 
           <div className="add__category">
             <div className="add__category--title">
@@ -111,7 +154,9 @@ draggable
 pauseOnHover
 theme="light"
 />   
-    </section>
+      </section>
+      
+    </>
   );
 };
 export default Location;
