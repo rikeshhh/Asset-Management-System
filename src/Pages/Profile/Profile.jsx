@@ -6,48 +6,18 @@ import "./profile.css";
 import Button from "../../Component/Button/Button";
 import { SelectInput } from "../../Component/Input/SelectInput";
 import Model from "../../Component/Model/Model";
-import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { profileCover } from "../../Component/Images/Image";
 import { GoTrash } from "react-icons/go";
 import SelectInputDepartment from "../Departments/SelectInputDepartment";
-export const Profile = ({ title, description, buttonBlueText }) => {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
-  const location = useLocation();
-  const receivedState = location.state;
+export const Profile = ({
+  title,
+  description,
+  buttonBlueText,
+  employeeData,
+  receivedBoolean,
+}) => {
 
-  const fileInputRef = useRef(null);
-
-  const [profileImage, setProfileImage] = useState(profileCover);
-
-  const handleProfileUpdate = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const profileUrl = URL.createObjectURL(file);
-      setProfileImage(profileUrl);
-    }
-  };
-
-  const deleteProfile = () => {
-    setProfileImage(profileCover);
-  };
-
-  const [options, setOptions] = useState([
-    "Frontend",
-    "Backend",
-    "UI UX",
-    "QA",
-    "Project Manager",
-    "DevOps",
-  ]);
-
-  const handleButtonClick = () => {
-    fileInputRef.current.click();
-  };
 
   return (
     <section className="content-wrapper">
@@ -104,12 +74,13 @@ export const Profile = ({ title, description, buttonBlueText }) => {
             <div className="form__input--section">
               <Label sup={"*"} text="Name" />
               <InputField
-                name="Username"
+                name="username"
                 register={register}
                 value={Model.Username.pattern.value}
                 message={Model.Username.pattern.message}
                 required={Model.Username.required}
                 errors={errors}
+                inputValue={employeeData.name }
                 type={Model.Username.type}
                 placeholder={Model.Username.placeholder}
                 minLength={Model.Username.minLength.value}
@@ -153,12 +124,13 @@ export const Profile = ({ title, description, buttonBlueText }) => {
             <div className="form__input--section">
               <Label sup={"*"} text="Designation" />
               <InputField
-                name="Designation"
+                name="designation"
                 register={register}
                 value={Model.Designation.pattern.value}
                 message={Model.Designation.pattern.message}
                 required={Model.Designation.required}
                 errors={errors}
+                inputValue={employeeData.designation}
                 type={Model.Designation.type}
                 placeholder={Model.Designation.placeholder}
                 minLength={Model.Designation.minLength.value}
@@ -176,12 +148,13 @@ export const Profile = ({ title, description, buttonBlueText }) => {
             <div className="form__input--section">
               <Label sup={"*"} text="Email" />
               <InputField
-                name="Email"
+                name="email"
                 register={register}
                 value={Model.Email.pattern.value}
                 message={Model.Email.pattern.message}
                 required={Model.Email.required}
                 errors={errors}
+                inputValue={employeeData.email}
                 type={Model.Email.type}
                 placeholder={Model.Email.placeholder}
                 maxLength={Model.Email.maxLength.value}
@@ -192,7 +165,7 @@ export const Profile = ({ title, description, buttonBlueText }) => {
             <div className="form__input--section">
               <Label sup={"*"} text="Phone Number" />
               <InputField
-                name="PhoneNumber"
+                name="phoneNumber"
                 register={register}
                 value={Model.PhoneNumber.pattern.value}
                 message={Model.PhoneNumber.pattern.message}
