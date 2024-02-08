@@ -14,15 +14,13 @@ import { LocationSvg } from "../../Component/svg/LocationSvg";
 import { DepartmentSvg } from "../../Component/svg/DepartmentSvg";
 import { LogoutSvg } from "../../Component/svg/LogoutSvg";
 import { useState } from "react";
+import { clearTokenFromLocalStorage } from "../../utils/StorageUtils";
+import Logout from "../Logout/Logout";
 
 const Sidebar = () => {
   const [toggleNavbar, setToggleNavbar] = useState(false);
 
   const handleToggle = () => {
-    setToggleNavbar(!toggleNavbar);
-  };
-
-  const handleSmallToggle = () => {
     setToggleNavbar(!toggleNavbar);
   };
 
@@ -222,20 +220,7 @@ const Sidebar = () => {
                   />
                 </Link>
               </div>
-              <NavLink
-                to="/logout"
-                className={({ isActive }) =>
-                  isActive ? "navbar__link--active" : "link"
-                }
-              >
-                <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
-                  <span>
-                    {/* <LuLogOut /> */}
-                    <LogoutSvg />
-                  </span>
-                  <p>Logout</p>
-                </li>
-              </NavLink>
+              <Logout toggleNavbar={toggleNavbar} />
             </ul>
           </div>
         </nav>

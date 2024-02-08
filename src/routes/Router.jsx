@@ -21,6 +21,7 @@ import PricingForm from "../Pages/Plans/PricingForm";
 import PricingPayment from "../Pages/Plans/PricingPayment";
 import PaymentSuccess from "../Pages/Plans/PaymentSuccess";
 import ProtectedRoute from "./ProtectedRoute";
+import LoginSignupProtectedRoute from "./LoginSignupProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -107,10 +108,18 @@ export const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <LoginSignupProtectedRoute>
+        <Login />
+      </LoginSignupProtectedRoute>
+    ),
   },
   {
     path: "/signup",
-    element: <Signup />,
+    element: (
+      <LoginSignupProtectedRoute>
+        <Signup />,
+      </LoginSignupProtectedRoute>
+    ),
   },
 ]);

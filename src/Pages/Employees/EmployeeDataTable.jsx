@@ -5,7 +5,6 @@ import { CiEdit } from "react-icons/ci";
 import { getEmployeeTableData } from "./EmployeeApiSlice";
 import { useQuery } from "@tanstack/react-query";
 import Button from "../../Component/Button/Button";
-import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
 

@@ -25,9 +25,8 @@ const Departments = () => {
       return departmentAdd(formData.department);
     },
     onSuccess: () => {
-      notify(successMessage)
+      notify(successMessage);
       queryClient.invalidateQueries("DepartmentData");
-
     },
     onError: (error) => {
       if (error.response.status === 401) {
@@ -35,7 +34,7 @@ const Departments = () => {
       }
     },
   });
-  const successMessage = "Department has been added successfully"
+  const successMessage = "Department has been added successfully";
   const onSubmit = (data) => {
     addDepartment.mutate(data);
     reset();
@@ -61,7 +60,10 @@ const Departments = () => {
           <h2>Department</h2>
         </div>
         <div className="category__content">
-          <DepartmentDataTable DepartmentData={DepartmentData} isPending={isPending} />
+          <DepartmentDataTable
+            DepartmentData={DepartmentData}
+            isPending={isPending}
+          />
 
           <div className="add__category">
             <div className="add__category--title">

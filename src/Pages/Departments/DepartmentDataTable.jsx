@@ -10,16 +10,16 @@ import { departmentDelete, updateDepartmentData } from "./DepartmentApiSlice";
 import { FaCheck } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
-import './Departments.css'
+import "./Departments.css";
 import { RxCross1 } from "react-icons/rx";
 import { IoMdCheckmark } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { notify } from "../../Component/Toast/Toast";
 import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
 import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
 
-const DepartmentDataTable = ({ DepartmentData,isPending }) => {
+const DepartmentDataTable = ({ DepartmentData, isPending }) => {
   const DeleteLocation = useMutation({
     mutationFn: (department) => {
       return departmentDelete(department);
@@ -33,29 +33,28 @@ const DepartmentDataTable = ({ DepartmentData,isPending }) => {
       }
     },
   });
- 
 
   const onDeleteData = (department) => {
     DeleteLocation.mutate(department);
   };
-  const successMessage ="Department has been updated successfully"
+  const successMessage = "Department has been updated successfully";
 
-const EditDepartment  =  useMutation ({
-  mutationFn: (editData) => {
-    return updateDepartmentData(editData.data, editData.editedDepartment);
-  },
-  onSuccess: () => {
-    notify(successMessage)
-    queryClient.invalidateQueries("DepartmentData");
-  setShow(false)
-  },
-  onError: (error) => {
-    if (error.response.status === 401) {
-      console.log("Unauthorized: Please log in with valid id.");
-    }
-  },
-})
- const [show, setShow] = useState(false);
+  const EditDepartment = useMutation({
+    mutationFn: (editData) => {
+      return updateDepartmentData(editData.data, editData.editedDepartment);
+    },
+    onSuccess: () => {
+      notify(successMessage);
+      queryClient.invalidateQueries("DepartmentData");
+      setShow(false);
+    },
+    onError: (error) => {
+      if (error.response.status === 401) {
+        console.log("Unauthorized: Please log in with valid id.");
+      }
+    },
+  });
+  const [show, setShow] = useState(false);
   const onUpdateData = (data) => {
     const editData = {
       data: data.department,
@@ -63,13 +62,12 @@ const EditDepartment  =  useMutation ({
     };
 
     EditDepartment.mutate(editData);
-
-  }
-  const [previousDepartment, setPreviousDepartment] = useState(""); 
-const [departmentId,setDepartmentId] = useState("");
+  };
+  const [previousDepartment, setPreviousDepartment] = useState("");
+  const [departmentId, setDepartmentId] = useState("");
   const handleEditButtonClick = (option) => {
     setPreviousDepartment(option.department);
-    setDepartmentId(option.id)
+    setDepartmentId(option.id);
     setShow(true);
   };
   const {
@@ -80,63 +78,68 @@ const [departmentId,setDepartmentId] = useState("");
   } = useForm({
     defaultValues: { location: previousDepartment },
   });
-  const onMiniDelete = ()=>{
-    setShow(false)
-   reset();
-  }
-  
+  const onMiniDelete = () => {
+    setShow(false);
+    reset();
+  };
+
   return (
     <section className="cateogries table__container">
       <table>
         <thead>
-          {isPending ? <SmallTablePendingHead /> :
-          <tr>
-          <th>
-            SN <LuArrowDownUp />
-          </th>
-          <th>
-            Category <LuArrowDownUp />
-          </th>
-          <th>Action</th>
-        </tr>}
-          
+          {isPending ? (
+            <SmallTablePendingHead />
+          ) : (
+            <tr>
+              <th>
+                SN <LuArrowDownUp />
+              </th>
+              <th>
+                Category <LuArrowDownUp />
+              </th>
+              <th>Action</th>
+            </tr>
+          )}
         </thead>
         <tbody>
-          {isPending ? <SmallTablePendingBody /> : (
-             DepartmentData.map((options, index) => (
+          {isPending ? (
+            <SmallTablePendingBody />
+          ) : (
+            DepartmentData.map((options, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                {departmentId===options.id &&show ? (
-                  <td className={show?"universal__td--border" : ""}>
-                  <form onSubmit={handleSubmit(onUpdateData)} className="universal__update--form">
-                    <InputField
-                      name="department"
-                      register={register}
-                      // inputValue={options.department}
-                      required={Model.Group.required}
-                      autoComplete={"off"}
-                      errors={errors}
-                      className={show?"universal__table--input":''}
-                      type={Model.Group.type}
-                      placeholder={options.department}
-                    />
-                    <div className="universal__FormButton">
-                      <Button className="" text={<FaCheck />} />
-                      <Button
-                      type='button'
-                        className=""
-                        text={<RxCross1 />                    }
-                        handleClick={onMiniDelete}
+                {departmentId === options.id && show ? (
+                  <td className={show ? "universal__td--border" : ""}>
+                    <form
+                      onSubmit={handleSubmit(onUpdateData)}
+                      className="universal__update--form"
+                    >
+                      <InputField
+                        name="department"
+                        register={register}
+                        // inputValue={options.department}
+                        required={Model.Group.required}
+                        autoComplete={"off"}
+                        errors={errors}
+                        className={show ? "universal__table--input" : ""}
+                        type={Model.Group.type}
+                        placeholder={options.department}
                       />
-                    </div>
-                  </form>
-                </td>
-  
+                      <div className="universal__FormButton">
+                        <Button className="" text={<FaCheck />} />
+                        <Button
+                          type="button"
+                          className=""
+                          text={<RxCross1 />}
+                          handleClick={onMiniDelete}
+                        />
+                      </div>
+                    </form>
+                  </td>
                 ) : (
                   <td>{options.department}</td>
-  
                 )}
-  
+
                 <td className="button-gap">
                   <Button
                     className="edit__button"
@@ -151,12 +154,11 @@ const [departmentId,setDepartmentId] = useState("");
                 </td>
               </tr>
             ))
-         )}
+          )}
         </tbody>
       </table>
-     
     </section>
   );
 };
 
-export default DepartmentDataTable
+export default DepartmentDataTable;
