@@ -15,7 +15,7 @@ import { RxCross1 } from "react-icons/rx";
 import { IoMdCheckmark } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { notifySuccess, notifyDelete } from "../../Component/Toast/Toast";
+import { notifySuccess, notifyDelete, notifyError } from "../../Component/Toast/Toast";
 import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
 import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
@@ -34,6 +34,7 @@ const DepartmentDataTable = ({ DepartmentData, isPending,handleDeleteClick }) =>
       setShow(false)
     },
     onError: (error) => {
+      notifyError(error.message)
       if (error.response.status === 401) {
         console.log("Unauthorized: Please log in with valid id.");
       }
