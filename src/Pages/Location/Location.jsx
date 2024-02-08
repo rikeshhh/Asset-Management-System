@@ -13,7 +13,7 @@ import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
 import LocationDataTable from "./LocationDataTable";
 import { ToastContainer } from "react-toastify";
-import { notify } from "../../Component/Toast/Toast";
+import { notifySuccess } from "../../Component/Toast/Toast";
 
 const Location = () => {
   const {
@@ -42,7 +42,7 @@ const Location = () => {
       return locationAdd(formData.location);
     },
     onSuccess: (data) => {
-      notify(successMessage)
+      notifySuccess(successMessage)
       queryClient.invalidateQueries("LocationData");
     },
     onError: (error) => {

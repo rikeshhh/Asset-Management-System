@@ -22,7 +22,6 @@ const Employees = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-
   const DeleteEmployee = useMutation({
     mutationFn: (employeeId) => {
       return employeeDelete(employeeId);

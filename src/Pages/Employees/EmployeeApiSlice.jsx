@@ -25,3 +25,4 @@ export const employeeDelete = async (employeeId) => {
     },
   });
 };
+

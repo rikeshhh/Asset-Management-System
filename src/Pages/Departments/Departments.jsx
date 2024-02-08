@@ -7,13 +7,17 @@ import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
 import { IoMdAdd } from "react-icons/io";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { departmentAdd, getDepartmentData } from "./DepartmentApiSlice";
+import { departmentAdd, departmentDelete, getDepartmentData } from "./DepartmentApiSlice";
 import { queryClient } from "../../Component/Query/Query";
 import DepartmentDataTable from "./DepartmentDataTable";
 import { ToastContainer } from "react-toastify";
-import { notify } from "../../Component/Toast/Toast";
+import { notifyDelete, notifySuccess } from "../../Component/Toast/Toast";
+import { useState } from "react";
+import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 
 const Departments = () => {
+
+
   const {
     register,
     formState: { errors },
@@ -25,7 +29,7 @@ const Departments = () => {
       return departmentAdd(formData.department);
     },
     onSuccess: () => {
-      notify(successMessage)
+      notifySuccess(successMessage)
       queryClient.invalidateQueries("DepartmentData");
 
     },
@@ -50,65 +54,116 @@ const Departments = () => {
     queryFn: getDepartmentData,
   });
 
+  const deleteMessage = "Department has been deleted successfully";
+  const DeleteDepartment = useMutation({
+    mutationFn: (department) => {
+      return departmentDelete(department);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("DepartmentData");
+      notifyDelete(deleteMessage)
+    },
+    onError: (error) => {
+      if (error.response.status === 401) {
+        console.log("Unauthorized: Please log in with valid id.");
+      }
+    },
+  });
+  const [departmentName, setDepartmentName] = useState()
+  const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
+
+
+  const handleCancelClick = () => {
+    setDeleteConfirationShow(false);
+  };
+
+  const handleProceedClick = () => {
+    DeleteDepartment.mutate(departmentName);
+    setDeleteConfirationShow(false);
+  };
+  const handleDeleteClick = (department) => {
+    setDeleteConfirationShow(true);
+    setDepartmentName(department);
+  };
+
+
+
   // if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
 
   return (
-    <section className="content-wrapper">
-      <div className="content-radius category">
-        <div className="content__header">
-          <h2>Department</h2>
-        </div>
-        <div className="category__content">
-          <DepartmentDataTable DepartmentData={DepartmentData} isPending={isPending} />
+    <>
 
-          <div className="add__category">
-            <div className="add__category--title">
-              <p>Add a Department</p>
-              <span>
-                Enter the department to list in the employees section.
-              </span>
+      {deleteConfirationShow ? (
+        <DeleteConfirmation
+          deleteName="department"
+          handleCancelClick={handleCancelClick}
+          handleProceedClick={handleProceedClick}
+        />
+      ) : (
+        <></>
+      )}
+
+      <section className="content-wrapper">
+        <div className="content-radius category">
+          <div className="content__header">
+            <h2>Department</h2>
+          </div>
+          <div className="category__content">
+            <DepartmentDataTable DepartmentData={DepartmentData}
+              isPending={isPending}
+              handleDeleteClick={handleDeleteClick}
+              handleProceedClick={handleProceedClick} />
+
+            <div className="add__category">
+              <div className="add__category--title">
+                <p>Add a Department</p>
+                <span>
+                  Enter the department to list in the employees section.
+                </span>
+              </div>
+              <form action="" onSubmit={handleSubmit(onSubmit)}>
+                <div>
+                  <Label sup={"*"} text="Department Name" />
+                  <InputField
+                    name="department"
+                    register={register}
+                    required={Model.Group.required}
+                    errors={errors}
+                    type={Model.Group.type}
+                    placeholder="Enter the department name"
+                    minLength={Model.Group.minLength}
+                    maxLength={Model.Group.maxLength}
+                  />
+                </div>
+                <div className="">
+                  <Button
+                    text="Add Department"
+                    type="submit"
+                    className={"category--button button__blue"}
+                    icon={<IoMdAdd />}
+                  />
+                </div>
+              </form>
             </div>
-            <form action="" onSubmit={handleSubmit(onSubmit)}>
-              <div>
-                <Label sup={"*"} text="Department Name" />
-                <InputField
-                  name="department"
-                  register={register}
-                  required={Model.Group.required}
-                  errors={errors}
-                  type={Model.Group.type}
-                  placeholder="Enter the department name"
-                  minLength={Model.Group.minLength}
-                  maxLength={Model.Group.maxLength}
-                />
-              </div>
-              <div className="">
-                <Button
-                  text="Add Department"
-                  type="submit"
-                  className={"category--button button__blue"}
-                  icon={<IoMdAdd />}
-                />
-              </div>
-            </form>
           </div>
         </div>
-      </div>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-    </section>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+      </section>
+    </>
+
   );
 };
 export default Departments;
