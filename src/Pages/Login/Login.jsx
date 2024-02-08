@@ -10,6 +10,7 @@ import { verifyUser } from "./LoginApiSlice";
 import { useState } from "react";
 import { setTokenToLocalStorage } from "../../utils/StorageUtils";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
+import { notifyError } from "../../Component/Toast/Toast";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const Login = () => {
       }
     },
     onError: (error) => {
+      notifyError(error.message)
       if (error.response.status === 401) {
         setError("Unauthorized: Please log in with valid id.");
       }

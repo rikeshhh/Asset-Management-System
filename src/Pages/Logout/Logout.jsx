@@ -3,6 +3,7 @@ import { LogoutSvg } from "../../Component/svg/LogoutSvg";
 import { clearTokenFromLocalStorage } from "../../utils/StorageUtils";
 import { logoutUser } from "./LogoutApiSlice";
 import { useNavigate } from "react-router-dom";
+import { notifyError } from "../../Component/Toast/Toast";
 
 const Logout = ({ toggleNavbar }) => {
   const navigate = useNavigate();
@@ -16,9 +17,10 @@ const Logout = ({ toggleNavbar }) => {
       navigate("/login");
     },
     onError: (error) => {
+      notifyError(error.message);
       if (error.response.status === 401) {
         
-        console.log("Error");
+      notifyError("Error");
       }
     },
   });

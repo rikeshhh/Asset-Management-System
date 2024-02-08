@@ -94,7 +94,7 @@ const Model = {
   },
   Group: {
     type: "string",
-    required: "Please enter the sub category",
+    required: "Field can't be empty",
     placeholder: "Enter the name",
     minLength: {
       value: 2,

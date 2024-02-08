@@ -15,6 +15,7 @@ import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteCon
 import { employeeDelete } from "./EmployeeApiSlice";
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
+import { notifyError } from "../../Component/Toast/Toast";
 
 const Employees = () => {
   const {
@@ -30,8 +31,9 @@ const Employees = () => {
       queryClient.invalidateQueries("EmployeeData");
     },
     onError: (error) => {
+      notifyError(error.message)
       if (error.response.status === 401) {
-        console.log("Unauthorized: Please log in with valid id.");
+        notifyError("Unauthorized: Please log in with valid id.");
       }
     },
   });
