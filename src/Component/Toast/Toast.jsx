@@ -24,3 +24,10 @@ export function notifySuccess (successMessage) {
       className: 'error-bar'
     });
   }
+  
+  export function notifyError(errorMessage) {
+    toast.error(<Msg Message={errorMessage} title={Error}/>, {
+      position: "bottom-right",
+      className: 'error-bar'
+    });
+  }
