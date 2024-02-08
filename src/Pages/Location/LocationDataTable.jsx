@@ -15,8 +15,10 @@ import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { ToastContainer } from "react-toastify";
 import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
 import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
+import { FaCheck } from "react-icons/fa6";
 
-const LocationDataTable = ({ LocationData,isPending }) => {
+const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
+  
   const [show, setShow] = useState(false);
 
   const DeleteLocation = useMutation({
@@ -83,12 +85,16 @@ const LocationDataTable = ({ LocationData,isPending }) => {
     reset();
   };
 
-  const onDeleteData = (location) => {
-    DeleteLocation.mutate(location);
-  };
+  // const onDeleteData = (location) => {
+  //   DeleteLocation.mutate(location);
+  // };
   const onMiniDelete = () => {
     setShow(false)
     reset();
+  }
+
+  const handleDeleteLocation=(locationName)=>{
+    handleDeleteClick(locationName)
   }
   return (
     <section className="cateogries table__container">
@@ -112,8 +118,9 @@ const LocationDataTable = ({ LocationData,isPending }) => {
           <tr key={index}>
             <td>{index + 1}</td>
             {options.id === previousLocationId && show ? (
-              <td>
-                <form onSubmit={handleSubmit(onLocationEditSubmit)}>
+              <td className={show ? "universal__td--border" : ""}>
+                 <form onSubmit={handleSubmit(onLocationEditSubmit)}
+                 className="universal__update--form">
                   <InputField
                     name="location"
                     register={register}
@@ -122,14 +129,25 @@ const LocationDataTable = ({ LocationData,isPending }) => {
                     type={Model.Group.type}
                     placeholder={options.location}
                     minLength={Model.Group.minLength}
-                    maxLength={Model.Group.maxLength}
+                     maxLength={Model.Group.maxLength}
+                     className={show ? "universal__table--input" : ''}
+                     
                   ></InputField>
-                  <button>
+                  {/* <button>
                     <IoMdCheckmark />
                   </button>
                   <button type="button" onClick={handleEditCancel}>
                     <RxCross1 />
-                  </button>
+                  </button> */}
+                    <div className="universal__FormButton">
+                          <Button className="" text={<FaCheck/>} />
+                          <Button
+                            type='button'
+                            className=""
+                            text={<RxCross1 />}
+                            handleClick={onMiniDelete}
+                          />
+                        </div>
                 </form>
               </td>
             ) : (
@@ -144,7 +162,8 @@ const LocationDataTable = ({ LocationData,isPending }) => {
               <Button
                 className="delete__button"
                 text={<GoTrash />}
-                handleClick={() => onDeleteData(options.location)}
+                 handleClick={() => handleDeleteLocation(options.location)}
+                // handleClick={() => onDeleteData(options.location)}
               />
             </td>
           </tr>
