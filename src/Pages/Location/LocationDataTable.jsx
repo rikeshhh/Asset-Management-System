@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
 import { IoMdCheckmark } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
-import { notify } from "../../Component/Toast/Toast";
+import { notifySuccess } from "../../Component/Toast/Toast";
 import { ToastContainer } from "react-toastify";
 import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
 import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
@@ -38,7 +38,7 @@ const LocationDataTable = ({ LocationData,isPending }) => {
       return locationEdit(editData.data, editData.previousLocation);
     },
     onSuccess: () => {
-      notify(successMessage)
+      notifySuccess(successMessage)
       queryClient.invalidateQueries("LocationData");
       setShow(false);
       reset();
