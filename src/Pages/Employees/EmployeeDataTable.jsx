@@ -29,7 +29,7 @@ const EmployeeDataTable = ({
     handleDeleteClick(employeeId);
   };
 
-  if (isPending) return "Loading...";
+  // if (isPending) return "Loading...";
   // if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
@@ -51,63 +51,38 @@ const EmployeeDataTable = ({
           }
         </thead>
         <tbody>
-          {tableData.map((tableItem, index) => (
-            <tr key={index}>
-              <td>{tableItem.id}</td>
-              <td>{tableItem.name}</td>
-              <td>{tableItem.designation}</td>
-              <td>{tableItem.department}</td>
-              <td>{tableItem.email}</td>
-              <td>{tableItem.phone}</td>
-              <td className="button-gap">
-                {/* <Link  to={{ pathname: '/profile', state: false }}>
-                   </Link> */}
-                <Link to={linkTo} className="link">
-                  <Button
-                    type={"button"}
-                    className="edit__button"
-                    onClick={handleTableEdit}
-                    text={<CiEdit />}
-                  />
-                </Link>
-                <Button
-                  type={"button"}
-                  className="delete__button"
-                  text={<GoTrash />}
-                  handleClick={() => handleDeleteEmployee(tableItem.id)}
-                />
-              </td>
-            </tr>
-          ))}
           {isPending ? <PendingTableBody /> : (
-            tableData.map((tableItem, index) => (
-              <tr key={index}>
-                <td>{tableItem.id}</td>
-                <td>{tableItem.name}</td>
-                <td>{tableItem.designation}</td>
-                <td>{tableItem.department}</td>
-                <td>{tableItem.email}</td>
-                <td>{tableItem.phone}</td>
-                <td className="button-gap">
-                  {/* <Link  to={{ pathname: '/profile', state: false }}>
-                         </Link> */}
-                  <Link to={linkTo} className="link">
-                    <Button
-                      type={"button"}
-                      className="edit__button"
-                      onClick={handleTableEdit}
-                      text={<CiEdit />}
-                    />
-                  </Link>
-                  <Button
-                    type={"button"}
-                    className="delete__button"
-                    text={<GoTrash />}
-                  />
-                </td>
-              </tr>
-            ))
+                  tableData.map((tableItem, index) => (
+                    <tr key={index}>
+                      <td>{tableItem.id}</td>
+                      <td>{tableItem.name}</td>
+                      <td>{tableItem.designation}</td>
+                      <td>{tableItem.department}</td>
+                      <td>{tableItem.email}</td>
+                      <td>{tableItem.phone}</td>
+                      <td className="button-gap">
+                        {/* <Link  to={{ pathname: '/profile', state: false }}>
+                           </Link> */}
+                        <Link to={linkTo} className="link">
+                          <Button
+                            type={"button"}
+                            className="edit__button"
+                            onClick={handleTableEdit}
+                            text={<CiEdit />}
+                          />
+                        </Link>
+                        <Button
+                          type={"button"}
+                          className="delete__button"
+                          text={<GoTrash />}
+                          handleClick={() => handleDeleteEmployee(tableItem.id)}
+                        />
+                      </td>
+                    </tr>
+                  ))
           )}
+    
+    
         </tbody>
       </table>
     </div>
