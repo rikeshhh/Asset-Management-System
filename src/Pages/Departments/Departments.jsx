@@ -33,7 +33,7 @@ const Departments = () => {
       queryClient.invalidateQueries("DepartmentData");
     },
     onError: (error) => {
-      notifyError(error.message)
+      notifyError("Data cannot be redeclared");
       if (error.response.status === 401) {
         notifyError("Unauthorized: Please log in with valid id.");
       }
@@ -61,11 +61,11 @@ const Departments = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries("DepartmentData");
-      notifyDelete(deleteMessage)
+      notifySuccess(deleteMessage)
     },
     onError: (error) => {
       if (error.response.status === 401) {
-        console.log("Unauthorized: Please log in with valid id.");
+        notifyError("Unauthorized: Please log in with valid id.");
       }
     },
   });

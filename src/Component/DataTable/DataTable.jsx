@@ -22,7 +22,7 @@ export const DataTable = ({ CategoryOptions }) => {
       queryClient.invalidateQueries(data);
     },
     onError: (error) => {
-      notifyError(error.message);
+      notifyError("Data cannot be redeclared");
       if (error.response.status === 401) {
         console.log("Unauthorized: Please log in with valid id.");
       }
