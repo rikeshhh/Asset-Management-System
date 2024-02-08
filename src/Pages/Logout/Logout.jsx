@@ -2,7 +2,6 @@ import { useMutation } from "@tanstack/react-query";
 import { LogoutSvg } from "../../Component/svg/LogoutSvg";
 import { clearTokenFromLocalStorage } from "../../utils/StorageUtils";
 import { logoutUser } from "./LogoutApiSlice";
-import { notify } from "../../Component/Toast/Toast";
 import { useNavigate } from "react-router-dom";
 
 const Logout = ({ toggleNavbar }) => {
