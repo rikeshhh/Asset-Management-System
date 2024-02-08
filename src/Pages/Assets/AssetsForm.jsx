@@ -8,6 +8,7 @@ import { SelectInput } from "../../Component/Input/SelectInput";
 import Button from "../../Component/Button/Button";
 import DropzoneArea from "../../Component/Dropzone/DropzoneArea";
 import { Link } from "react-router-dom";
+import SelectInputLocation from "../Location/SelectInputLocation";
 
 const AssetsForm = ({
   formHeading,
@@ -122,7 +123,7 @@ const AssetsForm = ({
             </div>
             <div className="assets__form--input">
               <Label text="Location" sup={"*"} />
-              <SelectInput options={options} />
+              <SelectInputLocation  />
             </div>
             <div className="assets__form--input">
               <Label text="Assigned to" sup={"*"} />

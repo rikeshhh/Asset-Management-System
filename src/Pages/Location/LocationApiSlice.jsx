@@ -9,6 +9,13 @@ export const getLocationData = async () => {
   const resp = await locationData.data.data;
   return resp;
 };
+export const selectInputLocation = async () => {
+  const locationData = await instance.get("/location", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const resp = await locationData.data.data;
+  return resp;
+};
 
 export const locationAdd = async (location) => {
   const locationData = await instance.post(
