@@ -10,6 +10,7 @@ import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { profileCover } from "../../Component/Images/Image";
 import { GoTrash } from "react-icons/go";
+import SelectInputDepartment from "../Departments/SelectInputDepartment";
 export const Profile = ({ title, description, buttonBlueText }) => {
   const {
     register,
@@ -169,7 +170,8 @@ export const Profile = ({ title, description, buttonBlueText }) => {
             </div>
             <div className="form__input--section">
               <Label sup={"*"} text="Department" />
-              <SelectInput isDisabled={receivedState} options={options} />
+              <SelectInputDepartment isDisabled={receivedState}/>
+              {/* // <SelectInput isDisabled={receivedState} options={options} /> */}
             </div>
             <div className="form__input--section">
               <Label sup={"*"} text="Email" />

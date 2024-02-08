@@ -10,7 +10,13 @@ export const getDepartmentData = async () => {
   const resp = await departmentData.data.data;
   return resp;
 };
-
+export const selectInputDepartment = async () => {
+  const departmentData = await instance.get("/department", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const resp = await departmentData.data.data;
+  return resp;
+};
 export const departmentAdd = async (department) => {
   const departmentData = await instance.post(
     "/department",

@@ -11,7 +11,7 @@ import { departmentAdd, departmentDelete, getDepartmentData } from "./Department
 import { queryClient } from "../../Component/Query/Query";
 import DepartmentDataTable from "./DepartmentDataTable";
 import { ToastContainer } from "react-toastify";
-import { notifyDelete, notifySuccess } from "../../Component/Toast/Toast";
+import { notifyDelete, notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { useState } from "react";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 
@@ -33,8 +33,9 @@ const Departments = () => {
       queryClient.invalidateQueries("DepartmentData");
     },
     onError: (error) => {
+      notifyError(error.message)
       if (error.response.status === 401) {
-        console.log("Unauthorized: Please log in with valid id.");
+        notifyError("Unauthorized: Please log in with valid id.");
       }
     },
   });

@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
 import { IoMdCheckmark } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
-import { notifySuccess } from "../../Component/Toast/Toast";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { ToastContainer } from "react-toastify";
 import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
 import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
@@ -27,8 +27,10 @@ const LocationDataTable = ({ LocationData,isPending }) => {
       queryClient.invalidateQueries("LocationData");
     },
     onError: (error) => {
+      notifyError(error.message);
+
       if (error.response.status === 401) {
-        console.log("Unauthorized: Please log in with valid id.");
+        notifyError("Unauthorized: Please log in with valid id.");
       }
     },
   });

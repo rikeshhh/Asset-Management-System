@@ -14,6 +14,7 @@ import { IoChevronDown } from "react-icons/io5";
 import { categoryDelete, categoryEdit } from "./CategoryApiSice";
 import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
 import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
+import { notifyError } from "../../Component/Toast/Toast";
 
 const CategoryDataTable = ({ CategoryData ,isPending}) => {
   const [show, setShow] = useState(false);
@@ -27,8 +28,9 @@ const CategoryDataTable = ({ CategoryData ,isPending}) => {
       queryClient.invalidateQueries("CategoryData");
     },
     onError: (error) => {
+      notifyError(error.message);
       if (error.response.status === 401) {
-        console.log("Unauthorized: Please log in with valid id.");
+        notifyError("Unauthorized: Please log in with valid id.");
       }
     },
   });
@@ -43,8 +45,9 @@ const CategoryDataTable = ({ CategoryData ,isPending}) => {
       reset();
     },
     onError: (error) => {
+      notifyError(error.message)
       if (error.response.status === 401) {
-        console.log("Unauthorized: Please log in with valid id.");
+        notifyError("Unauthorized: Please log in with valid id.");
       }
     },
   });

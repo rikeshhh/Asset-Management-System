@@ -10,6 +10,7 @@ import { IoMdAdd } from "react-icons/io";
 import { categoryAdd, getCategoryData } from "./CategoryApiSice";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import CategoryDataTable from "./CategoryDataTable";
+import { notifyError } from "../../Component/Toast/Toast";
 
 const Categories = () => {
   const options = ["Frontend"];
@@ -42,8 +43,9 @@ const Categories = () => {
       reset();
     },
     onError: (error) => {
+      notifyError(error.message)
       if (error.response.status === 401) {
-        console.log("Unauthorized: Please log in with valid id.");
+        notifyError("Unauthorized: Please log in with valid id.");
       }
     },
   });

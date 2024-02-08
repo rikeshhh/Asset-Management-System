@@ -11,6 +11,7 @@ import EditData from "../EditData/EditData";
 import { useMutation } from "@tanstack/react-query";
 import { departmentDelete } from "../../Pages/Departments/DepartmentApiSlice";
 import { queryClient } from "../Query/Query";
+import { notifyError } from "../Toast/Toast";
 
 export const DataTable = ({ CategoryOptions }) => {
   const DeleteDepartment = useMutation({
@@ -21,6 +22,7 @@ export const DataTable = ({ CategoryOptions }) => {
       queryClient.invalidateQueries(data);
     },
     onError: (error) => {
+      notifyError(error.message);
       if (error.response.status === 401) {
         console.log("Unauthorized: Please log in with valid id.");
       }

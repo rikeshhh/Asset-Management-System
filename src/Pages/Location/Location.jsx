@@ -13,7 +13,7 @@ import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
 import LocationDataTable from "./LocationDataTable";
 import { ToastContainer } from "react-toastify";
-import { notifySuccess } from "../../Component/Toast/Toast";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 
 const Location = () => {
   const {
@@ -46,8 +46,9 @@ const Location = () => {
       queryClient.invalidateQueries("LocationData");
     },
     onError: (error) => {
+      notifyError(error.message)
       if (error.response.status === 401) {
-        console.log("Unauthorized: Please log in with valid id.");
+        notifyError("Unauthorized: Please log in with valid id.");
       }
     },
   });

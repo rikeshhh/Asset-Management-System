@@ -34,9 +34,10 @@ const DepartmentDataTable = ({ DepartmentData, isPending,handleDeleteClick }) =>
       setShow(false)
     },
     onError: (error) => {
-      notifyError(error.message)
+      notifyError(error.message);
+
       if (error.response.status === 401) {
-        console.log("Unauthorized: Please log in with valid id.");
+        notifyError("Unauthorized: Please log in with valid id.");
       }
     },
   })
