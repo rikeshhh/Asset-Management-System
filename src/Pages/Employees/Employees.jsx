@@ -7,7 +7,7 @@ import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import Button from "../../Component/Button/Button";
 import { IoMdAdd } from "react-icons/io";
 import { BsFunnel } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Filter from "../../Component/Filter/Filter";
 import { useState } from "react";
 import EmployeeDataTable from "./EmployeeDataTable";
@@ -22,6 +22,9 @@ const Employees = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  const navigate = useNavigate();
+
   const DeleteEmployee = useMutation({
     mutationFn: (employeeId) => {
       return employeeDelete(employeeId);
@@ -57,11 +60,17 @@ const Employees = () => {
     DeleteEmployee.mutate(employeeId);
     setDeleteConfirationShow(false);
   };
+
+  const handleTableEdit = (employeeData) => {
+    navigate("/editProfile", {
+      state: { employeeData: employeeData },
+    });
+  };
   return (
     <>
       {deleteConfirationShow ? (
         <DeleteConfirmation
-        deleteName="employee"
+          deleteName="employee"
           handleCancelClick={handleCancelClick}
           handleProceedClick={handleProceedClick}
         />
@@ -100,9 +109,9 @@ const Employees = () => {
               />
             </div>
             <EmployeeDataTable
-              linkTo={"/editProfile"}
               handleDeleteClick={handleDeleteClick}
               handleProceedClick={handleProceedClick}
+              handleTableEdit={handleTableEdit}
             />
           </div>
         </div>
