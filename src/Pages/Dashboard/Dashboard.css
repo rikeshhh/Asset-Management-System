@@ -4,4 +4,26 @@
   align-items: center;
   flex-direction: column;
   height: 100vh;
+  gap: 12px;
+}
+.ams__Dashboard{
+  color: var(--ams);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 42px;
+}
+.dashboard__button{
+  background-color: var(--blue);
+  color: var(--secondary-color);
+}
+.work__on--progress{
+  color :var(--work-progress);
+  font-size: 50px;
+  font-weight: 800;
+  line-height: 75px;
+}
+.dashboard--span{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
 }
