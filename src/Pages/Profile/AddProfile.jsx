@@ -1,4 +1,3 @@
-import { useLocation } from "react-router-dom";
 import React, { useRef, useState } from "react";
 import { InputField } from "../../Component/Input/InputField";
 import { Label } from "../../Component/Label/Label";
