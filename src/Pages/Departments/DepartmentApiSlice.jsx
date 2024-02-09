@@ -3,6 +3,7 @@ import { getTokenFromLocalStorage } from "../../utils/StorageUtils";
 import instance from "../../axios/Axios";
 
 const token = getTokenFromLocalStorage();
+
 export const getDepartmentData = async () => {
   const departmentData = await instance.get("/department", {
     headers: { Authorization: `Bearer ${token}` },
@@ -10,6 +11,7 @@ export const getDepartmentData = async () => {
   const resp = await departmentData.data.data;
   return resp;
 };
+
 export const selectInputDepartment = async () => {
   const departmentData = await instance.get("/department", {
     headers: { Authorization: `Bearer ${token}` },
@@ -17,6 +19,7 @@ export const selectInputDepartment = async () => {
   const resp = await departmentData.data.data;
   return resp;
 };
+
 export const departmentAdd = async (department) => {
   const departmentData = await instance.post(
     "/department",
