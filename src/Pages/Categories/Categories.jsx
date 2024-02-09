@@ -7,13 +7,20 @@ import { SelectInput } from "../../Component/Input/SelectInput";
 import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
 import { IoMdAdd } from "react-icons/io";
-import { categoryAdd, getCategoryData } from "./CategoryApiSice";
+import {
+  getCategoryData,
+  getSubCategoryData,
+  parentCategoryAdd,
+  subCategoryAdd,
+} from "./CategoryApiSice";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import CategoryDataTable from "./CategoryDataTable";
 import { notifyError } from "../../Component/Toast/Toast";
+import { queryClient } from "../../Component/Query/Query";
+import { useState } from "react";
+import SelectInputCategory from "./SelectInputCategory";
 
 const Categories = () => {
-  const options = ["Frontend"];
   const {
     register,
     formState: { errors },
@@ -30,26 +37,51 @@ const Categories = () => {
     queryFn: getCategoryData,
   });
 
+  const { data: SubCategoryData } = useQuery({
+    queryKey: ["SubCategoryData"],
+    queryFn: getSubCategoryData,
+  });
+
   const onCategorySubmit = (data) => {
-    addLocation.mutate(data);
+    console.log(data);
+    if (data.parent === "None") {
+      addParentCategory.mutate(data);
+    } else {
+      addSubCategory.mutate(data);
+    }
   };
 
-  const addLocation = useMutation({
+  const addParentCategory = useMutation({
     mutationFn: (formData) => {
-      return categoryAdd(formData.parent);
+      return parentCategoryAdd(formData);
     },
     onSuccess: () => {
       queryClient.invalidateQueries("CategoryData");
       reset();
     },
     onError: (error) => {
-      notifyError(error.message)
+      notifyError(error.message);
       if (error.response.status === 401) {
         notifyError("Unauthorized: Please log in with valid id.");
       }
     },
   });
 
+  const addSubCategory = useMutation({
+    mutationFn: (formData) => {
+      return subCategoryAdd(formData);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("SubCategoryData");
+      reset();
+    },
+    onError: (error) => {
+      notifyError(error.message);
+      if (error.response.status === 401) {
+        notifyError("Unauthorized: Please log in with valid id.");
+      }
+    },
+  });
   // if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
@@ -60,7 +92,11 @@ const Categories = () => {
           <h2>Categories</h2>
         </div>
         <div className="category__content">
-          <CategoryDataTable CategoryData={CategoryData} isPending={ isPending} />
+          <CategoryDataTable
+            CategoryData={CategoryData}
+            isPending={isPending}
+            SubCategoryData={SubCategoryData}
+          />
 
           <div className="add__category">
             <div className="add__category--title">
@@ -74,7 +110,7 @@ const Categories = () => {
               <div>
                 <Label sup={"*"} text="Name" />
                 <InputField
-                  name="ChildCategory"
+                  name="category_name"
                   register={register}
                   required={Model.Group.required}
                   errors={errors}
@@ -82,11 +118,12 @@ const Categories = () => {
                   placeholder={Model.Group.placeholder}
                   minLength={Model.Group.minLength}
                   maxLength={Model.Group.maxLength}
+                  autoComplete={"off"}
                 />
               </div>
               <div className="add__category--select">
                 <Label sup={"*"} text="Parent Category" />
-                <SelectInput options={options} />
+                <SelectInputCategory register={register} />
               </div>
               <div className="">
                 <Button

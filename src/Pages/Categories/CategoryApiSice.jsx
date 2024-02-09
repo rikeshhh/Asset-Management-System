@@ -10,12 +10,43 @@ export const getCategoryData = async () => {
   return resp;
 };
 
-export const categoryAdd = async (parentCategory) => {
+export const getSubCategoryData = async () => {
+  const subcategoryDataRequest = await instance.get("/category", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const resp = await subcategoryDataRequest.data.data;
+  return resp;
+};
+
+export const selectInputCategory = async () => {
+  const categoryData = await instance.get("/category", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const resp = await categoryData.data.data;
+  return resp;
+};
+
+export const parentCategoryAdd = async (category) => {
   const categoryDataAdd = await instance.post(
     "/category",
     {
-      category_name: "hello",
-      parent: parentCategory,
+      category_name: category.category_name,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
+export const subCategoryAdd = async (category) => {
+  const subCategoryDataAdd = await instance.post(
+    "/category",
+    {
+      category_name: category.category_name,
+      parent: category.parent,
     },
     {
       headers: {

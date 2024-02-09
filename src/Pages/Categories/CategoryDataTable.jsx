@@ -15,10 +15,12 @@ import { categoryDelete, categoryEdit } from "./CategoryApiSice";
 import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
 import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
 import { notifyError } from "../../Component/Toast/Toast";
+import SubCategory from "./SubCategory";
 
-const CategoryDataTable = ({ CategoryData ,isPending}) => {
+const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
   const [show, setShow] = useState(false);
-  const [showSubCatrgory, setShowSubCatrgory] = useState(false);
+  const [showSubCategory, setShowSubCategory] = useState(false);
+  const [showSubCategoryDrop, setshowSubCategoryDrop] = useState("");
 
   const DeleteCategory = useMutation({
     mutationFn: (parentCategory) => {
@@ -45,7 +47,7 @@ const CategoryDataTable = ({ CategoryData ,isPending}) => {
       reset();
     },
     onError: (error) => {
-      notifyError(error.message)
+      notifyError(error.message);
       if (error.response.status === 401) {
         notifyError("Unauthorized: Please log in with valid id.");
       }
@@ -62,8 +64,9 @@ const CategoryDataTable = ({ CategoryData ,isPending}) => {
     reset();
   };
 
-  const handleSubCategoryClick = () => {
-    setShowSubCatrgory(true);
+  const handleSubCategoryClick = (options) => {
+    setshowSubCategoryDrop(options.id);
+    setShowSubCategory((prev) => !prev);
   };
 
   const {
@@ -94,20 +97,25 @@ const CategoryDataTable = ({ CategoryData ,isPending}) => {
     <section className="cateogries table__container">
       <table>
         <thead>
-          {isPending ? <SmallTablePendingHead /> :
-          <tr>
-          <th>
-            SN <LuArrowDownUp />
-          </th>
-          <th>
-            Category <LuArrowDownUp />
-          </th>
-          <th>Action</th>
-        </tr>}
+          {isPending ? (
+            <SmallTablePendingHead />
+          ) : (
+            <tr>
+              <th>
+                SN <LuArrowDownUp />
+              </th>
+              <th>
+                Category <LuArrowDownUp />
+              </th>
+              <th>Action</th>
+            </tr>
+          )}
         </thead>
         <tbody>
-          {isPending ? <SmallTablePendingBody /> : (
-             CategoryData.map((options, index) => (
+          {isPending ? (
+            <SmallTablePendingBody />
+          ) : (
+            CategoryData.map((options, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 {options.id === previousCategoryId && show ? (
@@ -124,9 +132,6 @@ const CategoryDataTable = ({ CategoryData ,isPending}) => {
                         maxLength={Model.Group.maxLength}
                       ></InputField>
                       <button>
-                        <IoChevronDown onClick={handleSubCategoryClick} />
-                      </button>
-                      <button>
                         <IoMdCheckmark />
                       </button>
                       <button type="button" onClick={handleEditCancel}>
@@ -135,9 +140,24 @@ const CategoryDataTable = ({ CategoryData ,isPending}) => {
                     </form>
                   </td>
                 ) : (
-                  <td>{options.parent}</td>
+                  <>
+                    <td>
+                      {options.parent}
+                      {showSubCategory && options.id === showSubCategoryDrop ? (
+                        <SubCategory SubCategoryData={SubCategoryData}/>
+                      ) : (
+                        <></>
+                      )}
+                    </td>
+                  </>
                 )}
                 <td className="button-gap">
+                  <Button
+                    handleClick={() => handleSubCategoryClick(options)}
+                    text={<IoChevronDown />}
+                    className="edit__button"
+                  />
+
                   <Button
                     className="edit__button"
                     text={<CiEdit />}
@@ -151,7 +171,7 @@ const CategoryDataTable = ({ CategoryData ,isPending}) => {
                 </td>
               </tr>
             ))
-         )}
+          )}
         </tbody>
       </table>
     </section>
