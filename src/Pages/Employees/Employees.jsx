@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { InputField } from "../../Component/Input/InputField";
 import Table from "../../Component/Table/Table";
@@ -9,7 +10,6 @@ import { IoMdAdd } from "react-icons/io";
 import { BsFunnel } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import Filter from "../../Component/Filter/Filter";
-import { useState } from "react";
 import EmployeeDataTable from "./EmployeeDataTable";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 import { employeeDelete } from "./EmployeeApiSlice";
@@ -34,7 +34,7 @@ const Employees = () => {
       queryClient.invalidateQueries("EmployeeData");
     },
     onError: (error) => {
-      notifyError(error.message)
+      notifyError(error.message);
       if (error.response.status === 401) {
         notifyError("Unauthorized: Please log in with valid id.");
       }
@@ -48,6 +48,25 @@ const Employees = () => {
   const onFilterClick = (showHide) => {
     setFilterShow(showHide);
   };
+
+  const handleBodyClick = (e) => {
+    // Check if the clicked element is not part of the filter component
+    if (
+      !e.target.closest(".ams__filter") &&
+      !e.target.closest(".filter--button") &&
+      !e.target.closest(".filter__form")
+    ) {
+      setFilterShow(false);
+    }
+  };
+
+  useEffect(() => {
+    document.body.addEventListener("click", handleBodyClick);
+
+    return () => {
+      document.body.removeEventListener("click", handleBodyClick);
+    };
+  }, []);
 
   const handleDeleteClick = (employee) => {
     setDeleteConfirationShow(true);
@@ -68,6 +87,7 @@ const Employees = () => {
       state: { employeeData: employeeData },
     });
   };
+
   return (
     <>
       {deleteConfirationShow ? (

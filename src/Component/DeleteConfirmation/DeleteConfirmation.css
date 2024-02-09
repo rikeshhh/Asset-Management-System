@@ -50,3 +50,42 @@
   display: flex;
   gap: 14px;
 }
+
+@media screen and (max-width: 1024px) {
+  .delete__box {
+    margin-left: -7rem !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .delete__box {
+    margin-left: 0rem !important;
+  }
+  .delete__confirmation {
+    padding: 10px;
+  }
+  .delete__confirmation--icon {
+    padding-bottom: 6px;
+  }
+  .delete__confirmation h4 {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 15px;
+    letter-spacing: 0.5%;
+    text-transform: capitalize;
+  }
+  .delete__confirmation--info p {
+    font-size: 10px;
+    font-weight: 300;
+    line-height: 18px;
+    letter-spacing: 0.5%;
+    text-align: center;
+  }
+  .delete__confirmation--info {
+    padding-bottom: 14px;
+  }
+  .delete__confirmation--button button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}

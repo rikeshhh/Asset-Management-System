@@ -1,4 +1,4 @@
-import "./DeleteConfirmation..css";
+import "./DeleteConfirmation.css";
 import Button from "../Button/Button";
 import { deleteIcon } from "../Images/Image";
 
