@@ -10,6 +10,7 @@ import Model from "../../Component/Model/Model";
 import { Link } from "react-router-dom";
 import { profileCover } from "../../Component/Images/Image";
 import { GoTrash } from "react-icons/go";
+import SelectInputDepartment from "../Departments/SelectInputDepartment";
 
 const EditProfile = () => {
   const location = useLocation();
@@ -175,7 +176,7 @@ const EditProfile = () => {
             </div>
             <div className="form__input--section">
               <Label sup={"*"} text="Department" />
-              <SelectInput isDisabled={receivedState} options={options} />
+              <SelectInputDepartment isDisabled={receivedState} />
             </div>
             <div className="form__input--section">
               <Label sup={"*"} text="Email" />
