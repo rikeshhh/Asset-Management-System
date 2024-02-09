@@ -11,12 +11,17 @@ const Msg = ({ Message,title }) => (
 const Success= "Success";
 const Error ="Error";
 const deleted= "Deleted";
+
+
+
 export function notifySuccess (successMessage) {
     toast.success(<Msg Message={successMessage} title={Success}/>, {
       position: "bottom-right",
       className: 'success-bar'
     });
   }
+
+
 
   export function notifyDelete(deleteMessage) {
     toast.error(<Msg Message={deleteMessage} title={deleted}/>, {
