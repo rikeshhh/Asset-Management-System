@@ -4,14 +4,14 @@ import "./Dashboard.css";
 const Dashboard = () => {
   return (
     <section className="dashboard">
-      <h3>AMS DASHBOARD</h3>
-      <p>Work On Progress</p>
-      <span>Please continue checking other ui pages</span>
-      <Button text={"Go to Assets"} linkUrl={"/assets"} />
-      <h1>Go to LOGIN & SIGNUP pages</h1>
-      <Link to="/login">
-        <button>LOGIN</button>
-      </Link>
+      <h3 className="ams__Dashboard">AMS DASHBOARD</h3>
+      <p className="work__on--progress">Work On Progress</p>
+      <span className="dashboard--span">Please continue checking other ui pages</span>
+        <Link to="/assets" className="link">
+      <Button className='button__blue' text="Go To Assets">
+
+      </Button>
+        </Link>
     </section>
   );
 };
