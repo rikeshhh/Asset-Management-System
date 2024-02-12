@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import React, { useRef, useState } from "react";
 import { InputField } from "../../Component/Input/InputField";
 import { Label } from "../../Component/Label/Label";
@@ -11,17 +11,24 @@ import { Link } from "react-router-dom";
 import { profileCover } from "../../Component/Images/Image";
 import { GoTrash } from "react-icons/go";
 import SelectInputDepartment from "../Departments/SelectInputDepartment";
+import { useMutation } from "@tanstack/react-query";
+import { queryClient } from "../../Component/Query/Query";
+import { employeeEdit } from "./EditProfileApi";
+import { notifySuccess } from "../../Component/Toast/Toast";
 
 const EditProfile = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const receivedData = location.state;
   const employeeData = receivedData.employeeData;
+  const employeePrevId = employeeData.id;
 
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+
   const receivedState = false;
 
   const fileInputRef = useRef(null);
@@ -53,6 +60,29 @@ const EditProfile = () => {
     fileInputRef.current.click();
   };
 
+  const EditEmployeeData = useMutation({
+    mutationFn: (data) => {
+      return employeeEdit(data);
+    },
+    onSuccess: () => {
+      notifySuccess("Employee Edited Successfully");
+      navigate("/employees")
+      queryClient.invalidateQueries("EmployeeData");
+    },
+    onError: (error) => {
+      notifyError(error.message);
+      if (error.response.status === 401) {
+        notifyError("Unauthorized: Please log in with valid id.");
+      }
+    },
+  });
+  const onEmployeeEditSubmit = (data) => {
+    const employeeInfo = {
+      id: employeePrevId,
+      employeeData: data
+    }
+    EditEmployeeData.mutate(employeeInfo)
+  }
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -104,7 +134,7 @@ const EditProfile = () => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit()} className="group__form profile__form">
+          <form onSubmit={handleSubmit(onEmployeeEditSubmit)} className="group__form profile__form">
             <div className="form__input--section">
               <Label sup={"*"} text="Name" />
               <InputField
@@ -114,14 +144,15 @@ const EditProfile = () => {
                 message={Model.Username.pattern.message}
                 required={Model.Username.required}
                 errors={errors}
-                inputValue={employeeData.name}
+                // inputValue={employeeData.name}
                 type={Model.Username.type}
-                placeholder={Model.Username.placeholder}
+                placeholder={employeeData.name}
                 minLength={Model.Username.minLength.value}
                 minMessage={Model.Username.minLength.message}
                 maxLength={Model.Username.maxLength.value}
                 maxMessage={Model.Username.maxLength.message}
                 isDisabled={receivedState}
+                onEditChange={(e) => employeeData.name.value}
               />
             </div>
 
@@ -164,7 +195,7 @@ const EditProfile = () => {
                 message={Model.Designation.pattern.message}
                 required={Model.Designation.required}
                 errors={errors}
-                inputValue={employeeData.designation}
+                // inputValue={employeeData.designation}
                 type={Model.Designation.type}
                 placeholder={Model.Designation.placeholder}
                 minLength={Model.Designation.minLength.value}
@@ -187,9 +218,9 @@ const EditProfile = () => {
                 message={Model.Email.pattern.message}
                 required={Model.Email.required}
                 errors={errors}
-                inputValue={employeeData.email}
+                // inputValue={employeeData.email}
                 type={Model.Email.type}
-                placeholder={Model.Email.placeholder}
+                placeholder={employeeData.email}
                 maxLength={Model.Email.maxLength.value}
                 maxMessage={Model.Email.maxLength.message}
                 isDisabled={receivedState}
@@ -221,7 +252,7 @@ const EditProfile = () => {
               }
             >
               <Button
-                value="submit"
+              type="submit"
                 text="Save Changes"
                 className={receivedState ? "profile-btn-none" : "button__blue"}
               />
@@ -233,15 +264,6 @@ const EditProfile = () => {
                 />
               </Link>
 
-              <Link to="/" className="link">
-                <Button
-                  className={
-                    receivedState ? "button__red " : "profile-btn-none"
-                  }
-                  text="Close"
-                  isDisabled={false}
-                />
-              </Link>
             </div>
           </form>
         </div>
