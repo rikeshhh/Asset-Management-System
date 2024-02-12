@@ -4,7 +4,7 @@ import { getTokenFromLocalStorage } from "../../utils/StorageUtils";
 const token = getTokenFromLocalStorage();
 export const getEmployeeTableData = async () => {
   try {
-    const response = await instance.get("/user?", {
+    const response = await instance.get("/user", {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data.data;
