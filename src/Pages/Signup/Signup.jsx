@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
 import { BiSolidShow, BiSolidHide } from "react-icons/bi";
+import { showHide } from "../../Component/Images/Image";
 
 export const Signup = () => {
   const formMethod = useForm();
@@ -20,15 +21,12 @@ export const Signup = () => {
     console.log(data);
   };
   // password showing features
-  const [showPassword, setShowPassword] = useState(false)
-  const[showResetPassword,setShowResetPassword]=useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [showResetPassword, setShowResetPassword] = useState(false);
   const visiblePasswordFn = (e) => (
-    e.preventDefault(),
-    setShowPassword((prev) => !prev)
-  )
-  const visibleResetPasswordFn = () => (
-    setShowResetPassword((prev) => !prev)
-  )
+    e.preventDefault(), setShowPassword((prev) => !prev)
+  );
+  const visibleResetPasswordFn = () => setShowResetPassword((prev) => !prev);
   return (
     <section className="main-container signup">
       <div className="user__auth">
@@ -96,28 +94,36 @@ export const Signup = () => {
                     showPassword={showPassword}
                     visiblePasswordFn={visiblePasswordFn}
                   >
-                    <button className="toggleBtn__signUp"  type="button">
-                      {showPassword?<BiSolidShow />:<BiSolidHide />}
-                      </button>
-                    </InputField>
+                    <button className="toggleBtn__signUp" type="button">
+                      <img src={showHide} alt="show-hide" />
+                    </button>
+                  </InputField>
                 </div>
                 <div className="form__input--section form__input--section__password">
                   <Label text="RetypePassword" />
-                  <input
-                    className="retype-password"
-                    name="RetypePassword"
-                    type={showResetPassword?'text':'password'}
-                    placeholder="Enter your password again"
-                    {...register("RetypePassword", {
-                      required: "Retype Password is required",
-                      validate: (value) =>
-                        value === watch("Password") || "Passwords do not match",
-                    })}
-                  />
-                    <button onClick={visibleResetPasswordFn} className="toggleBtn__signUp__retype__password"  type="button">
-                      {showResetPassword?<BiSolidShow />:<BiSolidHide />}
+                  <div className="repassword-toggle--button">
+                    <input
+                      className="retype-password"
+                      name="RetypePassword"
+                      type={showResetPassword ? "text" : "password"}
+                      placeholder="Enter your password again"
+                      {...register("RetypePassword", {
+                        required: "Retype Password is required",
+                        validate: (value) =>
+                          value === watch("Password") ||
+                          "Passwords do not match",
+                      })}
+                    />
+                    <div className="retype-password--showHide--btn">
+                      <button
+                        onClick={visibleResetPasswordFn}
+                        className="toggleBtn__signUp__retype__password"
+                        type="button"
+                      >
+                        <img src={showHide} alt="show-hide" />
                       </button>
-              
+                    </div>
+                  </div>
                   {errors.RetypePassword && (
                     <p className="retype__error">
                       {errors.RetypePassword.message}
