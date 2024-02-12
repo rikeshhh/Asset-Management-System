@@ -68,7 +68,14 @@ label {
   padding-right: 0 !important;
 }
 
+.repassword-toggle--button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .retype-password {
+  width: 100%;
   border-radius: 0.3125rem;
   border: 1px solid var(--primary-grey);
   padding: 1.09rem 1rem;

@@ -11,6 +11,7 @@ import { useState } from "react";
 import { setTokenToLocalStorage } from "../../utils/StorageUtils";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { notifyError } from "../../Component/Toast/Toast";
+import { showHide } from "../../Component/Images/Image";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const Login = () => {
       }
     },
     onError: (error) => {
-      notifyError(error.message)
+      notifyError(error.message);
       if (error.response.status === 401) {
         setError("Unauthorized: Please log in with valid id.");
       }
@@ -47,11 +48,8 @@ const Login = () => {
     verifyUserMutation.mutate(data);
     setError(null);
   };
-  const [showPassword, setShowPassword] = useState(false)
-  const visiblePasswordFn = () => (
-    setShowPassword(prev => !prev)
-  )
-
+  const [showPassword, setShowPassword] = useState(false);
+  const visiblePasswordFn = () => setShowPassword((prev) => !prev);
 
   return (
     <>
@@ -105,12 +103,11 @@ const Login = () => {
                       // maxMessage={Model.Password.maxLength.message}
                       showPassword={showPassword}
                       visiblePasswordFn={visiblePasswordFn}
-
                     >
-                      <button className="toggleBtn__login" type="button" >
-                      {showPassword?<BiSolidShow/>:<BiSolidHide/>}
+                      <button className="toggleBtn__login" type="button">
+                        <img src={showHide} alt="show-hide" />
                       </button>
-                      </InputField>
+                    </InputField>
                   </div>
                   <div className="form__input--secion login__remember">
                     <InputField

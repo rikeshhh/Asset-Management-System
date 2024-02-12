@@ -16,19 +16,18 @@
   position: relative;
 }
 .toggleBtn__signUp {
-  position: absolute;
-  left: 95%;
-  top: 55%;
   outline: none;
   border: none;
   background: none;
 }
-.toggleBtn__signUp__retype__password {
+
+.retype-password--showHide--btn {
   position: absolute;
-  left: 95%;
-  top: 45%;
+  right: 2%;
+}
+
+.toggleBtn__signUp__retype__password {
   outline: none;
   border: none;
   background: none;
-  margin: auto;
 }

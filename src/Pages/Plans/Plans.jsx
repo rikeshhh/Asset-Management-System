@@ -4,9 +4,9 @@ import "./Plans.css";
 import { FcOk } from "react-icons/fc";
 import { PlansStar } from "../../Component/svg/PlansStar";
 import { Link } from "react-router-dom";
-import { useAmsContext } from "../../Component/Context/AmsContext";
 import { features } from "./PlansFeatures";
 import { house, building, factory } from "../../Component/Images/Image";
+import { useAmsContext } from "../../Context/AmsContext";
 const Plans = () => {
   const { isAnnualBilling, toggleBilling, getBusinessRate, getEnterpriseRate } =
     useAmsContext();

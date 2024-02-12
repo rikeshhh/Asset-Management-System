@@ -7,7 +7,7 @@ import { InputField } from "../../Component/Input/InputField";
 import Model from "../../Component/Model/Model";
 import { SelectInput } from "../../Component/Input/SelectInput";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAmsContext } from "../../Component/Context/AmsContext";
+import { useAmsContext } from "../../Context/AmsContext";
 
 const PricingForm = () => {
   const {

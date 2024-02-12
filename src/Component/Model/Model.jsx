@@ -32,7 +32,7 @@ const Model = {
 
   Password: {
     type: "password",
-    required: "Password is should not be empty",
+    required: "Password should not be empty",
     placeholder: "Enter your password",
     minLength: {
       value: 8,
