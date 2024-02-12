@@ -13,11 +13,13 @@ import unionpay from "/src/assets/unionpay.png";
 import userProf from "/src/assets/userProf.svg";
 import profileCover from "/src/assets/profilecover.png";
 import deleteIcon from "/src/assets/deleteIcon.svg";
+import showHide from "/src/assets/showHide.svg";
 
 export {
   profile,
   building,
   factory,
+  showHide,
   deleteIcon,
   house,
   jcb,

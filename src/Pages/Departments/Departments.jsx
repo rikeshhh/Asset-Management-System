@@ -30,6 +30,7 @@ const Departments = () => {
     },
     onSuccess: () => {
       notifySuccess(successMessage)
+
       queryClient.invalidateQueries("DepartmentData");
     },
     onError: (error) => {
@@ -55,6 +56,7 @@ const Departments = () => {
   });
 
   const deleteMessage = "Department has been deleted successfully";
+  
   const DeleteDepartment = useMutation({
     mutationFn: (department) => {
       return departmentDelete(department);

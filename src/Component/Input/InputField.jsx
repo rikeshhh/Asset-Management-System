@@ -27,38 +27,40 @@ export const InputField = ({
 
   return (
     <div className={type == "radio" ? "input__field--radio" : "input__field"}>
-      <input
-        className={`${isDisabled ? "input-disabled" : "input-enabled"} ${
-          hasError ? "input__error" : ""
-        } ${hasError && type == "radio" ? "input__radio" : ""} ${className}`}
-        placeholder={placeholder}
-        name={name}
-        value={inputValue}
-        onChange={onEditChange}
-        autoComplete={autoComplete}
-        type={showPassword ? "text" : type}
-        {...register(name, {
-          required: required,
-          pattern: {
-            value: new RegExp(value),
-            message: message,
-          },
-          minLength: !isDisabled && {
-            value: minLength,
-            message: minMessage,
-          },
-          maxLength: !isDisabled && {
-            value: maxLength,
-            message: maxMessage,
-          },
-        })}
-        disabled={isDisabled}
-      />
-      {children && (
-        <div className="password-toggle-button" onClick={visiblePasswordFn}>
-          {children}
-        </div>
-      )}
+      <div className="toggle__showHide--container">
+        <input
+          className={`${isDisabled ? "input-disabled" : "input-enabled"} ${
+            hasError ? "input__error" : ""
+          } ${hasError && type == "radio" ? "input__radio" : ""} ${className}`}
+          placeholder={placeholder}
+          name={name}
+          value={inputValue}
+          onChange={onEditChange}
+          autoComplete={autoComplete}
+          type={showPassword ? "text" : type}
+          {...register(name, {
+            required: required,
+            pattern: {
+              value: new RegExp(value),
+              message: message,
+            },
+            minLength: !isDisabled && {
+              value: minLength,
+              message: minMessage,
+            },
+            maxLength: !isDisabled && {
+              value: maxLength,
+              message: maxMessage,
+            },
+          })}
+          disabled={isDisabled}
+        />
+        {children && (
+          <div className="password-toggle-button" onClick={visiblePasswordFn}>
+            {children}
+          </div>
+        )}
+      </div>
 
       {!isDisabled && (
         <ErrorMessage

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../../Component/Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAmsContext } from "../../Component/Context/AmsContext";
+import { useAmsContext } from "../../Context/AmsContext";
 import { CreditCard } from "../../Component/svg/CreditCard";
 import { Paypal } from "./Paypal";
 import { Credit } from "./Credit";
