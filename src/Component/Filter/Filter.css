@@ -11,6 +11,7 @@
   right: 0;
   animation-duration: 0.5s;
   overflow-y: scroll;
+  /* z-index: 1000; */
 }
 
 .filter::-webkit-scrollbar-thumb {
@@ -29,6 +30,10 @@
   to {
     transform: translateX(0);
   }
+} */
+
+/* .filter.temp-style {
+  display: block !important;
 } */
 
 .filter__heading {

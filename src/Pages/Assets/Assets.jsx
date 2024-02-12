@@ -29,6 +29,9 @@ const Assets = () => {
   const onFilterClick = (showHide) => {
     setFilterShow(showHide);
   };
+  const toggleFilter = () => {
+    setFilterShow(!filterShow);
+  };
   return (
     <>
       <section className="content-wrapper">
@@ -77,6 +80,7 @@ const Assets = () => {
         <Filter
           handleClick={() => onFilterClick(!filterShow)}
           filterShow={filterShow}
+          toggleFilter={toggleFilter}
         />
       )}
     </>

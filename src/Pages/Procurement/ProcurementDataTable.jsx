@@ -28,22 +28,24 @@ const ProcurementDataTable = ({ size, linkTo, handleTableEdit }) => {
     <div className="table__container">
       <table className="main__table">
         <thead>
-          {isPending ?
-          <PendingTableHead/>
-          : 
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Designation</th>
-            <th>Department</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Action</th>
-          </tr>}
-          
+          {isPending ? (
+            <PendingTableHead />
+          ) : (
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Designation</th>
+              <th>Department</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Action</th>
+            </tr>
+          )}
         </thead>
         <tbody>
-        {isPending ? <PendingTableBody/> : (
+          {isPending ? (
+            <PendingTableBody />
+          ) : (
             tableData.map((tableItem, index) => (
               <tr key={index}>
                 <td>{tableItem.id}</td>
@@ -55,14 +57,14 @@ const ProcurementDataTable = ({ size, linkTo, handleTableEdit }) => {
                 <td className="button-gap">
                   <Link to={linkTo} className="link">
                     <Button
-                      type={'button'}
+                      type={"button"}
                       className="edit__button"
                       onClick={handleTableEdit}
                       text={<CiEdit />}
                     />
                   </Link>
                   <Button
-                    type={'button'}
+                    type={"button"}
                     className="delete__button"
                     text={<GoTrash />}
                   />
