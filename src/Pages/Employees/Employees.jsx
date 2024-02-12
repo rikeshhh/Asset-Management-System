@@ -180,7 +180,8 @@ import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteCon
 import { employeeDelete } from "./EmployeeApiSlice";
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
-import { notifyError } from "../../Component/Toast/Toast";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
 
 const Employees = () => {
   const {
@@ -196,6 +197,7 @@ const Employees = () => {
       return employeeDelete(employeeId);
     },
     onSuccess: () => {
+      notifySuccess("Employee Deleted Successfully");
       queryClient.invalidateQueries("EmployeeData");
     },
     onError: (error) => {
@@ -314,6 +316,7 @@ const Employees = () => {
           toggleFilter={toggleFilter}
         />
       )}
+      <CustomToastContainer/>
     </>
   );
 };

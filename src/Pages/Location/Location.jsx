@@ -13,8 +13,9 @@ import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
 import LocationDataTable from "./LocationDataTable";
 import { ToastContainer } from "react-toastify";
-import { notifyDelete, notifySuccess } from "../../Component/Toast/Toast";
+import { notifyDelete, notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
 
 const Location = () => {
   const {
@@ -61,11 +62,11 @@ const Location = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries('LocationData')
-      notifyDelete(deleteMessage)
+      notifySuccess(deleteMessage)
     },
     onError: (error) => {
       if (error.response.status === 401) {
-        console.log("Unauthorized: Please log in with valid id.");
+       notifyError("Unauthorized: Please log in with valid id.");
       }
     },
   });
@@ -143,18 +144,7 @@ const Location = () => {
           </div>
         </div>
       </div>
-      <ToastContainer
-position="bottom-right"
-autoClose={5000}
-hideProgressBar={true}
-newestOnTop={true}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="light"
-/>   
+      <CustomToastContainer />   
       </section>
       
     </>

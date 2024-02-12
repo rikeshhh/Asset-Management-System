@@ -10,10 +10,11 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { departmentAdd, departmentDelete, getDepartmentData } from "./DepartmentApiSlice";
 import { queryClient } from "../../Component/Query/Query";
 import DepartmentDataTable from "./DepartmentDataTable";
-import { ToastContainer } from "react-toastify";
 import { notifyDelete, notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { useState } from "react";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
+import ToastContainer from "../../Component/Toast/ToastContainer";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
 
 const Departments = () => {
 
@@ -150,21 +151,9 @@ const Departments = () => {
           </div>
         </div>
 
+<CustomToastContainer/>
 
 
-
-        <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
 
 
 

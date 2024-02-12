@@ -2,8 +2,8 @@ import {toast } from "react-toastify";
 import './Toast.css'
 const Msg = ({ Message,title }) => (
   <div className="toastBody">
-    <h1>{title}</h1>
-    <p>
+    <h1 className="toast__heading">{title}</h1>
+    <p className="toast__paragraph">
     {Message}
       </p> 
   </div>
@@ -26,7 +26,7 @@ export function notifySuccess (successMessage) {
   export function notifyDelete(deleteMessage) {
     toast.error(<Msg Message={deleteMessage} title={deleted}/>, {
       position: "bottom-right",
-      className: 'error-bar'
+      className: 'success-bar'
     });
   }
   
