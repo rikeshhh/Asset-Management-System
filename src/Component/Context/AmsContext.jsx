@@ -8,14 +8,6 @@ export const useAmsContext = () => {
 
 export const AmsProvider = ({ children }) => {
   const [isAnnualBilling, setIsAnnualBilling] = useState(true);
-  const storeTokenLS = (serverToken) => {
-    return localStorage.setItem("Token", serverToken);
-  };
-
-  const getTokenLS = () => {
-    const token = localStorage.getItem("Token");
-    return token;
-  };
 
   const businessMonthlyRate = 25;
   const businessAnnualRate = 275;
@@ -38,8 +30,6 @@ export const AmsProvider = ({ children }) => {
     toggleBilling,
     getBusinessRate,
     getEnterpriseRate,
-    storeTokenLS,
-    getTokenLS,
   };
 
   return (

@@ -177,6 +177,12 @@ label {
   padding: 0.45rem !important;
   border-radius: 0.25rem !important;
   border: none !important;
+  transition: all 0.2s ease;
+}
+
+.edit__button,
+.delete__button:focus {
+  outline: none;
 }
 
 .delete__button {

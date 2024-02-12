@@ -1,9 +1,7 @@
 import "./Categories.css";
 import { useForm } from "react-hook-form";
-import { DataTable } from "../../Component/DataTable/DataTable";
 import { InputField } from "../../Component/Input/InputField";
 import { Label } from "../../Component/Label/Label";
-import { SelectInput } from "../../Component/Input/SelectInput";
 import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
 import { IoMdAdd } from "react-icons/io";

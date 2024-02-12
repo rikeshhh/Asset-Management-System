@@ -144,7 +144,7 @@ const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
                     <td>
                       {options.parent}
                       {showSubCategory && options.id === showSubCategoryDrop ? (
-                        <SubCategory SubCategoryData={SubCategoryData}/>
+                        <SubCategory SubCategoryData={SubCategoryData} />
                       ) : (
                         <></>
                       )}
@@ -154,8 +154,12 @@ const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
                 <td className="button-gap">
                   <Button
                     handleClick={() => handleSubCategoryClick(options)}
-                    text={<IoChevronDown />}
-                    className="edit__button"
+                    text={<IoChevronDown className="  " />}
+                    className={
+                      showSubCategory && options.id === showSubCategoryDrop
+                        ? "edit__button rotate__dropdown"
+                        : "edit__button"
+                    }
                   />
 
                   <Button
