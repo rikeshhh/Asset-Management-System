@@ -109,13 +109,13 @@ const Filter = ({ handleClick, filterShow, toggleFilter }) => {
   } = useForm();
 
   const handleBodyClick = (e) => {
-   
     if (
       !e.target.closest(".filter") &&
       !e.target.closest(".filter--button") &&
       !e.target.closest(".filter__form")
     ) {
-      toggleFilter(); // Close the filter component
+      toggleFilter();
+      console.log(toggleFilter);
     }
   };
 
