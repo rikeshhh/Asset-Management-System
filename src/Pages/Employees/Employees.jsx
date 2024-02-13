@@ -24,7 +24,6 @@ const Employees = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-
   const navigate = useNavigate();
 
   const DeleteEmployee = useMutation({
@@ -131,7 +130,7 @@ const Employees = () => {
           toggleFilter={toggleFilter}
         />
       )}
-      <CustomToastContainer/>
+      <CustomToastContainer />
     </>
   );
 };

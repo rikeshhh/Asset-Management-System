@@ -21,4 +21,21 @@ export const employeeEdit = async (employeeData) => {
 
     );
 };
+export const employeeProfile = async (employeeData) => {
+    const employeeAddRequest = await instance.post("/user", {
+        "username": employeeData.username,
+        "password": "adminadmin",
+        "email": employeeData.email,
+        "name": employeeData.username
+    },
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        },
+
+    );
+};
+
 

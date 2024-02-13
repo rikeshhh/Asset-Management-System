@@ -88,7 +88,7 @@ const Model = {
       message: "Designation should be less than 20 characters",
     },
     pattern: {
-      value: "^[a-zA-Z]+$",
+      value: "^[a-zA-Z0-9 ]+$",
       message: "Please enter a valid designation",
     },
   },
