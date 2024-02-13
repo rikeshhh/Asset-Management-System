@@ -13,7 +13,7 @@ import { GoTrash } from "react-icons/go";
 import SelectInputDepartment from "../Departments/SelectInputDepartment";
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
-import { employeeEdit } from "./EditProfileApi";
+import { employeeEdit } from "./ProfileApiSlicee";
 import { notifySuccess } from "../../Component/Toast/Toast";
 
 const EditProfile = () => {

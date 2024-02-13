@@ -6,9 +6,14 @@ import "./profile.css";
 import Button from "../../Component/Button/Button";
 import { SelectInput } from "../../Component/Input/SelectInput";
 import Model from "../../Component/Model/Model";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { profileCover } from "../../Component/Images/Image";
 import { GoTrash } from "react-icons/go";
+import { employeeProfile } from "./ProfileApiSlicee";
+import { useMutation } from "@tanstack/react-query";
+import { queryClient } from "../../Component/Query/Query";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
 
 const AddProfile = () => {
   const {
@@ -17,6 +22,8 @@ const AddProfile = () => {
     handleSubmit,
   } = useForm();
   const receivedState = false;
+  const navigate = useNavigate();
+
 
   const fileInputRef = useRef(null);
 
@@ -46,13 +53,37 @@ const AddProfile = () => {
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
+  const AddEmployeeProfile = useMutation({
+    mutationFn: (data) => {
+      return employeeProfile(data);
+    },
+    onSuccess: () => {
+      
+      notifySuccess("Employee Profile Added Successfully");
+      setTimeout(() => {
+        navigate("/employees")
+        queryClient.invalidateQueries("EmployeeData");
+      }, 1000);
+     
+    },
+    onError: (error) => {
+      console.log(error.request.status)
+      if (error.request.status === 409) {
+        notifyError(error.response.data.message);
+      }
+    },
+  });
+  const onEmployeeAddSubmit = (data) => {
+    AddEmployeeProfile.mutate(data)
+  }
+
 
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
         <div className="content__header form--header">
-          <h2>Edit Profile</h2>
-          <span>Edit this profile with valid details</span>
+          <h2>Add Profile</h2>
+          <span>Add a profile with valid details</span>
         </div>
         <div className="user__profile--body">
           <div className="user__profile--left">
@@ -98,7 +129,7 @@ const AddProfile = () => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit()} className="group__form profile__form">
+          <form onSubmit={handleSubmit(onEmployeeAddSubmit)} className="group__form profile__form">
             <div className="form__input--section">
               <Label sup={"*"} text="Name" />
               <InputField
@@ -237,6 +268,7 @@ const AddProfile = () => {
           </form>
         </div>
       </div>
+      <CustomToastContainer />
     </section>
   );
 };
