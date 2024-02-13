@@ -6,11 +6,18 @@ import { CreditCard } from "../../Component/svg/CreditCard";
 import { Paypal } from "./Paypal";
 import { Credit } from "./Credit";
 import { paypal } from "../../Component/Images/Image";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+const stripePromise = loadStripe(
+  "pk_test_51OjDzQSDVqjNOfpcWjFWwyFB75nd2e7sqdhjwhyxkWrizywOjBqBoEOJyjVrq9afD6I1xX3xrtQamCKfJgLvnfUf00wUB84Wou"
+);
 
 const PricingPayment = () => {
   const location = useLocation();
   const receivedFeature = location.state;
 
+  const clientSecret = import.meta.env.VITE_APP_AMS_STRIPE_SKEY;
   const navigate = useNavigate();
 
   const { getBusinessRate, getEnterpriseRate } = useAmsContext();
@@ -112,7 +119,9 @@ const PricingPayment = () => {
           </div>
           <div className="pricing__content--right">
             {selectedPaymentMethod === "creditCard" && (
-              <Credit goback={goBack} navigate={navigate} />
+              <Elements stripe={stripePromise}>
+                <Credit goback={goBack} navigate={navigate} />
+              </Elements>
             )}
             {selectedPaymentMethod === "paypal" && (
               <Paypal navigate={navigate} goback={goBack} />

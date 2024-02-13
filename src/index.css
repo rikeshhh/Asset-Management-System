@@ -20,8 +20,8 @@
   --edit-button: #8c62ff;
   --edit-background: #f4efff;
   --delete-background: #fee9f1;
-  --work-progress: #A3B6DB;
-  --ams: #769BE1;
+  --work-progress: #a3b6db;
+  --ams: #769be1;
 }
 
 * {
@@ -54,7 +54,6 @@ select:focus {
 select:focus {
   border: none;
 }
-
 
 .layout {
   display: flex;
