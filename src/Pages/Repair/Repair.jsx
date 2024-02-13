@@ -9,6 +9,7 @@ import { useState } from "react";
 import Table from "../../Component/Table/Table";
 import { BsFunnel } from "react-icons/bs";
 import RepairDataTable from "./RepairDataTable";
+import Filter from "../../Component/Filter/Filter";
 
 const Repair = () => {
   const {
@@ -17,58 +18,75 @@ const Repair = () => {
     handleSubmit,
   } = useForm();
   const [isActive, setIsActive] = useState(true);
+  const [filterShow, setFilterShow] = useState(false);
   const [activeButton, setActiveButton] = useState("hardware");
+
   const handleButtonClick = () => {
     setIsActive((prev) => !prev);
   };
+
+  const onFilterClick = (showHide) => {
+    setFilterShow(showHide);
+  };
   return (
-    <section className="content-wrapper">
-      <div className="repair content-radius">
-        <div className="content__header repair__header">
-          <h2>Repair & Replace</h2>
-          <Button
-            text="Send for Repair / Replace"
-            className={"category--buttons button__blue"}
-            icon={<IoMdAdd />}
-          />
-        </div>
-
-        <div className="repair__content">
-          <div className="repair__navigation">
+    <>
+      {filterShow ? (
+        <Filter
+          handleClick={() => onFilterClick(!filterShow)}
+          filterShow={filterShow}
+        />
+      ) : (
+        <></>
+      )}
+      <section className="content-wrapper">
+        <div className="repair content-radius">
+          <div className="content__header repair__header">
+            <h2>Repair & Replace</h2>
             <Button
-              text="Repair"
-              onClick={handleButtonClick}
-              isActive={isActive}
-              className="assets__btn"
-            />
-            <Button
-              text="Replace"
-              onClick={handleButtonClick}
-              isActive={!isActive}
-              className="assets__btn"
+              text="Send for Repair / Replace"
+              className={"category--buttons button__blue"}
+              icon={<IoMdAdd />}
             />
           </div>
 
-          <div className="ams__filter ">
-            <InputField
-              name="Repair"
-              register={register}
-              pattern={Model.Group.pattern}
-              required={Model.Group.required}
-              errors={errors}
-              type="search"
-              placeholder="Search"
-            />
-            <Button
-              text="Filter"
-              icon={<BsFunnel />}
-              className="filter--button"
-            />
+          <div className="repair__content">
+            <div className="repair__navigation">
+              <Button
+                text="Repair"
+                onClick={handleButtonClick}
+                isActive={isActive}
+                className="assets__btn"
+              />
+              <Button
+                text="Replace"
+                onClick={handleButtonClick}
+                isActive={!isActive}
+                className="assets__btn"
+              />
+            </div>
+
+            <div className="ams__filter ">
+              <InputField
+                name="Repair"
+                register={register}
+                pattern={Model.Group.pattern}
+                required={Model.Group.required}
+                errors={errors}
+                type="search"
+                placeholder="Search"
+              />
+              <Button
+                text="Filter"
+                icon={<BsFunnel />}
+                className="filter--button"
+                handleClick={() => onFilterClick(!filterShow)}
+              />
+            </div>
+            {isActive && <RepairDataTable size="8" />}
           </div>
-          {isActive && <RepairDataTable size="8" />}
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { paypal } from "../../Component/Images/Image";
 import Model from "../../Component/Model/Model";
 import Button from "../../Component/Button/Button";
@@ -11,13 +11,42 @@ export const Paypal = ({ navigate, goback }) => {
     register,
     formState: { errors },
     handleSubmit,
-    clearErrors,
   } = useForm();
 
   const paypalSubmit = (data) => {
     console.log(data);
-    navigate("/success");
+    // navigate("/success");
+    useEffect(() => {
+      window.paypal
+        .Buttons({
+          createOrder: (data, actions, err) => {
+            return actions.order.create({
+              intent: "CAPTURE",
+              purchase_units: [
+                {
+                  description: "Cool looking table",
+                  amount: {
+                    currency_code: "CAD",
+                    value: 650.0,
+                  },
+                },
+              ],
+            });
+          },
+          onApprove: async (data, actions) => {
+            const order = await actions.order.capture();
+            console.log(order);
+          },
+          onError: (err) => {
+            console.log(err);
+          },
+        })
+        .render(paypal.current);
+    }, []);
   };
+
+  const [paypalClick, setPaypalClick] = useState(false);
+  const paypal = useRef();
 
   return (
     <div className="paypal__section">
@@ -30,7 +59,7 @@ export const Paypal = ({ navigate, goback }) => {
         </figure>
       </div>
       <form onSubmit={handleSubmit(paypalSubmit)} className="group__form">
-        <div className="form__input--section">
+        {/* <div className="form__input--section">
           <Label text="Email" />
           <InputField
             name="Email"
@@ -61,13 +90,15 @@ export const Paypal = ({ navigate, goback }) => {
             maxLength={Model.Password.maxLength.value}
             maxMessage={Model.Password.maxLength.message}
           />
-        </div>
+        </div> */}
         <div className="form__input--section">
-          <Button
-            text="Login"
-            className={"button__blue paypal__button"}
+          <button
+            className={"button__blue button__style paypal__button"}
             value="submit"
-          />
+          >
+            Click
+          </button>{" "}
+          <div ref={paypal}></div>
         </div>
         <div className="form__input--section">
           <p className="paypal__ques">Having trouble loggin in?</p>

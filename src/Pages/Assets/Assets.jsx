@@ -19,7 +19,9 @@ const Assets = () => {
     handleSubmit,
   } = useForm();
   const [isActive, setIsActive] = useState(true);
+
   const [activeButton, setActiveButton] = useState("hardware");
+
   const handleButtonClick = () => {
     setIsActive((prev) => !prev);
   };
@@ -29,11 +31,17 @@ const Assets = () => {
   const onFilterClick = (showHide) => {
     setFilterShow(showHide);
   };
-  const toggleFilter = () => {
-    setFilterShow(!filterShow);
-  };
+
   return (
     <>
+      {filterShow ? (
+        <Filter
+          handleClick={() => onFilterClick(!filterShow)}
+          filterShow={filterShow}
+        />
+      ) : (
+        <></>
+      )}
       <section className="content-wrapper">
         <div className="assets content-radius">
           <div className="content__header assets__header">
@@ -76,13 +84,6 @@ const Assets = () => {
           </div>
         </div>
       </section>
-      {filterShow && (
-        <Filter
-          handleClick={() => onFilterClick(!filterShow)}
-          filterShow={filterShow}
-          toggleFilter={toggleFilter}
-        />
-      )}
     </>
   );
 };

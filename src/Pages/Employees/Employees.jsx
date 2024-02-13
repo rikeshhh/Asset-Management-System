@@ -50,10 +50,6 @@ const Employees = () => {
     setFilterShow(showHide);
   };
 
-  const toggleFilter = () => {
-    setFilterShow(!filterShow);
-  };
-
   const handleDeleteClick = (employee) => {
     setDeleteConfirationShow(true);
     setEmployeeId(employee);
@@ -82,6 +78,11 @@ const Employees = () => {
           handleCancelClick={handleCancelClick}
           handleProceedClick={handleProceedClick}
         />
+      ) : (
+        <></>
+      )}
+      {filterShow ? (
+        <Filter handleClick={() => onFilterClick(!filterShow)} />
       ) : (
         <></>
       )}
@@ -124,12 +125,6 @@ const Employees = () => {
           </div>
         </div>
       </section>
-      {filterShow && (
-        <Filter
-          handleClick={() => onFilterClick(!filterShow)}
-          toggleFilter={toggleFilter}
-        />
-      )}
       <CustomToastContainer />
     </>
   );

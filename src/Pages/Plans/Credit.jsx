@@ -12,22 +12,54 @@ import {
   unionpay,
   visa,
 } from "../../Component/Images/Image";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 export const Credit = ({ goback, navigate }) => {
+  const stripe = useStripe();
+  const elements = useElements();
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
-  const submitData = (data) => {
-    console.log(data);
-    navigate("/success");
+  const client_secret = import.meta.env.VITE_APP_AMS_STRIPE_SKEY;
+
+  const submitData = async (data) => {
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: 1000,
+      currency: "usd",
+      // additional options...
+    });
+
+    console.log(paymentIntent.client_secret);
+    if (!stripe || !elements) {
+      // Stripe.js has not yet loaded.
+      return;
+    }
+
+    const result = await stripe.confirmCardPayment(formattedSecretKey, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+        billing_details: {
+          // Add billing details if needed
+        },
+      },
+    });
+
+    if (result.error) {
+      console.error(result.error);
+    } else if (result.paymentIntent.status === "succeeded") {
+      // Payment succeeded
+      console.log("Payment succeeded");
+      navigate("/success");
+    }
   };
   return (
     <>
       <form onSubmit={handleSubmit(submitData)} className="group__form ">
-        <div className="form__input--section">
+        {/* <div className="form__input--section">
           <Label sup={"*"} text="Name on Card" />
           <InputField
             name="Card Name"
@@ -107,12 +139,10 @@ export const Credit = ({ goback, navigate }) => {
               placeholder={"Enter the security code"}
             />
           </div>
-        </div>
-        <div className="pricing__flex--end ">
+        </div> */}
+        {/* <div className="pricing__flex--end ">
           <div className="pricing__button">
-            {/* <Link to="/payment" state={receivedFeature} className="link"> */}
             <Button type="submit" className="button__blue" text="Continue" />
-            {/* </Link> */}
             <Button
               type="button"
               className="button__red "
@@ -120,7 +150,8 @@ export const Credit = ({ goback, navigate }) => {
               handleClick={goback}
             />
           </div>
-        </div>
+        </div> */}
+        <CardElement />
       </form>
     </>
   );
