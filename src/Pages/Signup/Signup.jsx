@@ -108,10 +108,10 @@ export const Signup = () => {
                       type={showResetPassword ? "text" : "password"}
                       placeholder="Enter your password again"
                       {...register("RetypePassword", {
-                        required: "Retype Password is required",
+                        required: "Please retype your password",
                         validate: (value) =>
                           value === watch("Password") ||
-                          "Passwords do not match",
+                          "Retyped password does not match the original password.",
                       })}
                     />
                     <div className="retype-password--showHide--btn">

@@ -5,7 +5,7 @@ const Model = {
     placeholder: "Enter your username",
     minLength: {
       value: 4,
-      message: "Username should be at least 4 characters",
+      message: "Username must be at least 4 characters long",
     },
     maxLength: {
       value: 20,
@@ -18,35 +18,35 @@ const Model = {
   },
   Email: {
     type: "email",
-    required: "Email is required",
+    required: "Please enter your email address",
     placeholder: "Enter your email address",
     maxLength: {
       value: 64,
-      message: "Value must be less than 64",
+      message: "Email must be less than 64 characters",
     },
     pattern: {
       value: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
-      message: "Please follow the instructions",
+      message: "Invalid Email. Please provide a valid email",
     },
   },
 
   Password: {
     type: "password",
-    required: "Password should not be empty",
+    required: "Please enter your password",
     placeholder: "Enter your password",
     minLength: {
       value: 8,
       message:
-        "Password should be at least 8 characters and should contain numbeers",
+        "Password must be at least 8 characters long, must include a capital letter and a numeric character",
     },
     maxLength: {
       value: 64,
-      message: "Password should be less than 64 characters",
+      message: "Password must be less than 64 characters",
     },
     pattern: {
-      value: "^(?=.*[A-Za-z])(?=.*\\d).*$",
+      value: "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()-_+=]).*$",
       message:
-        "Invalid password format (at least 8 characters, at least one letter, and one number)",
+        "Invalid password. Password must be at least 8 characters long, must include a capital letter and a numeric character",
     },
   },
   Checkbox: {
@@ -56,23 +56,23 @@ const Model = {
   },
   Radio: {
     type: "radio",
-    required: "must be selected",
+    required: "Must be checked",
   },
   PhoneNumber: {
     type: "text",
-    required: "must be valid",
+    required: "Please enter a valid phone number",
     minLength: {
       value: 10,
-      message: "Phone number must be 10 in length",
+      message: "Phone number must be exactly 10 characters.",
     },
     maxLength: {
       value: 10,
-      message: "Phone number must be 10 in length",
+      message: "Phone number must be exactly 10 characters.",
     },
-    placeholder: "Enter your valid phone number",
+    placeholder: "Enter your phone number",
     pattern: {
-      value: "^[0-9]+$",
-      message: "Phone number should only contain numbers",
+      value: /^(98|97)[0-9]+$/,
+      message: "Phone number should only contain numbers and start from 97/98",
     },
   },
   Designation: {
@@ -94,19 +94,19 @@ const Model = {
   },
   Group: {
     type: "string",
-    required: "Field can't be empty",
+    required: "Please enter field value",
     placeholder: "Enter the name",
     minLength: {
       value: 2,
-      message: "Categories must be at least 4 characters",
+      message: "Field must be at least 2 characters long",
     },
     maxLength: {
       value: 20,
-      message: "Categories should be less than 20 characters",
+      message: "Field should be less than 20 characters",
     },
     pattern: {
       value: "^[a-zA-Z]+$",
-      message: "Please enter a valid categories containing alphabets",
+      message: "Please enter a valid category with alphabets",
     },
   },
   ZipCode: {
@@ -132,6 +132,43 @@ const Model = {
     pattern: {
       value: "^d{2}/d{2}/d{4}$",
       message: "Date should be in MM/DD/YYYY format",
+    },
+  },
+  ProductCode: {
+    type: "string",
+    required: "Please enter a product code",
+    placeholder: "Enter the product code of the assets",
+    minLength: {
+      value: 8,
+      message:
+        "Product key must be start with 'ITJ' followed by dash,capital letter 'DA' dash and numbers",
+    },
+    maxLength: {
+      value: 20,
+      message: "Product key should be less than 20 characters",
+    },
+    pattern: {
+      value: /^ITJ-DA-[0-9]+$/,
+      message:
+        "Please enter a valid Product Code. It should start with 'ITJ' followed by dash,capital letter 'DA' dash and numbers",
+    },
+  },
+  ProductName: {
+    type: "string",
+    required: "Please enter a product name",
+    placeholder: "Enter the product name of the assets",
+    minLength: {
+      value: 2,
+      message: "Product name must be at least 2 characters long",
+    },
+    maxLength: {
+      value: 50,
+      message: "Product name should be less than 50 characters",
+    },
+    pattern: {
+      value: /^[a-zA-Z0-9-]+$/,
+      message:
+        "Please enter a valid product name. It can include capital letters, small letters, and numbers.",
     },
   },
 };

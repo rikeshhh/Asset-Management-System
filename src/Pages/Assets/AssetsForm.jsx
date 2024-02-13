@@ -58,36 +58,36 @@ const AssetsForm = ({
             <div className="assets__form--input">
               <Label text="ID / Product Code" sup={"*"} />
               <InputField
-                name="ID / Product Code"
+                name="productID"
                 register={register}
-                required={Model.Group.required}
-                value={Model.Group.pattern.value}
-                message={Model.Group.pattern.message}
+                required={Model.ProductCode.required}
+                value={Model.ProductCode.pattern.value}
+                message={Model.ProductCode.pattern.message}
                 errors={errors}
-                type={Model.Group.type}
-                placeholder={Model.Group.placeholder}
-                minLength={Model.Group.minLength.value}
-                minMessage={Model.Group.minLength.message}
-                maxLength={Model.Group.maxLength.value}
-                maxMessage={Model.Group.maxLength.message}
+                type={Model.ProductCode.type}
+                placeholder={Model.ProductCode.placeholder}
+                minLength={Model.ProductCode.value}
+                minMessage={Model.ProductCode.minLength.message}
+                maxLength={Model.ProductCode.maxLength.value}
+                maxMessage={Model.ProductCode.maxLength.message}
               />
             </div>
 
             <div className="assets__form--input">
               <Label text="Name / Title" sup={"*"} />
               <InputField
-                name="ID / Product Code"
+                name="productName"
                 register={register}
-                required={Model.Group.required}
-                value={Model.Group.pattern.value}
-                message={Model.Group.pattern.message}
+                required={Model.ProductName.required}
+                value={Model.ProductName.pattern.value}
+                message={Model.ProductName.pattern.message}
                 errors={errors}
-                type={Model.Group.type}
-                placeholder={Model.Group.placeholder}
-                minLength={Model.Group.minLength.value}
-                minMessage={Model.Group.minLength.message}
-                maxLength={Model.Group.maxLength.value}
-                maxMessage={Model.Group.maxLength.message}
+                type={Model.ProductName.type}
+                placeholder={Model.ProductName.placeholder}
+                minLength={Model.ProductName.minLength.value}
+                minMessage={Model.ProductName.minLength.message}
+                maxLength={Model.ProductName.maxLength.value}
+                maxMessage={Model.ProductName.maxLength.message}
               />
             </div>
             <div className="assets__form--input">
@@ -107,14 +107,14 @@ const AssetsForm = ({
             <div className="assets__form--input">
               <Label text="Brand / Company" />
               <InputField
-                name="ID / Product Code"
+                name="brandCompany"
                 register={register}
-                required={Model.Group.required}
+                required="Please enter Brand/Company "
                 value={Model.Group.pattern.value}
                 message={Model.Group.pattern.message}
                 errors={errors}
                 type={Model.Group.type}
-                placeholder={Model.Group.placeholder}
+                placeholder="Enter the brand / company of the assets"
                 minLength={Model.Group.minLength.value}
                 minMessage={Model.Group.minLength.message}
                 maxLength={Model.Group.maxLength.value}
@@ -123,7 +123,7 @@ const AssetsForm = ({
             </div>
             <div className="assets__form--input">
               <Label text="Location" sup={"*"} />
-              <SelectInputLocation  />
+              <SelectInputLocation />
             </div>
             <div className="assets__form--input">
               <Label text="Assigned to" sup={"*"} />

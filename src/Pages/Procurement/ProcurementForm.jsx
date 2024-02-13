@@ -52,7 +52,7 @@ const ProcurementForm = () => {
               />
             </div>
             <div className="user__auth--input procurement__form--input">
-              <Label sup={"*"} text="Requeat Urgency" />
+              <Label sup={"*"} text="Request Urgency" />
               <SelectInput options={options} />
             </div>
           </div>
