@@ -12,7 +12,12 @@ import {
   unionpay,
   visa,
 } from "../../Component/Images/Image";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import {
+  CardElement,
+  PaymentElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
 
 export const Credit = ({ goback, navigate }) => {
   const stripe = useStripe();
@@ -26,10 +31,10 @@ export const Credit = ({ goback, navigate }) => {
   const client_secret = import.meta.env.VITE_APP_AMS_STRIPE_SKEY;
 
   const submitData = async (data) => {
-
     const paymentIntent = await stripe.paymentIntents.create({
+      mode: 'payment',
       amount: 1000,
-      currency: "usd",
+      currency: "USD",
       // additional options...
     });
 
@@ -39,7 +44,7 @@ export const Credit = ({ goback, navigate }) => {
       return;
     }
 
-    const result = await stripe.confirmCardPayment(formattedSecretKey, {
+    const result = await stripe.confirmCardPayment(client_secret, {
       payment_method: {
         card: elements.getElement(CardElement),
         billing_details: {
@@ -151,7 +156,7 @@ export const Credit = ({ goback, navigate }) => {
             />
           </div>
         </div> */}
-        <CardElement />
+        <PaymentElement />
       </form>
     </>
   );

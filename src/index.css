@@ -96,6 +96,13 @@ select:focus {
   letter-spacing: 0.00438rem;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: var(--text-color);
+}
+
 @media (width<=1024px) {
   .content-wrapper {
     padding: 1rem;
