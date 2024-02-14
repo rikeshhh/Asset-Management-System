@@ -5,25 +5,24 @@ import { useAmsContext } from "../../Context/AmsContext";
 import { CreditCard } from "../../Component/svg/CreditCard";
 import { Paypal } from "./Paypal";
 import { Credit } from "./Credit";
-import { paypal } from "../../Component/Images/Image";
+import { paypalImage } from "../../Component/Images/Image";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
-const stripePromise = loadStripe(
+var stripePromise = loadStripe(
   "pk_test_51OjDzQSDVqjNOfpcWjFWwyFB75nd2e7sqdhjwhyxkWrizywOjBqBoEOJyjVrq9afD6I1xX3xrtQamCKfJgLvnfUf00wUB84Wou"
 );
 
 const PricingPayment = () => {
   const location = useLocation();
   const receivedFeature = location.state;
+  const client_secret = import.meta.env.VITE_APP_AMS_STRIPE_SKEY;
 
-  const clientSecret = import.meta.env.VITE_APP_AMS_STRIPE_SKEY;
   const navigate = useNavigate();
 
   const { getBusinessRate, getEnterpriseRate } = useAmsContext();
 
-  const [selectedPaymentMethod, setSelectedPaymentMethod] =
-    useState("creditCard");
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("paypal");
 
   const handleCreditClick = () => {
     setSelectedPaymentMethod("creditCard");
@@ -38,6 +37,17 @@ const PricingPayment = () => {
     navigate(-1);
   };
 
+  const options = {
+    clientSecret: `${client_secret}`,
+  };
+
+  var rate = 0;
+
+  if (receivedFeature.title === "Business Plan") {
+    rate = getBusinessRate;
+  } else if (receivedFeature.title === "Enterprise Plan") {
+    rate = getEnterpriseRate;
+  }
   return (
     <section className="content-wrapper">
       <div className="content-radius">
@@ -85,7 +95,7 @@ const PricingPayment = () => {
                 onClick={handlePayPalClick}
               >
                 <figure className="paypal__svg">
-                  <img src={paypal} alt="paypal" />
+                  <img src={paypalImage} alt="paypal" />
                 </figure>
                 <div className="payment__left--content">
                   <div className="payment__left--title">
@@ -119,12 +129,12 @@ const PricingPayment = () => {
           </div>
           <div className="pricing__content--right">
             {selectedPaymentMethod === "creditCard" && (
-              <Elements stripe={stripePromise}>
+              <Elements stripe={stripePromise} options={options}>
                 <Credit goback={goBack} navigate={navigate} />
               </Elements>
             )}
             {selectedPaymentMethod === "paypal" && (
-              <Paypal navigate={navigate} goback={goBack} />
+              <Paypal navigate={navigate} goback={goBack} rate={rate} />
             )}
           </div>
         </div>

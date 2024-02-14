@@ -1,65 +1,67 @@
 import React, { useEffect, useRef, useState } from "react";
-import { paypal } from "../../Component/Images/Image";
+import { paypalImage } from "../../Component/Images/Image";
 import Model from "../../Component/Model/Model";
 import Button from "../../Component/Button/Button";
 import { Label } from "../../Component/Label/Label";
 import { InputField } from "../../Component/Input/InputField";
 import { useForm } from "react-hook-form";
+import { useAmsContext } from "../../Context/AmsContext";
 
-export const Paypal = ({ navigate, goback }) => {
+export const Paypal = ({ navigate, goback, rate }) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
+  const { getBusinessRate, getEnterpriseRate } = useAmsContext();
+
+  const [paypalClick, setPaypalClick] = useState(false);
+
+  useEffect(() => {
+    window.paypal
+      .Buttons({
+        createOrder: (data, actions, err) => {
+          return actions.order.create({
+            intent: "CAPTURE",
+            purchase_units: [
+              {
+                description: "Business Plan",
+                amount: {
+                  currency_code: "USD",
+                  value: rate,
+                },
+              },
+            ],
+          });
+        },
+        onApprove: async (data, actions) => {
+          const order = await actions.order.capture();
+          console.log(order);
+        },
+        onError: (err) => {
+          console.log(err);
+        },
+      })
+      .render("#paypal__content");
+  }, []);
   const paypalSubmit = (data) => {
     console.log(data);
     // navigate("/success");
-    useEffect(() => {
-      window.paypal
-        .Buttons({
-          createOrder: (data, actions, err) => {
-            return actions.order.create({
-              intent: "CAPTURE",
-              purchase_units: [
-                {
-                  description: "Cool looking table",
-                  amount: {
-                    currency_code: "CAD",
-                    value: 650.0,
-                  },
-                },
-              ],
-            });
-          },
-          onApprove: async (data, actions) => {
-            const order = await actions.order.capture();
-            console.log(order);
-          },
-          onError: (err) => {
-            console.log(err);
-          },
-        })
-        .render(paypal.current);
-    }, []);
   };
-
-  const [paypalClick, setPaypalClick] = useState(false);
-  const paypal = useRef();
 
   return (
     <div className="paypal__section">
       <div className="paypal__section--top">
         <figure className="paypal__section--image">
-          <img src={paypal} alt="Paypal" />
+          <img src={paypalImage} alt="Paypal" />
           <figcaption className="paypal__section--title">
             Pay with PayPal
           </figcaption>
         </figure>
       </div>
       <form onSubmit={handleSubmit(paypalSubmit)} className="group__form">
-        {/* <div className="form__input--section">
+        <div className="form__input--section">
           <Label text="Email" />
           <InputField
             name="Email"
@@ -90,15 +92,15 @@ export const Paypal = ({ navigate, goback }) => {
             maxLength={Model.Password.maxLength.value}
             maxMessage={Model.Password.maxLength.message}
           />
-        </div> */}
+        </div>
         <div className="form__input--section">
           <button
             className={"button__blue button__style paypal__button"}
             value="submit"
+            onClick={() => setPaypalClick(true)}
           >
-            Click
-          </button>{" "}
-          <div ref={paypal}></div>
+            Login
+          </button>
         </div>
         <div className="form__input--section">
           <p className="paypal__ques">Having trouble loggin in?</p>
@@ -118,6 +120,7 @@ export const Paypal = ({ navigate, goback }) => {
           </div>
         </div>
       </form>
+      <div id="paypal__content"></div>
     </div>
   );
 };
