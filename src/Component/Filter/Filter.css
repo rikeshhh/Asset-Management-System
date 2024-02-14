@@ -11,7 +11,7 @@
   right: 0;
   animation-duration: 0.5s;
   overflow-y: scroll;
-  /* z-index: 1000; */
+  z-index: 115;
 }
 
 .filter__container {
@@ -112,5 +112,27 @@
 @media screen and (max-width: 500px) {
   .filter__container {
     margin-left: 0rem !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .filter {
+    width: 19rem !important;
+    padding: 1rem;
+  }
+  .filter__container {
+    margin-left: 0;
+  }
+  .filter__button--flex {
+    gap: 1rem;
+    align-items: flex-start;
+    flex-direction: column-reverse;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .filter {
+    width: 17rem !important;
+    padding: 0.8rem;
   }
 }

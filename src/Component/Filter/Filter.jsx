@@ -38,7 +38,8 @@ const Filter = ({ handleClick, filterShow }) => {
   const filterSubmit = (data) => console.log(data);
 
   return (
-    <div className="filter__container" onClick={handleClick}>
+    <>
+      <div className="filter__container" onClick={handleClick}></div>
       <div className={`filter ${filterShow ? "open" : ""} `}>
         <div className="filter__heading">
           <h3>Filter</h3>
@@ -91,7 +92,7 @@ const Filter = ({ handleClick, filterShow }) => {
           </div>
         </form>
       </div>
-    </div>
+    </>
   );
 };
 

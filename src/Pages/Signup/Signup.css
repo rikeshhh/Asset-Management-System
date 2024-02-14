@@ -31,3 +31,32 @@
   border: none;
   background: none;
 }
+
+@media screen and (max-width: 720px) {
+  .user__auth {
+    width: 100%;
+    flex-shrink: 0;
+  }
+  .user__auth__content {
+    padding: 0 80px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .user__auth {
+    width: 100%;
+    flex-shrink: 0;
+  }
+  .user__auth--para {
+    line-height: 100%; /*1.6875rem */
+    margin-top: -2.3rem;
+    font-size: 1.05rem;
+  }
+  .user__auth--heading {
+    font-size: 7rem;
+    font-weight: 700;
+  }
+  .user__auth__content {
+    padding: 0 20px !important;
+  }
+}

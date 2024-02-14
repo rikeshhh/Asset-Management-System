@@ -3,6 +3,7 @@
   background-color: var(--secondary-color);
   border-bottom: 1px solid var(--primary-grey);
   position: fixed;
+  z-index: 4;
 }
 
 .profile {

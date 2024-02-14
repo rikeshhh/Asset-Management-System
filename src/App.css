@@ -375,6 +375,12 @@ th:last-child {
   padding: 1.09rem 1rem;
 }
 
+@media screen and (min-height: 1000px) {
+  .signup {
+    height: 100vh;
+  }
+}
+
 @media (width<=850px) {
   .category__content {
     display: flex;
