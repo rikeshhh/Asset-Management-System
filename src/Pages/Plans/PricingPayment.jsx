@@ -9,6 +9,7 @@ import { paypalImage } from "../../Component/Images/Image";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
+
 var stripePromise = loadStripe(
   "pk_test_51OjDzQSDVqjNOfpcWjFWwyFB75nd2e7sqdhjwhyxkWrizywOjBqBoEOJyjVrq9afD6I1xX3xrtQamCKfJgLvnfUf00wUB84Wou"
 );

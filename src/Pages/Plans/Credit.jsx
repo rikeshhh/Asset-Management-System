@@ -18,6 +18,7 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
+import { loadStripe } from '@stripe/stripe-js';
 
 export const Credit = ({ goback, navigate }) => {
   const stripe = useStripe();

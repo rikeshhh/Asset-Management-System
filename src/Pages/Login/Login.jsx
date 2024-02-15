@@ -26,6 +26,7 @@ const Login = () => {
         navigate("/");
         console.log("accessToken", data.payload.access_token);
         setTokenToLocalStorage(data.payload.access_token);
+        window.location.reload();
       }
     },
     onError: (error) => {
@@ -44,7 +45,6 @@ const Login = () => {
   } = formMethod;
 
   const submitData = (data) => {
-    console.log(data);
     verifyUserMutation.mutate(data);
     setError(null);
   };
