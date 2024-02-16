@@ -46,6 +46,7 @@ label {
   line-height: 150%; /* 1.6875rem */
   letter-spacing: 0.00563rem;
   margin-top: -2.69rem;
+  text-transform: capitalize;
 }
 
 .user__auth--form {
