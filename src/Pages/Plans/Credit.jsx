@@ -39,7 +39,6 @@ export const Credit = ({ goback, navigate }) => {
       // additional options...
     });
 
-    console.log(paymentIntent.client_secret);
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
       return;
@@ -58,7 +57,6 @@ export const Credit = ({ goback, navigate }) => {
       console.error(result.error);
     } else if (result.paymentIntent.status === "succeeded") {
       // Payment succeeded
-      console.log("Payment succeeded");
       navigate("/success");
     }
   };

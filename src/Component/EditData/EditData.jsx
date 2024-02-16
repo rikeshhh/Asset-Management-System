@@ -16,7 +16,6 @@ const EditData = ({ value,handleClick,setFormDataArray   }) => {
   } = useForm();
   const [updatedValue, setUpdatedValue] = useState(value); 
   const onSubmit = (data) => {
-    console.log('User input:', data.ChildCategory);
     // Modify the existing data in formDataArray
     setFormDataArray((prevDataArray) =>
       prevDataArray.map((formData) =>

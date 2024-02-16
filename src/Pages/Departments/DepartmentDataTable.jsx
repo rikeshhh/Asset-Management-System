@@ -23,7 +23,7 @@ import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteCon
 const DepartmentDataTable = ({ DepartmentData, isPending,handleDeleteClick }) => {
   
   const successMessage = "Department has been updated successfully"
-
+  
   const EditDepartment = useMutation({
     mutationFn: (editData) => {
       return updateDepartmentData(editData.data, editData.editedDepartment);

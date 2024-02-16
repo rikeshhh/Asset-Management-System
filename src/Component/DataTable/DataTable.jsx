@@ -24,12 +24,11 @@ export const DataTable = ({ CategoryOptions }) => {
     onError: (error) => {
       notifyError("Data cannot be redeclared");
       if (error.response.status === 401) {
-        console.log("Unauthorized: Please log in with valid id.");
+        notifyError("Unauthorized: Please log in with valid id.");
       }
     },
   });
   const onDeleteData = (optionName) => {
-    console.log("name", optionName);
     DeleteDepartment.mutate(optionName);
   };
   const {

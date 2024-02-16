@@ -1,6 +1,5 @@
 import "./Departments.css";
 import { useForm } from "react-hook-form";
-import { DataTable } from "../../Component/DataTable/DataTable";
 import { InputField } from "../../Component/Input/InputField";
 import { Label } from "../../Component/Label/Label";
 import Button from "../../Component/Button/Button";

@@ -1,7 +1,9 @@
+import { notifyError } from "../../Component/Toast/Toast";
 import instance from "../../axios/Axios";
 import { getTokenFromLocalStorage } from "../../utils/StorageUtils";
 
 const token = getTokenFromLocalStorage();
+
 export const getLocationData = async () => {
   const locationData = await instance.get("/location", {
     headers: { Authorization: `Bearer ${token}` },
@@ -9,6 +11,7 @@ export const getLocationData = async () => {
   const resp = await locationData.data.data;
   return resp;
 };
+
 export const selectInputLocation = async () => {
   const locationData = await instance.get("/location", {
     headers: { Authorization: `Bearer ${token}` },
@@ -45,7 +48,7 @@ export const locationDelete = async (location) => {
       },
     });
   } catch (error) {
-    console.log(error)
+    notifyError(error)
   }
 }
 

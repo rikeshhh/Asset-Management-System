@@ -18,7 +18,6 @@ export const Signup = () => {
     watch,
   } = formMethod;
   const submitData = (data) => {
-    console.log(data);
   };
   // password showing features
   const [showPassword, setShowPassword] = useState(false);

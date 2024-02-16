@@ -12,7 +12,7 @@ export const SearchInput = () => {
   } = useForm();
 
   const submitSearch = (data) => {
-    console.log("hello");
+    p
   };
   return (
     <form className="search__form" onSubmit={handleSubmit(submitSearch)}>

@@ -35,7 +35,6 @@ const Filter = ({ handleClick, filterShow }) => {
 
   const options = [{ options: "frontend", value: "frontend" }];
 
-  const filterSubmit = (data) => console.log(data);
 
   return (
     <>

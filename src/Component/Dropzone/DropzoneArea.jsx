@@ -9,11 +9,9 @@ const DropzoneArea = () => {
   const [importedImage, setImportedImage] = useState(null);
   const onDrop = (acceptedFiles) => {
     // Handle dropped files
-    console.log("Dropped files:", acceptedFiles);
     const file = acceptedFiles[0];
     if (file) {
       const imageUrl = URL.createObjectURL(file);
-      console.log(imageUrl);
       setImportedImage(imageUrl);
     }
   };

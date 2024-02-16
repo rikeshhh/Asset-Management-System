@@ -6,6 +6,7 @@ import { Label } from "../../Component/Label/Label";
 import { InputField } from "../../Component/Input/InputField";
 import { useForm } from "react-hook-form";
 import { useAmsContext } from "../../Context/AmsContext";
+import { notifyError } from "../../Component/Toast/Toast";
 
 export const Paypal = ({ navigate, goback, rate }) => {
   const {
@@ -37,16 +38,14 @@ export const Paypal = ({ navigate, goback, rate }) => {
         },
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
-          console.log(order);
         },
         onError: (err) => {
-          console.log(err);
+        notifyError(err);
         },
       })
       .render("#paypal__content");
   }, []);
   const paypalSubmit = (data) => {
-    console.log(data);
     // navigate("/success");
   };
 

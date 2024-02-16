@@ -24,7 +24,6 @@ const Login = () => {
     onSuccess: (data) => {
       if (data.status === true) {
         navigate("/");
-        console.log("accessToken", data.payload.access_token);
         setTokenToLocalStorage(data.payload.access_token);
         window.location.reload();
       }

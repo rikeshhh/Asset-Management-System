@@ -48,7 +48,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
     },
     onError: (error) => {
       if (error.response.status === 401) {
-        console.log("Unauthorized: Please log in with valid id.");
+        notifyError("Unauthorized: Please log in with valid id.");
       }
     },
   });

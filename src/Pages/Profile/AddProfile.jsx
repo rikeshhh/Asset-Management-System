@@ -67,7 +67,6 @@ const AddProfile = () => {
      
     },
     onError: (error) => {
-      console.log(error.request.status)
       if (error.request.status === 409) {
         notifyError(error.response.data.message);
       }

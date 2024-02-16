@@ -41,7 +41,6 @@ const Categories = () => {
   });
 
   const onCategorySubmit = (data) => {
-    console.log(data);
     if (data.parent === "None") {
       addParentCategory.mutate(data);
     } else {

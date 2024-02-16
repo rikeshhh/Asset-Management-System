@@ -24,8 +24,7 @@ const PricingForm = () => {
   const navigate = useNavigate();
 
   const submitData = (data) => {
-    console.log(data);
-    navigate("/payment", { state: receivedFeature });
+      navigate("/payment", { state: receivedFeature });
   };
 
   // const options = { value: "Nepal", label: "Nepal" };

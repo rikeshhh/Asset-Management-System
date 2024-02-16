@@ -9,7 +9,6 @@ export const getCategoryData = async () => {
   const resp = await categoryData.data.data;
   const data = resp.map((item, index) => item);
   const uniqueParents = Array.from(new Set(data.map((item) => item.parent)));
-  console.log({ uniqueParents }); 
   return resp;
 };
 
