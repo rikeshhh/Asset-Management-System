@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { notifyError } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
 import { useEffect } from "react";
+import useLogout from "./useLogout";
 
 const Logout = ({ toggleNavbar }) => {
   const navigate = useNavigate();
@@ -27,17 +28,8 @@ const Logout = ({ toggleNavbar }) => {
       }
     },
   });
-  useEffect(() => {
-    const handleStorageChange = () => {
-      window.location.reload();
-    };
 
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
+  useLogout()
   const handleLogout = () => {
     LogoutUser.mutate();
   };
