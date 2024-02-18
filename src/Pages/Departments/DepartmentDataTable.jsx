@@ -6,32 +6,45 @@ import { GoTrash } from "react-icons/go";
 import { useState } from "react";
 import Button from "../../Component/Button/Button";
 import { queryClient } from "../../Component/Query/Query";
-import { departmentDelete, updateDepartmentData } from "./DepartmentApiSlice";
+import { updateDepartmentData } from "./DepartmentApiSlice";
 import { FaCheck } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
 import "./Departments.css";
 import { RxCross1 } from "react-icons/rx";
-import { IoMdCheckmark } from "react-icons/io";
-import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-import { notifySuccess, notifyDelete, notifyError } from "../../Component/Toast/Toast";
+import "react-toastify/dist/ReactToastify.css";
+import { notifySuccess, notifyError } from "../../Component/Toast/Toast";
 import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
 import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
-import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
+/**
+ * Functional component representing the data table for departments.
+ * @component
+ * @param {Object} props - Component props.
+ * @param {Array} props.DepartmentData - Array of department data.
+ * @param {boolean} props.isPending - Indicates whether data is still being fetched.
+ * @param {Function} props.handleDeleteClick - Function to handle the deletion of a department.
+ * @returns {JSX.Element} JSX element representing the DepartmentDataTable component.
+ */
 
-const DepartmentDataTable = ({ DepartmentData, isPending,handleDeleteClick }) => {
-  
-  const successMessage = "Department has been updated successfully"
-  
+const DepartmentDataTable = ({
+  DepartmentData,
+  isPending,
+  handleDeleteClick,
+}) => {
+  const successMessage = "Department has been updated successfully";
+
+  /**
+   * React Query hook for handling department update mutation.
+   */
+
   const EditDepartment = useMutation({
     mutationFn: (editData) => {
       return updateDepartmentData(editData.data, editData.editedDepartment);
     },
     onSuccess: () => {
-      notifySuccess(successMessage)
+      notifySuccess(successMessage);
       queryClient.invalidateQueries("DepartmentData");
-      setShow(false)
+      setShow(false);
     },
     onError: (error) => {
       notifyError(error.message);
@@ -40,8 +53,14 @@ const DepartmentDataTable = ({ DepartmentData, isPending,handleDeleteClick }) =>
         notifyError("Unauthorized: Please log in with valid id.");
       }
     },
-  })
+  });
   const [show, setShow] = useState(false);
+
+  /**
+   * Handles the update of department data.
+   * @param {Object} data - The department data.
+   */
+
   const onUpdateData = (data) => {
     const editData = {
       data: data.department,
@@ -49,15 +68,23 @@ const DepartmentDataTable = ({ DepartmentData, isPending,handleDeleteClick }) =>
     };
 
     EditDepartment.mutate(editData);
-
-  }
+  };
   const [previousDepartment, setPreviousDepartment] = useState("");
   const [departmentId, setDepartmentId] = useState("");
+
+  /**
+   * Handles the click event for the edit button.
+   * @param {Object} option - The department option to be edited.
+   */
   const handleEditButtonClick = (option) => {
     setPreviousDepartment(option.department);
     setDepartmentId(option.id);
     setShow(true);
   };
+
+  /**
+   * React Hook Form instance for managing form state.
+   */
   const {
     register,
     formState: { errors },
@@ -67,19 +94,25 @@ const DepartmentDataTable = ({ DepartmentData, isPending,handleDeleteClick }) =>
     defaultValues: { location: previousDepartment },
   });
   const onMiniDelete = () => {
-    setShow(false)
+    setShow(false);
     reset();
-  }
+  };
+
+  /**
+   * Handles the click event for deleting a department.
+   * @param {string} departmentName - The name of the department to be deleted.
+   */
   const handleDeleteDepartment = (departmentName) => {
     handleDeleteClick(departmentName);
   };
   return (
     <>
-     
       <section className="cateogries table__container">
         <table>
           <thead>
-            {isPending ? <SmallTablePendingHead /> :
+            {isPending ? (
+              <SmallTablePendingHead />
+            ) : (
               <tr>
                 <th>
                   SN <LuArrowDownUp />
@@ -88,18 +121,22 @@ const DepartmentDataTable = ({ DepartmentData, isPending,handleDeleteClick }) =>
                   Category <LuArrowDownUp />
                 </th>
                 <th>Action</th>
-              </tr>}
-
+              </tr>
+            )}
           </thead>
           <tbody>
-
-            {isPending ? <SmallTablePendingBody /> : (
+            {isPending ? (
+              <SmallTablePendingBody />
+            ) : (
               DepartmentData.map((options, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
                   {departmentId === options.id && show ? (
                     <td className={show ? "universal__td--border" : ""}>
-                      <form onSubmit={handleSubmit(onUpdateData)} className="universal__update--form">
+                      <form
+                        onSubmit={handleSubmit(onUpdateData)}
+                        className="universal__update--form"
+                      >
                         <InputField
                           name="department"
                           register={register}
@@ -107,14 +144,14 @@ const DepartmentDataTable = ({ DepartmentData, isPending,handleDeleteClick }) =>
                           required={Model.Group.required}
                           autoComplete={"off"}
                           errors={errors}
-                          className={show ? "universal__table--input" : ''}
+                          className={show ? "universal__table--input" : ""}
                           type={Model.Group.type}
                           placeholder={options.department}
                         />
                         <div className="universal__FormButton">
                           <Button className="" text={<FaCheck />} />
                           <Button
-                            type='button'
+                            type="button"
                             className=""
                             text={<RxCross1 />}
                             handleClick={onMiniDelete}
@@ -122,10 +159,8 @@ const DepartmentDataTable = ({ DepartmentData, isPending,handleDeleteClick }) =>
                         </div>
                       </form>
                     </td>
-
                   ) : (
                     <td>{options.department}</td>
-
                   )}
 
                   <td className="button-gap">
@@ -137,17 +172,16 @@ const DepartmentDataTable = ({ DepartmentData, isPending,handleDeleteClick }) =>
                     <Button
                       className="delete__button"
                       text={<GoTrash />}
-                      handleClick={() => handleDeleteDepartment(options.department)}
-
+                      handleClick={() =>
+                        handleDeleteDepartment(options.department)
+                      }
                     />
-
                   </td>
                 </tr>
               ))
             )}
           </tbody>
         </table>
-
       </section>
     </>
   );

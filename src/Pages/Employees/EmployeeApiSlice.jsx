@@ -1,7 +1,11 @@
 import instance from "../../axios/Axios";
 import { getTokenFromLocalStorage } from "../../utils/StorageUtils";
 
-const token = getTokenFromLocalStorage();
+const token = getTokenFromLocalStorage(); //Get the authentication token from local storage.
+
+/**
+ * Retrieves employee table data from the server.
+ */
 export const getEmployeeTableData = async () => {
   try {
     const response = await instance.get("/user", {
@@ -14,6 +18,10 @@ export const getEmployeeTableData = async () => {
   }
 };
 
+/**
+ * Deletes an employee with the specified ID.
+ * @param {string} employeeId - The ID of the employee to be deleted.
+ */
 export const employeeDelete = async (employeeId) => {
   const employeeDeleteRequest = await instance.delete("/user", {
     params: {
@@ -25,4 +33,3 @@ export const employeeDelete = async (employeeId) => {
     },
   });
 };
-

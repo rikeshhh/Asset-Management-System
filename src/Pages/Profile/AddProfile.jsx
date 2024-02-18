@@ -15,6 +15,10 @@ import { queryClient } from "../../Component/Query/Query";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 
+/**
+ * Functional component for adding a new employee profile.
+ * @returns {JSX.Element} JSX element representing the AddProfile component.
+ */
 const AddProfile = () => {
   const {
     register,
@@ -24,11 +28,14 @@ const AddProfile = () => {
   const receivedState = false;
   const navigate = useNavigate();
 
-
   const fileInputRef = useRef(null);
 
   const [profileImage, setProfileImage] = useState(profileCover);
 
+  /**
+   * Handles the update of the profile picture.
+   * @param {Object} e - The event object.
+   */
   const handleProfileUpdate = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -36,19 +43,16 @@ const AddProfile = () => {
       setProfileImage(profileUrl);
     }
   };
-
+  /**
+   * Deletes the current profile picture.
+   */
   const deleteProfile = () => {
     setProfileImage(profileCover);
   };
 
-  const [options, setOptions] = useState([
-    "Frontend",
-    "Backend",
-    "UI UX",
-    "QA",
-    "Project Manager",
-    "DevOps",
-  ]);
+  /**
+   * Handles the click event of the upload button.
+   */
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -58,13 +62,11 @@ const AddProfile = () => {
       return employeeProfile(data);
     },
     onSuccess: () => {
-      
       notifySuccess("Employee Profile Added Successfully");
       setTimeout(() => {
-        navigate("/employees")
+        navigate("/employees");
         queryClient.invalidateQueries("EmployeeData");
       }, 1000);
-     
     },
     onError: (error) => {
       if (error.request.status === 409) {
@@ -72,10 +74,14 @@ const AddProfile = () => {
       }
     },
   });
-  const onEmployeeAddSubmit = (data) => {
-    AddEmployeeProfile.mutate(data)
-  }
 
+  /**
+   * Handles the submission of the employee profile form.
+   * @param {Object} data - Form data submitted.
+   */
+  const onEmployeeAddSubmit = (data) => {
+    AddEmployeeProfile.mutate(data);
+  };
 
   return (
     <section className="content-wrapper">
@@ -128,7 +134,10 @@ const AddProfile = () => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit(onEmployeeAddSubmit)} className="group__form profile__form">
+          <form
+            onSubmit={handleSubmit(onEmployeeAddSubmit)}
+            className="group__form profile__form"
+          >
             <div className="form__input--section">
               <Label sup={"*"} text="Name" />
               <InputField

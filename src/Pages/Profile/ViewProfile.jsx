@@ -1,4 +1,3 @@
-import { useLocation } from "react-router-dom";
 import React, { useRef, useState } from "react";
 import { InputField } from "../../Component/Input/InputField";
 import { Label } from "../../Component/Label/Label";
@@ -10,12 +9,12 @@ import Model from "../../Component/Model/Model";
 import { Link } from "react-router-dom";
 import { profileCover } from "../../Component/Images/Image";
 import { GoTrash } from "react-icons/go";
+/**
+ * Functional component for viewing user profile information.
+ * @returns {JSX.Element} The JSX representation of the component.
+ */
 
 const ViewProfile = () => {
-  // const location = useLocation();
-  // const receivedData = location.state;
-  // const employeeData = receivedData.employeeData;
-
   const {
     register,
     formState: { errors },
@@ -27,6 +26,11 @@ const ViewProfile = () => {
 
   const [profileImage, setProfileImage] = useState(profileCover);
 
+  /**
+   * Handles the update of the profile image when a new file is selected.
+   * @param {React.ChangeEvent<HTMLInputElement>} e - The change event from the file input.
+   */
+
   const handleProfileUpdate = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -34,20 +38,17 @@ const ViewProfile = () => {
       setProfileImage(profileUrl);
     }
   };
+  /**
+   * Deletes the current profile image and sets it back to the default image.
+   */
 
   const deleteProfile = () => {
     setProfileImage(profileCover);
   };
 
-  const [options, setOptions] = useState([
-    "Frontend",
-    "Backend",
-    "UI UX",
-    "QA",
-    "Project Manager",
-    "DevOps",
-  ]);
-
+  /**
+   * Handles the click event for the file input, triggering the file selection dialog.
+   */
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };

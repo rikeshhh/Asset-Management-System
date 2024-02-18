@@ -7,6 +7,11 @@ import { Link } from "react-router-dom";
 import { features } from "./PlansFeatures";
 import { house, building, factory } from "../../Component/Images/Image";
 import { useAmsContext } from "../../Context/AmsContext";
+
+/**
+ * Component for displaying pricing plans with features and options.
+ * @returns {JSX.Element} The JSX representation of the component.
+ */
 const Plans = () => {
   const { isAnnualBilling, toggleBilling, getBusinessRate, getEnterpriseRate } =
     useAmsContext();

@@ -4,6 +4,9 @@ import instance from "../../axios/Axios";
 
 const token = getTokenFromLocalStorage();
 
+/**
+ * Retrieves department data from the server.
+ */
 export const getDepartmentData = async () => {
   const departmentData = await instance.get("/department", {
     headers: { Authorization: `Bearer ${token}` },
@@ -11,6 +14,9 @@ export const getDepartmentData = async () => {
   const resp = await departmentData.data.data;
   return resp;
 };
+/**
+ * Retrieves department data for select input from the server.
+ */
 
 export const selectInputDepartment = async () => {
   const departmentData = await instance.get("/department", {
@@ -19,6 +25,11 @@ export const selectInputDepartment = async () => {
   const resp = await departmentData.data.data;
   return resp;
 };
+
+/**
+ * Adds a new department to the server.
+ *  @param {string} department - The name of the department to be added.
+ */
 
 export const departmentAdd = async (department) => {
   const departmentData = await instance.post(
@@ -34,6 +45,12 @@ export const departmentAdd = async (department) => {
     }
   );
 };
+/**
+ * Deletes a department from the server.
+ * @param {string} department - The name of the department to be deleted.
+ 
+ */
+
 export const departmentDelete = async (department) => {
   try {
     const response = await instance.delete("/department", {
@@ -49,6 +66,11 @@ export const departmentDelete = async (department) => {
     console.error(error);
   }
 };
+/**
+ * Updates department data on the server.
+ * @param {string} newDepartment - The new name for the department.
+ * @param {string} prevDepartment - The previous name of the department.
+ */
 
 export const updateDepartmentData = async (newDepartment, prevDepartment) => {
   try {
@@ -61,8 +83,8 @@ export const updateDepartmentData = async (newDepartment, prevDepartment) => {
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       }
     );
     // Assuming you want to return the response data
@@ -71,5 +93,3 @@ export const updateDepartmentData = async (newDepartment, prevDepartment) => {
     throw error; // Rethrow the error so that the caller can handle it if necessary
   }
 };
-
-

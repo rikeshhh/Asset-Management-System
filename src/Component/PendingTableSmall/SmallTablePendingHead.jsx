@@ -1,5 +1,9 @@
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+/**
+ * Renders the pending state of a table header with skeleton loading components.
+ * @returns {JSX.Element} JSX element representing the pending table header with custom height and width.
+ */
 
 const SmallTablePendingHead = () => {
   return (

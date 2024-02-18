@@ -1,24 +1,27 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { InputField } from "../../Component/Input/InputField";
 import { Label } from "../../Component/Label/Label";
-import { useForm } from "react-hook-form";
 import "./profile.css";
 import Button from "../../Component/Button/Button";
-import { SelectInput } from "../../Component/Input/SelectInput";
 import Model from "../../Component/Model/Model";
 import { Link } from "react-router-dom";
-import { profileCover } from "../../Component/Images/Image";
 import { GoTrash } from "react-icons/go";
 import SelectInputDepartment from "../Departments/SelectInputDepartment";
+
+/**
+ * Profile component for displaying and editing employee profiles.
+ * @param {Object} props - The properties passed to the component.
+ * @param {string} props.title - The title of the profile section.
+ * @param {string} props.description - The description of the profile section.
+ * @param {string} props.buttonBlueText - The text for the blue button.
+ * @param {Object} props.employeeData - Data of the employee profile.
+ */
 export const Profile = ({
   title,
   description,
   buttonBlueText,
   employeeData,
-  receivedBoolean,
 }) => {
-
-
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -80,7 +83,7 @@ export const Profile = ({
                 message={Model.Username.pattern.message}
                 required={Model.Username.required}
                 errors={errors}
-                inputValue={employeeData.name }
+                inputValue={employeeData.name}
                 type={Model.Username.type}
                 placeholder={Model.Username.placeholder}
                 minLength={Model.Username.minLength.value}
@@ -142,7 +145,7 @@ export const Profile = ({
             </div>
             <div className="form__input--section">
               <Label sup={"*"} text="Department" />
-              <SelectInputDepartment isDisabled={receivedState}/>
+              <SelectInputDepartment isDisabled={receivedState} />
               {/* // <SelectInput isDisabled={receivedState} options={options} /> */}
             </div>
             <div className="form__input--section">

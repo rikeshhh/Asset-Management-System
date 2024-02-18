@@ -9,6 +9,10 @@ import { SelectInput } from "../../Component/Input/SelectInput";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAmsContext } from "../../Context/AmsContext";
 
+/**
+ * Component for handling pricing form, capturing user details, and navigating to payment.
+ * @returns {JSX.Element} The JSX representation of the component.
+ */
 const PricingForm = () => {
   const {
     register,
@@ -23,19 +27,13 @@ const PricingForm = () => {
 
   const navigate = useNavigate();
 
+  /**
+   * Handles the form submission and navigates to the payment page.
+   * @param {Object} data - Form data submitted by the user.
+   */
   const submitData = (data) => {
-      navigate("/payment", { state: receivedFeature });
+    navigate("/payment", { state: receivedFeature });
   };
-
-  // const options = { value: "Nepal", label: "Nepal" };
-  const [options, setOptions] = useState([
-    "Frontend",
-    "Backend",
-    "UI UX",
-    "QA",
-    "Project Manager",
-    "DevOps",
-  ]);
 
   return (
     <section className="content-wrapper">

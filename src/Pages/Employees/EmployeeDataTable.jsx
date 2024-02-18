@@ -1,5 +1,4 @@
 import "../../Component/Table/Table.css";
-import { Link } from "react-router-dom";
 import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
 import { getEmployeeTableData } from "./EmployeeApiSlice";
@@ -7,14 +6,11 @@ import { useQuery } from "@tanstack/react-query";
 import Button from "../../Component/Button/Button";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
-import CustomToastContainer from "../../Component/Toast/ToastContainer";
+/**
+ * Employee data table component that displays a table of employee information.
+ */
 
-const EmployeeDataTable = ({
-  size,
-  linkTo,
-  handleTableEdit,
-  handleDeleteClick,
-}) => {
+const EmployeeDataTable = ({ handleTableEdit, handleDeleteClick }) => {
   const {
     isPending,
     error,
@@ -23,18 +19,23 @@ const EmployeeDataTable = ({
     queryKey: ["EmployeeData"],
     queryFn: getEmployeeTableData,
   });
+  /**
+   * Handles deleting an employee.
+   * @param {number} employeeId - The ID of the employee to be deleted.
+   */
 
   const handleDeleteEmployee = (employeeId) => {
     handleDeleteClick(employeeId);
   };
-
+  /**
+   * Handles editing an employee's information.
+   * @param {Object} tableItem - The employee data to be edited.
+   */
   const handleEditEmployee = (tableItem) => {
     handleTableEdit(tableItem);
   };
 
-  // if (isPending) return "Loading...";
-  // if (isPending) return "Loading...";
-
+  // If an error occurs during data fetching, display an error message.
   if (error) return "An error has occurred: " + error.message;
 
   return (
@@ -68,9 +69,6 @@ const EmployeeDataTable = ({
                 <td>{tableItem.email}</td>
                 <td>{tableItem.phone}</td>
                 <td className="button-gap">
-                  {/* <Link  to={{ pathname: '/profile', state: false }}>
-                           </Link> */}
-
                   <Button
                     type={"button"}
                     className="edit__button"

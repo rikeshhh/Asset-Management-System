@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { InputField } from "../../Component/Input/InputField";
-import Table from "../../Component/Table/Table";
 import "./Employee.css";
 import Model from "../../Component/Model/Model";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
@@ -17,7 +16,9 @@ import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
-
+/**
+ * Functional component representing the Employees page.
+ */
 const Employees = () => {
   const {
     register,
@@ -25,6 +26,9 @@ const Employees = () => {
     handleSubmit,
   } = useForm();
   const navigate = useNavigate();
+  /**
+   * React Query hook for handling employee deletion mutation.
+   */
 
   const DeleteEmployee = useMutation({
     mutationFn: (employeeId) => {
@@ -42,28 +46,47 @@ const Employees = () => {
     },
   });
 
-  const [filterShow, setFilterShow] = useState(false);
+  const [filterShow, setFilterShow] = useState(false); //State to manage the visibility of the filter component.
+
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const [employeeId, setEmployeeId] = useState("");
 
+  /**
+   * Toggles the visibility of the filter component.
+   * @param {boolean} showHide - Indicates whether to show or hide the filter component.
+   */
   const onFilterClick = (showHide) => {
     setFilterShow(showHide);
   };
 
+  /**
+   * Handles the click event for deleting an employee.
+   * @param {Object} employee - The employee object to be deleted.
+   */
   const handleDeleteClick = (employee) => {
     setDeleteConfirationShow(true);
     setEmployeeId(employee);
   };
 
+  /**
+   * Handles the click event for canceling the employee deletion.
+   */
   const handleCancelClick = () => {
     setDeleteConfirationShow(false);
   };
 
+  /**
+   * Handles the click event for proceeding with the employee deletion.
+   */
   const handleProceedClick = () => {
     DeleteEmployee.mutate(employeeId);
     setDeleteConfirationShow(false);
   };
 
+  /**
+   * Handles the click event for editing an employee's information.
+   * @param {Object} employeeData - The employee data to be edited.
+   */
   const handleTableEdit = (employeeData) => {
     navigate("/editProfile", {
       state: { employeeData: employeeData },

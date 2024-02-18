@@ -9,6 +9,11 @@ import { paypalImage } from "../../Component/Images/Image";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
+/**
+ * Component for handling the payment section in the pricing process.
+ * Allows users to choose between credit card and PayPal payment methods.
+ * @returns {JSX.Element} The JSX representation of the component.
+ */
 
 var stripePromise = loadStripe(
   "pk_test_51OjDzQSDVqjNOfpcWjFWwyFB75nd2e7sqdhjwhyxkWrizywOjBqBoEOJyjVrq9afD6I1xX3xrtQamCKfJgLvnfUf00wUB84Wou"
@@ -25,14 +30,23 @@ const PricingPayment = () => {
 
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("paypal");
 
+  /**
+   * Handles the click event for selecting the credit card payment method.
+   */
   const handleCreditClick = () => {
     setSelectedPaymentMethod("creditCard");
   };
+  /**
+   * Handles the click event for selecting the PayPal payment method.
+   */
 
   const handlePayPalClick = () => {
     setSelectedPaymentMethod("paypal");
   };
 
+  /**
+   * Navigates back to the previous page in the history.
+   */
   const goBack = () => {
     // back("/pricingForm", { state: receivedFeature });
     navigate(-1);

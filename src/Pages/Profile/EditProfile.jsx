@@ -5,7 +5,6 @@ import { Label } from "../../Component/Label/Label";
 import { useForm } from "react-hook-form";
 import "./profile.css";
 import Button from "../../Component/Button/Button";
-import { SelectInput } from "../../Component/Input/SelectInput";
 import Model from "../../Component/Model/Model";
 import { Link } from "react-router-dom";
 import { profileCover } from "../../Component/Images/Image";
@@ -15,6 +14,11 @@ import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
 import { employeeEdit } from "./ProfileApiSlicee";
 import { notifySuccess } from "../../Component/Toast/Toast";
+
+/**
+ * Functional component for editing an existing employee profile.
+ * @returns {JSX.Element} JSX element representing the EditProfile component.
+ */
 
 const EditProfile = () => {
   const location = useLocation();
@@ -35,6 +39,11 @@ const EditProfile = () => {
 
   const [profileImage, setProfileImage] = useState(profileCover);
 
+  /**
+   * Handles the update of the profile picture.
+   * @param {Object} e - The event object.
+   */
+
   const handleProfileUpdate = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -43,19 +52,16 @@ const EditProfile = () => {
     }
   };
 
+  /**
+   * Deletes the current profile picture.
+   */
   const deleteProfile = () => {
     setProfileImage(profileCover);
   };
 
-  const [options, setOptions] = useState([
-    "Frontend",
-    "Backend",
-    "UI UX",
-    "QA",
-    "Project Manager",
-    "DevOps",
-  ]);
-
+  /**
+   * Handles the click event of the upload button.
+   */
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
@@ -66,7 +72,7 @@ const EditProfile = () => {
     },
     onSuccess: () => {
       notifySuccess("Employee Edited Successfully");
-      navigate("/employees")
+      navigate("/employees");
       queryClient.invalidateQueries("EmployeeData");
     },
     onError: (error) => {
@@ -76,13 +82,18 @@ const EditProfile = () => {
       }
     },
   });
+
+  /**
+   * Handles the submission of the employee profile edit form.
+   * @param {Object} data - Form data submitted.
+   */
   const onEmployeeEditSubmit = (data) => {
     const employeeInfo = {
       id: employeePrevId,
-      employeeData: data
-    }
-    EditEmployeeData.mutate(employeeInfo)
-  }
+      employeeData: data,
+    };
+    EditEmployeeData.mutate(employeeInfo);
+  };
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -134,7 +145,10 @@ const EditProfile = () => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit(onEmployeeEditSubmit)} className="group__form profile__form">
+          <form
+            onSubmit={handleSubmit(onEmployeeEditSubmit)}
+            className="group__form profile__form"
+          >
             <div className="form__input--section">
               <Label sup={"*"} text="Name" />
               <InputField
@@ -252,7 +266,7 @@ const EditProfile = () => {
               }
             >
               <Button
-              type="submit"
+                type="submit"
                 text="Save Changes"
                 className={receivedState ? "profile-btn-none" : "button__blue"}
               />
@@ -263,7 +277,6 @@ const EditProfile = () => {
                   isDisabled={receivedState}
                 />
               </Link>
-
             </div>
           </form>
         </div>

@@ -1,5 +1,10 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+/**
+ * Renders the pending state of a table body with skeleton loading components.
+ * @returns {JSX.Element} JSX element representing the pending table data with custom height and width.
+ */
+ 
 const PendingTableBody = () => {
   return (
     <>

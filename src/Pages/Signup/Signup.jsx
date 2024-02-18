@@ -6,10 +6,15 @@ import "./Signup.css";
 import { Link } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
-import { BiSolidShow, BiSolidHide } from "react-icons/bi";
 import { showHide } from "../../Component/Images/Image";
+/**
+ * Signup component for user registration.
 
+ */
 export const Signup = () => {
+  /**
+   * React Hook Form instance for managing form state.
+   */
   const formMethod = useForm();
   const {
     register,
@@ -17,14 +22,24 @@ export const Signup = () => {
     handleSubmit,
     watch,
   } = formMethod;
-  const submitData = (data) => {
-  };
+  const submitData = (data) => {};
   // password showing features
   const [showPassword, setShowPassword] = useState(false);
+
   const [showResetPassword, setShowResetPassword] = useState(false);
+
+  /**
+   * Handles the visibility toggle of the password.
+   * @param {Event} e - The event object.
+   */
+
   const visiblePasswordFn = (e) => (
     e.preventDefault(), setShowPassword((prev) => !prev)
   );
+
+  /**
+   * Handles the visibility toggle of the retype password.
+   */
   const visibleResetPasswordFn = () => setShowResetPassword((prev) => !prev);
   return (
     <section className="main-container signup">
