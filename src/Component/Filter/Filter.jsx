@@ -34,7 +34,7 @@ const Filter = ({ handleClick, filterShow }) => {
   // }, [toggleFilter]);
 
   const options = [{ options: "frontend", value: "frontend" }];
-
+  const filterSubmit = () => {};
 
   return (
     <>
