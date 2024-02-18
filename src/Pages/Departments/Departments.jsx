@@ -6,18 +6,27 @@ import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
 import { IoMdAdd } from "react-icons/io";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { departmentAdd, departmentDelete, getDepartmentData } from "./DepartmentApiSlice";
+import {
+  departmentAdd,
+  departmentDelete,
+  getDepartmentData,
+} from "./DepartmentApiSlice";
 import { queryClient } from "../../Component/Query/Query";
 import DepartmentDataTable from "./DepartmentDataTable";
-import { notifyDelete, notifyError, notifySuccess } from "../../Component/Toast/Toast";
+import {
+  notifyDelete,
+  notifyError,
+  notifySuccess,
+} from "../../Component/Toast/Toast";
 import { useState } from "react";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 import ToastContainer from "../../Component/Toast/ToastContainer";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
-
+/**
+ * Department component responsible for rendering department UI .
+ * @returns {JSX.Element} JSX element representing the Department component.
+ */
 const Departments = () => {
-
-
   const {
     register,
     formState: { errors },
@@ -25,14 +34,17 @@ const Departments = () => {
     reset,
   } = useForm();
   const addDepartment = useMutation({
+    //Function that performs the mutation, adding a new department.
     mutationFn: (formData) => {
       return departmentAdd(formData.department);
     },
+    //func:Callback function invoked on successful completion of the mutation.
     onSuccess: () => {
-      notifySuccess(successMessage)
+      notifySuccess(successMessage);
 
       queryClient.invalidateQueries("DepartmentData");
     },
+    //func:Callback function invoked if an error occurs during the mutation.
     onError: (error) => {
       notifyError("Data cannot be redeclared");
       if (error.response.status === 401) {
@@ -56,14 +68,14 @@ const Departments = () => {
   });
 
   const deleteMessage = "Department has been deleted successfully";
-  
+
   const DeleteDepartment = useMutation({
     mutationFn: (department) => {
       return departmentDelete(department);
     },
     onSuccess: () => {
       queryClient.invalidateQueries("DepartmentData");
-      notifySuccess(deleteMessage)
+      notifySuccess(deleteMessage);
     },
     onError: (error) => {
       if (error.response.status === 401) {
@@ -71,9 +83,8 @@ const Departments = () => {
       }
     },
   });
-  const [departmentName, setDepartmentName] = useState()
+  const [departmentName, setDepartmentName] = useState();
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
-
 
   const handleCancelClick = () => {
     setDeleteConfirationShow(false);
@@ -88,15 +99,12 @@ const Departments = () => {
     setDepartmentName(department);
   };
 
-
-
   // if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
 
   return (
     <>
-
       {deleteConfirationShow ? (
         <DeleteConfirmation
           deleteName="department"
@@ -113,10 +121,12 @@ const Departments = () => {
             <h2>Department</h2>
           </div>
           <div className="category__content">
-            <DepartmentDataTable DepartmentData={DepartmentData}
+            <DepartmentDataTable
+              DepartmentData={DepartmentData}
               isPending={isPending}
               handleDeleteClick={handleDeleteClick}
-              handleProceedClick={handleProceedClick} />
+              handleProceedClick={handleProceedClick}
+            />
 
             <div className="add__category">
               <div className="add__category--title">
@@ -126,6 +136,8 @@ const Departments = () => {
                 </span>
               </div>
               <form action="" onSubmit={handleSubmit(onSubmit)}>
+                {/* Department Name input field */}
+
                 <div>
                   <Label sup={"*"} text="Department Name" />
                   <InputField
@@ -139,6 +151,7 @@ const Departments = () => {
                     maxLength={Model.Group.maxLength}
                   />
                 </div>
+                {/* Add Department button */}
                 <div className="">
                   <Button
                     text="Add Department"
@@ -151,18 +164,10 @@ const Departments = () => {
             </div>
           </div>
         </div>
-
-<CustomToastContainer/>
-
-
-
-
-
-
-        
+        {/* Custom Toast Container */}
+        <CustomToastContainer />
       </section>
     </>
-
   );
 };
 export default Departments;

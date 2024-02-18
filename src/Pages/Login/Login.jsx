@@ -12,15 +12,19 @@ import { setTokenToLocalStorage } from "../../utils/StorageUtils";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { notifyError } from "../../Component/Toast/Toast";
 import { showHide } from "../../Component/Images/Image";
-
+/**
+ * Login component responsible for rendering the login form and handling user authentication.
+ * @returns {JSX.Element} JSX element representing the Login component.
+ */
 const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
-
+  //func: Mutation hook for verifying user credentials
   const verifyUserMutation = useMutation({
     mutationFn: (formData) => {
       return verifyUser(formData.username, formData.password);
     },
+    // On successful login
     onSuccess: (data) => {
       if (data.status === true) {
         navigate("/");
@@ -28,6 +32,7 @@ const Login = () => {
         window.location.reload();
       }
     },
+    // On error during login
     onError: (error) => {
       notifyError(error.message);
       if (error.response.status === 401) {
@@ -42,11 +47,14 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = formMethod;
-
+  //func:Function to handle form submission
   const submitData = (data) => {
     verifyUserMutation.mutate(data);
     setError(null);
   };
+
+  // State for managing password visibility
+
   const [showPassword, setShowPassword] = useState(false);
   const visiblePasswordFn = () => setShowPassword((prev) => !prev);
 

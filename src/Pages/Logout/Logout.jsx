@@ -1,3 +1,4 @@
+
 import { useMutation } from "@tanstack/react-query";
 import { LogoutSvg } from "../../Component/svg/LogoutSvg";
 import { clearTokenFromLocalStorage } from "../../utils/StorageUtils";
@@ -7,10 +8,16 @@ import { notifyError } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
 import { useEffect } from "react";
 import useLogout from "./useLogout";
+/*
+ * Logout component responsible for handling user logout functionality.
+ * @returns {JSX.Element} JSX element representing the SelectInputDepartment component.
+
+ */
 
 const Logout = ({ toggleNavbar }) => {
   const navigate = useNavigate();
 
+  // feat: Mutation hook for handling logout operation
   const LogoutUser = useMutation({
     mutationFn: () => {
       return logoutUser();
@@ -29,7 +36,7 @@ const Logout = ({ toggleNavbar }) => {
     },
   });
 
-  useLogout()
+  useLogout();
   const handleLogout = () => {
     LogoutUser.mutate();
   };

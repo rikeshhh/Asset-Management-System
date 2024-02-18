@@ -16,11 +16,13 @@ import { ToastContainer } from "react-toastify";
 import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
 import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
 import { FaCheck } from "react-icons/fa6";
-
+/**
+ * LocationDataTable component responsible for rendering a table displaying location data.
+ * @returns {JSX.Element} JSX element representing the LocationDataTable component.
+ */
 const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
-  
   const [show, setShow] = useState(false);
-
+  //func: Mutation hook for deleting location
   const DeleteLocation = useMutation({
     mutationFn: (location) => {
       return locationDelete(location);
@@ -35,13 +37,14 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
       }
     },
   });
+  // func:Mutation hook for editing location
 
   const EditLocation = useMutation({
     mutationFn: (editData) => {
       return locationEdit(editData.data, editData.previousLocation);
     },
     onSuccess: () => {
-      notifySuccess(successMessage)
+      notifySuccess(successMessage);
       queryClient.invalidateQueries("LocationData");
       setShow(false);
       reset();
@@ -77,7 +80,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
     };
     EditLocation.mutate(editData);
   };
-  const successMessage = "Location has been updated successfully"
+  const successMessage = "Location has been updated successfully";
 
   const handleEditCancel = () => {
     setShow(false);
@@ -88,89 +91,93 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
   //   DeleteLocation.mutate(location);
   // };
   const onMiniDelete = () => {
-    setShow(false)
+    setShow(false);
     reset();
-  }
+  };
 
-  const handleDeleteLocation=(locationName)=>{
-    handleDeleteClick(locationName)
-  }
+  const handleDeleteLocation = (locationName) => {
+    handleDeleteClick(locationName);
+  };
   return (
     <section className="cateogries table__container">
       <table>
         <thead>
-          {isPending ? <SmallTablePendingHead /> :
+          {isPending ? (
+            <SmallTablePendingHead />
+          ) : (
             <tr>
-            <th>
-              SN <LuArrowDownUp />
-            </th>
-            <th>
-              Category <LuArrowDownUp />
-            </th>
-            <th>Action</th>
-          </tr>
-          }
+              <th>
+                SN <LuArrowDownUp />
+              </th>
+              <th>
+                Category <LuArrowDownUp />
+              </th>
+              <th>Action</th>
+            </tr>
+          )}
         </thead>
         <tbody>
-          {isPending ? <SmallTablePendingBody /> :
-         ( LocationData.map((options, index) => (
-          <tr key={index}>
-            <td>{index + 1}</td>
-            {options.id === previousLocationId && show ? (
-              <td className={show ? "universal__td--border" : ""}>
-                 <form onSubmit={handleSubmit(onLocationEditSubmit)}
-                 className="universal__update--form">
-                  <InputField
-                    name="location"
-                    register={register}
-                    required={Model.Group.required}
-                    errors={errors}
-                    type={Model.Group.type}
-                    placeholder={options.location}
-                    minLength={Model.Group.minLength}
-                     maxLength={Model.Group.maxLength}
-                     className={show ? "universal__table--input" : ''}
-                     
-                  ></InputField>
-                  {/* <button>
+          {isPending ? (
+            <SmallTablePendingBody />
+          ) : (
+            LocationData.map((options, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                {options.id === previousLocationId && show ? (
+                  <td className={show ? "universal__td--border" : ""}>
+                    <form
+                      onSubmit={handleSubmit(onLocationEditSubmit)}
+                      className="universal__update--form"
+                    >
+                      <InputField
+                        name="location"
+                        register={register}
+                        required={Model.Group.required}
+                        errors={errors}
+                        type={Model.Group.type}
+                        placeholder={options.location}
+                        minLength={Model.Group.minLength}
+                        maxLength={Model.Group.maxLength}
+                        className={show ? "universal__table--input" : ""}
+                      ></InputField>
+                      {/* <button>
                     <IoMdCheckmark />
                   </button>
                   <button type="button" onClick={handleEditCancel}>
                     <RxCross1 />
                   </button> */}
-                    <div className="universal__FormButton">
-                          <Button className="" text={<FaCheck/>} />
-                          <Button
-                            type='button'
-                            className=""
-                            text={<RxCross1 />}
-                            handleClick={onMiniDelete}
-                          />
-                        </div>
-                </form>
-              </td>
-            ) : (
-              <td>{options.location}</td>
-            )}
-            <td className="button-gap">
-              <Button
-                className="edit__button"
-                text={<CiEdit />}
-                handleClick={() => handleEditButtonClick(options)}
-              />
-              <Button
-                className="delete__button"
-                text={<GoTrash />}
-                 handleClick={() => handleDeleteLocation(options.location)}
-                // handleClick={() => onDeleteData(options.location)}
-              />
-            </td>
-          </tr>
-         ))
-            )}
+                      <div className="universal__FormButton">
+                        <Button className="" text={<FaCheck />} />
+                        <Button
+                          type="button"
+                          className=""
+                          text={<RxCross1 />}
+                          handleClick={onMiniDelete}
+                        />
+                      </div>
+                    </form>
+                  </td>
+                ) : (
+                  <td>{options.location}</td>
+                )}
+                <td className="button-gap">
+                  <Button
+                    className="edit__button"
+                    text={<CiEdit />}
+                    handleClick={() => handleEditButtonClick(options)}
+                  />
+                  <Button
+                    className="delete__button"
+                    text={<GoTrash />}
+                    handleClick={() => handleDeleteLocation(options.location)}
+                    // handleClick={() => onDeleteData(options.location)}
+                  />
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
-
     </section>
   );
 };

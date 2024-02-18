@@ -1,5 +1,7 @@
 import instance from "../../axios/Axios";
-
+/**
+ * Function to verify user credentials by sending a POST request to the server.
+ */
 export const verifyUser = async (username, password) => {
   var formdata = new FormData();
   formdata.append("username", username);

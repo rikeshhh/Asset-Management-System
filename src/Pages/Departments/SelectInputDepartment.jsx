@@ -1,7 +1,10 @@
 import React from 'react';
 import { getDepartmentData, selectInputDepartment } from './DepartmentApiSlice';
 import { useQuery } from '@tanstack/react-query';
-
+/**
+ * SelectInputDepartment component responsible for rendering a dropdown select input for departments.
+ * @returns {JSX.Element} JSX element representing the SelectInputDepartment component.
+ */
 const SelectInputDepartment = () => {
   const { data: DepartmentData } = useQuery({
     queryKey: ["selectInputDepartmentData"],
