@@ -137,17 +137,23 @@ const DepartmentDataTable = ({
                         onSubmit={handleSubmit(onUpdateData)}
                         className="universal__update--form"
                       >
-                        <InputField
-                          name="department"
-                          register={register}
-                          // inputValue={options.department}
-                          required={Model.Group.required}
-                          autoComplete={"off"}
-                          errors={errors}
-                          className={show ? "universal__table--input" : ""}
-                          type={Model.Group.type}
-                          placeholder={options.department}
-                        />
+                        <div className="universal__input--container">
+                          <InputField
+                            name="department"
+                            register={register}
+                            errors={errors}
+                            type={Model.department.type}
+                            value={Model.department.pattern.value}
+                            message={Model.department.pattern.message}
+                            minLength={Model.department.minLength.value}
+                            minMessage={Model.department.minLength.message}
+                            maxLength={Model.department.maxLength.value}
+                            maxMessage={Model.department.maxLength.message}
+                            autoComplete={"off"}
+                            className={show ? "universal__table--input" : ""}
+                            placeholder={options.department}
+                          />
+                        </div>
                         <div className="universal__FormButton">
                           <Button className="" text={<FaCheck />} />
                           <Button

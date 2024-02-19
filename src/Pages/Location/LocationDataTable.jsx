@@ -132,12 +132,16 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
                       <InputField
                         name="location"
                         register={register}
-                        required={Model.Group.required}
                         errors={errors}
-                        type={Model.Group.type}
+                        pattern={Model.location.pattern}
+                        message={Model.location.pattern.message}
+                        value={Model.location.pattern.value}
+                        type={Model.location.type}
                         placeholder={options.location}
-                        minLength={Model.Group.minLength}
-                        maxLength={Model.Group.maxLength}
+                        minLength={Model.location.minLength.value}
+                        maxLength={Model.location.maxLength.value}
+                        minMessage={Model.location.minLength.message}
+                        maxMessage={Model.location.maxLength.message}
                         className={show ? "universal__table--input" : ""}
                       ></InputField>
                       {/* <button>

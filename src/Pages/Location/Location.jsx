@@ -144,16 +144,18 @@ const Location = () => {
                 <div>
                   <Label sup={"*"} text="Location Name" />
                   <InputField
-                    name="Location"
+                    name="location"
                     register={register}
-                    required={Model.Location.required}
+                    required={Model.location.required}
                     errors={errors}
-                    value={Model.Location.pattern.value}
-                    message={Model.Location.pattern.message}
-                    type={Model.Location.type}
+                    value={Model.location.pattern.value}
+                    message={Model.location.pattern.message}
+                    type={Model.location.type}
                     placeholder="Enter the location name"
-                    minLength={Model.Location.minLength}
-                    maxLength={Model.Location.maxLength}
+                    minLength={Model.location.minLength.value}
+                    minMessage={Model.location.minLength.message}
+                    maxLength={Model.location.maxLength.value}
+                    maxMessage={Model.location.maxLength.message}
                   />
                 </div>
                 <div className="">
