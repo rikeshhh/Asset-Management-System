@@ -40,7 +40,7 @@ const Model = {
         "Password must be at least 8 characters long, must include a capital letter and a numeric character",
     },
     maxLength: {
-      value: 64,
+      value: 16,
       message: "Password must be less than 64 characters",
     },
     pattern: {
@@ -169,6 +169,40 @@ const Model = {
       value: /^[a-zA-Z0-9-]+$/,
       message:
         "Please enter a valid product name. It can include capital letters, small letters, and numbers.",
+    },
+  },
+  location: {
+    type: "string",
+    required: "Please enter a location name",
+    placeholder: "Enter a location name",
+    minLength: {
+      value: 1,
+      message: "Location name should be more than 1 characters",
+    },
+    maxLength: {
+      value: 64,
+      message: "Location name should be less than 64 characters",
+    },
+    pattern: {
+      value: /^[a-zA-Z0-9 ]+$/,
+      message: "Please enter a valid alphanumeric string.",
+    },
+  },
+  department: {
+    type: "string",
+    required: "Please enter a Department name",
+    placeholder: "Enter a department name",
+    minLength: {
+      value: 1,
+      message: "Department name should be more than 1 characters",
+    },
+    maxLength: {
+      value: 32,
+      message: "Department name should be less than 32 characters",
+    },
+    pattern: {
+      value: /^[a-zA-Z]+$/,
+      message: "Please enter a valid alphabets.",
     },
   },
 };

@@ -14,6 +14,7 @@ import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import SelectInputDepartment from "../Departments/SelectInputDepartment";
 
 /**
  * Functional component for adding a new employee profile.
@@ -207,7 +208,7 @@ const AddProfile = () => {
             </div>
             <div className="form__input--section">
               <Label sup={"*"} text="Department" />
-              <SelectInput isDisabled={receivedState} options={options} />
+              <SelectInputDepartment isDisabled={receivedState} />
             </div>
             <div className="form__input--section">
               <Label sup={"*"} text="Email" />

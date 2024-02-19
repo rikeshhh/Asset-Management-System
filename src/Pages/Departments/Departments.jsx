@@ -143,12 +143,16 @@ const Departments = () => {
                   <InputField
                     name="department"
                     register={register}
-                    required={Model.Group.required}
+                    required={Model.department.required}
                     errors={errors}
-                    type={Model.Group.type}
+                    type={Model.department.type}
+                    value={Model.department.pattern.value}
+                    message={Model.department.pattern.message}
                     placeholder="Enter the department name"
-                    minLength={Model.Group.minLength}
-                    maxLength={Model.Group.maxLength}
+                    minLength={Model.department.minLength.value}
+                    minMessage={Model.department.minLength.message}
+                    maxLength={Model.department.maxLength.value}
+                    maxMessage={Model.department.maxLength.message}
                   />
                 </div>
                 {/* Add Department button */}
