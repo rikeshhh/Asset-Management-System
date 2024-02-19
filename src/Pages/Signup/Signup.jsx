@@ -56,7 +56,7 @@ export const Signup = () => {
               className="user__auth--form"
               onSubmit={handleSubmit(submitData)}
             >
-              <h3 className="user__auth--title">Signup</h3>
+              <h2 className="user__auth--title">Signup</h2>
               <div className="group__form auth--form">
                 <div className="form__input--section">
                   <Label text="Username" />

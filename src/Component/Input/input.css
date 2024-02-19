@@ -37,6 +37,7 @@ select {
   border-radius: 0.3125rem;
   border: 1px solid var(--primary-grey);
   background: var(--secondary-color);
+  font-size: 14px;
   /* outline: none; */
 }
 
@@ -76,4 +77,5 @@ select {
 
 .error-message {
   color: var(--red) !important;
+  font-size: 14px;
 }
