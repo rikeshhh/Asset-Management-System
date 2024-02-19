@@ -74,7 +74,7 @@ const Login = () => {
                 className="user__auth--form"
                 onSubmit={handleSubmit(submitData)}
               >
-                <h3 className="user__auth--title">Login</h3>
+                <h2 className="user__auth--title">Login</h2>
                 <div className="group__form auth--form">
                   <div className="form__input--section">
                     <Label text="Username" />
