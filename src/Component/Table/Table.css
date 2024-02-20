@@ -29,9 +29,71 @@
   filter: alpha(opacity=50);
   position: relative;
 }
+.hoverEffect {
+  position: relative;
+  font-family: sans-serif;
+  width: 200px;
+  color: #000;
+  cursor: pointer; /* Set cursor to pointer */
+  font-size: 14px;
+}
 
-@media (width < 1024px) {
+.hoverEffect::before {
+  content: "";
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid var(--blue);
+  bottom: 42px;
+  left: 25%;
+  transform: translateX(-50%);
+  display: none;
+}
+.hoverEffect::after {
+  content: attr(data-name);
+  position: absolute;
+  background-color: var(--blue);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  bottom: 50px;
+  left: 25px;
+
+  z-index: 1;
+  display: none; /* Initially hidden */
+}
+
+.hoverEffect:hover::before,
+.hoverEffect:hover::after {
+  display: block; /* Show on hover */
+}
+
+@media (width <= 1110px) {
   .table__container {
     overflow-x: scroll;
+  }
+}
+
+@media (max-width: 650px) {
+  th {
+    display: none;
+  }
+  tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: 0.625em;
+  }
+  td {
+    display: grid;
+    grid-template-columns: 15ch auto;
+    padding: 0.5rem 1rem;
+  }
+  td::before {
+    content: attr(data-cell) ":";
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+  td:last-child::before {
+    content: "";
   }
 }

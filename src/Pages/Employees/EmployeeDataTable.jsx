@@ -6,6 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import Button from "../../Component/Button/Button";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 /**
  * Employee data table component that displays a table of employee information.
  */
@@ -62,12 +64,21 @@ const EmployeeDataTable = ({ handleTableEdit, handleDeleteClick }) => {
           ) : (
             tableData.map((tableItem, index) => (
               <tr key={index}>
-                <td>{tableItem.id}</td>
-                <td>{tableItem.name}</td>
-                <td>{tableItem.designation}</td>
-                <td>{tableItem.department}</td>
-                <td>{tableItem.email}</td>
-                <td>{tableItem.phone}</td>
+                <td data-cell="id">{tableItem.id}</td>
+                <td data-cell="name">{tableItem.name}</td>
+                <td data-cell="designation">
+                  {/* {tableItem.designation} */}
+                  <Skeleton width={127} height={10} />
+                </td>
+                <td data-cell="department">
+                  <Skeleton width={127} height={10} />
+                  {/* {tableItem.department} */}
+                </td>
+                <td data-cell="email">{tableItem.email}</td>
+                <td data-cell="phone">
+                  <Skeleton width={127} height={10} />
+                  {/* {tableItem.phone} */}
+                </td>
                 <td className="button-gap">
                   <Button
                     type={"button"}
