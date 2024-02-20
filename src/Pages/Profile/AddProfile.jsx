@@ -41,7 +41,9 @@ const AddProfile = () => {
     const file = e.target.files[0];
     if (file) {
       const profileUrl = URL.createObjectURL(file);
+      console.log(profileUrl);
       setProfileImage(profileUrl);
+      console.log(profileImage);
     }
   };
   /**
@@ -58,6 +60,7 @@ const AddProfile = () => {
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
+
   const AddEmployeeProfile = useMutation({
     mutationFn: (data) => {
       return employeeProfile(data);

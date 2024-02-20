@@ -63,10 +63,7 @@ const Location = () => {
       queryClient.invalidateQueries("LocationData");
     },
     onError: (error) => {
-      notifyError(error.message);
-      if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
-      }
+      notifyError(error.response.data.message);
     },
   });
   //func: Mutation hook for deleting a location

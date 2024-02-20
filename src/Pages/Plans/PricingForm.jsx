@@ -181,7 +181,7 @@ const PricingForm = () => {
               <div className="basic__dets--country">
                 <div className="form__input--section">
                   <Label sup={"*"} text="Country" />
-                  <SelectInput options={options} />
+                  <SelectInput />
                 </div>
                 <div className="form__input--section">
                   <Label text={"ZipCode"} />

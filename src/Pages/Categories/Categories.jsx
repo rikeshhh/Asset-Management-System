@@ -15,7 +15,6 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import CategoryDataTable from "./CategoryDataTable";
 import { notifyError } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
-import { useState } from "react";
 import SelectInputCategory from "./SelectInputCategory";
 
 const Categories = () => {

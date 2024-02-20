@@ -9,10 +9,8 @@ import { locationDelete, locationEdit } from "./LocationApiSlice";
 import { queryClient } from "../../Component/Query/Query";
 import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
-import { IoMdCheckmark } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
-import { ToastContainer } from "react-toastify";
 import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
 import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
 import { FaCheck } from "react-icons/fa6";
@@ -22,23 +20,7 @@ import { FaCheck } from "react-icons/fa6";
  */
 const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
   const [show, setShow] = useState(false);
-  //func: Mutation hook for deleting location
-  const DeleteLocation = useMutation({
-    mutationFn: (location) => {
-      return locationDelete(location);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries("LocationData");
-    },
-    onError: (error) => {
-      notifyError(error.message);
-      if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
-      }
-    },
-  });
   // func:Mutation hook for editing location
-
   const EditLocation = useMutation({
     mutationFn: (editData) => {
       return locationEdit(editData.data, editData.previousLocation);
@@ -110,7 +92,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
                 SN <LuArrowDownUp />
               </th>
               <th>
-                Category <LuArrowDownUp />
+                Location <LuArrowDownUp />
               </th>
               <th>Action</th>
             </tr>
