@@ -16,6 +16,7 @@ import CategoryDataTable from "./CategoryDataTable";
 import { notifyError } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
 import SelectInputCategory from "./SelectInputCategory";
+import { useState } from "react";
 
 const Categories = () => {
   const {
@@ -79,6 +80,12 @@ const Categories = () => {
     },
   });
   // if (isPending) return "Loading...";
+
+  if (CategoryData) {
+    const data = CategoryData.map((item) => item);
+    const uniqueParents = Array.from(new Set(data.map((item) => item.parent)));
+    // setUniqueparent(uniqueParents);
+  }
 
   if (error) return "An error has occurred: " + error.message;
   return (
