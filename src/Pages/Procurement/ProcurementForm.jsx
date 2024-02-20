@@ -18,8 +18,8 @@ const ProcurementForm = () => {
     handleSubmit,
   } = useForm();
 
-  // const submitProcurement = () => {
-  // };
+  const submitProcurement = () => {
+  };
   return (
     <section className="content-wrapper">
       <div className="content-radius procurement">
