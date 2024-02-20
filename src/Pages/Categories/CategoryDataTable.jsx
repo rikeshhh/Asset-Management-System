@@ -1,3 +1,4 @@
+import "../../Component/DataTable/DataTable.css";
 import { useMutation } from "@tanstack/react-query";
 import { InputField } from "../../Component/Input/InputField";
 import { LuArrowDownUp } from "react-icons/lu";
@@ -16,6 +17,7 @@ import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTableP
 import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
 import { notifyError } from "../../Component/Toast/Toast";
 import SubCategory from "./SubCategory";
+import { FaCheck } from "react-icons/fa6";
 
 const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
   const [show, setShow] = useState(false);
@@ -47,15 +49,13 @@ const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
       reset();
     },
     onError: (error) => {
-      notifyError(error.message);
-      if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
-      }
+      notifyError(error.response.message);
     },
   });
 
   const [previousCategory, setPreviousCategory] = useState("");
   const [previousCategoryId, setPreviousCategoryId] = useState("");
+  const [newCategory, setNewCategory] = useState("");
 
   const handleEditButtonClick = (options) => {
     setPreviousCategory(options.parent);
@@ -119,24 +119,38 @@ const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
               <tr key={index}>
                 <td>{index + 1}</td>
                 {options.id === previousCategoryId && show ? (
-                  <td>
-                    <form onSubmit={handleSubmit(onCategoryEditSubmit)}>
-                      <InputField
-                        name="parent"
-                        register={register}
-                        required={Model.Group.required}
-                        errors={errors}
-                        type={Model.Group.type}
-                        placeholder={options.parent}
-                        minLength={Model.Group.minLength}
-                        maxLength={Model.Group.maxLength}
-                      ></InputField>
-                      <button>
-                        <IoMdCheckmark />
-                      </button>
-                      <button type="button" onClick={handleEditCancel}>
-                        <RxCross1 />
-                      </button>
+                  <td className={show ? "universal__td--border" : ""}>
+                    <form
+                      onSubmit={handleSubmit(onCategoryEditSubmit)}
+                      className="universal__update--form"
+                    >
+                      <div className="universal__input--container">
+                        <InputField
+                          name="parent"
+                          register={register}
+                          required="Category is required"
+                          errors={errors}
+                          type={Model.department.type}
+                          placeholder={options.parent}
+                          inputValue={options.parent}
+                          value={Model.department.pattern.value}
+                          message={Model.department.pattern.message}
+                          minLength={Model.department.minLength}
+                          minMessage="Category name should be more than 1 characters"
+                          maxMessage="Category name should be less than 64 characters"
+                          maxLength={Model.department.maxLength}
+                          className={show ? "universal__table--input" : ""}
+                        ></InputField>
+                      </div>
+                      <div className="universal__FormButton">
+                        <Button className="" text={<FaCheck />} />
+                        <Button
+                          type="button"
+                          className=""
+                          text={<RxCross1 />}
+                          handleClick={handleEditCancel}
+                        />
+                      </div>
                     </form>
                   </td>
                 ) : (

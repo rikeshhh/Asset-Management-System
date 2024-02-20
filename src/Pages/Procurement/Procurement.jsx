@@ -2,7 +2,6 @@ import Button from "../../Component/Button/Button";
 import { IoMdAdd } from "react-icons/io";
 import "./Procurement.css";
 import { BsFunnel } from "react-icons/bs";
-import Table from "../../Component/Table/Table";
 import { Link } from "react-router-dom";
 import { SearchInput } from "../../Component/SearchInput/SearchInput";
 import ProcurementDataTable from "./ProcurementDataTable";
