@@ -19,6 +19,14 @@ import { notifyError } from "../../Component/Toast/Toast";
 import SubCategory from "./SubCategory";
 import { FaCheck } from "react-icons/fa6";
 
+/**
+ * React component representing the table for displaying category data.
+ * @param {Object} props - Component props.
+ * @param {Array} props.CategoryData - Array of category data.
+ * @param {boolean} props.isPending - Indicates whether the data is pending or not.
+ * @param {Array} props.SubCategoryData - Array of subcategory data.
+ */
+
 const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
   const [show, setShow] = useState(false);
   const [showSubCategory, setShowSubCategory] = useState(false);
@@ -54,15 +62,25 @@ const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
   });
 
   const [previousCategory, setPreviousCategory] = useState("");
+
   const [previousCategoryId, setPreviousCategoryId] = useState("");
   const [newCategory, setNewCategory] = useState("");
 
+  /**
+   * Handles the click event for the edit button.
+   * @param {Object} options - Options for the category.
+   */
   const handleEditButtonClick = (options) => {
     setPreviousCategory(options.parent);
     setPreviousCategoryId(options.id);
     setShow(true);
     reset();
   };
+
+  /**
+   * Handles the click event for the subcategory button.
+   * @param {Object} options - Options for the category.
+   */
 
   const handleSubCategoryClick = (options) => {
     setshowSubCategoryDrop(options.id);
@@ -76,6 +94,11 @@ const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
     reset,
   } = useForm();
 
+  /**
+   * Handles the form submission for category edits.
+   * @param {Object} data - Form data.
+   */
+
   const onCategoryEditSubmit = (data) => {
     const editData = {
       data: data.parent,
@@ -84,10 +107,18 @@ const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
     EditCategory.mutate(editData);
   };
 
+  /**
+   * Handles the click event for the cancel button in the edit form.
+   */
   const handleEditCancel = () => {
     setShow(false);
     reset();
   };
+
+  /**
+   * Handles the click event for the delete button.
+   * @param {string} parentCategory - The parent category to delete.
+   */
 
   const onDeleteData = (parentCategory) => {
     DeleteCategory.mutate(parentCategory);

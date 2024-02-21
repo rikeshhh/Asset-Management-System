@@ -18,6 +18,12 @@ import { queryClient } from "../../Component/Query/Query";
 import SelectInputCategory from "./SelectInputCategory";
 import { useState } from "react";
 
+/**
+ * Component for managing and displaying categories and subcategories.
+ * Allows users to add new categories and subcategories, and view existing ones.
+ * @returns {JSX.Element} The JSX representation of the component.
+ */
+
 const Categories = () => {
   const {
     register,
@@ -25,6 +31,10 @@ const Categories = () => {
     handleSubmit,
     reset,
   } = useForm();
+
+  /**
+   * Query to get category data.
+   */
 
   const {
     isPending,
@@ -35,11 +45,19 @@ const Categories = () => {
     queryFn: getCategoryData,
   });
 
+  /**
+   * Query to get subcategory data.
+   */
+
   const { data: SubCategoryData } = useQuery({
     queryKey: ["SubCategoryData"],
     queryFn: getSubCategoryData,
   });
 
+  /**
+   * Handles the form submission for adding a new category or subcategory.
+   * @param {Object} data - Form data submitted by the user.
+   */
   const onCategorySubmit = (data) => {
     if (data.parent === "None") {
       addParentCategory.mutate(data);
@@ -47,6 +65,10 @@ const Categories = () => {
       addSubCategory.mutate(data);
     }
   };
+
+  /**
+   * Mutation for adding a new parent category.
+   */
 
   const addParentCategory = useMutation({
     mutationFn: (formData) => {
@@ -63,7 +85,9 @@ const Categories = () => {
       }
     },
   });
-
+  /**
+   * Mutation for adding a new subcategory.
+   */
   const addSubCategory = useMutation({
     mutationFn: (formData) => {
       return subCategoryAdd(formData);
@@ -79,7 +103,6 @@ const Categories = () => {
       }
     },
   });
-  // if (isPending) return "Loading...";
 
   if (CategoryData) {
     const data = CategoryData.map((item) => item);
