@@ -16,6 +16,7 @@ import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import { SearchInput } from "../../Component/SearchInput/SearchInput";
 /**
  * Functional component representing the Employees page.
  */
@@ -123,16 +124,7 @@ const Employees = () => {
           </div>
           <div className="employees__table">
             <div className="ams__filter">
-              <InputField
-                name="Search"
-                register={register}
-                errors={errors}
-                placeholder={"Search"}
-                type={Model.Group.type}
-                value={Model.Group.pattern.value}
-                message={Model.Group.pattern.message}
-                icon={<HiMiniMagnifyingGlass />}
-              />
+              <SearchInput/>
               <Button
                 handleClick={() => onFilterClick(!filterShow)}
                 text="Filter"

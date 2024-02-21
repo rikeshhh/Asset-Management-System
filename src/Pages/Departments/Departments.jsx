@@ -50,8 +50,8 @@ const Departments = () => {
   });
   const successMessage = "Department has been added successfully";
   const onSubmit = (data) => {
-    addDepartment.mutate(data);
     reset();
+    addDepartment.mutate(data);
   };
 
   const {

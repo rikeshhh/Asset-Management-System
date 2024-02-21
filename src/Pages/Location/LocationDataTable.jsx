@@ -115,6 +115,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
                         name="location"
                         register={register}
                         errors={errors}
+                        inputValue={options.location}
                         pattern={Model.location.pattern}
                         message={Model.location.pattern.message}
                         value={Model.location.pattern.value}

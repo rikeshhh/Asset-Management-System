@@ -55,9 +55,9 @@ const AssetsTableData = ({ size, linkTo, handleTableEdit }) => {
                 >
                 <p
                 className={
-                  `${tableItem.name}`.length >= 12 ? "hoverEffect" : ""
-                }
-                data-name={`${tableItem.name}`}
+                    `${tableItem.name}`.length >= 12 ? "hoverEffect" : ""
+                  }
+                  data-name={`${tableItem.name}`}
                  >  {tableItem.name}</p>
                 </td>
                 <td data-cell="designation">
