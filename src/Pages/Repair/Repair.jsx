@@ -8,6 +8,7 @@ import { useState } from "react";
 import { BsFunnel } from "react-icons/bs";
 import RepairDataTable from "./RepairDataTable";
 import Filter from "../../Component/Filter/Filter";
+import { SearchInput } from "../../Component/SearchInput/SearchInput";
 
 const Repair = () => {
   const {
@@ -64,15 +65,7 @@ const Repair = () => {
             </div>
 
             <div className="ams__filter ">
-              <InputField
-                name="Repair"
-                register={register}
-                pattern={Model.Group.pattern}
-                required={Model.Group.required}
-                errors={errors}
-                type="search"
-                placeholder="Search"
-              />
+              <SearchInput/>
               <Button
                 text="Filter"
                 icon={<BsFunnel />}

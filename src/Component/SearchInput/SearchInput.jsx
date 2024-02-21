@@ -12,7 +12,6 @@ export const SearchInput = () => {
   } = useForm();
 
   const submitSearch = (data) => {
-    p
   };
   return (
     <form className="search__form" onSubmit={handleSubmit(submitSearch)}>
@@ -21,7 +20,7 @@ export const SearchInput = () => {
         name="Search"
         register={register}
         errors={errors}
-        placeholder={"Search"}
+        placeholder="Search"
         className="search-input"
       />
     </form>

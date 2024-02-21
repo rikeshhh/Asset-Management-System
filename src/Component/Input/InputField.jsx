@@ -1,5 +1,6 @@
 import { ErrorMessage } from "@hookform/error-message";
 import "./input.css";
+import { useEffect, useState } from "react";
 
 export const InputField = ({
   placeholder,
@@ -19,26 +20,32 @@ export const InputField = ({
   showPassword,
   inputValue,
   visiblePasswordFn,
-  onEditChange,
   autoComplete,
   children,
+  onEditChange,
+  defaultValue
 }) => {
   const hasError = errors[name];
+  const [inputValu, setInputValu] = useState(defaultValue); // <-- State to manage the input value
+  // Handle change event
+const handleChange = (e)=>{
+    setInputValu(e.target.value);
+}
 
-  return (
+  return ( 
     <div className={type == "radio" ? "input__field--radio" : "input__field"}>
       <div className="toggle__showHide--container">
         <input
           className={`${isDisabled ? "input-disabled" : "input-enabled"} ${
             hasError ? "input__error" : ""
           } ${hasError && type == "radio" ? "input__radio" : ""} ${className}`}
-          placeholder={placeholder}
+          value={inputValu}
           name={name}
-          value={inputValue}
-          onChange={onEditChange}
+          placeholder={placeholder}
           autoComplete={autoComplete}
           type={showPassword ? "text" : type}
           {...register(name, {
+            onChange:handleChange,
             required: required,
             pattern: {
               value: new RegExp(value),

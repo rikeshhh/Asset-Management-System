@@ -45,6 +45,7 @@ const DepartmentDataTable = ({
       notifySuccess(successMessage);
       queryClient.invalidateQueries("DepartmentData");
       setShow(false);
+      reset();
     },
     onError: (error) => {
       notifyError(error.message);
@@ -140,6 +141,8 @@ const DepartmentDataTable = ({
                         <div className="universal__input--container">
                           <InputField
                             name="department"
+                            // inputValue={options.department}
+                            defaultValue={options.department}
                             register={register}
                             errors={errors}
                             type={Model.department.type}
@@ -151,7 +154,6 @@ const DepartmentDataTable = ({
                             maxMessage={Model.department.maxLength.message}
                             autoComplete={"off"}
                             className={show ? "universal__table--input" : ""}
-                            placeholder={options.department}
                           />
                         </div>
                         <div className="universal__FormButton">

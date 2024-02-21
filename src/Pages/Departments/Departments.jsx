@@ -41,7 +41,6 @@ const Departments = () => {
     //func:Callback function invoked on successful completion of the mutation.
     onSuccess: () => {
       notifySuccess(successMessage);
-
       queryClient.invalidateQueries("DepartmentData");
     },
     //func:Callback function invoked if an error occurs during the mutation.
@@ -54,8 +53,8 @@ const Departments = () => {
   });
   const successMessage = "Department has been added successfully";
   const onSubmit = (data) => {
-    addDepartment.mutate(data);
     reset();
+    addDepartment.mutate(data);
   };
 
   const {
