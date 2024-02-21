@@ -53,9 +53,7 @@ ol li {
   display: flex;
   position: relative;
 }
-.category_edit--row {
-  /* padding: 1rem 0.69rem; */
-}
+
 .category__buttons {
   display: flex;
   justify-content: center;
@@ -81,18 +79,18 @@ ol li {
 }
 
 .universal__input--container {
-  width: 75%;
+  width: 65%;
 }
 
 .universal__table--input {
   border: none;
-  padding: 5px 4px;
+  padding: 5px 0px;
   outline: none;
   font-size: 14px;
 }
 
 .universal__table--input input {
-  width: 70%;
+  width: 65%;
 }
 
 .universal__table--input:focus {
@@ -112,13 +110,16 @@ ol li {
   color: black;
   padding: 0 !important;
 }
+
 .universal__FormButton button:first-child {
-  border-right: 1px solid grey;
+  border-right: 1px solid var(--primary-color);
   border-radius: 0px;
   padding-right: 13px !important;
   color: var(--toast-success-border);
 }
+
 .universal__FormButton button:nth-child(2) {
   color: var(--red);
-  padding-right: 13px !important;
+  padding-left: 13px !important;
+  padding-right: 11px !important;
 }

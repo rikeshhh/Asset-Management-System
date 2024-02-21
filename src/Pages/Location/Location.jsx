@@ -1,8 +1,6 @@
 import { useForm } from "react-hook-form";
-import { DataTable } from "../../Component/DataTable/DataTable";
 import { InputField } from "../../Component/Input/InputField";
 import { Label } from "../../Component/Label/Label";
-import { SelectInput } from "../../Component/Input/SelectInput";
 import "./Location.css";
 import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
@@ -13,12 +11,10 @@ import {
   locationAdd,
   locationDelete,
 } from "./LocationApiSlice";
-import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
 import LocationDataTable from "./LocationDataTable";
-import { ToastContainer } from "react-toastify";
 import {
-  notifyDelete,
   notifyError,
   notifySuccess,
 } from "../../Component/Toast/Toast";

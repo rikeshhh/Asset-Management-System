@@ -11,6 +11,7 @@ import { FaCheck } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
 import "./Departments.css";
+import "../../Component/DataTable/DataTable.css";
 import { RxCross1 } from "react-icons/rx";
 import "react-toastify/dist/ReactToastify.css";
 import { notifySuccess, notifyError } from "../../Component/Toast/Toast";

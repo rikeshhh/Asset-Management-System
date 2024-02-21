@@ -2,24 +2,21 @@ import { useForm } from "react-hook-form";
 import Button from "../../Component/Button/Button";
 import { InputField } from "../../Component/Input/InputField";
 import { Label } from "../../Component/Label/Label";
-import Table from "../../Component/Table/Table";
 import Model from "../../Component/Model/Model";
 import { SelectInput } from "../../Component/Input/SelectInput";
 import { IoMdAdd } from "react-icons/io";
 import { GrStatusGoodSmall } from "react-icons/gr";
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import AssetsTableData from "../Assets/AssetsTableData";
 
 const ProcurementForm = () => {
-  const [options, setOptions] = useState(["Urgent", "High", "Low", "Very Low"]);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
-  const submitProcurement = () => {
-  };
+  const submitProcurement = () => {};
   return (
     <section className="content-wrapper">
       <div className="content-radius procurement">
@@ -52,7 +49,7 @@ const ProcurementForm = () => {
             </div>
             <div className="user__auth--input procurement__form--input">
               <Label sup={"*"} text="Request Urgency" />
-              <SelectInput options={options} />
+              <SelectInput />
             </div>
           </div>
           <div className="procurement__product">
@@ -65,7 +62,7 @@ const ProcurementForm = () => {
                 icon={<IoMdAdd />}
               />
             </div>
-            <Table size="5" linkTo={""} />
+            <AssetsTableData size="5" linkTo={""} />
             <div className="procurement__bottom--buttons">
               <Button
                 text="Fill Procurement"

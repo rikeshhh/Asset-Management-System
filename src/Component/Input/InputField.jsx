@@ -42,6 +42,9 @@ const handleChange = (e)=>{
           value={inputValu}
           name={name}
           placeholder={placeholder}
+          name={name}
+          value={inputValue}
+          onChange={onEditChange}
           autoComplete={autoComplete}
           type={showPassword ? "text" : type}
           {...register(name, {

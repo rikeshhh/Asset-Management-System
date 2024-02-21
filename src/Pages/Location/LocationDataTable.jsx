@@ -1,3 +1,4 @@
+import "../../Component/DataTable/DataTable.css";
 import { useMutation } from "@tanstack/react-query";
 import { InputField } from "../../Component/Input/InputField";
 import { LuArrowDownUp } from "react-icons/lu";
@@ -5,7 +6,7 @@ import { CiEdit } from "react-icons/ci";
 import { GoTrash } from "react-icons/go";
 import { useState } from "react";
 import Button from "../../Component/Button/Button";
-import { locationDelete, locationEdit } from "./LocationApiSlice";
+import { locationEdit } from "./LocationApiSlice";
 import { queryClient } from "../../Component/Query/Query";
 import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
