@@ -49,7 +49,7 @@ const EmployeeDataTable = ({ handleTableEdit, handleDeleteClick }) => {
           ) : (
             <tr>
               <th>ID</th>
-              <th>Name</th>
+              <th>User</th>
               <th>Designation</th>
               <th>Department</th>
               <th>Email</th>

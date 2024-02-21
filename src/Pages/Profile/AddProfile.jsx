@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { InputField } from "../../Component/Input/InputField";
 import { Label } from "../../Component/Label/Label";
 import { useForm } from "react-hook-form";
@@ -83,7 +83,23 @@ const AddProfile = () => {
   const onEmployeeAddSubmit = (data) => {
     AddEmployeeProfile.mutate(data);
   };
+  const [currentDate, setCurrentDate] = useState(new Date());
 
+  useEffect(() => {
+    const timerID = setInterval(() => tick(), 1000);
+    return function cleanup() {
+      clearInterval(timerID);
+    };
+  });
+
+  const tick = () => {
+    setCurrentDate(new Date());
+  };
+
+  const formattedDate = `${currentDate.getDate()} ${currentDate.toLocaleString(
+    "default",
+    { month: "long" }
+  )} ${currentDate.getFullYear()}`;
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -124,13 +140,13 @@ const AddProfile = () => {
                 }
               />
               <span>
-                Max file size: 3MB <br /> Larger image will be resized
+                Max file size: 5MB <br /> Larger image will be resized
                 automatically. <br />
                 Supported File Type: JPG, PNG
               </span>
               <p>
-                <span style={{ fontSize: "0.875rem" }}>Created on: </span>24th
-                September 2019
+                <span style={{ fontSize: "0.875rem" }}>Created on: </span>
+                {formattedDate}
               </p>
             </div>
           </div>
@@ -149,7 +165,7 @@ const AddProfile = () => {
                 required={Model.Username.required}
                 errors={errors}
                 type={Model.Username.type}
-                placeholder={Model.Username.placeholder}
+                placeholder="Enter your name"
                 minLength={Model.Username.minLength.value}
                 minMessage={Model.Username.minLength.message}
                 maxLength={Model.Username.maxLength.value}
