@@ -62,16 +62,16 @@ const Model = {
     type: "text",
     required: "Please enter a valid phone number",
     minLength: {
-      value: 10,
-      message: "Phone number must be exactly 10 characters.",
+      value: 6,
+      message: "Phone number must have 6 characters.",
     },
     maxLength: {
-      value: 10,
-      message: "Phone number must be exactly 10 characters.",
+      value: 15,
+      message: "Phone number must be not more than 15 characters.",
     },
     placeholder: "Enter your phone number",
     pattern: {
-      value: /^(98|97)[0-9]+$/,
+      value: /^(98|97)[0-9]+(\+)?$/,
       message: "Phone number should only contain numbers and start from 97/98",
     },
   },

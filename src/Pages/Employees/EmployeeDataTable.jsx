@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import Button from "../../Component/Button/Button";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
+
 /**
  * Employee data table component that displays a table of employee information.
  */

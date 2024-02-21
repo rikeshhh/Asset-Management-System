@@ -2,6 +2,10 @@ import instance from "../../axios/Axios";
 import { getTokenFromLocalStorage } from "../../utils/StorageUtils";
 
 const token = getTokenFromLocalStorage();
+
+/**
+ * Fetches category data from the API.
+ */
 export const getCategoryData = async () => {
   const categoryData = await instance.get("/category", {
     headers: { Authorization: `Bearer ${token}` },
@@ -12,6 +16,10 @@ export const getCategoryData = async () => {
   return resp;
 };
 
+/**
+ * Fetches subcategory data from the API.
+ */
+
 export const getSubCategoryData = async () => {
   const subcategoryDataRequest = await instance.get("/category", {
     headers: { Authorization: `Bearer ${token}` },
@@ -20,6 +28,9 @@ export const getSubCategoryData = async () => {
   return resp;
 };
 
+/**
+ * Fetches category data for input selection.
+ */
 export const selectInputCategory = async () => {
   const categoryData = await instance.get("/category", {
     headers: { Authorization: `Bearer ${token}` },
@@ -28,6 +39,10 @@ export const selectInputCategory = async () => {
   return resp;
 };
 
+/**
+ * Adds a new parent category to the API.
+ *  * @param {string} category_name - The name of the new parent category.
+ */
 export const parentCategoryAdd = async (category) => {
   const categoryDataAdd = await instance.post(
     "/category",
@@ -42,6 +57,12 @@ export const parentCategoryAdd = async (category) => {
     }
   );
 };
+
+/**
+ * Adds a new subcategory to the API.
+ * @param {string} category_name - The name of the new subcategory.
+ * @param {string} parent - The parent category of the subcategory.
+ */
 
 export const subCategoryAdd = async (category) => {
   const subCategoryDataAdd = await instance.post(
@@ -59,6 +80,11 @@ export const subCategoryAdd = async (category) => {
   );
 };
 
+/**
+ * Deletes a category from the API.
+ * @param {string} parentCategory - The parent category to delete.
+ */
+
 export const categoryDelete = async (parentCategory) => {
   const categoryDeleteRequest = await instance.delete(`/category`, {
     params: { parentCategory: parentCategory },
@@ -69,6 +95,11 @@ export const categoryDelete = async (parentCategory) => {
   });
 };
 
+/**
+ * Edits a category in the API.
+ * @param {string} newParent - The new parent category name.
+ * @param {string} previousParent - The previous parent category name.
+ */
 export const categoryEdit = async (newCategory, prevCategory) => {
   const categoryEditRequest = await instance.put(
     "/category",
