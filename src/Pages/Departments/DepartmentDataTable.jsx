@@ -11,7 +11,6 @@ import { FaCheck } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
 import "./Departments.css";
-import "../../Component/DataTable/DataTable.css";
 import { RxCross1 } from "react-icons/rx";
 import "react-toastify/dist/ReactToastify.css";
 import { notifySuccess, notifyError } from "../../Component/Toast/Toast";
@@ -47,6 +46,7 @@ const DepartmentDataTable = ({
       queryClient.invalidateQueries("DepartmentData");
       setShow(false);
       reset();
+
     },
     onError: (error) => {
       notifyError(error.message);
@@ -70,6 +70,7 @@ const DepartmentDataTable = ({
     };
 
     EditDepartment.mutate(editData);
+    setShow(false);
   };
   const [previousDepartment, setPreviousDepartment] = useState("");
   const [departmentId, setDepartmentId] = useState("");
@@ -100,6 +101,7 @@ const DepartmentDataTable = ({
     reset();
   };
 
+ 
   /**
    * Handles the click event for deleting a department.
    * @param {string} departmentName - The name of the department to be deleted.
@@ -120,7 +122,7 @@ const DepartmentDataTable = ({
                   SN <LuArrowDownUp />
                 </th>
                 <th>
-                  Department <LuArrowDownUp />
+                  Category <LuArrowDownUp />
                 </th>
                 <th>Action</th>
               </tr>
@@ -142,7 +144,7 @@ const DepartmentDataTable = ({
                         <div className="universal__input--container">
                           <InputField
                             name="department"
-                            // inputValue={options.department}
+                            inputValue={options.department}
                             defaultValue={options.department}
                             register={register}
                             errors={errors}
@@ -158,7 +160,10 @@ const DepartmentDataTable = ({
                           />
                         </div>
                         <div className="universal__FormButton">
-                          <Button className="" text={<FaCheck />} />
+                          <Button
+                            className=""
+                            text={<FaCheck />}
+                          />
                           <Button
                             type="button"
                             className=""
