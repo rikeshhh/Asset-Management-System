@@ -23,30 +23,29 @@ export const InputField = ({
   autoComplete,
   children,
   onEditChange,
-  defaultValue
+  defaultValue,
 }) => {
   const hasError = errors[name];
   const [inputValu, setInputValu] = useState(defaultValue); // <-- State to manage the input value
   // Handle change event
-const handleChange = (e)=>{
+  const handleChange = (e) => {
     setInputValu(e.target.value);
-}
+  };
 
-  return ( 
+  return (
     <div className={type == "radio" ? "input__field--radio" : "input__field"}>
       <div className="toggle__showHide--container">
         <input
           className={`${isDisabled ? "input-disabled" : "input-enabled"} ${
             hasError ? "input__error" : ""
           } ${hasError && type == "radio" ? "input__radio" : ""} ${className}`}
-          value={inputValu}
           name={name}
           placeholder={placeholder}
-          onChange={onEditChange}
           autoComplete={autoComplete}
           type={showPassword ? "text" : type}
           {...register(name, {
-            onChange:handleChange,
+            value: inputValu,
+            onChange: handleChange,
             required: required,
             pattern: {
               value: new RegExp(value),

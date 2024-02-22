@@ -4,7 +4,7 @@ import { InputField } from "../../Component/Input/InputField";
 import { Label } from "../../Component/Label/Label";
 import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
-import { IoMdAdd } from "react-icons/io";
+import { IoMdAdd, IoMdOptions } from "react-icons/io";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   departmentAdd,
@@ -32,7 +32,11 @@ const Departments = () => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      department: "",
+    },
+  });
   const addDepartment = useMutation({
     //Function that performs the mutation, adding a new department.
     mutationFn: (formData) => {
@@ -42,6 +46,7 @@ const Departments = () => {
     onSuccess: () => {
       notifySuccess(successMessage);
       queryClient.invalidateQueries("DepartmentData");
+      reset()
     },
     //func:Callback function invoked if an error occurs during the mutation.
     onError: (error) => {
@@ -50,7 +55,7 @@ const Departments = () => {
   });
   const successMessage = "Department has been added successfully";
   const onSubmit = (data) => {
-    reset();
+
     addDepartment.mutate(data);
   };
 
