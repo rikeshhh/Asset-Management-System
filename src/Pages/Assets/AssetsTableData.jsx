@@ -34,10 +34,10 @@ const AssetsTableData = ({ size, linkTo, handleTableEdit }) => {
             <tr>
               <th>ID</th>
               <th>Name</th>
-              <th>Designation</th>
-              <th>Department</th>
-              <th>Email</th>
-              <th>Phone</th>
+              <th>Category</th>
+              <th>Status</th>
+              <th>Assigned to</th>
+              <th>Assigned date</th>
               <th>Action</th>
             </tr>
           )}
@@ -49,32 +49,21 @@ const AssetsTableData = ({ size, linkTo, handleTableEdit }) => {
             tableData.map((tableItem, index) => (
               <tr key={index}>
                 <td data-cell="id">{tableItem.id}</td>
-                <td
-                  data-cell="name"
-                  
-                >
-                <p
-                className={
-                    `${tableItem.name}`.length >= 12 ? "hoverEffect" : ""
-                  }
-                  data-name={`${tableItem.name}`}
-                 >  {tableItem.name}</p>
+                <td data-cell="name">
+                  <p
+                    className={
+                      `${tableItem.name}`.length >= 12 ? "hoverEffect" : ""
+                    }
+                    data-name={`${tableItem.name}`}
+                  >
+                    {" "}
+                    {tableItem.name}
+                  </p>
                 </td>
-                <td data-cell="designation">
-                  {/* {tableItem.designation} */}
-                  <Skeleton width={127} height={10} />
-                </td>
-                <td data-cell="department">
-                  <Skeleton width={127} height={10} />
-                  {/* {tableItem.department} */}
-                </td>
-                <td data-cell="email">{tableItem.email}</td>
-                <td data-cell="phone">
-                  <Skeleton width={127} height={10} />
-                  {/* Shows loadiing skeleton on not received data */}
-
-                  {/* {tableItem.phone} */}
-                </td>
+                <td data-cell="designation">{tableItem.category}</td>
+                <td data-cell="department">{tableItem.status}</td>
+                <td data-cell="email">{tableItem.assigned_to_name}</td>
+                <td data-cell="phone">{tableItem.phone}</td>
                 <td className="button-gap">
                   {/* <Link  to={{ pathname: '/profile', state: false }}>
                        </Link> */}

@@ -7,7 +7,7 @@ import { SelectInput } from "../../Component/Input/SelectInput";
 import { IoMdAdd } from "react-icons/io";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { Link } from "react-router-dom";
-import AssetsTableData from "../Assets/AssetsTableData";
+import AddProcurementTable from "./AddProcurementTable";
 
 const ProcurementForm = () => {
   const {
@@ -62,7 +62,7 @@ const ProcurementForm = () => {
                 icon={<IoMdAdd />}
               />
             </div>
-            <AssetsTableData size="5" linkTo={""} />
+            <AddProcurementTable />
             <div className="procurement__bottom--buttons">
               <Button
                 text="Fill Procurement"

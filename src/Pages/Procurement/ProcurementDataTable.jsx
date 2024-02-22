@@ -5,11 +5,10 @@ import { CiEdit } from "react-icons/ci";
 import { useQuery } from "@tanstack/react-query";
 import { getProcurementTableData } from "./ProcurementApiSlice";
 import Button from "../../Component/Button/Button";
-
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
 
-const ProcurementDataTable = ({ size, linkTo, handleTableEdit }) => {
+const ProcurementDataTable = ({ linkTo, handleTableEdit }) => {
   const {
     isPending,
     error,
