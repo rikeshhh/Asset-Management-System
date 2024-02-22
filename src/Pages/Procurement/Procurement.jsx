@@ -47,7 +47,7 @@ const Procurement = () => {
             />
           </div>
           <div className="procurement__table">
-            <ProcurementDataTable linkTo={"/procurementForm"} />
+            <ProcurementDataTable />
           </div>
         </div>
       </section>

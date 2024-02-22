@@ -201,9 +201,9 @@ const Model = {
       message: "Department name should be less than 32 characters",
     },
     pattern: {
-      value: /^[a-zA-Z]+$/,
+      value: /^[a-zA-Z\s]+$/,
       message: "Please enter a valid alphabets.",
     },
   },
-};
+};  
 export default Model;
