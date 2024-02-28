@@ -2,19 +2,26 @@ import React, { useRef, useState } from "react";
 import { InputField } from "../../Component/Input/InputField";
 import { Label } from "../../Component/Label/Label";
 import { useForm } from "react-hook-form";
-import "./profile.css";
+import "./Employee.css";
 import Button from "../../Component/Button/Button";
 import { SelectInput } from "../../Component/Input/SelectInput";
 import Model from "../../Component/Model/Model";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { profileCover } from "../../Component/Images/Image";
 import { GoTrash } from "react-icons/go";
+import { showHide } from "../../Component/Images/Image";
+
 /**
  * Functional component for viewing user profile information.
  * @returns {JSX.Element} The JSX representation of the component.
  */
 
-const ViewProfile = () => {
+const EmployeeView = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const receivedData = location.state;
+  const viewEmployeeData = receivedData.viewEmployeeData;
+
   const {
     register,
     formState: { errors },
@@ -57,8 +64,8 @@ const ViewProfile = () => {
     <section className="content-wrapper">
       <div className="user__profile content-radius">
         <div className="content__header form--header">
-          <h2>Edit Profile</h2>
-          <span>Edit this profile with valid details</span>
+          <h2>{viewEmployeeData.name}</h2>
+          <span>{viewEmployeeData.user_type || "admin"}</span>
         </div>
         <div className="user__profile--body">
           <div className="user__profile--left">
@@ -98,8 +105,8 @@ const ViewProfile = () => {
                 Supported File Type: JPG, PNG
               </span>
               <p>
-                <span style={{ fontSize: "0.875rem" }}>Created on: </span>24th
-                September 2019
+                <span style={{ fontSize: "0.875rem" }}>Created on: </span>
+                {viewEmployeeData.created_at || "24th September 2019"}
               </p>
             </div>
           </div>
@@ -109,6 +116,7 @@ const ViewProfile = () => {
               <Label sup={"*"} text="Name" />
               <InputField
                 name="username"
+                defaultValue={viewEmployeeData.name}
                 register={register}
                 value={Model.Username.pattern.value}
                 message={Model.Username.pattern.message}
@@ -135,6 +143,7 @@ const ViewProfile = () => {
                       errors={errors}
                       type={Model.Radio.type}
                       isDisabled={receivedState}
+                      isChecked={receivedState}
                     />
                   </div>
                   <Label text="Permanent" />
@@ -158,6 +167,11 @@ const ViewProfile = () => {
               <Label sup={"*"} text="Designation" />
               <InputField
                 name="designation"
+                defaultValue={
+                  viewEmployeeData.designation
+                    ? viewEmployeeData.designation
+                    : "designation"
+                }
                 register={register}
                 value={Model.Designation.pattern.value}
                 message={Model.Designation.pattern.message}
@@ -172,14 +186,20 @@ const ViewProfile = () => {
                 isDisabled={receivedState}
               />
             </div>
+
             <div className="form__input--section">
               <Label sup={"*"} text="Department" />
-              <SelectInput isDisabled={receivedState} options={options} />
+              <SelectInput
+                isDisabled={receivedState}
+                defaultValue={viewEmployeeData.department}
+              />
             </div>
-            <div className="form__input--section">
+
+            <div className="form__input--section toggleBtn__email__parent">
               <Label sup={"*"} text="Email" />
               <InputField
                 name="email"
+                defaultValue={viewEmployeeData.email}
                 register={register}
                 value={Model.Email.pattern.value}
                 message={Model.Email.pattern.message}
@@ -190,12 +210,17 @@ const ViewProfile = () => {
                 maxLength={Model.Email.maxLength.value}
                 maxMessage={Model.Email.maxLength.message}
                 isDisabled={receivedState}
-              />
+              >
+                <button className="toggleBtn__email" type="button">
+                  <img src={showHide} alt="show-hide" />
+                </button>
+              </InputField>
             </div>
             <div className="form__input--section">
               <Label sup={"*"} text="Phone Number" />
               <InputField
                 name="phoneNumber"
+                defaultValue={viewEmployeeData.phone_number}
                 register={register}
                 value={Model.PhoneNumber.pattern.value}
                 message={Model.PhoneNumber.pattern.message}
@@ -222,15 +247,15 @@ const ViewProfile = () => {
                 text="Add Profile"
                 className={receivedState ? "profile-btn-none" : "button__blue"}
               />
-              <Link to="/employees" className="link">
+              {/* <Link to="/employees" className="link">
                 <Button
                   className={receivedState ? "profile-btn-none" : "button__red"}
                   text="Cancel"
                   isDisabled={receivedState}
                 />
-              </Link>
+              </Link> */}
 
-              <Link to="/" className="link">
+              <Link to="/employees" className="link">
                 <Button
                   className={
                     receivedState ? "button__red " : "profile-btn-none"
@@ -247,4 +272,4 @@ const ViewProfile = () => {
   );
 };
 
-export { ViewProfile };
+export default EmployeeView;

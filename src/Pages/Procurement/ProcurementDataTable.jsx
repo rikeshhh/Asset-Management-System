@@ -7,6 +7,8 @@ import { getProcurementTableData } from "./ProcurementApiSlice";
 import Button from "../../Component/Button/Button";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
+import { LuArrowUpDown } from "react-icons/lu";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 const ProcurementDataTable = ({ linkTo, handleTableEdit }) => {
   const {
@@ -31,12 +33,24 @@ const ProcurementDataTable = ({ linkTo, handleTableEdit }) => {
             <PendingTableHead />
           ) : (
             <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Designation</th>
-              <th>Department</th>
-              <th>Email</th>
-              <th>Phone</th>
+              <th>
+                Requested By <LuArrowUpDown />
+              </th>
+              <th>
+                No. of Items
+                <LuArrowUpDown />
+              </th>
+              <th>
+                Status <LuArrowUpDown />
+              </th>
+              <th>
+                Approved By <LuArrowUpDown />
+              </th>
+              <th>
+                Approved By
+                <LuArrowUpDown />
+              </th>
+
               <th>Action</th>
             </tr>
           )}
@@ -52,8 +66,13 @@ const ProcurementDataTable = ({ linkTo, handleTableEdit }) => {
                 <td>{tableItem.designation}</td>
                 <td>{tableItem.department}</td>
                 <td>{tableItem.email}</td>
-                <td>{tableItem.phone}</td>
                 <td className="button-gap">
+                  <Button
+                    type={"button"}
+                    className="edit__button"
+                    // handleClick={() => viewEmployeeProfile(tableItem)}
+                    text={<MdOutlineRemoveRedEye />}
+                  />
                   <Link to={linkTo} className="link">
                     <Button
                       type={"button"}

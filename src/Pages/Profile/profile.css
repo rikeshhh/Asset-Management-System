@@ -153,6 +153,7 @@
   display: none;
 }
 
+
 @media (width>1600px) {
   .user__profile--image {
     width: auto;

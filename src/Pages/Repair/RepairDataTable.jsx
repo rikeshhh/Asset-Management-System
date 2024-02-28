@@ -7,6 +7,8 @@ import Button from "../../Component/Button/Button";
 import { getRepairTableData } from "./RepairApiSlice";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
+import { LuArrowUpDown } from "react-icons/lu";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 const RepairDataTable = ({ size, linkTo, handleTableEdit }) => {
   const {
@@ -27,50 +29,69 @@ const RepairDataTable = ({ size, linkTo, handleTableEdit }) => {
     <div className="table__container">
       <table className="main__table">
         <thead>
-          {isPending ?
-            <PendingTableHead /> :
-           <tr>
-           <th>ID</th>
-           <th>Name</th>
-           <th>Designation</th>
-           <th>Department</th>
-           <th>Email</th>
-           <th>Phone</th>
-           <th>Action</th>
+          {isPending ? (
+            <PendingTableHead />
+          ) : (
+            <tr>
+              <th>
+                Product Code <LuArrowUpDown />
+              </th>
+              <th>
+                Name
+                <LuArrowUpDown />
+              </th>
+              <th>
+                Category
+                <LuArrowUpDown />
+              </th>
+              <th>
+                Status <LuArrowUpDown />
+              </th>
+              <th>
+                Assigned Date <LuArrowUpDown />
+              </th>
+
+              <th>Action</th>
             </tr>
-          }
+          )}
         </thead>
         <tbody>
-          {isPending ? <PendingTableBody /> : (
-              tableData.map((tableItem, index) => (
-                <tr key={index}>
-                  <td>{tableItem.id}</td>
-                  <td>{tableItem.name}</td>
-                  <td>{tableItem.designation}</td>
-                  <td>{tableItem.department}</td>
-                  <td>{tableItem.email}</td>
-                  <td>{tableItem.phone}</td>
-                  <td className="button-gap">
-                    {/* <Link  to={{ pathname: '/profile', state: false }}>
+          {isPending ? (
+            <PendingTableBody />
+          ) : (
+            tableData.map((tableItem, index) => (
+              <tr key={index}>
+                <td>{tableItem.id}</td>
+                <td>{tableItem.name}</td>
+                <td>{tableItem.designation}</td>
+                <td>{tableItem.department}</td>
+                <td>{tableItem.email}</td>
+                <td className="button-gap">
+                  {/* <Link  to={{ pathname: '/profile', state: false }}>
                        </Link> */}
-                    <Link to={linkTo} className="link">
-                      <Button
-                        type={"button"}
-                        className="edit__button"
-                        onClick={handleTableEdit}
-                        text={<CiEdit />}
-                      />
-                    </Link>
+                  <Button
+                    type={"button"}
+                    className="edit__button"
+                    // handleClick={() => viewEmployeeProfile(tableItem)}
+                    text={<MdOutlineRemoveRedEye />}
+                  />
+                  <Link to={linkTo} className="link">
                     <Button
                       type={"button"}
-                      className="delete__button"
-                      text={<GoTrash />}
+                      className="edit__button"
+                      onClick={handleTableEdit}
+                      text={<CiEdit />}
                     />
-                  </td>
-                </tr>
-              ))
+                  </Link>
+                  <Button
+                    type={"button"}
+                    className="delete__button"
+                    text={<GoTrash />}
+                  />
+                </td>
+              </tr>
+            ))
           )}
-        
         </tbody>
       </table>
     </div>
