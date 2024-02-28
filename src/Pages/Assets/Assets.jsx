@@ -77,7 +77,9 @@ const Assets = () => {
                 handleClick={() => onFilterClick(!filterShow)}
               />
             </div>
-            {isActive && <AssetsTableData linkTo={"/editAssets"} size="8" />}
+            <div className="assets__table">
+              <AssetsTableData linkTo={"/editAssets"} />
+            </div>
           </div>
         </div>
       </section>

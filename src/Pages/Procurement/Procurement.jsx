@@ -46,9 +46,7 @@ const Procurement = () => {
               handleClick={() => onFilterClick(!filterShow)}
             />
           </div>
-          <div className="procurement__table">
-            <ProcurementDataTable />
-          </div>
+          <ProcurementDataTable />
         </div>
       </section>
     </>

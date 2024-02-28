@@ -123,6 +123,10 @@
   color: var(--secondary-color);
 }
 
+.edit__not--allowed:disabled {
+  cursor: not-allowed;
+}
+
 @media (width<=500px) {
   .procurement__employee--dets {
     display: flex;

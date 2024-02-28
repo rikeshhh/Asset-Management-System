@@ -4,7 +4,7 @@ import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
 import { useQuery } from "@tanstack/react-query";
 import Button from "../../Component/Button/Button";
-import { getAssetsTableData } from "./AssetsApiSlice";
+import { getAssetsTableData } from "../../Api/Assets/AssetsApiSlice";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
 import Skeleton from "react-loading-skeleton";
@@ -26,7 +26,7 @@ const AssetsTableData = ({ size, linkTo, handleTableEdit }) => {
 
   return (
     <div className="table__container">
-      <table className="main__table">
+      <table className="main__table ">
         <thead>
           {isPending ? (
             <PendingTableHead />
@@ -36,8 +36,8 @@ const AssetsTableData = ({ size, linkTo, handleTableEdit }) => {
               <th>Name</th>
               <th>Category</th>
               <th>Status</th>
-              <th>Assigned to</th>
-              <th>Assigned date</th>
+              <th>Assignedto</th>
+              <th>Assigneddate</th>
               <th>Action</th>
             </tr>
           )}
@@ -52,7 +52,7 @@ const AssetsTableData = ({ size, linkTo, handleTableEdit }) => {
                 <td data-cell="name">
                   <p
                     className={
-                      `${tableItem.name}`.length >= 12 ? "hoverEffect" : ""
+                      `${tableItem.name}`.length >= 4 ? "hoverEffect" : ""
                     }
                     data-name={`${tableItem.name}`}
                   >
@@ -61,8 +61,8 @@ const AssetsTableData = ({ size, linkTo, handleTableEdit }) => {
                   </p>
                 </td>
                 <td data-cell="designation">{tableItem.category}</td>
-                <td data-cell="department">{tableItem.status}</td>
-                <td data-cell="email">{tableItem.assigned_to_name}</td>
+                <td data-cell="status">{tableItem.status}</td>
+                <td data-cell="assigned to">{tableItem.assigned_to_name}</td>
                 <td data-cell="phone">{tableItem.phone}</td>
                 <td className="button-gap">
                   {/* <Link  to={{ pathname: '/profile', state: false }}>

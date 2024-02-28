@@ -12,9 +12,9 @@ const ProcurementDataTable = ({ linkTo, handleTableEdit }) => {
   const {
     isPending,
     error,
-    data: tableData,
+    data: procurementTableData,
   } = useQuery({
-    queryKey: ["tableData"],
+    queryKey: ["procurementTableData"],
     queryFn: getProcurementTableData,
     staleTime: 10000,
   });
@@ -45,7 +45,7 @@ const ProcurementDataTable = ({ linkTo, handleTableEdit }) => {
           {isPending ? (
             <PendingTableBody />
           ) : (
-            tableData.map((tableItem, index) => (
+            procurementTableData.map((tableItem, index) => (
               <tr key={index}>
                 <td>{tableItem.id}</td>
                 <td>{tableItem.name}</td>

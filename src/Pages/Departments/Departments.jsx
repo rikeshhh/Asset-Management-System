@@ -10,7 +10,7 @@ import {
   departmentAdd,
   departmentDelete,
   getDepartmentData,
-} from "./DepartmentApiSlice";
+} from "../../Api/Department/DepartmentApiSlice";
 import { queryClient } from "../../Component/Query/Query";
 import DepartmentDataTable from "./DepartmentDataTable";
 import {
@@ -46,7 +46,7 @@ const Departments = () => {
     onSuccess: () => {
       notifySuccess(successMessage);
       queryClient.invalidateQueries("DepartmentData");
-      reset()
+      reset();
     },
     //func:Callback function invoked if an error occurs during the mutation.
     onError: (error) => {
@@ -55,7 +55,6 @@ const Departments = () => {
   });
   const successMessage = "Department has been added successfully";
   const onSubmit = (data) => {
-
     addDepartment.mutate(data);
   };
 

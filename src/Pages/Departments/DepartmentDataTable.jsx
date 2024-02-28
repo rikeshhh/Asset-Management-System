@@ -6,7 +6,6 @@ import { GoTrash } from "react-icons/go";
 import { useState } from "react";
 import Button from "../../Component/Button/Button";
 import { queryClient } from "../../Component/Query/Query";
-import { updateDepartmentData } from "./DepartmentApiSlice";
 import { FaCheck } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
@@ -16,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { notifySuccess, notifyError } from "../../Component/Toast/Toast";
 import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
 import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
+import { updateDepartmentData } from "../../Api/Department/DepartmentApiSlice";
 /**
  * Functional component representing the data table for departments.
  * @component
