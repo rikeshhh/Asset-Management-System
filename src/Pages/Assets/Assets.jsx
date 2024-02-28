@@ -175,7 +175,7 @@ const Assets = () => {
               />
             </div>
 
-            <div className="assets__content">
+            <div>
               <Outlet />
             </div>
           </div>

@@ -15,8 +15,12 @@ th {
   padding: 1.09rem 0rem;
 }
 
+.cateogries thead tr {
+  border-bottom: none;
+}
+
 .cateogries td {
-  padding: 1.09rem 0.69rem;
+  padding: 1.09rem 1rem;
 }
 /* .cateogries tr:last-child {
   border: none;

@@ -2,7 +2,6 @@
   background-color: var(--secondary-color);
 }
 
-
 label {
   color: var(--text-color);
   font-size: 0.875rem;
@@ -182,7 +181,8 @@ label {
 }
 
 .delete__button,
-.edit__button {
+.edit__button,
+.view__button {
   padding: 0.45rem !important;
   border-radius: 0.25rem !important;
   border: none !important;
@@ -202,6 +202,11 @@ label {
 .edit__button {
   color: var(--edit-button) !important;
   background-color: var(--edit-background) !important;
+}
+
+.view__button {
+  color: var(--view-button) !important;
+  background-color: var(--view-background) !important;
 }
 
 .active {

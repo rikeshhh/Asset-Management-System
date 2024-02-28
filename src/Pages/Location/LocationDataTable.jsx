@@ -105,7 +105,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
           ) : (
             LocationData.map((options, index) => (
               <tr key={index}>
-                <td>{options.id}</td>
+                <td>{index + 1}</td>
                 {options.id === previousLocationId && show ? (
                   <td className={show ? "universal__td--border" : ""}>
                     <form
@@ -116,7 +116,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
                         name="location"
                         register={register}
                         errors={errors}
-                        inputValue={options.location}
+                        defaultValue={options.location}
                         pattern={Model.location.pattern}
                         message={Model.location.pattern.message}
                         value={Model.location.pattern.value}

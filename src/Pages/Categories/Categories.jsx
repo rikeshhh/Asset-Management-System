@@ -7,7 +7,6 @@ import Model from "../../Component/Model/Model";
 import { IoMdAdd } from "react-icons/io";
 import {
   getCategoryData,
-  getSubCategoryData,
   parentCategoryAdd,
   subCategoryAdd,
 } from "./CategoryApiSice";
@@ -49,10 +48,10 @@ const Categories = () => {
    * Query to get subcategory data.
    */
 
-  const { data: SubCategoryData } = useQuery({
-    queryKey: ["SubCategoryData"],
-    queryFn: getSubCategoryData,
-  });
+  // const { data: SubCategoryData } = useQuery({
+  //   queryKey: ["SubCategoryData"],
+  //   queryFn: getSubCategoryData,
+  // });
 
   /**
    * Handles the form submission for adding a new category or subcategory.
@@ -104,12 +103,6 @@ const Categories = () => {
     },
   });
 
-  if (CategoryData) {
-    const data = CategoryData.map((item) => item);
-    const uniqueParents = Array.from(new Set(data.map((item) => item.parent)));
-    // setUniqueparent(uniqueParents);
-  }
-
   if (error) return "An error has occurred: " + error.message;
   return (
     <section className="content-wrapper">
@@ -121,7 +114,6 @@ const Categories = () => {
           <CategoryDataTable
             CategoryData={CategoryData}
             isPending={isPending}
-            SubCategoryData={SubCategoryData}
           />
 
           <div className="add__category">
@@ -145,11 +137,15 @@ const Categories = () => {
                   minLength={Model.Group.minLength}
                   maxLength={Model.Group.maxLength}
                   autoComplete={"off"}
+                  defaultValue={""}
                 />
               </div>
               <div className="add__category--select">
                 <Label sup={"*"} text="Parent Category" />
-                <SelectInputCategory register={register} />
+                <SelectInputCategory
+                  name={"select_category"}
+                  register={register}
+                />
               </div>
               <div className="">
                 <Button

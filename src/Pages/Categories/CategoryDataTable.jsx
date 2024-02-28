@@ -27,8 +27,9 @@ import { FaCheck } from "react-icons/fa6";
  * @param {Array} props.SubCategoryData - Array of subcategory data.
  */
 
-const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
+const CategoryDataTable = ({ CategoryData, isPending }) => {
   const [show, setShow] = useState(false);
+  const [showSubCategoryEdit, setShowSubCategoryEdit] = useState(false);
   const [showSubCategory, setShowSubCategory] = useState(false);
   const [showSubCategoryDrop, setshowSubCategoryDrop] = useState("");
 
@@ -49,7 +50,7 @@ const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
 
   const EditCategory = useMutation({
     mutationFn: (editData) => {
-      return categoryEdit(editData.data, editData.previousCategory);
+      return categoryEdit(editData.data, editData.id);
     },
     onSuccess: () => {
       queryClient.invalidateQueries("CategoryData");
@@ -61,9 +62,8 @@ const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
     },
   });
 
-  const [previousCategory, setPreviousCategory] = useState("");
-
   const [previousCategoryId, setPreviousCategoryId] = useState("");
+  const [previousSubCategoryId, setPreviousSubCategoryId] = useState("");
   const [newCategory, setNewCategory] = useState("");
 
   /**
@@ -71,7 +71,6 @@ const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
    * @param {Object} options - Options for the category.
    */
   const handleEditButtonClick = (options) => {
-    setPreviousCategory(options.parent);
     setPreviousCategoryId(options.id);
     setShow(true);
     reset();
@@ -102,7 +101,7 @@ const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
   const onCategoryEditSubmit = (data) => {
     const editData = {
       data: data.parent,
-      previousCategory: previousCategory,
+      id: previousCategoryId,
     };
     EditCategory.mutate(editData);
   };
@@ -122,6 +121,21 @@ const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
 
   const onDeleteData = (parentCategory) => {
     DeleteCategory.mutate(parentCategory);
+  };
+
+  const handleSubCategoryEdit = (subCategory) => {
+    setShowSubCategoryEdit(true);
+    setPreviousSubCategoryId(subCategory.id);
+    reset();
+  };
+
+  const handleSubCategoryCancel = () => {
+    setShowSubCategoryEdit(false);
+    reset();
+  };
+
+  const deleteSubCategory = (subCategoryId) => {
+    DeleteCategory.mutate(subCategoryId);
   };
 
   return (
@@ -147,78 +161,148 @@ const CategoryDataTable = ({ CategoryData, isPending, SubCategoryData }) => {
             <SmallTablePendingBody />
           ) : (
             CategoryData.map((options, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                {options.id === previousCategoryId && show ? (
-                  <td className={show ? "universal__td--border" : ""}>
-                    <form
-                      onSubmit={handleSubmit(onCategoryEditSubmit)}
-                      className="universal__update--form"
-                    >
-                      <div className="universal__input--container">
-                        <InputField
-                          name="parent"
-                          register={register}
-                          required="Category is required"
-                          errors={errors}
-                          type={Model.department.type}
-                          placeholder={options.parent}
-                          inputValue={options.parent}
-                          value={Model.department.pattern.value}
-                          message={Model.department.pattern.message}
-                          minLength={Model.department.minLength}
-                          minMessage="Category name should be more than 1 characters"
-                          maxMessage="Category name should be less than 64 characters"
-                          maxLength={Model.department.maxLength}
-                          className={show ? "universal__table--input" : ""}
-                        ></InputField>
-                      </div>
-                      <div className="universal__FormButton">
-                        <Button className="" text={<FaCheck />} />
-                        <Button
-                          type="button"
-                          className=""
-                          text={<RxCross1 />}
-                          handleClick={handleEditCancel}
-                        />
-                      </div>
-                    </form>
-                  </td>
-                ) : (
-                  <>
-                    <td>
-                      {options.parent}
-                      {showSubCategory && options.id === showSubCategoryDrop ? (
-                        <SubCategory SubCategoryData={SubCategoryData} />
-                      ) : (
-                        <></>
-                      )}
+              <>
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  {options.id === previousCategoryId && show ? (
+                    <td className={show ? "universal__td--border" : ""}>
+                      <form
+                        onSubmit={handleSubmit(onCategoryEditSubmit)}
+                        className="universal__update--form"
+                      >
+                        <div className="universal__input--container">
+                          <InputField
+                            name="parent"
+                            register={register}
+                            required="Category is required"
+                            errors={errors}
+                            type={Model.location.type}
+                            placeholder={options.parent}
+                            defaultValue={options.parent}
+                            value={Model.location.pattern.value}
+                            message={Model.location.pattern.message}
+                            minLength={Model.location.minLength}
+                            minMessage="Category name should be more than 1 characters"
+                            maxMessage="Category name should be less than 64 characters"
+                            maxLength={Model.location.maxLength}
+                            className={show ? "universal__table--input" : ""}
+                          ></InputField>
+                        </div>
+                        <div className="universal__FormButton">
+                          <Button className="" text={<FaCheck />} />
+                          <Button
+                            type="button"
+                            className=""
+                            text={<RxCross1 />}
+                            handleClick={handleEditCancel}
+                          />
+                        </div>
+                      </form>
                     </td>
-                  </>
-                )}
-                <td className="button-gap">
-                  <Button
-                    handleClick={() => handleSubCategoryClick(options)}
-                    text={<IoChevronDown className="  " />}
-                    className={
-                      showSubCategory && options.id === showSubCategoryDrop
-                        ? "edit__button rotate__dropdown"
-                        : "edit__button"
-                    }
-                  />
+                  ) : (
+                    <>
+                      <td>{options.parent}</td>
+                    </>
+                  )}
+                  <td className="button-gap">
+                    <Button
+                      handleClick={() => handleSubCategoryClick(options)}
+                      text={<IoChevronDown className="  " />}
+                      className={
+                        showSubCategory && options.id === showSubCategoryDrop
+                          ? "edit__button rotate__dropdown"
+                          : "edit__button"
+                      }
+                    />
 
-                  <Button
-                    className="edit__button"
-                    text={<CiEdit />}
-                    handleClick={() => handleEditButtonClick(options)}
-                  />
-                  <Button
-                    className="delete__button"
-                    text={<GoTrash />}
-                    handleClick={() => onDeleteData(options.parent)}
-                  />
-                </td>
-              </tr>
+                    <Button
+                      className="edit__button"
+                      text={<CiEdit />}
+                      handleClick={() => handleEditButtonClick(options)}
+                    />
+                    <Button
+                      className="delete__button"
+                      text={<GoTrash />}
+                      handleClick={() => onDeleteData(options.id)}
+                    />
+                  </td>
+                </tr>
+                {showSubCategory && options.id === showSubCategoryDrop ? (
+                  options.child.map((subCategory, index) => (
+                    <tr start="a">
+                      <td colSpan="3">
+                        {subCategory.id === previousSubCategoryId &&
+                        showSubCategoryEdit ? (
+                          <div
+                            className={
+                              showSubCategoryEdit ? "universal__td--border" : ""
+                            }
+                          >
+                            <form
+                              onSubmit={handleSubmit(onCategoryEditSubmit)}
+                              className="universal__update--form"
+                            >
+                              <div className="universal__input--container">
+                                <InputField
+                                  name="child"
+                                  register={register}
+                                  required="Sub Category is required"
+                                  errors={errors}
+                                  type={Model.department.type}
+                                  placeholder={subCategory.category_name}
+                                  defaultValue={subCategory.category_name}
+                                  value={Model.department.pattern.value}
+                                  message={Model.department.pattern.message}
+                                  minLength={Model.department.minLength}
+                                  minMessage="Sub Category name should be more than 1 characters"
+                                  maxMessage="Sub Category name should be less than 64 characters"
+                                  maxLength={Model.department.maxLength}
+                                  className={
+                                    showSubCategoryEdit
+                                      ? "universal__table--input"
+                                      : ""
+                                  }
+                                ></InputField>
+                              </div>
+                              <div className="universal__FormButton">
+                                <Button className="" text={<FaCheck />} />
+                                <Button
+                                  type="button"
+                                  className=""
+                                  text={<RxCross1 />}
+                                  handleClick={handleSubCategoryCancel}
+                                />
+                              </div>
+                            </form>
+                          </div>
+                        ) : (
+                          <>
+                            <div>{subCategory.category_name}</div>
+                          </>
+                        )}
+                        <div className="subcategory__button">
+                          <Button
+                            className="edit__button"
+                            text={<CiEdit />}
+                            handleClick={() =>
+                              handleSubCategoryEdit(subCategory)
+                            }
+                          />
+                          <Button
+                            className="delete__button"
+                            text={<GoTrash />}
+                            handleClick={() =>
+                              deleteSubCategory(subCategory.id)
+                            }
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <></>
+                )}
+              </>
             ))
           )}
         </tbody>
