@@ -148,7 +148,7 @@ const Model = {
       message: "Product key should be less than 20 characters",
     },
     pattern: {
-      value: /^ITJ-DA-[0-9]+$/,
+      // value: /^ITJ-DA-[0-9]+$/,
       message:
         "Please enter a valid Product Code. It should start with 'ITJ' followed by dash,capital letter 'DA' dash and numbers",
     },
@@ -166,7 +166,7 @@ const Model = {
       message: "Product name should be less than 50 characters",
     },
     pattern: {
-      value: /^[a-zA-Z0-9-]+$/,
+      // value: /^[a-zA-Z0-9-]+$/,
       message:
         "Please enter a valid product name. It can include capital letters, small letters, and numbers.",
     },

@@ -3,9 +3,11 @@
   height: 100%;
   width: 100%;
   z-index: 20;
-  margin-top: -6rem !important;
-  margin-left: -17.5rem !important;
+  /* margin-top: -6rem !important;
+  margin-left: -17.5rem !important; */
   display: flex;
+  top: 0;
+  right: 0;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.4);

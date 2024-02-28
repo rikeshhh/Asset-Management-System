@@ -22,6 +22,9 @@ import PricingPayment from "../Pages/Plans/PricingPayment";
 import PaymentSuccess from "../Pages/Plans/PaymentSuccess";
 import ProtectedRoute from "./ProtectedRoute";
 import LoginSignupProtectedRoute from "./LoginSignupProtectedRoute";
+import ViewAssets from "../Pages/Assets/ViewAssets";
+import Software from "../Pages/Assets/Software";
+import Hardware from "../Pages/Assets/Hardware";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +42,17 @@ export const router = createBrowserRouter([
       {
         path: "/assets",
         element: <Assets />,
+        children: [
+          {
+            index: true,
+            path: "/assets",
+            element: <Hardware />,
+          },
+          {
+            path: "/assets/software",
+            element: <Software />,
+          },
+        ],
       },
       {
         path: "/viewProfile",
@@ -100,6 +114,11 @@ export const router = createBrowserRouter([
         path: "/editAssets",
         element: <EditAssets />,
       },
+      {
+        path: "/viewAssets",
+        element: <ViewAssets />,
+      },
+
       {
         path: "/procurementForm",
         element: <ProcurementForm />,

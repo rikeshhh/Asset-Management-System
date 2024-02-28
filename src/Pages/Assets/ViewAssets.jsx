@@ -14,8 +14,9 @@ import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
 import { assetsEdit } from "./AssetsApiSlice";
 import { useLocation } from "react-router-dom";
+import { FaRegEye } from "react-icons/fa6";
 
-const EditAssets = () => {
+const ViewAssets = () => {
   const formMethod = useForm();
   const {
     register,
@@ -53,12 +54,13 @@ const EditAssets = () => {
     console.log(data);
     EditAssets.mutate(data);
   };
+  const disabled = true;
   return (
     <section className="assets__add">
       <div className="content-wrapper">
         <div className="content-radius">
           <div className="content__header form--header">
-            <h2>Edit Assets Detail</h2>
+            <h2>{assetsData.id}</h2>
             <p>
               <span>Assets /</span>{" "}
               <GrStatusGoodSmall className="form__circle" /> Assets Detail
@@ -75,6 +77,7 @@ const EditAssets = () => {
                   name="productID"
                   defaultValue={assetsData.id}
                   register={register}
+                  isDisabled={disabled}
                   required={Model.ProductCode.required}
                   value={Model.ProductCode.pattern.value}
                   message={Model.ProductCode.pattern.message}
@@ -94,6 +97,7 @@ const EditAssets = () => {
                   name="productName"
                   defaultValue={assetsData.name}
                   register={register}
+                  isDisabled={disabled}
                   required={Model.ProductName.required}
                   value={Model.ProductName.pattern.value}
                   message={Model.ProductName.pattern.message}
@@ -111,6 +115,7 @@ const EditAssets = () => {
                 <SelectInput
                   value={assetsData.assets_type}
                   name="assets_type"
+                  isDisabled={disabled}
                 />
               </div>
               <div className="assets__form--input">
@@ -134,6 +139,7 @@ const EditAssets = () => {
                   message={Model.Group.pattern.message}
                   errors={errors}
                   type={Model.Group.type}
+                  isDisabled={disabled}
                   placeholder="Enter the brand / company of the assets"
                   minLength={Model.Group.minLength.value}
                   minMessage={Model.Group.minLength.message}
@@ -143,11 +149,17 @@ const EditAssets = () => {
               </div>
               <div className="assets__form--input">
                 <Label text="Location" sup={"*"} />
-                <SelectInputLocation value={assetsData.location} />
+                <SelectInputLocation
+                  value={assetsData.location}
+                  isDisabled={disabled}
+                />
               </div>
               <div className="assets__form--input">
                 <Label text="Assigned to" sup={"*"} />
-                <SelectInput value={assetsData.assigned_to_name} />
+                <SelectInput
+                  isDisabled={disabled}
+                  value={assetsData.assigned_to_name}
+                />
               </div>
               <div className="assets__form--input assets__switch">
                 <Label text="Status" />
@@ -165,16 +177,12 @@ const EditAssets = () => {
                 </label>
               </div>
               <div className="assets__form--input">
-                <DropzoneArea />
+                <DropzoneArea image={assetsData.image_name}/>
               </div>
               <div className="assets__form--btn">
-                <Button
-                  type="submit"
-                  text="Save Changes"
-                  className={"button__blue"}
-                />
-                <Link to="/assets/hardware" className="link">
-                  <Button text="Cancel" className={"button__red"} />
+               
+                <Link to="/assets" className="link">
+                  <Button text="Close" className={"button__red"} />
                 </Link>
               </div>
             </div>
@@ -185,4 +193,4 @@ const EditAssets = () => {
   );
 };
 
-export default EditAssets;
+export default ViewAssets;

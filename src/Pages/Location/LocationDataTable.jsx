@@ -105,7 +105,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
           ) : (
             LocationData.map((options, index) => (
               <tr key={index}>
-                <td>{index + 1}</td>
+                <td>{options.id}</td>
                 {options.id === previousLocationId && show ? (
                   <td className={show ? "universal__td--border" : ""}>
                     <form

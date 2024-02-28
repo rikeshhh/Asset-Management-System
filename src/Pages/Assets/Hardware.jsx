@@ -1,5 +1,5 @@
 import "./Assets.css";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../../Component/Button/Button";
 import { useForm } from "react-hook-form";
 import { IoMdAdd } from "react-icons/io";
@@ -11,15 +11,15 @@ import AssetsTableData from "./AssetsTableData";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 import {
   deleteAssetsTableData,
+  getAssetsData,
   getAssetsTableData,
-  getHardwareData,
   getSearchInput,
 } from "./AssetsApiSlice";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { SearchSvg } from "../../Component/svg/SearchSvg";
 import { InputField } from "../../Component/Input/InputField";
 
-const Assets = () => {
+const Hardware = () => {
   const {
     register,
     formState: { errors },
@@ -50,7 +50,15 @@ const Assets = () => {
     setDeleteConfirationShow(true);
     setAssetsId(assets);
   };
-
+  const {
+    isPending,
+    error,
+    data: HardwareData,
+  } = useQuery({
+    queryKey: ["AssetsData", "HardwareData"],
+    queryFn: () => getAssetsData("hardware"),
+    staleTime: 10000,
+  });
   /**
    * Handles the click event for canceling the employee deletion.
    */
@@ -73,6 +81,7 @@ const Assets = () => {
       }
     },
   });
+
   /**
    * Handles the click event for proceeding with the employee deletion.
    */
@@ -92,97 +101,24 @@ const Assets = () => {
       console.error("Error:", error);
     }
   };
-  const {
-    isPending,
-    error,
-    data: tableData,
-  } = useQuery({
-    queryKey: ["AssetsData"],
-    queryFn: getHardwareData,
-    staleTime: 10000,
-  });
-  const navigate = useNavigate();
+
   const handleSoftwareClick = () => {
-    navigate("/assets/software");
+    console.log("software");
   };
   const handleHardwareClick = () => {
-    navigate("/assets");
+    console.log("hardware");
   };
-
   if (error) return "An error has occurred: " + error.message;
   return (
     <>
-      {deleteConfirationShow ? (
-        <DeleteConfirmation
-          deleteName="assetsId"
-          handleCancelClick={handleCancelClick}
-          handleProceedClick={handleProceedClick}
-        />
-      ) : (
-        <></>
-      )}
-      {filterShow ? (
-        <Filter handleClick={() => onFilterClick(!filterShow)} />
-      ) : (
-        <></>
-      )}
-      <section className="content-wrapper">
-        <div className="assets content-radius">
-          <div className="content__header assets__header">
-            <h2>Assets</h2>
-            <Link to="/addAssets" className="link">
-              <Button
-                text="Add an Asset"
-                className={"button__blue"}
-                icon={<IoMdAdd />}
-              />
-            </Link>
-          </div>
-
-          <div className="assets__content">
-            <div className="assets__navigation">
-              <Button
-                text="Hardware"
-                handleClick={handleHardwareClick}
-                className="assets__btn"
-              />
-              <Button
-                text="Software"
-                handleClick={handleSoftwareClick}
-                className="assets__btn"
-              />
-            </div>
-
-            <div className="ams__filter ">
-              <form
-                className="search__form"
-                onSubmit={handleSubmit(submitSearch)}
-              >
-                <SearchSvg />
-                <InputField
-                  name="search"
-                  register={register}
-                  errors={errors}
-                  placeholder="Search"
-                  className="search-input"
-                />
-              </form>
-              <Button
-                text="Filter"
-                icon={<BsFunnel />}
-                className="filter--button"
-                handleClick={() => onFilterClick(!filterShow)}
-              />
-            </div>
-
-            <div className="assets__content">
-              <Outlet />
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+      <AssetsTableData
+              handleDeleteClick={handleDeleteClick}
+              handleProceedClick={handleProceedClick}
+              tableData={HardwareData}
+              isPending={isPending}
+            />
+     </>
   );
 };
 
-export default Assets;
+export default Hardware;

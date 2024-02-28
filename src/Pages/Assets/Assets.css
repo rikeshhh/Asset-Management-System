@@ -50,6 +50,7 @@
 
 .assets__form--btn {
   display: flex;
+  justify-content: flex-end;
   gap: 1rem;
   margin-top: 0.06rem;
 }

@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 import { GoTrash } from "react-icons/go";
 import { UploadSvg } from "../svg/UploadSvg";
 
-const DropzoneArea = () => {
+const DropzoneArea = ({image}) => {
   const [importedImage, setImportedImage] = useState(null);
   const onDrop = (acceptedFiles) => {
     // Handle dropped files
