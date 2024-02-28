@@ -24,6 +24,7 @@ export const InputField = ({
   children,
   onEditChange,
   defaultValue,
+  isChecked,
 }) => {
   const hasError = errors[name];
   const [inputValu, setInputValu] = useState(defaultValue); // <-- State to manage the input value
@@ -61,6 +62,7 @@ export const InputField = ({
             },
           })}
           disabled={isDisabled}
+          checked={isChecked}
         />
         {children && (
           <div className="password-toggle-button" onClick={visiblePasswordFn}>

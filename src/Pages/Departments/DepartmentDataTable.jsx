@@ -46,7 +46,6 @@ const DepartmentDataTable = ({
       queryClient.invalidateQueries("DepartmentData");
       setShow(false);
       reset();
-
     },
     onError: (error) => {
       notifyError(error.message);
@@ -101,7 +100,6 @@ const DepartmentDataTable = ({
     reset();
   };
 
- 
   /**
    * Handles the click event for deleting a department.
    * @param {string} departmentName - The name of the department to be deleted.
@@ -160,10 +158,7 @@ const DepartmentDataTable = ({
                           />
                         </div>
                         <div className="universal__FormButton">
-                          <Button
-                            className=""
-                            text={<FaCheck />}
-                          />
+                          <Button className="" text={<FaCheck />} />
                           <Button
                             type="button"
                             className=""

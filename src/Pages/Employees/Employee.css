@@ -20,4 +20,17 @@
   justify-content: space-between;
 }
 
+.toggleBtn__email__parent {
+  position: relative;
+}
 
+.toggleBtn__email {
+  /* position: absolute; */
+  outline: none;
+  border: none;
+  background: none;
+}
+
+.table__heading__row th {
+  text-align: center;
+}

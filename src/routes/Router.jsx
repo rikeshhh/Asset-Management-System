@@ -22,6 +22,7 @@ import PricingPayment from "../Pages/Plans/PricingPayment";
 import PaymentSuccess from "../Pages/Plans/PaymentSuccess";
 import ProtectedRoute from "./ProtectedRoute";
 import LoginSignupProtectedRoute from "./LoginSignupProtectedRoute";
+import EmployeeView from "../Pages/Employees/EmployeeView";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
       {
         path: "/employees",
         element: <Employees />,
+      },
+      {
+        path: "/viewEmployee",
+        element: <EmployeeView />,
       },
       {
         path: "/categories",

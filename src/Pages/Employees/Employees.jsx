@@ -93,6 +93,12 @@ const Employees = () => {
       state: { employeeData: employeeData },
     });
   };
+  const handleViewEmployee = (viewEmployeeData) => {
+    console.log("viewEmployeeData", viewEmployeeData);
+    navigate("/viewEmployee", {
+      state: { viewEmployeeData: viewEmployeeData },
+    });
+  };
 
   return (
     <>
@@ -124,7 +130,7 @@ const Employees = () => {
           </div>
           <div className="employees__table">
             <div className="ams__filter">
-              <SearchInput/>
+              <SearchInput />
               <Button
                 handleClick={() => onFilterClick(!filterShow)}
                 text="Filter"
@@ -136,6 +142,7 @@ const Employees = () => {
               handleDeleteClick={handleDeleteClick}
               handleProceedClick={handleProceedClick}
               handleTableEdit={handleTableEdit}
+              handleViewEmployee={handleViewEmployee}
             />
           </div>
         </div>
