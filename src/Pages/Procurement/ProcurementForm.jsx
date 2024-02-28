@@ -8,6 +8,7 @@ import { IoMdAdd } from "react-icons/io";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import AddProcurementTable from "./AddProcurementTable";
+import { useState } from "react";
 
 const ProcurementForm = () => {
   const {
@@ -16,7 +17,14 @@ const ProcurementForm = () => {
     handleSubmit,
   } = useForm();
 
+  const [procurementTableLine, setProcurementTableLine] = useState(false);
+
+  const handleAddProcurement = () => {
+    setProcurementTableLine(true);
+  };
+
   const submitProcurement = () => {};
+  
   return (
     <section className="content-wrapper">
       <div className="content-radius procurement">
@@ -35,7 +43,7 @@ const ProcurementForm = () => {
             <div className="user__auth--input procurement__form--input">
               <Label sup={"*"} text="Requested By" />
               <InputField
-                name="Username"
+                name="username"
                 register={register}
                 pattern={Model.Username.pattern}
                 required={Model.Username.required}
@@ -53,16 +61,6 @@ const ProcurementForm = () => {
             </div>
           </div>
           <div className="procurement__product">
-            <div className="procurement__product--list">
-              <h3>Product List</h3>
-              <Button
-                type={"button"}
-                text="Add a table line"
-                className={"procurement--button"}
-                icon={<IoMdAdd />}
-              />
-            </div>
-            <AddProcurementTable />
             <div className="procurement__bottom--buttons">
               <Button
                 text="Fill Procurement"
@@ -77,6 +75,20 @@ const ProcurementForm = () => {
             </div>
           </div>
         </form>
+        <div className="procurement__product--list">
+          <h3>Product List</h3>
+          <Button
+            type={"button"}
+            text="Add a table line"
+            className={"procurement--button"}
+            handleClick={handleAddProcurement}
+            icon={<IoMdAdd />}
+          />
+        </div>
+        <AddProcurementTable
+          procurementTableLine={procurementTableLine}
+          setProcurementTableLine={setProcurementTableLine}
+        />
       </div>
     </section>
   );

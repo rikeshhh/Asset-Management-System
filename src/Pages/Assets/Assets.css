@@ -121,9 +121,6 @@ input:checked + .slider {
   border-color: #2196f3;
 }
 
-.upload__svg {
-}
-
 .upload__image--file {
   display: flex;
   flex-direction: column;
