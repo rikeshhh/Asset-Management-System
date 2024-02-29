@@ -13,7 +13,6 @@ import {
 import { useMutation, useQuery } from "@tanstack/react-query";
 import CategoryDataTable from "./CategoryDataTable";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
-import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
 import SelectInputCategory from "./SelectInputCategory";
 
