@@ -112,12 +112,12 @@ const Hardware = () => {
   return (
     <>
       <AssetsTableData
-              handleDeleteClick={handleDeleteClick}
-              handleProceedClick={handleProceedClick}
-              tableData={HardwareData}
-              isPending={isPending}
-            />
-     </>
+        handleDeleteClick={handleDeleteClick}
+        handleProceedClick={handleProceedClick}
+        tableData={HardwareData}
+        isPending={isPending}
+      />
+    </>
   );
 };
 

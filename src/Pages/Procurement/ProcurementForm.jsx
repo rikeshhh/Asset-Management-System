@@ -45,14 +45,14 @@ const ProcurementForm = () => {
               <InputField
                 name="username"
                 register={register}
-                pattern={Model.Username.pattern}
-                required={Model.Username.required}
-                errorMessage={Model.Username.errorMessage}
+                pattern={Model.Name.pattern}
+                required={Model.Name.required}
+                errorMessage={Model.Name.errorMessage}
                 errors={errors}
-                type={Model.Username.type}
-                placeholder={Model.Username.placeholder}
-                minLength={Model.Username.minLength}
-                maxLength={Model.Username.maxLength}
+                type={Model.Name.type}
+                placeholder={Model.Name.placeholder}
+                minLength={Model.Name.minLength}
+                maxLength={Model.Name.maxLength}
               />
             </div>
             <div className="user__auth--input procurement__form--input">

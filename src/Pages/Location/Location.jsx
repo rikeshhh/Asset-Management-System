@@ -44,7 +44,7 @@ const Location = () => {
     queryKey: ["LocationData"],
     queryFn: getLocationData,
   });
-  const successMessage = "Location has been added successfully";
+  const successMessage = "Location has been added";
   //func: Mutation hook for adding a location
 
   const addLocation = useMutation({
@@ -56,12 +56,12 @@ const Location = () => {
       queryClient.invalidateQueries("LocationData");
     },
     onError: (error) => {
-      notifyError(error.response.data.message.message.location);
+      notifyError("Error adding location");
     },
   });
   //func: Mutation hook for deleting a location
 
-  const deleteMessage = "Location has been deleted successfully";
+  const deleteMessage = "Location has been deleted";
   const DeleteLocation = useMutation({
     mutationFn: (location) => {
       return locationDelete(location);
@@ -72,7 +72,7 @@ const Location = () => {
     },
     onError: (error) => {
       if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
+        notifyError("Error deleting location");
       }
     },
   });
