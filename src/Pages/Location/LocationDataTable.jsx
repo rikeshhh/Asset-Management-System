@@ -24,7 +24,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
   // func:Mutation hook for editing location
   const EditLocation = useMutation({
     mutationFn: (editData) => {
-      return locationEdit(editData.data, editData.previousLocation);
+      return locationEdit(editData.data, editData.id);
     },
     onSuccess: () => {
       notifySuccess(successMessage);
@@ -33,17 +33,13 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
       reset();
     },
     onError: (error) => {
-      if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
-      }
+      notifyError("Error Editing location");
     },
   });
 
-  const [previousLocation, setPreviousLocation] = useState("");
   const [previousLocationId, setPreviousLocationId] = useState("");
 
   const handleEditButtonClick = (options) => {
-    setPreviousLocation(options.location);
     setPreviousLocationId(options.id);
     setShow(true);
     reset();
@@ -59,27 +55,22 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
   const onLocationEditSubmit = (data) => {
     const editData = {
       data: data.location,
-      previousLocation: previousLocation,
+      id: previousLocationId,
     };
     EditLocation.mutate(editData);
   };
   const successMessage = "Location has been updated successfully";
 
-  const handleEditCancel = () => {
-    setShow(false);
-    reset();
-  };
-
   // const onDeleteData = (location) => {
   //   DeleteLocation.mutate(location);
   // };
-  const onMiniDelete = () => {
+  const onEditCancel = () => {
     setShow(false);
     reset();
   };
 
-  const handleDeleteLocation = (locationName) => {
-    handleDeleteClick(locationName);
+  const handleDeleteLocation = (locationId) => {
+    handleDeleteClick(locationId);
   };
   return (
     <section className="cateogries table__container">
@@ -140,7 +131,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
                           type="button"
                           className=""
                           text={<RxCross1 />}
-                          handleClick={onMiniDelete}
+                          handleClick={onEditCancel}
                         />
                       </div>
                     </form>
@@ -157,7 +148,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
                   <Button
                     className="delete__button"
                     text={<GoTrash />}
-                    handleClick={() => handleDeleteLocation(options.location)}
+                    handleClick={() => handleDeleteLocation(options.id)}
                     // handleClick={() => onDeleteData(options.location)}
                   />
                 </td>

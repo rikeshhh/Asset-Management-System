@@ -45,29 +45,20 @@ export const locationAdd = async (location) => {
  * Function to delete a location.
  */
 export const locationDelete = async (location) => {
-  try {
-    const locationDelete = await instance.delete("/location", {
-      data: {
-        location: location,
-      },
-
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
-  } catch (error) {
-    notifyError(error)
-  }
-}
+  const locationDelete = await instance.delete(`/location?id=${location}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+};
 /**
  * Function to edit a location.
  */
-export const locationEdit = async (newLocation, prevLocation) => {
+export const locationEdit = async (newLocation, prevLocationId) => {
   const locationEdit = await instance.put(
-    "/location",
+    `/location?id=${prevLocationId}`,
     {
-      previousLocation: prevLocation,
       newLocation: newLocation,
     },
     {

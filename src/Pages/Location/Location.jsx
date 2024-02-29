@@ -68,7 +68,7 @@ const Location = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries("LocationData");
-      notifySuccess("deleted");
+      notifySuccess("Location has been deleted");
     },
     onError: (error) => {
       if (error.response.status === 401) {
@@ -76,20 +76,20 @@ const Location = () => {
       }
     },
   });
-  const [locationName, setLocationName] = useState();
+  const [locationId, setLocationId] = useState();
   const [deleteConfirmationShow, setDeleteConfirmationShow] = useState(false);
 
   const handleCancelClick = () => {
     setDeleteConfirmationShow(false);
   };
   const handleProceedClick = () => {
-    DeleteLocation.mutate(locationName);
+    DeleteLocation.mutate(locationId);
     setDeleteConfirmationShow(false);
   };
 
   const handleDeleteClick = (location) => {
     setDeleteConfirmationShow(true);
-    setLocationName(location);
+    setLocationId(location);
   };
   // if (isPending) return "Loading...";
 

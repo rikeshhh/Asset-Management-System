@@ -120,7 +120,7 @@ const DepartmentDataTable = ({
                   SN <LuArrowDownUp />
                 </th>
                 <th>
-                  Category <LuArrowDownUp />
+                  Department <LuArrowDownUp />
                 </th>
                 <th>Action</th>
               </tr>
