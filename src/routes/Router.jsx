@@ -23,6 +23,9 @@ import PaymentSuccess from "../Pages/Plans/PaymentSuccess";
 import ProtectedRoute from "./ProtectedRoute";
 import LoginSignupProtectedRoute from "./LoginSignupProtectedRoute";
 import EmployeeView from "../Pages/Employees/EmployeeView";
+import Hardware from "../Pages/Assets/Hardware";
+import Software from "../Pages/Assets/Software";
+import ViewAssets from "../Pages/Assets/ViewAssets";
 
 export const router = createBrowserRouter([
   {

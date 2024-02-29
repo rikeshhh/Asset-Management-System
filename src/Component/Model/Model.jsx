@@ -12,8 +12,26 @@ const Model = {
       message: "Username should be less than 20 characters",
     },
     pattern: {
-      value: "^[a-zA-Z0-9 ]+$",
+      value: "^[a-zA-Z0-9]+(?:[_/-/.][a-zA-Z0-9]+)*$",
+
       message: "Please enter a valid username",
+    },
+  },
+  Name: {
+    type: "string",
+    required: "Please enter your name",
+    placeholder: "Enter your name",
+    minLength: {
+      value: 2,
+      message: "Name must be at least 2 characters long",
+    },
+    maxLength: {
+      value: 64,
+      message: "Name should be less than 64 characters",
+    },
+    pattern: {
+      value: "^[a-zA-Z0-9 ]+$",
+      message: "Please enter a valid Name",
     },
   },
   Email: {
@@ -162,11 +180,11 @@ const Model = {
       message: "Product name must be at least 2 characters long",
     },
     maxLength: {
-      value: 50,
-      message: "Product name should be less than 50 characters",
+      value: 16,
+      message: "Product name should be less than 16 characters",
     },
     pattern: {
-      // value: /^[a-zA-Z0-9-]+$/,
+      value: /^[a-zA-Z0-9-]+$/,
       message:
         "Please enter a valid product name. It can include capital letters, small letters, and numbers.",
     },
@@ -205,5 +223,5 @@ const Model = {
       message: "Please enter a valid alphabets.",
     },
   },
-};  
+};
 export default Model;

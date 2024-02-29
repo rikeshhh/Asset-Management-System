@@ -50,10 +50,11 @@ const Departments = () => {
     },
     //func:Callback function invoked if an error occurs during the mutation.
     onError: (error) => {
-      notifyError(error.response.data.message);
+      notifyError("Error adding department");
+      console.log("Error adding department", error);
     },
   });
-  const successMessage = "Department has been added successfully";
+  const successMessage = "Department has been added";
   const onSubmit = (data) => {
     addDepartment.mutate(data);
   };
@@ -67,7 +68,7 @@ const Departments = () => {
     queryFn: getDepartmentData,
   });
 
-  const deleteMessage = "Department has been deleted successfully";
+  const deleteMessage = "Department has been deleted";
 
   const DeleteDepartment = useMutation({
     mutationFn: (department) => {
@@ -79,7 +80,7 @@ const Departments = () => {
     },
     onError: (error) => {
       if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
+        notifyError("Error deleting department");
       }
     },
   });

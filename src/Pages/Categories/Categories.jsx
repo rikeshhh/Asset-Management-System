@@ -13,10 +13,9 @@ import {
 } from "./CategoryApiSice";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import CategoryDataTable from "./CategoryDataTable";
-import { notifyError } from "../../Component/Toast/Toast";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
 import SelectInputCategory from "./SelectInputCategory";
-import { useState } from "react";
 
 /**
  * Component for managing and displaying categories and subcategories.
@@ -75,13 +74,14 @@ const Categories = () => {
       return parentCategoryAdd(formData);
     },
     onSuccess: () => {
+      notifySuccess("Category has been added");
       queryClient.invalidateQueries("CategoryData");
       reset();
     },
     onError: (error) => {
       notifyError(error.message);
       if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
+        notifyError("Error adding category");
       }
     },
   });
