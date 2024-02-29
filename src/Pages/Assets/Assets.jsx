@@ -1,5 +1,5 @@
 import "./Assets.css";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import Button from "../../Component/Button/Button";
 import { useForm } from "react-hook-form";
 import { IoMdAdd } from "react-icons/io";
@@ -18,26 +18,18 @@ import {
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { SearchSvg } from "../../Component/svg/SearchSvg";
 import { InputField } from "../../Component/Input/InputField";
+import { notifyError } from "../../Component/Toast/Toast";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import Model from "../../Component/Model/Model";
 
 const Assets = () => {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
-  const [isActive, setIsActive] = useState(true);
 
-  const [activeButton, setActiveButton] = useState("hardware");
+  const [isActive, setIsActive] = useState(true);
 
   const handleButtonClick = () => {
     setIsActive((prev) => !prev);
   };
 
-  const [filterShow, setFilterShow] = useState(false);
-
-  const onFilterClick = (showHide) => {
-    setFilterShow(showHide);
-  };
 
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const [assetsId, setAssetsId] = useState();
@@ -80,18 +72,17 @@ const Assets = () => {
     DeleteAssets.mutate(assetsId);
     setDeleteConfirationShow(false);
   };
-  const [searchAssets, setSearchAssets] = useState();
   const [showSearchItem, setShowSearchItem] = useState(true);
-  const submitSearch = async (data) => {
-    try {
-      const searchResult = await getSearchInput(data.search);
-      setShowSearchItem((prev) => !prev);
-      console.log(searchResult);
-      setSearchAssets(searchResult);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+
+  const {
+    // isPending:searchPending,
+    error: searchError,
+    data: searchAssetsData,
+  } = useQuery({
+    queryKey: ["AssetsData"],
+    queryFn: getHardwareData,
+    staleTime: 10000,
+  });
   const {
     isPending,
     error,
@@ -101,12 +92,13 @@ const Assets = () => {
     queryFn: getHardwareData,
     staleTime: 10000,
   });
+  const [activeButton, setActiveButton] = useState("hardware");
   const navigate = useNavigate();
   const handleSoftwareClick = () => {
     navigate("/assets/software");
   };
   const handleHardwareClick = () => {
-    navigate("/assets");
+    navigate("/assets/*");
   };
 
   if (error) return "An error has occurred: " + error.message;
@@ -121,11 +113,7 @@ const Assets = () => {
       ) : (
         <></>
       )}
-      {filterShow ? (
-        <Filter handleClick={() => onFilterClick(!filterShow)} />
-      ) : (
-        <></>
-      )}
+    
       <section className="content-wrapper">
         <div className="assets content-radius">
           <div className="content__header assets__header">
@@ -141,45 +129,47 @@ const Assets = () => {
 
           <div className="assets__content">
             <div className="assets__navigation">
-              <Button
-                text="Hardware"
-                handleClick={handleHardwareClick}
-                className="assets__btn"
-              />
-              <Button
-                text="Software"
-                handleClick={handleSoftwareClick}
-                className="assets__btn"
-              />
-            </div>
-
-            <div className="ams__filter ">
-              <form
-                className="search__form"
-                onSubmit={handleSubmit(submitSearch)}
+              <NavLink
+                to="*"
+                className={({ isActive }) => (isActive ? "active" : "inactive")}
               >
-                <SearchSvg />
-                <InputField
-                  name="search"
-                  register={register}
-                  errors={errors}
-                  placeholder="Search"
-                  className="search-input"
+                <Button
+                  text="Hardware"
+                  handleClick={handleHardwareClick}
+                  className="assets__btn"
                 />
-              </form>
-              <Button
-                text="Filter"
-                icon={<BsFunnel />}
-                className="filter--button"
-                handleClick={() => onFilterClick(!filterShow)}
-              />
+              </NavLink>
+              <NavLink
+                to="/assets/software"
+                className={({ isActive }) => (isActive ? "active" : "inactive")}
+              >
+                <Button
+                  text="Software"
+                  handleClick={handleSoftwareClick}
+                  className="assets__btn"
+                />
+              </NavLink>
             </div>
 
-            <div className="assets__content">
-              <Outlet />
-            </div>
+           
+            <>
+              {/* {searchAssets ? (
+                <AssetsTableData
+                  handleDeleteClick={handleDeleteClick}
+                  handleProceedClick={handleProceedClick}
+                  tableData={searchAssets}
+                  isPending={isPending}
+                  assets_type='hardware'
+                />
+              ) : ( */}
+                <div className="assets__content">
+                  <Outlet />
+                </div>
+              {/* )} */}
+            </>
           </div>
         </div>
+        <CustomToastContainer />
       </section>
     </>
   );

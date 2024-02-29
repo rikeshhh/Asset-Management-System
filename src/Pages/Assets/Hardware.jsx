@@ -18,30 +18,17 @@ import {
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { SearchSvg } from "../../Component/svg/SearchSvg";
 import { InputField } from "../../Component/Input/InputField";
+import Model from "../../Component/Model/Model";
+import { notifyError } from "../../Component/Toast/Toast";
+import Pagination from "../../Component/Pagination/Pagination";
 
 const Hardware = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
-  const [isActive, setIsActive] = useState(true);
-
-  const [activeButton, setActiveButton] = useState("hardware");
-
-  const handleButtonClick = () => {
-    setIsActive((prev) => !prev);
-  };
-
-  const [filterShow, setFilterShow] = useState(false);
-
-  const onFilterClick = (showHide) => {
-    setFilterShow(showHide);
-  };
-
-  const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
-  const [assetsId, setAssetsId] = useState();
-
   /**
    * Handles the click event for deleting an employee.
    * @param {Object} employee - The employee object to be deleted.
@@ -90,34 +77,71 @@ const Hardware = () => {
     setDeleteConfirationShow(false);
   };
   const [searchAssets, setSearchAssets] = useState();
-  const [showSearchItem, setShowSearchItem] = useState(true);
+  const [filterShow, setFilterShow] = useState(false);
+
+  const onFilterClick = (showHide) => {
+    setFilterShow(showHide);
+  };
   const submitSearch = async (data) => {
     try {
-      const searchResult = await getSearchInput(data.search);
-      setShowSearchItem((prev) => !prev);
-      console.log(searchResult);
+      const searchResult = await getSearchInput(data.search, "hardware");
+
       setSearchAssets(searchResult);
     } catch (error) {
-      console.error("Error:", error);
+      notifyError(error.message);
     }
   };
-
-  const handleSoftwareClick = () => {
-    console.log("software");
-  };
-  const handleHardwareClick = () => {
-    console.log("hardware");
-  };
   if (error) return "An error has occurred: " + error.message;
+  const [page, setPage] = useState(1);
+  const [data, setData] = useState([]);
+  const getPosts = async (page) => {
+    try {
+      page = page + 1;
+      const response = await getPaginationData(page, assets_type);
+      setData(response);
+      console.log(page);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
-      <AssetsTableData
-              handleDeleteClick={handleDeleteClick}
-              handleProceedClick={handleProceedClick}
-              tableData={HardwareData}
-              isPending={isPending}
-            />
-     </>
+      {filterShow ? (
+        <Filter handleClick={() => onFilterClick(!filterShow)} />
+      ) : (
+        <></>
+      )}
+      <div className="ams__filter ">
+        <form className="search__form" onSubmit={handleSubmit(submitSearch)}>
+          <SearchSvg className="icons" />
+          <InputField
+            name="search"
+            register={register}
+            placeholder="Search"
+            className="search-input"
+            value={Model.assetSearch.pattern.value}
+            message={Model.assetSearch.pattern.message}
+            errors={errors}
+            type={Model.assetSearch.type}
+            minLength={Model.assetSearch.minLength.value}
+            minMessage={Model.assetSearch.minLength.message}
+            maxLength={Model.assetSearch.maxLength.value}
+            maxMessage={Model.assetSearch.maxLength.message}
+          />
+        </form>
+        <Button
+          text="Filter"
+          icon={<BsFunnel />}
+          className="filter--button"
+          handleClick={() => onFilterClick(!filterShow)}
+        />
+      </div>
+
+      
+      <Pagination assets_type="hardware" searchAssets={searchAssets} asssets_data={HardwareData}
+      isPending={isPending}
+      />
+    </>
   );
 };
 

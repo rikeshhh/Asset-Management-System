@@ -109,6 +109,23 @@ const Model = {
       message: "Please enter a valid category with alphabets",
     },
   },
+  assetSearch: {
+    type: "string",
+    required: "Please enter field value",
+    placeholder: "Enter the name",
+    minLength: {
+      value: 2,
+      message: "Field must be at least 2 characters long",
+    },
+    maxLength: {
+      value: 20,
+      message: "Field should be less than 20 characters",
+    },
+    pattern: {
+      value: "^[a-zA-Z]+$",
+      message: "Please enter a valid category with alphabets",
+    },
+  },
   ZipCode: {
     type: "text",
     required: "Required ",

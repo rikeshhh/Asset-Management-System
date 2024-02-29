@@ -96,11 +96,13 @@ input:checked + .slider {
 }
 
 .active {
-  background-color: #2196f3;
+  color: #2196f3 !important;
+  text-decoration: none;
 }
 
 .inactive {
-  background-color: #ccc;
+  color: #2196f3!important;
+  text-decoration: none;
 }
 
 .dropzone {
@@ -188,7 +190,10 @@ input:checked + .slider {
   top: -10%;
   right: -5%;
 }
-
+.navlink {
+  text-decoration: none; 
+ 
+}
 @media (width < 850px) {
   .assets__form--content {
     display: flex;

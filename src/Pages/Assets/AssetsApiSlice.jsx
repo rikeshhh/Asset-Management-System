@@ -82,10 +82,10 @@ export const assetsAdd = async (assetsData) => {
   }
 };
 
-export const getSearchInput = async (itemName) => {
+export const getSearchInput = async (itemName, assetsType) => {
   try {
     const response = await instance.get(
-      `/assets?search=${itemName}`,
+      `/assets?assets_type=${assetsType}&search=${itemName}`,
       // {
       //   params: {
       //   search= itemName,
@@ -98,7 +98,6 @@ export const getSearchInput = async (itemName) => {
     const searchData = response.data.data.data;
     return searchData;
   } catch (error) {
-    console.error("Axios error:", error);
     throw error;
   }
 };
@@ -138,6 +137,26 @@ export const getHardwareData = async () => {
     return searchData;
   } catch (error) {
     console.error("Axios error:", error);
+    throw error;
+  }
+};
+
+//sorting
+export const sortByStatus = async (status, assets_type, newOrder) => {
+  console.log(newOrder);
+  try {
+    const response = await instance.get(
+      `/assets?assets_type=${assets_type}&sortBy=${status}&order=${newOrder}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const searchData = response.data.data.data;
+    return searchData;
+  } catch (error) {
     throw error;
   }
 };

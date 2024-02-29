@@ -1,78 +1,57 @@
-import React from "react";
-import classnames from "classnames";
-import { usePagination, DOTS } from "./usePagination";
+// Pagination.jsx
+import React, { useEffect, useState } from "react";
+import Button from "../Button/Button";
 import "./Pagination.css";
-const Pagination = (props) => {
-  const {
-    onPageChange,
-    totalCount,
-    siblingCount = 1,
-    currentPage,
-    pageSize,
-    className,
-  } = props;
-  const paginationRange = usePagination({
-    currentPage,
-    totalCount,
-    siblingCount,
-    pageSize,
-  });
+import { useQuery } from "@tanstack/react-query";
+import { getPaginationData } from "./PaginationApiSlice";
+import AssetsTableData from "../../Pages/Assets/AssetsTableData";
 
-  if (currentPage === 0 || paginationRange.length < 2) {
-    return null;
+const Pagination = ({ assets_type, asssets_data, searchAssets, isPending }) => {
+  const [page, setPage] = useState(1);
+  const [paginationData, setPaginationData] = useState(null);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["exampleQuery", page],
+    queryFn: () => getPaginationData(page, assets_type),
+    staleTime: 10000,
+    // Other options...
+  });
+  const handlePrevClick = () => {
+    setPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
+  const handleNextClick = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
+
+  if (error) {
+    console.log(error);
   }
 
-  const onNext = () => {
-    onPageChange(currentPage + 5);
-  };
-
-  const onPrevious = () => {
-    onPageChange(currentPage - 5);
-  };
-
-  let lastPage = paginationRange[paginationRange.length - 1];
   return (
-    <ul
-      className={classnames("pagination-container", { [className]: className })}
-    >
-      <li
-        className={classnames("pagination-item", {
-          disabled: currentPage === 1,
-        })}
-        onClick={onPrevious}
-      >
-        <div className="arrow left" />
-      </li>
-      {paginationRange.map((pageNumber, index) => {
-        if (pageNumber === DOTS) {
-          return (
-            <li key={index} className="pagination-item dots">
-              &#8230;
-            </li>
-          );
-        }
-
-        return (
-          <li
-            key={index}
-            className={classnames("pagination-item", {
-              selected: pageNumber === currentPage,
-            })}
-            onClick={() => onPageChange(pageNumber)}
-          >
-            {pageNumber}
-          </li>
-        );
-      })}
-      <li
-        className={classnames("pagination-item", {
-          disabled: currentPage === lastPage,
-        })}
-        onClick={onNext}
-      >
-        <div className="arrow right" />
-      </li>
-    </ul>
+    <>
+      <AssetsTableData
+        // handleDeleteClick={handleDeleteClick}
+        // handleProceedClick={handleProceedClick}
+        tableData={searchAssets ? data : asssets_data}
+        isPending={isPending}
+        assets_type="hardware"
+      />
+      <div className="pagination-container">
+        <Button
+          className="pagination--button"
+          text="prev"
+          handleClick={handlePrevClick}
+          disabled={page === 1}
+        />
+        <div>{page}</div>
+        <Button
+          className="pagination--button"
+          text="next"
+          handleClick={handleNextClick}
+        />
+      </div>
+    </>
   );
 };
 

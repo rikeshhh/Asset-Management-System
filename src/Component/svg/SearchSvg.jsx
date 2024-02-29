@@ -1,6 +1,6 @@
 import React from "react";
 
-export const SearchSvg = () => {
+export const SearchSvg = ({classname}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,6 +8,7 @@ export const SearchSvg = () => {
       height="21"
       viewBox="0 0 21 21"
       fill="none"
+      className={classname}
     >
       <path
         fillRule="evenodd"

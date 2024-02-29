@@ -23,6 +23,9 @@ import PaymentSuccess from "../Pages/Plans/PaymentSuccess";
 import ProtectedRoute from "./ProtectedRoute";
 import LoginSignupProtectedRoute from "./LoginSignupProtectedRoute";
 import EmployeeView from "../Pages/Employees/EmployeeView";
+import Hardware from "../Pages/Assets/Hardware";
+import Software from "../Pages/Assets/Software";
+import ViewAssets from "../Pages/Assets/ViewAssets";
 
 export const router = createBrowserRouter([
   {
@@ -43,12 +46,12 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            path: "/assets",
-            element: <Hardware />,
+            path: "*",
+            element: <Hardware/>,
           },
           {
             path: "/assets/software",
-            element: <Software />,
+            element: <Software/>,
           },
         ],
       },

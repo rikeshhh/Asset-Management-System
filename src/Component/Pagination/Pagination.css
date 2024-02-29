@@ -1,6 +1,8 @@
 .pagination-container {
   display: flex;
   list-style-type: none;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .pagination-container .pagination-item {
@@ -34,9 +36,8 @@
   cursor: pointer;
 }
 
-.pagination-container .pagination-item.selected {
+.pagination--button {
   background-color: #527dd0;
-  color: var(--secondary-color);
 }
 
 .pagination-container .pagination-item .arrow::before {
