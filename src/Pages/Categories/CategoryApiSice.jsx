@@ -18,13 +18,13 @@ export const getCategoryData = async () => {
  * Fetches subcategory data from the API.
  */
 
-export const getSubCategoryData = async () => {
-  const subcategoryDataRequest = await instance.get("/category", {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  const resp = await subcategoryDataRequest.data.data;
-  return resp;
-};
+// export const getSubCategoryData = async () => {
+//   const subcategoryDataRequest = await instance.get("/category", {
+//     headers: { Authorization: `Bearer ${token}` },
+//   });
+//   const resp = await subcategoryDataRequest.data.data;
+//   return resp;
+// };
 
 /**
  * Fetches category data for input selection.
@@ -33,9 +33,7 @@ export const selectInputCategory = async () => {
   const categoryData = await instance.get("/category", {
     headers: { Authorization: `Bearer ${token}` },
   });
-  const resp = await categoryData.data;
-  const category = Object.key(resp);
-  console.log(category);
+  const resp = await categoryData.data.data;
   return resp;
 };
 
@@ -69,7 +67,7 @@ export const subCategoryAdd = async (category) => {
     "/category",
     {
       category_name: category.category_name,
-      parent: category.parent,
+      parent: category.select_category,
     },
     {
       headers: {
@@ -87,7 +85,7 @@ export const subCategoryAdd = async (category) => {
 
 export const categoryDelete = async (parentCategory) => {
   const categoryDeleteRequest = await instance.delete(`/category`, {
-    params: { parentCategory: parentCategory },
+    params: { id: parentCategory },
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
@@ -100,12 +98,31 @@ export const categoryDelete = async (parentCategory) => {
  * @param {string} newParent - The new parent category name.
  * @param {string} previousParent - The previous parent category name.
  */
-export const categoryEdit = async (newCategory, prevCategory) => {
+export const categoryEdit = async (newCategory, parentId) => {
   const categoryEditRequest = await instance.put(
-    "/category",
+    `/category?id=${parentId}`,
     {
       newParent: newCategory,
-      previousParent: prevCategory,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
+/**
+ * Edits a category in the API.
+ * @param {string} newParent - The new parent category name.
+ * @param {string} previousParent - The previous parent category name.
+ */
+export const subCategoryEdit = async (newSubCategory, subCategoryId) => {
+  const categoryEditRequest = await instance.put(
+    `/category?id=${subCategoryId}`,
+    {
+      newChild: newSubCategory,
     },
     {
       headers: {

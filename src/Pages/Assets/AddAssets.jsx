@@ -45,11 +45,12 @@ const AssetsForm = ({
       return assetsAdd(assetsData);
     },
     onSuccess: () => {
-      notifySuccess("Assets has been added successfully");
+      notifySuccess("Assets has been added ");
       queryClient.invalidateQueries("AssetsData");
     },
     onError: (error) => {
-      notifyError(error.message);
+      notifyError('Error adding assets');
+      console.log('Error while adding assets',error)
     },
   });
   const submitData = (data) => {
@@ -108,7 +109,7 @@ const AssetsForm = ({
             </div>
             <div className="assets__form--input">
               <Label text="Asset Type" sup={"*"} />
-              <SelectInput  name="assets_type" />
+              <SelectInput name="assets_type" />
             </div>
             <div className="assets__form--input">
               <Label text="Category" sup={"*"} />
@@ -139,11 +140,11 @@ const AssetsForm = ({
             </div>
             <div className="assets__form--input">
               <Label text="Location" sup={"*"} />
-              <SelectInputLocation  />
+              <SelectInputLocation />
             </div>
             <div className="assets__form--input">
               <Label text="Assigned to" sup={"*"} />
-              <SelectInput  />
+              <SelectInput />
             </div>
             <div className="assets__form--input assets__switch">
               <Label text="Status" />

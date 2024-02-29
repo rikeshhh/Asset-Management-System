@@ -4,7 +4,7 @@ import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteCon
 import { deleteAssetsTableData } from "./AssetsApiSlice";
 import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
-import { FaRegEye } from "react-icons/fa6";
+import { PiEyeLight } from "react-icons/pi";
 import Button from "../../Component/Button/Button";
 
 const Tablerow = ({ tableItem }) => {
@@ -59,9 +59,9 @@ const Tablerow = ({ tableItem }) => {
 
           <Button
             type={"button"}
-            className="edit__button"
+            className="view__button"
             handleClick={() => handleTableView(tableItem)}
-            text={<FaRegEye />}
+            text={<PiEyeLight />}
           />
           <Button
             type={"button"}

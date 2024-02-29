@@ -10,6 +10,14 @@
   padding: 1rem;
 }
 
+.main__table thead tr {
+  border-bottom: none;
+}
+
+.main__table tr {
+  border-bottom: 1px solid var(--primary-grey);
+}
+
 .main__table th {
   text-align: left;
   background-color: #eff4fe;

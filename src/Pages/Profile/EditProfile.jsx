@@ -154,17 +154,17 @@ const EditProfile = () => {
               <InputField
                 name="username"
                 register={register}
-                value={Model.Username.pattern.value}
-                message={Model.Username.pattern.message}
-                required={Model.Username.required}
+                value={Model.Name.pattern.value}
+                message={Model.Name.pattern.message}
+                required={Model.Name.required}
                 errors={errors}
                 // inputValue={employeeData.name}
-                type={Model.Username.type}
+                type={Model.Name.type}
                 placeholder={employeeData.name}
-                minLength={Model.Username.minLength.value}
-                minMessage={Model.Username.minLength.message}
-                maxLength={Model.Username.maxLength.value}
-                maxMessage={Model.Username.maxLength.message}
+                minLength={Model.Name.minLength.value}
+                minMessage={Model.Name.minLength.message}
+                maxLength={Model.Name.maxLength.value}
+                maxMessage={Model.Name.maxLength.message}
                 isDisabled={receivedState}
                 onEditChange={(e) => employeeData.name.value}
               />

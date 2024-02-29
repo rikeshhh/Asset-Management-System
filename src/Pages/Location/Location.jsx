@@ -14,10 +14,7 @@ import {
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
 import LocationDataTable from "./LocationDataTable";
-import {
-  notifyError,
-  notifySuccess,
-} from "../../Component/Toast/Toast";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 /**
@@ -47,7 +44,7 @@ const Location = () => {
     queryKey: ["LocationData"],
     queryFn: getLocationData,
   });
-  const successMessage = "Location has been added successfully";
+  const successMessage = "Location has been added";
   //func: Mutation hook for adding a location
 
   const addLocation = useMutation({
@@ -59,23 +56,23 @@ const Location = () => {
       queryClient.invalidateQueries("LocationData");
     },
     onError: (error) => {
-      notifyError(error.response.data.message);
+      notifyError("Error adding location");
     },
   });
   //func: Mutation hook for deleting a location
 
-  const deleteMessage = "Location has been deleted successfully";
+  const deleteMessage = "Location has been deleted";
   const DeleteLocation = useMutation({
     mutationFn: (location) => {
       return locationDelete(location);
     },
     onSuccess: () => {
       queryClient.invalidateQueries("LocationData");
-      notifySuccess(deleteMessage);
+      notifySuccess("deleted");
     },
     onError: (error) => {
       if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
+        notifyError("Error deleting location");
       }
     },
   });

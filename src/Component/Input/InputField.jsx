@@ -18,11 +18,9 @@ export const InputField = ({
   register,
   className,
   showPassword,
-  inputValue,
   visiblePasswordFn,
   autoComplete,
   children,
-  onEditChange,
   defaultValue,
   isChecked,
 }) => {

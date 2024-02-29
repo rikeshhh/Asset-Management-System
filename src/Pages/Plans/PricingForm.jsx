@@ -150,16 +150,16 @@ const PricingForm = () => {
                 <InputField
                   name="Username"
                   register={register}
-                  value={Model.Username.pattern.value}
-                  message={Model.Username.pattern.message}
-                  required={Model.Username.required}
+                  value={Model.Name.pattern.value}
+                  message={Model.Name.pattern.message}
+                  required={Model.Name.required}
                   errors={errors}
-                  type={Model.Username.type}
-                  placeholder={Model.Username.placeholder}
-                  minLength={Model.Username.minLength.value}
-                  minMessage={Model.Username.minLength.message}
-                  maxLength={Model.Username.maxLength.value}
-                  maxMessage={Model.Username.maxLength.message}
+                  type={Model.Name.type}
+                  placeholder={Model.Name.placeholder}
+                  minLength={Model.Name.minLength.value}
+                  minMessage={Model.Name.minLength.message}
+                  maxLength={Model.Name.maxLength.value}
+                  maxMessage={Model.Name.maxLength.message}
                 />
               </div>
 

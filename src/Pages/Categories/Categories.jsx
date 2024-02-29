@@ -7,16 +7,14 @@ import Model from "../../Component/Model/Model";
 import { IoMdAdd } from "react-icons/io";
 import {
   getCategoryData,
-  getSubCategoryData,
   parentCategoryAdd,
   subCategoryAdd,
 } from "./CategoryApiSice";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import CategoryDataTable from "./CategoryDataTable";
-import { notifyError } from "../../Component/Toast/Toast";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
 import SelectInputCategory from "./SelectInputCategory";
-import { useState } from "react";
 
 /**
  * Component for managing and displaying categories and subcategories.
@@ -46,27 +44,6 @@ const Categories = () => {
   });
 
   /**
-   * Query to get subcategory data.
-   */
-
-  const { data: SubCategoryData } = useQuery({
-    queryKey: ["SubCategoryData"],
-    queryFn: getSubCategoryData,
-  });
-
-  /**
-   * Handles the form submission for adding a new category or subcategory.
-   * @param {Object} data - Form data submitted by the user.
-   */
-  const onCategorySubmit = (data) => {
-    if (data.parent === "None") {
-      addParentCategory.mutate(data);
-    } else {
-      addSubCategory.mutate(data);
-    }
-  };
-
-  /**
    * Mutation for adding a new parent category.
    */
 
@@ -75,14 +52,13 @@ const Categories = () => {
       return parentCategoryAdd(formData);
     },
     onSuccess: () => {
+      notifySuccess("Category has been added");
       queryClient.invalidateQueries("CategoryData");
+      notifySuccess("Category has been added");
       reset();
     },
     onError: (error) => {
       notifyError(error.message);
-      if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
-      }
     },
   });
   /**
@@ -93,22 +69,28 @@ const Categories = () => {
       return subCategoryAdd(formData);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("SubCategoryData");
+      queryClient.invalidateQueries("CategoryData");
+      notifySuccess("Sub Category has been added");
       reset();
     },
     onError: (error) => {
       notifyError(error.message);
-      if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
-      }
     },
   });
 
-  if (CategoryData) {
-    const data = CategoryData.map((item) => item);
-    const uniqueParents = Array.from(new Set(data.map((item) => item.parent)));
-    // setUniqueparent(uniqueParents);
-  }
+  /**
+   * Handles the form submission for adding a new category or subcategory.
+   * @param {Object} data - Form data submitted by the user.
+   */
+
+  const onCategorySubmit = (data) => {
+    if (data.select_category === "None") {
+      addParentCategory.mutate(data);
+    } else {
+      addSubCategory.mutate(data);
+    }
+    reset();
+  };
 
   if (error) return "An error has occurred: " + error.message;
   return (
@@ -121,7 +103,6 @@ const Categories = () => {
           <CategoryDataTable
             CategoryData={CategoryData}
             isPending={isPending}
-            SubCategoryData={SubCategoryData}
           />
 
           <div className="add__category">
@@ -145,11 +126,15 @@ const Categories = () => {
                   minLength={Model.Group.minLength}
                   maxLength={Model.Group.maxLength}
                   autoComplete={"off"}
+                  defaultValue={""}
                 />
               </div>
               <div className="add__category--select">
                 <Label sup={"*"} text="Parent Category" />
-                <SelectInputCategory register={register} />
+                <SelectInputCategory
+                  name={"select_category"}
+                  register={register}
+                />
               </div>
               <div className="">
                 <Button

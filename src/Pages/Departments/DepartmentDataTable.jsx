@@ -142,7 +142,6 @@ const DepartmentDataTable = ({
                         <div className="universal__input--container">
                           <InputField
                             name="department"
-                            inputValue={options.department}
                             defaultValue={options.department}
                             register={register}
                             errors={errors}
