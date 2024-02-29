@@ -12,7 +12,7 @@ import {
 } from "./CategoryApiSice";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import CategoryDataTable from "./CategoryDataTable";
-import { notifyError } from "../../Component/Toast/Toast";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
 import SelectInputCategory from "./SelectInputCategory";
 import { useState } from "react";
@@ -45,27 +45,6 @@ const Categories = () => {
   });
 
   /**
-   * Query to get subcategory data.
-   */
-
-  // const { data: SubCategoryData } = useQuery({
-  //   queryKey: ["SubCategoryData"],
-  //   queryFn: getSubCategoryData,
-  // });
-
-  /**
-   * Handles the form submission for adding a new category or subcategory.
-   * @param {Object} data - Form data submitted by the user.
-   */
-  const onCategorySubmit = (data) => {
-    if (data.parent === "None") {
-      addParentCategory.mutate(data);
-    } else {
-      addSubCategory.mutate(data);
-    }
-  };
-
-  /**
    * Mutation for adding a new parent category.
    */
 
@@ -75,13 +54,11 @@ const Categories = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries("CategoryData");
+      notifySuccess("Category has been added");
       reset();
     },
     onError: (error) => {
       notifyError(error.message);
-      if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
-      }
     },
   });
   /**
@@ -92,16 +69,28 @@ const Categories = () => {
       return subCategoryAdd(formData);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("SubCategoryData");
+      queryClient.invalidateQueries("CategoryData");
+      notifySuccess("Sub Category has been added");
       reset();
     },
     onError: (error) => {
       notifyError(error.message);
-      if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
-      }
     },
   });
+
+  /**
+   * Handles the form submission for adding a new category or subcategory.
+   * @param {Object} data - Form data submitted by the user.
+   */
+
+  const onCategorySubmit = (data) => {
+    if (data.select_category === "None") {
+      addParentCategory.mutate(data);
+    } else {
+      addSubCategory.mutate(data);
+    }
+    reset();
+  };
 
   if (error) return "An error has occurred: " + error.message;
   return (

@@ -12,12 +12,17 @@ import Model from "../../Component/Model/Model";
 import { IoMdCheckmark } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
 import { IoChevronDown } from "react-icons/io5";
-import { categoryDelete, categoryEdit } from "./CategoryApiSice";
+import {
+  categoryDelete,
+  categoryEdit,
+  subCategoryEdit,
+} from "./CategoryApiSice";
 import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
 import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
 import { notifyError } from "../../Component/Toast/Toast";
 import SubCategory from "./SubCategory";
 import { FaCheck } from "react-icons/fa6";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
 
 /**
  * React component representing the table for displaying category data.
@@ -55,6 +60,21 @@ const CategoryDataTable = ({ CategoryData, isPending }) => {
     onSuccess: () => {
       queryClient.invalidateQueries("CategoryData");
       setShow(false);
+      reset();
+    },
+    onError: (error) => {
+      console.log(error);
+      notifyError(error.response.data.message.message.newParent);
+    },
+  });
+
+  const EditSubCategory = useMutation({
+    mutationFn: (editData) => {
+      return subCategoryEdit(editData.data, editData.id);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("CategoryData");
+      setShowSubCategoryEdit(false);
       reset();
     },
     onError: (error) => {
@@ -136,6 +156,15 @@ const CategoryDataTable = ({ CategoryData, isPending }) => {
 
   const deleteSubCategory = (subCategoryId) => {
     DeleteCategory.mutate(subCategoryId);
+  };
+
+  const onSubCategoryEditSubmit = (data) => {
+    const editData = {
+      data: data.child,
+      id: previousSubCategoryId,
+    };
+
+    EditSubCategory.mutate(editData);
   };
 
   return (
@@ -239,7 +268,7 @@ const CategoryDataTable = ({ CategoryData, isPending }) => {
                             }
                           >
                             <form
-                              onSubmit={handleSubmit(onCategoryEditSubmit)}
+                              onSubmit={handleSubmit(onSubCategoryEditSubmit)}
                               className="universal__update--form"
                             >
                               <div className="universal__input--container">
@@ -307,6 +336,7 @@ const CategoryDataTable = ({ CategoryData, isPending }) => {
           )}
         </tbody>
       </table>
+      <CustomToastContainer />
     </section>
   );
 };

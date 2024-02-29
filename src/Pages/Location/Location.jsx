@@ -14,10 +14,7 @@ import {
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
 import LocationDataTable from "./LocationDataTable";
-import {
-  notifyError,
-  notifySuccess,
-} from "../../Component/Toast/Toast";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 /**
@@ -59,7 +56,7 @@ const Location = () => {
       queryClient.invalidateQueries("LocationData");
     },
     onError: (error) => {
-      notifyError(error.response.data.message);
+      notifyError(error.response.data.message.message.location);
     },
   });
   //func: Mutation hook for deleting a location
@@ -71,7 +68,7 @@ const Location = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries("LocationData");
-      notifySuccess(deleteMessage);
+      notifySuccess("deleted");
     },
     onError: (error) => {
       if (error.response.status === 401) {

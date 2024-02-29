@@ -67,7 +67,7 @@ export const subCategoryAdd = async (category) => {
     "/category",
     {
       category_name: category.category_name,
-      parent: category.parent,
+      parent: category.select_category,
     },
     {
       headers: {
@@ -103,6 +103,26 @@ export const categoryEdit = async (newCategory, parentId) => {
     `/category?id=${parentId}`,
     {
       newParent: newCategory,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
+/**
+ * Edits a category in the API.
+ * @param {string} newParent - The new parent category name.
+ * @param {string} previousParent - The previous parent category name.
+ */
+export const subCategoryEdit = async (newSubCategory, subCategoryId) => {
+  const categoryEditRequest = await instance.put(
+    `/category?id=${subCategoryId}`,
+    {
+      newChild: newSubCategory,
     },
     {
       headers: {
