@@ -20,7 +20,6 @@ import { SearchSvg } from "../../Component/svg/SearchSvg";
 import { InputField } from "../../Component/Input/InputField";
 import Model from "../../Component/Model/Model";
 import { notifyError } from "../../Component/Toast/Toast";
-import Pagination from "../../Component/Pagination/Pagination";
 
 const Hardware = () => {
   const {
@@ -92,18 +91,6 @@ const Hardware = () => {
     }
   };
   if (error) return "An error has occurred: " + error.message;
-  const [page, setPage] = useState(1);
-  const [data, setData] = useState([]);
-  const getPosts = async (page) => {
-    try {
-      page = page + 1;
-      const response = await getPaginationData(page, assets_type);
-      setData(response);
-      console.log(page);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <>
       {filterShow ? (
@@ -136,10 +123,12 @@ const Hardware = () => {
           handleClick={() => onFilterClick(!filterShow)}
         />
       </div>
-
-      
-      <Pagination assets_type="hardware" searchAssets={searchAssets} asssets_data={HardwareData}
-      isPending={isPending}
+      <AssetsTableData
+        handleDeleteClick={handleDeleteClick}
+        handleProceedClick={handleProceedClick}
+        tableData={searchAssets || HardwareData}
+        isPending={isPending}
+        assets_type="hardware"
       />
     </>
   );

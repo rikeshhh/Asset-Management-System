@@ -21,7 +21,6 @@ import { InputField } from "../../Component/Input/InputField";
 import { queryClient } from "../../Component/Query/Query";
 import Model from "../../Component/Model/Model";
 import { notifyError } from "../../Component/Toast/Toast";
-import Pagination from "../../Component/Pagination/Pagination";
 
 const Software = () => {
   const {
@@ -105,8 +104,6 @@ const Software = () => {
     console.log("hardware");
   };
   if (error) return "An error has occurred: " + error.message;
-  const [paginationData, setPaginationData] = useState();
-  console.log(paginationData);
   return (
     <>
       {filterShow ? (
@@ -138,11 +135,12 @@ const Software = () => {
           handleClick={() => onFilterClick(!filterShow)}
         />
       </div>
-      <Pagination
-        assets_type="software"
-        searchAssets={searchAssets}
-        asssets_data={softwareData}
+      <AssetsTableData
+        handleDeleteClick={handleDeleteClick}
+        handleProceedClick={handleProceedClick}
+        tableData={searchAssets || softwareData}
         isPending={isPending}
+        assets_type="software"
       />
     </>
   );

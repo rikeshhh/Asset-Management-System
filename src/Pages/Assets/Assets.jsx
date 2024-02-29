@@ -130,8 +130,8 @@ const Assets = () => {
           <div className="assets__content">
             <div className="assets__navigation">
               <NavLink
-                to="*"
-                className={({ isActive }) => (isActive ? "active" : "inactive")}
+                to="/assets/*"
+                className={({ isActive }) => (isActive ? "assets__active" : "assets__inactive")}
               >
                 <Button
                   text="Hardware"
@@ -141,7 +141,7 @@ const Assets = () => {
               </NavLink>
               <NavLink
                 to="/assets/software"
-                className={({ isActive }) => (isActive ? "active" : "inactive")}
+                className={({ isActive }) => (isActive ? "assets__active" : "assets__inactive")}
               >
                 <Button
                   text="Software"

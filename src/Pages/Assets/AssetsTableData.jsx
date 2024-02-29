@@ -18,7 +18,6 @@ import { useState } from "react";
 import { FaRegEye } from "react-icons/fa6";
 import Tablerow from "./Tablerow";
 import { LuArrowUpDown } from "react-icons/lu";
-import Pagination from "../../Component/Pagination/Pagination";
 const AssetsTableData = ({ isPending, tableData, assets_type }) => {
   const options = [
     "ID",

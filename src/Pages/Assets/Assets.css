@@ -17,6 +17,7 @@
   display: flex;
   justify-content: start;
   padding: 0.625rem;
+  padding-bottom: 0 !important;
   gap: 1.12rem;
   border-bottom: 1px solid var(--primary-grey);
 }
@@ -95,13 +96,16 @@ input:checked + .slider {
   padding: 0rem 0.5rem;
 }
 
-.active {
-  color: #2196f3 !important;
+.assets__active {
   text-decoration: none;
+  border-bottom: 2px solid var(--blue);
 }
 
-.inactive {
-  color: #2196f3!important;
+.assets__active .assets__btn {
+  color: var(--blue) !important;
+}
+
+.assets__inactive {
   text-decoration: none;
 }
 
@@ -191,8 +195,7 @@ input:checked + .slider {
   right: -5%;
 }
 .navlink {
-  text-decoration: none; 
- 
+  text-decoration: none;
 }
 @media (width < 850px) {
   .assets__form--content {
