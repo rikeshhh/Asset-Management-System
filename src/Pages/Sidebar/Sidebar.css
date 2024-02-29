@@ -9,6 +9,14 @@
   overflow-y: scroll;
 }
 
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.sidebar:hover::-webkit-scrollbar-thumb {
+  background-color: var(--blue);
+}
+
 .sidebar__title {
   padding: 0 1rem;
 }

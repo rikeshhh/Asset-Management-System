@@ -4,8 +4,11 @@ import React, { useEffect } from "react";
  */
 const useLogout = () => {
   useEffect(() => {
-    const handleStorageChange = () => {
-      window.location.reload();
+    const handleStorageChange = (event) => {
+      if (event.key === "logoutSignal" && event.newValue === "true") {
+        // Logout signal received from another tab
+        window.location.reload();
+      }
     };
 
     window.addEventListener("storage", handleStorageChange);
@@ -14,6 +17,20 @@ const useLogout = () => {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
+
+  const logout = () => {
+    // Set a shared variable in the storage to signal other tabs to logout
+    localStorage.setItem("logoutSignal", "true");
+    // Perform local logout actions, e.g., clearing user data, etc.
+    // ...
+
+    // Optional: Clear the logout signal after a short delay
+    setTimeout(() => {
+      localStorage.removeItem("logoutSignal");
+    }, 1000);
+  };
+
+  return { logout };
 };
 
 export default useLogout;

@@ -1,4 +1,3 @@
-
 import { useMutation } from "@tanstack/react-query";
 import { LogoutSvg } from "../../Component/svg/LogoutSvg";
 import { clearTokenFromLocalStorage } from "../../utils/StorageUtils";
@@ -17,6 +16,8 @@ import useLogout from "./useLogout";
 const Logout = ({ toggleNavbar }) => {
   const navigate = useNavigate();
 
+  const { logout } = useLogout();
+
   // feat: Mutation hook for handling logout operation
   const LogoutUser = useMutation({
     mutationFn: () => {
@@ -27,6 +28,7 @@ const Logout = ({ toggleNavbar }) => {
       clearTokenFromLocalStorage();
       // localStorage.setItem("logoutFlag", Date.now().toString());
       navigate("/login");
+      logout();
     },
     onError: (error) => {
       notifyError(error.message);
@@ -36,7 +38,6 @@ const Logout = ({ toggleNavbar }) => {
     },
   });
 
-  useLogout();
   const handleLogout = () => {
     LogoutUser.mutate();
   };

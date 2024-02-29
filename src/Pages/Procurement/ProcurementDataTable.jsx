@@ -21,6 +21,23 @@ const ProcurementDataTable = ({ linkTo, handleTableEdit }) => {
     staleTime: 10000,
   });
 
+  const tableData = [
+    {
+      id: 1,
+      name: "John Doe",
+      designation: "Software Engineer",
+      department: "Engineering",
+      email: "john.doe@example.com",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      designation: "UX Designer",
+      department: "Design",
+      email: "jane.smith@example.com",
+    },
+    // Add more objects as needed
+  ];
   // if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
@@ -59,7 +76,7 @@ const ProcurementDataTable = ({ linkTo, handleTableEdit }) => {
           {isPending ? (
             <PendingTableBody />
           ) : (
-            procurementTableData.map((tableItem, index) => (
+            tableData.map((tableItem, index) => (
               <tr key={index}>
                 <td>{tableItem.id}</td>
                 <td>{tableItem.name}</td>

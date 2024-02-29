@@ -56,7 +56,7 @@ const Location = () => {
       queryClient.invalidateQueries("LocationData");
     },
     onError: (error) => {
-      notifyError(error.response.data.message.message.location);
+      notifyError("Error adding location");
     },
   });
   //func: Mutation hook for deleting a location
@@ -68,28 +68,26 @@ const Location = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries("LocationData");
-      notifySuccess("deleted");
+      notifySuccess("Location has been deleted");
     },
     onError: (error) => {
-      if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
-      }
+      notifyError("Error Deleting Locaiton");
     },
   });
-  const [locationName, setLocationName] = useState();
+  const [locationId, setLocationId] = useState();
   const [deleteConfirmationShow, setDeleteConfirmationShow] = useState(false);
 
   const handleCancelClick = () => {
     setDeleteConfirmationShow(false);
   };
   const handleProceedClick = () => {
-    DeleteLocation.mutate(locationName);
+    DeleteLocation.mutate(locationId);
     setDeleteConfirmationShow(false);
   };
 
   const handleDeleteClick = (location) => {
     setDeleteConfirmationShow(true);
-    setLocationName(location);
+    setLocationId(location);
   };
   // if (isPending) return "Loading...";
 
