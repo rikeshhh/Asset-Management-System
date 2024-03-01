@@ -69,3 +69,21 @@ export const locationEdit = async (newLocation, prevLocationId) => {
     }
   );
 };
+
+export const sortByStatusLocation = async (newOrder, status) => {
+  try {
+    const response = await instance.get(
+      `/location?sortorder=${newOrder}&orderby=${status}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const searchData = response.data.data;
+    return searchData;
+  } catch (error) {
+    throw error;
+  }
+};

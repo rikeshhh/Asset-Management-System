@@ -27,12 +27,15 @@ const Location = () => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      location: "",
+    },
+  });
   //func:Function to handle form submission
 
   const onSubmit = (data) => {
     addLocation.mutate(data);
-    reset();
   };
   // Query for getting location data
 
@@ -54,6 +57,7 @@ const Location = () => {
     onSuccess: (data) => {
       notifySuccess(successMessage);
       queryClient.invalidateQueries("LocationData");
+      reset();
     },
     onError: (error) => {
       notifyError("Error adding location");

@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { InputField } from "../../Component/Input/InputField";
-import { LuArrowDownUp } from "react-icons/lu";
+import { LuArrowDownUp, LuArrowUpDown } from "react-icons/lu";
 import { CiEdit } from "react-icons/ci";
 import { GoTrash } from "react-icons/go";
 import { useState } from "react";
@@ -15,7 +15,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { notifySuccess, notifyError } from "../../Component/Toast/Toast";
 import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
 import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
-import { updateDepartmentData } from "../../Api/Department/DepartmentApiSlice";
+import {
+  sortByStatusDepartment,
+  updateDepartmentData,
+} from "../../Api/Department/DepartmentApiSlice";
 /**
  * Functional component representing the data table for departments.
  * @component
@@ -39,7 +42,7 @@ const DepartmentDataTable = ({
 
   const EditDepartment = useMutation({
     mutationFn: (editData) => {
-      return updateDepartmentData(editData.data, editData.editedDepartment);
+      return updateDepartmentData(editData.data, editData.id);
     },
     onSuccess: () => {
       notifySuccess(successMessage);
@@ -49,10 +52,6 @@ const DepartmentDataTable = ({
     },
     onError: (error) => {
       notifyError(error.message);
-
-      if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
-      }
     },
   });
   const [show, setShow] = useState(false);
@@ -63,16 +62,21 @@ const DepartmentDataTable = ({
    */
 
   const onUpdateData = (data) => {
-    const editData = {
-      data: data.department,
-      editedDepartment: previousDepartment,
-    };
-
-    EditDepartment.mutate(editData);
-    setShow(false);
+    if (previousDepartment === data.department) {
+      setShow(false);
+    } else {
+      const editData = {
+        data: data.department,
+        id: departmentId,
+      };
+      EditDepartment.mutate(editData);
+    }
   };
   const [previousDepartment, setPreviousDepartment] = useState("");
   const [departmentId, setDepartmentId] = useState("");
+  const [departmentTableData, setDepartmentTableData] = useState(null);
+  const [departmentTableDataOrder, setDeparmentTableDataOrder] =
+    useState("ASC");
 
   /**
    * Handles the click event for the edit button.
@@ -92,9 +96,7 @@ const DepartmentDataTable = ({
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm({
-    defaultValues: { location: previousDepartment },
-  });
+  } = useForm();
   const onMiniDelete = () => {
     setShow(false);
     reset();
@@ -104,9 +106,23 @@ const DepartmentDataTable = ({
    * Handles the click event for deleting a department.
    * @param {string} departmentName - The name of the department to be deleted.
    */
-  const handleDeleteDepartment = (departmentName) => {
-    handleDeleteClick(departmentName);
+  const handleDeleteDepartment = (departmentId) => {
+    handleDeleteClick(departmentId);
   };
+
+  const handleStatusClick = async () => {
+    try {
+      const newOrder = departmentTableDataOrder === "ASC" ? "DESC" : "ASC";
+      const response = await sortByStatusDepartment(newOrder, "department");
+      setDepartmentTableData(response);
+      setDeparmentTableDataOrder(newOrder);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const departmentDataToRender = departmentTableData || DepartmentData;
   return (
     <>
       <section className="cateogries table__container">
@@ -116,11 +132,12 @@ const DepartmentDataTable = ({
               <SmallTablePendingHead />
             ) : (
               <tr>
+                <th>S.N.</th>
                 <th>
-                  SN <LuArrowDownUp />
-                </th>
-                <th>
-                  Department <LuArrowDownUp />
+                  Department
+                  <span>
+                    <LuArrowUpDown onClick={handleStatusClick} />
+                  </span>
                 </th>
                 <th>Action</th>
               </tr>
@@ -130,7 +147,7 @@ const DepartmentDataTable = ({
             {isPending ? (
               <SmallTablePendingBody />
             ) : (
-              DepartmentData.map((options, index) => (
+              departmentDataToRender.map((options, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
                   {departmentId === options.id && show ? (
@@ -180,9 +197,7 @@ const DepartmentDataTable = ({
                     <Button
                       className="delete__button"
                       text={<GoTrash />}
-                      handleClick={() =>
-                        handleDeleteDepartment(options.department)
-                      }
+                      handleClick={() => handleDeleteDepartment(options.id)}
                     />
                   </td>
                 </tr>

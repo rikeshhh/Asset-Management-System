@@ -1,4 +1,3 @@
-import React from "react";
 import { getTokenFromLocalStorage } from "../../utils/StorageUtils";
 import instance from "../../axios/Axios";
 
@@ -51,33 +50,27 @@ export const departmentAdd = async (department) => {
  
  */
 
-export const departmentDelete = async (department) => {
+export const departmentDelete = async (departmentId) => {
   try {
-    const response = await instance.delete("/department", {
-      data: {
-        department: department,
-      },
+    const response = await instance.delete(`/department?id=${departmentId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
-  } catch (error) {
-    console.error(error);
-  }
+  } catch (error) {}
 };
 /**
  * Updates department data on the server.
  * @param {string} newDepartment - The new name for the department.
- * @param {string} prevDepartment - The previous name of the department.
+ * @param {string} prevDepartmentId - The previous id of the department.
  */
 
-export const updateDepartmentData = async (newDepartment, prevDepartment) => {
+export const updateDepartmentData = async (newDepartment, prevDepartmentId) => {
   try {
     const response = await instance.put(
-      "/department",
+      `/department?id=${prevDepartmentId}`,
       {
-        previousDepartment: prevDepartment,
         newDepartment: newDepartment,
       },
       {
@@ -89,7 +82,25 @@ export const updateDepartmentData = async (newDepartment, prevDepartment) => {
     );
     // Assuming you want to return the response data
   } catch (error) {
-    console.error(error);
     throw error; // Rethrow the error so that the caller can handle it if necessary
+  }
+};
+
+//sorting
+export const sortByStatusDepartment = async (newOrder, status) => {
+  try {
+    const response = await instance.get(
+      `/department?sortorder=${newOrder}&orderby=${status}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const searchData = response.data.data;
+    return searchData;
+  } catch (error) {
+    throw error;
   }
 };
