@@ -197,6 +197,23 @@ input:checked + .slider {
 .navlink {
   text-decoration: none;
 }
+.pagination {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 1rem;
+}
+.pagination button {
+  color: black;
+  padding: 0.645rem;
+}
+.activePage {
+  background-color: var(--blue);
+  color: white;
+}
+.inactivePage {
+  background-color: transparent;
+  color: var(--primary-color);
+}
 @media (width < 850px) {
   .assets__form--content {
     display: flex;

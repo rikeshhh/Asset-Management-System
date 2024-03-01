@@ -13,7 +13,6 @@ import {
   deleteAssetsTableData,
   getAssetsData,
   getAssetsTableData,
-  getSearchInput,
 } from "./AssetsApiSlice";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { SearchSvg } from "../../Component/svg/SearchSvg";
@@ -36,13 +35,15 @@ const Hardware = () => {
     setDeleteConfirationShow(true);
     setAssetsId(assets);
   };
+  const [searchAssets, setSearchAssets] = useState();
+
   const {
     isPending,
     error,
     data: HardwareData,
   } = useQuery({
-    queryKey: ["AssetsData", "HardwareData"],
-    queryFn: () => getAssetsData("hardware"),
+    queryKey: ["AssetsData", "HardwareData", searchAssets],
+    queryFn: () => getAssetsData("hardware", searchAssets),
     staleTime: 10000,
   });
   /**
@@ -75,20 +76,13 @@ const Hardware = () => {
     DeleteAssets.mutate(assetsId);
     setDeleteConfirationShow(false);
   };
-  const [searchAssets, setSearchAssets] = useState();
   const [filterShow, setFilterShow] = useState(false);
 
   const onFilterClick = (showHide) => {
     setFilterShow(showHide);
   };
   const submitSearch = async (data) => {
-    try {
-      const searchResult = await getSearchInput(data.search, "hardware");
-
-      setSearchAssets(searchResult);
-    } catch (error) {
-      notifyError(error.message);
-    }
+    setSearchAssets(data.search);
   };
   if (error) return "An error has occurred: " + error.message;
   return (
@@ -126,7 +120,7 @@ const Hardware = () => {
       <AssetsTableData
         handleDeleteClick={handleDeleteClick}
         handleProceedClick={handleProceedClick}
-        tableData={searchAssets || HardwareData}
+        tableData={HardwareData}
         isPending={isPending}
         assets_type="hardware"
       />
