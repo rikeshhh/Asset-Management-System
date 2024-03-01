@@ -1,12 +1,12 @@
 import "../../Component/DataTable/DataTable.css";
 import { useMutation } from "@tanstack/react-query";
 import { InputField } from "../../Component/Input/InputField";
-import { LuArrowDownUp } from "react-icons/lu";
+import { LuArrowDownUp, LuArrowUpDown } from "react-icons/lu";
 import { CiEdit } from "react-icons/ci";
 import { GoTrash } from "react-icons/go";
 import { useState } from "react";
 import Button from "../../Component/Button/Button";
-import { locationEdit } from "./LocationApiSlice";
+import { locationEdit, sortByStatusLocation } from "./LocationApiSlice";
 import { queryClient } from "../../Component/Query/Query";
 import { useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
@@ -38,9 +38,13 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
   });
 
   const [previousLocationId, setPreviousLocationId] = useState("");
+  const [previousLocation, setPreviousLocation] = useState("");
+  const [locationTableData, setLocationTableData] = useState(null);
+  const [locationTableDataOrder, setLocationTableDataOrder] = useState("ASC");
 
   const handleEditButtonClick = (options) => {
     setPreviousLocationId(options.id);
+    setPreviousLocation(options.location);
     setShow(true);
     reset();
   };
@@ -53,11 +57,15 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
   } = useForm();
 
   const onLocationEditSubmit = (data) => {
-    const editData = {
-      data: data.location,
-      id: previousLocationId,
-    };
-    EditLocation.mutate(editData);
+    if (previousLocation === data.location) {
+      setShow(false);
+    } else {
+      const editData = {
+        data: data.location,
+        id: previousLocationId,
+      };
+      EditLocation.mutate(editData);
+    }
   };
   const successMessage = "Location has been updated successfully";
 
@@ -72,6 +80,21 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
   const handleDeleteLocation = (locationId) => {
     handleDeleteClick(locationId);
   };
+
+  const handleStatusClick = async () => {
+    try {
+      const newOrder = locationTableDataOrder === "ASC" ? "DESC" : "ASC";
+      const response = await sortByStatusLocation(newOrder, "location");
+      setLocationTableData(response);
+      setLocationTableDataOrder(newOrder);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const locationDataToRender = locationTableData || LocationData;
+
   return (
     <section className="cateogries table__container">
       <table>
@@ -80,11 +103,12 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
             <SmallTablePendingHead />
           ) : (
             <tr>
+              <th>S.N.</th>
               <th>
-                SN <LuArrowDownUp />
-              </th>
-              <th>
-                Location <LuArrowDownUp />
+                Location
+                <span>
+                  <LuArrowUpDown onClick={handleStatusClick} />
+                </span>
               </th>
               <th>Action</th>
             </tr>
@@ -94,7 +118,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
           {isPending ? (
             <SmallTablePendingBody />
           ) : (
-            LocationData.map((options, index) => (
+            locationDataToRender.map((options, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 {options.id === previousLocationId && show ? (

@@ -23,17 +23,8 @@ import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import Model from "../../Component/Model/Model";
 
 const Assets = () => {
-
-  const [isActive, setIsActive] = useState(true);
-
-  const handleButtonClick = () => {
-    setIsActive((prev) => !prev);
-  };
-
-
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const [assetsId, setAssetsId] = useState();
-
   /**
    * Handles the click event for deleting an employee.
    * @param {Object} employee - The employee object to be deleted.
@@ -113,7 +104,7 @@ const Assets = () => {
       ) : (
         <></>
       )}
-    
+
       <section className="content-wrapper">
         <div className="assets content-radius">
           <div className="content__header assets__header">
@@ -130,8 +121,10 @@ const Assets = () => {
           <div className="assets__content">
             <div className="assets__navigation">
               <NavLink
-                to="/assets/*"
-                className={({ isActive }) => (isActive ? "assets__active" : "assets__inactive")}
+                to="/assets"
+                className={({ isActive }) =>
+                  isActive ? "assets__active" : "assets__inactive"
+                }
               >
                 <Button
                   text="Hardware"
@@ -141,7 +134,9 @@ const Assets = () => {
               </NavLink>
               <NavLink
                 to="/assets/software"
-                className={({ isActive }) => (isActive ? "assets__active" : "assets__inactive")}
+                className={({ isActive }) =>
+                  isActive ? "assets__active" : "assets__inactive"
+                }
               >
                 <Button
                   text="Software"
@@ -151,7 +146,6 @@ const Assets = () => {
               </NavLink>
             </div>
 
-           
             <>
               {/* {searchAssets ? (
                 <AssetsTableData
@@ -162,9 +156,9 @@ const Assets = () => {
                   assets_type='hardware'
                 />
               ) : ( */}
-                <div className="assets__content">
-                  <Outlet />
-                </div>
+              <div className="assets__content">
+                <Outlet />
+              </div>
               {/* )} */}
             </>
           </div>

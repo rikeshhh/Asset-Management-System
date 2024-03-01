@@ -85,6 +85,7 @@ const Departments = () => {
     },
   });
   const [departmentName, setDepartmentName] = useState();
+  const [departmentId, setDepartmentId] = useState();
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
 
   const handleCancelClick = () => {
@@ -92,12 +93,12 @@ const Departments = () => {
   };
 
   const handleProceedClick = () => {
-    DeleteDepartment.mutate(departmentName);
+    DeleteDepartment.mutate(departmentId);
     setDeleteConfirationShow(false);
   };
-  const handleDeleteClick = (department) => {
+  const handleDeleteClick = (departmentId) => {
     setDeleteConfirationShow(true);
-    setDepartmentName(department);
+    setDepartmentId(departmentId);
   };
 
   // if (isPending) return "Loading...";
