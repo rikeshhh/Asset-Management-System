@@ -6,6 +6,7 @@ import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
 import { IoMdAdd } from "react-icons/io";
 import {
+  categoryDelete,
   getCategoryData,
   parentCategoryAdd,
   subCategoryAdd,
@@ -15,6 +16,8 @@ import CategoryDataTable from "./CategoryDataTable";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
 import SelectInputCategory from "./SelectInputCategory";
+import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
+import { useState } from "react";
 
 /**
  * Component for managing and displaying categories and subcategories.
@@ -92,63 +95,108 @@ const Categories = () => {
     reset();
   };
 
+  const deleteMessage = "Category has been deleted";
+  const DeleteCategory = useMutation({
+    mutationFn: (categoryId) => {
+      return categoryDelete(categoryId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("CategoryData");
+      notifySuccess(deleteMessage);
+    },
+    onError: (error) => {
+      if (error.response.status === 401) {
+        notifyError("Error deleting category");
+      }
+    },
+  });
+
+  const [categoryId, setCategoryId] = useState();
+
+  const [deleteConfirmationShow, setDeleteConfirmationShow] = useState(false);
+
+  const handleCancelClick = () => {
+    setDeleteConfirmationShow(false);
+  };
+  const handleProceedClick = () => {
+    DeleteCategory.mutate(categoryId);
+    setDeleteConfirmationShow(false);
+  };
+  const handleDeleteClick = (categoryId) => {
+    setDeleteConfirmationShow(true);
+    setCategoryId(categoryId);
+  };
+
   if (error) return "An error has occurred: " + error.message;
   return (
-    <section className="content-wrapper">
-      <div className="content-radius category">
-        <div className="content__header">
-          <h2>Categories</h2>
-        </div>
-        <div className="category__content">
-          <CategoryDataTable
-            CategoryData={CategoryData}
-            isPending={isPending}
-          />
+    <>
+      {deleteConfirmationShow ? (
+        <DeleteConfirmation
+          deleteName="category"
+          handleCancelClick={handleCancelClick}
+          handleProceedClick={handleProceedClick}
+        />
+      ) : (
+        <></>
+      )}
+      <section className="content-wrapper">
+        <div className="content-radius category">
+          <div className="content__header">
+            <h2>Categories</h2>
+          </div>
+          <div className="category__content">
+            <CategoryDataTable
+              CategoryData={CategoryData}
+              isPending={isPending}
+              handleDeleteClick={handleDeleteClick}
+              handleProceedClick={handleProceedClick}
+            />
 
-          <div className="add__category">
-            <div className="add__category--title">
-              <p>Add a category/ Sub Category</p>
-              <span>
-                Add a new category / sub category. Assign sub category to a
-                parent category.
-              </span>
+            <div className="add__category">
+              <div className="add__category--title">
+                <p>Add a category/ Sub Category</p>
+                <span>
+                  Add a new category / sub category. Assign sub category to a
+                  parent category.
+                </span>
+              </div>
+              <form action="" onSubmit={handleSubmit(onCategorySubmit)}>
+                <div>
+                  <Label sup={"*"} text="Name" />
+                  <InputField
+                    name="category_name"
+                    register={register}
+                    required={Model.Category.required}
+                    errors={errors}
+                    type={Model.Category.type}
+                    placeholder={Model.Category.placeholder}
+                    minLength={Model.Category.minLength}
+                    maxLength={Model.Category.maxLength}
+                    autoComplete={"off"}
+                    defaultValue={""}
+                  />
+                </div>
+                <div className="add__category--select">
+                  <Label sup={"*"} text="Parent Category" />
+                  <SelectInputCategory
+                    name={"select_category"}
+                    register={register}
+                  />
+                </div>
+                <div className="">
+                  <Button
+                    text="Add Category"
+                    type="submit"
+                    className={"category--button button__blue"}
+                    icon={<IoMdAdd />}
+                  />
+                </div>
+              </form>
             </div>
-            <form action="" onSubmit={handleSubmit(onCategorySubmit)}>
-              <div>
-                <Label sup={"*"} text="Name" />
-                <InputField
-                  name="category_name"
-                  register={register}
-                  required={Model.Group.required}
-                  errors={errors}
-                  type={Model.Group.type}
-                  placeholder={Model.Group.placeholder}
-                  minLength={Model.Group.minLength}
-                  maxLength={Model.Group.maxLength}
-                  autoComplete={"off"}
-                  defaultValue={""}
-                />
-              </div>
-              <div className="add__category--select">
-                <Label sup={"*"} text="Parent Category" />
-                <SelectInputCategory
-                  name={"select_category"}
-                  register={register}
-                />
-              </div>
-              <div className="">
-                <Button
-                  text="Add Category"
-                  type="submit"
-                  className={"category--button button__blue"}
-                  icon={<IoMdAdd />}
-                />
-              </div>
-            </form>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 export default Categories;

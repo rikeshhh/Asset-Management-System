@@ -3,7 +3,7 @@ import { Label } from "../../Component/Label/Label";
 import { InputField } from "../../Component/Input/InputField";
 import Button from "../../Component/Button/Button";
 import "./Signup.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
 import { showHide } from "../../Component/Images/Image";
@@ -12,6 +12,7 @@ import { showHide } from "../../Component/Images/Image";
 
  */
 export const Signup = () => {
+  const navigate = useNavigate();
   /**
    * React Hook Form instance for managing form state.
    */
@@ -22,7 +23,9 @@ export const Signup = () => {
     handleSubmit,
     watch,
   } = formMethod;
-  const submitData = (data) => {};
+  const submitData = (data) => {
+    navigate("/login");
+  };
   // password showing features
   const [showPassword, setShowPassword] = useState(false);
 
@@ -58,6 +61,23 @@ export const Signup = () => {
             >
               <h2 className="user__auth--title">Signup</h2>
               <div className="group__form auth--form">
+                <div className="form__input--section">
+                  <Label text="Name" />
+                  <InputField
+                    name="name"
+                    register={register}
+                    required={Model.Name.required}
+                    value={Model.Name.pattern.value}
+                    message={Model.Name.pattern.message}
+                    errors={errors}
+                    type={Model.Name.type}
+                    placeholder={Model.Name.placeholder}
+                    minLength={Model.Name.minLength.value}
+                    minMessage={Model.Name.minLength.message}
+                    maxLength={Model.Name.maxLength.value}
+                    maxMessage={Model.Name.maxLength.message}
+                  />
+                </div>
                 <div className="form__input--section">
                   <Label text="Username" />
                   <InputField

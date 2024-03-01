@@ -79,6 +79,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
   };
 
   const handleDeleteLocation = (locationName) => {
+    console.log("locationName", locationName);
     handleDeleteClick(locationName);
   };
   return (

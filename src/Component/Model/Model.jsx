@@ -89,8 +89,8 @@ const Model = {
     },
     placeholder: "Enter your phone number",
     pattern: {
-      value: /^(98|97)[0-9]+(\+)?$/,
-      message: "Phone number should only contain numbers and start from 97/98",
+      value: /^[0-9]+(\+)?$/,
+      message: "Phone number should only contain numbers",
     },
   },
   Designation: {
@@ -217,6 +217,23 @@ const Model = {
     maxLength: {
       value: 32,
       message: "Department name should be less than 32 characters",
+    },
+    pattern: {
+      value: /^[a-zA-Z\s]+$/,
+      message: "Please enter a valid alphabets.",
+    },
+  },
+  Category: {
+    type: "string",
+    required: "Please enter a Category name",
+    placeholder: "Enter the category name",
+    minLength: {
+      value: 1,
+      message: "Category name should be more than 1 characters",
+    },
+    maxLength: {
+      value: 32,
+      message: "Category name should be less than 32 characters",
     },
     pattern: {
       value: /^[a-zA-Z\s]+$/,
