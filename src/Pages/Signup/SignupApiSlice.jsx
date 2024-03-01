@@ -8,11 +8,11 @@ import instance from '../../axios/Axios';
  
  */
 
-export const postData = async(username,email,password) => {
+export const postData = async(name,username,email,password) => {
     const userResponse = await instance.post(
       "/user",
       {
-        name:username,
+        name:name,
         username: username,
         email: email,
         password: password,

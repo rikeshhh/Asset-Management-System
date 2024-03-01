@@ -1,3 +1,5 @@
+import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
+
 /**
  * React component representing the display of subcategories.
  * @param {Object} props - Component props.
