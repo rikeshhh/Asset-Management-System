@@ -47,11 +47,11 @@ export const router = createBrowserRouter([
           {
             index: true,
             path: "*",
-            element: <Hardware/>,
+            element: <Hardware />,
           },
           {
             path: "/assets/software",
-            element: <Software/>,
+            element: <Software />,
           },
         ],
       },

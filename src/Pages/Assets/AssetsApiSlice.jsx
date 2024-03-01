@@ -82,57 +82,22 @@ export const assetsAdd = async (assetsData) => {
   }
 };
 
-export const getSearchInput = async (itemName, assetsType) => {
-  try {
-    const response = await instance.get(
-      `/assets?assets_type=${assetsType}&search=${itemName}`,
-      // {
-      //   params: {
-      //   search= itemName,
-      //   },
-      {
-        headers: { Authorization: `Bearer ${token}` },
-        "Content-Type": "application/json",
-      }
-    );
-    const searchData = response.data.data.data;
-    return searchData;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const getAssetsData = async (assetsType) => {
+export const getAssetsData = async (assetsType, searchAssets, pageNumber) => {
+  console.log(searchAssets);
   try {
     const response = await instance({
       method: "get",
       url: "/assets",
-      params: { assets_type: assetsType },
+      params: {
+        assets_type: assetsType,
+        search: searchAssets,
+        page: pageNumber,
+      },
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
-    const searchData = response.data.data.data;
-    return searchData;
-  } catch (error) {
-    console.error("Axios error:", error);
-    throw error;
-  }
-};
-export const getHardwareData = async () => {
-  try {
-    const response = await instance.get(
-      `/assets?assets_type=hardware`,
-      // {
-      //   params: {
-      //   search= itemName,
-      //   },
-      {
-        headers: { Authorization: `Bearer ${token}` },
-        "Content-Type": "application/json",
-      }
-    );
     const searchData = response.data.data.data;
     return searchData;
   } catch (error) {

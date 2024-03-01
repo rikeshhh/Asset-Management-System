@@ -1,5 +1,10 @@
 import "./Assets.css";
-import { Link, useLocation } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import Button from "../../Component/Button/Button";
 import { useForm } from "react-hook-form";
 import { IoMdAdd } from "react-icons/io";
@@ -13,7 +18,6 @@ import {
   deleteAssetsTableData,
   getAssetsData,
   getAssetsTableData,
-  getSearchInput,
 } from "./AssetsApiSlice";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { SearchSvg } from "../../Component/svg/SearchSvg";
@@ -21,7 +25,7 @@ import { InputField } from "../../Component/Input/InputField";
 import { queryClient } from "../../Component/Query/Query";
 import Model from "../../Component/Model/Model";
 import { notifyError } from "../../Component/Toast/Toast";
-
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 const Software = () => {
   const {
     register,
@@ -32,7 +36,10 @@ const Software = () => {
   const handleButtonClick = () => {
     setIsActive((prev) => !prev);
   };
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [pageNumber, setPageNumber] = useState(
+    parseInt(searchParams.get("page")) || 1
+  );
   /**
    * Handles the click event for deleting an employee.
    * @param {Object} employee - The employee object to be deleted.
@@ -49,13 +56,8 @@ const Software = () => {
     setDeleteConfirationShow(false);
   };
   const [searchAssets, setSearchAssets] = useState();
-  const submitSearch = async (data) => {
-    try {
-      const searchResult = await getSearchInput(data.search, "software");
-      setSearchAssets(searchResult);
-    } catch (error) {
-      notifyError(error.message);
-    }
+  const submitSearch = (data) => {
+    setSearchAssets(data.search);
   };
 
   const DeleteAssets = useMutation({
@@ -86,13 +88,14 @@ const Software = () => {
   const onFilterClick = (showHide) => {
     setFilterShow(showHide);
   };
+
   const {
     isPending,
     error,
     data: softwareData,
   } = useQuery({
-    queryKey: ["AssetsData", "SoftwareData"],
-    queryFn: () => getAssetsData("software"),
+    queryKey: ["AssetsData", "SoftwareData", searchAssets, pageNumber],
+    queryFn: () => getAssetsData("software", searchAssets, pageNumber),
     staleTime: 10000,
   });
 
@@ -102,6 +105,10 @@ const Software = () => {
   };
   const handleHardwareClick = () => {
     console.log("hardware");
+  };
+  const updatePageNumber = (newPageNumber) => {
+    setPageNumber(newPageNumber);
+    setSearchParams({ page: newPageNumber });
   };
   if (error) return "An error has occurred: " + error.message;
   return (
@@ -138,10 +145,40 @@ const Software = () => {
       <AssetsTableData
         handleDeleteClick={handleDeleteClick}
         handleProceedClick={handleProceedClick}
-        tableData={searchAssets || softwareData}
+        tableData={softwareData}
         isPending={isPending}
         assets_type="software"
       />
+      <div className="pagination">
+        <Button
+          icon={<FaAngleLeft />}
+          handleClick={() =>
+            updatePageNumber(pageNumber > 1 ? pageNumber - 1 : 1)
+          }
+        />
+        {softwareData &&
+          [...Array(4)].map((_, index) => (
+            <Button
+              key={index}
+              text={index + 1}
+              className={
+                pageNumber === index + 1 ? "activePage" : "inactivePage"
+              }
+              handleClick={() => updatePageNumber(index + 1)}
+            />
+          ))}{" "}
+        <Button
+          handleClick={() =>
+            updatePageNumber(
+              pageNumber > Math.ceil(softwareData.length / 7)
+                ? pageNumber + 1
+                : pageNumber + 1
+            )
+          }
+          icon={<FaAngleRight />}
+          // isDisabled={pageNumber < 4}
+        />
+      </div>
     </>
   );
 };

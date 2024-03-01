@@ -26,11 +26,11 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
     "Status",
     "Assigned to",
     "Assigned Date",
-    "Action",
   ];
   const [assetTableData, setAssetTableData] = useState(null);
   const [assetTableDataOrder, setAssetTableDataOrder] = useState("asc");
   const [active, setActive] = useState("inactive");
+
   const handleStatusClick = async (stats) => {
     try {
       const newOrder = assetTableDataOrder === "asc" ? "desc" : "asc";
@@ -60,6 +60,7 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
                     </span>
                   </th>
                 ))}
+                <th>Action</th>
               </>
             )}
           </thead>
