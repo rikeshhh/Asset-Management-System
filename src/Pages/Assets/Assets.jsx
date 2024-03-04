@@ -127,9 +127,6 @@ const Assets = () => {
                 className={({ isActive }) =>
                   isActive ? "assets__active" : "assets__inactive"
                 }
-                className={({ isActive }) =>
-                  isActive ? "assets__active" : "assets__inactive"
-                }
               >
                 <Button
                   text="Software"
@@ -153,9 +150,7 @@ const Assets = () => {
               <div className="assets__content">
                 <Outlet />
               </div>
-              <div className="assets__content">
-                <Outlet />
-              </div>
+             
               {/* )} */}
             </>
           </div>
