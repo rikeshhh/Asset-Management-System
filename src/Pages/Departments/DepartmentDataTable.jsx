@@ -51,7 +51,7 @@ const DepartmentDataTable = ({
       reset();
     },
     onError: (error) => {
-      notifyError(error.message);
+      notifyError(error.response.data.message.message.newDepartment);
     },
   });
   const [show, setShow] = useState(false);
@@ -165,9 +165,11 @@ const DepartmentDataTable = ({
                             type={Model.department.type}
                             value={Model.department.pattern.value}
                             message={Model.department.pattern.message}
+                            placeholder={options.department}
                             minLength={Model.department.minLength.value}
                             minMessage={Model.department.minLength.message}
                             maxLength={Model.department.maxLength.value}
+                            required={"Please enter a department name"}
                             maxMessage={Model.department.maxLength.message}
                             autoComplete={"off"}
                             className={show ? "universal__table--input" : ""}

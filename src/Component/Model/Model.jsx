@@ -237,7 +237,7 @@ const Model = {
     },
     pattern: {
       value: /^[a-zA-Z\s]+$/,
-      message: "Please enter a valid alphabets.",
+      message: "Please enter valid alphabets.",
     },
   },
   Category: {
@@ -254,7 +254,7 @@ const Model = {
     },
     pattern: {
       value: /^[a-zA-Z\s]+$/,
-      message: "Please enter a valid alphabets.",
+      message: "Please enter valid alphabets.",
     },
   },
 };

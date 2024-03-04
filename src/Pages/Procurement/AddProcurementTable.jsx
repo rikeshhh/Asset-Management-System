@@ -10,6 +10,8 @@ import SelectInputCategory from "../Categories/SelectInputCategory";
 const AddProcurementTable = ({
   procurementTableLine,
   setProcurementTableLine,
+  editProcurementLine,
+  setEditProcurementLine,
 }) => {
   const {
     register,
@@ -19,7 +21,6 @@ const AddProcurementTable = ({
   } = useForm();
 
   const [newProcurement, setNewProcurement] = useState([]);
-  const [editProcurementLine, setEditProcurementLine] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleCancelTableLine = () => {
@@ -43,6 +44,7 @@ const AddProcurementTable = ({
 
   const handleDeleteProcurementLine = (index) => {
     setNewProcurement(newProcurement.filter((_, idx) => idx !== index));
+    reset();
   };
 
   const handleAddTableLineSubmit = (tableData) => {
@@ -57,8 +59,6 @@ const AddProcurementTable = ({
     setProcurementTableLine(false);
     reset();
   };
-
-  console.log(newProcurement);
 
   return (
     <div className="table__container">

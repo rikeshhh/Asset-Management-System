@@ -8,23 +8,26 @@ import { IoMdAdd } from "react-icons/io";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import AddProcurementTable from "./AddProcurementTable";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const ProcurementForm = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
 
   const [procurementTableLine, setProcurementTableLine] = useState(false);
+  const [editProcurementLine, setEditProcurementLine] = useState(false);
 
   const handleAddProcurement = () => {
+    setEditProcurementLine(false);
     setProcurementTableLine(true);
   };
 
   const submitProcurement = () => {};
-  
+
   return (
     <section className="content-wrapper">
       <div className="content-radius procurement">
@@ -80,14 +83,21 @@ const ProcurementForm = () => {
           <Button
             type={"button"}
             text="Add a table line"
-            className={"procurement--button"}
+            className={
+              editProcurementLine
+                ? "procurement--button procurement--button-not__allowed"
+                : "procurement--button"
+            }
             handleClick={handleAddProcurement}
             icon={<IoMdAdd />}
+            isDisabled={editProcurementLine ? true : false}
           />
         </div>
         <AddProcurementTable
           procurementTableLine={procurementTableLine}
           setProcurementTableLine={setProcurementTableLine}
+          editProcurementLine={editProcurementLine}
+          setEditProcurementLine={setEditProcurementLine}
         />
       </div>
     </section>

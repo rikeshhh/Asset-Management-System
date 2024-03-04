@@ -141,6 +141,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
                         maxLength={Model.location.maxLength.value}
                         minMessage={Model.location.minLength.message}
                         maxMessage={Model.location.maxLength.message}
+                        required={"Please enter a location name"}
                         className={show ? "universal__table--input" : ""}
                       ></InputField>
                       {/* <button>
