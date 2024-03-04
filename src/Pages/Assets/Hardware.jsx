@@ -1,5 +1,10 @@
 import "./Assets.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import Button from "../../Component/Button/Button";
 import { useForm } from "react-hook-form";
 import { IoMdAdd } from "react-icons/io";
@@ -19,6 +24,7 @@ import { SearchSvg } from "../../Component/svg/SearchSvg";
 import { InputField } from "../../Component/Input/InputField";
 import Model from "../../Component/Model/Model";
 import { notifyError } from "../../Component/Toast/Toast";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 const Hardware = () => {
   const {
@@ -36,7 +42,15 @@ const Hardware = () => {
     setAssetsId(assets);
   };
   const [searchAssets, setSearchAssets] = useState();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [pageNumber, setPageNumber] = useState(
+    parseInt(searchParams.get("page")) || 1
+  );
 
+  const updatePageNumber = (newPageNumber) => {
+    setPageNumber(newPageNumber);
+    setSearchParams({ page: newPageNumber });
+  };
   const {
     isPending,
     error,
@@ -84,6 +98,7 @@ const Hardware = () => {
   const submitSearch = async (data) => {
     setSearchAssets(data.search);
   };
+
   if (error) return "An error has occurred: " + error.message;
   return (
     <>
@@ -124,6 +139,36 @@ const Hardware = () => {
         isPending={isPending}
         assets_type="hardware"
       />
+      <div className="pagination">
+        <Button
+          icon={<FaAngleLeft />}
+          handleClick={() =>
+            updatePageNumber(pageNumber > 1 ? pageNumber - 1 : 1)
+          }
+        />
+        {HardwareData &&
+          [...Array(4)].map((_, index) => (
+            <Button
+              key={index}
+              text={index + 1}
+              className={
+                pageNumber === index + 1 ? "activePage" : "inactivePage"
+              }
+              handleClick={() => updatePageNumber(index + 1)}
+            />
+          ))}{" "}
+        <Button
+          handleClick={() =>
+            updatePageNumber(
+              pageNumber > Math.ceil(HardwareData.length / 7)
+                ? pageNumber + 1
+                : pageNumber + 1
+            )
+          }
+          icon={<FaAngleRight />}
+          // isDisabled={pageNumber < 4}
+        />
+      </div>
     </>
   );
 };
