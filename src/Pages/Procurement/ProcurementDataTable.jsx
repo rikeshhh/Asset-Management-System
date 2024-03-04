@@ -21,6 +21,14 @@ const ProcurementDataTable = ({ linkTo, handleTableEdit }) => {
     staleTime: 10000,
   });
 
+  const tableHeadOptions = [
+    "Requested By",
+    "No. of Items",
+    "Status",
+    "Verified By",
+    "Verified Data",
+  ];
+
   const tableData = [
     {
       id: 1,
@@ -50,24 +58,11 @@ const ProcurementDataTable = ({ linkTo, handleTableEdit }) => {
             <PendingTableHead />
           ) : (
             <tr>
-              <th>
-                Requested By <LuArrowUpDown />
-              </th>
-              <th>
-                No. of Items
-                <LuArrowUpDown />
-              </th>
-              <th>
-                Status <LuArrowUpDown />
-              </th>
-              <th>
-                Approved By <LuArrowUpDown />
-              </th>
-              <th>
-                Approved By
-                <LuArrowUpDown />
-              </th>
-
+              {tableHeadOptions.map((tableHead, index) => (
+                <th>
+                  {tableHead} <LuArrowUpDown />
+                </th>
+              ))}
               <th>Action</th>
             </tr>
           )}
@@ -76,13 +71,13 @@ const ProcurementDataTable = ({ linkTo, handleTableEdit }) => {
           {isPending ? (
             <PendingTableBody />
           ) : (
-            tableData.map((tableItem, index) => (
+            procurementTableData.map((tableItem, index) => (
               <tr key={index}>
-                <td>{tableItem.id}</td>
-                <td>{tableItem.name}</td>
-                <td>{tableItem.designation}</td>
-                <td>{tableItem.department}</td>
-                <td>{tableItem.email}</td>
+                <td>{tableItem.requested_by}</td>
+                <td>{tableItem.number_of_items}</td>
+                <td>{tableItem.status}</td>
+                <td>{tableItem.approved_by}</td>
+                <td>{tableItem.approved_date}</td>
                 <td className="button-gap">
                   <Button
                     type={"button"}

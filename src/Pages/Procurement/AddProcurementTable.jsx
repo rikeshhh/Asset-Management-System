@@ -6,6 +6,7 @@ import { InputField } from "../../Component/Input/InputField";
 import { useForm } from "react-hook-form";
 import { FaCheck } from "react-icons/fa6";
 import SelectInputCategory from "../Categories/SelectInputCategory";
+import { RxCross1 } from "react-icons/rx";
 
 const AddProcurementTable = ({
   procurementTableLine,
@@ -36,12 +37,6 @@ const AddProcurementTable = ({
     reset();
   };
 
-  const handleProcurementSubmitClick = () => {
-    setEditProcurementLine(false);
-    setSelectedIndex(null);
-    reset();
-  };
-
   const handleDeleteProcurementLine = (index) => {
     setNewProcurement(newProcurement.filter((_, idx) => idx !== index));
     reset();
@@ -55,14 +50,41 @@ const AddProcurementTable = ({
       estimated_price: tableData.estimated_price,
       link: tableData.link,
     };
+
     setNewProcurement((prevProcurement) => [...prevProcurement, newItem]);
     setProcurementTableLine(false);
     reset();
   };
 
+  const handleEditTableLineSubmit = (tableData) => {
+    const updatedItem = {
+      product_name: tableData.product_name,
+      category_id: tableData.category_id,
+      brand: tableData.brand,
+      estimated_price: tableData.estimated_price,
+      link: tableData.link,
+    };
+
+    setNewProcurement((prevProcurement) => {
+      const updatedList = [...prevProcurement];
+      updatedList[selectedIndex] = updatedItem;
+      return updatedList;
+    });
+
+    setEditProcurementLine(false);
+    setSelectedIndex(null);
+    reset();
+  };
+
   return (
     <div className="table__container">
-      <form onSubmit={handleSubmit(handleAddTableLineSubmit)}>
+      <form
+        onSubmit={handleSubmit(
+          editProcurementLine
+            ? handleEditTableLineSubmit
+            : handleAddTableLineSubmit
+        )}
+      >
         <table className="main__table">
           <thead>
             <tr>
@@ -140,9 +162,8 @@ const AddProcurementTable = ({
                 <td className="button-gap">
                   {editProcurementLine && index === selectedIndex ? (
                     <Button
-                      type={"button"}
+                      type="button"
                       className="edit__button"
-                      handleClick={handleProcurementSubmitClick}
                       text={<FaCheck />}
                     />
                   ) : (
@@ -158,12 +179,24 @@ const AddProcurementTable = ({
                       isDisabled={procurementTableLine ? true : false}
                     />
                   )}
-                  <Button
-                    type={"button"}
-                    className="delete__button"
-                    text={<GoTrash />}
-                    handleClick={() => handleDeleteProcurementLine(index)}
-                  />
+                  {editProcurementLine && index === selectedIndex ? (
+                    <Button
+                      type={"button"}
+                      className="delete__button"
+                      text={<RxCross1 />}
+                      handleClick={() => {
+                        setEditProcurementLine(false);
+                        reset();
+                      }}
+                    />
+                  ) : (
+                    <Button
+                      type={"button"}
+                      className="delete__button"
+                      text={<GoTrash />}
+                      handleClick={() => handleDeleteProcurementLine(index)}
+                    />
+                  )}
                 </td>
               </tr>
             ))}

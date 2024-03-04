@@ -33,7 +33,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
       reset();
     },
     onError: (error) => {
-      notifyError("Error Editing location");
+      notifyError(error.response.data.message.message.newLocation);
     },
   });
 

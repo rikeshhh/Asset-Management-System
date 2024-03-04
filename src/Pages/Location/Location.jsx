@@ -60,7 +60,7 @@ const Location = () => {
       reset();
     },
     onError: (error) => {
-      notifyError("Error adding location");
+      notifyError(error.response.data.message.message.location);
     },
   });
   //func: Mutation hook for deleting a location
@@ -75,9 +75,7 @@ const Location = () => {
       notifySuccess("Location has been deleted");
     },
     onError: (error) => {
-      if (error.response.status === 401) {
-        notifyError("Error deleting location");
-      }
+      notifyError("Error deleting location");
     },
   });
   const [locationId, setLocationId] = useState();

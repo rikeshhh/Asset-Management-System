@@ -50,8 +50,7 @@ const Departments = () => {
     },
     //func:Callback function invoked if an error occurs during the mutation.
     onError: (error) => {
-      notifyError("Error adding department");
-      console.log("Error adding department", error);
+      notifyError(error.response.data.message.message.department);
     },
   });
   const successMessage = "Department has been added";
@@ -78,10 +77,8 @@ const Departments = () => {
       queryClient.invalidateQueries("DepartmentData");
       notifySuccess(deleteMessage);
     },
-    onError: (error) => {
-      if (error.response.status === 401) {
-        notifyError("Error deleting department");
-      }
+    onError: () => {
+      notifyError("Error deleting department");
     },
   });
   const [departmentName, setDepartmentName] = useState();

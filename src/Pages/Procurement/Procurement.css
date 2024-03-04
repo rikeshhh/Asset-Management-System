@@ -127,6 +127,12 @@
   cursor: not-allowed;
 }
 
+.procurement--button-not__allowed:disabled {
+  cursor: not-allowed;
+  background-color: var(--primary-grey) !important;
+  color: var(--text-color);
+}
+
 @media (width<=500px) {
   .procurement__employee--dets {
     display: flex;

@@ -94,7 +94,6 @@ const Assets = () => {
         <></>
       )}
 
-
       <section className="content-wrapper">
         <div className="assets content-radius">
           <div className="content__header assets__header">
@@ -127,9 +126,6 @@ const Assets = () => {
                 className={({ isActive }) =>
                   isActive ? "assets__active" : "assets__inactive"
                 }
-                className={({ isActive }) =>
-                  isActive ? "assets__active" : "assets__inactive"
-                }
               >
                 <Button
                   text="Software"
@@ -138,7 +134,6 @@ const Assets = () => {
                 />
               </NavLink>
             </div>
-
 
             <>
               {/* {searchAssets ? (
