@@ -148,9 +148,7 @@ const Assets = () => {
               <div className="assets__content">
                 <Outlet />
               </div>
-              <div className="assets__content">
-                <Outlet />
-              </div>
+             
               {/* )} */}
             </>
           </div>
