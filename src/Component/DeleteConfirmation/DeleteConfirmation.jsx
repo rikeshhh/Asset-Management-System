@@ -4,6 +4,7 @@ import { deleteIcon } from "../Images/Image";
 
 export const DeleteConfirmation = ({
   deleteName,
+  deleteType,
   handleCancelClick,
   handleProceedClick,
 }) => {
@@ -13,7 +14,9 @@ export const DeleteConfirmation = ({
         <figure className="delete__confirmation--icon">
           <img src={deleteIcon} alt="" />
         </figure>
+
         <h4>Delete {deleteName}? </h4>
+
         <div className="delete__confirmation--info">
           <p>Are you sure you want to delete this {deleteName} permanently?</p>
           <p>This action cannot be undone.</p>

@@ -31,7 +31,11 @@ const Categories = () => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      category_name: "",
+    },
+  });
 
   /**
    * Query to get category data.
@@ -95,7 +99,7 @@ const Categories = () => {
     reset();
   };
 
-  const deleteMessage = "Category has been deleted";
+  const deleteMessage = "Category/Subcategory has been deleted";
   const DeleteCategory = useMutation({
     mutationFn: (categoryId) => {
       return categoryDelete(categoryId);
@@ -132,7 +136,7 @@ const Categories = () => {
     <>
       {deleteConfirmationShow ? (
         <DeleteConfirmation
-          deleteName="category"
+          deleteName="category/subcategory"
           handleCancelClick={handleCancelClick}
           handleProceedClick={handleProceedClick}
         />

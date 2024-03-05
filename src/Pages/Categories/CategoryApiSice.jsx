@@ -83,9 +83,9 @@ export const subCategoryAdd = async (category) => {
  * @param {string} parentCategory - The parent category to delete.
  */
 
-export const categoryDelete = async ( ) => {
+export const categoryDelete = async (categoryId) => {
   const categoryDeleteRequest = await instance.delete(`/category`, {
-    params: { id: parentCategory },
+    params: { id: categoryId },
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
