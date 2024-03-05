@@ -14,6 +14,7 @@ import userProf from "/src/assets/userProf.svg";
 import profileCover from "/src/assets/profilecover.png";
 import deleteIcon from "/src/assets/deleteIcon.svg";
 import showHide from "/src/assets/showHide.svg";
+import paymentSuccess from "/src/assets/paymentSuccess.png";
 
 export {
   profile,
@@ -32,4 +33,5 @@ export {
   unionpay,
   userProf,
   profileCover,
+  paymentSuccess,
 };

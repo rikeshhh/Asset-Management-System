@@ -7,24 +7,68 @@ import { Link, useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import Model from "../../Component/Model/Model";
 import { showHide } from "../../Component/Images/Image";
+import { useMutation } from "@tanstack/react-query";
+import { postData } from "./SignupApiSlice";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import { notifySuccess } from "../../Component/Toast/Toast";
 /**
  * Signup component for user registration.
 
  */
 export const Signup = () => {
   const navigate = useNavigate();
+  const successMessage = "User Registered Successfully";
+  const userRegisterMutation = useMutation({
+    mutationFn: (data) => {
+      return postData(
+        data.name,
+        data.username,
+        data.email,
+        data.password,
+        data.RetypePassword
+      );
+    },
+    // On successful login
+
+    onSuccess: (data) => {
+      if (data.status === true) {
+        notifySuccess(successMessage);
+        reset();
+        setTimeout(() => {
+          navigate("/login");
+        }, 1000);
+      }
+    },
+    // On error during login
+    onError: (error) => {
+      notifyError(error.message);
+      if (error.response.status === 401) {
+        setError("Unauthorized: Please log in with valid id.");
+      }
+    },
+  });
+
   /**
    * React Hook Form instance for managing form state.
    */
-  const formMethod = useForm();
+  const formMethod = useForm({
+    defaultValues: {
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+      RetypePassword: "",
+    },
+  });
   const {
     register,
     formState: { errors },
     handleSubmit,
     watch,
+    reset,
   } = formMethod;
   const submitData = (data) => {
-    navigate("/login");
+    userRegisterMutation.mutate(data);
   };
   // password showing features
   const [showPassword, setShowPassword] = useState(false);
@@ -81,7 +125,7 @@ export const Signup = () => {
                 <div className="form__input--section">
                   <Label text="Username" />
                   <InputField
-                    name="Username"
+                    name="username"
                     register={register}
                     required={Model.Username.required}
                     value={Model.Username.pattern.value}
@@ -98,7 +142,7 @@ export const Signup = () => {
                 <div className="form__input--section">
                   <Label text="Email" />
                   <InputField
-                    name="Email"
+                    name="email"
                     register={register}
                     value={Model.Email.pattern.value}
                     message={Model.Email.pattern.message}
@@ -113,7 +157,7 @@ export const Signup = () => {
                 <div className="form__input--section form__input--section__password">
                   <Label text="Password" />
                   <InputField
-                    name="Password"
+                    name="password"
                     register={register}
                     value={Model.Password.pattern.value}
                     message={Model.Password.pattern.message}
@@ -134,17 +178,17 @@ export const Signup = () => {
                   </InputField>
                 </div>
                 <div className="form__input--section form__input--section__password">
-                  <Label text="RetypePassword" />
+                  <Label text="Retype Password" />
                   <div className="repassword-toggle--button">
                     <input
                       className="retype-password"
-                      name="RetypePassword"
+                      name="retype_password"
                       type={showResetPassword ? "text" : "password"}
                       placeholder="Enter your password again"
                       {...register("RetypePassword", {
                         required: "Please retype your password",
                         validate: (value) =>
-                          value === watch("Password") ||
+                          value === watch("password") ||
                           "Retyped password does not match the original password.",
                       })}
                     />
@@ -187,6 +231,7 @@ export const Signup = () => {
           </div>
         </div>
       </div>
+      <CustomToastContainer />
     </section>
   );
 };

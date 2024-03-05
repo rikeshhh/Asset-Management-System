@@ -1,5 +1,5 @@
-import React from 'react'
-import instance from '../../axios/Axios';
+import React from "react";
+import instance from "../../axios/Axios";
 /**
  * Sends a POST request to create a new user.
  * @param {string} username - The username of the new user.
@@ -8,21 +8,28 @@ import instance from '../../axios/Axios';
  
  */
 
-export const postData = async(name,username,email,password) => {
-    const userResponse = await instance.post(
-      "/user",
-      {
-        name:name,
-        username: username,
-        email: email,
-        password: password,
+export const postData = async (
+  name,
+  username,
+  email,
+  password,
+  RetypePassword
+) => {
+  const userResponse = await instance.post(
+    "/signup",
+    {
+      name: name,
+      username: username,
+      email: email,
+      password: password,
+      retyped_password: RetypePassword,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const resp = await userResponse.data;
-    return resp;
-}
+    }
+  );
+  const resp = await userResponse.data;
+  return resp;
+};

@@ -26,6 +26,7 @@ import EmployeeView from "../Pages/Employees/EmployeeView";
 import Hardware from "../Pages/Assets/Hardware";
 import Software from "../Pages/Assets/Software";
 import ViewAssets from "../Pages/Assets/ViewAssets";
+import AddRepair from "../Pages/Repair/AddRepair";
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ export const router = createBrowserRouter([
       {
         path: "/repair",
         element: <Repair />,
+      },
+      {
+        path: "/addRepair",
+        element: <AddRepair />,
       },
       {
         path: "/employees",
