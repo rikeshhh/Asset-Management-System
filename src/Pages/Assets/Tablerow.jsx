@@ -6,6 +6,7 @@ import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
 import { PiEyeLight } from "react-icons/pi";
 import Button from "../../Component/Button/Button";
+import { EyeSvg } from "../../Component/svg/EyeSvg";
 
 const Tablerow = ({ tableItem }) => {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ const Tablerow = ({ tableItem }) => {
             type={"button"}
             className="view__button"
             handleClick={() => handleTableView(tableItem)}
-            text={<PiEyeLight />}
+            text={<EyeSvg />}
           />
           <Button
             type={"button"}

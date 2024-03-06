@@ -12,3 +12,27 @@ export const getProcurementTableData = async () => {
     throw error;
   }
 };
+
+export const getProductList = async (productId) => {
+  try {
+    const response = await instance.get(`/procurement?id=${productId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data.procurementInfo.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const productDelete = async (productId) => {
+  try {
+    const response = await instance.delete(
+      `/procurement?product_id=${productId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};

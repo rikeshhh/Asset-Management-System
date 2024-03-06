@@ -8,7 +8,7 @@ import Button from "../../Component/Button/Button";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
 import { LuArrowUpDown } from "react-icons/lu";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { EyeSvg } from "../../Component/svg/EyeSvg";
 
 const ProcurementDataTable = ({ linkTo, handleTableEdit }) => {
   const {
@@ -28,25 +28,6 @@ const ProcurementDataTable = ({ linkTo, handleTableEdit }) => {
     "Verified By",
     "Verified Data",
   ];
-
-  const tableData = [
-    {
-      id: 1,
-      name: "John Doe",
-      designation: "Software Engineer",
-      department: "Engineering",
-      email: "john.doe@example.com",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      designation: "UX Designer",
-      department: "Design",
-      email: "jane.smith@example.com",
-    },
-    // Add more objects as needed
-  ];
-  // if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
 
@@ -81,11 +62,15 @@ const ProcurementDataTable = ({ linkTo, handleTableEdit }) => {
                 <td className="button-gap">
                   <Button
                     type={"button"}
-                    className="edit__button"
+                    className=" view__button"
                     // handleClick={() => viewEmployeeProfile(tableItem)}
-                    text={<MdOutlineRemoveRedEye />}
+                    text={<EyeSvg />}
                   />
-                  <Link to={linkTo} className="link">
+                  <Link
+                    to={"/editProcurement"}
+                    state={{ id: tableItem.id }}
+                    className="link"
+                  >
                     <Button
                       type={"button"}
                       className="edit__button"

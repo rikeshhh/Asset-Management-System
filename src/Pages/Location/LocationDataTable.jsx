@@ -144,12 +144,6 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
                         required={"Please enter a location name"}
                         className={show ? "universal__table--input" : ""}
                       ></InputField>
-                      {/* <button>
-                    <IoMdCheckmark />
-                  </button>
-                  <button type="button" onClick={handleEditCancel}>
-                    <RxCross1 />
-                  </button> */}
                       <div className="universal__FormButton">
                         <Button className="" text={<FaCheck />} />
                         <Button
@@ -174,7 +168,6 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
                     className="delete__button"
                     text={<GoTrash />}
                     handleClick={() => handleDeleteLocation(options.id)}
-                    // handleClick={() => onDeleteData(options.location)}
                   />
                 </td>
               </tr>

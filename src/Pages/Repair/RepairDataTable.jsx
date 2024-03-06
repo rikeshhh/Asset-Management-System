@@ -10,7 +10,7 @@ import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
 import { LuArrowUpDown } from "react-icons/lu";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 
-const RepairDataTable = ({ size, linkTo, handleTableEdit }) => {
+const RepairDataTable = ({ linkTo, handleTableEdit }) => {
   const {
     isPending,
     error,
@@ -23,7 +23,7 @@ const RepairDataTable = ({ size, linkTo, handleTableEdit }) => {
 
   // if (isPending) return "Loading...";
 
-  if (error) return "An error has occurred: " + error.message;
+  if (error) return "An error has occurred: ";
 
   return (
     <div className="table__container">
@@ -75,14 +75,14 @@ const RepairDataTable = ({ size, linkTo, handleTableEdit }) => {
                     // handleClick={() => viewEmployeeProfile(tableItem)}
                     text={<MdOutlineRemoveRedEye />}
                   />
-                  <Link to={linkTo} className="link">
-                    <Button
-                      type={"button"}
-                      className="edit__button"
-                      onClick={handleTableEdit}
-                      text={<CiEdit />}
-                    />
-                  </Link>
+                  {/* <Link to={linkTo} className="link"> */}
+                  <Button
+                    type={"button"}
+                    className="edit__button"
+                    onClick={handleTableEdit}
+                    text={<CiEdit />}
+                  />
+                  {/* </Link> */}
                   <Button
                     type={"button"}
                     className="delete__button"
