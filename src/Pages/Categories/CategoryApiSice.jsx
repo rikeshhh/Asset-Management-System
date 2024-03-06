@@ -36,6 +36,13 @@ export const selectInputCategory = async () => {
   const resp = await categoryData.data.data;
   return resp;
 };
+export const selectSubCategoryData = async (categoryName) => {
+  const categoryData = await instance.get(`/category?name=${categoryName}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const resp = await categoryData.data.data;
+  return resp;
+};
 
 /**
  * Adds a new parent category to the API.
@@ -83,7 +90,7 @@ export const subCategoryAdd = async (category) => {
  * @param {string} parentCategory - The parent category to delete.
  */
 
-export const categoryDelete = async ( ) => {
+export const categoryDelete = async () => {
   const categoryDeleteRequest = await instance.delete(`/category`, {
     params: { id: parentCategory },
     headers: {

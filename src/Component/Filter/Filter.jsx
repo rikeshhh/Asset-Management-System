@@ -7,6 +7,9 @@ import { SelectInput } from "../Input/SelectInput";
 import { useEffect, useState } from "react";
 import { InputField } from "../Input/InputField";
 import Model from "../Model/Model";
+import SelectInputCategory from "../../Pages/Categories/SelectInputCategory";
+import { useQuery } from "@tanstack/react-query";
+import { getAssetsData } from "../../Pages/Assets/AssetsApiSlice";
 
 const Filter = ({ handleClick, filterShow }) => {
   const {
@@ -14,7 +17,27 @@ const Filter = ({ handleClick, filterShow }) => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-
+  const [byCategory, setByCategory] = useState();
+  const [byStatus, setByStatus] = useState();
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+  const {
+    isPending,
+    error,
+    data: softwareData,
+  } = useQuery({
+    queryKey: [
+      "AssetsData",
+      "SoftwareData",
+      byCategory,
+      byStatus,
+      startDate,
+      endDate,
+    ],
+    queryFn: () =>
+      getAssetsData("software", byCategory, byStatus, startDate, endDate),
+    staleTime: 10000,
+  });
   // const handleBodyClick = (e) => {
   //   if (
   //     !e.target.closest(".filter") &&
@@ -32,9 +55,13 @@ const Filter = ({ handleClick, filterShow }) => {
   //     document.body.removeEventListener("click", handleBodyClick);
   //   };
   // }, [toggleFilter]);
-
-  const options = [{ options: "frontend", value: "frontend" }];
-  const filterSubmit = () => {};
+  const option = ["rikesh", "shrestha"];
+  const filterSubmit = (data) => {
+    setByCategory(data.category);
+    setStartDate(data.fromDate);
+    setEndDate(data.toDate);
+    setByStatus(data.status);
+  };
 
   return (
     <>
@@ -50,24 +77,34 @@ const Filter = ({ handleClick, filterShow }) => {
           <div className="group__form filter__gap ">
             <div className="form__input--section ">
               <Label text={"Categories"} />
-              <SelectInput options={options} />
+              <SelectInputCategory register={register} name="category" />
             </div>
+            {/* <div className="form__input--section ">
+              <Label text={"Status"} />
+              <SelectInput option={option} register={register} name="status" />
+            </div> */}
             <div className="form__input--section ">
               <Label text={"Status"} />
-              <SelectInput options={options} />
+              <SelectInput
+                option={["Active", "Inactive"]}
+                register={register}
+                name="status"
+              />
             </div>
-            <div className="form__input--section ">
-              <Label text={"Status"} />
-              <SelectInput options={options} />
-            </div>
-            <div className="form__input--section ">
-              <Label text={"Status"} />
-              <SelectInput options={options} />
-            </div>
+
             <div className="form__input--section ">
               <Label text={"Assigned Date"} />
               <InputField
-                name="Expiration Date"
+                name="fromDate"
+                register={register}
+                value={Model.Date.pattern.value}
+                message={Model.Date.pattern.message}
+                errors={errors}
+                type={Model.Date.type}
+                placeholder={Model.Date.placeholder}
+              />
+              <InputField
+                name="toDate"
                 register={register}
                 value={Model.Date.pattern.value}
                 message={Model.Date.pattern.message}
