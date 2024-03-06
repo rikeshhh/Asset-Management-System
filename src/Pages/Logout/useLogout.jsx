@@ -21,10 +21,8 @@ const useLogout = () => {
   const logout = () => {
     // Set a shared variable in the storage to signal other tabs to logout
     localStorage.setItem("logoutSignal", "true");
-    // Perform local logout actions, e.g., clearing user data, etc.
-    // ...
-
-    // Optional: Clear the logout signal after a short delay
+    // Perform local logout actions
+    // Clear the logout signal after a short delay
     setTimeout(() => {
       localStorage.removeItem("logoutSignal");
     }, 1000);

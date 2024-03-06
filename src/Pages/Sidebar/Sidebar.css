@@ -150,6 +150,7 @@
   width: 12rem !important;
   color: var(--blue) !important;
   background: var(--secondary-color);
+  font-size: 14px !important;
 }
 
 @media (width<=1024px) {

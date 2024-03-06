@@ -42,7 +42,8 @@ const AddProcurementTable = ({
     reset();
   };
 
-  const handleAddTableLineSubmit = (tableData) => {
+  const handleAddTableLineSubmit = (tableData, event) => {
+    event.stopPropagation();
     const newItem = {
       product_name: tableData.product_name,
       category_id: tableData.category_id,
@@ -56,7 +57,9 @@ const AddProcurementTable = ({
     reset();
   };
 
-  const handleEditTableLineSubmit = (tableData) => {
+  const handleEditTableLineSubmit = (tableData, event) => {
+    console.log(tableData)
+    event.stopPropagation();
     const updatedItem = {
       product_name: tableData.product_name,
       category_id: tableData.category_id,
@@ -79,11 +82,11 @@ const AddProcurementTable = ({
   return (
     <div className="table__container">
       <form
-        onSubmit={handleSubmit(
-          editProcurementLine
-            ? handleEditTableLineSubmit
-            : handleAddTableLineSubmit
-        )}
+        onSubmit={handleSubmit((data, event) => {
+          // editProcurementLine
+             handleEditTableLineSubmit(data, event)
+            //  handleAddTableLineSubmit(data, event);
+        })}
       >
         <table className="main__table">
           <thead>

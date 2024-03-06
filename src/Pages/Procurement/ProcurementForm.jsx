@@ -8,7 +8,7 @@ import { IoMdAdd } from "react-icons/io";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import AddProcurementTable from "./AddProcurementTable";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const ProcurementForm = () => {
   const {
@@ -17,6 +17,8 @@ const ProcurementForm = () => {
     handleSubmit,
     reset,
   } = useForm();
+
+  const selectOptions = ["Urgent", "High", "Medium", "Low"];
 
   const [procurementTableLine, setProcurementTableLine] = useState(false);
   const [editProcurementLine, setEditProcurementLine] = useState(false);
@@ -60,7 +62,11 @@ const ProcurementForm = () => {
             </div>
             <div className="user__auth--input procurement__form--input">
               <Label sup={"*"} text="Request Urgency" />
-              <SelectInput />
+              <SelectInput
+                name={"request_urgency"}
+                register={register}
+                options={selectOptions}
+              />
             </div>
           </div>
           <div className="procurement__product">

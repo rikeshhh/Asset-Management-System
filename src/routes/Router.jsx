@@ -27,6 +27,7 @@ import Hardware from "../Pages/Assets/Hardware";
 import Software from "../Pages/Assets/Software";
 import ViewAssets from "../Pages/Assets/ViewAssets";
 import AddRepair from "../Pages/Repair/AddRepair";
+import EditProcurement from "../Pages/Procurement/EditProcurement";
 
 export const router = createBrowserRouter([
   {
@@ -128,10 +129,13 @@ export const router = createBrowserRouter([
         path: "/viewAssets",
         element: <ViewAssets />,
       },
-
       {
         path: "/procurementForm",
         element: <ProcurementForm />,
+      },
+      {
+        path: "/editProcurement",
+        element: <EditProcurement />,
       },
     ],
   },

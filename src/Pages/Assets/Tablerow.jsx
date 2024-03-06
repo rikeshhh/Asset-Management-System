@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
+import { EyeSvg } from "../../Component/svg/EyeSvg";
 
 const Tablerow = ({ tableItem }) => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
@@ -80,7 +81,7 @@ const Tablerow = ({ tableItem }) => {
             type={"button"}
             className="view__button"
             handleClick={() => handleTableView(tableItem)}
-            text={<PiEyeLight />}
+            text={<EyeSvg />}
           />
           <Button
             type={"button"}

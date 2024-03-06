@@ -9,7 +9,6 @@ import { useMutation } from "@tanstack/react-query";
 import { verifyUser } from "./LoginApiSlice";
 import { useState } from "react";
 import { setTokenToLocalStorage } from "../../utils/StorageUtils";
-import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { notifyError } from "../../Component/Toast/Toast";
 import { showHide } from "../../Component/Images/Image";
 /**
