@@ -23,6 +23,8 @@ export const InputField = ({
   children,
   defaultValue,
   isChecked,
+  active,
+  inActive,
 }) => {
   const hasError = errors[name];
   const [inputValu, setInputValu] = useState(defaultValue); // <-- State to manage the input value

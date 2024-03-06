@@ -29,7 +29,7 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
   ];
   const [assetTableData, setAssetTableData] = useState(null);
   const [assetTableDataOrder, setAssetTableDataOrder] = useState("asc");
-  const [active, setActive] = useState("inactive");
+  const [active, setActive] = useState();
 
   const handleStatusClick = async (stats) => {
     try {

@@ -6,11 +6,32 @@ import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
 import { PiEyeLight } from "react-icons/pi";
 import Button from "../../Component/Button/Button";
+import { useMutation } from "@tanstack/react-query";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
+import { queryClient } from "../../Component/Query/Query";
 
 const Tablerow = ({ tableItem }) => {
+  const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
+  const DeleteAssets = useMutation({
+    mutationFn: (tableItemId) => {
+      return deleteAssetsTableData(tableItemId);
+    },
+    onSuccess: () => {
+      notifySuccess("Asset Deleted Successfully");
+      queryClient.invalidateQueries("AssetsData");
+    },
+    onError: (error) => {
+      notifyError(error.message);
+      if (error.response.status === 401) {
+        notifyError("Unauthorized: Please log in with valid id.");
+      }
+    },
+  });
   const navigate = useNavigate();
   const handleDeleteAssets = () => {
-    deleteAssetsTableData(tableItem.id);
+    DeleteAssets.mutate(tableItem.id);
+    setDeleteConfirationShow(false);
   };
   const handleTableEdit = (tableData) => {
     navigate("/editAssets", {
@@ -22,13 +43,11 @@ const Tablerow = ({ tableItem }) => {
       state: { tableData: tableData },
     });
   };
-  const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
 
   // if (isPending) return "Loading...";
   const handleDeleteConfirmationModel = () => {
     setDeleteConfirationShow(true);
   };
-
   return (
     <>
       {deleteConfirationShow && (
@@ -52,7 +71,7 @@ const Tablerow = ({ tableItem }) => {
         <td data-cell="category">{tableItem.category}</td>
         <td data-cell="status">{tableItem.status}</td>
         <td data-cell="assigned_to">{tableItem.assigned_to_name}</td>
-        <td data-cell="assigned_date">{tableItem.created_at}</td>
+        <td data-cell="assigned_date">{tableItem.assigned_date}</td>
         <td className="button-gap">
           {/* <Link  to={{ pathname: '/profile', state: false }}>
          </Link> */}
@@ -77,6 +96,7 @@ const Tablerow = ({ tableItem }) => {
           />
         </td>
       </tr>
+      <CustomToastContainer />
     </>
   );
 };

@@ -36,6 +36,8 @@ const Software = () => {
   const handleButtonClick = () => {
     setIsActive((prev) => !prev);
   };
+  const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [pageNumber, setPageNumber] = useState(
     parseInt(searchParams.get("page")) || 1
@@ -66,7 +68,7 @@ const Software = () => {
     },
     onSuccess: () => {
       notifySuccess("Asset Deleted Successfully");
-      queryClient.invalidateQueries("AssetsData");
+      queryClient.invalidateQueries("softwareData");
     },
     onError: (error) => {
       notifyError(error.message);
@@ -170,7 +172,7 @@ const Software = () => {
         <Button
           handleClick={() =>
             updatePageNumber(
-              pageNumber > Math.ceil(softwareData.length / 7)
+              pageNumber > Math.ceil(softwareData["total data"] / 7)
                 ? pageNumber + 1
                 : pageNumber + 1
             )

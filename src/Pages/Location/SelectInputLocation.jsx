@@ -2,7 +2,14 @@ import React from "react";
 import { selectInputLocation } from "./LocationApiSlice";
 import { useQuery } from "@tanstack/react-query";
 
-const SelectInputLocation = ({ onChange, value, isDisabled }) => {
+const SelectInputLocation = ({
+  onChange,
+  value,
+  isDisabled,
+  name,
+  register,
+  defaultValue,
+}) => {
   const { data: LocationData } = useQuery({
     queryKey: ["selectInputLocationData"],
     queryFn: selectInputLocation,
@@ -10,23 +17,26 @@ const SelectInputLocation = ({ onChange, value, isDisabled }) => {
 
   return (
     <select
+      {...register(name)}
       disabled={isDisabled}
       required
       className={isDisabled ? "select__disabled" : "select__enabled"}
       onChange={onChange}
     >
-      <option className="select__option" value={value || "none"}>
-        {value || "none"}
-      </option>
       {LocationData &&
         LocationData.map((option) => (
-          <option
-            className="select__option"
-            key={option.id}
-            value={option.location}
-          >
-            {option.location}
-          </option>
+          <>
+            <option className="select__option" value={defaultValue || null}>
+              {defaultValue || "none"}
+            </option>
+            <option
+              className="select__option"
+              key={option.id}
+              value={option.id}
+            >
+              {option.location}
+            </option>
+          </>
         ))}
     </select>
   );

@@ -36,6 +36,13 @@ export const selectInputCategory = async () => {
   const resp = await categoryData.data.data;
   return resp;
 };
+export const selectSubCategoryData = async (categoryName) => {
+  const categoryData = await instance.get(`/category?name=${categoryName}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const resp = await categoryData.data.data;
+  return resp;
+};
 
 /**
  * Adds a new parent category to the API.

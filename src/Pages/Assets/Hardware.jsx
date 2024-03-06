@@ -33,6 +33,8 @@ const Hardware = () => {
     handleSubmit,
     reset,
   } = useForm();
+  const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
+
   /**
    * Handles the click event for deleting an employee.
    * @param {Object} employee - The employee object to be deleted.
@@ -115,14 +117,14 @@ const Hardware = () => {
             register={register}
             placeholder="Search"
             className="search-input"
-            value={Model.assetSearch.pattern.value}
+            // value={Model.assetSearch.pattern.value}
             message={Model.assetSearch.pattern.message}
             errors={errors}
             type={Model.assetSearch.type}
-            minLength={Model.assetSearch.minLength.value}
-            minMessage={Model.assetSearch.minLength.message}
-            maxLength={Model.assetSearch.maxLength.value}
-            maxMessage={Model.assetSearch.maxLength.message}
+            // minLength={Model.assetSearch.minLength.value}
+            // minMessage={Model.assetSearch.minLength.message}
+            // maxLength={Model.assetSearch.maxLength.value}
+            // maxMessage={Model.assetSearch.maxLength.message}
           />
         </form>
         <Button

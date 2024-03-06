@@ -13,6 +13,11 @@ import { useMutation } from "@tanstack/react-query";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
 import { assetsAdd, assetsEdit } from "./AssetsApiSlice";
+import SelectInputCategory from "../Categories/SelectInputCategory";
+import SelectSubCat from "../Categories/SelectSubCat";
+import SelectInputUser from "./SelectInputUser";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import { SelectAssetType } from "./SelectAssetType";
 const AssetsForm = ({
   formHeading,
   formType,
@@ -24,12 +29,15 @@ const AssetsForm = ({
   const {
     register,
     formState: { errors },
+    setValue,
     handleSubmit,
   } = formMethod;
+  // State variable to manage the status of the checkbox
   const [isActive, setIsActive] = useState(false);
 
+  // Function to toggle the status of the checkbox
   const toggleSwitch = () => {
-    setIsActive((prev) => !prev);
+    setIsActive(!isActive);
   };
 
   const [options, setOptions] = useState([
@@ -49,14 +57,16 @@ const AssetsForm = ({
       queryClient.invalidateQueries("AssetsData");
     },
     onError: (error) => {
-      notifyError('Error adding assets');
-      console.log('Error while adding assets',error)
+      notifyError("Error adding assets");
+      console.log("Error while adding assets", error);
     },
   });
   const submitData = (data) => {
     console.log(data);
     AddAssets.mutate(data);
   };
+  const [categoryName, setCategoryName] = useState();
+
   return (
     <div className="content-wrapper">
       <div className="content-radius">
@@ -109,15 +119,23 @@ const AssetsForm = ({
             </div>
             <div className="assets__form--input">
               <Label text="Asset Type" sup={"*"} />
-              <SelectInput name="assets_type" />
+              <SelectAssetType name="assets_type" register={register} />
             </div>
             <div className="assets__form--input">
               <Label text="Category" sup={"*"} />
-              <SelectInput options={options} />
+              <SelectInputCategory
+                setCategoryName={setCategoryName}
+                name="category"
+                register={register}
+              />
             </div>
             <div className="assets__form--input">
               <Label text="Sub-Category" />
-              <SelectInput options={options} />
+              <SelectSubCat
+                categoryName={categoryName}
+                name="sub_category"
+                register={register}
+              />
             </div>
           </div>
           <div className="form--content__left">
@@ -140,11 +158,11 @@ const AssetsForm = ({
             </div>
             <div className="assets__form--input">
               <Label text="Location" sup={"*"} />
-              <SelectInputLocation />
+              <SelectInputLocation register={register} name="location" />
             </div>
             <div className="assets__form--input">
               <Label text="Assigned to" sup={"*"} />
-              <SelectInput />
+              <SelectInputUser name="assigned_to" register={register} />
             </div>
             <div className="assets__form--input assets__switch">
               <Label text="Status" />
@@ -154,6 +172,8 @@ const AssetsForm = ({
                   checked={isActive}
                   onClick={toggleSwitch}
                   onChange={() => {}}
+                  name={isActive ? "Active" : "Inactive"}
+                  {...register("status")}
                 />
                 <span className="slider"></span>
                 <span className="status">
@@ -162,7 +182,7 @@ const AssetsForm = ({
               </label>
             </div>
             <div className="assets__form--input">
-              <DropzoneArea />
+              <DropzoneArea setValue={setValue} name="assets_image" />
             </div>
             <div className="assets__form--btn">
               <Button
@@ -176,6 +196,7 @@ const AssetsForm = ({
             </div>
           </div>
         </form>
+        <CustomToastContainer />
       </div>
     </div>
   );

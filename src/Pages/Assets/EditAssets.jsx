@@ -14,23 +14,21 @@ import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
 import { assetsEdit } from "./AssetsApiSlice";
 import { useLocation } from "react-router-dom";
+import SelectSubCat from "../Categories/SelectSubCat";
+import SelectInputUser from "./SelectInputUser";
+import SelectInputCategory from "../Categories/SelectInputCategory";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import { SelectAssetType } from "./SelectAssetType";
 
 const EditAssets = () => {
   const formMethod = useForm();
   const {
     register,
+    setValue,
     formState: { errors },
     handleSubmit,
   } = formMethod;
   const [isActive, setIsActive] = useState(false);
-  const [options, setOptions] = useState([
-    "Frontend",
-    "Backend",
-    "UI UX",
-    "QA",
-    "Project Manager",
-    "DevOps",
-  ]);
   const toggleSwitch = () => {
     setIsActive((prev) => !prev);
   };
@@ -53,6 +51,8 @@ const EditAssets = () => {
     console.log(data);
     EditAssets.mutate(data);
   };
+  const [categoryName, setCategoryName] = useState();
+  console.log(assetsData);
   return (
     <section className="assets__add">
       <div className="content-wrapper">
@@ -108,18 +108,29 @@ const EditAssets = () => {
               </div>
               <div className="assets__form--input">
                 <Label text="Asset Type" sup={"*"} />
-                <SelectInput
-                  value={assetsData.assets_type}
+                <SelectAssetType
+                  defaultValue={assetsData.assets_type}
                   name="assets_type"
+                  register={register}
                 />
               </div>
               <div className="assets__form--input">
                 <Label text="Category" sup={"*"} />
-                <SelectInput options={options} />
+                <SelectInputCategory
+                  setCategoryName={setCategoryName}
+                  name="category"
+                  defaultValue={assetsData.category}
+                  register={register}
+                />
               </div>
               <div className="assets__form--input">
                 <Label text="Sub-Category" />
-                <SelectInput options={options} />
+                <SelectSubCat
+                  categoryName={categoryName}
+                  defaultValue={categoryName}
+                  name="sub_category"
+                  register={register}
+                />{" "}
               </div>
             </div>
             <div className="form--content__left">
@@ -143,11 +154,19 @@ const EditAssets = () => {
               </div>
               <div className="assets__form--input">
                 <Label text="Location" sup={"*"} />
-                <SelectInputLocation value={assetsData.location} />
+                <SelectInputLocation
+                  defaultValue={assetsData.location}
+                  name="location"
+                  register={register}
+                />
               </div>
               <div className="assets__form--input">
                 <Label text="Assigned to" sup={"*"} />
-                <SelectInput value={assetsData.assigned_to_name} />
+                <SelectInputUser
+                  name="assigned_to"
+                  register={register}
+                  defaultValue={assetsData.assigned_to_name}
+                />
               </div>
               <div className="assets__form--input assets__switch">
                 <Label text="Status" />
@@ -165,7 +184,11 @@ const EditAssets = () => {
                 </label>
               </div>
               <div className="assets__form--input">
-                <DropzoneArea />
+                <DropzoneArea
+                  defaultValue={assetsData.image_name}
+                  name="assets_image"
+                  setValue={setValue}
+                />
               </div>
               <div className="assets__form--btn">
                 <Button
@@ -179,6 +202,7 @@ const EditAssets = () => {
               </div>
             </div>
           </form>
+          <CustomToastContainer />
         </div>
       </div>
     </section>
