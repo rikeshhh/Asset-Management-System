@@ -10,6 +10,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { profileCover } from "../../Component/Images/Image";
 import { GoTrash } from "react-icons/go";
 import { showHide } from "../../Component/Images/Image";
+import DateComponent from "../../Component/FormatDate/Date";
 /**
  * Functional component for viewing user profile information.
  * @returns {JSX.Element} The JSX representation of the component.
@@ -34,11 +35,15 @@ const EmployeeView = () => {
    * @param {React.ChangeEvent<HTMLInputElement>} e - The change event from the file input.
    */
 
+  const date = viewEmployeeData.created_at;
+
   // const [profileImage, setProfileImage] = useState(profileCover);
+  const file = viewEmployeeData.user_image ? viewEmployeeData.user_image : "";
+  const backendUrl = import.meta.env.VITE_APP_AMS_API;
+  const userProfile = `${backendUrl}${file}`;
+  console.log("userProfile", userProfile);
 
-  
-
-  console.log(viewEmployeeData.user_image, "profileImage");
+  // console.log("profileImage", profileImage.user_image);
 
   return (
     <section className="content-wrapper">
@@ -54,14 +59,7 @@ const EmployeeView = () => {
           <div className="user__profile--left">
             <div className="user__profile--image">
               <figure>
-                <img
-                  src={
-                    viewEmployeeData.user_image
-                      ? viewEmployeeData.user_image
-                      : profileCover
-                  }
-                  alt="Profile Picture"
-                />
+                <img src={userProfile} alt="Profile Picture" />
                 <div className="profile__button--container">
                   <Button
                     type={"button"}
@@ -86,10 +84,10 @@ const EmployeeView = () => {
                 automatically. <br />
                 Supported File Type: JPG, PNG
               </span>
-              <p>
+              <div className="date__created">
                 <span style={{ fontSize: "0.875rem" }}>Created on: </span>
-                {viewEmployeeData.created_at || "24th September 2019"}
-              </p>
+                {<DateComponent date={date} /> || "24th September 2019"}
+              </div>
             </div>
           </div>
 
@@ -181,11 +179,9 @@ const EmployeeView = () => {
 
             <div className="form__input--section">
               <Label sup={"*"} text="Department" />
-              <SelectInput
-                register={register}
-                isDisabled={receivedState}
-                defaultValue={viewEmployeeData.department.name}
-              />
+              <select name="" id="" disabled className="view-profile__select">
+                <option>{viewEmployeeData.department.name}</option>
+              </select>
             </div>
 
             <div className="form__input--section toggleBtn__email__parent">

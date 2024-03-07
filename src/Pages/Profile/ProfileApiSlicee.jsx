@@ -9,22 +9,27 @@ const token = getTokenFromLocalStorage();
  * @param {string} employeeData.employeeData.email - The email of the employee.
  * @param {string} employeeData.id - The ID of the employee.
  */
-export const employeeEdit = async (employeeData) => {
-  const employeeDeleteRequest = await instance.put(
-    `/user`,
+export const employeeEdit = async (
+  id,
+  employeeEditData,
+  employeeImage,
+  employeeJobType
+) => {
+  let formData = new FormData();
+  formData.append("user_image", employeeImage);
+  formData.append("name", employeeEditData.username);
+  formData.append("job_type", employeeJobType);
+  formData.append("designation", employeeEditData.designation);
+  formData.append("department", employeeEditData.departmentId);
+  formData.append("email", employeeEditData.email);
+  formData.append("phone_number", employeeEditData.phoneNumber);
+  const employeeEditRequest = await instance.post(
+    `/user?id=${id}&_method=put`,
+    formData,
     {
-      username: employeeData.employeeData.username,
-      password: "xddfxdfx",
-      email: employeeData.employeeData.email,
-      name: employeeData.employeeData.username,
-    },
-    {
-      params: {
-        id: employeeData.id,
-      },
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
     }
   );
@@ -41,7 +46,7 @@ export const employeeProfile = async (
   jobType
 ) => {
   console.log(jobType);
-  var formData = new FormData();
+  let formData = new FormData();
   formData.append("user_image", employeeDataImage);
   formData.append("name", employeeData.username);
   formData.append("job_type", jobType);
