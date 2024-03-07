@@ -9,8 +9,9 @@ import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
 import { LuArrowUpDown } from "react-icons/lu";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { EyeSvg } from "../../Component/svg/EyeSvg";
 
-const RepairDataTable = ({ linkTo, handleTableEdit }) => {
+const RepairDataTable = ({ handleTableEdit }) => {
   const {
     isPending,
     error,
@@ -61,19 +62,19 @@ const RepairDataTable = ({ linkTo, handleTableEdit }) => {
           ) : (
             tableData.map((tableItem, index) => (
               <tr key={index}>
-                <td>{tableItem.id}</td>
+                <td>ITJ-DA-{tableItem.id}</td>
                 <td>{tableItem.name}</td>
-                <td>{tableItem.designation}</td>
-                <td>{tableItem.department}</td>
-                <td>{tableItem.email}</td>
+                <td>{tableItem.Category ? tableItem.Category.name : "N/A"}</td>
+                <td>{tableItem.status}</td>
+                <td>{tableItem.type}</td>
                 <td className="button-gap">
                   {/* <Link  to={{ pathname: '/profile', state: false }}>
                        </Link> */}
                   <Button
                     type={"button"}
-                    className="edit__button"
+                    className="view__button"
                     // handleClick={() => viewEmployeeProfile(tableItem)}
-                    text={<MdOutlineRemoveRedEye />}
+                    text={<EyeSvg />}
                   />
                   {/* <Link to={linkTo} className="link"> */}
                   <Button

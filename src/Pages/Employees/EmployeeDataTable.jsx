@@ -108,17 +108,16 @@ const EmployeeDataTable = ({
                 <td data-cell="id">{tableItem.id}</td>
                 <td data-cell="name">{tableItem.name}</td>
                 <td data-cell="designation">
-                  {/* {tableItem.designation} */}
-                  <Skeleton width={127} height={10} />
+                  {tableItem.designation ? tableItem.designation : "N/A"}
                 </td>
                 <td data-cell="department">
-                  <Skeleton width={127} height={10} />
-                  {/* {tableItem.department} */}
+                  {tableItem.department.name
+                    ? tableItem.department.name
+                    : "N/A"}
                 </td>
                 <td data-cell="email">{tableItem.email}</td>
                 <td data-cell="phone">
-                  <Skeleton width={127} height={10} />
-                  {/* {tableItem.phone} */}
+                  {tableItem.phone ? tableItem.phone : "N/A"}
                 </td>
                 <td className="button-gap">
                   <Button

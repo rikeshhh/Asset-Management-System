@@ -27,6 +27,8 @@ const PricingForm = () => {
 
   const navigate = useNavigate();
 
+  const option = ["Nepal", "India", "Australia"];
+
   /**
    * Handles the form submission and navigates to the payment page.
    * @param {Object} data - Form data submitted by the user.
@@ -181,7 +183,11 @@ const PricingForm = () => {
               <div className="basic__dets--country">
                 <div className="form__input--section">
                   <Label sup={"*"} text="Country" />
-                  <SelectInput />
+                  {/* <SelectInput
+                    option={option}
+                    register={register}
+                    defaultValue={"Nepal"}
+                  /> */}
                 </div>
                 <div className="form__input--section">
                   <Label text={"ZipCode"} />
