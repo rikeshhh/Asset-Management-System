@@ -61,7 +61,6 @@ const Categories = () => {
     onSuccess: () => {
       notifySuccess("Category has been added");
       queryClient.invalidateQueries("CategoryData");
-      notifySuccess("Category has been added");
       reset();
     },
     onError: (error) => {

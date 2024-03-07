@@ -28,6 +28,8 @@ const EmployeeDataTable = ({
     queryKey: ["EmployeeData"],
     queryFn: getEmployeeTableData,
   });
+
+  console.log("TableData", tableData);
   /**
    * Handles deleting an employee.
    * @param {number} employeeId - The ID of the employee to be deleted.
@@ -108,17 +110,14 @@ const EmployeeDataTable = ({
                 <td data-cell="id">{tableItem.id}</td>
                 <td data-cell="name">{tableItem.name}</td>
                 <td data-cell="designation">
-                  {/* {tableItem.designation} */}
-                  <Skeleton width={127} height={10} />
+                  {tableItem.designation}
                 </td>
                 <td data-cell="department">
-                  <Skeleton width={127} height={10} />
-                  {/* {tableItem.department} */}
+                  {tableItem.department.name}
                 </td>
                 <td data-cell="email">{tableItem.email}</td>
                 <td data-cell="phone">
-                  <Skeleton width={127} height={10} />
-                  {/* {tableItem.phone} */}
+                  {tableItem.phone_number}
                 </td>
                 <td className="button-gap">
                   <Button

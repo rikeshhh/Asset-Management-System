@@ -221,7 +221,10 @@ const EditProfile = () => {
             </div>
             <div className="form__input--section">
               <Label sup={"*"} text="Department" />
-              <SelectInputDepartment isDisabled={receivedState} />
+              <SelectInputDepartment
+                isDisabled={receivedState}
+                register={register}
+              />
             </div>
             <div className="form__input--section">
               <Label sup={"*"} text="Email" />

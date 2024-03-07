@@ -65,6 +65,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
         id: previousLocationId,
       };
       EditLocation.mutate(editData);
+      // console.log("editData", editData.data);
     }
   };
   const successMessage = "Location has been updated successfully";

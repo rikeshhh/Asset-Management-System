@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { InputField } from "../../Component/Input/InputField";
 import { Label } from "../../Component/Label/Label";
 import { useForm } from "react-hook-form";
@@ -10,7 +10,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { profileCover } from "../../Component/Images/Image";
 import { GoTrash } from "react-icons/go";
 import { showHide } from "../../Component/Images/Image";
-
 /**
  * Functional component for viewing user profile information.
  * @returns {JSX.Element} The JSX representation of the component.
@@ -27,71 +26,54 @@ const EmployeeView = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
   const receivedState = true;
-
-  const fileInputRef = useRef(null);
-
-  const [profileImage, setProfileImage] = useState(profileCover);
 
   /**
    * Handles the update of the profile image when a new file is selected.
    * @param {React.ChangeEvent<HTMLInputElement>} e - The change event from the file input.
    */
 
-  const handleProfileUpdate = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const profileUrl = URL.createObjectURL(file);
-      setProfileImage(profileUrl);
-    }
-  };
-  /**
-   * Deletes the current profile image and sets it back to the default image.
-   */
+  // const [profileImage, setProfileImage] = useState(profileCover);
 
-  const deleteProfile = () => {
-    setProfileImage(profileCover);
-  };
+  
 
-  /**
-   * Handles the click event for the file input, triggering the file selection dialog.
-   */
-  const handleButtonClick = () => {
-    fileInputRef.current.click();
-  };
+  console.log(viewEmployeeData.user_image, "profileImage");
 
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
         <div className="content__header form--header">
           <h2>{viewEmployeeData.name}</h2>
-          <span>{viewEmployeeData.user_type || "admin"}</span>
+          <p>
+            <span>{viewEmployeeData.designation}</span> |
+            <span>{viewEmployeeData.department.name}</span>
+          </p>
         </div>
         <div className="user__profile--body">
           <div className="user__profile--left">
             <div className="user__profile--image">
               <figure>
-                <img src={profileImage} alt="Profile Picture" />
+                <img
+                  src={
+                    viewEmployeeData.user_image
+                      ? viewEmployeeData.user_image
+                      : profileCover
+                  }
+                  alt="Profile Picture"
+                />
                 <div className="profile__button--container">
                   <Button
                     type={"button"}
                     icon={<GoTrash />}
                     className={"button__red profile__delete--button"}
-                    handleClick={deleteProfile}
                     isDisabled={receivedState}
                   />
                 </div>
               </figure>
-              <input
-                type="file"
-                className="user__profile--none"
-                ref={fileInputRef}
-                accept=".jpg,.png"
-                onChange={handleProfileUpdate}
-              />
+
               <Button
                 text={"Upload new photo"}
-                handleClick={handleButtonClick}
                 isDisabled={receivedState}
                 className={
                   receivedState
@@ -111,7 +93,7 @@ const EmployeeView = () => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit()} className="group__form profile__form">
+          <form className="group__form profile__form">
             <div className="form__input--section">
               <Label sup={"*"} text="Name" />
               <InputField
@@ -143,7 +125,12 @@ const EmployeeView = () => {
                       errors={errors}
                       type={Model.Radio.type}
                       isDisabled={receivedState}
-                      isChecked={receivedState}
+                      // isChecked={receivedState}
+                      isChecked={
+                        viewEmployeeData.job_type === "Permanent"
+                          ? receivedState
+                          : null
+                      }
                     />
                   </div>
                   <Label text="Permanent" />
@@ -157,6 +144,11 @@ const EmployeeView = () => {
                       errors={errors}
                       type={Model.Radio.type}
                       isDisabled={receivedState}
+                      isChecked={
+                        viewEmployeeData.job_type === "Temporary"
+                          ? receivedState
+                          : null
+                      }
                     />
                   </div>
                   <Label text="Temporary" />
@@ -190,8 +182,9 @@ const EmployeeView = () => {
             <div className="form__input--section">
               <Label sup={"*"} text="Department" />
               <SelectInput
+                register={register}
                 isDisabled={receivedState}
-                defaultValue={viewEmployeeData.department}
+                defaultValue={viewEmployeeData.department.name}
               />
             </div>
 
