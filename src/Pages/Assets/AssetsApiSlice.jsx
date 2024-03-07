@@ -62,9 +62,6 @@ export const assetsEdit = async (assetsInfo) => {
 
 export const assetsAdd = async (assetsData) => {
   var formdata = new FormData();
-  console.log("status");
-
-  console.log(assetsData.status);
   formdata.append("name", assetsData.productName);
   formdata.append("assets_type", assetsData.assets_type);
   formdata.append("category", assetsData.category);
@@ -74,9 +71,9 @@ export const assetsAdd = async (assetsData) => {
   formdata.append("assigned_to", assetsData.assigned_to);
   formdata.append("assets_image", assetsData.assets_image);
   if (assetsData.status === true) {
-    formdata.append("status", "Active");
+    formdata.append("status", "active");
   } else {
-    formdata.append("status", "Inactive");
+    formdata.append("status", "inactive");
   }
 
   try {
@@ -96,14 +93,11 @@ export const getAssetsData = async (
   assetsType,
   searchAssets,
   pageNumber,
-  byCategory,
-  byStatus,
-  startDate,
-  endDate
+  searchCategory,
+  searchStatus,
+  fromDate,
+  toDate
 ) => {
-  console.log(byCategory);
-  const dateParam = `${startDate}to${endDate}`;
-
   try {
     const response = await instance({
       method: "get",
@@ -112,17 +106,42 @@ export const getAssetsData = async (
         assets_type: assetsType,
         search: searchAssets,
         page: pageNumber,
-        name: byCategory,
-        status: byStatus,
-        date: dateParam,
+        category: searchCategory,
+        status: searchStatus,
+        date: `${fromDate} to ${toDate}`,
       },
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
-    const searchData = response.data.data.data;
+    const searchData = response.data.data;
+    console.log(searchData.totalData);
     return searchData;
+  } catch (error) {
+    console.error("Axios error:", error);
+    throw error;
+  }
+};
+export const getFilterData = async (categoryName, status, searchDate) => {
+  try {
+    const response = await instance({
+      method: "get",
+      url: "/assets",
+      params: {
+        name: categoryName,
+        status: status,
+        date: searchDate,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const filterData = response.data.data.data;
+    console.log("filterData");
+    console.log(filterData);
+    return filterData;
   } catch (error) {
     console.error("Axios error:", error);
     throw error;

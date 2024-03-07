@@ -48,7 +48,13 @@ const Hardware = () => {
   const [pageNumber, setPageNumber] = useState(
     parseInt(searchParams.get("page")) || 1
   );
-
+  const searchHardware = searchParams.get("search");
+  const searchCategory = searchParams.get("category");
+  const fromDate = searchParams.get("fromDate");
+  const assets_type = searchParams.get("assets_type");
+  const toDate = searchParams.get("toDate");
+  const searchDate = `${fromDate} to ${toDate}`;
+  const searchStatus = searchParams.get("status");
   const updatePageNumber = (newPageNumber) => {
     setPageNumber(newPageNumber);
     setSearchParams({ page: newPageNumber });
@@ -58,8 +64,27 @@ const Hardware = () => {
     error,
     data: HardwareData,
   } = useQuery({
-    queryKey: ["AssetsData", "HardwareData", searchAssets],
-    queryFn: () => getAssetsData("hardware", searchAssets),
+    queryKey: [
+      "AssetsData",
+      "HardwareData",
+      "hardware",
+      searchHardware,
+      pageNumber,
+      searchCategory,
+      searchStatus,
+      fromDate,
+      toDate,
+    ],
+    queryFn: () =>
+      getAssetsData(
+        "hardware",
+        searchHardware,
+        pageNumber,
+        searchCategory,
+        searchStatus,
+        fromDate,
+        toDate
+      ),
     staleTime: 10000,
   });
   /**
@@ -98,10 +123,21 @@ const Hardware = () => {
     setFilterShow(showHide);
   };
   const submitSearch = async (data) => {
-    setSearchAssets(data.search);
+    setSearchParams({
+      ...data,
+    });
   };
 
   if (error) return "An error has occurred: " + error.message;
+  let totalData;
+
+  if (HardwareData) {
+    totalData = HardwareData.totalData;
+  }
+  const roundUp = Math.ceil(totalData / 7);
+  console.log(roundUp);
+  console.log(totalData);
+
   return (
     <>
       {filterShow ? (
@@ -137,7 +173,7 @@ const Hardware = () => {
       <AssetsTableData
         handleDeleteClick={handleDeleteClick}
         handleProceedClick={handleProceedClick}
-        tableData={HardwareData}
+        tableData={HardwareData?.data}
         isPending={isPending}
         assets_type="hardware"
       />
@@ -149,7 +185,7 @@ const Hardware = () => {
           }
         />
         {HardwareData &&
-          [...Array(4)].map((_, index) => (
+          [...Array(roundUp)].map((_, index) => (
             <Button
               key={index}
               text={index + 1}
@@ -161,11 +197,7 @@ const Hardware = () => {
           ))}{" "}
         <Button
           handleClick={() =>
-            updatePageNumber(
-              pageNumber > Math.ceil(HardwareData.length / 7)
-                ? pageNumber + 1
-                : pageNumber + 1
-            )
+            updatePageNumber(pageNumber < roundUp ? pageNumber + 1 : pageNumber)
           }
           icon={<FaAngleRight />}
           // isDisabled={pageNumber < 4}

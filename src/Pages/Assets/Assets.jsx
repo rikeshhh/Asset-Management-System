@@ -38,12 +38,9 @@ const Assets = () => {
    * @param {Object} employee - The employee object to be deleted.
    */
 
-
   /**
    * Handles the click event for canceling the employee deletion.
    */
-
-
 
   /**
    * Handles the click event for proceeding with the employee deletion.
