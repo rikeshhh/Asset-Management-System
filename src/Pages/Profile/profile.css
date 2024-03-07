@@ -76,7 +76,7 @@
 
 .user__profile--image span {
   color: #b8bdc5;
-  width: 15.4375rem;
+  /* width: 15.4375rem; */
   text-align: center;
   font-family: Inter;
   font-size: 0.75rem;
@@ -89,6 +89,8 @@
 .user__profile--image p {
   padding: 5.81rem 0 0 0;
   margin-bottom: 1.37rem;
+  display: flex;
+  gap: 4px;
 }
 
 .user__profile--none[type="file"] {
@@ -152,7 +154,6 @@
 .profile-btn-none {
   display: none;
 }
-
 
 @media (width>1600px) {
   .user__profile--image {

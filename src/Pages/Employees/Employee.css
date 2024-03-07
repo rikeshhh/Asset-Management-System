@@ -10,6 +10,7 @@
 
 .employees__table {
   padding: 1.56rem;
+  padding-top: 0 !important;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -33,4 +34,22 @@
 
 .table__heading__row th {
   text-align: center;
+}
+
+.view-profile__select:disabled {
+  background-color: var(--primary-grey);
+}
+.date__created {
+  display: flex;
+  padding: 5.81rem 0 0 0;
+  margin-bottom: 1.37rem;
+  gap: 4px;
+}
+
+.date__created div {
+  color: var(--text-color);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.00438rem;
 }
