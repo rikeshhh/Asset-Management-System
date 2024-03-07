@@ -10,7 +10,6 @@ export const getAssetsTableData = async () => {
     const assetsData = response.data.data.data;
     return assetsData;
   } catch (error) {
-    console.error("Axios error:", error);
     throw error;
   }
 };
@@ -23,12 +22,10 @@ export const deleteAssetsTableData = async (assetsId) => {
       headers: { Authorization: `Bearer ${token}` },
     });
   } catch (error) {
-    console.error("Axios error:", error);
     throw error;
   }
 };
 export const assetsEdit = async (assetsInfo) => {
-  console.log(assetsInfo);
   var formdata = new FormData();
   formdata.append("id", assetsInfo.productID);
   formdata.append("name", assetsInfo.productName);
@@ -55,7 +52,6 @@ export const assetsEdit = async (assetsInfo) => {
       }
     );
   } catch (error) {
-    console.error("Axios error:", error);
     throw error;
   }
 };
@@ -84,7 +80,6 @@ export const assetsAdd = async (assetsData) => {
       },
     });
   } catch (error) {
-    console.error("Axios error:", error);
     throw error;
   }
 };
@@ -116,10 +111,8 @@ export const getAssetsData = async (
       },
     });
     const searchData = response.data.data;
-    console.log(searchData.totalData);
     return searchData;
   } catch (error) {
-    console.error("Axios error:", error);
     throw error;
   }
 };
@@ -139,11 +132,8 @@ export const getFilterData = async (categoryName, status, searchDate) => {
       },
     });
     const filterData = response.data.data.data;
-    console.log("filterData");
-    console.log(filterData);
     return filterData;
   } catch (error) {
-    console.error("Axios error:", error);
     throw error;
   }
 };
@@ -155,7 +145,6 @@ export const selectUser = async () => {
       },
     });
     const userData = response.data.data;
-    console.log(userData);
     return userData;
   } catch (error) {
     throw error;
@@ -163,7 +152,6 @@ export const selectUser = async () => {
 };
 //sorting
 export const sortByStatus = async (status, assets_type, newOrder) => {
-  console.log(newOrder);
   try {
     const response = await instance.get(
       `/assets?assets_type=${assets_type}&sortBy=${status}&order=${newOrder}`,

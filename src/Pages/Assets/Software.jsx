@@ -124,7 +124,6 @@ const Software = () => {
       ),
     staleTime: 10000,
   });
-  console.log(searchDate);
   // if (isPending) return "Loading...";
   const handleSoftwareClick = () => {
     console.log("software");
@@ -140,16 +139,21 @@ const Software = () => {
   const onFilterClick = (showHide) => {
     setFilterShow(showHide);
   };
-  if (error) return notifyError("An error has occurred: " + error.message);
+  if (error)
+    return (
+      <div>
+        <h2>No item found</h2>
+      </div>
+    );
   // const totalData = softwareData.totalData;
+
   let totalData;
 
   if (softwareData) {
     totalData = softwareData.totalData;
   }
   const roundUp = Math.ceil(totalData / 7);
-  console.log(roundUp);
-  console.log(totalData);
+
   return (
     <>
       {filterShow ? (

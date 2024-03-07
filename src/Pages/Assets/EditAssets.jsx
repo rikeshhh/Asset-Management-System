@@ -48,11 +48,9 @@ const EditAssets = () => {
     },
   });
   const submitData = (data) => {
-    console.log(data);
     EditAssets.mutate(data);
   };
   const [categoryName, setCategoryName] = useState();
-  console.log(assetsData);
   return (
     <section className="assets__add">
       <div className="content-wrapper">

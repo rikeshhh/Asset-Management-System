@@ -135,8 +135,7 @@ const Hardware = () => {
     totalData = HardwareData.totalData;
   }
   const roundUp = Math.ceil(totalData / 7);
-  console.log(roundUp);
-  console.log(totalData);
+
 
   return (
     <>

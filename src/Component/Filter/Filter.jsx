@@ -66,7 +66,7 @@ const Filter = ({ handleClick, filterShow }) => {
             </div>
 
             <div className="form__input--section ">
-              <Label text={"Assigned Date"} />
+              <Label text={"From"} />
               <InputField
                 name="fromDate"
                 register={register}
@@ -76,7 +76,7 @@ const Filter = ({ handleClick, filterShow }) => {
                 type={Model.Date.type}
                 placeholder={Model.Date.placeholder}
               />
-
+              <Label text="To" />
               <InputField
                 name="toDate"
                 register={register}
