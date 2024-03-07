@@ -26,7 +26,6 @@ import Model from "../../Component/Model/Model";
 const Assets = () => {
   const [isActive, setIsActive] = useState(true);
   const { pageNumber } = useParams();
-  console.log(pageNumber);
   const handleButtonClick = () => {
     setIsActive((prev) => !prev);
   };
