@@ -81,7 +81,7 @@ const Sidebar = () => {
                 </li>
               </NavLink>
               <NavLink
-                to="/assets"
+                to="/assets/*"
                 onClick={() =>
                   toggleNavbar ? setToggleNavbar(!toggleNavbar) : null
                 }

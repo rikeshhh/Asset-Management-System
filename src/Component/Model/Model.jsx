@@ -163,12 +163,13 @@ const Model = {
   },
   Date: {
     type: "date",
-    placeholder: "Filter by Date",
+    placeholder: "YYYY-MM-DD",
     pattern: {
-      value: "^d{2}/d{2}/d{4}$",
-      message: "Date should be in MM/DD/YYYY format",
+      value: "^d{4}-d{2}-d{2}$/",
+      message: "Date should be in YYYY-MM-DD format",
     },
   },
+
   ProductCode: {
     type: "string",
     required: "Please enter a product code",

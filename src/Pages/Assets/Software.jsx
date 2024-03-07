@@ -26,6 +26,7 @@ import { queryClient } from "../../Component/Query/Query";
 import Model from "../../Component/Model/Model";
 import { notifyError } from "../../Component/Toast/Toast";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
 const Software = () => {
   const {
     register,
@@ -42,6 +43,13 @@ const Software = () => {
   const [pageNumber, setPageNumber] = useState(
     parseInt(searchParams.get("page")) || 1
   );
+  const searchSoftware = searchParams.get("search");
+  const searchCategory = searchParams.get("category");
+  const fromDate = searchParams.get("fromDate");
+  const assets_type = searchParams.get("assets_type");
+  const toDate = searchParams.get("toDate");
+  const searchDate = `${fromDate} to ${toDate}`;
+  const searchStatus = searchParams.get("status");
   /**
    * Handles the click event for deleting an employee.
    * @param {Object} employee - The employee object to be deleted.
@@ -59,7 +67,9 @@ const Software = () => {
   };
   const [searchAssets, setSearchAssets] = useState();
   const submitSearch = (data) => {
-    setSearchAssets(data.search);
+    setSearchParams({
+      ...data,
+    });
   };
 
   const DeleteAssets = useMutation({
@@ -86,21 +96,35 @@ const Software = () => {
   };
 
   const [filterShow, setFilterShow] = useState(false);
-
-  const onFilterClick = (showHide) => {
-    setFilterShow(showHide);
-  };
-
   const {
     isPending,
     error,
+    refetch,
     data: softwareData,
   } = useQuery({
-    queryKey: ["AssetsData", "SoftwareData", searchAssets, pageNumber],
-    queryFn: () => getAssetsData("software", searchAssets, pageNumber),
+    queryKey: [
+      "AssetsData",
+      "SoftwareData",
+      "software",
+      searchSoftware,
+      pageNumber,
+      searchCategory,
+      searchStatus,
+      fromDate,
+      toDate,
+    ],
+    queryFn: () =>
+      getAssetsData(
+        "software",
+        searchSoftware,
+        pageNumber,
+        searchCategory,
+        searchStatus,
+        searchDate
+      ),
     staleTime: 10000,
   });
-
+  console.log(searchDate);
   // if (isPending) return "Loading...";
   const handleSoftwareClick = () => {
     console.log("software");
@@ -112,11 +136,27 @@ const Software = () => {
     setPageNumber(newPageNumber);
     setSearchParams({ page: newPageNumber });
   };
-  if (error) return "An error has occurred: " + error.message;
+
+  const onFilterClick = (showHide) => {
+    setFilterShow(showHide);
+  };
+  if (error) return notifyError("An error has occurred: " + error.message);
+  // const totalData = softwareData.totalData;
+  let totalData;
+
+  if (softwareData) {
+    totalData = softwareData.totalData;
+  }
+  const roundUp = Math.ceil(totalData / 7);
+  console.log(roundUp);
+  console.log(totalData);
   return (
     <>
       {filterShow ? (
-        <Filter handleClick={() => onFilterClick(!filterShow)} />
+        <Filter
+          assetsType="software"
+          handleClick={() => onFilterClick(!filterShow)}
+        />
       ) : (
         <></>
       )}
@@ -128,7 +168,7 @@ const Software = () => {
             register={register}
             placeholder="search"
             className="search-input"
-            message={Model.assetSearch.pattern.message}
+            message={"hii"}
             errors={errors}
             type={Model.assetSearch.type}
             minLength={Model.assetSearch.minLength.value}
@@ -147,7 +187,7 @@ const Software = () => {
       <AssetsTableData
         handleDeleteClick={handleDeleteClick}
         handleProceedClick={handleProceedClick}
-        tableData={softwareData}
+        tableData={softwareData?.data}
         isPending={isPending}
         assets_type="software"
       />
@@ -159,7 +199,7 @@ const Software = () => {
           }
         />
         {softwareData &&
-          [...Array(4)].map((_, index) => (
+          [...Array(roundUp)].map((_, index) => (
             <Button
               key={index}
               text={index + 1}
@@ -171,16 +211,13 @@ const Software = () => {
           ))}{" "}
         <Button
           handleClick={() =>
-            updatePageNumber(
-              pageNumber > Math.ceil(softwareData["total data"] / 7)
-                ? pageNumber + 1
-                : pageNumber + 1
-            )
+            updatePageNumber(pageNumber < roundUp ? pageNumber + 1 : pageNumber)
           }
           icon={<FaAngleRight />}
           // isDisabled={pageNumber < 4}
         />
       </div>
+      <CustomToastContainer />
     </>
   );
 };

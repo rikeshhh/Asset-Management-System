@@ -9,7 +9,11 @@ import { InputField } from "../Input/InputField";
 import Model from "../Model/Model";
 import SelectInputCategory from "../../Pages/Categories/SelectInputCategory";
 import { useQuery } from "@tanstack/react-query";
-import { getAssetsData } from "../../Pages/Assets/AssetsApiSlice";
+import {
+  getAssetsData,
+  getFilterData,
+} from "../../Pages/Assets/AssetsApiSlice";
+import { useSearchParams } from "react-router-dom";
 
 const Filter = ({ handleClick, filterShow }) => {
   const {
@@ -17,50 +21,19 @@ const Filter = ({ handleClick, filterShow }) => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const [byCategory, setByCategory] = useState();
-  const [byStatus, setByStatus] = useState();
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
-  const {
-    isPending,
-    error,
-    data: softwareData,
-  } = useQuery({
-    queryKey: [
-      "AssetsData",
-      "SoftwareData",
-      byCategory,
-      byStatus,
-      startDate,
-      endDate,
-    ],
-    queryFn: () =>
-      getAssetsData("software", byCategory, byStatus, startDate, endDate),
-    staleTime: 10000,
-  });
-  // const handleBodyClick = (e) => {
-  //   if (
-  //     !e.target.closest(".filter") &&
-  //     !e.target.closest(".filter--button") &&
-  //     !e.target.closest(".filter__form")
-  //   ) {
-  //     toggleFilter(); // Close the filter component
-  //   }
-  // };
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  // useEffect(() => {
-  //   document.body.addEventListener("click", handleBodyClick);
-
-  //   return () => {
-  //     document.body.removeEventListener("click", handleBodyClick);
-  //   };
-  // }, [toggleFilter]);
-  const option = ["rikesh", "shrestha"];
   const filterSubmit = (data) => {
-    setByCategory(data.category);
-    setStartDate(data.fromDate);
-    setEndDate(data.toDate);
-    setByStatus(data.status);
+    if (data.category && data.status === "none") {
+      setSearchParams({
+        fromDate: data.fromDate,
+        toDate: data.toDate,
+      });
+    } else {
+      setSearchParams({
+        ...data,
+      });
+    }
   };
 
   return (
@@ -86,7 +59,7 @@ const Filter = ({ handleClick, filterShow }) => {
             <div className="form__input--section ">
               <Label text={"Status"} />
               <SelectInput
-                option={["Active", "Inactive"]}
+                option={["none", "Active", "Inactive"]}
                 register={register}
                 name="status"
               />
@@ -97,21 +70,31 @@ const Filter = ({ handleClick, filterShow }) => {
               <InputField
                 name="fromDate"
                 register={register}
-                value={Model.Date.pattern.value}
+                value="\d{4}-\d{2}-\d{2}"
                 message={Model.Date.pattern.message}
                 errors={errors}
                 type={Model.Date.type}
                 placeholder={Model.Date.placeholder}
               />
+
               <InputField
                 name="toDate"
                 register={register}
-                value={Model.Date.pattern.value}
+                value="\d{4}-\d{2}-\d{2}"
                 message={Model.Date.pattern.message}
                 errors={errors}
                 type={Model.Date.type}
-                placeholder={Model.Date.placeholder}
               />
+              {/* <input
+                type="date"
+                {...register("startDate")}
+                pattern="\d{4}-\d{2}-\d{2}"
+              />
+              <input
+                type="date"
+                {...register("endDate")}
+                pattern="\d{4}-\d{2}-\d{2}"
+              /> */}
             </div>
           </div>
           <div className="filter__button">

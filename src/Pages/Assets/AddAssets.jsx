@@ -172,12 +172,12 @@ const AssetsForm = ({
                   checked={isActive}
                   onClick={toggleSwitch}
                   onChange={() => {}}
-                  name={isActive ? "Active" : "Inactive"}
+                  name={isActive ? "active" : "inactive"}
                   {...register("status")}
                 />
                 <span className="slider"></span>
                 <span className="status">
-                  {isActive ? "Active" : "Inactive"}
+                  {isActive ? "active" : "inactive"}
                 </span>
               </label>
             </div>
