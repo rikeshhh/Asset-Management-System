@@ -28,7 +28,7 @@ const SelectInputCategory = ({
   return (
     <select {...register(name, { required: true })} onChange={addCategoryId}>
       <option className="select__option" value={null || defaultValue}>
-        {defaultValue || "none"}
+        {defaultValue || "None"}
       </option>
       {CategoryData &&
         CategoryData.map((option) => (

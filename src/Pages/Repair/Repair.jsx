@@ -9,6 +9,7 @@ import { BsFunnel } from "react-icons/bs";
 import RepairDataTable from "./RepairDataTable";
 import Filter from "../../Component/Filter/Filter";
 import { SearchInput } from "../../Component/SearchInput/SearchInput";
+import { Link } from "react-router-dom";
 
 const Repair = () => {
   const {
@@ -41,11 +42,13 @@ const Repair = () => {
         <div className="repair content-radius">
           <div className="content__header repair__header">
             <h2>Repair & Replace</h2>
-            <Button
-              text="Send for Repair / Replace"
-              className={"category--buttons button__blue"}
-              icon={<IoMdAdd />}
-            />
+            <Link to={"/addRepair"} className="link">
+              <Button
+                text="Send for Repair / Replace"
+                className={"category--buttons button__blue"}
+                icon={<IoMdAdd />}
+              />
+            </Link>
           </div>
 
           <div className="repair__content">
@@ -65,7 +68,7 @@ const Repair = () => {
             </div>
 
             <div className="ams__filter ">
-              <SearchInput/>
+              <SearchInput />
               <Button
                 text="Filter"
                 icon={<BsFunnel />}

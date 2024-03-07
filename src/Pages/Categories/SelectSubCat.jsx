@@ -15,7 +15,7 @@ const SelectSubCat = ({ name, register, categoryName, defaultValue }) => {
           category.child.map((child) => (
             <>
               <option className="select__option" value={defaultValue || null}>
-                {defaultValue || "none"}
+                {defaultValue || "None"}
               </option>
               <option
                 className="select__option"

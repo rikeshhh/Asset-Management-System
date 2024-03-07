@@ -1,10 +1,6 @@
 import { useForm } from "react-hook-form";
-
-import "../Profile/profile.css";
-
 import { Link, useNavigate } from "react-router-dom";
 import { GoTrash } from "react-icons/go";
-// import { employeeProfile } from "./ProfileApiSlicee";
 // import { useMutation } from "@tanstack/react-query";
 // import { queryClient } from "../../Component/Query/Query";
 // import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
@@ -211,24 +207,14 @@ const AddRepair = () => {
             >
               <Button
                 value="submit"
-                text="Add Profile"
-                className={receivedState ? "profile-btn-none" : "button__blue"}
+                text="Send for Repair"
+                className={"button__blue"}
               />
-              <Link to="/employees" className="link">
+              <Link to="/repair" className="link">
                 <Button
-                  className={receivedState ? "profile-btn-none" : "button__red"}
+                  className={"button__red"}
                   text="Cancel"
                   isDisabled={receivedState}
-                />
-              </Link>
-
-              <Link to="/" className="link">
-                <Button
-                  className={
-                    receivedState ? "button__red " : "profile-btn-none"
-                  }
-                  text="Close"
-                  isDisabled={false}
                 />
               </Link>
             </div>
