@@ -65,7 +65,6 @@ const Location = () => {
   });
   //func: Mutation hook for deleting a location
 
-  const deleteMessage = "Location has been deleted";
   const DeleteLocation = useMutation({
     mutationFn: (location) => {
       return locationDelete(location);

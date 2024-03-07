@@ -15,11 +15,8 @@ import { queryClient } from "../../Component/Query/Query";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import SelectInputDepartment from "../Departments/SelectInputDepartment";
+import { CiLight } from "react-icons/ci";
 
-/**
- * Functional component for adding a new employee profile.
- * @returns {JSX.Element} JSX element representing the AddProfile component.
- */
 const AddProfile = () => {
   const {
     register,
@@ -32,38 +29,33 @@ const AddProfile = () => {
   const fileInputRef = useRef(null);
 
   const [profileImage, setProfileImage] = useState(profileCover);
+  const [userProfileImage, setUserProfileImage] = useState();
+  const [selectedJobType, setSelectedJobType] = useState("");
 
-  /**
-   * Handles the update of the profile picture.
-   * @param {Object} e - The event object.
-   */
   const handleProfileUpdate = (e) => {
     const file = e.target.files[0];
+    setUserProfileImage(file);
     if (file) {
       const profileUrl = URL.createObjectURL(file);
-      console.log(profileUrl);
       setProfileImage(profileUrl);
-      console.log(profileImage);
     }
   };
-  /**
-   * Deletes the current profile picture.
-   */
+
   const deleteProfile = () => {
     setProfileImage(profileCover);
   };
-
-  /**
-   * Handles the click event of the upload button.
-   */
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
 
   const AddEmployeeProfile = useMutation({
-    mutationFn: (data) => {
-      return employeeProfile(data);
+    mutationFn: (employeeDataAdd) => {
+      return employeeProfile(
+        employeeDataAdd.data,
+        employeeDataAdd.image,
+        employeeDataAdd.jobType
+      );
     },
     onSuccess: () => {
       notifySuccess("Employee has been added");
@@ -79,13 +71,19 @@ const AddProfile = () => {
     },
   });
 
-  /**
-   * Handles the submission of the employee profile form.
-   * @param {Object} data - Form data submitted.
-   */
   const onEmployeeAddSubmit = (data) => {
-    AddEmployeeProfile.mutate(data);
+    const employeeDataAdd = {
+      data: data,
+      image: userProfileImage,
+      jobType: selectedJobType,
+    };
+    AddEmployeeProfile.mutate(employeeDataAdd);
   };
+
+  const handleRadioChange = (e) => {
+    setSelectedJobType(e.target.value);
+  };
+
   const [currentDate, setCurrentDate] = useState(new Date());
 
   useEffect(() => {
@@ -103,6 +101,7 @@ const AddProfile = () => {
     "default",
     { month: "long" }
   )} ${currentDate.getFullYear()}`;
+
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -182,25 +181,24 @@ const AddProfile = () => {
               <div style={{ display: "flex", gap: "1.5rem" }}>
                 <div className="radio__label">
                   <div className="checkbox__input--label">
-                    <InputField
-                      name="Radio"
-                      register={register}
-                      errors={errors}
-                      type={Model.Radio.type}
-                      isDisabled={receivedState}
+                    <input
+                      type="radio"
+                      name="jobType"
+                      value="Permanent"
+                      onChange={handleRadioChange}
+                      checked={selectedJobType === "Permanent"}
                     />
                   </div>
                   <Label text="Permanent" />
                 </div>
                 <div className="radio__label">
                   <div className="checkbox__input--label">
-                    <InputField
-                      name="Radio"
-                      register={register}
-                      required={Model.Radio.required}
-                      errors={errors}
-                      type={Model.Radio.type}
-                      isDisabled={receivedState}
+                    <input
+                      type="radio"
+                      name="jobType"
+                      value="Temporary"
+                      onChange={handleRadioChange}
+                      checked={selectedJobType === "Temporary"}
                     />
                   </div>
                   <Label text="Temporary" />
@@ -227,7 +225,10 @@ const AddProfile = () => {
             </div>
             <div className="form__input--section">
               <Label sup={"*"} text="Department" />
-              <SelectInputDepartment isDisabled={receivedState} />
+              <SelectInputDepartment
+                register={register}
+                isDisabled={receivedState}
+              />
             </div>
             <div className="form__input--section">
               <Label sup={"*"} text="Email" />

@@ -35,20 +35,26 @@ export const employeeEdit = async (employeeData) => {
  * @param {string} employeeData.username - The username of the employee.
  * @param {string} employeeData.email - The email of the employee.
  */
-export const employeeProfile = async (employeeData) => {
-  const employeeAddRequest = await instance.post(
-    "/user",
-    {
-      username: employeeData.username,
-      password: "adminadmin",
-      email: employeeData.email,
-      name: employeeData.username,
+export const employeeProfile = async (
+  employeeData,
+  employeeDataImage,
+  jobType
+) => {
+  console.log(jobType);
+  var formData = new FormData();
+  formData.append("user_image", employeeDataImage);
+  formData.append("name", employeeData.username);
+  formData.append("job_type", jobType);
+  formData.append("designation", employeeData.designation);
+  formData.append("department", employeeData.departmentId);
+  formData.append("email", employeeData.email);
+  formData.append("phone_number", employeeData.phoneNumber);
+  const employeeAddRequest = await instance.post("/user", formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
     },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  });
+  const resp = await employeeAddRequest.data;
+  return resp;
 };

@@ -172,7 +172,7 @@ const CategoryDataTable = ({ CategoryData, isPending, handleDeleteClick }) => {
     handleDeleteClick(categoryId);
   };
   const getLetterFromIndex = (index) => {
-    // Assuming you want to start from 'A'
+    // Assuming you want to start from 'a'
     return String.fromCharCode(97 + index);
   };
 
@@ -273,7 +273,7 @@ const CategoryDataTable = ({ CategoryData, isPending, handleDeleteClick }) => {
                         className={`flexItems ${
                           index === options.child.length - 1 ? "last-child" : ""
                         }`}
-                        key={subCategory.id}
+                        key={index}
                       >
                         <td>{getLetterFromIndex(index)}</td>
                         {subCategory.id === previousSubCategoryId &&
