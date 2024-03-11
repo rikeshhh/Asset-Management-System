@@ -11,6 +11,9 @@ import { profileCover } from "../../Component/Images/Image";
 import { GoTrash } from "react-icons/go";
 import { showHide } from "../../Component/Images/Image";
 import DateComponent from "../../Component/FormatDate/Date";
+import { useQuery } from "@tanstack/react-query";
+import { getEmployeeTableData } from "./EmployeeApiSlice";
+import ImagePath from "../../Component/Images/ImagePath";
 /**
  * Functional component for viewing user profile information.
  * @returns {JSX.Element} The JSX representation of the component.
@@ -29,7 +32,8 @@ const EmployeeView = () => {
   } = useForm();
 
   const receivedState = true;
-
+  // const image = {<ImagePath file = {viewEmployeeData.user_image} />}
+  // console.log(viewEmployeeData.user_image);
   /**
    * Handles the update of the profile image when a new file is selected.
    * @param {React.ChangeEvent<HTMLInputElement>} e - The change event from the file input.
@@ -38,10 +42,10 @@ const EmployeeView = () => {
   const date = viewEmployeeData.created_at;
 
   // const [profileImage, setProfileImage] = useState(profileCover);
-  const file = viewEmployeeData.user_image ? viewEmployeeData.user_image : "";
-  const backendUrl = import.meta.env.VITE_APP_AMS_API;
-  const userProfile = `${backendUrl}${file}`;
-  console.log("userProfile", userProfile);
+  // const file = viewEmployeeData.user_image ? viewEmployeeData.user_image : "";
+  // const backendUrl = import.meta.env.VITE_APP_AMS_API;
+  // const userProfile = `${backendUrl}/image?image_path=${file}`;
+  // console.log("userProfile", userProfile);
 
   // console.log("profileImage", profileImage.user_image);
 
@@ -59,7 +63,13 @@ const EmployeeView = () => {
           <div className="user__profile--left">
             <div className="user__profile--image">
               <figure>
-                <img src={userProfile} alt="Profile Picture" />
+                <ImagePath
+                  file={
+                    viewEmployeeData.user_image
+                      ? viewEmployeeData.user_image
+                      : " "
+                  }
+                />
                 <div className="profile__button--container">
                   <Button
                     type={"button"}
