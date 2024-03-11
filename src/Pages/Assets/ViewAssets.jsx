@@ -175,7 +175,8 @@ const ViewAssets = () => {
                   isDisabled={true}
                 />
               </div>
-              <div className="assets__form--input assets__switch">
+              <div className="assets__form--input ">
+                <Label text="Status" />
                 <label className={`switch ${isActive ? "active" : "inactive"}`}>
                   <input
                     type="checkbox"
@@ -199,7 +200,7 @@ const ViewAssets = () => {
               </div>
               <div className="assets__form--btn">
                 <Link to="/assets/hardware" className="link">
-                  <Button text="Cancel" className={"button__red"} />
+                  <Button text="Close" className={"button__red"} />
                 </Link>
               </div>
             </div>

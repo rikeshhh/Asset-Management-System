@@ -19,6 +19,7 @@ import SelectInputUser from "./SelectInputUser";
 import SelectInputCategory from "../Categories/SelectInputCategory";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import { SelectAssetType } from "./SelectAssetType";
+import ImagePath from "../../Component/Images/ImagePath";
 
 const EditAssets = () => {
   const formMethod = useForm();
@@ -170,7 +171,7 @@ const EditAssets = () => {
                   defaultValue={assetsData.assigned_to_name}
                 />
               </div>
-              <div className="assets__form--input assets__switch">
+              <div className="assets__form--input ">
                 <Label text="Status" />
                 <label className={`switch ${isActive ? "active" : "inactive"}`}>
                   <input
@@ -186,11 +187,7 @@ const EditAssets = () => {
                 </label>
               </div>
               <div className="assets__form--input">
-                <DropzoneArea
-                  defaultValue={assetsData.image_name}
-                  name="assets_image"
-                  setValue={setValue}
-                />
+                <ImagePath file={assetsData.image_name} />
               </div>
               <div className="assets__form--btn">
                 <Button

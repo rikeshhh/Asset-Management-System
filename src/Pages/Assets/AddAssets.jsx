@@ -40,6 +40,14 @@ const AssetsForm = ({
     setIsActive(!isActive);
   };
 
+  const [options, setOptions] = useState([
+    "Frontend",
+    "Backend",
+    "UI UX",
+    "QA",
+    "Project Manager",
+    "DevOps",
+  ]);
   const AddAssets = useMutation({
     mutationFn: (assetsData) => {
       return assetsAdd(assetsData);
@@ -160,14 +168,13 @@ const AssetsForm = ({
               <Label text="Assigned to" sup={"*"} />
               <SelectInputUser name="assigned_to" register={register} />
             </div>
-            <div className="assets__form--input assets__switch">
+            <div className="assets__form--input ">
               <Label text="Status" />
               <label className={`switch ${isActive ? "active" : "inactive"}`}>
                 <input
                   type="checkbox"
                   checked={isActive}
                   onClick={toggleSwitch}
-                  isDisabled={true}
                   onChange={() => {}}
                 />
                 <span className="slider"></span>

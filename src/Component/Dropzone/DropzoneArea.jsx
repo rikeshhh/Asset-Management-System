@@ -45,7 +45,7 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
                 className={"button__blue upload__drag--btn"}
               />
             </div>
-            <input {...getInputProps()} disabled={isDisabled}  />
+            <input {...getInputProps()} disabled={isDisabled} />
             <div className="upload__para">
               <p>Max File Size: 3MB</p>
               <p>Supported File Type: JPG, PNG</p>

@@ -175,10 +175,12 @@ input:checked + .slider:before {
 /* Text color adjustments for active and inactive states */
 .switch.active .status {
   color: #fff; /* Text color when active */
+  left: 8px;
 }
 
 .switch.inactive .status {
   color: white;
+  right: 8px;
 }
 
 .navlink {
