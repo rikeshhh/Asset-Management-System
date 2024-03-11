@@ -9,8 +9,9 @@ import { useMutation } from "@tanstack/react-query";
 import { verifyUser } from "./LoginApiSlice";
 import { useState } from "react";
 import { setTokenToLocalStorage } from "../../utils/StorageUtils";
-import { notifyError } from "../../Component/Toast/Toast";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { showHide } from "../../Component/Images/Image";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
 /**
  * Login component responsible for rendering the login form and handling user authentication.
  * @returns {JSX.Element} JSX element representing the Login component.
@@ -26,17 +27,18 @@ const Login = () => {
     // On successful login
     onSuccess: (data) => {
       if (data.status === true) {
-        navigate("/");
-        setTokenToLocalStorage(data.payload.access_token);
-        window.location.reload();
+        notifySuccess("Logged in successfully");
+        setTimeout(() => {
+          navigate("/");
+          setTokenToLocalStorage(data.payload.access_token);
+          window.location.reload();
+        }, 1000);
       }
     },
     // On error during login
     onError: (error) => {
-      notifyError(error.message);
-      if (error.response.status === 401) {
-        setError("Unauthorized: Please log in with valid id.");
-      }
+      console.log(error);
+      notifyError(error.response.data.message);
     },
   });
 
@@ -150,6 +152,7 @@ const Login = () => {
             </div>
           </div>
         </div>
+        <CustomToastContainer />
       </section>
     </>
   );
