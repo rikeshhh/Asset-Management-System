@@ -6,10 +6,13 @@ const token = getTokenFromLocalStorage();
 /**
  * Fetches category data from the API.
  */
-export const getCategoryData = async () => {
-  const categoryData = await instance.get("/category", {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+export const getCategoryData = async (categoryDataOrder) => {
+  const categoryData = await instance.get(
+    `/category?sortorder=${categoryDataOrder}&orderby=category_name`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
   const resp = await categoryData.data.data;
   return resp;
 };

@@ -104,9 +104,6 @@ const Hardware = () => {
     },
     onError: (error) => {
       notifyError(error.message);
-      if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
-      }
     },
   });
 
@@ -135,7 +132,6 @@ const Hardware = () => {
     totalData = HardwareData.totalData;
   }
   const roundUp = Math.ceil(totalData / 7);
-
 
   return (
     <>

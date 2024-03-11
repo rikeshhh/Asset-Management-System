@@ -14,22 +14,25 @@ import { SearchInput } from "../../Component/SearchInput/SearchInput";
 import { BsFunnel } from "react-icons/bs";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 import { useState } from "react";
+import { queryClient } from "../../Component/Query/Query";
 
 const RepairDataTable = ({ handleTableEdit, onFilterClick }) => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const [repairId, setRepairId] = useState();
+  const [searchData, setSearchData] = useState("");
+
   const {
     isPending,
     error,
     data: tableData,
   } = useQuery({
-    queryKey: ["RepairTableData"],
-    queryFn: getRepairTableData,
+    queryKey: ["RepairTableData", searchData],
+    queryFn: () => getRepairTableData(searchData),
     staleTime: 10000,
   });
 
   const DeleteRepair = useMutation({
-    mutationFn: deleteRepairReplace(repairId),
+    mutationFn: () => deleteRepairReplace(repairId),
     onSuccess: () => {
       queryClient.invalidateQueries("RepairTableData");
     },
@@ -49,6 +52,10 @@ const RepairDataTable = ({ handleTableEdit, onFilterClick }) => {
     setDeleteConfirationShow(false);
   };
 
+  const submitSearch = (data) => {
+    setSearchData(data.Search);
+  };
+
   // if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: ";
@@ -63,7 +70,7 @@ const RepairDataTable = ({ handleTableEdit, onFilterClick }) => {
         />
       )}
       <div className="ams__filter ">
-        <SearchInput />
+        <SearchInput submitSearch={submitSearch} />
         <Button
           text="Filter"
           icon={<BsFunnel />}

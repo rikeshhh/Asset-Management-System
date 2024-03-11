@@ -3,11 +3,14 @@ import { getTokenFromLocalStorage } from "../../utils/StorageUtils";
 
 const token = getTokenFromLocalStorage();
 
-export const getRepairTableData = async () => {
+export const getRepairTableData = async (searchData) => {
   try {
-    const response = await instance.get("/repairreplace", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await instance.get(
+      `/repairreplace?searchKeyword=${searchData}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     return response.data.data;
   } catch (error) {
     console.error("Axios error:", error);
@@ -15,11 +18,14 @@ export const getRepairTableData = async () => {
   }
 };
 
-export const getReplaceTableData = async () => {
+export const getReplaceTableData = async (searchData) => {
   try {
-    const response = await instance.get("/repairreplace?type=Replace", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await instance.get(
+      `/repairreplace?type=Replace&searchKeyword=${searchData}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     return response.data.data;
   } catch (error) {
     console.error("Axios error:", error);

@@ -4,17 +4,19 @@ import { InputField } from "../Input/InputField";
 import { useForm } from "react-hook-form";
 import "./search.css";
 
-export const SearchInput = () => {
+export const SearchInput = ({ submitSearch }) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
-  const submitSearch = (data) => {
+  const handleSearchSubmit = (data) => {
+    submitSearch(data);
   };
+
   return (
-    <form className="search__form" onSubmit={handleSubmit(submitSearch)}>
+    <form className="search__form" onSubmit={handleSubmit(handleSearchSubmit)}>
       <SearchSvg />
       <InputField
         name="Search"
