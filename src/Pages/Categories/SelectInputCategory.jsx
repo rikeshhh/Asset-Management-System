@@ -13,6 +13,7 @@ const SelectInputCategory = ({
   register,
   setCategoryName,
   defaultValue,
+  isDisabled,
 }) => {
   const { data: CategoryData } = useQuery({
     queryKey: ["selectInputCategory"],
@@ -26,8 +27,17 @@ const SelectInputCategory = ({
     setCategoryName(selectedCategory.parent);
   };
   return (
-    <select {...register(name, { required: true })} onChange={addCategoryId}>
-      <option className="select__option" value={null || defaultValue}>
+    <select
+      {...register(name, { required: true })}
+      disabled={isDisabled}
+      onChange={addCategoryId}
+      className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
+    >
+      <option
+        className="select__option"
+        value={null || defaultValue}
+        disabled={isDisabled}
+      >
         {defaultValue || "None"}
       </option>
       {CategoryData &&

@@ -2,14 +2,22 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { selectSubCategoryData } from "./CategoryApiSice";
 
-const SelectSubCat = ({ name, register, categoryName, defaultValue }) => {
+const SelectSubCat = ({
+  name,
+  register,
+  categoryName,
+  defaultValue,
+  isDisabled,
+}) => {
   const { data: subCategoryData } = useQuery({
     queryKey: ["selectSubCategory"],
     queryFn: () => selectSubCategoryData(categoryName),
   });
 
   return (
-    <select {...register(name, { required: true })}>
+    <select {...register(name, { required: true })} disabled={isDisabled}
+    className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
+    >
       {subCategoryData &&
         subCategoryData.map((category) =>
           category.child.map((child) => (

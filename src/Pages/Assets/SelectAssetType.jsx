@@ -1,10 +1,19 @@
 import React from "react";
 
-export const SelectAssetType = ({ register, name, defaultValue }) => {
+export const SelectAssetType = ({
+  register,
+  name,
+  defaultValue,
+  isDisabled,
+}) => {
   const assetType = ["hardware", "software"];
   console.log(assetType);
   return (
-    <select {...register(name, { required: true })}>
+    <select
+      {...register(name, { required: true })}
+      disabled={isDisabled}
+      className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
+    >
       {assetType.map((option, index) => (
         <option key={index} value={defaultValue}>
           {option.toLowerCase()}

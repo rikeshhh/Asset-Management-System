@@ -63,7 +63,11 @@ const AssetsForm = ({
   });
   const submitData = (data) => {
     console.log(data);
-    AddAssets.mutate(data);
+    if (data.assets_image === null) {
+      notifyError("Please upload an image");
+    } else {
+      AddAssets.mutate(data);
+    }
   };
   const [categoryName, setCategoryName] = useState();
 
@@ -83,7 +87,7 @@ const AssetsForm = ({
         >
           <div className="form--content__right">
             <div className="assets__form--input">
-              <Label text="ID / Product Code" sup={"*"} />
+              {/* <Label text="ID / Product Code" sup={"*"} />
               <InputField
                 name="productID"
                 register={register}
@@ -97,7 +101,7 @@ const AssetsForm = ({
                 minMessage={Model.ProductCode.minLength.message}
                 maxLength={Model.ProductCode.maxLength.value}
                 maxMessage={Model.ProductCode.maxLength.message}
-              />
+              /> */}
             </div>
 
             <div className="assets__form--input">
@@ -171,13 +175,12 @@ const AssetsForm = ({
                   type="checkbox"
                   checked={isActive}
                   onClick={toggleSwitch}
+                  isDisabled={true}
                   onChange={() => {}}
-                  name={isActive ? "active" : "inactive"}
-                  {...register("status")}
                 />
                 <span className="slider"></span>
                 <span className="status">
-                  {isActive ? "active" : "inactive"}
+                  {isActive ? "Active" : "Inactive"}
                 </span>
               </label>
             </div>

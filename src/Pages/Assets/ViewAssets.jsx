@@ -14,24 +14,21 @@ import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
 import { assetsEdit } from "./AssetsApiSlice";
 import { useLocation } from "react-router-dom";
-import { FaRegEye } from "react-icons/fa6";
+import SelectSubCat from "../Categories/SelectSubCat";
+import SelectInputUser from "./SelectInputUser";
+import SelectInputCategory from "../Categories/SelectInputCategory";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import { SelectAssetType } from "./SelectAssetType";
 
 const ViewAssets = () => {
   const formMethod = useForm();
   const {
     register,
+    setValue,
     formState: { errors },
     handleSubmit,
   } = formMethod;
   const [isActive, setIsActive] = useState(false);
-  const [options, setOptions] = useState([
-    "Frontend",
-    "Backend",
-    "UI UX",
-    "QA",
-    "Project Manager",
-    "DevOps",
-  ]);
   const toggleSwitch = () => {
     setIsActive((prev) => !prev);
   };
@@ -51,16 +48,15 @@ const ViewAssets = () => {
     },
   });
   const submitData = (data) => {
-    console.log(data);
     EditAssets.mutate(data);
   };
-  const disabled = true;
+  const [categoryName, setCategoryName] = useState();
   return (
     <section className="assets__add">
       <div className="content-wrapper">
         <div className="content-radius">
           <div className="content__header form--header">
-            <h2>{assetsData.id}</h2>
+            <h2>Edit Assets Detail</h2>
             <p>
               <span>Assets /</span>{" "}
               <GrStatusGoodSmall className="form__circle" /> Assets Detail
@@ -71,13 +67,12 @@ const ViewAssets = () => {
             className="assets__form--content"
           >
             <div className="form--content__right">
-              <div className="assets__form--input">
+              {/* <div className="assets__form--input">
                 <Label text="ID / Product Code" sup={"*"} />
                 <InputField
                   name="productID"
                   defaultValue={assetsData.id}
                   register={register}
-                  isDisabled={disabled}
                   required={Model.ProductCode.required}
                   value={Model.ProductCode.pattern.value}
                   message={Model.ProductCode.pattern.message}
@@ -89,7 +84,7 @@ const ViewAssets = () => {
                   maxLength={Model.ProductCode.maxLength.value}
                   maxMessage={Model.ProductCode.maxLength.message}
                 />
-              </div>
+              </div> */}
 
               <div className="assets__form--input">
                 <Label text="Name / Title" sup={"*"} />
@@ -97,7 +92,6 @@ const ViewAssets = () => {
                   name="productName"
                   defaultValue={assetsData.name}
                   register={register}
-                  isDisabled={disabled}
                   required={Model.ProductName.required}
                   value={Model.ProductName.pattern.value}
                   message={Model.ProductName.pattern.message}
@@ -108,23 +102,38 @@ const ViewAssets = () => {
                   minMessage={Model.ProductName.minLength.message}
                   maxLength={Model.ProductName.maxLength.value}
                   maxMessage={Model.ProductName.maxLength.message}
+                  isDisabled={true}
                 />
               </div>
               <div className="assets__form--input">
                 <Label text="Asset Type" sup={"*"} />
-                <SelectInput
-                  value={assetsData.assets_type}
+                <SelectAssetType
+                  defaultValue={assetsData.assets_type}
                   name="assets_type"
-                  isDisabled={disabled}
+                  register={register}
+                  isDisabled={true}
                 />
               </div>
               <div className="assets__form--input">
                 <Label text="Category" sup={"*"} />
-                <SelectInput options={options} />
+                <SelectInputCategory
+                  setCategoryName={setCategoryName}
+                  name="category"
+                  defaultValue={assetsData.category}
+                  register={register}
+                  isDisabled={true}
+                />
               </div>
               <div className="assets__form--input">
                 <Label text="Sub-Category" />
-                <SelectInput options={options} />
+                <SelectSubCat
+                  categoryName={categoryName}
+                  defaultValue={categoryName}
+                  name="sub_category"
+                  register={register}
+                  isDisabled={true}
+
+                />{" "}
               </div>
             </div>
             <div className="form--content__left">
@@ -139,36 +148,40 @@ const ViewAssets = () => {
                   message={Model.Group.pattern.message}
                   errors={errors}
                   type={Model.Group.type}
-                  isDisabled={disabled}
                   placeholder="Enter the brand / company of the assets"
                   minLength={Model.Group.minLength.value}
                   minMessage={Model.Group.minLength.message}
                   maxLength={Model.Group.maxLength.value}
                   maxMessage={Model.Group.maxLength.message}
+                  isDisabled={true}
                 />
               </div>
               <div className="assets__form--input">
                 <Label text="Location" sup={"*"} />
                 <SelectInputLocation
-                  value={assetsData.location}
-                  isDisabled={disabled}
+                  defaultValue={assetsData.location}
+                  name="location"
+                  register={register}
+                  isDisabled={true}
                 />
               </div>
               <div className="assets__form--input">
                 <Label text="Assigned to" sup={"*"} />
-                <SelectInput
-                  isDisabled={disabled}
-                  value={assetsData.assigned_to_name}
+                <SelectInputUser
+                  name="assigned_to"
+                  register={register}
+                  defaultValue={assetsData.assigned_to_name}
+                  isDisabled={true}
                 />
               </div>
               <div className="assets__form--input assets__switch">
-                <Label text="Status" />
                 <label className={`switch ${isActive ? "active" : "inactive"}`}>
                   <input
                     type="checkbox"
                     checked={isActive}
-                    onClick={toggleSwitch}
-                    onChange={() => {}}
+                    handleClick={toggleSwitch}
+                    isDisabled={true}
+                    className="input-disabled"
                   />
                   <span className="slider"></span>
                   <span className="status">
@@ -177,16 +190,26 @@ const ViewAssets = () => {
                 </label>
               </div>
               <div className="assets__form--input">
-                <DropzoneArea image={assetsData.image_name}/>
+                <DropzoneArea
+                  defaultValue={assetsData.image_name}
+                  name="assets_image"
+                  setValue={setValue}
+                  isDisabled={true}
+                />
               </div>
               <div className="assets__form--btn">
-               
-                <Link to="/assets" className="link">
-                  <Button text="Close" className={"button__red"} />
+                <Button
+                  type="submit"
+                  text="Save Changes"
+                  className={"button__blue"}
+                />
+                <Link to="/assets/hardware" className="link">
+                  <Button text="Cancel" className={"button__red"} />
                 </Link>
               </div>
             </div>
           </form>
+          <CustomToastContainer />
         </div>
       </div>
     </section>

@@ -2,13 +2,17 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { selectUser } from "./AssetsApiSlice";
 
-const SelectInputUser = ({ name, register, defaultValue }) => {
+const SelectInputUser = ({ name, register, defaultValue, isDisabled }) => {
   const { data: userData } = useQuery({
     queryKey: ["selectUserData"],
     queryFn: selectUser,
   });
   return (
-    <select {...register(name, { required: true })}>
+    <select
+      {...register(name, { required: true })}
+      disabled={isDisabled}
+      className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
+    >
       {userData &&
         userData.map((user) => (
           <>

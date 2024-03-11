@@ -60,13 +60,13 @@
   display: flex;
   align-items: center;
 }
-
+/* 
 .switch {
   position: relative;
   padding: 0.75rem;
   height: fit-content;
   width: 100px;
-  background-color: #ccc;
+  background-color: var(--toast-success-border);
   border-radius: 34px;
   cursor: pointer;
 }
@@ -76,13 +76,12 @@
   width: 0;
   height: 0;
 }
-
 .slider {
   position: absolute;
   content: "";
   height: 30px;
   width: 30px;
-  background-color: rgb(162, 33, 33);
+  background-color: var(--main-background);
   transition: 0.4s;
   border-radius: 50%;
 }
@@ -96,6 +95,61 @@ input:checked + .slider {
   padding: 0rem 0.5rem;
 }
 
+
+/* styles.css */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  height: 40px;
+  border-radius: 34px;
+  cursor: pointer;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc; /* Default background color */
+  transition: 0.4s;
+  border-radius: 34px;
+  color: white;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(
+    --toast-success-border
+  ); /* Change background color when active */
+}
+
+/* input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+} */
+
+input:checked + .slider:before {
+  left: calc(100% - 32px);
+}
 .assets__active {
   text-decoration: none;
   border-bottom: 2px solid var(--blue);
@@ -107,6 +161,24 @@ input:checked + .slider {
 
 .assets__inactive {
   text-decoration: none;
+}
+/* Text styles */
+.status {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: white;
+  padding: 0 8px;
+}
+
+/* Text color adjustments for active and inactive states */
+.switch.active .status {
+  color: #fff; /* Text color when active */
+}
+
+.switch.inactive .status {
+  color: white;
 }
 
 .dropzone {

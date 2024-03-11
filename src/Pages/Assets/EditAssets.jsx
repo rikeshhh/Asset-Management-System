@@ -48,7 +48,11 @@ const EditAssets = () => {
     },
   });
   const submitData = (data) => {
-    EditAssets.mutate(data);
+    if (data.assets_image === null) {
+      notifyError("Please upload an image");
+    } else {
+      EditAssets.mutate(data);
+    }
   };
   const [categoryName, setCategoryName] = useState();
   return (
@@ -67,7 +71,7 @@ const EditAssets = () => {
             className="assets__form--content"
           >
             <div className="form--content__right">
-              <div className="assets__form--input">
+              {/* <div className="assets__form--input">
                 <Label text="ID / Product Code" sup={"*"} />
                 <InputField
                   name="productID"
@@ -84,7 +88,7 @@ const EditAssets = () => {
                   maxLength={Model.ProductCode.maxLength.value}
                   maxMessage={Model.ProductCode.maxLength.message}
                 />
-              </div>
+              </div> */}
 
               <div className="assets__form--input">
                 <Label text="Name / Title" sup={"*"} />

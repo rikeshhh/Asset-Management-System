@@ -5,9 +5,7 @@ import Button from "../Button/Button";
 import { GoTrash } from "react-icons/go";
 import { UploadSvg } from "../svg/UploadSvg";
 
-const DropzoneArea = ({ setValue, name, defaultValue }) => {
-  console.log("default Value");
-  console.log(defaultValue);
+const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
   const [importedImage, setImportedImage] = useState(defaultValue || null);
   const onDrop = (acceptedFiles) => {
     // Handle dropped files
@@ -21,6 +19,7 @@ const DropzoneArea = ({ setValue, name, defaultValue }) => {
 
   const deleteImage = () => {
     setImportedImage(null);
+    setValue(name, null);
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -46,7 +45,7 @@ const DropzoneArea = ({ setValue, name, defaultValue }) => {
                 className={"button__blue upload__drag--btn"}
               />
             </div>
-            <input {...getInputProps()} />
+            <input {...getInputProps()} disabled={isDisabled}  />
             <div className="upload__para">
               <p>Max File Size: 3MB</p>
               <p>Supported File Type: JPG, PNG</p>
@@ -61,6 +60,7 @@ const DropzoneArea = ({ setValue, name, defaultValue }) => {
                 icon={<GoTrash />}
                 className={"button__red drag__button"}
                 handleClick={deleteImage}
+                disabled={isDisabled}
               />
             </div>
           </>
