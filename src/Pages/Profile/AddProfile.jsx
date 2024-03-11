@@ -15,7 +15,6 @@ import { queryClient } from "../../Component/Query/Query";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import SelectInputDepartment from "../Departments/SelectInputDepartment";
-import { CiLight } from "react-icons/ci";
 import DateComponent from "../../Component/FormatDate/Date";
 
 const AddProfile = () => {

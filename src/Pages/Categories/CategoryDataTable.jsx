@@ -31,7 +31,13 @@ import CustomToastContainer from "../../Component/Toast/ToastContainer";
  * @param {Array} props.SubCategoryData - Array of subcategory data.
  */
 
-const CategoryDataTable = ({ CategoryData, isPending, handleDeleteClick }) => {
+const CategoryDataTable = ({
+  CategoryData,
+  isPending,
+  handleDeleteClick,
+  setDisableButtons,
+  disableButtons,
+}) => {
   const [show, setShow] = useState(false);
   const [showSubCategoryEdit, setShowSubCategoryEdit] = useState(false);
   const [showSubCategory, setShowSubCategory] = useState(false);
@@ -58,11 +64,11 @@ const CategoryDataTable = ({ CategoryData, isPending, handleDeleteClick }) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries("CategoryData");
+      setDisableButtons(false);
       setShow(false);
       reset();
     },
     onError: (error) => {
-      console.log(error);
       notifyError(error.response.data.message.message.newParent);
     },
   });
@@ -73,6 +79,7 @@ const CategoryDataTable = ({ CategoryData, isPending, handleDeleteClick }) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries("CategoryData");
+      setDisableButtons(false);
       setShowSubCategoryEdit(false);
       reset();
     },
@@ -90,6 +97,7 @@ const CategoryDataTable = ({ CategoryData, isPending, handleDeleteClick }) => {
    * @param {Object} options - Options for the category.
    */
   const handleEditButtonClick = (options) => {
+    setDisableButtons(true);
     setPreviousCategoryId(options.id);
     setShow(true);
     reset();
@@ -129,6 +137,7 @@ const CategoryDataTable = ({ CategoryData, isPending, handleDeleteClick }) => {
    * Handles the click event for the cancel button in the edit form.
    */
   const handleEditCancel = () => {
+    setDisableButtons(false);
     setShow(false);
     reset();
   };
@@ -143,18 +152,16 @@ const CategoryDataTable = ({ CategoryData, isPending, handleDeleteClick }) => {
   // };
 
   const handleSubCategoryEdit = (subCategory) => {
+    setDisableButtons(true);
     setShowSubCategoryEdit(true);
     setPreviousSubCategoryId(subCategory.id);
     reset();
   };
 
   const handleSubCategoryCancel = () => {
+    setDisableButtons(false);
     setShowSubCategoryEdit(false);
     reset();
-  };
-
-  const deleteSubCategory = (subCategoryId) => {
-    handleDeleteClick(subCategoryId);
   };
 
   const onSubCategoryEditSubmit = (data) => {
@@ -254,13 +261,23 @@ const CategoryDataTable = ({ CategoryData, isPending, handleDeleteClick }) => {
                     />
 
                     <Button
-                      className="edit__button"
+                      className={
+                        disableButtons
+                          ? "small-button__disabled"
+                          : "edit__button"
+                      }
                       text={<CiEdit />}
                       handleClick={() => handleEditButtonClick(options)}
+                      isDisabled={disableButtons ? true : false}
                     />
                     <Button
-                      className="delete__button"
+                      className={
+                        disableButtons
+                          ? "small-button__disabled delete__button"
+                          : "delete__button"
+                      }
                       text={<GoTrash />}
+                      isDisabled={disableButtons ? true : false}
                       handleClick={() => handleDeleteCategory(options.id)}
                     />
                   </td>
@@ -327,15 +344,25 @@ const CategoryDataTable = ({ CategoryData, isPending, handleDeleteClick }) => {
                         )}
                         <td className="subcategory__button button-gap">
                           <Button
-                            className="edit__button"
+                            className={
+                              disableButtons
+                                ? "small-button__disabled"
+                                : "edit__button"
+                            }
                             text={<CiEdit />}
+                            isDisabled={disableButtons ? true : false}
                             handleClick={() =>
                               handleSubCategoryEdit(subCategory)
                             }
                           />
                           <Button
-                            className="delete__button"
+                            className={
+                              disableButtons
+                                ? "small-button__disabled"
+                                : "delete__button"
+                            }
                             text={<GoTrash />}
+                            isDisabled={disableButtons ? true : false}
                             handleClick={() =>
                               handleDeleteSubCategory(subCategory.id)
                             }

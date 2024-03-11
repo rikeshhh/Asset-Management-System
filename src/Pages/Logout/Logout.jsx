@@ -26,15 +26,11 @@ const Logout = ({ toggleNavbar }) => {
     onSuccess: () => {
       //   notify(successMessage);
       clearTokenFromLocalStorage();
-      // localStorage.setItem("logoutFlag", Date.now().toString());
       navigate("/login");
       logout();
     },
     onError: (error) => {
       notifyError(error.message);
-      if (error.response.status === 401) {
-        notifyError("Error");
-      }
     },
   });
 

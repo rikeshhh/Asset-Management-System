@@ -65,7 +65,7 @@ const ProcurementForm = () => {
               <SelectInput
                 name={"request_urgency"}
                 register={register}
-                options={selectOptions}
+                option={selectOptions}
               />
             </div>
           </div>
