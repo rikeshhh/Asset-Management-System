@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { GoTrash } from "react-icons/go";
 // import { useMutation } from "@tanstack/react-query";
@@ -11,6 +11,10 @@ import { InputField } from "../../Component/Input/InputField";
 import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
 import DropzoneArea from "../../Component/Dropzone/DropzoneArea";
+import SelectInputCategory from "../Categories/SelectInputCategory";
+import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { repairReplaceAdd } from "./RepairApiSlice";
 
 /**
  * Functional component for adding a new employee profile.
@@ -20,13 +24,15 @@ const AddRepair = () => {
   const {
     register,
     formState: { errors },
+    setValue,
     handleSubmit,
   } = useForm();
 
+  console.log(errors);
   const receivedState = false;
-  // const navigate = useNavigate();
+  const [selectedJobType, setSelectedJobType] = useState("");
 
-  // const fileInputRef = useRef(null);
+  // const navigate = useNavigate();
 
   /**
    * Handles the update of the profile picture.
@@ -48,33 +54,35 @@ const AddRepair = () => {
   //   fileInputRef.current.click();
   // };
 
-  // const AddEmployeeProfile = useMutation({
-  //   mutationFn: (data) => {
-  //     return employeeProfile(data);
-  //   },
-  //   onSuccess: () => {
-  //     notifySuccess("Employee has been added");
-  //     setTimeout(() => {
-  //       navigate("/employees");
-  //       queryClient.invalidateQueries("EmployeeData");
-  //     }, 1000);
-  //   },
-  //   onError: (error) => {
-  //     if (error.request.status === 409) {
-  //       notifyError("Error adding employee");
-  //     }
-  //   },
-  // });
+  const AddRepairReplace = useMutation({
+    mutationFn: (repairReplaceData) => {
+      return repairReplaceAdd(repairReplaceData);
+    },
+    onSuccess: () => {
+      notifySuccess("Repair/Replace has been added");
+      setTimeout(() => {
+        navigate("/repair");
+        queryClient.invalidateQueries("RepairTableData", "ReplaceDataTable");
+      }, 1000);
+    },
+    onError: (error) => {
+      if (error.request.status === 409) {
+        notifyError("Error adding employee");
+      }
+    },
+  });
 
+  const handleRadioChange = (e) => {
+    setSelectedJobType(e.target.value);
+  };
   /**
-   * Handles the submission of the employee profile form.
+   * Handles the submission of the repair and replace form.
    * @param {Object} data - Form data submitted.
    */
-  // const onEmployeeAddSubmit = (data) => {
-  //   AddEmployeeProfile.mutate(data);
-  // };
 
-  const onRepairAddSubmit = () => {};
+  const onRepairAddSubmit = (deviceData) => {
+    AddRepairReplace.mutate(data);
+  };
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -84,7 +92,7 @@ const AddRepair = () => {
         </div>
         <div className="user__profile--body">
           <div className="user__profile--left">
-            <DropzoneArea />
+            <DropzoneArea name="product_image" setValue={setValue} />
           </div>
 
           <form
@@ -94,7 +102,7 @@ const AddRepair = () => {
             <div className="form__input--section">
               <Label sup={"*"} text="Device Owner" />
               <InputField
-                name="deviceOwner"
+                name="Assigned_to"
                 register={register}
                 value={Model.Name.pattern.value}
                 message={Model.Name.pattern.message}
@@ -113,7 +121,7 @@ const AddRepair = () => {
             <div className="form__input--section">
               <Label text="Product Code" sup={"*"} />
               <InputField
-                name="productCode"
+                name="Product_Code"
                 register={register}
                 value={Model.ProductCode.pattern.value}
                 message={Model.ProductCode.pattern.message}
@@ -132,22 +140,26 @@ const AddRepair = () => {
             <div className="form__input--section">
               <Label text="Product Name" sup={"*"} />
               <InputField
-                name="productName"
+                name="Product_Name"
                 register={register}
-                value={Model.Email.pattern.value}
-                message={Model.Email.pattern.message}
-                required={Model.Email.required}
+                value={Model.ProductName.pattern.value}
+                message={Model.ProductName.pattern.message}
+                required={Model.ProductName.required}
                 errors={errors}
-                type={Model.Email.type}
-                placeholder={Model.Email.placeholder}
-                maxLength={Model.Email.maxLength.value}
-                maxMessage={Model.Email.maxLength.message}
+                type={Model.ProductName.type}
+                placeholder={Model.ProductName.placeholder}
+                maxLength={Model.ProductName.maxLength.value}
+                maxMessage={Model.ProductName.maxLength.message}
                 isDisabled={receivedState}
               />
             </div>
             <div className="form__input--section">
               <Label text="Category" sup={"*"} />
-              <SelectInputDepartment isDisabled={receivedState} />
+              <SelectInputCategory
+                name="Category"
+                register={register}
+                isDisabled={receivedState}
+              />
             </div>
 
             <div className="form__input--section">
@@ -155,25 +167,24 @@ const AddRepair = () => {
               <div style={{ display: "flex", gap: "1.5rem" }}>
                 <div className="radio__label">
                   <div className="checkbox__input--label">
-                    <InputField
-                      name="Radio"
-                      register={register}
-                      errors={errors}
-                      type={Model.Radio.type}
-                      isDisabled={receivedState}
+                    <input
+                      type="radio"
+                      name="Repair"
+                      value="Repair"
+                      onChange={handleRadioChange}
+                      checked={selectedJobType === "Repair"}
                     />
                   </div>
                   <Label text="Repair" />
                 </div>
                 <div className="radio__label">
                   <div className="checkbox__input--label">
-                    <InputField
-                      name="Radio"
-                      register={register}
-                      required={Model.Radio.required}
-                      errors={errors}
-                      type={Model.Radio.type}
-                      isDisabled={receivedState}
+                    <input
+                      type="radio"
+                      name="Replace"
+                      value="Replace"
+                      onChange={handleRadioChange}
+                      checked={selectedJobType === "Replace"}
                     />
                   </div>
                   <Label text="Replace" />
@@ -184,32 +195,22 @@ const AddRepair = () => {
             <div className="form__input--section">
               <Label text="Reason for Repair/Replace" sup={"*"} />
               <InputField
-                name="productName"
+                name="reason"
                 register={register}
-                value={Model.Email.pattern.value}
-                message={Model.Email.pattern.message}
-                required={Model.Email.required}
+                value={Model.location.pattern.value}
+                message={Model.location.pattern.message}
+                required={"Reason for Repair/Replace is required"}
                 errors={errors}
-                type={Model.Email.type}
-                placeholder={Model.Email.placeholder}
-                maxLength={Model.Email.maxLength.value}
-                maxMessage={Model.Email.maxLength.message}
+                type={Model.location.type}
+                placeholder={"Enter what happened to this device"}
+                maxLength={Model.location.maxLength.value}
+                maxMessage={Model.location.maxLength.message}
                 isDisabled={receivedState}
               />
             </div>
 
-            <div
-              className={
-                receivedState
-                  ? "user__profile--btn-right"
-                  : "user__profile--btn"
-              }
-            >
-              <Button
-                value="submit"
-                text="Send for Repair"
-                className={"button__blue"}
-              />
+            <div className={"user__profile--btn-right user__profile--btn"}>
+              <Button text="Send for Repair" className={"button__blue"} />
               <Link to="/repair" className="link">
                 <Button
                   className={"button__red"}

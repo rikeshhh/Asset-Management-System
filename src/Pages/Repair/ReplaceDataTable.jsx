@@ -4,23 +4,22 @@ import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
 import { useQuery } from "@tanstack/react-query";
 import Button from "../../Component/Button/Button";
-import { getRepairTableData } from "./RepairApiSlice";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
 import { LuArrowUpDown } from "react-icons/lu";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { EyeSvg } from "../../Component/svg/EyeSvg";
 import { SearchInput } from "../../Component/SearchInput/SearchInput";
 import { BsFunnel } from "react-icons/bs";
+import { getReplaceTableData } from "./RepairApiSlice";
 
-const RepairDataTable = ({ handleTableEdit, onFilterClick }) => {
+const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
   const {
     isPending,
     error,
-    data: tableData,
+    data: replaceTableData,
   } = useQuery({
-    queryKey: ["RepairTableData"],
-    queryFn: getRepairTableData,
+    queryKey: ["replaceTableData"],
+    queryFn: getReplaceTableData,
     staleTime: 10000,
   });
 
@@ -72,7 +71,7 @@ const RepairDataTable = ({ handleTableEdit, onFilterClick }) => {
             {isPending ? (
               <PendingTableBody />
             ) : (
-              tableData.map((tableItem, index) => (
+              replaceTableData.map((tableItem, index) => (
                 <tr key={index}>
                   <td>ITJ-DA-{tableItem.id}</td>
                   <td>
@@ -117,4 +116,4 @@ const RepairDataTable = ({ handleTableEdit, onFilterClick }) => {
     </>
   );
 };
-export default RepairDataTable;
+export default ReplaceDataTable;

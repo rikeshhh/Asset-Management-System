@@ -40,7 +40,6 @@ export const employeeProfile = async (
   employeeDataImage,
   jobType
 ) => {
-  console.log(jobType);
   var formData = new FormData();
   formData.append("user_image", employeeDataImage);
   formData.append("name", employeeData.username);

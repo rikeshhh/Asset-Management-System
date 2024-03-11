@@ -6,7 +6,6 @@ import { GoTrash } from "react-icons/go";
 import { UploadSvg } from "../svg/UploadSvg";
 
 const DropzoneArea = ({ setValue, name, defaultValue }) => {
-  console.log("default Value");
   console.log(defaultValue);
   const [importedImage, setImportedImage] = useState(defaultValue || null);
   const onDrop = (acceptedFiles) => {
