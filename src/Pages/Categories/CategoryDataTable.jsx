@@ -37,6 +37,8 @@ const CategoryDataTable = ({
   handleDeleteClick,
   setDisableButtons,
   disableButtons,
+  setCategoryDataOrder,
+  categoryDataOrder
 }) => {
   const [show, setShow] = useState(false);
   const [showSubCategoryEdit, setShowSubCategoryEdit] = useState(false);
@@ -172,6 +174,12 @@ const CategoryDataTable = ({
 
     EditSubCategory.mutate(editData);
   };
+
+  const handleCategorySort = () => {
+    const newOrder = categoryDataOrder === "ASC" ? "DESC" : "ASC";
+    setCategoryDataOrder(newOrder);
+  };
+
   const handleDeleteCategory = (categoryId) => {
     handleDeleteClick(categoryId);
   };
@@ -191,11 +199,9 @@ const CategoryDataTable = ({
             <SmallTablePendingHead />
           ) : (
             <tr>
+              <th>SN</th>
               <th>
-                SN <LuArrowDownUp />
-              </th>
-              <th>
-                Category <LuArrowDownUp />
+                Category <LuArrowDownUp onClick={handleCategorySort} />
               </th>
               <th>Action</th>
             </tr>

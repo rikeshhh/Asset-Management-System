@@ -18,18 +18,21 @@ import { queryClient } from "../../Component/Query/Query";
 const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const [replaceId, setReplaceId] = useState();
+  const [searchData, setSearchData] = useState("");
+
+  const tableHeads = ["Product Code", "Name", "Category"];
   const {
     isPending,
     error,
     data: replaceTableData,
   } = useQuery({
-    queryKey: ["ReplaceTableData"],
-    queryFn: getReplaceTableData,
+    queryKey: ["ReplaceTableData", searchData],
+    queryFn: () => getReplaceTableData(searchData),
     staleTime: 10000,
   });
 
   const DeleteReplace = useMutation({
-    mutationFn: deleteRepairReplace(replaceId),
+    mutationFn: () => deleteRepairReplace(replaceId),
     onSuccess: () => {
       queryClient.invalidateQueries("ReplaceTableData");
     },
@@ -53,17 +56,21 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
     setDeleteConfirationShow(false);
   };
 
+  const submitSearch = (data) => {
+    setSearchData(data.Search);
+  };
+
   return (
     <>
       {deleteConfirationShow && (
         <DeleteConfirmation
-          deleteName="Replace"
+          deleteName="Repair"
           handleCancelClick={handleCancelClick}
           handleProceedClick={handleProceedClick}
         />
       )}
       <div className="ams__filter ">
-        <SearchInput />
+        <SearchInput submitSearch={submitSearch} />
         <Button
           text="Filter"
           icon={<BsFunnel />}

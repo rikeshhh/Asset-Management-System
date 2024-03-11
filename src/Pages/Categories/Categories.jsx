@@ -37,6 +37,8 @@ const Categories = () => {
     },
   });
 
+  const [categoryDataOrder, setCategoryDataOrder] = useState("ASC");
+
   /**
    * Query to get category data.
    */
@@ -46,8 +48,8 @@ const Categories = () => {
     error,
     data: CategoryData,
   } = useQuery({
-    queryKey: ["CategoryData"],
-    queryFn: getCategoryData,
+    queryKey: ["CategoryData", categoryDataOrder],
+    queryFn: () => getCategoryData(categoryDataOrder),
   });
 
   /**
@@ -149,6 +151,8 @@ const Categories = () => {
           </div>
           <div className="category__content">
             <CategoryDataTable
+              setCategoryDataOrder={setCategoryDataOrder}
+              categoryDataOrder={categoryDataOrder}
               setDisableButtons={setDisableButtons}
               disableButtons={disableButtons}
               CategoryData={CategoryData}
