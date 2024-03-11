@@ -19,6 +19,7 @@ import SelectInputUser from "./SelectInputUser";
 import SelectInputCategory from "../Categories/SelectInputCategory";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import { SelectAssetType } from "./SelectAssetType";
+import ImagePath from "../../Component/Images/ImagePath";
 
 const ViewAssets = () => {
   const formMethod = useForm();
@@ -51,12 +52,13 @@ const ViewAssets = () => {
     EditAssets.mutate(data);
   };
   const [categoryName, setCategoryName] = useState();
+  console.log(assetsData);
   return (
     <section className="assets__add">
       <div className="content-wrapper">
         <div className="content-radius">
           <div className="content__header form--header">
-            <h2>Edit Assets Detail</h2>
+            <h2>{assetsData.id}</h2>
             <p>
               <span>Assets /</span>{" "}
               <GrStatusGoodSmall className="form__circle" /> Assets Detail
@@ -132,7 +134,6 @@ const ViewAssets = () => {
                   name="sub_category"
                   register={register}
                   isDisabled={true}
-
                 />{" "}
               </div>
             </div>
@@ -190,19 +191,13 @@ const ViewAssets = () => {
                 </label>
               </div>
               <div className="assets__form--input">
-                <DropzoneArea
-                  defaultValue={assetsData.image_name}
-                  name="assets_image"
-                  setValue={setValue}
-                  isDisabled={true}
-                />
+                <figure>
+                  <ImagePath
+                    file={assetsData.user_image ? assetsData.user_image : " "}
+                  />
+                </figure>
               </div>
               <div className="assets__form--btn">
-                <Button
-                  type="submit"
-                  text="Save Changes"
-                  className={"button__blue"}
-                />
                 <Link to="/assets/hardware" className="link">
                   <Button text="Cancel" className={"button__red"} />
                 </Link>
