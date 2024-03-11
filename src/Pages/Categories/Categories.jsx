@@ -188,14 +188,14 @@ const Categories = () => {
                     register={register}
                   />
                 </div>
-                <div className="">
+                <div className="add__category--right">
                   <Button
                     text="Add Category"
                     type="submit"
                     className={
                       disableButtons
                         ? "category__button--disabled"
-                        : " button__blue"
+                        : " button__blue "
                     }
                     icon={<IoMdAdd />}
                     isDisabled={disableButtons ? true : false}
