@@ -2,7 +2,7 @@ import "../../Component/Table/Table.css";
 import { Link } from "react-router-dom";
 import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Button from "../../Component/Button/Button";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
@@ -10,25 +10,58 @@ import { LuArrowUpDown } from "react-icons/lu";
 import { EyeSvg } from "../../Component/svg/EyeSvg";
 import { SearchInput } from "../../Component/SearchInput/SearchInput";
 import { BsFunnel } from "react-icons/bs";
-import { getReplaceTableData } from "./RepairApiSlice";
+import { deleteRepairReplace, getReplaceTableData } from "./RepairApiSlice";
+import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
+import { useState } from "react";
+import { queryClient } from "../../Component/Query/Query";
 
 const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
+  const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
+  const [replaceId, setReplaceId] = useState();
   const {
     isPending,
     error,
     data: replaceTableData,
   } = useQuery({
-    queryKey: ["replaceTableData"],
+    queryKey: ["ReplaceTableData"],
     queryFn: getReplaceTableData,
     staleTime: 10000,
+  });
+
+  const DeleteReplace = useMutation({
+    mutationFn: deleteRepairReplace(replaceId),
+    onSuccess: () => {
+      queryClient.invalidateQueries("ReplaceTableData");
+    },
   });
 
   // if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: ";
 
+  const handleReplaceDelete = (replaceID) => {
+    setDeleteConfirationShow(true);
+    setReplaceId(replaceID);
+  };
+
+  const handleCancelClick = () => {
+    setDeleteConfirationShow(false);
+  };
+
+  const handleProceedClick = () => {
+    DeleteReplace.mutate();
+    setDeleteConfirationShow(false);
+  };
+
   return (
     <>
+      {deleteConfirationShow && (
+        <DeleteConfirmation
+          deleteName="Replace"
+          handleCancelClick={handleCancelClick}
+          handleProceedClick={handleProceedClick}
+        />
+      )}
       <div className="ams__filter ">
         <SearchInput />
         <Button
@@ -97,7 +130,7 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
                     <Button
                       type={"button"}
                       className="edit__button"
-                      onClick={handleTableEdit}
+                      handleClick={handleTableEdit}
                       text={<CiEdit />}
                     />
                     {/* </Link> */}
@@ -105,6 +138,7 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
                       type={"button"}
                       className="delete__button"
                       text={<GoTrash />}
+                      handleClick={() => handleReplaceDelete(tableItem.id)}
                     />
                   </td>
                 </tr>
