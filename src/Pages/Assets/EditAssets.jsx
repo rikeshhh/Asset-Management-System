@@ -144,15 +144,15 @@ const EditAssets = () => {
                   register={register}
                   required="Please enter Brand/Company "
                   defaultValue={assetsData.brand}
-                  value={Model.Group.pattern.value}
-                  message={Model.Group.pattern.message}
+                  value="^[a-zA-Z0-9]+$"
+                  message="Name should be alphaNumeric"
                   errors={errors}
-                  type={Model.Group.type}
+                  type="text"
                   placeholder="Enter the brand / company of the assets"
-                  minLength={Model.Group.minLength.value}
-                  minMessage={Model.Group.minLength.message}
-                  maxLength={Model.Group.maxLength.value}
-                  maxMessage={Model.Group.maxLength.message}
+                  minLength="1"
+                  minMessage="Minimum length should be 1"
+                  maxLength="10"
+                  maxMessage="Maximum length is 10"
                 />
               </div>
               <div className="assets__form--input">
@@ -180,6 +180,7 @@ const EditAssets = () => {
                     onClick={toggleSwitch}
                     onChange={() => {}}
                   />
+
                   <span className="slider"></span>
                   <span className="status">
                     {isActive ? "active" : "inactive"}
@@ -199,7 +200,7 @@ const EditAssets = () => {
                   text="Save Changes"
                   className={"button__blue"}
                 />
-                <Link to="/assets/hardware" className="link">
+                <Link to="/assets/*" className="link">
                   <Button text="Cancel" className={"button__red"} />
                 </Link>
               </div>

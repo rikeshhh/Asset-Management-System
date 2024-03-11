@@ -25,7 +25,7 @@ export const InputField = ({
   isChecked,
   active,
   inActive,
-  
+  handleclick,
 }) => {
   const hasError = errors[name];
   const [inputValu, setInputValu] = useState(defaultValue); // <-- State to manage the input value
@@ -38,6 +38,7 @@ export const InputField = ({
     <div className={type == "radio" ? "input__field--radio" : "input__field"}>
       <div className="toggle__showHide--container">
         <input
+          onClick={handleclick}
           className={`${isDisabled ? "input-disabled" : "input-enabled"} ${
             hasError ? "input__error" : ""
           } ${hasError && type == "radio" ? "input__radio" : ""} ${className}`}

@@ -33,24 +33,21 @@ const SelectInputCategory = ({
       onChange={addCategoryId}
       className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
     >
+      {/* Render the default option only once outside of the map function */}
       <option
         className="select__option"
-        value={null || defaultValue}
+        value={defaultValue || "None"}
         disabled={isDisabled}
       >
         {defaultValue || "None"}
       </option>
+
+      {/* Map over the CategoryData array and render each category option */}
       {CategoryData &&
         CategoryData.map((option) => (
-          <>
-            <option
-              className="select__option"
-              key={option.id}
-              value={option.id}
-            >
-              {option.parent}
-            </option>
-          </>
+          <option className="select__option" key={option.id} value={option.id}>
+            {option.parent}
+          </option>
         ))}
     </select>
   );
