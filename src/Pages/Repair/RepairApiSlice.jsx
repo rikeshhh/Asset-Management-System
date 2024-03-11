@@ -27,19 +27,22 @@ export const getReplaceTableData = async () => {
   }
 };
 
-export const repairReplaceAdd = async (repairReplaceData) => {
+export const repairReplaceAdd = async (repairReplaceData, selectedJobType) => {
   let repairFormData = new FormData();
 
   repairFormData.append("Product_Code", repairReplaceData.Product_Code);
+  repairFormData.append("Product_Name", repairReplaceData.Product_Name);
   repairFormData.append("Assigned_to", repairReplaceData.Assigned_to);
-  repairFormData.append("product_image", repairReplaceData.product_image);
+  repairFormData.append("product_image", repairReplaceData.product_image.path);
   repairFormData.append("reason", repairReplaceData.reason);
-  repairFormData.append("Product_Code", repairReplaceData.Product_Code);
+  repairFormData.append("status", "Sent");
+  repairFormData.append("repairreplace_type", selectedJobType);
+  repairFormData.append("Category", repairReplaceData.Category);
+
   try {
-    const response = await instance.post("/repairreplace", {
+    const response = await instance.post("/repairreplace", repairFormData, {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
       },
     });
     return response.data.data;
@@ -47,4 +50,12 @@ export const repairReplaceAdd = async (repairReplaceData) => {
     console.error("Axios error:", error);
     throw error;
   }
+};
+
+export const deleteRepairReplace = async (id) => {
+  const repairReplaceDelete = await instance.delete(`/repairreplace?id=${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };

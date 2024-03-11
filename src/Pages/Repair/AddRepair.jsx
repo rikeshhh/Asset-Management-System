@@ -15,6 +15,7 @@ import SelectInputCategory from "../Categories/SelectInputCategory";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { repairReplaceAdd } from "./RepairApiSlice";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 
 /**
  * Functional component for adding a new employee profile.
@@ -28,11 +29,10 @@ const AddRepair = () => {
     handleSubmit,
   } = useForm();
 
-  console.log(errors);
   const receivedState = false;
   const [selectedJobType, setSelectedJobType] = useState("");
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   /**
    * Handles the update of the profile picture.
@@ -56,13 +56,16 @@ const AddRepair = () => {
 
   const AddRepairReplace = useMutation({
     mutationFn: (repairReplaceData) => {
-      return repairReplaceAdd(repairReplaceData);
+      return repairReplaceAdd(
+        repairReplaceData.data,
+        repairReplaceData.selectedJobType
+      );
     },
     onSuccess: () => {
       notifySuccess("Repair/Replace has been added");
       setTimeout(() => {
         navigate("/repair");
-        queryClient.invalidateQueries("RepairTableData", "ReplaceDataTable");
+        queryClient.invalidateQueries("RepairTableData", "ReplaceTableData");
       }, 1000);
     },
     onError: (error) => {
@@ -81,7 +84,14 @@ const AddRepair = () => {
    */
 
   const onRepairAddSubmit = (deviceData) => {
-    AddRepairReplace.mutate(data);
+    if (errors) {
+      notifyError("Please upload product image");
+    }
+    const repairData = {
+      selectedJobType: selectedJobType,
+      data: deviceData,
+    };
+    AddRepairReplace.mutate(repairData);
   };
   return (
     <section className="content-wrapper">
@@ -123,16 +133,16 @@ const AddRepair = () => {
               <InputField
                 name="Product_Code"
                 register={register}
-                value={Model.ProductCode.pattern.value}
-                message={Model.ProductCode.pattern.message}
+                // value={Model.ProductCode.pattern.value}
+                // message={Model.ProductCode.pattern.message}
                 required={Model.ProductCode.required}
                 errors={errors}
                 type={Model.ProductCode.type}
                 placeholder={Model.ProductCode.placeholder}
-                minLength={Model.ProductCode.minLength.value}
-                minMessage={Model.ProductCode.minLength.message}
-                maxLength={Model.ProductCode.maxLength.value}
-                maxMessage={Model.ProductCode.maxLength.message}
+                // minLength={Model.ProductCode.minLength.value}
+                // minMessage={Model.ProductCode.minLength.message}
+                // maxLength={Model.ProductCode.maxLength.value}
+                // maxMessage={Model.ProductCode.maxLength.message}
                 isDisabled={receivedState}
               />
             </div>

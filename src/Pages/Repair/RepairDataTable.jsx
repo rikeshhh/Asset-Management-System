@@ -2,9 +2,9 @@ import "../../Component/Table/Table.css";
 import { Link } from "react-router-dom";
 import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Button from "../../Component/Button/Button";
-import { getRepairTableData } from "./RepairApiSlice";
+import { deleteRepairReplace, getRepairTableData } from "./RepairApiSlice";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
 import { LuArrowUpDown } from "react-icons/lu";
@@ -12,8 +12,12 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { EyeSvg } from "../../Component/svg/EyeSvg";
 import { SearchInput } from "../../Component/SearchInput/SearchInput";
 import { BsFunnel } from "react-icons/bs";
+import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
+import { useState } from "react";
 
 const RepairDataTable = ({ handleTableEdit, onFilterClick }) => {
+  const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
+  const [repairId, setRepairId] = useState();
   const {
     isPending,
     error,
@@ -24,12 +28,40 @@ const RepairDataTable = ({ handleTableEdit, onFilterClick }) => {
     staleTime: 10000,
   });
 
+  const DeleteRepair = useMutation({
+    mutationFn: deleteRepairReplace(repairId),
+    onSuccess: () => {
+      queryClient.invalidateQueries("RepairTableData");
+    },
+  });
+
+  const handleRepairDelete = (repairID) => {
+    setDeleteConfirationShow(true);
+    setRepairId(repairID);
+  };
+
+  const handleCancelClick = () => {
+    setDeleteConfirationShow(false);
+  };
+
+  const handleProceedClick = () => {
+    DeleteRepair.mutate();
+    setDeleteConfirationShow(false);
+  };
+
   // if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: ";
 
   return (
     <>
+      {deleteConfirationShow && (
+        <DeleteConfirmation
+          deleteName="Replace"
+          handleCancelClick={handleCancelClick}
+          handleProceedClick={handleProceedClick}
+        />
+      )}
       <div className="ams__filter ">
         <SearchInput />
         <Button
@@ -106,6 +138,7 @@ const RepairDataTable = ({ handleTableEdit, onFilterClick }) => {
                       type={"button"}
                       className="delete__button"
                       text={<GoTrash />}
+                      handleClick={() => handleRepairDelete(tableItem.id)}
                     />
                   </td>
                 </tr>
