@@ -10,9 +10,6 @@
   justify-content: space-between;
 } */
 
-.universal {
-  /* width: fit-content; */
-}
 .universal2 {
   padding: 1.09rem 0rem !important;
 }
@@ -58,4 +55,9 @@
 .subcategory__button {
   padding-left: -10px;
   /* padding-left: 0.5rem; */
+}
+
+.add__category--right {
+  display: flex;
+  justify-content: right;
 }

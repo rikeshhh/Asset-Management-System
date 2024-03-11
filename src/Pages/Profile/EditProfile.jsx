@@ -27,6 +27,8 @@ const EditProfile = () => {
   const employeeData = receivedData.employeeData;
   const employeePrevId = employeeData.id;
 
+  console.log("employee data: ", employeeData);
+
   const {
     register,
     formState: { errors },
@@ -38,6 +40,8 @@ const EditProfile = () => {
   const fileInputRef = useRef(null);
 
   const [profileImage, setProfileImage] = useState(profileCover);
+  const [userProfileImage, setUserProfileImage] = useState();
+  const [selectedJobType, setSelectedJobType] = useState("");
 
   /**
    * Handles the update of the profile picture.
@@ -46,12 +50,16 @@ const EditProfile = () => {
 
   const handleProfileUpdate = (e) => {
     const file = e.target.files[0];
+    setUserProfileImage(file);
+    console.log("first", userProfileImage);
     if (file) {
       const profileUrl = URL.createObjectURL(file);
       setProfileImage(profileUrl);
     }
   };
-
+  const handleRadioChange = (e) => {
+    setSelectedJobType(e.target.value);
+  };
   /**
    * Deletes the current profile picture.
    */
@@ -67,8 +75,8 @@ const EditProfile = () => {
   };
 
   const EditEmployeeData = useMutation({
-    mutationFn: (data) => {
-      return employeeEdit(data);
+    mutationFn: (employeeEditInfo) => {
+      return employeeEdit(employeeEditInfo.id,employeeEditInfo.employeeData,employeeEditInfo.employeeImage,employeeEditInfo.jobType);
     },
     onSuccess: () => {
       notifySuccess("Employee Edited Successfully");
@@ -88,11 +96,13 @@ const EditProfile = () => {
    * @param {Object} data - Form data submitted.
    */
   const onEmployeeEditSubmit = (data) => {
-    const employeeInfo = {
+    const employeeEditInfo = {
       id: employeePrevId,
       employeeData: data,
+      employeeImage: userProfileImage,
+      jobType:selectedJobType
     };
-    EditEmployeeData.mutate(employeeInfo);
+    EditEmployeeData.mutate(employeeEditInfo);
   };
   return (
     <section className="content-wrapper">
@@ -158,7 +168,7 @@ const EditProfile = () => {
                 message={Model.Name.pattern.message}
                 required={Model.Name.required}
                 errors={errors}
-                // inputValue={employeeData.name}
+                defaultValue={employeeData.name}
                 type={Model.Name.type}
                 placeholder={employeeData.name}
                 minLength={Model.Name.minLength.value}
@@ -166,7 +176,6 @@ const EditProfile = () => {
                 maxLength={Model.Name.maxLength.value}
                 maxMessage={Model.Name.maxLength.message}
                 isDisabled={receivedState}
-                onEditChange={(e) => employeeData.name.value}
               />
             </div>
 
@@ -175,25 +184,26 @@ const EditProfile = () => {
               <div style={{ display: "flex", gap: "1.5rem" }}>
                 <div className="radio__label">
                   <div className="checkbox__input--label">
-                    <InputField
-                      name="Radio"
-                      register={register}
-                      errors={errors}
-                      type={Model.Radio.type}
-                      isDisabled={receivedState}
+                    <input
+                      type="radio"
+                      name="jobType"
+                      value="Permanent"
+                      onChange={handleRadioChange}
+                      checked={selectedJobType === "Permanent"}
+                      defaultChecked={employeeData.job_type === "Permanent"}
                     />
                   </div>
                   <Label text="Permanent" />
                 </div>
                 <div className="radio__label">
                   <div className="checkbox__input--label">
-                    <InputField
-                      name="Radio"
-                      register={register}
-                      required={Model.Radio.required}
-                      errors={errors}
-                      type={Model.Radio.type}
-                      isDisabled={receivedState}
+                    <input
+                      type="radio"
+                      name="jobType"
+                      value="Temporary"
+                      onChange={handleRadioChange}
+                      checked={selectedJobType === "Temporary"}
+                      defaultChecked={employeeData.job_type === "Temporary"}
                     />
                   </div>
                   <Label text="Temporary" />
@@ -209,9 +219,9 @@ const EditProfile = () => {
                 message={Model.Designation.pattern.message}
                 required={Model.Designation.required}
                 errors={errors}
-                // inputValue={employeeData.designation}
+                defaultValue={employeeData.designation}
                 type={Model.Designation.type}
-                placeholder={Model.Designation.placeholder}
+                placeholder={employeeData.designation}
                 minLength={Model.Designation.minLength.value}
                 minMessage={Model.Designation.minLength.message}
                 maxLength={Model.Designation.maxLength.value}
@@ -224,6 +234,7 @@ const EditProfile = () => {
               <SelectInputDepartment
                 isDisabled={receivedState}
                 register={register}
+                defaultValue={employeeData.department.name}
               />
             </div>
             <div className="form__input--section">
@@ -235,7 +246,7 @@ const EditProfile = () => {
                 message={Model.Email.pattern.message}
                 required={Model.Email.required}
                 errors={errors}
-                // inputValue={employeeData.email}
+                defaultValue={employeeData.email}
                 type={Model.Email.type}
                 placeholder={employeeData.email}
                 maxLength={Model.Email.maxLength.value}
@@ -253,7 +264,8 @@ const EditProfile = () => {
                 required={Model.PhoneNumber.required}
                 errors={errors}
                 type={Model.PhoneNumber.type}
-                placeholder={Model.PhoneNumber.placeholder}
+                defaultValue={employeeData.phone_number}
+                placeholder={employeeData.phone_number}
                 minLength={Model.PhoneNumber.minLength.value}
                 minMessage={Model.PhoneNumber.minLength.message}
                 maxLength={Model.PhoneNumber.maxLength.value}

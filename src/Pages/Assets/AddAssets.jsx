@@ -40,14 +40,6 @@ const AssetsForm = ({
     setIsActive(!isActive);
   };
 
-  const [options, setOptions] = useState([
-    "Frontend",
-    "Backend",
-    "UI UX",
-    "QA",
-    "Project Manager",
-    "DevOps",
-  ]);
   const AddAssets = useMutation({
     mutationFn: (assetsData) => {
       return assetsAdd(assetsData);

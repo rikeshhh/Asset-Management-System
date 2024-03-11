@@ -119,7 +119,7 @@ const EmployeeDataTable = ({
                 </td>
                 <td data-cell="email">{tableItem.email}</td>
                 <td data-cell="phone">
-                  {tableItem.phone ? tableItem.phone : "N/A"}
+                  {tableItem.phone_number ? tableItem.phone_number : "N/A"}
                 </td>
                 <td className="button-gap">
                   <Button

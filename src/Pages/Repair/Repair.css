@@ -20,13 +20,37 @@
   border-bottom: 1px solid var(--primary-grey);
 }
 
+.repair-replace__comp {
+  font-size: 1rem;
+  line-height: 24px;
+  letter-spacing: 0.5%;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 0.62rem;
+  padding-bottom: 0 !important;
+}
+
+.active__repair {
+  color: var(--blue) !important;
+  position: relative;
+}
+
+.active__repair::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background-color: var(--blue);
+  left: 0;
+  bottom: -10px;
+}
 
 .assets__navigation--btn {
   border-bottom: 2px solid #527dd0;
 }
 
 @media (width<=350px) {
-  .repair__header button{
+  .repair__header button {
     font-size: 0.85rem;
   }
 }

@@ -115,7 +115,7 @@ const Categories = () => {
   });
 
   const [categoryId, setCategoryId] = useState();
-
+  const [disableButtons, setDisableButtons] = useState(false);
   const [deleteConfirmationShow, setDeleteConfirmationShow] = useState(false);
 
   const handleCancelClick = () => {
@@ -149,6 +149,8 @@ const Categories = () => {
           </div>
           <div className="category__content">
             <CategoryDataTable
+              setDisableButtons={setDisableButtons}
+              disableButtons={disableButtons}
               CategoryData={CategoryData}
               isPending={isPending}
               handleDeleteClick={handleDeleteClick}
@@ -186,12 +188,17 @@ const Categories = () => {
                     register={register}
                   />
                 </div>
-                <div className="">
+                <div className="add__category--right">
                   <Button
                     text="Add Category"
                     type="submit"
-                    className={"category--button button__blue"}
+                    className={
+                      disableButtons
+                        ? "category__button--disabled"
+                        : " button__blue "
+                    }
                     icon={<IoMdAdd />}
+                    isDisabled={disableButtons ? true : false}
                   />
                 </div>
               </form>

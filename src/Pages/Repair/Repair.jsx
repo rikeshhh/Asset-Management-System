@@ -10,6 +10,7 @@ import RepairDataTable from "./RepairDataTable";
 import Filter from "../../Component/Filter/Filter";
 import { SearchInput } from "../../Component/SearchInput/SearchInput";
 import { Link } from "react-router-dom";
+import ReplaceDataTable from "./ReplaceDataTable";
 
 const Repair = () => {
   const {
@@ -17,12 +18,11 @@ const Repair = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const [isActive, setIsActive] = useState(true);
+  const [isCompActive, setIsCompActive] = useState(true);
   const [filterShow, setFilterShow] = useState(false);
-  const [activeButton, setActiveButton] = useState("hardware");
 
   const handleButtonClick = () => {
-    setIsActive((prev) => !prev);
+    setIsCompActive((prev) => !prev);
   };
 
   const onFilterClick = (showHide) => {
@@ -53,30 +53,39 @@ const Repair = () => {
 
           <div className="repair__content">
             <div className="repair__navigation">
-              <Button
-                text="Repair"
+              <h6
                 onClick={handleButtonClick}
-                isActive={isActive}
-                className="assets__btn"
-              />
-              <Button
-                text="Replace"
+                className={
+                  isCompActive
+                    ? "repair-replace__comp active__repair"
+                    : "repair-replace__comp"
+                }
+              >
+                Repair
+              </h6>
+              <h6
                 onClick={handleButtonClick}
-                isActive={!isActive}
-                className="assets__btn"
-              />
+                className={
+                  isCompActive
+                    ? "repair-replace__comp "
+                    : "repair-replace__comp active__repair"
+                }
+              >
+                Replace
+              </h6>
             </div>
 
-            <div className="ams__filter ">
-              <SearchInput />
-              <Button
-                text="Filter"
-                icon={<BsFunnel />}
-                className="filter--button"
-                handleClick={() => onFilterClick(!filterShow)}
+            {isCompActive ? (
+              <RepairDataTable
+                filterShow={filterShow}
+                onFilterClick={() => onFilterClick(!filterShow)}
               />
-            </div>
-            {isActive && <RepairDataTable size="8" />}
+            ) : (
+              <ReplaceDataTable
+                filterShow={filterShow}
+                onFilterClick={() => onFilterClick(!filterShow)}
+              />
+            )}
           </div>
         </div>
       </section>

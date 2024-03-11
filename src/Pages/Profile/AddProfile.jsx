@@ -15,7 +15,7 @@ import { queryClient } from "../../Component/Query/Query";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import SelectInputDepartment from "../Departments/SelectInputDepartment";
-import { CiLight } from "react-icons/ci";
+import DateComponent from "../../Component/FormatDate/Date";
 
 const AddProfile = () => {
   const {
@@ -146,10 +146,11 @@ const AddProfile = () => {
                 automatically. <br />
                 Supported File Type: JPG, PNG
               </span>
-              <p>
+              <div className="date__created">
                 <span style={{ fontSize: "0.875rem" }}>Created on: </span>
-                {formattedDate}
-              </p>
+
+                {<DateComponent date={formattedDate} />}
+              </div>
             </div>
           </div>
 
