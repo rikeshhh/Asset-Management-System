@@ -25,9 +25,10 @@ export const deleteAssetsTableData = async (assetsId) => {
     throw error;
   }
 };
-export const assetsEdit = async (assetsInfo) => {
+export const assetsEdit = async (assetsInfo, productID) => {
+  console.log(productID)
   var formdata = new FormData();
-  formdata.append("id", assetsInfo.productID);
+  formdata.append("id", productID);
   formdata.append("name", assetsInfo.productName);
   formdata.append("assets_type", assetsInfo.assets_type.toLowerCase());
   formdata.append("category", assetsInfo.category);
@@ -37,14 +38,14 @@ export const assetsEdit = async (assetsInfo) => {
   formdata.append("assigned_to", assetsInfo.assigned_to);
   formdata.append("assets_image", assetsInfo.assets_image);
   if (assetsInfo.status === true) {
-    formdata.append("status", "Active");
+    formdata.append("status", "active");
   } else {
-    formdata.append("status", "Inactive");
+    formdata.append("status", "inactive");
   }
   formdata.append("_method", "PUT");
   try {
     const response = await instance.post(
-      `/assets?id=${assetsInfo.productID}`,
+      `/assets?id=${productID}`,
       formdata,
       {
         headers: { Authorization: `Bearer ${token}` },

@@ -7,7 +7,7 @@ import Model from "../../Component/Model/Model";
 import { SelectInput } from "../../Component/Input/SelectInput";
 import Button from "../../Component/Button/Button";
 import DropzoneArea from "../../Component/Dropzone/DropzoneArea";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SelectInputLocation from "../Location/SelectInputLocation";
 import { useMutation } from "@tanstack/react-query";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
@@ -34,6 +34,7 @@ const AssetsForm = ({
   } = formMethod;
   // State variable to manage the status of the checkbox
   const [isActive, setIsActive] = useState(false);
+  const navigate = useNavigate();
 
   // Function to toggle the status of the checkbox
   const toggleSwitch = () => {
@@ -55,6 +56,7 @@ const AssetsForm = ({
     onSuccess: () => {
       notifySuccess("Assets has been added ");
       queryClient.invalidateQueries("AssetsData");
+      navigate("/assets/*");
     },
     onError: (error) => {
       notifyError("Error adding assets");
@@ -179,7 +181,7 @@ const AssetsForm = ({
                 />
                 <span className="slider"></span>
                 <span className="status">
-                  {isActive ? "Active" : "Inactive"}
+                  {isActive ? "active" : "inactive"}
                 </span>
               </label>
             </div>

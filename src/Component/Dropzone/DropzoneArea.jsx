@@ -20,7 +20,6 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
   const deleteImage = () => {
     setValue(name, null);
     setImportedImage(null);
-    setValue(name, null);
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({

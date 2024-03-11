@@ -38,7 +38,7 @@ const EditAssets = () => {
   const assetsData = receivedState.tableData;
   const EditAssets = useMutation({
     mutationFn: (assetsInfo) => {
-      return assetsEdit(assetsInfo);
+      return assetsEdit(assetsInfo, assetsData.id);
     },
     onSuccess: () => {
       notifySuccess("Assets has been updated");
@@ -182,12 +182,16 @@ const EditAssets = () => {
                   />
                   <span className="slider"></span>
                   <span className="status">
-                    {isActive ? "Active" : "Inactive"}
+                    {isActive ? "active" : "inactive"}
                   </span>
                 </label>
               </div>
               <div className="assets__form--input">
-                <ImagePath file={assetsData.image_name} />
+                <DropzoneArea
+                  setValue={setValue}
+                  name="assets_image"
+                  defaultValue={assetsData.image_name}
+                />
               </div>
               <div className="assets__form--btn">
                 <Button
