@@ -19,7 +19,7 @@ import {
 } from "./CategoryApiSice";
 import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
 import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
-import { notifyError } from "../../Component/Toast/Toast";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { FaCheck } from "react-icons/fa6";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 
@@ -38,7 +38,7 @@ const CategoryDataTable = ({
   setDisableButtons,
   disableButtons,
   setCategoryDataOrder,
-  categoryDataOrder
+  categoryDataOrder,
 }) => {
   const [show, setShow] = useState(false);
   const [showSubCategoryEdit, setShowSubCategoryEdit] = useState(false);
@@ -66,6 +66,7 @@ const CategoryDataTable = ({
     },
     onSuccess: () => {
       queryClient.invalidateQueries("CategoryData");
+      notifySuccess("Category has been updated");
       setDisableButtons(false);
       setShow(false);
       reset();
@@ -92,7 +93,7 @@ const CategoryDataTable = ({
 
   const [previousCategoryId, setPreviousCategoryId] = useState("");
   const [previousSubCategoryId, setPreviousSubCategoryId] = useState("");
-  const [newCategory, setNewCategory] = useState("");
+  const [previousCategoryName, setPreviousCategoryName] = useState("");
 
   /**
    * Handles the click event for the edit button.
@@ -100,6 +101,7 @@ const CategoryDataTable = ({
    */
   const handleEditButtonClick = (options) => {
     setDisableButtons(true);
+    setPreviousCategoryName(options.parent);
     setPreviousCategoryId(options.id);
     setShow(true);
     reset();
@@ -128,11 +130,16 @@ const CategoryDataTable = ({
    */
 
   const onCategoryEditSubmit = (data) => {
-    const editData = {
-      data: data.parent,
-      id: previousCategoryId,
-    };
-    EditCategory.mutate(editData);
+    if (previousCategoryName === data.parent) {
+      setShow(false);
+      setDisableButtons(false);
+    } else {
+      const editData = {
+        data: data.parent,
+        id: previousCategoryId,
+      };
+      EditCategory.mutate(editData);
+    }
   };
 
   /**
