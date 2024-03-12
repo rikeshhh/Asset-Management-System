@@ -190,6 +190,7 @@ const Categories = () => {
                   <SelectInputCategory
                     name={"select_category"}
                     register={register}
+                    defaultValue={""}
                   />
                 </div>
                 <div className="add__category--right">

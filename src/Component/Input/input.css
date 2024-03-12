@@ -11,6 +11,10 @@
   outline: 1px solid var(--red);
 }
 
+.input__error:focus {
+  outline: 1px solid var(--red);
+}
+
 .input__radio {
   outline: none;
 }

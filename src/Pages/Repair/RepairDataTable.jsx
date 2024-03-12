@@ -36,7 +36,12 @@ const RepairDataTable = ({ handleTableEdit, onFilterClick }) => {
     onSuccess: () => {
       queryClient.invalidateQueries("RepairTableData");
     },
+    onError: (error) => {
+      console.log(error);
+    },
   });
+
+  const handleRepairEdit = () => {};
 
   const handleRepairDelete = (repairID) => {
     setDeleteConfirationShow(true);
@@ -133,14 +138,13 @@ const RepairDataTable = ({ handleTableEdit, onFilterClick }) => {
                       // handleClick={() => viewEmployeeProfile(tableItem)}
                       text={<EyeSvg />}
                     />
-                    {/* <Link to={linkTo} className="link"> */}
-                    <Button
-                      type={"button"}
-                      className="edit__button"
-                      onClick={handleTableEdit}
-                      text={<CiEdit />}
-                    />
-                    {/* </Link> */}
+                    <Link to="/editRepairReplace" state={tableItem}>
+                      <Button
+                        type={"button"}
+                        className="edit__button"
+                        text={<CiEdit />}
+                      />
+                    </Link>
                     <Button
                       type={"button"}
                       className="delete__button"

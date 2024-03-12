@@ -28,6 +28,7 @@ import Software from "../Pages/Assets/Software";
 import ViewAssets from "../Pages/Assets/ViewAssets";
 import AddRepair from "../Pages/Repair/AddRepair";
 import EditProcurement from "../Pages/Procurement/EditProcurement";
+import EditRepairReplace from "../Pages/Repair/EditRepairReplace";
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +81,10 @@ export const router = createBrowserRouter([
       {
         path: "/addRepair",
         element: <AddRepair />,
+      },
+      {
+        path: "/editRepairReplace",
+        element: <EditRepairReplace />,
       },
       {
         path: "/employees",

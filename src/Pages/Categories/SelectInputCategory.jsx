@@ -36,10 +36,10 @@ const SelectInputCategory = ({
       {/* Render the default option only once outside of the map function */}
       <option
         className="select__option"
-        value={defaultValue || "None"}
+        value={defaultValue.id || "None"}
         disabled={isDisabled}
       >
-        {defaultValue || "None"}
+        {defaultValue.name || "None"}
       </option>
 
       {/* Map over the CategoryData array and render each category option */}
