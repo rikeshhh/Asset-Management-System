@@ -13,26 +13,28 @@ const SelectSubCat = ({
     queryKey: ["selectSubCategory"],
     queryFn: () => selectSubCategoryData(categoryName),
   });
-
   return (
-    <select {...register(name, { required: true })} disabled={isDisabled}
-    className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
+    <select
+      {...register(name, { required: true })}
+      disabled={isDisabled}
+      className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
     >
+      {/* Render the default option only once outside of the map function */}
+      <option
+        className="select__option"
+        value={defaultValue || "None"}
+        disabled={isDisabled}
+      >
+        {defaultValue || "None"}
+      </option>
+
+      {/* Map over the subCategoryData array and render each subcategory option */}
       {subCategoryData &&
         subCategoryData.map((category) =>
           category.child.map((child) => (
-            <>
-              <option className="select__option" value={defaultValue || null}>
-                {defaultValue || "None"}
-              </option>
-              <option
-                className="select__option"
-                key={child.id}
-                value={child.id}
-              >
-                {child.category_name}
-              </option>
-            </>
+            <option className="select__option" key={child.id} value={child.id}>
+              {child.category_name}
+            </option>
           ))
         )}
     </select>

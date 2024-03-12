@@ -199,7 +199,7 @@ const ViewAssets = () => {
                 </figure>
               </div>
               <div className="assets__form--btn">
-                <Link to="/assets/hardware" className="link">
+                <Link to="/assets/*" className="link">
                   <Button text="Close" className={"button__red"} />
                 </Link>
               </div>

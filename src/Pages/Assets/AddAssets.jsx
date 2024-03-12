@@ -56,7 +56,9 @@ const AssetsForm = ({
     onSuccess: () => {
       notifySuccess("Assets has been added ");
       queryClient.invalidateQueries("AssetsData");
-      navigate("/assets/*");
+      setTimeout(() => {
+        navigate("/assets/*");
+      }, 1000);
     },
     onError: (error) => {
       notifyError("Error adding assets");

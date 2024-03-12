@@ -146,14 +146,13 @@ const Software = () => {
       </div>
     );
   // const totalData = softwareData.totalData;
-
+  console.log(softwareData);
   let totalData;
 
   if (softwareData) {
     totalData = softwareData.totalData;
   }
   const roundUp = Math.ceil(totalData / 7);
-
   return (
     <>
       {filterShow ? (
@@ -197,6 +196,7 @@ const Software = () => {
       />
       <div className="pagination">
         <Button
+          className="inactivePage"
           icon={<FaAngleLeft />}
           handleClick={() =>
             updatePageNumber(pageNumber > 1 ? pageNumber - 1 : 1)
@@ -204,21 +204,34 @@ const Software = () => {
         />
         {softwareData &&
           [...Array(roundUp)].map((_, index) => (
-            <Button
-              key={index}
-              text={index + 1}
-              className={
-                pageNumber === index + 1 ? "activePage" : "inactivePage"
-              }
-              handleClick={() => updatePageNumber(index + 1)}
-            />
-          ))}{" "}
+            <>
+              {index === roundUp - 2 ? (
+                <Button
+                  key={index}
+                  text="..."
+                  className={
+                    pageNumber === index + 1 ? "activePage" : "inactivePage"
+                  }
+                  handleClick={() => updatePageNumber(index + 1)}
+                />
+              ) : (
+                <Button
+                  key={index}
+                  text={index + 1}
+                  className={
+                    pageNumber === index + 1 ? "activePage" : "inactivePage"
+                  }
+                  handleClick={() => updatePageNumber(index + 1)}
+                />
+              )}
+            </>
+          ))}
         <Button
+          className="inactivePage"
           handleClick={() =>
             updatePageNumber(pageNumber < roundUp ? pageNumber + 1 : pageNumber)
           }
           icon={<FaAngleRight />}
-          // isDisabled={pageNumber < 4}
         />
       </div>
       <CustomToastContainer />

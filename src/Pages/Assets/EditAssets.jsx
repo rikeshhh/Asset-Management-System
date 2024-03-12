@@ -29,13 +29,13 @@ const EditAssets = () => {
     formState: { errors },
     handleSubmit,
   } = formMethod;
-  const [isActive, setIsActive] = useState(false);
   const toggleSwitch = () => {
     setIsActive((prev) => !prev);
   };
   const location = useLocation();
   const receivedState = location.state;
   const assetsData = receivedState.tableData;
+  console.log(assetsData);
   const EditAssets = useMutation({
     mutationFn: (assetsInfo) => {
       return assetsEdit(assetsInfo, assetsData.id);
@@ -48,6 +48,7 @@ const EditAssets = () => {
       notifyError(error.message);
     },
   });
+
   const submitData = (data) => {
     if (data.assets_image === null) {
       notifyError("Please upload an image");
@@ -55,6 +56,8 @@ const EditAssets = () => {
       EditAssets.mutate(data);
     }
   };
+  const [isActive, setIsActive] = useState(assetsData.status === "active");
+
   const [categoryName, setCategoryName] = useState();
   return (
     <section className="assets__add">
@@ -144,15 +147,15 @@ const EditAssets = () => {
                   register={register}
                   required="Please enter Brand/Company "
                   defaultValue={assetsData.brand}
-                  value={Model.Group.pattern.value}
-                  message={Model.Group.pattern.message}
+                  value="^[a-zA-Z0-9]+$"
+                  message="Name should be alphaNumeric"
                   errors={errors}
-                  type={Model.Group.type}
+                  type="text"
                   placeholder="Enter the brand / company of the assets"
-                  minLength={Model.Group.minLength.value}
-                  minMessage={Model.Group.minLength.message}
-                  maxLength={Model.Group.maxLength.value}
-                  maxMessage={Model.Group.maxLength.message}
+                  minLength="1"
+                  minMessage="Minimum length should be 1"
+                  maxLength="10"
+                  maxMessage="Maximum length is 10"
                 />
               </div>
               <div className="assets__form--input">
@@ -171,14 +174,13 @@ const EditAssets = () => {
                   defaultValue={assetsData.assigned_to_name}
                 />
               </div>
-              <div className="assets__form--input ">
+              <div className="assets__form--input">
                 <Label text="Status" />
                 <label className={`switch ${isActive ? "active" : "inactive"}`}>
                   <input
                     type="checkbox"
                     checked={isActive}
-                    onClick={toggleSwitch}
-                    onChange={() => {}}
+                    onChange={toggleSwitch}
                   />
                   <span className="slider"></span>
                   <span className="status">
@@ -199,7 +201,7 @@ const EditAssets = () => {
                   text="Save Changes"
                   className={"button__blue"}
                 />
-                <Link to="/assets/hardware" className="link">
+                <Link to="/assets/*" className="link">
                   <Button text="Cancel" className={"button__red"} />
                 </Link>
               </div>
