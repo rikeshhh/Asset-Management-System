@@ -1,25 +1,7 @@
-// import { useQuery } from "@tanstack/react-query";
-// import getImage from "./ImageApiSlice";
-
-// const ImagePath = ({ file }) => {
-//   const {
-//     isPending,
-//     error,
-//     data: imagePath,
-//   } = useQuery({
-//     queryKey: ["ImagePath"],
-//     queryFn: () => getImage(file),
-//   });
-
-//   return <img src={imagePath} />;
-// };
-
-// export default ImagePath;
-
 import { useQuery } from "@tanstack/react-query";
 import getImage from "./ImageApiSlice";
 
-const ImagePath = ({ file }) => {
+const ImagePath = ({ file, state }) => {
   const {
     isFetching,
     error,
@@ -44,7 +26,27 @@ const ImagePath = ({ file }) => {
   const blob = new Blob([imageData], { type: "image/jpeg" }); // Adjust the type based on your image format
   const imageUrl = URL.createObjectURL(blob);
 
-  return <img src={imageUrl} alt="Image" />;
+  state.setProfileImage = { imageUrl };
+
+  return <img src={imageUrl} alt="" />;
 };
 
 export default ImagePath;
+
+// import { useQuery } from "@tanstack/react-query";
+// import getImage from "./ImageApiSlice";
+
+// const ImagePath = ({ file }) => {
+//   const {
+//     isPending,
+//     error,
+//     data: imagePath,
+//   } = useQuery({
+//     queryKey: ["ImagePath"],
+//     queryFn: () => getImage(file),
+//   });
+
+//   return <img src={imagePath} />;
+// };
+
+// export default ImagePath;
