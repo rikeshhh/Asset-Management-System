@@ -13,7 +13,6 @@ const SelectSubCat = ({
     queryKey: ["selectSubCategory"],
     queryFn: () => selectSubCategoryData(categoryName),
   });
-
   return (
     <select
       {...register(name, { required: true })}
@@ -23,7 +22,7 @@ const SelectSubCat = ({
       {/* Render the default option only once outside of the map function */}
       <option
         className="select__option"
-        value={defaultValue || null}
+        value={defaultValue || "None"}
         disabled={isDisabled}
       >
         {defaultValue || "None"}

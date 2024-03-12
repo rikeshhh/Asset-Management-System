@@ -29,13 +29,13 @@ const EditAssets = () => {
     formState: { errors },
     handleSubmit,
   } = formMethod;
-  const [isActive, setIsActive] = useState(false);
   const toggleSwitch = () => {
     setIsActive((prev) => !prev);
   };
   const location = useLocation();
   const receivedState = location.state;
   const assetsData = receivedState.tableData;
+  console.log(assetsData);
   const EditAssets = useMutation({
     mutationFn: (assetsInfo) => {
       return assetsEdit(assetsInfo, assetsData.id);
@@ -48,6 +48,7 @@ const EditAssets = () => {
       notifyError(error.message);
     },
   });
+
   const submitData = (data) => {
     if (data.assets_image === null) {
       notifyError("Please upload an image");
@@ -55,6 +56,8 @@ const EditAssets = () => {
       EditAssets.mutate(data);
     }
   };
+  const [isActive, setIsActive] = useState(assetsData.status === "active");
+
   const [categoryName, setCategoryName] = useState();
   return (
     <section className="assets__add">
@@ -171,16 +174,14 @@ const EditAssets = () => {
                   defaultValue={assetsData.assigned_to_name}
                 />
               </div>
-              <div className="assets__form--input ">
+              <div className="assets__form--input">
                 <Label text="Status" />
                 <label className={`switch ${isActive ? "active" : "inactive"}`}>
                   <input
                     type="checkbox"
                     checked={isActive}
-                    onClick={toggleSwitch}
-                    onChange={() => {}}
+                    onChange={toggleSwitch}
                   />
-
                   <span className="slider"></span>
                   <span className="status">
                     {isActive ? "active" : "inactive"}
