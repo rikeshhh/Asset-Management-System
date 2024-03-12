@@ -19,17 +19,18 @@ const EmployeeDataTable = ({
   handleTableEdit,
   handleDeleteClick,
   handleViewEmployee,
+  searchedData,
 }) => {
   const {
     isPending,
     error,
     data: tableData,
   } = useQuery({
-    queryKey: ["EmployeeData"],
+    queryKey: ["searchedData"],
     queryFn: getEmployeeTableData,
   });
 
-  console.log("TableData", tableData);
+  console.log(searchedData);
   /**
    * Handles deleting an employee.
    * @param {number} employeeId - The ID of the employee to be deleted.
@@ -52,7 +53,7 @@ const EmployeeDataTable = ({
   };
   // If an error occurs during data fetching, display an error message.
   if (error) return "An error has occurred: " + error.message;
-
+  const dataToRender = searchedData || tableData;
   return (
     <div className="table__container">
       <table className="main__table">
@@ -105,7 +106,7 @@ const EmployeeDataTable = ({
           {isPending ? (
             <PendingTableBody />
           ) : (
-            tableData.map((tableItem, index) => (
+            dataToRender.map((tableItem, index) => (
               <tr key={index}>
                 <td data-cell="id">{tableItem.id}</td>
                 <td data-cell="name">{tableItem.name}</td>

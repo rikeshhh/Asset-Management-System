@@ -7,20 +7,23 @@ import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import Button from "../../Component/Button/Button";
 import { IoMdAdd } from "react-icons/io";
 import { BsFunnel } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Filter from "../../Component/Filter/Filter";
 import EmployeeDataTable from "./EmployeeDataTable";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
-import { employeeDelete } from "./EmployeeApiSlice";
-import { useMutation } from "@tanstack/react-query";
+import { employeeDelete, searchUser } from "./EmployeeApiSlice";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import { SearchInput } from "../../Component/SearchInput/SearchInput";
+import { SearchSvg } from "../../Component/svg/SearchSvg";
 /**
  * Functional component representing the Employees page.
  */
 const Employees = () => {
+  const [searchParams, setSearchParams] = useSearchParams([]);
+
   const {
     register,
     formState: { errors },
@@ -30,6 +33,18 @@ const Employees = () => {
   /**
    * React Query hook for handling employee deletion mutation.
    */
+  const searchEmployee = searchParams.get("search") || "";
+  // console.log("searchEmployee", searchEmployee);
+  const [employeeTableDataOrder, setEmployeeTableDataOrder] = useState("ASC");
+  const {
+    isPending,
+    error,
+    data: searchEmployeeData,
+  } = useQuery({
+    queryKey: ["EmployeeData", searchEmployee],
+    queryFn: () => searchUser(searchEmployee),
+    staleTime: 10000,
+  });
 
   const DeleteEmployee = useMutation({
     mutationFn: (employeeId) => {
@@ -94,12 +109,15 @@ const Employees = () => {
     });
   };
   const handleViewEmployee = (viewEmployeeData) => {
-    console.log("viewEmployeeData", viewEmployeeData);
     navigate("/viewEmployee", {
       state: { viewEmployeeData: viewEmployeeData },
     });
   };
-
+  const submitSearch = (data) => {
+    setSearchParams({
+      ...data,
+    });
+  };
 
   return (
     <>
@@ -131,7 +149,22 @@ const Employees = () => {
           </div>
           <div className="employees__table">
             <div className="ams__filter">
-              <SearchInput />
+              {/* <SearchInput /> */}
+              <form
+                className="search__form"
+                onSubmit={handleSubmit(submitSearch)}
+              >
+                <InputField
+                  name="search"
+                  register={register}
+                  placeholder="Search"
+                  className="search-input"
+                  message={Model.Name.pattern.message}
+                  errors={errors}
+                  type={Model.Name.type}
+                />
+                <SearchSvg className="icons" />
+              </form>
               <Button
                 handleClick={() => onFilterClick(!filterShow)}
                 text="Filter"
@@ -144,6 +177,7 @@ const Employees = () => {
               handleProceedClick={handleProceedClick}
               handleTableEdit={handleTableEdit}
               handleViewEmployee={handleViewEmployee}
+              searchedData={searchEmployeeData}
             />
           </div>
         </div>

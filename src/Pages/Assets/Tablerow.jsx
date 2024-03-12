@@ -4,7 +4,6 @@ import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteCon
 import { deleteAssetsTableData } from "./AssetsApiSlice";
 import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
-import { PiEyeLight } from "react-icons/pi";
 import Button from "../../Component/Button/Button";
 import { useMutation } from "@tanstack/react-query";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";

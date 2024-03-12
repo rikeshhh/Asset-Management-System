@@ -40,6 +40,7 @@ const EmployeeView = () => {
    */
 
   const date = viewEmployeeData.created_at;
+  const [profileImage, setProfileImage] = useState(profileCover);
 
   // const [profileImage, setProfileImage] = useState(profileCover);
   // const file = viewEmployeeData.user_image ? viewEmployeeData.user_image : "";
@@ -63,12 +64,14 @@ const EmployeeView = () => {
           <div className="user__profile--left">
             <div className="user__profile--image">
               <figure>
+                {/* <img src={profileImage} alt="Profile Image" /> */}
                 <ImagePath
                   file={
                     viewEmployeeData.user_image
                       ? viewEmployeeData.user_image
                       : " "
                   }
+                  state={{ profileImage, setProfileImage }}
                 />
                 <div className="profile__button--container">
                   <Button

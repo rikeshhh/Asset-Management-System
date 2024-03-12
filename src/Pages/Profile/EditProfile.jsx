@@ -14,6 +14,7 @@ import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
 import { employeeEdit } from "./ProfileApiSlicee";
 import { notifySuccess } from "../../Component/Toast/Toast";
+import ImagePath from "../../Component/Images/ImagePath";
 
 /**
  * Functional component for editing an existing employee profile.
@@ -76,7 +77,12 @@ const EditProfile = () => {
 
   const EditEmployeeData = useMutation({
     mutationFn: (employeeEditInfo) => {
-      return employeeEdit(employeeEditInfo.id,employeeEditInfo.employeeData,employeeEditInfo.employeeImage,employeeEditInfo.jobType);
+      return employeeEdit(
+        employeeEditInfo.id,
+        employeeEditInfo.employeeData,
+        employeeEditInfo.employeeImage,
+        employeeEditInfo.jobType
+      );
     },
     onSuccess: () => {
       notifySuccess("Employee Edited Successfully");
@@ -100,7 +106,7 @@ const EditProfile = () => {
       id: employeePrevId,
       employeeData: data,
       employeeImage: userProfileImage,
-      jobType:selectedJobType
+      jobType: selectedJobType,
     };
     EditEmployeeData.mutate(employeeEditInfo);
   };
@@ -115,6 +121,17 @@ const EditProfile = () => {
           <div className="user__profile--left">
             <div className="user__profile--image">
               <figure>
+                {/* <img src={profileImage} alt="Profile Picture" /> */}
+                {
+                  <ImagePath
+                    file={
+                      employeeData.user_image
+                        ? employeeData.user_image
+                        : profileCover
+                    }
+                    state={{ profileImage, setProfileImage }}
+                  />
+                }
                 <img src={profileImage} alt="Profile Picture" />
                 <div className="profile__button--container">
                   <Button
