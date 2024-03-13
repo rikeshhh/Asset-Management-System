@@ -244,18 +244,18 @@ const Model = {
   Category: {
     type: "string",
     required: "Please enter a Category name",
-    placeholder: "Enter the category name",
+    placeholder: "Enter the Category name",
     minLength: {
       value: 1,
       message: "Category name should be more than 1 characters",
     },
     maxLength: {
-      value: 32,
-      message: "Category name should be less than 32 characters",
+      value: 64,
+      message: "Category name should be less than 64 characters",
     },
     pattern: {
-      value: /^[a-zA-Z\s]+$/,
-      message: "Please enter valid alphabets.",
+      value: /^[a-zA-Z0-9\s]+$/,
+      message: "Please enter valid alphanumeric string.",
     },
   },
 };

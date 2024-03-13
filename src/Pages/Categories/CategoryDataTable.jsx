@@ -38,12 +38,17 @@ const CategoryDataTable = ({
   setDisableButtons,
   disableButtons,
   setCategoryDataOrder,
+  setCategoryDataSort,
+  categoryDataSort,
   categoryDataOrder,
 }) => {
   const [show, setShow] = useState(false);
   const [showSubCategoryEdit, setShowSubCategoryEdit] = useState(false);
   const [showSubCategory, setShowSubCategory] = useState(false);
   const [showSubCategoryDrop, setshowSubCategoryDrop] = useState("");
+  const [previousCategoryId, setPreviousCategoryId] = useState("");
+  const [previousSubCategoryId, setPreviousSubCategoryId] = useState("");
+  const [previousCategoryName, setPreviousCategoryName] = useState("");
 
   // const DeleteCategory = useMutation({
   //   mutationFn: (parentCategory) => {
@@ -82,6 +87,7 @@ const CategoryDataTable = ({
     },
     onSuccess: () => {
       queryClient.invalidateQueries("CategoryData");
+      notifySuccess("Sub Category has been updated");
       setDisableButtons(false);
       setShowSubCategoryEdit(false);
       reset();
@@ -90,10 +96,6 @@ const CategoryDataTable = ({
       notifyError(error.response.message);
     },
   });
-
-  const [previousCategoryId, setPreviousCategoryId] = useState("");
-  const [previousSubCategoryId, setPreviousSubCategoryId] = useState("");
-  const [previousCategoryName, setPreviousCategoryName] = useState("");
 
   /**
    * Handles the click event for the edit button.
@@ -184,6 +186,8 @@ const CategoryDataTable = ({
 
   const handleCategorySort = () => {
     const newOrder = categoryDataOrder === "ASC" ? "DESC" : "ASC";
+    const newSort = categoryDataSort === "id" ? "category_name" : "id";
+    setCategoryDataSort(newSort);
     setCategoryDataOrder(newOrder);
   };
 
@@ -234,15 +238,15 @@ const CategoryDataTable = ({
                             register={register}
                             required="Category is required"
                             errors={errors}
-                            type={Model.location.type}
+                            type={Model.Category.type}
                             placeholder={options.parent}
                             defaultValue={options.parent}
-                            value={Model.location.pattern.value}
-                            message={Model.location.pattern.message}
-                            minLength={Model.location.minLength}
+                            value={Model.Category.pattern.value}
+                            message={Model.Category.pattern.message}
+                            minLength={Model.Category.minLength}
                             minMessage="Category name should be more than 1 characters"
                             maxMessage="Category name should be less than 64 characters"
-                            maxLength={Model.location.maxLength}
+                            maxLength={Model.Category.maxLength}
                             className={show ? "universal__table--input" : ""}
                           ></InputField>
                         </div>
@@ -325,15 +329,15 @@ const CategoryDataTable = ({
                                   register={register}
                                   required="Sub Category is required"
                                   errors={errors}
-                                  type={Model.department.type}
+                                  type={Model.Category.type}
                                   placeholder={subCategory.category_name}
                                   defaultValue={subCategory.category_name}
-                                  value={Model.department.pattern.value}
-                                  message={Model.department.pattern.message}
-                                  minLength={Model.department.minLength}
+                                  value={Model.Category.pattern.value}
+                                  message={Model.Category.pattern.message}
+                                  minLength={Model.Category.minLength}
                                   minMessage="Sub Category name should be more than 1 characters"
                                   maxMessage="Sub Category name should be less than 64 characters"
-                                  maxLength={Model.department.maxLength}
+                                  maxLength={Model.Category.maxLength}
                                   className={
                                     showSubCategoryEdit
                                       ? "universal__table--input || universal2"

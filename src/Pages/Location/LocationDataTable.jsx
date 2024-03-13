@@ -88,7 +88,6 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
       const response = await sortByStatusLocation(newOrder, "location");
       setLocationTableData(response);
       setLocationTableDataOrder(newOrder);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }

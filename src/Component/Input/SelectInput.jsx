@@ -8,11 +8,15 @@ export const SelectInput = ({
   name,
   value,
 }) => {
-  console.log(defaultValue);
   return (
     <select {...register(name, { required: true })}>
+      {defaultValue ? (
+        <option value={defaultValue}>{defaultValue}</option>
+      ) : (
+        <></>
+      )}
       {option.map((option, index) => (
-        <option key={index} value={defaultValue}>
+        <option key={index} value={option}>
           {option}
         </option>
       ))}

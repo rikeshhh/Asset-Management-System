@@ -38,6 +38,7 @@ const Categories = () => {
   });
 
   const [categoryDataOrder, setCategoryDataOrder] = useState("ASC");
+  const [categoryDataSort, setCategoryDataSort] = useState("id");
 
   /**
    * Query to get category data.
@@ -48,8 +49,8 @@ const Categories = () => {
     error,
     data: CategoryData,
   } = useQuery({
-    queryKey: ["CategoryData", categoryDataOrder],
-    queryFn: () => getCategoryData(categoryDataOrder),
+    queryKey: ["CategoryData", categoryDataOrder, categoryDataSort],
+    queryFn: () => getCategoryData(categoryDataOrder, categoryDataSort),
   });
 
   /**
@@ -110,9 +111,7 @@ const Categories = () => {
       notifySuccess(deleteMessage);
     },
     onError: (error) => {
-      if (error.response.status === 401) {
-        notifyError("Error deleting category");
-      }
+      notifyError("Error deleting category");
     },
   });
 
@@ -153,6 +152,8 @@ const Categories = () => {
             <CategoryDataTable
               setCategoryDataOrder={setCategoryDataOrder}
               categoryDataOrder={categoryDataOrder}
+              setCategoryDataSort={setCategoryDataSort}
+              categoryDataSort={categoryDataSort}
               setDisableButtons={setDisableButtons}
               disableButtons={disableButtons}
               CategoryData={CategoryData}
@@ -171,7 +172,7 @@ const Categories = () => {
               </div>
               <form action="" onSubmit={handleSubmit(onCategorySubmit)}>
                 <div>
-                  <Label sup={"*"} text="Name" />
+                  <Label sup={"*"} text="Category Name" />
                   <InputField
                     name="category_name"
                     register={register}
@@ -181,6 +182,8 @@ const Categories = () => {
                     placeholder={Model.Category.placeholder}
                     minLength={Model.Category.minLength}
                     maxLength={Model.Category.maxLength}
+                    minMessage="Category name should be more than 1 characters"
+                    maxMessage="Category name should be less than 64 characters"
                     autoComplete={"off"}
                     defaultValue={""}
                   />

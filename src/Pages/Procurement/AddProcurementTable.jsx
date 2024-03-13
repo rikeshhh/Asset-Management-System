@@ -43,7 +43,16 @@ const AddProcurementTable = ({
   };
 
   const handleAddTableLineSubmit = (tableData, event) => {
-    event.stopPropagation();
+    const newItem = {
+      product_name: tableData.product_name,
+      category_id: tableData.category_id,
+      brand: tableData.brand,
+      estimated_price: tableData.estimated_price,
+      link: tableData.link,
+    };
+  };
+
+  const handleTableLineSubmit = (tableData, event) => {
     const newItem = {
       product_name: tableData.product_name,
       category_id: tableData.category_id,
@@ -52,42 +61,26 @@ const AddProcurementTable = ({
       link: tableData.link,
     };
 
-    setNewProcurement((prevProcurement) => [...prevProcurement, newItem]);
-    setProcurementTableLine(false);
-    reset();
-  };
+    if (editProcurementLine) {
+      setNewProcurement((prevProcurement) => {
+        const updatedList = [...prevProcurement];
+        updatedList[selectedIndex] = newItem;
+        return updatedList;
+      });
 
-  const handleEditTableLineSubmit = (tableData, event) => {
-    console.log(tableData)
-    event.stopPropagation();
-    const updatedItem = {
-      product_name: tableData.product_name,
-      category_id: tableData.category_id,
-      brand: tableData.brand,
-      estimated_price: tableData.estimated_price,
-      link: tableData.link,
-    };
-
-    setNewProcurement((prevProcurement) => {
-      const updatedList = [...prevProcurement];
-      updatedList[selectedIndex] = updatedItem;
-      return updatedList;
-    });
-
-    setEditProcurementLine(false);
-    setSelectedIndex(null);
-    reset();
+      setEditProcurementLine(false);
+      setSelectedIndex(null);
+      reset();
+    } else {
+      setNewProcurement((prevProcurement) => [...prevProcurement, newItem]);
+      setProcurementTableLine(false);
+      reset();
+    }
   };
 
   return (
     <div className="table__container">
-      <form
-        onSubmit={handleSubmit((data, event) => {
-          // editProcurementLine
-             handleEditTableLineSubmit(data, event)
-            //  handleAddTableLineSubmit(data, event);
-        })}
-      >
+      <form onSubmit={handleSubmit(handleTableLineSubmit)}>
         <table className="main__table">
           <thead>
             <tr>
@@ -120,6 +113,7 @@ const AddProcurementTable = ({
                       name="category_id"
                       register={register}
                       errors={errors}
+                      defaultValue={""}
                     />
                   ) : (
                     tableItem.category_id
@@ -214,7 +208,11 @@ const AddProcurementTable = ({
                   />
                 </td>
                 <td>
-                  <SelectInputCategory name="category_id" register={register} />
+                  <SelectInputCategory
+                    name="category_id"
+                    register={register}
+                    defaultValue={""}
+                  />
                 </td>
                 <td>
                   <InputField

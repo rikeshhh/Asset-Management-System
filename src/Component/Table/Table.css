@@ -27,6 +27,7 @@
   font-weight: 500;
   line-height: 150%;
   letter-spacing: 0.07px;
+  text-transform: capitalize;
 }
 
 .loader {

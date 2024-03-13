@@ -1,4 +1,4 @@
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GoTrash } from "react-icons/go";
 // import { useMutation } from "@tanstack/react-query";
@@ -21,7 +21,7 @@ import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
  * Functional component for adding a new employee profile.
  * @returns {JSX.Element} JSX element representing the AddProfile component.
  */
-const EditRepairReplace = (tableItem) => {
+const EditRepairReplace = () => {
   const {
     register,
     formState: { errors },
@@ -30,7 +30,7 @@ const EditRepairReplace = (tableItem) => {
   } = useForm();
 
   const receivedState = false;
-  const [selectedJobType, setSelectedJobType] = useState("");
+  const [selectedType, setSelectedType] = useState("");
 
   const navigate = useNavigate();
 
@@ -40,7 +40,6 @@ const EditRepairReplace = (tableItem) => {
    * Handles the update of the profile picture.
    * @param {Object} e - The event object.
    */
-
   /**
    * Deletes the current profile picture.
    */
@@ -60,7 +59,7 @@ const EditRepairReplace = (tableItem) => {
     mutationFn: (repairReplaceData) => {
       return repairReplaceAdd(
         repairReplaceData.data,
-        repairReplaceData.selectedJobType
+        repairReplaceData.selectedType
       );
     },
     onSuccess: () => {
@@ -78,7 +77,7 @@ const EditRepairReplace = (tableItem) => {
   });
 
   const handleRadioChange = (e) => {
-    setSelectedJobType(e.target.value);
+    setSelectedType(e.target.value);
   };
   /**
    * Handles the submission of the repair and replace form.
@@ -90,7 +89,7 @@ const EditRepairReplace = (tableItem) => {
       notifyError("Please upload product image");
     }
     const repairData = {
-      selectedJobType: selectedJobType,
+      selectedType: selectedType,
       data: deviceData,
     };
     AddRepairReplace.mutate(repairData);
@@ -165,7 +164,7 @@ const EditRepairReplace = (tableItem) => {
                 maxLength={Model.ProductName.maxLength.value}
                 maxMessage={Model.ProductName.maxLength.message}
                 isDisabled={receivedState}
-                defaultValue={`ITJ-DA-${tableData.Product_Code.name}`}
+                defaultValue={tableData.Product_Code.name}
               />
             </div>
             <div className="form__input--section">
@@ -173,7 +172,7 @@ const EditRepairReplace = (tableItem) => {
               <SelectInputCategory
                 name="Category"
                 register={register}
-                defaultValue={tableItem.Category}
+                defaultValue={""}
               />
             </div>
 
@@ -187,7 +186,7 @@ const EditRepairReplace = (tableItem) => {
                       name="Repair"
                       value="Repair"
                       onChange={handleRadioChange}
-                      checked={selectedJobType === "Repair"}
+                      checked={tableData.Type === "Repair"}
                     />
                   </div>
                   <Label text="Repair" />
@@ -199,7 +198,7 @@ const EditRepairReplace = (tableItem) => {
                       name="Replace"
                       value="Replace"
                       onChange={handleRadioChange}
-                      checked={selectedJobType === "Replace"}
+                      checked={tableData.Type === "Replace"}
                     />
                   </div>
                   <Label text="Replace" />
@@ -221,6 +220,7 @@ const EditRepairReplace = (tableItem) => {
                 maxLength={Model.location.maxLength.value}
                 maxMessage={Model.location.maxLength.message}
                 isDisabled={receivedState}
+                defaultValue={tableData.reason}
               />
             </div>
 

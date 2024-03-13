@@ -3,10 +3,10 @@ import { getTokenFromLocalStorage } from "../../utils/StorageUtils";
 
 const token = getTokenFromLocalStorage();
 
-export const getRepairTableData = async (searchData) => {
+export const getRepairTableData = async (searchData, sortData, sortOrder) => {
   try {
     const response = await instance.get(
-      `/repairreplace?searchKeyword=${searchData}`,
+      `/repairreplace?searchKeyword=${searchData}&orderby=${sortData}&sortorder=${sortOrder}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }

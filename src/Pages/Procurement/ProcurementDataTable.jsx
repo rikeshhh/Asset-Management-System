@@ -54,11 +54,11 @@ const ProcurementDataTable = ({ linkTo, handleTableEdit }) => {
           ) : (
             procurementTableData.map((tableItem, index) => (
               <tr key={index}>
-                <td>{tableItem.requested_by}</td>
+                <td>{tableItem.user.requested_by}</td>
                 <td>{tableItem.number_of_items}</td>
                 <td>{tableItem.status}</td>
                 <td>{tableItem.approved_by}</td>
-                <td>{tableItem.approved_date}</td>
+                <td>2024-02-21 07:31:19</td>
                 <td className="button-gap">
                   <Button
                     type={"button"}
@@ -68,7 +68,7 @@ const ProcurementDataTable = ({ linkTo, handleTableEdit }) => {
                   />
                   <Link
                     to={"/editProcurement"}
-                    state={{ id: tableItem.id }}
+                    state={{ data: tableItem }}
                     className="link"
                   >
                     <Button

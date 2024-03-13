@@ -18,7 +18,7 @@ const Repair = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const [isCompActive, setIsCompActive] = useState(true);
+  const [isCompActive, setIsCompActive] = useState("Repair");
   const [filterShow, setFilterShow] = useState(false);
 
   const handleButtonClick = () => {
@@ -54,9 +54,9 @@ const Repair = () => {
           <div className="repair__content">
             <div className="repair__navigation">
               <h6
-                onClick={handleButtonClick}
+                onClick={() => setIsCompActive("Repair")}
                 className={
-                  isCompActive
+                  isCompActive === "Repair"
                     ? "repair-replace__comp active__repair"
                     : "repair-replace__comp"
                 }
@@ -64,18 +64,18 @@ const Repair = () => {
                 Repair
               </h6>
               <h6
-                onClick={handleButtonClick}
+                onClick={() => setIsCompActive("Replace")}
                 className={
-                  isCompActive
-                    ? "repair-replace__comp "
-                    : "repair-replace__comp active__repair"
+                  isCompActive === "Replace"
+                    ? "repair-replace__comp active__repair"
+                    : "repair-replace__comp "
                 }
               >
                 Replace
               </h6>
             </div>
 
-            {isCompActive ? (
+            {isCompActive === "Repair" ? (
               <RepairDataTable
                 filterShow={filterShow}
                 onFilterClick={() => onFilterClick(!filterShow)}

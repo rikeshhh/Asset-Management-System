@@ -18,7 +18,7 @@ export const getProductList = async (productId) => {
     const response = await instance.get(`/procurement?id=${productId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    return response.data.procurementInfo.data;
+    return response.data.procurementInfo;
   } catch (error) {
     console.log(error);
   }
