@@ -36,7 +36,7 @@ const SelectInputCategory = ({
       {/* Render the default option only once outside of the map function */}
       <option
         className="select__option"
-        value={defaultValue.id || "None"}
+        value={defaultValue.id || null}
         disabled={isDisabled}
       >
         {defaultValue.name || "None"}

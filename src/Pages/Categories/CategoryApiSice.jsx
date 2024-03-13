@@ -6,9 +6,9 @@ const token = getTokenFromLocalStorage();
 /**
  * Fetches category data from the API.
  */
-export const getCategoryData = async (categoryDataOrder) => {
+export const getCategoryData = async (categoryDataOrder, categoryDataSort) => {
   const categoryData = await instance.get(
-    `/category?sortorder=${categoryDataOrder}&orderby=category_name`,
+    `/category?sortorder=${categoryDataOrder}&orderby=${categoryDataSort}`,
     {
       headers: { Authorization: `Bearer ${token}` },
     }
@@ -39,6 +39,7 @@ export const selectInputCategory = async () => {
   const resp = await categoryData.data.data;
   return resp;
 };
+
 export const selectSubCategoryData = async (categoryName) => {
   const categoryData = await instance.get(`/category?name=${categoryName}`, {
     headers: { Authorization: `Bearer ${token}` },

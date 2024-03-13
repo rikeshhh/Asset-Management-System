@@ -8,26 +8,35 @@ import { deleteRepairReplace, getRepairTableData } from "./RepairApiSlice";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
 import { LuArrowUpDown } from "react-icons/lu";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { EyeSvg } from "../../Component/svg/EyeSvg";
 import { SearchInput } from "../../Component/SearchInput/SearchInput";
 import { BsFunnel } from "react-icons/bs";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 import { useState } from "react";
 import { queryClient } from "../../Component/Query/Query";
+import { notifySuccess } from "../../Component/Toast/Toast";
 
-const RepairDataTable = ({ handleTableEdit, onFilterClick }) => {
+const RepairDataTable = ({ onFilterClick }) => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const [repairId, setRepairId] = useState();
   const [searchData, setSearchData] = useState("");
+  const [sortData, setSortData] = useState("id");
+  const [sortOrder, setSortOrder] = useState("ASC");
+  const tableHeads = [
+    "Product code",
+    "Name",
+    "Category",
+    "Status",
+    "Assigned date",
+  ];
 
   const {
     isPending,
     error,
     data: tableData,
   } = useQuery({
-    queryKey: ["RepairTableData", searchData],
-    queryFn: () => getRepairTableData(searchData),
+    queryKey: ["RepairTableData", searchData, sortData, sortOrder],
+    queryFn: () => getRepairTableData(searchData, sortData, sortOrder),
     staleTime: 10000,
   });
 
@@ -35,6 +44,7 @@ const RepairDataTable = ({ handleTableEdit, onFilterClick }) => {
     mutationFn: () => deleteRepairReplace(repairId),
     onSuccess: () => {
       queryClient.invalidateQueries("RepairTableData");
+      notifySuccess("Repair Data has been deleted successfully");
     },
     onError: (error) => {
       console.log(error);
@@ -59,6 +69,12 @@ const RepairDataTable = ({ handleTableEdit, onFilterClick }) => {
 
   const submitSearch = (data) => {
     setSearchData(data.Search);
+  };
+
+  const handleStatusClick = (tableHead) => {
+    const newOrder = sortOrder === "ASC" ? "DESC" : "ASC";
+    setSortOrder(newOrder);
+    setSortData(tableHead);
   };
 
   // if (isPending) return "Loading...";
@@ -90,23 +106,14 @@ const RepairDataTable = ({ handleTableEdit, onFilterClick }) => {
               <PendingTableHead />
             ) : (
               <tr>
-                <th>
-                  Product Code <LuArrowUpDown />
-                </th>
-                <th>
-                  Name
-                  <LuArrowUpDown />
-                </th>
-                <th>
-                  Category
-                  <LuArrowUpDown />
-                </th>
-                <th>
-                  Status <LuArrowUpDown />
-                </th>
-                <th>
-                  Assigned Date <LuArrowUpDown />
-                </th>
+                {tableHeads.map((tableHead, index) => (
+                  <th key={index} onClick={() => handleStatusClick(tableHead)}>
+                    {tableHead}
+                    <span>
+                      <LuArrowUpDown />
+                    </span>
+                  </th>
+                ))}
 
                 <th>Action</th>
               </tr>

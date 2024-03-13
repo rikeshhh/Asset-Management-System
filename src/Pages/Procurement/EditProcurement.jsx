@@ -20,6 +20,13 @@ import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
 import { queryClient } from "../../Component/Query/Query";
 
 const EditProcurement = () => {
+  const [procurementTableLine, setProcurementTableLine] = useState(false);
+  const [editProcurementLine, setEditProcurementLine] = useState(false);
+  const [newProcurement, setNewProcurement] = useState([]);
+  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [productId, setProductId] = useState("");
+  const [categoryName, setCategoryName] = useState("");
+
   const {
     register,
     formState: { errors },
@@ -29,18 +36,13 @@ const EditProcurement = () => {
   // console.log(errors);
   const location = useLocation();
   const receivedData = location.state;
-  const procurementId = receivedData.id;
+  const procurementData = receivedData.data;
 
-  const {
-    isPending,
-
-    data: ProductList,
-  } = useQuery({
+  const { isPending, data: ProductList } = useQuery({
     queryKey: ["productList"],
-    queryFn: () => getProductList(procurementId),
+    queryFn: () => getProductList(procurementData.id),
     staleTime: 10000,
   });
-
   //   if (error) {
   //     return "An error has occurred: " + error.message;
   //   }
@@ -66,19 +68,15 @@ const EditProcurement = () => {
 
   const selectOptions = ["Urgent", "High", "Medium", "Low"];
 
-  const [procurementTableLine, setProcurementTableLine] = useState(false);
-  const [editProcurementLine, setEditProcurementLine] = useState(false);
-  //   const [newProcurement, setNewProcurement] = useState([]);
-  const [selectedIndex, setSelectedIndex] = useState(null);
-
   const handleCancelTableLine = () => {
     setProcurementTableLine(false);
     setSelectedIndex(null);
     reset();
   };
 
-  const handleProcurementTableEdit = (index) => {
+  const handleProcurementTableEdit = (index, productId) => {
     setSelectedIndex(index);
+    setProductId(productId);
     setEditProcurementLine(true);
     setProcurementTableLine(false);
     reset();
@@ -88,13 +86,41 @@ const EditProcurement = () => {
     setSelectedIndex(null);
     setEditProcurementLine(false);
     DeleteProduct.mutate(productId);
-    queryClient.invalidateQueries("productId");
     // reset();
   };
 
   const submitProcurementEdit = (data) => {
     console.log(data);
+    const newItem = {
+      product_id: productId,
+      product_name: data.product_name,
+      category_id: data.category_id,
+      brand: data.brand,
+      estimated_price: data.estimated_price,
+      link: data.link,
+    };
+    // Check if the product with the same ID exists in newProcurement
+    const existingIndex = newProcurement.findIndex(
+      (item) => item.product_id === productId
+    );
+
+    // If the product exists, update its values
+    if (existingIndex !== -1) {
+      setNewProcurement((prevProcurement) => {
+        const updatedProcurement = [...prevProcurement];
+        updatedProcurement[existingIndex] = newItem;
+        return updatedProcurement;
+      });
+      setEditProcurementLine(false);
+    } else {
+      // If the product doesn't exist, add it to newProcurement
+      setNewProcurement((prevProcurement) => {
+        return [...prevProcurement, newItem];
+      });
+      setEditProcurementLine(false);
+    }
   };
+  console.log(newProcurement);
 
   return (
     <section className="content-wrapper">
@@ -114,7 +140,7 @@ const EditProcurement = () => {
             <div className="user__auth--input procurement__form--input">
               <Label sup={"*"} text="Requested By" />
               <InputField
-                name="username"
+                name="requestedBy"
                 register={register}
                 pattern={Model.Name.pattern}
                 required={Model.Name.required}
@@ -124,6 +150,8 @@ const EditProcurement = () => {
                 placeholder={Model.Name.placeholder}
                 minLength={Model.Name.minLength}
                 maxLength={Model.Name.maxLength}
+                defaultValue={procurementData.user.requested_by}
+                isDisabled={true}
               />
             </div>
             <div className="user__auth--input procurement__form--input">
@@ -131,7 +159,8 @@ const EditProcurement = () => {
               <SelectInput
                 name={"request_urgency"}
                 register={register}
-                options={selectOptions}
+                option={selectOptions}
+                defaultValue={ProductList && ProductList.urgency}
               />
             </div>
           </div>
@@ -152,18 +181,6 @@ const EditProcurement = () => {
         </form>
         <div className="procurement__product--list">
           <h3>Product List</h3>
-          <Button
-            type={"button"}
-            text="Add a table line"
-            className={
-              editProcurementLine
-                ? "procurement--button procurement--button-not__allowed"
-                : "procurement--button"
-            }
-            handleClick={handleAddProcurement}
-            icon={<IoMdAdd />}
-            isDisabled={editProcurementLine ? true : false}
-          />
         </div>
         <div className="table__container">
           <form onSubmit={handleSubmit(submitProcurementEdit)}>
@@ -185,9 +202,8 @@ const EditProcurement = () => {
               <tbody>
                 {isPending ? (
                   <PendingTableBody />
-                ) : (
-                  ProductList &&
-                  ProductList.map((tableItem, index) => (
+                ) : ProductList.length !== 0 ? (
+                  ProductList?.data.map((tableItem, index) => (
                     <tr key={index}>
                       <td>
                         {editProcurementLine && index === selectedIndex ? (
@@ -195,8 +211,14 @@ const EditProcurement = () => {
                             name="product_name"
                             register={register}
                             errors={errors}
-                            defaultValue={tableItem.product_name}
+                            defaultValue={
+                              newProcurement[index]
+                                ? newProcurement[index].product_name
+                                : tableItem.product_name
+                            }
                           />
+                        ) : newProcurement[index] ? (
+                          newProcurement[index].product_name
                         ) : (
                           tableItem.product_name
                         )}
@@ -207,9 +229,13 @@ const EditProcurement = () => {
                             name="category_id"
                             register={register}
                             errors={errors}
+                            setCategoryName={setCategoryName}
+                            defaultValue={tableItem.category.name}
                           />
+                        ) : newProcurement[index] ? (
+                          newProcurement[index].category_id
                         ) : (
-                          tableItem.category_name
+                          tableItem.category.name
                         )}
                       </td>
                       <td>
@@ -218,8 +244,14 @@ const EditProcurement = () => {
                             name="brand"
                             register={register}
                             errors={errors}
-                            defaultValue={tableItem.brand}
+                            defaultValue={
+                              newProcurement[index]
+                                ? newProcurement[index].brand
+                                : tableItem.brand
+                            }
                           />
+                        ) : newProcurement[index] ? (
+                          newProcurement[index].brand
                         ) : (
                           tableItem.brand
                         )}
@@ -230,32 +262,44 @@ const EditProcurement = () => {
                             name="estimated_price"
                             register={register}
                             errors={errors}
-                            defaultValue={tableItem.estimated_price}
+                            defaultValue={
+                              newProcurement[index]
+                                ? newProcurement[index].estimated_price
+                                : tableItem.estimated_price
+                            }
                           />
+                        ) : newProcurement[index] ? (
+                          newProcurement[index].estimated_price
                         ) : (
                           tableItem.estimated_price
                         )}
                       </td>
                       <td>
-                        {" "}
                         {editProcurementLine && index === selectedIndex ? (
                           <InputField
                             name="link"
                             register={register}
                             errors={errors}
-                            defaultValue={tableItem.link}
+                            defaultValue={
+                              newProcurement[index]
+                                ? newProcurement[index].link
+                                : tableItem.link
+                            }
                           />
+                        ) : newProcurement[index] ? (
+                          newProcurement[index].link
                         ) : (
                           tableItem.link
                         )}
                       </td>
                       <td className="button-gap">
                         {editProcurementLine && index === selectedIndex ? (
-                          <Button
-                            type="submit"
+                          <button
                             className="edit__button"
-                            text={<FaCheck />}
-                          />
+                            onClick={() => handleSubmit(submitProcurementEdit)}
+                          >
+                            <FaCheck />
+                          </button>
                         ) : (
                           <Button
                             type={"button"}
@@ -265,7 +309,10 @@ const EditProcurement = () => {
                                 : "edit__button"
                             }
                             handleClick={() =>
-                              handleProcurementTableEdit(index)
+                              handleProcurementTableEdit(
+                                index,
+                                tableItem.products_id
+                              )
                             }
                             text={<CiEdit />}
                             isDisabled={procurementTableLine ? true : false}
@@ -294,6 +341,8 @@ const EditProcurement = () => {
                       </td>
                     </tr>
                   ))
+                ) : (
+                  <></>
                 )}
               </tbody>
             </table>

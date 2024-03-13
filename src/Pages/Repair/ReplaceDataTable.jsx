@@ -20,7 +20,13 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
   const [replaceId, setReplaceId] = useState();
   const [searchData, setSearchData] = useState("");
 
-  const tableHeads = ["Product Code", "Name", "Category"];
+  const tableHeads = [
+    "Product Code",
+    "Name",
+    "Category",
+    "Status",
+    "Assigned Date",
+  ];
   const {
     isPending,
     error,
@@ -133,14 +139,13 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
                       // handleClick={() => viewEmployeeProfile(tableItem)}
                       text={<EyeSvg />}
                     />
-                    {/* <Link to={linkTo} className="link"> */}
-                    <Button
-                      type={"button"}
-                      className="edit__button"
-                      handleClick={handleTableEdit}
-                      text={<CiEdit />}
-                    />
-                    {/* </Link> */}
+                    <Link to="/editRepairReplace" state={tableItem}>
+                      <Button
+                        type={"button"}
+                        className="edit__button"
+                        text={<CiEdit />}
+                      />
+                    </Link>
                     <Button
                       type={"button"}
                       className="delete__button"

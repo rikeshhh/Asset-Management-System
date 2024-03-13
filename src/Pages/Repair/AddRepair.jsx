@@ -30,7 +30,7 @@ const AddRepair = () => {
   } = useForm();
 
   const receivedState = false;
-  const [selectedJobType, setSelectedJobType] = useState("");
+  const [selectedType, setSelectedType] = useState("");
 
   const navigate = useNavigate();
 
@@ -58,7 +58,7 @@ const AddRepair = () => {
     mutationFn: (repairReplaceData) => {
       return repairReplaceAdd(
         repairReplaceData.data,
-        repairReplaceData.selectedJobType
+        repairReplaceData.selectedType
       );
     },
     onSuccess: () => {
@@ -76,7 +76,7 @@ const AddRepair = () => {
   });
 
   const handleRadioChange = (e) => {
-    setSelectedJobType(e.target.value);
+    setSelectedType(e.target.value);
   };
   /**
    * Handles the submission of the repair and replace form.
@@ -88,7 +88,7 @@ const AddRepair = () => {
       notifyError("Please upload product image");
     }
     const repairData = {
-      selectedJobType: selectedJobType,
+      selectedType: selectedType,
       data: deviceData,
     };
     AddRepairReplace.mutate(repairData);
@@ -182,7 +182,7 @@ const AddRepair = () => {
                       name="Repair"
                       value="Repair"
                       onChange={handleRadioChange}
-                      checked={selectedJobType === "Repair"}
+                      checked={selectedType === "Repair"}
                     />
                   </div>
                   <Label text="Repair" />
@@ -194,7 +194,7 @@ const AddRepair = () => {
                       name="Replace"
                       value="Replace"
                       onChange={handleRadioChange}
-                      checked={selectedJobType === "Replace"}
+                      checked={selectedType === "Replace"}
                     />
                   </div>
                   <Label text="Replace" />
