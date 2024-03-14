@@ -23,7 +23,7 @@ const SelectSubCat = ({
       {defaultValue && (
         <option
           className="select__option"
-          value={null || defaultValue.id}
+          value={"None" || defaultValue.id}
           disabled={isDisabled}
         >
           {"None" || defaultValue.name}
@@ -39,7 +39,6 @@ const SelectSubCat = ({
             </option>
           ))
         )}
-      
     </select>
   );
 };

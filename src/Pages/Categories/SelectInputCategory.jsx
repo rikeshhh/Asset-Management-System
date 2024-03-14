@@ -37,21 +37,28 @@ const SelectInputCategory = ({
       {defaultValue && (
         <option
           className="select__option"
-          value={defaultValue.id }
+          value={defaultValue.id}
           disabled={isDisabled}
         >
-          {defaultValue.name }
+          {defaultValue.name}
         </option>
       )}
-      <option className="select__option" value={null}>
-        None
-      </option>
+
       {/* Map over the CategoryData array and render each category option */}
       {CategoryData &&
         CategoryData.map((option) => (
-          <option className="select__option" key={option.id} value={option.id}>
-            {option.parent}
-          </option>
+          <>
+            <option className="select__option" value={null}>
+              None
+            </option>
+            <option
+              className="select__option"
+              key={option.id}
+              value={option.id}
+            >
+              {option.parent}
+            </option>
+          </>
         ))}
     </select>
   );
