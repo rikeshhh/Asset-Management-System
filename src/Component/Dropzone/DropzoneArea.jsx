@@ -1,12 +1,14 @@
 import { useDropzone } from "react-dropzone";
 import { Label } from "../Label/Label";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import { GoTrash } from "react-icons/go";
 import { UploadSvg } from "../svg/UploadSvg";
+import ImagePath from "../Images/ImagePath";
 
 const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
   const [importedImage, setImportedImage] = useState(defaultValue || null);
+  const [newImage, setNewImage] = useState();
   const onDrop = (acceptedFiles) => {
     // Handle dropped files
     const file = acceptedFiles[0];
@@ -14,12 +16,16 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setImportedImage(imageUrl);
+      setNewImage(imageUrl);
     }
   };
-
   const deleteImage = () => {
     setValue(name, null);
     setImportedImage(null);
+  };
+  const [drop, setDrop] = useState(true);
+  const openDrop = () => {
+    setDrop((prev) => !prev);
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -54,7 +60,17 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
         ) : (
           <>
             <div className="image__display">
-              <img src={importedImage} alt="image" />
+              {" "}
+              <div className="image__display">
+                <figure>
+                  {newImage ? (
+                    <img src={newImage} alt="" />
+                  ) : (
+                    <ImagePath file={importedImage} />
+                  )}
+                </figure>
+                {/* Render other elements conditionally here */}
+              </div>
               <Button
                 type={"button"}
                 icon={<GoTrash />}

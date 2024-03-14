@@ -23,9 +23,11 @@ const SelectInputLocation = ({
       onChange={onChange}
     >
       {/* Render the default option outside of the map function */}
-      <option className="select__option" value={defaultValue || "None"}>
-        {defaultValue || "None"}
-      </option>
+      {defaultValue && (
+        <option className="select__option" value={null || defaultValue.id}>
+          {"None" || defaultValue.name}
+        </option>
+      )}
 
       {/* Map over the LocationData array and render each location option */}
       {LocationData &&

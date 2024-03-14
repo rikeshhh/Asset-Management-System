@@ -14,6 +14,7 @@ import {
   getFilterData,
 } from "../../Pages/Assets/AssetsApiSlice";
 import { useSearchParams } from "react-router-dom";
+import SelectFilter from "./SelectFilter";
 
 const Filter = ({ handleClick, filterShow }) => {
   const {
@@ -24,10 +25,11 @@ const Filter = ({ handleClick, filterShow }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filterSubmit = (data) => {
-    if (data.category && data.status === "none") {
+    if (data.category === "None") {
       setSearchParams({
         fromDate: data.fromDate,
         toDate: data.toDate,
+        status: data.status,
       });
     } else {
       setSearchParams({
@@ -50,7 +52,7 @@ const Filter = ({ handleClick, filterShow }) => {
           <div className="group__form filter__gap ">
             <div className="form__input--section ">
               <Label text={"Categories"} />
-              <SelectInputCategory register={register} name="category" />
+              <SelectFilter register={register} name="category" />
             </div>
             {/* <div className="form__input--section ">
               <Label text={"Status"} />
@@ -59,7 +61,7 @@ const Filter = ({ handleClick, filterShow }) => {
             <div className="form__input--section ">
               <Label text={"Status"} />
               <SelectInput
-                option={["none", "Active", "Inactive"]}
+                option={["active", "inactive"]}
                 register={register}
                 name="status"
               />
