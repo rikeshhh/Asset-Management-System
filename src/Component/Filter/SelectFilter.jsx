@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { selectInputCategory } from "./CategoryApiSice";
+import { selectInputCategory } from "../../Pages/Categories/CategoryApiSice";
 /**
  * React component representing a select input for categories.
  * @param {Object} props - Component props.
@@ -8,7 +8,7 @@ import { selectInputCategory } from "./CategoryApiSice";
  * @returns {JSX.Element} JSX element representing the SelectInputCategory component.
  */
 
-const SelectInputCategory = ({
+const SelectFilter = ({
   name,
   register,
   setCategoryName,
@@ -26,30 +26,24 @@ const SelectInputCategory = ({
     );
     setCategoryName(selectedCategory.parent);
   };
+
   return (
     <select
       {...register(name, { required: true })}
       disabled={isDisabled}
-      onChange={addCategoryId}
       className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
     >
-      {/* Render the default option only once outside of the map function */}
-      {defaultValue && (
-        <option
-          className="select__option"
-          value={defaultValue.id || null}
-          disabled={isDisabled}
-        >
-          {defaultValue.name || "None"}
-        </option>
-      )}
-      {/* <option className="select__option" value={null}>
+      <option className="select__option" value={null}>
         None
-      </option> */}
+      </option>
       {/* Map over the CategoryData array and render each category option */}
       {CategoryData &&
         CategoryData.map((option) => (
-          <option className="select__option" key={option.id} value={option.id}>
+          <option
+            className="select__option"
+            key={option.id}
+            value={option.parent}
+          >
             {option.parent}
           </option>
         ))}
@@ -57,4 +51,4 @@ const SelectInputCategory = ({
   );
 };
 
-export default SelectInputCategory;
+export default SelectFilter;

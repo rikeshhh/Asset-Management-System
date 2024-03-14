@@ -20,13 +20,15 @@ const SelectSubCat = ({
       className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
     >
       {/* Render the default option only once outside of the map function */}
-      <option
-        className="select__option"
-        value={defaultValue || "None"}
-        disabled={isDisabled}
-      >
-        {defaultValue || "None"}
-      </option>
+      {defaultValue && (
+        <option
+          className="select__option"
+          value={null || defaultValue.id}
+          disabled={isDisabled}
+        >
+          {"None" || defaultValue.name}
+        </option>
+      )}
 
       {/* Map over the subCategoryData array and render each subcategory option */}
       {subCategoryData &&

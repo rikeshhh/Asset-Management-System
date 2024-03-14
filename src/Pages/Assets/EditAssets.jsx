@@ -194,6 +194,13 @@ const EditAssets = () => {
                   name="assets_image"
                   defaultValue={assetsData.image_name}
                 />
+                {/* <div>
+                <figure>
+                  <ImagePath file={assetsData.image_name} />
+                </figure>
+
+                  
+                </div> */}
               </div>
               <div className="assets__form--btn">
                 <Button

@@ -7,7 +7,6 @@ const SelectInputUser = ({ name, register, defaultValue, isDisabled }) => {
     queryKey: ["selectUserData"],
     queryFn: selectUser,
   });
-
   return (
     <select
       {...register(name, { required: true })}
@@ -15,10 +14,11 @@ const SelectInputUser = ({ name, register, defaultValue, isDisabled }) => {
       className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
     >
       {/* Render the default option outside of the map function */}
-      <option className="select__option" value={null || defaultValue}>
-        {defaultValue || "none"}
-      </option>
-
+      {defaultValue && (
+        <option className="select__option" value={null || defaultValue.id}>
+          {"none" || defaultValue.name}
+        </option>
+      )}
       {/* Map over the userData array and render each user option */}
       {userData &&
         userData.map((user) => (

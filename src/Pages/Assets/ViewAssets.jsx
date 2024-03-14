@@ -52,7 +52,7 @@ const ViewAssets = () => {
     EditAssets.mutate(data);
   };
   const [categoryName, setCategoryName] = useState();
-  console.log(assetsData);
+  console.log("kjk", assetsData);
   return (
     <section className="assets__add">
       <div className="content-wrapper">
@@ -160,7 +160,7 @@ const ViewAssets = () => {
               <div className="assets__form--input">
                 <Label text="Location" sup={"*"} />
                 <SelectInputLocation
-                  defaultValue={assetsData.location}
+                  defaultValue={assetsData.location.name}
                   name="location"
                   register={register}
                   isDisabled={true}
@@ -171,7 +171,7 @@ const ViewAssets = () => {
                 <SelectInputUser
                   name="assigned_to"
                   register={register}
-                  defaultValue={assetsData.assigned_to_name}
+                  defaultValue={assetsData.assigned_to}
                   isDisabled={true}
                 />
               </div>
@@ -192,10 +192,8 @@ const ViewAssets = () => {
                 </label>
               </div>
               <div className="assets__form--input">
-                <figure>
-                  <ImagePath
-                    file={assetsData.image_name ? assetsData.image_name : " "}
-                  />
+                <figure className="image__display">
+                  <ImagePath file={assetsData.image_name} />
                 </figure>
               </div>
               <div className="assets__form--btn">

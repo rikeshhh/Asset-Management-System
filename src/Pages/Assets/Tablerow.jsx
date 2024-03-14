@@ -48,6 +48,7 @@ const Tablerow = ({ tableItem }) => {
   const handleDeleteConfirmationModel = () => {
     setDeleteConfirationShow(true);
   };
+  console.log(tableItem);
   return (
     <>
       {deleteConfirationShow && (
@@ -68,9 +69,9 @@ const Tablerow = ({ tableItem }) => {
             {tableItem.name}
           </p>
         </td>
-        <td data-cell="category">{tableItem.category}</td>
+        <td data-cell="category">{tableItem.category.name}</td>
         <td data-cell="status">{tableItem.status}</td>
-        <td data-cell="assigned_to">{tableItem.assigned_to_name}</td>
+        <td data-cell="assigned_to">{tableItem.assigned_to.name}</td>
         <td data-cell="assigned_date">{tableItem.assigned_date}</td>
         <td className="button-gap">
           {/* <Link  to={{ pathname: '/profile', state: false }}>
