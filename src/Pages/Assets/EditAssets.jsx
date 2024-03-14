@@ -29,9 +29,7 @@ const EditAssets = () => {
     formState: { errors },
     handleSubmit,
   } = formMethod;
-  const toggleSwitch = () => {
-    setIsActive((prev) => !prev);
-  };
+
   const location = useLocation();
   const receivedState = location.state;
   const assetsData = receivedState.tableData;
@@ -66,6 +64,9 @@ const EditAssets = () => {
   };
   const [isActive, setIsActive] = useState(assetsData.status === "active");
 
+  const toggleSwitch = () => {
+    setIsActive((prev) => !prev);
+  };
   const [categoryName, setCategoryName] = useState();
   return (
     <section className="assets__add">
@@ -187,7 +188,7 @@ const EditAssets = () => {
                 <label className={`switch ${isActive ? "active" : "inactive"}`}>
                   <input
                     type="checkbox"
-                    checked={isActive}
+                    defaultChecked={isActive}
                     onChange={toggleSwitch}
                   />
                   <span className="slider"></span>

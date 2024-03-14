@@ -153,6 +153,8 @@ const Software = () => {
     totalData = softwareData.totalData;
   }
   const roundUp = Math.ceil(totalData / 7);
+  const [pageNumberForEllipsis, setPageNumberForEllipsis] = useState(null);
+
   return (
     <>
       {filterShow ? (
@@ -205,14 +207,21 @@ const Software = () => {
         {softwareData &&
           [...Array(roundUp)].map((_, index) => (
             <>
-              {index === roundUp - 2 ? (
+              {index === roundUp - 2 && pageNumber > 2 ? (
                 <Button
                   key={index}
-                  text="..."
+                  text={
+                    pageNumberForEllipsis !== null
+                      ? pageNumberForEllipsis.toString()
+                      : "..."
+                  }
                   className={
                     pageNumber === index + 1 ? "activePage" : "inactivePage"
                   }
-                  handleClick={() => updatePageNumber(index + 1)}
+                  handleClick={() => {
+                    updatePageNumber(index);
+                    setPageNumberForEllipsis(index + 1);
+                  }}
                 />
               ) : (
                 <Button

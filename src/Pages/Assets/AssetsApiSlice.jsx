@@ -26,7 +26,7 @@ export const deleteAssetsTableData = async (assetsId) => {
   }
 };
 export const assetsEdit = async (assetsInfo, productID) => {
-  console.log(productID)
+  console.log(productID);
   var formdata = new FormData();
   formdata.append("id", productID);
   formdata.append("name", assetsInfo.productName);
@@ -44,14 +44,10 @@ export const assetsEdit = async (assetsInfo, productID) => {
   }
   formdata.append("_method", "PUT");
   try {
-    const response = await instance.post(
-      `/assets?id=${productID}`,
-      formdata,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-        "Content-Type": "multipart/form-data",
-      }
-    );
+    const response = await instance.post(`/assets?id=${productID}`, formdata, {
+      headers: { Authorization: `Bearer ${token}` },
+      "Content-Type": "multipart/form-data",
+    });
   } catch (error) {
     throw error;
   }
@@ -91,8 +87,7 @@ export const getAssetsData = async (
   pageNumber,
   searchCategory,
   searchStatus,
-  fromDate,
-  toDate
+  assigned_date
 ) => {
   try {
     const response = await instance({
@@ -104,7 +99,7 @@ export const getAssetsData = async (
         page: pageNumber,
         category: searchCategory,
         status: searchStatus,
-        date: `${fromDate} to ${toDate}`,
+        date: assigned_date,
       },
       headers: {
         Authorization: `Bearer ${token}`,

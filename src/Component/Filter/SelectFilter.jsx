@@ -33,7 +33,7 @@ const SelectFilter = ({
       disabled={isDisabled}
       className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
     >
-      <option className="select__option" value={null}>
+      <option className="select__option" value="None">
         None
       </option>
       {/* Map over the CategoryData array and render each category option */}

@@ -15,8 +15,6 @@ const SelectInputCategory = ({
   defaultValue,
   isDisabled,
 }) => {
-  console.log(defaultValue);
-
   const { data: CategoryData } = useQuery({
     queryKey: ["selectInputCategory"],
     queryFn: selectInputCategory,
@@ -35,24 +33,23 @@ const SelectInputCategory = ({
       onChange={addCategoryId}
       className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
     >
-      {defaultValue ? null : (
+      {defaultValue ? (
+        <>
+          <option
+            className="select__option"
+            value={defaultValue?.id}
+            disabled={isDisabled}
+          >
+            {defaultValue?.name}
+          </option>
+        </>
+      ) : (
         <option value="" disabled selected className="option__disabled">
           Select the category of the asset
         </option>
       )}
 
       {/* Render the default option only once outside of the map function */}
-      {defaultValue && (
-        <>
-          <option
-            className="select__option"
-            value={defaultValue.id}
-            disabled={isDisabled}
-          >
-            {defaultValue.name}
-          </option>
-        </>
-      )}
 
       {/* Map over the CategoryData array and render each category option */}
       {CategoryData && (

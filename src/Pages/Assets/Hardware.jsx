@@ -54,6 +54,7 @@ const Hardware = () => {
   const assets_type = searchParams.get("assets_type");
   const toDate = searchParams.get("toDate");
   const searchDate = `${fromDate} to ${toDate}`;
+  const assignedDate = searchParams.get("toDate");
   const searchStatus = searchParams.get("status");
   const updatePageNumber = (newPageNumber) => {
     setPageNumber(newPageNumber);
@@ -72,8 +73,7 @@ const Hardware = () => {
       pageNumber,
       searchCategory,
       searchStatus,
-      fromDate,
-      toDate,
+      assignedDate,
     ],
     queryFn: () =>
       getAssetsData(
@@ -82,8 +82,8 @@ const Hardware = () => {
         pageNumber,
         searchCategory,
         searchStatus,
-        fromDate,
-        toDate
+
+        assignedDate
       ),
     staleTime: 10000,
   });
@@ -132,6 +132,7 @@ const Hardware = () => {
     totalData = HardwareData.totalData;
   }
   const roundUp = Math.ceil(totalData / 7);
+  const [pageNumberForEllipsis, setPageNumberForEllipsis] = useState(null);
 
   return (
     <>
@@ -183,14 +184,21 @@ const Hardware = () => {
         {HardwareData &&
           [...Array(roundUp)].map((_, index) => (
             <>
-              {index === roundUp - 2 ? (
+              {index === roundUp - 2 && pageNumber > 2 ? (
                 <Button
                   key={index}
-                  text="..."
+                  text={
+                    pageNumberForEllipsis !== null
+                      ? pageNumberForEllipsis.toString()
+                      : "..."
+                  }
                   className={
                     pageNumber === index + 1 ? "activePage" : "inactivePage"
                   }
-                  handleClick={() => updatePageNumber(index + 1)}
+                  handleClick={() => {
+                    updatePageNumber(index);
+                    setPageNumberForEllipsis(index + 1);
+                  }}
                 />
               ) : (
                 <Button

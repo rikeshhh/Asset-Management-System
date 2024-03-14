@@ -25,15 +25,40 @@ const Filter = ({ handleClick, filterShow }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filterSubmit = (data) => {
-    if (data.category === "None") {
+    console.log(data);
+    const fromDate = data.fromDate.replace(/\+/g, " ");
+    const toDate = data.toDate.replace(/\+/g, " ");
+    const assignedDate = `${fromDate} to ${toDate}`;
+
+    if (data.category && data.fromDate && data.toDate) {
+      // Set search parameters including category, fromDate, toDate, and status
       setSearchParams({
+        category: data.category,
         fromDate: data.fromDate,
         toDate: data.toDate,
         status: data.status,
+        assigned_date: assignedDate,
       });
-    } else {
+    } else if (data.status !== "None") {
+      // Set search parameters including status only
       setSearchParams({
-        ...data,
+        status: data.status,
+      });
+    } else if (data.category !== "None") {
+      setSearchParams({
+        category: data.category,
+      });
+    } else if (data.fromDate !== "") {
+      setSearchParams({
+        fromDate: data.fromDate,
+      });
+    } else if (data.toDate !== "") {
+      setSearchParams({
+        toDate: data.toDate,
+      });
+    } else if (data.toDate && data.fromDate !== "") {
+      setSearchParams({
+        assigned_date: `${data.toDate} to ${data.fromDate}`,
       });
     }
   };

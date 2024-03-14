@@ -38,7 +38,8 @@ const AssetsForm = ({
 
   // Function to toggle the status of the checkbox
   const toggleSwitch = () => {
-    setIsActive(!isActive);
+    setIsActive((prevState) => !prevState);
+    console.log("After toggling:", isActive);
   };
 
   const [options, setOptions] = useState([
@@ -73,6 +74,7 @@ const AssetsForm = ({
     },
   });
   const submitData = (data) => {
+    console.log("add");
     console.log(data);
     if (data.assets_image === null) {
       notifyError("Please upload an image");
@@ -180,13 +182,13 @@ const AssetsForm = ({
               <SelectInputUser name="assigned_to" register={register} />
             </div>
             <div className="assets__form--input ">
-              <Label text="Status" />
               <label className={`switch ${isActive ? "active" : "inactive"}`}>
                 <input
+                  {...register("status")}
                   type="checkbox"
+                  // Registering the checkbox with react-hook-form
                   checked={isActive}
-                  onClick={toggleSwitch}
-                  onChange={() => {}}
+                  onChange={toggleSwitch} // Toggle the checkbox state
                 />
                 <span className="slider"></span>
                 <span className="status">
@@ -194,6 +196,7 @@ const AssetsForm = ({
                 </span>
               </label>
             </div>
+
             <div className="assets__form--input">
               <DropzoneArea setValue={setValue} name="assets_image" />
             </div>

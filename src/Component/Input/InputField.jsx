@@ -26,6 +26,7 @@ export const InputField = ({
   active,
   inActive,
   handleclick,
+  checked
 }) => {
   const hasError = errors[name];
   const [inputValu, setInputValu] = useState(defaultValue); // <-- State to manage the input value
@@ -64,7 +65,7 @@ export const InputField = ({
             },
           })}
           disabled={isDisabled}
-          checked={isChecked}
+          checked={checked}
         />
         {children && (
           <div className="password-toggle-button" onClick={visiblePasswordFn}>
