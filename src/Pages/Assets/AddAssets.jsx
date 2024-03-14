@@ -61,8 +61,15 @@ const AssetsForm = ({
       }, 1000);
     },
     onError: (error) => {
-      notifyError("Error adding assets");
-      console.log("Error while adding assets", error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        notifyError(error.response.data.message);
+      } else {
+        notifyError(error.message);
+      }
     },
   });
   const submitData = (data) => {

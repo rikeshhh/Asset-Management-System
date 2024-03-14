@@ -160,7 +160,7 @@ const ViewAssets = () => {
               <div className="assets__form--input">
                 <Label text="Location" sup={"*"} />
                 <SelectInputLocation
-                  defaultValue={assetsData.location.name}
+                  defaultValue={assetsData.location}
                   name="location"
                   register={register}
                   isDisabled={true}
@@ -193,7 +193,7 @@ const ViewAssets = () => {
               </div>
               <div className="assets__form--input">
                 <figure className="image__display">
-                  <ImagePath file={assetsData.image_name} />
+                  <img src={assetsData.image_name} />
                 </figure>
               </div>
               <div className="assets__form--btn">

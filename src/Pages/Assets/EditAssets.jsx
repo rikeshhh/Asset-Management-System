@@ -45,7 +45,15 @@ const EditAssets = () => {
       queryClient.invalidateQueries("AssetsData");
     },
     onError: (error) => {
-      notifyError(error.message);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        notifyError(error.response.data.message);
+      } else {
+        notifyError(error.message);
+      }
     },
   });
 
@@ -171,7 +179,7 @@ const EditAssets = () => {
                 <SelectInputUser
                   name="assigned_to"
                   register={register}
-                  defaultValue={assetsData.assigned_to_name}
+                  defaultValue={assetsData.assigned_to}
                 />
               </div>
               <div className="assets__form--input">
@@ -194,7 +202,6 @@ const EditAssets = () => {
                   name="assets_image"
                   defaultValue={assetsData.image_name}
                 />
-               
               </div>
               <div className="assets__form--btn">
                 <Button

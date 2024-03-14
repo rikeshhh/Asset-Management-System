@@ -131,7 +131,7 @@ const Login = () => {
                     <Button
                       text="Login"
                       className={"user__auth--button"}
-                      value="submit"
+                      type="submit"
                     />
                     <div className="user__auth--ques login__ques">
                       <p>Dont have an account?</p>

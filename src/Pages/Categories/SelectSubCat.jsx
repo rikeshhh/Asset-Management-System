@@ -19,26 +19,39 @@ const SelectSubCat = ({
       disabled={isDisabled}
       className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
     >
+      {defaultValue ? null : (
+        <option value="" disabled selected>
+          Select the category of the asset
+        </option>
+      )}
       {/* Render the default option only once outside of the map function */}
       {defaultValue && (
         <option
           className="select__option"
-          value={"None" || defaultValue.id}
+          value={defaultValue.id}
           disabled={isDisabled}
         >
-          {"None" || defaultValue.name}
+          {defaultValue.name}
         </option>
       )}
 
       {/* Map over the subCategoryData array and render each subcategory option */}
-      {subCategoryData &&
-        subCategoryData.map((category) =>
-          category.child.map((child) => (
-            <option className="select__option" key={child.id} value={child.id}>
-              {child.category_name}
-            </option>
-          ))
-        )}
+      {subCategoryData && (
+        <>
+          <option value={null}>None</option>
+          {subCategoryData.map((category) =>
+            category.child.map((child) => (
+              <option
+                className="select__option"
+                key={child.id}
+                value={child.id}
+              >
+                {child.category_name}
+              </option>
+            ))
+          )}
+        </>
+      )}
     </select>
   );
 };

@@ -61,7 +61,7 @@ const Filter = ({ handleClick, filterShow }) => {
             <div className="form__input--section ">
               <Label text={"Status"} />
               <SelectInput
-                option={["active", "inactive"]}
+                option={["None", "active", "inactive"]}
                 register={register}
                 name="status"
               />

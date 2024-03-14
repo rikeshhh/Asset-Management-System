@@ -7,25 +7,34 @@ const SelectInputUser = ({ name, register, defaultValue, isDisabled }) => {
     queryKey: ["selectUserData"],
     queryFn: selectUser,
   });
+  console.log(defaultValue);
   return (
     <select
       {...register(name, { required: true })}
       disabled={isDisabled}
       className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
     >
-      {/* Render the default option outside of the map function */}
-      {defaultValue && (
-        <option className="select__option" value={null || defaultValue.id}>
-          {"none" || defaultValue.name}
+      {defaultValue ? null : (
+        <option value="" disabled selected>
+          Select the Assigned Employee
         </option>
       )}
-      {/* Map over the userData array and render each user option */}
-      {userData &&
-        userData.map((user) => (
-          <option className="select__option" key={user.id} value={user.id}>
-            {user.name}
-          </option>
-        ))}
+
+      {defaultValue && (
+        <option className="select__option" value={defaultValue.id}>
+          {defaultValue.name}
+        </option>
+      )}
+      {userData && (
+        <>
+          <option value={null}>None</option>
+          {userData.map((user) => (
+            <option className="select__option" key={user.id} value={user.id}>
+              {user.name}
+            </option>
+          ))}
+        </>
+      )}
     </select>
   );
 };

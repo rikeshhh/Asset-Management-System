@@ -83,7 +83,7 @@ const Categories = () => {
       reset();
     },
     onError: (error) => {
-      notifyError(error.message);
+      notifyError(error.response.data.message.message.category_name[0]);
     },
   });
 
