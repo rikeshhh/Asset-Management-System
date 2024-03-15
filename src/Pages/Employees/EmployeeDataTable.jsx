@@ -19,18 +19,10 @@ const EmployeeDataTable = ({
   handleTableEdit,
   handleDeleteClick,
   handleViewEmployee,
-  searchedData,
+  tableData,
+  error,
+  isPending,
 }) => {
-  const {
-    isPending,
-    error,
-    data: tableData,
-  } = useQuery({
-    queryKey: ["searchedData"],
-    queryFn: getEmployeeTableData,
-  });
-
-  console.log(searchedData);
   /**
    * Handles deleting an employee.
    * @param {number} employeeId - The ID of the employee to be deleted.
@@ -53,7 +45,8 @@ const EmployeeDataTable = ({
   };
   // If an error occurs during data fetching, display an error message.
   if (error) return "An error has occurred: " + error.message;
-  const dataToRender = searchedData || tableData;
+
+  const option = ["ID", "User", "Designation", "Department", "Email", "Phone"];
   return (
     <div className="table__container">
       <table className="main__table">
@@ -61,52 +54,24 @@ const EmployeeDataTable = ({
           {isPending ? (
             <PendingTableHead />
           ) : (
-            <tr className="table__heading__row">
-              <th>
-                ID{" "}
-                <span>
-                  <LuArrowUpDown />
-                </span>
-              </th>
-              <th>
-                User{" "}
-                <span>
-                  <LuArrowUpDown />
-                </span>
-              </th>
-              <th>
-                Designation{" "}
-                <span>
-                  <LuArrowUpDown />
-                </span>
-              </th>
-              <th>
-                Department{" "}
-                <span>
-                  <LuArrowUpDown />
-                </span>
-              </th>
-              <th>
-                Email{" "}
-                <span>
-                  <LuArrowUpDown />
-                </span>
-              </th>
-              <th>
-                Phone{" "}
-                <span>
-                  <LuArrowUpDown />
-                </span>
-              </th>
+            <>
+              {option.map((tableHead, index) => (
+                <th key={index}>
+                  {tableHead}
+                  <span>
+                    <LuArrowUpDown />
+                  </span>
+                </th>
+              ))}
               <th>Action</th>
-            </tr>
+            </>
           )}
         </thead>
         <tbody>
           {isPending ? (
             <PendingTableBody />
           ) : (
-            dataToRender.map((tableItem, index) => (
+            tableData.map((tableItem, index) => (
               <tr key={index}>
                 <td data-cell="id">{tableItem.id}</td>
                 <td data-cell="name">{tableItem.name}</td>

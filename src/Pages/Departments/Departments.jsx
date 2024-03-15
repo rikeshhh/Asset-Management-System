@@ -37,6 +37,7 @@ const Departments = () => {
       department: "",
     },
   });
+  const [disabledButton, setDisabledButton] = useState(false);
   const addDepartment = useMutation({
     //Function that performs the mutation, adding a new department.
     mutationFn: (formData) => {
@@ -54,7 +55,19 @@ const Departments = () => {
     },
   });
   const successMessage = "Department has been added";
+  // const onSubmit = (data) => {
+  //   addDepartment.mutate(data);
+  // };
   const onSubmit = (data) => {
+    // Check if the department name contains only spaces
+    if (data.department.trim() === "  ") {
+      // If the department name consists only of spaces, display an error message or handle it accordingly
+      // For now, let's log an error message to the console
+      notifyError("Department name cannot be empty");
+      return;
+    }
+
+    // If the department name is not empty after trimming, proceed with the mutation
     addDepartment.mutate(data);
   };
 
@@ -125,6 +138,8 @@ const Departments = () => {
               isPending={isPending}
               handleDeleteClick={handleDeleteClick}
               handleProceedClick={handleProceedClick}
+              disabledButton={disabledButton}
+              setDisabledButton={setDisabledButton}
             />
 
             <div className="add__category">

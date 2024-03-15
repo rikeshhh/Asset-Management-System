@@ -33,6 +33,8 @@ const DepartmentDataTable = ({
   DepartmentData,
   isPending,
   handleDeleteClick,
+  disabledButton,
+  setDisabledButton,
 }) => {
   const successMessage = "Department has been updated successfully";
 
@@ -47,6 +49,7 @@ const DepartmentDataTable = ({
     onSuccess: () => {
       notifySuccess(successMessage);
       queryClient.invalidateQueries("DepartmentData");
+      setDisabledButton(false);
       setShow(false);
       reset();
     },
@@ -64,6 +67,7 @@ const DepartmentDataTable = ({
   const onUpdateData = (data) => {
     if (previousDepartment === data.department) {
       setShow(false);
+      setDisabledButton(false);
     } else {
       const editData = {
         data: data.department,
@@ -83,9 +87,11 @@ const DepartmentDataTable = ({
    * @param {Object} option - The department option to be edited.
    */
   const handleEditButtonClick = (option) => {
+    setDisabledButton(true);
     setPreviousDepartment(option.department);
     setDepartmentId(option.id);
     setShow(true);
+    reset();
   };
 
   /**
@@ -97,7 +103,9 @@ const DepartmentDataTable = ({
     handleSubmit,
     reset,
   } = useForm();
+
   const onMiniDelete = () => {
+    setDisabledButton(false);
     setShow(false);
     reset();
   };
@@ -151,7 +159,13 @@ const DepartmentDataTable = ({
                 <tr key={index}>
                   <td>{index + 1}</td>
                   {departmentId === options.id && show ? (
-                    <td className={show ? "universal__td--border" : ""}>
+                    <td
+                      className={
+                        show && !errors.department
+                          ? "universal__td--border"
+                          : "universal__td--border error__validation__outline"
+                      }
+                    >
                       <form
                         onSubmit={handleSubmit(onUpdateData)}
                         className="universal__update--form"
@@ -192,13 +206,23 @@ const DepartmentDataTable = ({
 
                   <td className="button-gap">
                     <Button
-                      className="edit__button"
+                      className={
+                        disabledButton
+                          ? "small-button__disabled"
+                          : "edit__button"
+                      }
                       text={<CiEdit />}
+                      isDisabled={disabledButton ? true : false}
                       handleClick={() => handleEditButtonClick(options)}
                     />
                     <Button
-                      className="delete__button"
+                      className={
+                        disabledButton
+                          ? "small-button__disabled"
+                          : "delete__button"
+                      }
                       text={<GoTrash />}
+                      isDisabled={disabledButton ? true : false}
                       handleClick={() => handleDeleteDepartment(options.id)}
                     />
                   </td>

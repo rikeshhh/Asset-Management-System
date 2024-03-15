@@ -61,7 +61,7 @@ const Location = () => {
     },
     onError: (error) => {
       console.log(error);
-      notifyError(error.response.data.message.message.location);
+      notifyError(error.response.data.message);
     },
   });
   //func: Mutation hook for deleting a location
@@ -80,6 +80,7 @@ const Location = () => {
   });
   const [locationId, setLocationId] = useState();
   const [deleteConfirmationShow, setDeleteConfirmationShow] = useState(false);
+  const [disableButtons, setDisableButtons] = useState(false);
 
   const handleCancelClick = () => {
     setDeleteConfirmationShow(false);
@@ -121,6 +122,8 @@ const Location = () => {
               isPending={isPending}
               handleDeleteClick={handleDeleteClick}
               handleProceedClick={handleProceedClick}
+              setDisableButtons={setDisableButtons}
+              disableButtons={disableButtons}
             />
             {/* Add location form */}
 

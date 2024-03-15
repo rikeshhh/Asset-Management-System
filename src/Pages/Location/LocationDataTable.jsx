@@ -19,7 +19,13 @@ import { FaCheck } from "react-icons/fa6";
  * LocationDataTable component responsible for rendering a table displaying location data.
  * @returns {JSX.Element} JSX element representing the LocationDataTable component.
  */
-const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
+const LocationDataTable = ({
+  LocationData,
+  isPending,
+  handleDeleteClick,
+  setDisableButtons,
+  disableButtons,
+}) => {
   const [show, setShow] = useState(false);
   // func:Mutation hook for editing location
   const EditLocation = useMutation({
@@ -29,6 +35,8 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
     onSuccess: () => {
       notifySuccess(successMessage);
       queryClient.invalidateQueries("LocationData");
+      setDisableButtons(false);
+
       setShow(false);
       reset();
     },
@@ -43,6 +51,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
   const [locationTableDataOrder, setLocationTableDataOrder] = useState("ASC");
 
   const handleEditButtonClick = (options) => {
+    setDisableButtons(true);
     setPreviousLocationId(options.id);
     setPreviousLocation(options.location);
     setShow(true);
@@ -59,6 +68,7 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
   const onLocationEditSubmit = (data) => {
     if (previousLocation === data.location) {
       setShow(false);
+      setDisableButtons(false);
     } else {
       const editData = {
         data: data.location,
@@ -74,6 +84,8 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
   //   DeleteLocation.mutate(location);
   // };
   const onEditCancel = () => {
+    setDisableButtons(false);
+
     setShow(false);
     reset();
   };
@@ -123,7 +135,13 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
               <tr key={index}>
                 <td>{index + 1}</td>
                 {options.id === previousLocationId && show ? (
-                  <td className={show ? "universal__td--border" : ""}>
+                  <td
+                    className={
+                      show && !errors.location
+                        ? "universal__td--border"
+                        : " universal__td--border error__validation__outline"
+                    }
+                  >
                     <form
                       onSubmit={handleSubmit(onLocationEditSubmit)}
                       className="universal__update--form"
@@ -161,13 +179,21 @@ const LocationDataTable = ({ LocationData, isPending, handleDeleteClick }) => {
                 )}
                 <td className="button-gap">
                   <Button
-                    className="edit__button"
+                    className={
+                      disableButtons ? "small-button__disabled" : "edit__button"
+                    }
                     text={<CiEdit />}
+                    isDisabled={disableButtons ? true : false}
                     handleClick={() => handleEditButtonClick(options)}
                   />
                   <Button
-                    className="delete__button"
+                    className={
+                      disableButtons
+                        ? "small-button__disabled"
+                        : "delete__button"
+                    }
                     text={<GoTrash />}
+                    isDisabled={disableButtons ? true : false}
                     handleClick={() => handleDeleteLocation(options.id)}
                   />
                 </td>
