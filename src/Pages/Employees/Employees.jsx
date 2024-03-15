@@ -11,7 +11,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Filter from "../../Component/Filter/Filter";
 import EmployeeDataTable from "./EmployeeDataTable";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
-import { employeeDelete, searchUser } from "./EmployeeApiSlice";
+import { employeeDelete, getEmployeeTableData } from "./EmployeeApiSlice";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
@@ -22,8 +22,6 @@ import { SearchSvg } from "../../Component/svg/SearchSvg";
  * Functional component representing the Employees page.
  */
 const Employees = () => {
-  const [searchParams, setSearchParams] = useSearchParams([]);
-
   const {
     register,
     formState: { errors },
@@ -33,18 +31,32 @@ const Employees = () => {
   /**
    * React Query hook for handling employee deletion mutation.
    */
-  const searchEmployee = searchParams.get("search") || "";
+  // const searchEmployee = searchParams.get("search") || "";
   // console.log("searchEmployee", searchEmployee);
-  const [employeeTableDataOrder, setEmployeeTableDataOrder] = useState("ASC");
+  // const [employeeTableDataOrder, setEmployeeTableDataOrder] = useState("ASC");
+  // const {
+  //   isPending,
+  //   error,
+  //   data: searchEmployeeData,
+  // } = useQuery({
+  //   queryKey: ["EmployeeData", searchEmployee],
+  //   queryFn: () => searchUser(searchEmployee),
+  //   staleTime: 10000,
+  // });
+  const [sortOrder, setSortOrder] = useState("ASC");
+  const [searchData, setSearchData] = useState("");
   const {
     isPending,
     error,
-    data: searchEmployeeData,
+    data: tableData,
   } = useQuery({
-    queryKey: ["EmployeeData", searchEmployee],
-    queryFn: () => searchUser(searchEmployee),
+    queryKey: ["searchedData", searchData],
+    queryFn: () => getEmployeeTableData(searchData),
     staleTime: 10000,
   });
+  const handleSort = () => {
+    setSortOrder((prevSortOrder) => (prevSortOrder === "ASC" ? "DESC" : "ASC"));
+  };
 
   const DeleteEmployee = useMutation({
     mutationFn: (employeeId) => {
@@ -114,9 +126,7 @@ const Employees = () => {
     });
   };
   const submitSearch = (data) => {
-    setSearchParams({
-      ...data,
-    });
+    setSearchData(data.Search);
   };
 
   return (
@@ -149,22 +159,7 @@ const Employees = () => {
           </div>
           <div className="employees__table">
             <div className="ams__filter">
-              {/* <SearchInput /> */}
-              <form
-                className="search__form"
-                onSubmit={handleSubmit(submitSearch)}
-              >
-                <InputField
-                  name="search"
-                  register={register}
-                  placeholder="Search"
-                  className="search-input"
-                  message={Model.Name.pattern.message}
-                  errors={errors}
-                  type={Model.Name.type}
-                />
-                <SearchSvg className="icons" />
-              </form>
+              <SearchInput submitSearch={submitSearch} />
               <Button
                 handleClick={() => onFilterClick(!filterShow)}
                 text="Filter"
@@ -177,7 +172,11 @@ const Employees = () => {
               handleProceedClick={handleProceedClick}
               handleTableEdit={handleTableEdit}
               handleViewEmployee={handleViewEmployee}
-              searchedData={searchEmployeeData}
+              // searchedData={searchEmployeeData}
+              tableData={tableData}
+              isPending={isPending}
+              error={error}
+              handleSort={handleSort}
             />
           </div>
         </div>
