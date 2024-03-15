@@ -56,12 +56,8 @@ const EditAssets = () => {
   });
 
   const submitData = (data) => {
-    if (data.assets_image === null) {
-      notifyError("Please upload an image");
-    } else {
       EditAssets.mutate(data);
-    }
-  };
+      };
   const [isActive, setIsActive] = useState(assetsData.status === "active");
 
   const toggleSwitch = () => {

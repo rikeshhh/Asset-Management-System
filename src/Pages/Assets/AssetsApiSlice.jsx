@@ -87,7 +87,7 @@ export const getAssetsData = async (
   pageNumber,
   searchCategory,
   searchStatus,
-  assigned_date
+  assignedDate
 ) => {
   try {
     const response = await instance({
@@ -99,7 +99,7 @@ export const getAssetsData = async (
         page: pageNumber,
         category: searchCategory,
         status: searchStatus,
-        date: assigned_date,
+        assigned_date: assignedDate,
       },
       headers: {
         Authorization: `Bearer ${token}`,

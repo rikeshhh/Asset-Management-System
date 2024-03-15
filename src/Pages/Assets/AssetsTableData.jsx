@@ -41,7 +41,6 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
       console.log(error);
     }
   };
-
   const dataToRender = assetTableData || tableData;
   return (
     <>

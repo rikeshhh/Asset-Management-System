@@ -29,7 +29,6 @@ const SelectSubCat = ({
         <option
           className="select__option"
           value={defaultValue.id}
-          disabled={isDisabled}
         >
           {defaultValue.name}
         </option>

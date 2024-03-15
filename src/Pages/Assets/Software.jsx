@@ -50,6 +50,8 @@ const Software = () => {
   const toDate = searchParams.get("toDate");
   const searchDate = `${fromDate} to ${toDate}`;
   const searchStatus = searchParams.get("status");
+  const assignedDate = searchParams.get("assigned_date");
+
   /**
    * Handles the click event for deleting an employee.
    * @param {Object} employee - The employee object to be deleted.
@@ -110,8 +112,7 @@ const Software = () => {
       pageNumber,
       searchCategory,
       searchStatus,
-      fromDate,
-      toDate,
+      assignedDate,
     ],
     queryFn: () =>
       getAssetsData(
@@ -120,7 +121,7 @@ const Software = () => {
         pageNumber,
         searchCategory,
         searchStatus,
-        searchDate
+        assignedDate
       ),
     staleTime: 10000,
   });

@@ -35,12 +35,8 @@ const SelectInputCategory = ({
     >
       {defaultValue ? (
         <>
-          <option
-            className="select__option"
-            value={defaultValue?.id}
-            disabled={isDisabled}
-          >
-            {defaultValue?.name}
+          <option className="select__option" value={defaultValue.id}>
+            {defaultValue.name}
           </option>
         </>
       ) : (
