@@ -8,6 +8,7 @@ import ImagePath from "../Images/ImagePath";
 
 const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
   const [importedImage, setImportedImage] = useState(defaultValue || null);
+
   const [newImage, setNewImage] = useState();
   const onDrop = (acceptedFiles) => {
     // Handle dropped files

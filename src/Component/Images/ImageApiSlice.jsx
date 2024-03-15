@@ -37,4 +37,7 @@ const getImage = async (file) => {
   }
 };
 
+
+
+
 export default getImage;

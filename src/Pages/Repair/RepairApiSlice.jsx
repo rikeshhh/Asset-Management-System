@@ -11,7 +11,7 @@ export const getRepairTableData = async (searchData, sortData, sortOrder) => {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    return response.data.data;
+    return response.data.data.data;
   } catch (error) {
     console.error("Axios error:", error);
     throw error;

@@ -39,7 +39,6 @@ const RepairDataTable = ({ onFilterClick }) => {
     queryFn: () => getRepairTableData(searchData, sortData, sortOrder),
     staleTime: 10000,
   });
-
   const DeleteRepair = useMutation({
     mutationFn: () => deleteRepairReplace(repairId),
     onSuccess: () => {
