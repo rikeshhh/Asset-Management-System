@@ -7,7 +7,7 @@ import Model from "../../Component/Model/Model";
 import { SelectInput } from "../../Component/Input/SelectInput";
 import Button from "../../Component/Button/Button";
 import DropzoneArea from "../../Component/Dropzone/DropzoneArea";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SelectInputLocation from "../Location/SelectInputLocation";
 import { useMutation } from "@tanstack/react-query";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
@@ -33,7 +33,7 @@ const EditAssets = () => {
   const location = useLocation();
   const receivedState = location.state;
   const assetsData = receivedState.tableData;
-  console.log(assetsData);
+  const navigate = useNavigate();
   const EditAssets = useMutation({
     mutationFn: (assetsInfo) => {
       return assetsEdit(assetsInfo, assetsData.id);
@@ -41,6 +41,9 @@ const EditAssets = () => {
     onSuccess: () => {
       notifySuccess("Assets has been updated");
       queryClient.invalidateQueries("AssetsData");
+      setTimeout(() => {
+        navigate('/assets/*')
+      }, 1000);
     },
     onError: (error) => {
       if (
@@ -56,8 +59,8 @@ const EditAssets = () => {
   });
 
   const submitData = (data) => {
-      EditAssets.mutate(data);
-      };
+    EditAssets.mutate(data);
+  };
   const [isActive, setIsActive] = useState(assetsData.status === "active");
 
   const toggleSwitch = () => {

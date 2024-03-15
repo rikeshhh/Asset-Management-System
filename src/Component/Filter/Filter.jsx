@@ -31,34 +31,37 @@ const Filter = ({ handleClick, filterShow }) => {
     const assignedDate = `${fromDate} to ${toDate}`;
 
     // Check if all three parameters are selected
-    if (data.category !== "None" && data.status !== "None" && data.fromDate && data.toDate) {
-        setSearchParams({
-            category: data.category,
-            fromDate: data.fromDate,
-            toDate: data.toDate,
-            status: data.status,
-            assigned_date: assignedDate,
-        });
+    if (
+      data.category !== "None" &&
+      data.status !== "None" &&
+      data.fromDate &&
+      data.toDate
+    ) {
+      setSearchParams({
+        category: data.category,
+        status: data.status,
+        assigned_date: assignedDate,
+      });
     }
     // Check if only category is selected
     else if (data.category !== "None") {
-        setSearchParams({
-            category: data.category,
-        });
+      setSearchParams({
+        category: data.category,
+      });
     }
     // Check if only status is selected
     else if (data.status !== "None") {
-        setSearchParams({
-            status: data.status,
-        });
+      setSearchParams({
+        status: data.status,
+      });
     }
     // Check if only fromDate and toDate are selected
     else if (data.fromDate && data.toDate) {
-        setSearchParams({
-            assigned_date: assignedDate,
-        });
+      setSearchParams({
+        assigned_date: assignedDate,
+      });
     }
-};
+  };
 
   return (
     <>

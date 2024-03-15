@@ -13,7 +13,6 @@ const SelectSubCat = ({
     queryKey: ["selectSubCategory"],
     queryFn: () => selectSubCategoryData(categoryName),
   });
-  console.log(subCategoryData.child);
   return (
     <select
       {...register(name, { required: true })}

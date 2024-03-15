@@ -132,7 +132,6 @@ const Hardware = () => {
   }
   const roundUp = Math.ceil(totalData / 7);
   const [pageNumberForEllipsis, setPageNumberForEllipsis] = useState(null);
-  console.log(HardwareData);
   return (
     <>
       {filterShow ? (
@@ -195,7 +194,7 @@ const Hardware = () => {
                     pageNumber === index + 1 ? "activePage" : "inactivePage"
                   }
                   handleClick={() => {
-                    updatePageNumber(index);
+                    updatePageNumber(index + 1);
                     setPageNumberForEllipsis(index + 1);
                   }}
                 />
