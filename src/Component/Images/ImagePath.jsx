@@ -26,7 +26,7 @@ const ImagePath = ({ file, state }) => {
   const blob = new Blob([imageData], { type: "image/jpeg/png" }); // Adjust the type based on your image format
   const imageUrl = URL.createObjectURL(blob);
 
-  state.setProfileImage = { imageUrl };
+  // state.setProfileImage = { imageUrl };
 
   return <img src={imageUrl} alt="" />;
 };

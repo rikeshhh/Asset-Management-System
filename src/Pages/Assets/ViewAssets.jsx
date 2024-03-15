@@ -193,7 +193,7 @@ const ViewAssets = () => {
               </div>
               <div className="assets__form--input">
                 <figure className="image__display">
-                  <img src={assetsData.image_name} />
+                  <ImagePath file={assetsData.image_name} />
                 </figure>
               </div>
               <div className="assets__form--btn">
