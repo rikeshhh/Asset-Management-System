@@ -54,7 +54,7 @@ const Hardware = () => {
   const assets_type = searchParams.get("assets_type");
   const toDate = searchParams.get("toDate");
   const searchDate = `${fromDate} to ${toDate}`;
-  const assignedDate = searchParams.get("toDate");
+  const assignedDate = searchParams.get("assigned_date");
   const searchStatus = searchParams.get("status");
   const updatePageNumber = (newPageNumber) => {
     setPageNumber(newPageNumber);
@@ -82,7 +82,6 @@ const Hardware = () => {
         pageNumber,
         searchCategory,
         searchStatus,
-
         assignedDate
       ),
     staleTime: 10000,
@@ -133,7 +132,7 @@ const Hardware = () => {
   }
   const roundUp = Math.ceil(totalData / 7);
   const [pageNumberForEllipsis, setPageNumberForEllipsis] = useState(null);
-
+  console.log(HardwareData);
   return (
     <>
       {filterShow ? (

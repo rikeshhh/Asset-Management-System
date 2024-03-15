@@ -29,10 +29,7 @@ const ViewAssets = () => {
     formState: { errors },
     handleSubmit,
   } = formMethod;
-  const [isActive, setIsActive] = useState(false);
-  const toggleSwitch = () => {
-    setIsActive((prev) => !prev);
-  };
+
   const location = useLocation();
   const receivedState = location.state;
   const assetsData = receivedState.tableData;
@@ -48,6 +45,10 @@ const ViewAssets = () => {
       notifyError(error.message);
     },
   });
+  const [isActive, setIsActive] = useState(assetsData.status === "active");
+  const toggleSwitch = () => {
+    setIsActive((prev) => !prev);
+  };
   const submitData = (data) => {
     EditAssets.mutate(data);
   };
@@ -130,7 +131,7 @@ const ViewAssets = () => {
                 <Label text="Sub-Category" />
                 <SelectSubCat
                   categoryName={categoryName}
-                  defaultValue={categoryName}
+                  defaultValue={assetsData.subcategory}
                   name="sub_category"
                   register={register}
                   isDisabled={true}
@@ -175,19 +176,18 @@ const ViewAssets = () => {
                   isDisabled={true}
                 />
               </div>
-              <div className="assets__form--input ">
+              <div className="assets__form--input">
                 <Label text="Status" />
                 <label className={`switch ${isActive ? "active" : "inactive"}`}>
                   <input
                     type="checkbox"
-                    checked={isActive}
-                    handleClick={toggleSwitch}
-                    isDisabled={true}
-                    className="input-disabled"
+                    defaultChecked={isActive}
+                    // onChange={toggleSwitch}
+                    disabled={true}
                   />
                   <span className="slider"></span>
                   <span className="status">
-                    {isActive ? "Active" : "Inactive"}
+                    {isActive ? "active" : "inactive"}
                   </span>
                 </label>
               </div>

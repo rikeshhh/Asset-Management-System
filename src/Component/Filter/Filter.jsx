@@ -30,38 +30,35 @@ const Filter = ({ handleClick, filterShow }) => {
     const toDate = data.toDate.replace(/\+/g, " ");
     const assignedDate = `${fromDate} to ${toDate}`;
 
-    if (data.category && data.fromDate && data.toDate) {
-      // Set search parameters including category, fromDate, toDate, and status
-      setSearchParams({
-        category: data.category,
-        fromDate: data.fromDate,
-        toDate: data.toDate,
-        status: data.status,
-        assigned_date: assignedDate,
-      });
-    } else if (data.status !== "None") {
-      // Set search parameters including status only
-      setSearchParams({
-        status: data.status,
-      });
-    } else if (data.category !== "None") {
-      setSearchParams({
-        category: data.category,
-      });
-    } else if (data.fromDate !== "") {
-      setSearchParams({
-        fromDate: data.fromDate,
-      });
-    } else if (data.toDate !== "") {
-      setSearchParams({
-        toDate: data.toDate,
-      });
-    } else if (data.toDate && data.fromDate !== "") {
-      setSearchParams({
-        assigned_date: `${data.toDate} to ${data.fromDate}`,
-      });
+    // Check if all three parameters are selected
+    if (data.category !== "None" && data.status !== "None" && data.fromDate && data.toDate) {
+        setSearchParams({
+            category: data.category,
+            fromDate: data.fromDate,
+            toDate: data.toDate,
+            status: data.status,
+            assigned_date: assignedDate,
+        });
     }
-  };
+    // Check if only category is selected
+    else if (data.category !== "None") {
+        setSearchParams({
+            category: data.category,
+        });
+    }
+    // Check if only status is selected
+    else if (data.status !== "None") {
+        setSearchParams({
+            status: data.status,
+        });
+    }
+    // Check if only fromDate and toDate are selected
+    else if (data.fromDate && data.toDate) {
+        setSearchParams({
+            assigned_date: assignedDate,
+        });
+    }
+};
 
   return (
     <>
