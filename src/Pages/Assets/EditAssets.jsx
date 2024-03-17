@@ -42,7 +42,7 @@ const EditAssets = () => {
       notifySuccess("Assets has been updated");
       queryClient.invalidateQueries("AssetsData");
       setTimeout(() => {
-        navigate('/assets/*')
+        navigate("/assets/*");
       }, 1000);
     },
     onError: (error) => {
@@ -59,6 +59,7 @@ const EditAssets = () => {
   });
 
   const submitData = (data) => {
+    console.log(data);
     EditAssets.mutate(data);
   };
   const [isActive, setIsActive] = useState(assetsData.status === "active");
@@ -141,7 +142,7 @@ const EditAssets = () => {
                 <Label text="Sub-Category" />
                 <SelectSubCat
                   categoryName={categoryName}
-                  defaultValue={categoryName}
+                  defaultValue={assetsData.subcategory}
                   name="sub_category"
                   register={register}
                 />{" "}
@@ -186,6 +187,7 @@ const EditAssets = () => {
                 <Label text="Status" />
                 <label className={`switch ${isActive ? "active" : "inactive"}`}>
                   <input
+                    {...register("status")}
                     type="checkbox"
                     defaultChecked={isActive}
                     onChange={toggleSwitch}
