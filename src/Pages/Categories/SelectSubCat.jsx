@@ -13,11 +13,11 @@ const SelectSubCat = ({
     queryKey: ["selectSubCategory"],
     queryFn: () => selectSubCategoryData(categoryName),
   });
-  console.log(categoryName);
   return (
     <select
       {...register(name, { required: true })}
       disabled={isDisabled}
+      style={{ color: "#999" }}
       className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
     >
       {defaultValue ? null : (

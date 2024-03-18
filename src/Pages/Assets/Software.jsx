@@ -27,6 +27,13 @@ import Model from "../../Component/Model/Model";
 import { notifyError } from "../../Component/Toast/Toast";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
+
+/**
+ * Software component displays and manages software assets.
+ *
+ * @returns {JSX.Element} JSX representation of the Software component
+ */
+
 const Software = () => {
   const {
     register,

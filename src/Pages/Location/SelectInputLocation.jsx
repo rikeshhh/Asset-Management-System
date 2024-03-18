@@ -19,6 +19,7 @@ const SelectInputLocation = ({
       {...register(name)}
       disabled={isDisabled}
       required
+      style={{ color: "#999" }}
       className={isDisabled ? "select__disabled" : "select__enabled"}
       onChange={onChange}
     >

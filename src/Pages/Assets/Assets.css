@@ -162,6 +162,7 @@ input:checked + .slider:before {
 .assets__inactive {
   text-decoration: none;
 }
+
 /* Text styles */
 .status {
   position: absolute;

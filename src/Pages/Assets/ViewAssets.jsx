@@ -20,7 +20,10 @@ import SelectInputCategory from "../Categories/SelectInputCategory";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import { SelectAssetType } from "./SelectAssetType";
 import ImagePath from "../../Component/Images/ImagePath";
-
+/**
+ * View component for displaying asset details.
+ * @returns {JSX.Element} ViewAssets component.
+ */
 const ViewAssets = () => {
   const formMethod = useForm();
   const {
@@ -30,30 +33,51 @@ const ViewAssets = () => {
     handleSubmit,
   } = formMethod;
 
+  // Extracting location and received state from the React Router's useLocation hook
   const location = useLocation();
   const receivedState = location.state;
+
+  // Extracting assets data from the received state
   const assetsData = receivedState.tableData;
+
+  // Defining a mutation function to edit assets data
   const EditAssets = useMutation({
     mutationFn: (assetsInfo) => {
+      // Call the assetsEdit function with the provided assets info
       return assetsEdit(assetsInfo);
     },
+    // Function to execute on successful mutation
     onSuccess: () => {
+      // Notify the user about successful asset update
       notifySuccess("Assets has been updated");
+
+      // Invalidate the "AssetsData" query cache to reflect the changes
       queryClient.invalidateQueries("AssetsData");
     },
+    // Function to handle errors during mutation
     onError: (error) => {
+      // Notify the user about the error
       notifyError(error.message);
     },
   });
+
+  // Define the initial state of the isActive switch based on the status of the assets data
   const [isActive, setIsActive] = useState(assetsData.status === "active");
+
+  // Function to toggle the isActive state
   const toggleSwitch = () => {
     setIsActive((prev) => !prev);
   };
+
+  // Function to submit the edited data
   const submitData = (data) => {
+    // Trigger the mutation with the edited data
     EditAssets.mutate(data);
   };
+
+  // Define state to hold the category name
   const [categoryName, setCategoryName] = useState();
-  console.log("kjk", assetsData);
+
   return (
     <section className="assets__add">
       <div className="content-wrapper">

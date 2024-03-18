@@ -1,3 +1,13 @@
+/**
+ * Filter component for filtering assets data.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {Function} props.handleClick - Function to handle click events
+ * @param {boolean} props.filterShow - Boolean indicating whether the filter is displayed or not
+ * @returns {JSX.Element} JSX representation of the Filter component
+ */
+
 import { useForm } from "react-hook-form";
 import "./Filter.css";
 import { RxCross1 } from "react-icons/rx";
@@ -23,9 +33,8 @@ const Filter = ({ handleClick, filterShow }) => {
     handleSubmit,
   } = useForm();
   const [searchParams, setSearchParams] = useSearchParams();
-
+  //function to filter assets data
   const filterSubmit = (data) => {
-    console.log(data);
     const fromDate = data.fromDate.replace(/\+/g, " ");
     const toDate = data.toDate.replace(/\+/g, " ");
     const assignedDate = `${fromDate} to ${toDate}`;

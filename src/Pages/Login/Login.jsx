@@ -8,7 +8,10 @@ import Model from "../../Component/Model/Model";
 import { useMutation } from "@tanstack/react-query";
 import { verifyUser } from "./LoginApiSlice";
 import { useState } from "react";
-import { setTokenToLocalStorage } from "../../utils/StorageUtils";
+import {
+  addUserIdToLocalStorage,
+  setTokenToLocalStorage,
+} from "../../utils/StorageUtils";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { showHide } from "../../Component/Images/Image";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
@@ -31,6 +34,7 @@ const Login = () => {
         setTimeout(() => {
           navigate("/");
           setTokenToLocalStorage(data.payload.access_token);
+          addUserIdToLocalStorage(data.payload.user_id);
           window.location.reload();
         }, 1000);
       }

@@ -49,7 +49,7 @@ const EmployeeView = () => {
   // console.log("userProfile", userProfile);
 
   // console.log("profileImage", profileImage.user_image);
-
+  console.log(viewEmployeeData);
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">

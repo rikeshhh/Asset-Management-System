@@ -31,6 +31,7 @@ const SelectInputCategory = ({
       {...register(name, { required: true })}
       disabled={isDisabled}
       onChange={addCategoryId}
+      style={{ color: "#999" }}
       className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
     >
       {defaultValue ? (
