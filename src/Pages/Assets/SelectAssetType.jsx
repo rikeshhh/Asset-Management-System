@@ -35,7 +35,6 @@ export const SelectAssetType = ({
           {defaultValue.toLowerCase()}
         </option>
       )}
-      <option value={null}>None</option>
       {assetType.map((option, index) => (
         <>
           <option key={index} value={option}>

@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getEmployeeTableData } from "../Employees/EmployeeApiSlice";
 import { getUserData } from "./userTabApi";
 import { getUserIdFromLocalStorage } from "../../utils/StorageUtils";
+import ImagePath from "../../Component/Images/ImagePath";
 const UserTab = () => {
   const userId = getUserIdFromLocalStorage();
   const {
@@ -26,11 +27,12 @@ const UserTab = () => {
     <section className="usertab">
       <div className="profile">
         <div className="profile__heading">
-          <h4 className="profile__name">Amod Suman</h4>
-          <h6 className="profile__position">Admin</h6>
+          <h4 className="profile__name">{userData.name}</h4>
+          <h6 className="profile__position">{userData.user_type}</h6>
         </div>
         <figure onClick={gotToEmployeeView}>
-          <img src={profile} alt="profile-image" />
+          <img src={userData.user_image} alt="click" />
+          {/* <ImagePath file={userData.user_image}/> */}
         </figure>
       </div>
     </section>
