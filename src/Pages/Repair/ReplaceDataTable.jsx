@@ -117,7 +117,7 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
             {isPending ? (
               <PendingTableBody />
             ) : (
-              replaceTableData.map((tableItem, index) => (
+              replaceTableData?.data.map((tableItem, index) => (
                 <tr key={index}>
                   <td>ITJ-DA-{tableItem.id}</td>
                   <td>

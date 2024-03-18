@@ -122,7 +122,7 @@ const RepairDataTable = ({ onFilterClick }) => {
             {isPending ? (
               <PendingTableBody />
             ) : (
-              tableData.map((tableItem, index) => (
+              tableData?.data.map((tableItem, index) => (
                 <tr key={index}>
                   <td>ITJ-DA-{tableItem.id}</td>
                   <td>
