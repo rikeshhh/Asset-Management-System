@@ -25,7 +25,12 @@ import { InputField } from "../../Component/Input/InputField";
 import Model from "../../Component/Model/Model";
 import { notifyError } from "../../Component/Toast/Toast";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
-
+/**
+ * Hardware component for managing hardware assets.
+ *
+ * @component
+ * @returns {JSX.Element} JSX representation of the Hardware component
+ */
 const Hardware = () => {
   const {
     register,
@@ -34,6 +39,26 @@ const Hardware = () => {
     reset,
   } = useForm();
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
+  const [searchAssets, setSearchAssets] = useState();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [pageNumber, setPageNumber] = useState(
+    parseInt(searchParams.get("page")) || 1
+  );
+  // Extracting search parameters from the URL
+  const searchHardware = searchParams.get("search"); // Search keyword
+  const searchCategory = searchParams.get("category"); // Category filter
+  const fromDate = searchParams.get("fromDate"); // Start date filter
+  const toDate = searchParams.get("toDate"); // End date filter
+  const searchDate = `${fromDate} to ${toDate}`; // Date range for search
+  const assets_type = searchParams.get("assets_type"); // Type of assets
+  const assignedDate = searchParams.get("assigned_date"); // Assigned date filter
+  const searchStatus = searchParams.get("status"); // Status filter
+  const [filterShow, setFilterShow] = useState(false);
+  // Function to update the page number and update the URL with the new page number
+  const updatePageNumber = (newPageNumber) => {
+    setPageNumber(newPageNumber); // Set the new page number
+    setSearchParams({ page: newPageNumber }); // Update the URL with the new page number
+  };
 
   /**
    * Handles the click event for deleting an employee.
@@ -43,23 +68,7 @@ const Hardware = () => {
     setDeleteConfirationShow(true);
     setAssetsId(assets);
   };
-  const [searchAssets, setSearchAssets] = useState();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [pageNumber, setPageNumber] = useState(
-    parseInt(searchParams.get("page")) || 1
-  );
-  const searchHardware = searchParams.get("search");
-  const searchCategory = searchParams.get("category");
-  const fromDate = searchParams.get("fromDate");
-  const assets_type = searchParams.get("assets_type");
-  const toDate = searchParams.get("toDate");
-  const searchDate = `${fromDate} to ${toDate}`;
-  const assignedDate = searchParams.get("assigned_date");
-  const searchStatus = searchParams.get("status");
-  const updatePageNumber = (newPageNumber) => {
-    setPageNumber(newPageNumber);
-    setSearchParams({ page: newPageNumber });
-  };
+
   const {
     isPending,
     error,
@@ -113,7 +122,6 @@ const Hardware = () => {
     DeleteAssets.mutate(assetsId);
     setDeleteConfirationShow(false);
   };
-  const [filterShow, setFilterShow] = useState(false);
 
   const onFilterClick = (showHide) => {
     setFilterShow(showHide);

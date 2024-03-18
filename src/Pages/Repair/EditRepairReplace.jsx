@@ -83,7 +83,7 @@ const EditRepairReplace = () => {
    * Handles the submission of the repair and replace form.
    * @param {Object} data - Form data submitted.
    */
-
+  console.log(tableData);
   const onRepairAddSubmit = (deviceData) => {
     if (errors) {
       notifyError("Please upload product image");

@@ -18,6 +18,14 @@ import { useState } from "react";
 import { FaRegEye } from "react-icons/fa6";
 import Tablerow from "./Tablerow";
 import { LuArrowUpDown } from "react-icons/lu";
+/**
+ * Component to display assets data in a table format.
+ * @param {object} props - Component props
+ * @param {boolean} props.isPending - Flag indicating whether data is pending
+ * @param {Array} props.tableData - Array of table data
+ * @param {string} props.assets_type - Type of assets
+ * @returns {JSX.Element} Table component
+ */
 const AssetsTableData = ({ isPending, tableData, assets_type }) => {
   const options = [
     "ID",
@@ -30,7 +38,10 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
   const [assetTableData, setAssetTableData] = useState(null);
   const [assetTableDataOrder, setAssetTableDataOrder] = useState("asc");
   const [active, setActive] = useState();
-
+  /**
+   * Handles click event for sorting table data by status.
+   * @param {string} stats - Status to sort by
+   */
   const handleStatusClick = async (stats) => {
     try {
       const newOrder = assetTableDataOrder === "asc" ? "desc" : "asc";

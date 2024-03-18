@@ -1,7 +1,16 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { selectUser } from "./AssetsApiSlice";
-
+/**
+ * SelectInputUser component for selecting an assigned user.
+ *
+ * @param {Object} props - Component props
+ * @param {string} props.name - The name of the select input field
+ * @param {Function} props.register - The function to register the input field with React Hook Form
+ * @param {Object} props.defaultValue - The default value of the select input field
+ * @param {boolean} props.isDisabled - Boolean indicating if the select input field is disabled
+ * @returns {JSX.Element} JSX representation of the SelectInputUser component
+ */
 const SelectInputUser = ({ name, register, defaultValue, isDisabled }) => {
   const { data: userData } = useQuery({
     queryKey: ["selectUserData"],
@@ -12,6 +21,7 @@ const SelectInputUser = ({ name, register, defaultValue, isDisabled }) => {
     <select
       {...register(name, { required: true })}
       disabled={isDisabled}
+      style={{ color: "#999" }}
       className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
     >
       {defaultValue ? null : (

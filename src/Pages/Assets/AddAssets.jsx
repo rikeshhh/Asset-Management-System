@@ -41,7 +41,7 @@ const AssetsForm = ({
     setIsActive((prevState) => !prevState);
     console.log("After toggling:", isActive);
   };
-
+  // Define state to hold the options for asset categories
   const [options, setOptions] = useState([
     "Frontend",
     "Backend",
@@ -50,18 +50,29 @@ const AssetsForm = ({
     "Project Manager",
     "DevOps",
   ]);
+
+  // Define a mutation function to add new assets
   const AddAssets = useMutation({
     mutationFn: (assetsData) => {
+      // Call the assetsAdd function with the provided assets data
       return assetsAdd(assetsData);
     },
+    // Function to execute on successful mutation
     onSuccess: () => {
+      // Notify the user about successful asset addition
       notifySuccess("Assets has been added ");
+
+      // Invalidate the "AssetsData" query cache to reflect the changes
       queryClient.invalidateQueries("AssetsData");
+
+      // Redirect the user to the assets page after a delay
       setTimeout(() => {
         navigate("/assets/*");
       }, 1000);
     },
+    // Function to handle errors during mutation
     onError: (error) => {
+      // Check if the error response contains a message and notify the user accordingly
       if (
         error.response &&
         error.response.data &&
@@ -73,15 +84,13 @@ const AssetsForm = ({
       }
     },
   });
+
+  // Function to submit the data for adding new assets
   const submitData = (data) => {
-    console.log("add");
-    console.log(data);
-    if (data.assets_image === null) {
-      notifyError("Please upload an image");
-    } else {
-      AddAssets.mutate(data);
-    }
+    AddAssets.mutate(data);
   };
+
+  // Define state to hold the category name
   const [categoryName, setCategoryName] = useState();
 
   return (
@@ -182,6 +191,7 @@ const AssetsForm = ({
               <SelectInputUser name="assigned_to" register={register} />
             </div>
             <div className="assets__form--input ">
+              <Label text="Status" sup={"*"} />
               <label className={`switch ${isActive ? "active" : "inactive"}`}>
                 <input
                   {...register("status")}

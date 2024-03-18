@@ -2,6 +2,10 @@ import instance from "../../axios/Axios";
 import { getTokenFromLocalStorage } from "../../utils/StorageUtils";
 
 const token = getTokenFromLocalStorage();
+/**
+ * Retrieve assets table data from the server.
+ * @returns {Promise} A promise that resolves with the assets data.
+ */
 export const getAssetsTableData = async () => {
   try {
     const response = await instance.get("/assets", {
@@ -13,6 +17,12 @@ export const getAssetsTableData = async () => {
     throw error;
   }
 };
+
+/**
+ * Delete an asset from the assets table data.
+ * @param {string} assetsId - The ID of the asset to be deleted.
+ * @returns {Promise} A promise that resolves if the deletion is successful.
+ */
 export const deleteAssetsTableData = async (assetsId) => {
   try {
     const response = await instance.delete("/assets", {
@@ -25,8 +35,14 @@ export const deleteAssetsTableData = async (assetsId) => {
     throw error;
   }
 };
+
+/**
+ * Edit assets data and update it on the server.
+ * @param {Object} assetsInfo - The updated assets information.
+ * @param {string} productID - The ID of the product being edited.
+ * @returns {Promise} A promise that resolves if the update is successful.
+ */
 export const assetsEdit = async (assetsInfo, productID) => {
-  console.log(productID);
   var formdata = new FormData();
   formdata.append("id", productID);
   formdata.append("name", assetsInfo.productName);
@@ -52,7 +68,11 @@ export const assetsEdit = async (assetsInfo, productID) => {
     throw error;
   }
 };
-
+/**
+ * Add new assets to the database.
+ * @param {Object} assetsData - The data of the assets to be added.
+ * @returns {Promise} A promise that resolves if the addition is successful.
+ */
 export const assetsAdd = async (assetsData) => {
   var formdata = new FormData();
   formdata.append("name", assetsData.productName);
@@ -81,6 +101,16 @@ export const assetsAdd = async (assetsData) => {
   }
 };
 
+/**
+ * Retrieve assets data based on various parameters.
+ * @param {string} assetsType - The type of assets to retrieve.
+ * @param {string} searchAssets - The search query for assets.
+ * @param {number} pageNumber - The page number of the assets data.
+ * @param {string} searchCategory - The category to search within.
+ * @param {string} searchStatus - The status to filter by.
+ * @param {string} assignedDate - The assigned date to filter by.
+ * @returns {Promise} A promise that resolves with the filtered assets data.
+ */
 export const getAssetsData = async (
   assetsType,
   searchAssets,
@@ -112,6 +142,7 @@ export const getAssetsData = async (
     throw error;
   }
 };
+
 export const getFilterData = async (categoryName, status, searchDate) => {
   try {
     const response = await instance({
@@ -133,6 +164,8 @@ export const getFilterData = async (categoryName, status, searchDate) => {
     throw error;
   }
 };
+
+//select user
 export const selectUser = async () => {
   try {
     const response = await instance.get("/user", {

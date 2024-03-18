@@ -1,5 +1,16 @@
 import React from "react";
-
+import "./Assets.css";
+/**
+ * SelectAssetType component for selecting asset types.
+ *
+ * @component
+ * @param {Object} props - Component props
+ * @param {Function} props.register - Function from react-hook-form to register the select input
+ * @param {string} props.name - Name of the select input
+ * @param {string} props.defaultValue - Default value for the select input
+ * @param {boolean} props.isDisabled - Boolean indicating whether the select input is disabled or not
+ * @returns {JSX.Element} JSX representation of the SelectAssetType component
+ */
 export const SelectAssetType = ({
   register,
   name,
@@ -7,11 +18,11 @@ export const SelectAssetType = ({
   isDisabled,
 }) => {
   const assetType = ["hardware", "software"];
-  console.log(assetType);
   return (
     <select
       {...register(name, { required: true })}
       disabled={isDisabled}
+      style={{ color: "#999" }}
       className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
     >
       {defaultValue ? null : (

@@ -68,6 +68,7 @@ export const Signup = () => {
     reset,
   } = formMethod;
   const submitData = (data) => {
+    console.log(data)
     userRegisterMutation.mutate(data);
   };
   // password showing features

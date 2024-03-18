@@ -20,7 +20,12 @@ import SelectInputCategory from "../Categories/SelectInputCategory";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import { SelectAssetType } from "./SelectAssetType";
 import ImagePath from "../../Component/Images/ImagePath";
-
+/**
+ * EditAssets component for editing asset details.
+ *
+ * @component
+ * @returns {JSX.Element} JSX representation of the EditAssets component
+ */
 const EditAssets = () => {
   const formMethod = useForm();
   const {
@@ -59,7 +64,6 @@ const EditAssets = () => {
   });
 
   const submitData = (data) => {
-    console.log(data);
     EditAssets.mutate(data);
   };
   const [isActive, setIsActive] = useState(assetsData.status === "active");

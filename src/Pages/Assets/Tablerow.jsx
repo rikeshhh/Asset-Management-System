@@ -10,7 +10,12 @@ import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
 import { EyeSvg } from "../../Component/svg/EyeSvg";
-
+/**
+ * TableRow component represents a single row in the assets table.
+ *
+ * @param {Object} tableItem - The data of the table row.
+ * @returns {JSX.Element} JSX representation of the TableRow component.
+ */
 const Tablerow = ({ tableItem }) => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const DeleteAssets = useMutation({
@@ -48,7 +53,6 @@ const Tablerow = ({ tableItem }) => {
   const handleDeleteConfirmationModel = () => {
     setDeleteConfirationShow(true);
   };
-  console.log(tableItem);
   return (
     <>
       {deleteConfirationShow && (

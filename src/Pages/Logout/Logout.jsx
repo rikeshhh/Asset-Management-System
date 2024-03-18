@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { LogoutSvg } from "../../Component/svg/LogoutSvg";
-import { clearTokenFromLocalStorage } from "../../utils/StorageUtils";
+import { clearTokenFromLocalStorage, removeUserIdToLocalStorage } from "../../utils/StorageUtils";
 import { logoutUser } from "./LogoutApiSlice";
 import { useNavigate } from "react-router-dom";
 import { notifyError } from "../../Component/Toast/Toast";
@@ -25,6 +25,7 @@ const Logout = ({ toggleNavbar }) => {
     },
     onSuccess: () => {
       //   notify(successMessage);
+      removeUserIdToLocalStorage()
       clearTokenFromLocalStorage();
       navigate("/login");
       logout();
