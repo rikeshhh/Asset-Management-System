@@ -19,23 +19,37 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const [replaceId, setReplaceId] = useState();
   const [searchData, setSearchData] = useState("");
+  const [sortData, setSortData] = useState("Product_Code");
+  const [sortOrder, setSortOrder] = useState("ASC");
 
   const tableHeads = [
-    "Product Code",
+    "Product code",
     "Name",
     "Category",
     "Status",
-    "Assigned Date",
+    "Assigned date",
   ];
   const {
     isPending,
     error,
     data: replaceTableData,
   } = useQuery({
-    queryKey: ["ReplaceTableData", searchData],
-    queryFn: () => getReplaceTableData(searchData),
+    queryKey: ["ReplaceTableData", searchData, sortData, sortOrder],
+    queryFn: () => getReplaceTableData(searchData, sortData, sortOrder),
     staleTime: 10000,
   });
+
+  const handleStatusClick = (tableHead) => {
+    const newOrder = sortOrder === "ASC" ? "DESC" : "ASC";
+    setSortOrder(newOrder);
+    if (tableHead === "Assigned date") {
+      setSortData("Assigned_date");
+    } else if (tableHead === "Product code") {
+      setSortData("Product_Code");
+    } else {
+      setSortData(tableHead);
+    }
+  };
 
   const DeleteReplace = useMutation({
     mutationFn: () => deleteRepairReplace(replaceId),
@@ -91,23 +105,16 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
               <PendingTableHead />
             ) : (
               <tr>
-                <th>
-                  Product Code <LuArrowUpDown />
-                </th>
-                <th>
-                  Name
-                  <LuArrowUpDown />
-                </th>
-                <th>
-                  Category
-                  <LuArrowUpDown />
-                </th>
-                <th>
-                  Status <LuArrowUpDown />
-                </th>
-                <th>
-                  Assigned Date <LuArrowUpDown />
-                </th>
+                {tableHeads.map((tableHead, index) => (
+                  <th key={index}>
+                    {tableHead}
+                    <span className="sort__icon">
+                      <LuArrowUpDown
+                        onClick={() => handleStatusClick(tableHead)}
+                      />
+                    </span>
+                  </th>
+                ))}
 
                 <th>Action</th>
               </tr>
@@ -119,7 +126,7 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
             ) : (
               replaceTableData?.data.map((tableItem, index) => (
                 <tr key={index}>
-                  <td>ITJ-DA-{tableItem.id}</td>
+                  <td>ITJ-DA-{tableItem.Product_Code.id}</td>
                   <td>
                     {tableItem.Product_Code.name
                       ? tableItem.Product_Code.name

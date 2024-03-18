@@ -20,11 +20,11 @@ const RepairDataTable = ({ onFilterClick }) => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const [repairId, setRepairId] = useState();
   const [searchData, setSearchData] = useState("");
-  const [sortData, setSortData] = useState("id");
+  const [sortData, setSortData] = useState("Product_Code");
   const [sortOrder, setSortOrder] = useState("ASC");
   const tableHeads = [
     "Product code",
-    "Name",
+    "name",
     "Category",
     "Status",
     "Assigned date",
@@ -73,7 +73,13 @@ const RepairDataTable = ({ onFilterClick }) => {
   const handleStatusClick = (tableHead) => {
     const newOrder = sortOrder === "ASC" ? "DESC" : "ASC";
     setSortOrder(newOrder);
-    setSortData(tableHead);
+    if (tableHead === "Assigned date") {
+      setSortData("Assigned_date");
+    } else if (tableHead === "Product code") {
+      setSortData("Product_Code");
+    } else {
+      setSortData(tableHead);
+    }
   };
 
   // if (isPending) return "Loading...";
@@ -106,10 +112,12 @@ const RepairDataTable = ({ onFilterClick }) => {
             ) : (
               <tr>
                 {tableHeads.map((tableHead, index) => (
-                  <th key={index} onClick={() => handleStatusClick(tableHead)}>
+                  <th key={index}>
                     {tableHead}
-                    <span>
-                      <LuArrowUpDown />
+                    <span className="sort__icon">
+                      <LuArrowUpDown
+                        onClick={() => handleStatusClick(tableHead)}
+                      />
                     </span>
                   </th>
                 ))}
@@ -124,7 +132,7 @@ const RepairDataTable = ({ onFilterClick }) => {
             ) : (
               tableData?.data.map((tableItem, index) => (
                 <tr key={index}>
-                  <td>ITJ-DA-{tableItem.id}</td>
+                  <td>ITJ-DA-{tableItem.Product_Code.id}</td>
                   <td>
                     {tableItem.Product_Code.name
                       ? tableItem.Product_Code.name

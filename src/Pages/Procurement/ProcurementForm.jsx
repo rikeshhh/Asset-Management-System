@@ -21,11 +21,22 @@ const ProcurementForm = () => {
   const selectOptions = ["Urgent", "High", "Medium", "Low"];
 
   const [procurementTableLine, setProcurementTableLine] = useState(false);
-  const [editProcurementLine, setEditProcurementLine] = useState(false);
+  const [newProcurement, setNewProcurement] = useState([]);
+  const [isEditable, setIsEditable] = useState(false);
 
   const handleAddProcurement = () => {
-    setEditProcurementLine(false);
+    setIsEditable(true);
     setProcurementTableLine(true);
+    setNewProcurement([
+      ...newProcurement,
+      {
+        product_name: "",
+        category_id: "None",
+        brand: "",
+        estimated_price: "",
+        link: "",
+      },
+    ]);
   };
 
   const submitProcurement = () => {};
@@ -36,7 +47,7 @@ const ProcurementForm = () => {
         <div className="procurement__header--form form--header">
           <h2>Procurement Form</h2>
           <p>
-            <span>Procurement /</span>{" "}
+            <span>Procurement /</span>
             <GrStatusGoodSmall className="form__circle" /> Request an asset
           </p>
         </div>
@@ -90,20 +101,22 @@ const ProcurementForm = () => {
             type={"button"}
             text="Add a table line"
             className={
-              editProcurementLine
+              procurementTableLine
                 ? "procurement--button procurement--button-not__allowed"
                 : "procurement--button"
             }
             handleClick={handleAddProcurement}
             icon={<IoMdAdd />}
-            isDisabled={editProcurementLine ? true : false}
+            // isDisabled={editProcurementLine ? true : false}
           />
         </div>
         <AddProcurementTable
           procurementTableLine={procurementTableLine}
           setProcurementTableLine={setProcurementTableLine}
-          editProcurementLine={editProcurementLine}
-          setEditProcurementLine={setEditProcurementLine}
+          setNewProcurement={setNewProcurement}
+          newProcurement={newProcurement}
+          setIsEditable={setIsEditable}
+          isEditable={isEditable}
         />
       </div>
     </section>

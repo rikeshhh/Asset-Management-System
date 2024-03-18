@@ -40,7 +40,7 @@ export const Paypal = ({ navigate, goback, rate }) => {
           const order = await actions.order.capture();
         },
         onError: (err) => {
-        notifyError(err);
+          notifyError(err);
         },
       })
       .render("#paypal__content");

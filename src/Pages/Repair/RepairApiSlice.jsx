@@ -18,10 +18,10 @@ export const getRepairTableData = async (searchData, sortData, sortOrder) => {
   }
 };
 
-export const getReplaceTableData = async (searchData) => {
+export const getReplaceTableData = async (searchData, sortData, sortOrder) => {
   try {
     const response = await instance.get(
-      `/repairreplace?type=Replace&searchKeyword=${searchData}`,
+      `/repairreplace?type=Replace&searchKeyword=${searchData}&orderby=${sortData}&sortorder=${sortOrder}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
