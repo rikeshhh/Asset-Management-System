@@ -14,6 +14,7 @@ const SelectInputCategory = ({
   setCategoryName,
   defaultValue,
   isDisabled,
+  isEditable,
 }) => {
   const { data: CategoryData } = useQuery({
     queryKey: ["selectInputCategory"],
@@ -29,10 +30,12 @@ const SelectInputCategory = ({
   return (
     <select
       {...register(name, { required: true })}
-      disabled={isDisabled}
+      disabled={isDisabled || !isEditable}
       onChange={addCategoryId}
       style={{ color: "#999" }}
-      className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
+      className={`${isDisabled ? "input-disabled" : "input-enabled"}
+      ${isEditable ? "" : "select-not-editable"}
+      `}
     >
       {defaultValue ? (
         <>
@@ -41,8 +44,8 @@ const SelectInputCategory = ({
           </option>
         </>
       ) : (
-        <option value="" disabled selected className="option__disabled">
-          Select the category of the asset
+        <option value="None" disabled selected className="option__disabled">
+          Select the Category of the asset
         </option>
       )}
 
@@ -56,7 +59,7 @@ const SelectInputCategory = ({
             <option
               className="select__option"
               key={option.id}
-              value={option.id}
+              value={JSON.stringify({ id: option.id, name: option.name })}
             >
               {option.parent}
             </option>

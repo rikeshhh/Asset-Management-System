@@ -1,6 +1,6 @@
 import { ErrorMessage } from "@hookform/error-message";
 import "./input.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const InputField = ({
   placeholder,
@@ -22,11 +22,9 @@ export const InputField = ({
   autoComplete,
   children,
   defaultValue,
-  isChecked,
-  active,
-  inActive,
   handleclick,
-  checked
+  checked,
+  isEditable,
 }) => {
   const hasError = errors[name];
   const [inputValu, setInputValu] = useState(defaultValue); // <-- State to manage the input value

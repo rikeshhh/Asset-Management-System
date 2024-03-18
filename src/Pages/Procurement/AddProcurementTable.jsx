@@ -7,21 +7,23 @@ import { useForm } from "react-hook-form";
 import { FaCheck } from "react-icons/fa6";
 import SelectInputCategory from "../Categories/SelectInputCategory";
 import { RxCross1 } from "react-icons/rx";
+import ProductListTableItem from "./ProductList";
 
 const AddProcurementTable = ({
   procurementTableLine,
   setProcurementTableLine,
-  editProcurementLine,
-  setEditProcurementLine,
+  setNewProcurement,
+  newProcurement,
+  setIsEditable,
+  isEditable,
 }) => {
   const {
     register,
     formState: { errors },
-    handleSubmit,
+    getValues,
     reset,
   } = useForm();
-
-  const [newProcurement, setNewProcurement] = useState([]);
+  // const [newProcurement, setNewProcurement] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleCancelTableLine = () => {
@@ -30,223 +32,81 @@ const AddProcurementTable = ({
     reset();
   };
 
-  const handleProcurementTableEdit = (index) => {
+  const handleProcurementTableAdd = (index) => {
+    console.log(index);
+    const values = getValues();
     setSelectedIndex(index);
-    setEditProcurementLine(true);
-    setProcurementTableLine(false);
+    const newItem = {
+      product_name: values.product_name,
+      category_id: values.category_id,
+      brand: values.brand,
+      estimated_price: values.estimated_price,
+      link: values.link,
+    };
+
+    setNewProcurement([...newProcurement]);
+
+    setIsEditable(false);
+    setSelectedIndex(null);
     reset();
   };
 
   const handleDeleteProcurementLine = (index) => {
     setNewProcurement(newProcurement.filter((_, idx) => idx !== index));
-    reset();
   };
 
-  const handleAddTableLineSubmit = (tableData, event) => {
-    const newItem = {
-      product_name: tableData.product_name,
-      category_id: tableData.category_id,
-      brand: tableData.brand,
-      estimated_price: tableData.estimated_price,
-      link: tableData.link,
-    };
-  };
+  // const handleTableLineSubmit = (tableData) => {
+  //   const newItem = {
+  //     product_name: tableData.product_name,
+  //     category_id: tableData.category_id,
+  //     brand: tableData.brand,
+  //     estimated_price: tableData.estimated_price,
+  //     link: tableData.link,
+  //   };
 
-  const handleTableLineSubmit = (tableData, event) => {
-    const newItem = {
-      product_name: tableData.product_name,
-      category_id: tableData.category_id,
-      brand: tableData.brand,
-      estimated_price: tableData.estimated_price,
-      link: tableData.link,
-    };
+  //   setNewProcurement((prevProcurement) => [...prevProcurement, newItem]);
+  //   setProcurementTableLine(false);
+  //   reset();
+  // };
 
-    if (editProcurementLine) {
-      setNewProcurement((prevProcurement) => {
-        const updatedList = [...prevProcurement];
-        updatedList[selectedIndex] = newItem;
-        return updatedList;
-      });
-
-      setEditProcurementLine(false);
-      setSelectedIndex(null);
-      reset();
-    } else {
-      setNewProcurement((prevProcurement) => [...prevProcurement, newItem]);
-      setProcurementTableLine(false);
-      reset();
-    }
-  };
+  console.log(newProcurement);
 
   return (
     <div className="table__container">
-      <form onSubmit={handleSubmit(handleTableLineSubmit)}>
-        <table className="main__table">
-          <thead>
-            <tr>
-              <th>Product Name</th>
-              <th>Catagory</th>
-              <th>Brand</th>
-              <th>Estimated Price</th>
-              <th>Link</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {newProcurement.map((tableItem, index) => (
-              <tr key={index}>
-                <td>
-                  {editProcurementLine && index === selectedIndex ? (
-                    <InputField
-                      name="product_name"
-                      register={register}
-                      errors={errors}
-                      defaultValue={tableItem.product_name}
-                    />
-                  ) : (
-                    tableItem.product_name
-                  )}
-                </td>
-                <td>
-                  {editProcurementLine && index === selectedIndex ? (
-                    <SelectInputCategory
-                      name="category_id"
-                      register={register}
-                      errors={errors}
-                      defaultValue={""}
-                    />
-                  ) : (
-                    tableItem.category_id
-                  )}
-                </td>
-                <td>
-                  {editProcurementLine && index === selectedIndex ? (
-                    <InputField
-                      name="brand"
-                      register={register}
-                      errors={errors}
-                      defaultValue={tableItem.brand}
-                    />
-                  ) : (
-                    tableItem.brand
-                  )}
-                </td>
-                <td>
-                  {editProcurementLine && index === selectedIndex ? (
-                    <InputField
-                      name="estimated_price"
-                      register={register}
-                      errors={errors}
-                      defaultValue={tableItem.estimated_price}
-                    />
-                  ) : (
-                    tableItem.estimated_price
-                  )}
-                </td>
-                <td>
-                  {" "}
-                  {editProcurementLine && index === selectedIndex ? (
-                    <InputField
-                      name="link"
-                      register={register}
-                      errors={errors}
-                      defaultValue={tableItem.link}
-                    />
-                  ) : (
-                    tableItem.link
-                  )}
-                </td>
-                <td className="button-gap">
-                  {editProcurementLine && index === selectedIndex ? (
-                    <Button
-                      type="button"
-                      className="edit__button"
-                      text={<FaCheck />}
-                    />
-                  ) : (
-                    <Button
-                      type={"button"}
-                      className={
-                        procurementTableLine && index !== selectedIndex
-                          ? "edit__button edit__not--allowed"
-                          : "edit__button"
-                      }
-                      handleClick={() => handleProcurementTableEdit(index)}
-                      text={<CiEdit />}
-                      isDisabled={procurementTableLine ? true : false}
-                    />
-                  )}
-                  {editProcurementLine && index === selectedIndex ? (
-                    <Button
-                      type={"button"}
-                      className="delete__button"
-                      text={<RxCross1 />}
-                      handleClick={() => {
-                        setEditProcurementLine(false);
-                        reset();
-                      }}
-                    />
-                  ) : (
-                    <Button
-                      type={"button"}
-                      className="delete__button"
-                      text={<GoTrash />}
-                      handleClick={() => handleDeleteProcurementLine(index)}
-                    />
-                  )}
-                </td>
-              </tr>
+      <table className="main__table">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Catagory</th>
+            <th>Brand</th>
+            <th>Estimated Price</th>
+            <th>Link</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <>
+            {newProcurement?.map((procurement, index) => (
+              <ProductListTableItem
+                key={procurement?.product_name}
+                index={index}
+                tableItem={procurement}
+                setNewProcurement={setNewProcurement}
+                setProcurementTableLine={setProcurementTableLine}
+                selectedIndex={selectedIndex}
+                procurementTableLine={procurementTableLine}
+                handleProcurementTableAdd={handleProcurementTableAdd}
+                handleDeleteProcurementLine={handleDeleteProcurementLine}
+                register={register}
+                errors={errors}
+                getValues={getValues}
+                reset={reset}
+                isEditable={isEditable}
+              />
             ))}
-            {procurementTableLine ? (
-              <tr>
-                <td>
-                  <InputField
-                    name="product_name"
-                    register={register}
-                    errors={errors}
-                    required={"this is required"}
-                  />
-                </td>
-                <td>
-                  <SelectInputCategory
-                    name="category_id"
-                    register={register}
-                    defaultValue={""}
-                  />
-                </td>
-                <td>
-                  <InputField
-                    name="brand"
-                    register={register}
-                    errors={errors}
-                  />
-                </td>
-                <td>
-                  <InputField
-                    name="estimated_price"
-                    register={register}
-                    errors={errors}
-                  />
-                </td>
-                <td>
-                  <InputField name="link" register={register} errors={errors} />
-                </td>
-                <td className="button-gap">
-                  <Button className="edit__button" text={<FaCheck />} />
-                  <Button
-                    type={"button"}
-                    className="delete__button"
-                    text={<GoTrash />}
-                    handleClick={handleCancelTableLine}
-                  />
-                </td>
-              </tr>
-            ) : (
-              <></>
-            )}
-          </tbody>
-        </table>
-      </form>
+          </>
+        </tbody>
+      </table>
     </div>
   );
 };

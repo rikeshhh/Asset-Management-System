@@ -100,7 +100,6 @@
 .procurement--button {
   border-radius: 0.3125rem;
   background: var(--blue);
-  padding: 1rem;
   border: none;
   color: var(--secondary-color);
   text-align: center;
@@ -113,7 +112,6 @@
 .procurement__error--button {
   border-radius: 0.3125rem;
   background: var(--red);
-  padding: 1rem;
   font-size: 1rem;
   font-weight: 500;
   line-height: 150%;
