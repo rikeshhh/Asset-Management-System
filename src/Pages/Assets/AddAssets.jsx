@@ -170,7 +170,6 @@ const AssetsForm = ({
               <InputField
                 name="brandCompany"
                 register={register}
-                required="Please enter Brand/Company "
                 value={Model.Group.pattern.value}
                 message={Model.Group.pattern.message}
                 errors={errors}

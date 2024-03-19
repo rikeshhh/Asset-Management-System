@@ -158,7 +158,7 @@ const EditAssets = () => {
                 <InputField
                   name="brandCompany"
                   register={register}
-                  required="Please enter Brand/Company "
+                  // required="Please enter Brand/Company "
                   defaultValue={assetsData.brand}
                   value="^[a-zA-Z0-9]+$"
                   message="Name should be alphaNumeric"
@@ -188,7 +188,7 @@ const EditAssets = () => {
                 />
               </div>
               <div className="assets__form--input">
-                <Label text="Status" />
+                <Label text="Status" sup={"*"} />
                 <label className={`switch ${isActive ? "active" : "inactive"}`}>
                   <input
                     {...register("status")}
