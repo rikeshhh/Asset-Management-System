@@ -15,7 +15,7 @@ const SelectSubCat = ({
   });
   return (
     <select
-      {...register(name, { required: true })}
+      {...register(name)}
       disabled={isDisabled}
       style={{ color: "#999" }}
       className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
