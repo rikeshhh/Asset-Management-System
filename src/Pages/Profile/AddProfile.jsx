@@ -30,7 +30,7 @@ const AddProfile = () => {
 
   const [profileImage, setProfileImage] = useState(profileCover);
   const [userProfileImage, setUserProfileImage] = useState();
-  const [selectedJobType, setSelectedJobType] = useState("");
+  const [selectedJobType, setSelectedJobType] = useState("Permanent");
 
   const handleProfileUpdate = (e) => {
     const file = e.target.files[0];
@@ -187,7 +187,7 @@ const AddProfile = () => {
                       name="jobType"
                       value="Permanent"
                       onChange={handleRadioChange}
-                      checked={selectedJobType === "Permanent"}
+                      checked={selectedJobType === "Permanent" ? true : false}
                     />
                   </div>
                   <Label text="Permanent" />
@@ -199,7 +199,7 @@ const AddProfile = () => {
                       name="jobType"
                       value="Temporary"
                       onChange={handleRadioChange}
-                      checked={selectedJobType === "Temporary"}
+                      checked={selectedJobType === "Temporary" ? true : false}
                     />
                   </div>
                   <Label text="Temporary" />
@@ -229,6 +229,8 @@ const AddProfile = () => {
               <SelectInputDepartment
                 register={register}
                 isDisabled={receivedState}
+                isRequired={true}
+                name="department"
               />
             </div>
             <div className="form__input--section">

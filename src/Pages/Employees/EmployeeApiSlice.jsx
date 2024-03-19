@@ -7,10 +7,16 @@ const token = getTokenFromLocalStorage(); //Get the authentication token from lo
 /**
  * Retrieves employee table data from the server.
  */
-export const getEmployeeTableData = async (searchKeyword) => {
+export const getEmployeeTableData = async (
+  searchKeyword,
+  sortOrder,
+  orderByData,
+  filterbyDesignation,
+  filterbyDepartment
+) => {
   try {
     const response = await instance.get(
-      `/user?searchKeyword=${searchKeyword}`,
+      `/user?searchKeyword=${searchKeyword}&sortorder=${sortOrder}&orderby=${orderByData}&filterbyDesignation=${filterbyDesignation}&filterbyDepartment=${filterbyDepartment}`,
 
       {
         headers: {

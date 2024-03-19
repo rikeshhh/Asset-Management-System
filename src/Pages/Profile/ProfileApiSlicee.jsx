@@ -20,11 +20,11 @@ export const employeeEdit = async (
   formData.append("name", employeeEditData.username);
   formData.append("job_type", employeeJobType);
   formData.append("designation", employeeEditData.designation);
-  formData.append("department", employeeEditData.departmentId);
+  formData.append("department", employeeEditData.department);
   formData.append("email", employeeEditData.email);
   formData.append("phone_number", employeeEditData.phoneNumber);
   const employeeEditRequest = await instance.post(
-    `/user?id=${id}&_method=put`,
+    `/user?id=${id}&_method=PUT`,
     formData,
     {
       headers: {
@@ -51,7 +51,7 @@ export const employeeProfile = async (
   formData.append("name", employeeData.username);
   formData.append("job_type", jobType);
   formData.append("designation", employeeData.designation);
-  formData.append("department", employeeData.departmentId);
+  formData.append("department", employeeData.department);
   formData.append("email", employeeData.email);
   formData.append("phone_number", employeeData.phoneNumber);
   const employeeAddRequest = await instance.post("/user", formData, {
