@@ -93,7 +93,8 @@ const CategoryDataTable = ({
       reset();
     },
     onError: (error) => {
-      notifyError(error.response.message);
+      // notifyError(error.response.message);
+      notifyError(error.response.data.message.message.category);
     },
   });
 
@@ -115,8 +116,14 @@ const CategoryDataTable = ({
    */
 
   const handleSubCategoryClick = (options) => {
-    setshowSubCategoryDrop(options.id);
-    setShowSubCategory((prev) => !prev);
+    setShowSubCategory((prev) => {
+      if (prev && options.id === showSubCategoryDrop) {
+        return false;
+      } else {
+        setshowSubCategoryDrop(options.id);
+        return true;
+      }
+    });
   };
 
   const {
@@ -221,6 +228,11 @@ const CategoryDataTable = ({
         <tbody>
           {isPending ? (
             <SmallTablePendingBody />
+          ) : CategoryData.length < 1 ? (
+            <td className="data__empty" colSpan={3} rowSpan={10}>
+              {" "}
+              No data available
+            </td>
           ) : (
             CategoryData.map((options, index) => (
               <>
@@ -269,7 +281,7 @@ const CategoryDataTable = ({
                   <td className="button-gap">
                     <Button
                       handleClick={() => handleSubCategoryClick(options)}
-                      text={<IoChevronDown className="  " />}
+                      text={<IoChevronDown className={""} />}
                       className={
                         showSubCategory && options.id === showSubCategoryDrop
                           ? "edit__button rotate__dropdown"

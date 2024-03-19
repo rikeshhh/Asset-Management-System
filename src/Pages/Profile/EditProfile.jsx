@@ -254,7 +254,6 @@ const EditProfile = () => {
                 defaultValue={employeeData.department}
                 name="department"
                 isRequired={true}
-
               />
             </div>
             <div className="form__input--section">

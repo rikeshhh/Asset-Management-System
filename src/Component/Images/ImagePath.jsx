@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import getImage from "./ImageApiSlice";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const ImagePath = ({ file, state }) => {
   const {
@@ -12,7 +14,11 @@ const ImagePath = ({ file, state }) => {
   });
 
   if (isFetching) {
-    return <p>Loading...</p>;
+    return (
+      <p>
+        <Skeleton circle={true} height={177} width={177} />
+      </p>
+    );
   }
 
   if (error) {
