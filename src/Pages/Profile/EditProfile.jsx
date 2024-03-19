@@ -15,6 +15,7 @@ import { queryClient } from "../../Component/Query/Query";
 import { employeeEdit } from "./ProfileApiSlicee";
 import { notifySuccess } from "../../Component/Toast/Toast";
 import ImagePath from "../../Component/Images/ImagePath";
+import DateComponent from "../../Component/FormatDate/Date";
 
 /**
  * Functional component for editing an existing employee profile.
@@ -28,8 +29,7 @@ const EditProfile = () => {
   const employeeData = receivedData.employeeData;
   const employeePrevId = employeeData.id;
 
-  console.log("employee data: ", employeeData);
-
+  // console.log("employeeData", employeeData);
   const {
     register,
     formState: { errors },
@@ -40,9 +40,12 @@ const EditProfile = () => {
 
   const fileInputRef = useRef(null);
 
-  const [profileImage, setProfileImage] = useState(profileCover);
+  const [profileImage, setProfileImage] = useState();
   const [userProfileImage, setUserProfileImage] = useState();
-  const [selectedJobType, setSelectedJobType] = useState("");
+
+  const [selectedJobType, setSelectedJobType] = useState(
+    employeeData.job_type || ""
+  );
 
   /**
    * Handles the update of the profile picture.
@@ -51,13 +54,16 @@ const EditProfile = () => {
 
   const handleProfileUpdate = (e) => {
     const file = e.target.files[0];
-    setUserProfileImage(file);
-    console.log("first", userProfileImage);
     if (file) {
+      setUserProfileImage(file);
       const profileUrl = URL.createObjectURL(file);
       setProfileImage(profileUrl);
     }
   };
+  const date = employeeData.created_at;
+
+  // console.log("userProfileImage", userProfileImage);
+  // console.log("user  ProfileImage", employeeData.user_image);
   const handleRadioChange = (e) => {
     setSelectedJobType(e.target.value);
   };
@@ -65,7 +71,7 @@ const EditProfile = () => {
    * Deletes the current profile picture.
    */
   const deleteProfile = () => {
-    setProfileImage(profileCover);
+    setProfileImage(profileCover || null);
   };
 
   /**
@@ -105,11 +111,14 @@ const EditProfile = () => {
     const employeeEditInfo = {
       id: employeePrevId,
       employeeData: data,
-      employeeImage: userProfileImage,
+      employeeImage: userProfileImage
+        ? userProfileImage
+        : employeeData.user_image,
       jobType: selectedJobType,
     };
     EditEmployeeData.mutate(employeeEditInfo);
   };
+
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -121,18 +130,11 @@ const EditProfile = () => {
           <div className="user__profile--left">
             <div className="user__profile--image">
               <figure>
-                {/* <img src={profileImage} alt="Profile Picture" /> */}
-                {
-                  <ImagePath
-                    file={
-                      employeeData.user_image
-                        ? employeeData.user_image
-                        : profileCover
-                    }
-                    state={{ profileImage, setProfileImage }}
-                  />
-                }
-                <img src={profileImage} alt="Profile Picture" />
+                {profileImage ? (
+                  <img src={profileImage} alt="Profile Picture" />
+                ) : (
+                  <ImagePath file={employeeData.user_image} />
+                )}
                 <div className="profile__button--container">
                   <Button
                     type={"button"}
@@ -166,8 +168,8 @@ const EditProfile = () => {
                 Supported File Type: JPG, PNG
               </span>
               <p>
-                <span style={{ fontSize: "0.875rem" }}>Created on: </span>24th
-                September 2019
+                <span style={{ fontSize: "0.875rem" }}>Created on: </span>{" "}
+                {<DateComponent date={date} /> || "24th September 2019"}
               </p>
             </div>
           </div>
@@ -207,7 +209,6 @@ const EditProfile = () => {
                       value="Permanent"
                       onChange={handleRadioChange}
                       checked={selectedJobType === "Permanent"}
-                      defaultChecked={employeeData.job_type === "Permanent"}
                     />
                   </div>
                   <Label text="Permanent" />
@@ -220,7 +221,6 @@ const EditProfile = () => {
                       value="Temporary"
                       onChange={handleRadioChange}
                       checked={selectedJobType === "Temporary"}
-                      defaultChecked={employeeData.job_type === "Temporary"}
                     />
                   </div>
                   <Label text="Temporary" />
@@ -251,7 +251,10 @@ const EditProfile = () => {
               <SelectInputDepartment
                 isDisabled={receivedState}
                 register={register}
-                defaultValue={employeeData.department.name}
+                defaultValue={employeeData.department}
+                name="department"
+                isRequired={true}
+
               />
             </div>
             <div className="form__input--section">

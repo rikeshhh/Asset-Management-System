@@ -18,6 +18,7 @@ import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import { SearchInput } from "../../Component/SearchInput/SearchInput";
 import { SearchSvg } from "../../Component/svg/SearchSvg";
+import FilterEmployee from "./FilterEmployee";
 /**
  * Functional component representing the Employees page.
  */
@@ -31,31 +32,43 @@ const Employees = () => {
   /**
    * React Query hook for handling employee deletion mutation.
    */
-  // const searchEmployee = searchParams.get("search") || "";
-  // console.log("searchEmployee", searchEmployee);
-  // const [employeeTableDataOrder, setEmployeeTableDataOrder] = useState("ASC");
-  // const {
-  //   isPending,
-  //   error,
-  //   data: searchEmployeeData,
-  // } = useQuery({
-  //   queryKey: ["EmployeeData", searchEmployee],
-  //   queryFn: () => searchUser(searchEmployee),
-  //   staleTime: 10000,
-  // });
   const [sortOrder, setSortOrder] = useState("ASC");
+  const [orderByData, setOrderByData] = useState("id");
   const [searchData, setSearchData] = useState("");
+  const [designationData, setDesignationData] = useState("");
+  const [departmentData, setDepartmentData] = useState("");
+  const [page, setPage] = useState(1);
   const {
     isPending,
     error,
     data: tableData,
   } = useQuery({
-    queryKey: ["searchedData", searchData],
-    queryFn: () => getEmployeeTableData(searchData),
+    queryKey: [
+      "searchedData",
+      searchData,
+      sortOrder,
+      orderByData,
+      designationData,
+      departmentData,
+    ],
+    queryFn: () =>
+      getEmployeeTableData(
+        searchData,
+        sortOrder,
+        orderByData,
+        designationData,
+        departmentData
+      ),
     staleTime: 10000,
   });
-  const handleSort = () => {
-    setSortOrder((prevSortOrder) => (prevSortOrder === "ASC" ? "DESC" : "ASC"));
+  const handleSort = (thead) => {
+    setSortOrder((sortOrder) => (sortOrder === "ASC" ? "DESC" : "ASC"));
+
+    if (thead === "User") {
+      setOrderByData("name");
+    } else {
+      setOrderByData(thead.toLowerCase());
+    }
   };
 
   const DeleteEmployee = useMutation({
@@ -73,6 +86,8 @@ const Employees = () => {
       }
     },
   });
+
+  console.log("departmentData");
 
   const [filterShow, setFilterShow] = useState(false); //State to manage the visibility of the filter component.
 
@@ -129,6 +144,12 @@ const Employees = () => {
     setSearchData(data.Search);
   };
 
+  const designationSubmit = (data) => {
+    setDesignationData(data.designation);
+    setDepartmentData(data.department);
+    // console.log("data.department", );
+  };
+
   return (
     <>
       {deleteConfirationShow ? (
@@ -141,7 +162,11 @@ const Employees = () => {
         <></>
       )}
       {filterShow ? (
-        <Filter handleClick={() => onFilterClick(!filterShow)} />
+        <FilterEmployee
+          handleClick={() => onFilterClick(!filterShow)}
+          // filterShow={filterShow}
+          designationSubmit={designationSubmit}
+        />
       ) : (
         <></>
       )}
