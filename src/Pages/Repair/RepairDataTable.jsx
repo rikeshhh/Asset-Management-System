@@ -15,6 +15,7 @@ import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteCon
 import { useState } from "react";
 import { queryClient } from "../../Component/Query/Query";
 import { notifySuccess } from "../../Component/Toast/Toast";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 const RepairDataTable = ({ onFilterClick }) => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
@@ -22,6 +23,7 @@ const RepairDataTable = ({ onFilterClick }) => {
   const [searchData, setSearchData] = useState("");
   const [sortData, setSortData] = useState("Product_Code");
   const [sortOrder, setSortOrder] = useState("ASC");
+  const [pageNumberForEllipsis, setPageNumberForEllipsis] = useState(null);
   const tableHeads = [
     "Product code",
     "name",
@@ -33,12 +35,13 @@ const RepairDataTable = ({ onFilterClick }) => {
   const {
     isPending,
     error,
-    data: tableData,
+    data: repairTableData,
   } = useQuery({
     queryKey: ["RepairTableData", searchData, sortData, sortOrder],
     queryFn: () => getRepairTableData(searchData, sortData, sortOrder),
     staleTime: 10000,
   });
+
   const DeleteRepair = useMutation({
     mutationFn: () => deleteRepairReplace(repairId),
     onSuccess: () => {
@@ -49,6 +52,8 @@ const RepairDataTable = ({ onFilterClick }) => {
       console.log(error);
     },
   });
+
+  // const roundUp = Math.ceil(totalData / 7);
 
   const handleRepairEdit = () => {};
 
@@ -130,7 +135,7 @@ const RepairDataTable = ({ onFilterClick }) => {
             {isPending ? (
               <PendingTableBody />
             ) : (
-              tableData?.data.map((tableItem, index) => (
+              repairTableData?.data.map((tableItem, index) => (
                 <tr key={index}>
                   <td>ITJ-DA-{tableItem.Product_Code.id}</td>
                   <td>
@@ -171,6 +176,53 @@ const RepairDataTable = ({ onFilterClick }) => {
             )}
           </tbody>
         </table>
+      </div>
+      <div className="pagination">
+        <Button
+          className="inactivePage"
+          icon={<FaAngleLeft />}
+          handleClick={() =>
+            updatePageNumber(pageNumber > 1 ? pageNumber - 1 : 1)
+          }
+        />
+        {repairTableData &&
+          [...Array(roundUp)].map((_, index) => (
+            <>
+              {index === roundUp - 2 && pageNumber > 2 ? (
+                <Button
+                  key={index}
+                  text={
+                    pageNumberForEllipsis !== null
+                      ? pageNumberForEllipsis.toString()
+                      : "..."
+                  }
+                  className={
+                    pageNumber === index + 1 ? "activePage" : "inactivePage"
+                  }
+                  handleClick={() => {
+                    updatePageNumber(index + 1);
+                    setPageNumberForEllipsis(index + 1);
+                  }}
+                />
+              ) : (
+                <Button
+                  key={index}
+                  text={index + 1}
+                  className={
+                    pageNumber === index + 1 ? "activePage" : "inactivePage"
+                  }
+                  handleClick={() => updatePageNumber(index + 1)}
+                />
+              )}
+            </>
+          ))}
+        <Button
+          className="inactivePage"
+          handleClick={() =>
+            updatePageNumber(pageNumber < roundUp ? pageNumber + 1 : pageNumber)
+          }
+          icon={<FaAngleRight />}
+        />
       </div>
     </>
   );

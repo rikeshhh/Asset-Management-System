@@ -59,7 +59,7 @@ const SelectInputCategory = ({
             <option
               className="select__option"
               key={option.id}
-              value={JSON.stringify({ id: option.id, name: option.name })}
+              value={option.id}
             >
               {option.parent}
             </option>
