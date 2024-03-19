@@ -39,6 +39,8 @@ const Categories = () => {
 
   const [categoryDataOrder, setCategoryDataOrder] = useState("ASC");
   const [categoryDataSort, setCategoryDataSort] = useState("id");
+  const [inputDisabled, setInputDisabled] = useState(false); // State to track whether input fields should be disabled
+  const [hasErrors, setHasErrors] = useState(false);
 
   /**
    * Query to get category data.
@@ -62,12 +64,13 @@ const Categories = () => {
       return parentCategoryAdd(formData);
     },
     onSuccess: () => {
-      notifySuccess("Category has been added");
       queryClient.invalidateQueries("CategoryData");
+      notifySuccess("Category has been added");
       reset();
     },
     onError: (error) => {
-      notifyError(error.message);
+      notifyError(error.response.data.message);
+      setHasErrors(true);
     },
   });
   /**
@@ -84,6 +87,7 @@ const Categories = () => {
     },
     onError: (error) => {
       notifyError(error.response.data.message.message.category_name[0]);
+      setHasErrors(true);
     },
   });
 
@@ -98,7 +102,7 @@ const Categories = () => {
     } else {
       addSubCategory.mutate(data);
     }
-    reset();
+    // reset();
   };
 
   const deleteMessage = "Category/Subcategory has been deleted";
@@ -186,6 +190,8 @@ const Categories = () => {
                     maxMessage="Category name should be less than 64 characters"
                     autoComplete={"off"}
                     defaultValue={""}
+                    // disabled={inputDisabled || hasErrors} // Disable input field when inputDisabled state is true or there are errors
+                    // onClick={() => setInputDisabled(false)}
                   />
                 </div>
                 <div className="add__category--select">
@@ -194,6 +200,7 @@ const Categories = () => {
                     name={"select_category"}
                     register={register}
                     defaultValue={""}
+                   
                   />
                 </div>
                 <div className="add__category--right">
