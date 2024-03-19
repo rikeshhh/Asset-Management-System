@@ -27,11 +27,13 @@ const UserTab = () => {
     <section className="usertab">
       <div className="profile">
         <div className="profile__heading">
-          <h4 className="profile__name">{userData.name}</h4>
-          <h6 className="profile__position">{userData.user_type}</h6>
+          {/* <h4 className="profile__name">{userData.name}</h4>
+          <h6 className="profile__position">{userData.user_type}</h6> */}
+          <h4 className="profile__name">Amod Suman</h4>
+          <h6 className="profile__position">Admin</h6>
         </div>
         <figure onClick={gotToEmployeeView}>
-          <img src={userData.user_image} alt="click" />
+          <img src={profile} alt="click" />
           {/* <ImagePath file={userData.user_image}/> */}
         </figure>
       </div>
