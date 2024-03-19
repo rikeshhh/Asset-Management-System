@@ -21,6 +21,7 @@ const UserTab = () => {
   // Check if userData exists before accessing its properties
   const userName = userData ? userData.name : "Loading...";
   const userType = userData ? userData.user_type : "Loading...";
+  const userImage = userData ? userData.user_image : "Loading...";
 
   const gotToEmployeeView = () => {
     navigate("/viewEmployee", {
