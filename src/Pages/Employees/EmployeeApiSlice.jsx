@@ -25,7 +25,7 @@ export const getEmployeeTableData = async (
         },
       }
     );
-    return response.data.data;
+    return response.data.data.data;
   } catch (error) {
     console.error("Axios error:", error);
     throw error;

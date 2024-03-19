@@ -86,7 +86,8 @@ const Categories = () => {
       reset();
     },
     onError: (error) => {
-      notifyError(error.response.data.message.message.category_name[0]);
+      // notifyError(error.response.data.message.message.category_name[0]);
+      notifyError(error.response.data.message);
       setHasErrors(true);
     },
   });
@@ -164,6 +165,10 @@ const Categories = () => {
               isPending={isPending}
               handleDeleteClick={handleDeleteClick}
               handleProceedClick={handleProceedClick}
+              inputDisabled={inputDisabled}
+              setInputDisabled={setInputDisabled}
+              hasErrors={hasErrors}
+            setHasErrors={setHasErrors}
             />
 
             <div className="add__category">
@@ -190,8 +195,8 @@ const Categories = () => {
                     maxMessage="Category name should be less than 64 characters"
                     autoComplete={"off"}
                     defaultValue={""}
-                    // disabled={inputDisabled || hasErrors} // Disable input field when inputDisabled state is true or there are errors
-                    // onClick={() => setInputDisabled(false)}
+                    disabled={inputDisabled || hasErrors} // Disable input field when inputDisabled state is true or there are errors
+                    onClick={() => setInputDisabled(false)}
                   />
                 </div>
                 <div className="add__category--select">
@@ -200,7 +205,6 @@ const Categories = () => {
                     name={"select_category"}
                     register={register}
                     defaultValue={""}
-                   
                   />
                 </div>
                 <div className="add__category--right">
