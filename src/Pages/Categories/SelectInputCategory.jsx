@@ -14,7 +14,7 @@ const SelectInputCategory = ({
   setCategoryName,
   defaultValue,
   isDisabled,
-  isEditable,
+  isEditable = true,
 }) => {
   const { data: CategoryData } = useQuery({
     queryKey: ["selectInputCategory"],
@@ -34,7 +34,7 @@ const SelectInputCategory = ({
       onChange={addCategoryId}
       style={{ color: "#999" }}
       className={`${isDisabled ? "input-disabled" : "input-enabled"}
-      ${isEditable ? "" : "select-not-editable"}
+      ${isEditable ? "input-enabled" : "select-not-editable"}
       `}
     >
       {defaultValue ? (
