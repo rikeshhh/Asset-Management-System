@@ -77,7 +77,7 @@ const CategoryDataTable = ({
       reset();
     },
     onError: (error) => {
-      notifyError(error.response.data.message.message.newParent);
+      notifyError(error.response.data.message.message.category);
     },
   });
 
