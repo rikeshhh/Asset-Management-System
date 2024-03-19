@@ -54,6 +54,11 @@ const Hardware = () => {
   const assignedDate = searchParams.get("assigned_date"); // Assigned date filter
   const searchStatus = searchParams.get("status"); // Status filter
   const [filterShow, setFilterShow] = useState(false);
+  const by_assets_type = searchParams.get("sortBy");
+  const byStatus = searchParams.get("assets_type");
+  const order = searchParams.get("order") || "asc";
+
+
   // Function to update the page number and update the URL with the new page number
   const updatePageNumber = (newPageNumber) => {
     setPageNumber(newPageNumber); // Set the new page number
@@ -83,6 +88,9 @@ const Hardware = () => {
       searchCategory,
       searchStatus,
       assignedDate,
+      byStatus,
+      by_assets_type,
+      order
     ],
     queryFn: () =>
       getAssetsData(
@@ -91,7 +99,10 @@ const Hardware = () => {
         pageNumber,
         searchCategory,
         searchStatus,
-        assignedDate
+        assignedDate,
+        byStatus,
+        by_assets_type,
+        order
       ),
     staleTime: 10000,
   });
