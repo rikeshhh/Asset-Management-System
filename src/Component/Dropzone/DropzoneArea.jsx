@@ -67,7 +67,7 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
                   {newImage ? (
                     <img src={newImage} alt="" />
                   ) : (
-                    <ImagePath file={importedImage} />
+                    <ImagePath file={importedImage?importedImage:""} />
                   )}
                 </figure>
                 {/* Render other elements conditionally here */}
