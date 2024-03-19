@@ -14,7 +14,7 @@ import DropzoneArea from "../../Component/Dropzone/DropzoneArea";
 import SelectInputCategory from "../Categories/SelectInputCategory";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { repairReplaceAdd } from "./RepairApiSlice";
+import { repairReplaceAdd, repairReplaceEdit } from "./RepairApiSlice";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 
 /**
@@ -30,12 +30,10 @@ const EditRepairReplace = () => {
   } = useForm();
 
   const receivedState = false;
-  const [selectedType, setSelectedType] = useState("");
 
   const navigate = useNavigate();
 
   const { state: tableData } = useLocation();
-
   /**
    * Handles the update of the profile picture.
    * @param {Object} e - The event object.
@@ -55,11 +53,12 @@ const EditRepairReplace = () => {
   //   fileInputRef.current.click();
   // };
 
-  const AddRepairReplace = useMutation({
+  const EditRepairReplace = useMutation({
     mutationFn: (repairReplaceData) => {
-      return repairReplaceAdd(
+      return repairReplaceEdit(
         repairReplaceData.data,
-        repairReplaceData.selectedType
+        repairReplaceData.selectedType,
+        tableData.id
       );
     },
     onSuccess: () => {
@@ -70,30 +69,27 @@ const EditRepairReplace = () => {
       }, 1000);
     },
     onError: (error) => {
-      if (error.request.status === 409) {
-        notifyError("Error adding employee");
-      }
+      notifyError(error.message);
     },
   });
+  const [selectedType, setSelectedType] = useState(tableData.Type || "Repair");
 
   const handleRadioChange = (e) => {
+    console.log(selectedType);
     setSelectedType(e.target.value);
   };
   /**
    * Handles the submission of the repair and replace form.
    * @param {Object} data - Form data submitted.
    */
-  console.log(tableData);
   const onRepairAddSubmit = (deviceData) => {
-    if (errors) {
-      notifyError("Please upload product image");
-    }
     const repairData = {
       selectedType: selectedType,
       data: deviceData,
     };
-    AddRepairReplace.mutate(repairData);
+    EditRepairReplace.mutate(repairData);
   };
+  console.log(tableData);
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -103,7 +99,11 @@ const EditRepairReplace = () => {
         </div>
         <div className="user__profile--body">
           <div className="user__profile--left">
-            <DropzoneArea name="product_image" setValue={setValue} />
+            <DropzoneArea
+              name="product_image"
+              setValue={setValue}
+              defaultValue={tableData.product_image}
+            />
           </div>
 
           <form
@@ -146,7 +146,7 @@ const EditRepairReplace = () => {
                 // maxLength={Model.ProductCode.maxLength.value}
                 // maxMessage={Model.ProductCode.maxLength.message}
                 isDisabled={receivedState}
-                defaultValue={`ITJ-DA-${tableData.Product_Code.id}`}
+                defaultValue={`${tableData.Product_Code.id}`}
               />
             </div>
 
@@ -172,7 +172,7 @@ const EditRepairReplace = () => {
               <SelectInputCategory
                 name="Category"
                 register={register}
-                defaultValue={""}
+                defaultValue={tableData.category}
               />
             </div>
 
@@ -186,7 +186,7 @@ const EditRepairReplace = () => {
                       name="Repair"
                       value="Repair"
                       onChange={handleRadioChange}
-                      checked={tableData.Type === "Repair"}
+                      checked={selectedType  === "Repair"}
                     />
                   </div>
                   <Label text="Repair" />
@@ -198,7 +198,7 @@ const EditRepairReplace = () => {
                       name="Replace"
                       value="Replace"
                       onChange={handleRadioChange}
-                      checked={tableData.Type === "Replace"}
+                      checked={selectedType === "Replace"}
                     />
                   </div>
                   <Label text="Replace" />

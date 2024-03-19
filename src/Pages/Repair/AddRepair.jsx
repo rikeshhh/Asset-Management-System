@@ -84,9 +84,7 @@ const AddRepair = () => {
    */
 
   const onRepairAddSubmit = (deviceData) => {
-    if (errors) {
-      notifyError("Please upload product image");
-    }
+   
     const repairData = {
       selectedType: selectedType,
       data: deviceData,
