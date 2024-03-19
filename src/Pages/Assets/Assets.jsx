@@ -127,7 +127,7 @@ const Assets = () => {
                   assets_type='hardware'
                 />
               ) : ( */}
-              <div className="assets__content">
+              <div className="">
                 <Outlet />
               </div>
 

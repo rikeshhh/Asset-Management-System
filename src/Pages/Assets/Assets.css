@@ -187,31 +187,7 @@ input:checked + .slider:before {
 .navlink {
   text-decoration: none;
 }
-.pagination {
-  display: flex;
-  justify-content: flex-start;
-  padding-top: 1rem;
-  gap: 4px;
-}
-.pagination button {
-  color: black;
-  padding: 0.645rem;
-  width: 32px;
-  height: 32px;
-}
-.paginationNext {
-  background-color: var(--secondary-color) !important;
-}
-.activePage {
-  background-color: var(--blue);
-  color: white !important;
-}
-.inactivePage {
-  background-color: var(--secondary-color);
-  padding: 2px;
-  color: var(--primary-color) !important;
-  border: 1px solid var(--primary-grey);
-}
+
 @media (width < 850px) {
   .assets__form--content {
     display: flex;
