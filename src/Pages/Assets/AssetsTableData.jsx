@@ -1,5 +1,10 @@
 import "../../Component/Table/Table.css";
-import { Link, useNavigate, useNavigation } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useNavigation,
+  useSearchParams,
+} from "react-router-dom";
 import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -35,22 +40,21 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
     "Assigned to",
     "Assigned Date",
   ];
+  const [searchParams, setSearchParams] = useSearchParams();
   const [assetTableData, setAssetTableData] = useState(null);
-  const [assetTableDataOrder, setAssetTableDataOrder] = useState("asc");
-  const [active, setActive] = useState();
+  
+
   /**
    * Handles click event for sorting table data by status.
    * @param {string} stats - Status to sort by
    */
   const handleStatusClick = async (stats) => {
-    try {
-      const newOrder = assetTableDataOrder === "asc" ? "desc" : "asc";
-      const response = await sortByStatus(stats, assets_type, newOrder);
-      setAssetTableData(response);
-      setAssetTableDataOrder(newOrder);
-    } catch (error) {
-      console.log(error);
-    }
+    const assetTableDataOrder = searchParams.get("order") || "asc"
+    console.log(stats, "status")
+    setSearchParams({
+      sortBy: stats,
+      order: assetTableDataOrder === "asc" ? "desc" : "asc",
+    });
   };
   const dataToRender = assetTableData || tableData;
   return (
