@@ -16,7 +16,6 @@ const SelectInputUser = ({ name, register, defaultValue, isDisabled }) => {
     queryKey: ["selectUserData"],
     queryFn: selectUser,
   });
-  console.log(defaultValue);
   return (
     <select
       {...register(name, { required: true })}
@@ -35,16 +34,12 @@ const SelectInputUser = ({ name, register, defaultValue, isDisabled }) => {
           {defaultValue.name}
         </option>
       )}
-      {userData && (
-        <>
-          <option value={null}>None</option>
-          {userData.map((user) => (
-            <option className="select__option" key={user.id} value={user.id}>
-              {user.name}
-            </option>
-          ))}
-        </>
-      )}
+      {Array.isArray(userData) &&
+        userData.map((user) => (
+          <option className="select__option" key={user.id} value={user.id}>
+            {user.name}
+          </option>
+        ))}
     </select>
   );
 };
