@@ -22,6 +22,7 @@ const EmployeeDataTable = ({
   tableData,
   error,
   isPending,
+  handleSort,
 }) => {
   /**
    * Handles deleting an employee.
@@ -45,7 +46,6 @@ const EmployeeDataTable = ({
   };
   // If an error occurs during data fetching, display an error message.
   if (error) return "An error has occurred: " + error.message;
-
   const option = ["ID", "User", "Designation", "Department", "Email", "Phone"];
   return (
     <div className="table__container">
@@ -56,7 +56,7 @@ const EmployeeDataTable = ({
           ) : (
             <>
               {option.map((tableHead, index) => (
-                <th key={index}>
+                <th key={index} onClick={() => handleSort(tableHead)}>
                   {tableHead}
                   <span>
                     <LuArrowUpDown />
@@ -78,11 +78,7 @@ const EmployeeDataTable = ({
                 <td data-cell="designation">
                   {tableItem.designation ? tableItem.designation : "N/A"}
                 </td>
-                <td data-cell="department">
-                  {tableItem.department.name
-                    ? tableItem.department.name
-                    : "N/A"}
-                </td>
+                <td data-cell="department">{tableItem.department?.name}</td>
                 <td data-cell="email">{tableItem.email}</td>
                 <td data-cell="phone">
                   {tableItem.phone_number ? tableItem.phone_number : "N/A"}

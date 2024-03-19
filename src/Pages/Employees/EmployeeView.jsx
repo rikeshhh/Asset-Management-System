@@ -42,6 +42,10 @@ const EmployeeView = () => {
   const date = viewEmployeeData.created_at;
   const [profileImage, setProfileImage] = useState(profileCover);
 
+  const [selectedJobType, setSelectedJobType] = useState(
+    viewEmployeeData.job_type || ""
+  );
+
   // const [profileImage, setProfileImage] = useState(profileCover);
   // const file = viewEmployeeData.user_image ? viewEmployeeData.user_image : "";
   // const backendUrl = import.meta.env.VITE_APP_AMS_API;
@@ -137,7 +141,7 @@ const EmployeeView = () => {
                       type={Model.Radio.type}
                       isDisabled={receivedState}
                       // isChecked={receivedState}
-                      isChecked={
+                      checked={
                         viewEmployeeData.job_type === "Permanent"
                           ? receivedState
                           : null
@@ -155,7 +159,7 @@ const EmployeeView = () => {
                       errors={errors}
                       type={Model.Radio.type}
                       isDisabled={receivedState}
-                      isChecked={
+                      checked={
                         viewEmployeeData.job_type === "Temporary"
                           ? receivedState
                           : null

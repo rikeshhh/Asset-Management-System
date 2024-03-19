@@ -229,6 +229,8 @@ const AddProfile = () => {
               <SelectInputDepartment
                 register={register}
                 isDisabled={receivedState}
+                isRequired={true}
+                name="department"
               />
             </div>
             <div className="form__input--section">
