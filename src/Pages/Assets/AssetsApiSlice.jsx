@@ -174,8 +174,6 @@ export const selectUser = async () => {
       },
     });
     const userData = response.data.data.data.data;
-    console.log("data");
-    console.log(userData);
     return userData;
   } catch (error) {
     throw error;
