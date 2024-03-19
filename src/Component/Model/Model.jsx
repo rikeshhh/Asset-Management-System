@@ -202,9 +202,9 @@ const Model = {
       message: "Product name should be less than 16 characters",
     },
     pattern: {
-      value: /^[a-zA-Z0-9-]+$/,
+      value: /^[a-zA-Z0-9 ]+$/,
       message:
-        "Please enter a valid product name. It can include capital letters, small letters, and numbers.",
+        "Please enter a valid product name. It can include capital letters, small letters, numbers, and spaces.",
     },
   },
   location: {
