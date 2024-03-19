@@ -17,25 +17,32 @@ const UserTab = () => {
     queryFn: () => getUserData(userId),
   });
   const navigate = useNavigate();
+
+  // Check if userData exists before accessing its properties
+  const userName = userData ? userData.name : "Loading...";
+  const userType = userData ? userData.user_type : "Loading...";
+  const userImage = userData ? userData.user_image : "Loading...";
+
   const gotToEmployeeView = () => {
     navigate("/viewEmployee", {
       state: { viewEmployeeData: userData },
     });
   };
-  console.log(userData);
+
   return (
     <section className="usertab">
       <div className="profile">
         <div className="profile__heading">
-          {/* <h4 className="profile__name">{userData.name}</h4>
-          <h6 className="profile__position">{userData.user_type}</h6> */}
-          <h4 className="profile__name">Amod Suman</h4>
-          <h6 className="profile__position">Admin</h6>
+          {/* Render the user name and type */}
+          <h4 className="profile__name">{userName}</h4>
+          <h6 className="profile__position">{userType}</h6>
         </div>
-        <figure onClick={gotToEmployeeView}>
-          <img src={profile} alt="click" />
-          {/* <ImagePath file={userData.user_image}/> */}
-        </figure>
+        {/* Check if userData exists before rendering the image */}
+        {userData && (
+          <figure onClick={gotToEmployeeView}>
+            <img src={profile} alt="click" />
+          </figure>
+        )}
       </div>
     </section>
   );
