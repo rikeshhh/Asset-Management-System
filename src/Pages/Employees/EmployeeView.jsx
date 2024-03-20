@@ -216,11 +216,7 @@ const EmployeeView = () => {
                 maxLength={Model.Email.maxLength.value}
                 maxMessage={Model.Email.maxLength.message}
                 isDisabled={receivedState}
-              >
-                <button className="toggleBtn__email" type="button">
-                  <img src={showHide} alt="show-hide" />
-                </button>
-              </InputField>
+              />
             </div>
             <div className="form__input--section">
               <Label sup={"*"} text="Phone Number" />
