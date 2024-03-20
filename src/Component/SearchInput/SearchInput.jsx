@@ -1,30 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { SearchSvg } from "../svg/SearchSvg";
-import { InputField } from "../Input/InputField";
 import { useForm } from "react-hook-form";
 import "./search.css";
 
-export const SearchInput = ({ submitSearch }) => {
+export const SearchInput = ({ defaultValue, setSearchParams }) => {
   const {
     register,
     formState: { errors },
-    handleSubmit,
   } = useForm();
+  const [inputValue, setInputValue] = useState(defaultValue);
 
-  const handleSearchSubmit = (data) => {
-    submitSearch(data);
+  const handleSearchChange = (e) => {
+    const data = e.target.value;
+    setInputValue(data);
+    setSearchParams({ Search: data });
   };
 
   return (
-    <form className="search__form" onSubmit={handleSubmit(handleSearchSubmit)}>
+    <div className="search__form">
       <SearchSvg />
-      <InputField
+      <input
         name="Search"
-        register={register}
+        {...register("Search", {
+          value: inputValue,
+          onChange: handleSearchChange,
+        })}
         errors={errors}
         placeholder="Search"
         className="search-input"
+        type={"search"}
       />
-    </form>
+    </div>
   );
 };

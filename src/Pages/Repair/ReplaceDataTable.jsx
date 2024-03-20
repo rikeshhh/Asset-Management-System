@@ -1,5 +1,5 @@
 import "../../Component/Table/Table.css";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -18,9 +18,9 @@ import { queryClient } from "../../Component/Query/Query";
 const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const [replaceId, setReplaceId] = useState();
-  const [searchData, setSearchData] = useState("");
-  const [sortData, setSortData] = useState("Product_Code");
+  const [sortData, setSortData] = useState("Assigned_date");
   const [sortOrder, setSortOrder] = useState("ASC");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const tableHeads = [
     "Product code",
@@ -29,13 +29,18 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
     "Status",
     "Assigned date",
   ];
+
+  const params = new URLSearchParams(searchParams);
+
+  const searchRepair = params.get("Search") || "";
+
   const {
     isPending,
     error,
     data: replaceTableData,
   } = useQuery({
-    queryKey: ["ReplaceTableData", searchData, sortData, sortOrder],
-    queryFn: () => getReplaceTableData(searchData, sortData, sortOrder),
+    queryKey: ["ReplaceTableData", searchRepair, sortData, sortOrder],
+    queryFn: () => getReplaceTableData(searchRepair, sortData, sortOrder),
     staleTime: 10000,
   });
 
@@ -46,6 +51,8 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
       setSortData("Assigned_date");
     } else if (tableHead === "Product code") {
       setSortData("Product_Code");
+    } else if (tableHead === "Name") {
+      setSortData("assets_name");
     } else {
       setSortData(tableHead);
     }
@@ -77,7 +84,14 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
   };
 
   const submitSearch = (data) => {
-    setSearchData(data.Search);
+    setSearchParams({
+      ...data,
+    });
+
+    if (!data.Search) {
+      searchParams.delete("Search");
+      setSearchParams(searchParams);
+    }
   };
 
   return (
@@ -90,7 +104,7 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
         />
       )}
       <div className="ams__filter ">
-        <SearchInput submitSearch={submitSearch} />
+        <SearchInput defaultValue={""} setSearchParams={setSearchParams} />
         <Button
           text="Filter"
           icon={<BsFunnel />}

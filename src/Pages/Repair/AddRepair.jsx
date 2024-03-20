@@ -69,9 +69,8 @@ const AddRepair = () => {
       }, 1000);
     },
     onError: (error) => {
-      if (error.request.status === 409) {
-        notifyError("Error adding employee");
-      }
+      console.log(error);
+      notifyError(error.response.data.message.message.repairreplace);
     },
   });
 
@@ -84,7 +83,6 @@ const AddRepair = () => {
    */
 
   const onRepairAddSubmit = (deviceData) => {
-   
     const repairData = {
       selectedType: selectedType,
       data: deviceData,
