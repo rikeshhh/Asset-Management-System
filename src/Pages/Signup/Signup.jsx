@@ -10,7 +10,7 @@ import { showHide } from "../../Component/Images/Image";
 import { useMutation } from "@tanstack/react-query";
 import { postData } from "./SignupApiSlice";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
-import { notifySuccess } from "../../Component/Toast/Toast";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 /**
  * Signup component for user registration.
 
@@ -30,21 +30,16 @@ export const Signup = () => {
     },
     // On successful login
 
-    onSuccess: (data) => {
-      if (data.status === true) {
-        notifySuccess(successMessage);
-        reset();
-        setTimeout(() => {
-          navigate("/login");
-        }, 1000);
-      }
+    onSuccess: () => {
+      notifySuccess(successMessage);
+      reset();
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     },
     // On error during login
     onError: (error) => {
-      notifyError(error.message);
-      if (error.response.status === 401) {
-        setError("Unauthorized: Please log in with valid id.");
-      }
+      notifyError(error.response.data.message.message.username);
     },
   });
 
@@ -68,7 +63,6 @@ export const Signup = () => {
     reset,
   } = formMethod;
   const submitData = (data) => {
-    console.log(data)
     userRegisterMutation.mutate(data);
   };
   // password showing features
