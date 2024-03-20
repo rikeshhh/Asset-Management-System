@@ -16,6 +16,7 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { repairReplaceAdd } from "./RepairApiSlice";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
+import { queryClient } from "../../Component/Query/Query";
 
 /**
  * Functional component for adding a new employee profile.

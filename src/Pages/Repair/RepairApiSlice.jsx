@@ -3,10 +3,15 @@ import { getTokenFromLocalStorage } from "../../utils/StorageUtils";
 
 const token = getTokenFromLocalStorage();
 
-export const getRepairTableData = async (searchData, sortData, sortOrder) => {
+export const getRepairTableData = async (
+  searchData,
+  sortData,
+  sortOrder,
+  pageNumber
+) => {
   try {
     const response = await instance.get(
-      `/repairreplace?searchKeyword=${searchData}&orderby=${sortData}&sortorder=${sortOrder}`,
+      `/repairreplace?searchKeyword=${searchData}&orderby=${sortData}&sortorder=${sortOrder}&pageNumber=${pageNumber}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -18,10 +23,15 @@ export const getRepairTableData = async (searchData, sortData, sortOrder) => {
   }
 };
 
-export const getReplaceTableData = async (searchData, sortData, sortOrder) => {
+export const getReplaceTableData = async (
+  searchData,
+  sortData,
+  sortOrder,
+  pageNumber
+) => {
   try {
     const response = await instance.get(
-      `/repairreplace?type=Replace&searchKeyword=${searchData}&orderby=${sortData}&sortorder=${sortOrder}`,
+      `/repairreplace?type=Replace&searchKeyword=${searchData}&orderby=${sortData}&sortorder=${sortOrder}&pageNumber=${pageNumber}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }

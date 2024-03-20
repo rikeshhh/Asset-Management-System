@@ -102,6 +102,9 @@ const Filter = ({ handleClick, filterShow }) => {
             </div>
 
             <div className="form__input--section ">
+              <div style={{ paddingBottom: "10px" }}>
+                <Label text={"Assigned Dates:"} />
+              </div>
               <Label text={"From"} />
               <InputField
                 name="fromDate"

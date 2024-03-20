@@ -73,15 +73,7 @@ const AssetsForm = ({
     // Function to handle errors during mutation
     onError: (error) => {
       // Check if the error response contains a message and notify the user accordingly
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        notifyError(error.response.data.message);
-      } else {
-        notifyError(error.message);
-      }
+      notifyError("Fill every input field");
     },
   });
 
