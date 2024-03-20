@@ -71,7 +71,7 @@ const EmployeeDataTable = ({
           {isPending ? (
             <PendingTableBody />
           ) : (
-            tableData.map((tableItem, index) => (
+            tableData.data.map((tableItem, index) => (
               <tr key={index}>
                 <td data-cell="id">{tableItem.id}</td>
                 <td data-cell="name">{tableItem.name}</td>

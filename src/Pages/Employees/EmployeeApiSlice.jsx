@@ -12,11 +12,12 @@ export const getEmployeeTableData = async (
   sortOrder,
   orderByData,
   filterbyDesignation,
-  filterbyDepartment
+  filterbyDepartment,
+  page
 ) => {
   try {
     const response = await instance.get(
-      `/user?searchKeyword=${searchKeyword}&sortorder=${sortOrder}&orderby=${orderByData}&filterbyDesignation=${filterbyDesignation}&filterbyDepartment=${filterbyDepartment}`,
+      `/user?searchKeyword=${searchKeyword}&sortorder=${sortOrder}&orderby=${orderByData}&filterbyDesignation=${filterbyDesignation}&filterbyDepartment=${filterbyDepartment}&pageNumber=${page}`,
 
       {
         headers: {
@@ -25,7 +26,7 @@ export const getEmployeeTableData = async (
         },
       }
     );
-    return response.data.data.data;
+    return response.data.data;
   } catch (error) {
     console.error("Axios error:", error);
     throw error;
