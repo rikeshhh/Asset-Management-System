@@ -14,13 +14,20 @@ import { deleteRepairReplace, getReplaceTableData } from "./RepairApiSlice";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 import { useState } from "react";
 import { queryClient } from "../../Component/Query/Query";
+import Pagination from "../../Component/Pagination/Pagination";
 
-const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
+const ReplaceDataTable = ({
+  onFilterClick,
+  setPageNumber,
+  pageNumber,
+  params,
+  searchParams,
+  setSearchParams,
+}) => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const [replaceId, setReplaceId] = useState();
   const [sortData, setSortData] = useState("Assigned_date");
   const [sortOrder, setSortOrder] = useState("ASC");
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const tableHeads = [
     "Product code",
@@ -30,17 +37,22 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
     "Assigned date",
   ];
 
-  const params = new URLSearchParams(searchParams);
-
-  const searchRepair = params.get("Search") || "";
+  const searchReplace = params.get("Search") || "";
 
   const {
     isPending,
     error,
     data: replaceTableData,
   } = useQuery({
-    queryKey: ["ReplaceTableData", searchRepair, sortData, sortOrder],
-    queryFn: () => getReplaceTableData(searchRepair, sortData, sortOrder),
+    queryKey: [
+      "ReplaceTableData",
+      searchReplace,
+      sortData,
+      sortOrder,
+      pageNumber,
+    ],
+    queryFn: () =>
+      getReplaceTableData(searchReplace, sortData, sortOrder, pageNumber),
     staleTime: 10000,
   });
 
@@ -57,6 +69,9 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
       setSortData(tableHead);
     }
   };
+
+  const totalData = replaceTableData?.total_data;
+  const roundUp = Math.ceil(totalData / 7);
 
   const DeleteReplace = useMutation({
     mutationFn: () => deleteRepairReplace(replaceId),
@@ -83,17 +98,6 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
     setDeleteConfirationShow(false);
   };
 
-  const submitSearch = (data) => {
-    setSearchParams({
-      ...data,
-    });
-
-    if (!data.Search) {
-      searchParams.delete("Search");
-      setSearchParams(searchParams);
-    }
-  };
-
   return (
     <>
       {deleteConfirationShow && (
@@ -104,7 +108,11 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
         />
       )}
       <div className="ams__filter ">
-        <SearchInput defaultValue={""} setSearchParams={setSearchParams} />
+        <SearchInput
+          defaultValue={""}
+          setSearchParams={setSearchParams}
+          setPageNumber={setPageNumber}
+        />
         <Button
           text="Filter"
           icon={<BsFunnel />}
@@ -180,6 +188,17 @@ const ReplaceDataTable = ({ handleTableEdit, onFilterClick }) => {
           </tbody>
         </table>
       </div>
+      {roundUp > 1 && (
+        <Pagination
+          params={params}
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+          data={replaceTableData}
+          roundUp={roundUp}
+          setPageNumber={setPageNumber}
+          pageNumber={pageNumber}
+        />
+      )}
     </>
   );
 };

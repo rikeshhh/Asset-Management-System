@@ -1,57 +1,73 @@
-// Pagination.jsx
-import React, { useEffect, useState } from "react";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import Button from "../Button/Button";
-import "./Pagination.css";
-import { useQuery } from "@tanstack/react-query";
-import { getPaginationData } from "./PaginationApiSlice";
-import AssetsTableData from "../../Pages/Assets/AssetsTableData";
+import { useState } from "react";
 
-const Pagination = ({ assets_type, asssets_data, searchAssets, isPending }) => {
-  const [page, setPage] = useState(1);
-  const [paginationData, setPaginationData] = useState(null);
+const Pagination = ({
+  data,
+  params,
+  searchParams,
+  setSearchParams,
+  roundUp,
+  pageNumber,
+  setPageNumber,
+}) => {
+  const [pageNumberForEllipsis, setPageNumberForEllipsis] = useState(null);
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["exampleQuery", page],
-    queryFn: () => getPaginationData(page, assets_type),
-    staleTime: 10000,
-    // Other options...
-  });
-  const handlePrevClick = () => {
-    setPage((prevPage) => Math.max(prevPage - 1, 1));
+  const updatePageNumber = (newPageNumber) => {
+    // Set the new page number
+    setPageNumber(newPageNumber);
+    // Update the URL with the new page number
+    setSearchParams({ page: newPageNumber });
   };
-
-  const handleNextClick = () => {
-    setPage((prevPage) => prevPage + 1);
-  };
-
-  if (error) {
-    console.log(error);
-  }
 
   return (
-    <>
-      <AssetsTableData
-        // handleDeleteClick={handleDeleteClick}
-        // handleProceedClick={handleProceedClick}
-        tableData={searchAssets ? data : asssets_data}
-        isPending={isPending}
-        assets_type="hardware"
+    <div className="pagination">
+      <Button
+        className="inactivePage"
+        icon={<FaAngleLeft />}
+        handleClick={() =>
+          updatePageNumber(pageNumber > 1 ? pageNumber - 1 : 1)
+        }
       />
-      <div className="pagination-container">
-        <Button
-          className="pagination--button"
-          text="prev"
-          handleClick={handlePrevClick}
-          disabled={page === 1}
-        />
-        <div>{page}</div>
-        <Button
-          className="pagination--button"
-          text="next"
-          handleClick={handleNextClick}
-        />
-      </div>
-    </>
+      {data &&
+        [...Array(roundUp)].map((_, index) => (
+          <>
+            {index === roundUp - 2 && pageNumber > 2 ? (
+              <Button
+                key={index}
+                text={
+                  pageNumberForEllipsis !== null
+                    ? pageNumberForEllipsis.toString()
+                    : "..."
+                }
+                className={
+                  pageNumber === index + 1 ? "activePage" : "inactivePage"
+                }
+                handleClick={() => {
+                  updatePageNumber(index + 1);
+                  setPageNumberForEllipsis(index + 1);
+                }}
+              />
+            ) : (
+              <Button
+                key={index}
+                text={index + 1}
+                className={
+                  pageNumber === index + 1 ? "activePage" : "inactivePage"
+                }
+                handleClick={() => updatePageNumber(index + 1)}
+              />
+            )}
+          </>
+        ))}
+      <Button
+        className="inactivePage"
+        handleClick={() =>
+          updatePageNumber(pageNumber < roundUp ? pageNumber + 1 : pageNumber)
+        }
+        icon={<FaAngleRight />}
+      />
+    </div>
   );
 };
 

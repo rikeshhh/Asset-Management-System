@@ -3,7 +3,11 @@ import { SearchSvg } from "../svg/SearchSvg";
 import { useForm } from "react-hook-form";
 import "./search.css";
 
-export const SearchInput = ({ defaultValue, setSearchParams }) => {
+export const SearchInput = ({
+  defaultValue,
+  setSearchParams,
+  setPageNumber,
+}) => {
   const {
     register,
     formState: { errors },
@@ -11,6 +15,7 @@ export const SearchInput = ({ defaultValue, setSearchParams }) => {
   const [inputValue, setInputValue] = useState(defaultValue);
 
   const handleSearchChange = (e) => {
+    setPageNumber(1);
     const data = e.target.value;
     setInputValue(data);
     setSearchParams({ Search: data });

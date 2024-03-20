@@ -16,16 +16,20 @@ import { useEffect, useState } from "react";
 import { queryClient } from "../../Component/Query/Query";
 import { notifySuccess } from "../../Component/Toast/Toast";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+import Pagination from "../../Component/Pagination/Pagination";
 
-const RepairDataTable = ({ onFilterClick }) => {
+const RepairDataTable = ({
+  onFilterClick,
+  setPageNumber,
+  pageNumber,
+  params,
+  searchParams,
+  setSearchParams,
+}) => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const [repairId, setRepairId] = useState();
   const [sortData, setSortData] = useState("Assigned_date");
   const [sortOrder, setSortOrder] = useState("ASC");
-  const [pageNumberForEllipsis, setPageNumberForEllipsis] = useState(null);
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const params = new URLSearchParams(searchParams);
 
   const searchRepair = params.get("Search") || "";
 
@@ -42,8 +46,15 @@ const RepairDataTable = ({ onFilterClick }) => {
     error,
     data: repairTableData,
   } = useQuery({
-    queryKey: ["RepairTableData", searchRepair, sortData, sortOrder],
-    queryFn: () => getRepairTableData(searchRepair, sortData, sortOrder),
+    queryKey: [
+      "RepairTableData",
+      searchRepair,
+      sortData,
+      sortOrder,
+      pageNumber,
+    ],
+    queryFn: () =>
+      getRepairTableData(searchRepair, sortData, sortOrder, pageNumber),
     staleTime: 10000,
   });
 
@@ -58,7 +69,8 @@ const RepairDataTable = ({ onFilterClick }) => {
     },
   });
 
-  // const roundUp = Math.ceil(totalData / 7);
+  const totalData = repairTableData?.total_data;
+  const roundUp = Math.ceil(totalData / 7);
 
   const handleRepairEdit = () => {};
 
@@ -104,7 +116,11 @@ const RepairDataTable = ({ onFilterClick }) => {
         />
       )}
       <div className="ams__filter ">
-        <SearchInput defaultValue={""} setSearchParams={setSearchParams} />
+        <SearchInput
+          defaultValue={""}
+          setSearchParams={setSearchParams}
+          setPageNumber={setPageNumber}
+        />
         <Button
           text="Filter"
           icon={<BsFunnel />}
@@ -180,53 +196,17 @@ const RepairDataTable = ({ onFilterClick }) => {
           </tbody>
         </table>
       </div>
-      {/* <div className="pagination">
-        <Button
-          className="inactivePage"
-          icon={<FaAngleLeft />}
-          handleClick={() =>
-            updatePageNumber(pageNumber > 1 ? pageNumber - 1 : 1)
-          }
+      {roundUp > 1 && (
+        <Pagination
+          params={params}
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+          data={repairTableData}
+          roundUp={roundUp}
+          setPageNumber={setPageNumber}
+          pageNumber={pageNumber}
         />
-        {repairTableData &&
-          [...Array(roundUp)].map((_, index) => (
-            <>
-              {index === roundUp - 2 && pageNumber > 2 ? (
-                <Button
-                  key={index}
-                  text={
-                    pageNumberForEllipsis !== null
-                      ? pageNumberForEllipsis.toString()
-                      : "..."
-                  }
-                  className={
-                    pageNumber === index + 1 ? "activePage" : "inactivePage"
-                  }
-                  handleClick={() => {
-                    updatePageNumber(index + 1);
-                    setPageNumberForEllipsis(index + 1);
-                  }}
-                />
-              ) : (
-                <Button
-                  key={index}
-                  text={index + 1}
-                  className={
-                    pageNumber === index + 1 ? "activePage" : "inactivePage"
-                  }
-                  handleClick={() => updatePageNumber(index + 1)}
-                />
-              )}
-            </>
-          ))}
-        <Button
-          className="inactivePage"
-          handleClick={() =>
-            updatePageNumber(pageNumber < roundUp ? pageNumber + 1 : pageNumber)
-          }
-          icon={<FaAngleRight />}
-        />
-      </div> */}
+      )}
     </>
   );
 };

@@ -51,15 +51,7 @@ const EditAssets = () => {
       }, 1000);
     },
     onError: (error) => {
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        notifyError(error.response.data.message);
-      } else {
-        notifyError(error.message);
-      }
+      notifyError("Something went wrong");
     },
   });
 
