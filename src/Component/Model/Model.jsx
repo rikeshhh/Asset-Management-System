@@ -12,8 +12,8 @@ const Model = {
       message: "Username should be less than 20 characters",
     },
     pattern: {
-      value: "^[a-zA-Z0-9]+(?:[_/-/.][a-zA-Z0-9]+)*$",
-
+      value:
+        /^(?![^._-]*[-._][^._-]*[-._])[A-Za-z][A-Za-z0-9]*[-._]?[A-Za-z0-9]*$/,
       message: "Please enter a valid username",
     },
   },
@@ -30,8 +30,8 @@ const Model = {
       message: "Name should be less than 64 characters",
     },
     pattern: {
-      value: "^[a-zA-Z0-9 ]+$",
-      message: "Please enter a valid Name",
+      value: "^[a-zA-Z ]+$",
+      message: "Invalid name. Name must contain only alphabetic characters",
     },
   },
   Email: {
@@ -58,11 +58,11 @@ const Model = {
         "Password must be at least 8 characters long, must include a capital and small letter and a numeric and special character",
     },
     maxLength: {
-      value: 16,
-      message: "Password must be less than 64 characters",
+      value: 20,
+      message: "Password must be less than 20 characters",
     },
     pattern: {
-      value: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()-_+=]).*$",
+      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
       message:
         "Invalid password. Password must be at least 8 characters long, must include a capital and small letter and a numeric and special character",
     },
