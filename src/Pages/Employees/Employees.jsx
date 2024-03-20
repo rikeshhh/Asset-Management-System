@@ -41,7 +41,7 @@ const Employees = () => {
   const [designationData, setDesignationData] = useState("");
   const [departmentData, setDepartmentData] = useState("");
   const [page, setPage] = useState(1);
-  const [searchParams, setSearchParams] = useState();
+  const [searchParams, setSearchParams] = useSearchParams();
   const itemsPerPage = 7;
 
   const params = new URLSearchParams(searchParams);
@@ -118,6 +118,8 @@ const Employees = () => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
 
   const [employeeId, setEmployeeId] = useState("");
+
+  const [pageNumber, setPageNumber] = useState(1);
 
   /**
    * Toggles the visibility of the filter component.
@@ -221,7 +223,11 @@ const Employees = () => {
           </div>
           <div className="employees__table">
             <div className="ams__filter">
-              <SearchInput setSearchParams={setSearchParams} />
+              <SearchInput
+                setPageNumber={setPageNumber}
+                setSearchParams={setSearchParams}
+                defaultValue={""}
+              />
               <Button
                 handleClick={() => onFilterClick(!filterShow)}
                 text="Filter"
