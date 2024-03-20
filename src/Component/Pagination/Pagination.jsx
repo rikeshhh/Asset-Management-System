@@ -4,8 +4,6 @@ import { useState } from "react";
 
 const Pagination = ({
   data,
-  params,
-  searchParams,
   setSearchParams,
   roundUp,
   pageNumber,
@@ -14,10 +12,23 @@ const Pagination = ({
   const [pageNumberForEllipsis, setPageNumberForEllipsis] = useState(null);
 
   const updatePageNumber = (newPageNumber) => {
+    // Retrieve existing search parameters
+    const params = new URLSearchParams(window.location.search);
+
+    // Update the "page" parameter with the new page number
+    params.set("page", newPageNumber);
+
+    // Convert URLSearchParams object to plain object
+    const updatedParams = {};
+    for (const [key, value] of params.entries()) {
+      updatedParams[key] = value;
+    }
+
     // Set the new page number
     setPageNumber(newPageNumber);
-    // Update the URL with the new page number
-    setSearchParams({ page: newPageNumber });
+
+    // Update the URL with the new search parameters
+    setSearchParams(updatedParams);
   };
 
   return (

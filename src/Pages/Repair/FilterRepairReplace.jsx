@@ -9,36 +9,37 @@
  */
 
 import { useForm } from "react-hook-form";
-import "./Filter.css";
+import "../../Component/Filter/Filter.css";
 import { RxCross1 } from "react-icons/rx";
-import Button from "../Button/Button";
-import { Label } from "../Label/Label";
-import { SelectInput } from "../Input/SelectInput";
-import { useEffect, useState } from "react";
-import { InputField } from "../Input/InputField";
-import Model from "../Model/Model";
-import SelectInputCategory from "../../Pages/Categories/SelectInputCategory";
 import { useQuery } from "@tanstack/react-query";
-import {
-  getAssetsData,
-  getFilterData,
-} from "../../Pages/Assets/AssetsApiSlice";
 import { useSearchParams } from "react-router-dom";
-import SelectFilter from "./SelectFilter";
+import { Label } from "../../Component/Label/Label";
+import SelectFilter from "../../Component/Filter/SelectFilter";
+import { SelectInput } from "../../Component/Input/SelectInput";
+import { InputField } from "../../Component/Input/InputField";
+import Button from "../../Component/Button/Button";
+import Model from "../../Component/Model/Model";
 
-const Filter = ({ handleClick, filterShow, filterOptions }) => {
+const FilterRepairReplace = ({
+  handleClick,
+  filterShow,
+  filterOptions,
+  setPageNumber,
+  setSearchParams,
+}) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
-  const [searchParams, setSearchParams] = useSearchParams();
 
   //function to filter assets data
   const filterSubmit = (data) => {
+    setPageNumber(1);
     const fromDate = data.fromDate.replace(/\+/g, " ");
     const toDate = data.toDate.replace(/\+/g, " ");
-    const assignedDate = `${fromDate} to ${toDate}`;
+    const assignedDate = `${fromDate} AND ${toDate}`;
 
     // Check if all three parameters are selected
     if (
@@ -139,7 +140,14 @@ const Filter = ({ handleClick, filterShow, filterOptions }) => {
           </div>
           <div className="filter__button">
             <div className="filter__button--flex">
-              <Button className="button__red" text="Clear All Filter" />
+              <Button
+                className="button__red"
+                text="Clear All Filter"
+                handleClick={() => {
+                  reset();
+                  setSearchParams("");
+                }}
+              />
               {/* <Link to="/payment" state={receivedFeature} className="link"> */}
               <Button
                 type="submit"
@@ -155,4 +163,4 @@ const Filter = ({ handleClick, filterShow, filterOptions }) => {
   );
 };
 
-export default Filter;
+export default FilterRepairReplace;

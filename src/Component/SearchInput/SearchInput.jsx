@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SearchSvg } from "../svg/SearchSvg";
 import { useForm } from "react-hook-form";
 import "./search.css";
+import { useDebounce } from "../Debounce/useDebounce";
 
 export const SearchInput = ({
   defaultValue,
@@ -13,13 +14,12 @@ export const SearchInput = ({
     formState: { errors },
   } = useForm();
   const [inputValue, setInputValue] = useState(defaultValue);
+  const debouncedSearch = useDebounce(inputValue);
 
-  const handleSearchChange = (e) => {
+  useEffect(() => {
     setPageNumber(1);
-    const data = e.target.value;
-    setInputValue(data);
-    setSearchParams({ Search: data });
-  };
+    setSearchParams({ Search: debouncedSearch });
+  }, [debouncedSearch]);
 
   return (
     <div className="search__form">
@@ -28,7 +28,7 @@ export const SearchInput = ({
         name="Search"
         {...register("Search", {
           value: inputValue,
-          onChange: handleSearchChange,
+          onChange: (e) => setInputValue(e.target.value),
         })}
         errors={errors}
         placeholder="Search"

@@ -38,6 +38,10 @@ const ReplaceDataTable = ({
   ];
 
   const searchReplace = params.get("Search") || "";
+  const category = params.get("category") || "";
+  const status = params.get("status") || "";
+
+  const assigned_date = params.get("assigned_date") || "";
 
   const {
     isPending,
@@ -50,9 +54,20 @@ const ReplaceDataTable = ({
       sortData,
       sortOrder,
       pageNumber,
+      category,
+      status,
+      assigned_date,
     ],
     queryFn: () =>
-      getReplaceTableData(searchReplace, sortData, sortOrder, pageNumber),
+      getReplaceTableData(
+        searchReplace,
+        sortData,
+        sortOrder,
+        pageNumber,
+        category,
+        status,
+        assigned_date
+      ),
     staleTime: 10000,
   });
 
@@ -190,8 +205,6 @@ const ReplaceDataTable = ({
       </div>
       {roundUp > 1 && (
         <Pagination
-          params={params}
-          searchParams={searchParams}
           setSearchParams={setSearchParams}
           data={replaceTableData}
           roundUp={roundUp}

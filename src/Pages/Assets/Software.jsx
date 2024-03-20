@@ -124,7 +124,7 @@ const Software = () => {
       assignedDate,
       byStatus,
       by_assets_type,
-      order
+      order,
     ],
     queryFn: () =>
       getAssetsData(
@@ -170,6 +170,7 @@ const Software = () => {
   }
   const roundUp = Math.ceil(totalData / 7);
   const [pageNumberForEllipsis, setPageNumberForEllipsis] = useState(null);
+  const filterOptions = ["None", "active", "inactive"];
 
   return (
     <>
@@ -177,6 +178,7 @@ const Software = () => {
         <Filter
           assetsType="software"
           handleClick={() => onFilterClick(!filterShow)}
+          filterOptions={filterOptions}
         />
       ) : (
         <></>

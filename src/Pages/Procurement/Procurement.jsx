@@ -14,12 +14,15 @@ const Procurement = () => {
   const onFilterClick = (showHide) => {
     setFilterShow(showHide);
   };
+  const filterOptions = ["None", "Approved", "Pending"];
+
   return (
     <>
       {filterShow ? (
         <Filter
           handleClick={() => onFilterClick(!filterShow)}
           filterShow={filterShow}
+          filterOptions={filterOptions}
         />
       ) : (
         <></>

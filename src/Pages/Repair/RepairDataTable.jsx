@@ -32,6 +32,9 @@ const RepairDataTable = ({
   const [sortOrder, setSortOrder] = useState("ASC");
 
   const searchRepair = params.get("Search") || "";
+  const category = params.get("category") || "";
+  const status = params.get("status") || "";
+  const assigned_date = params.get("assigned_date") || "";
 
   const tableHeads = [
     "Product code",
@@ -52,9 +55,20 @@ const RepairDataTable = ({
       sortData,
       sortOrder,
       pageNumber,
+      category,
+      status,
+      assigned_date,
     ],
     queryFn: () =>
-      getRepairTableData(searchRepair, sortData, sortOrder, pageNumber),
+      getRepairTableData(
+        searchRepair,
+        sortData,
+        sortOrder,
+        pageNumber,
+        category,
+        status,
+        assigned_date
+      ),
     staleTime: 10000,
   });
 
@@ -198,8 +212,6 @@ const RepairDataTable = ({
       </div>
       {roundUp > 1 && (
         <Pagination
-          params={params}
-          searchParams={searchParams}
           setSearchParams={setSearchParams}
           data={repairTableData}
           roundUp={roundUp}
