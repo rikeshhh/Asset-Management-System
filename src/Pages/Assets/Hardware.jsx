@@ -45,13 +45,20 @@ const Hardware = () => {
     parseInt(searchParams.get("page")) || 1
   );
   // Extracting search parameters from the URL
-  const searchHardware = searchParams.get("search"); // Search keyword
-  const searchCategory = searchParams.get("category"); // Category filter
-  const fromDate = searchParams.get("fromDate"); // Start date filter
-  const toDate = searchParams.get("toDate"); // End date filter
-  const searchDate = `${fromDate} to ${toDate}`; // Date range for search
-  const assets_type = searchParams.get("assets_type"); // Type of assets
-  const assignedDate = searchParams.get("assigned_date"); // Assigned date filter
+  // Search keyword
+  const searchHardware = searchParams.get("search");
+  // Category filter
+  const searchCategory = searchParams.get("category");
+  // Start date filter
+  const fromDate = searchParams.get("fromDate");
+  // End date filter
+  const toDate = searchParams.get("toDate");
+  // Date range for search
+  const searchDate = `${fromDate} to ${toDate}`; 
+  // Type of assets
+  const assets_type = searchParams.get("assets_type");
+  // Assigned date filter
+  const assignedDate = searchParams.get("assigned_date");
   const searchStatus = searchParams.get("status"); // Status filter
   const [filterShow, setFilterShow] = useState(false);
   const by_assets_type = searchParams.get("sortBy");
@@ -61,8 +68,10 @@ const Hardware = () => {
 
   // Function to update the page number and update the URL with the new page number
   const updatePageNumber = (newPageNumber) => {
-    setPageNumber(newPageNumber); // Set the new page number
-    setSearchParams({ page: newPageNumber }); // Update the URL with the new page number
+    // Set the new page number
+    setPageNumber(newPageNumber); 
+    // Update the URL with the new page number
+    setSearchParams({ page: newPageNumber });
   };
 
   /**

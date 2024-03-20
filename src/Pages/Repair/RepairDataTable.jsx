@@ -1,5 +1,5 @@
 import "../../Component/Table/Table.css";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -12,7 +12,7 @@ import { EyeSvg } from "../../Component/svg/EyeSvg";
 import { SearchInput } from "../../Component/SearchInput/SearchInput";
 import { BsFunnel } from "react-icons/bs";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { queryClient } from "../../Component/Query/Query";
 import { notifySuccess } from "../../Component/Toast/Toast";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
@@ -20,10 +20,15 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 const RepairDataTable = ({ onFilterClick }) => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const [repairId, setRepairId] = useState();
-  const [searchData, setSearchData] = useState("");
-  const [sortData, setSortData] = useState("Product_Code");
+  const [sortData, setSortData] = useState("Assigned_date");
   const [sortOrder, setSortOrder] = useState("ASC");
   const [pageNumberForEllipsis, setPageNumberForEllipsis] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const params = new URLSearchParams(searchParams);
+
+  const searchRepair = params.get("Search") || "";
+
   const tableHeads = [
     "Product code",
     "name",
@@ -37,8 +42,8 @@ const RepairDataTable = ({ onFilterClick }) => {
     error,
     data: repairTableData,
   } = useQuery({
-    queryKey: ["RepairTableData", searchData, sortData, sortOrder],
-    queryFn: () => getRepairTableData(searchData, sortData, sortOrder),
+    queryKey: ["RepairTableData", searchRepair, sortData, sortOrder],
+    queryFn: () => getRepairTableData(searchRepair, sortData, sortOrder),
     staleTime: 10000,
   });
 
@@ -71,10 +76,6 @@ const RepairDataTable = ({ onFilterClick }) => {
     setDeleteConfirationShow(false);
   };
 
-  const submitSearch = (data) => {
-    setSearchData(data.Search);
-  };
-
   const handleStatusClick = (tableHead) => {
     const newOrder = sortOrder === "ASC" ? "DESC" : "ASC";
     setSortOrder(newOrder);
@@ -82,6 +83,8 @@ const RepairDataTable = ({ onFilterClick }) => {
       setSortData("Assigned_date");
     } else if (tableHead === "Product code") {
       setSortData("Product_Code");
+    } else if (tableHead === "name") {
+      setSortData("assets_name");
     } else {
       setSortData(tableHead);
     }
@@ -101,7 +104,7 @@ const RepairDataTable = ({ onFilterClick }) => {
         />
       )}
       <div className="ams__filter ">
-        <SearchInput submitSearch={submitSearch} />
+        <SearchInput defaultValue={""} setSearchParams={setSearchParams} />
         <Button
           text="Filter"
           icon={<BsFunnel />}
@@ -177,7 +180,7 @@ const RepairDataTable = ({ onFilterClick }) => {
           </tbody>
         </table>
       </div>
-      <div className="pagination">
+      {/* <div className="pagination">
         <Button
           className="inactivePage"
           icon={<FaAngleLeft />}
@@ -223,7 +226,7 @@ const RepairDataTable = ({ onFilterClick }) => {
           }
           icon={<FaAngleRight />}
         />
-      </div>
+      </div> */}
     </>
   );
 };
