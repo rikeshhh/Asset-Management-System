@@ -58,7 +58,9 @@ const Software = () => {
   const searchDate = `${fromDate} to ${toDate}`;
   const searchStatus = searchParams.get("status");
   const assignedDate = searchParams.get("assigned_date");
-
+  const by_assets_type = searchParams.get("sortBy");
+  const byStatus = searchParams.get("assets_type");
+  const order = searchParams.get("order") || "asc";
   /**
    * Handles the click event for deleting an employee.
    * @param {Object} employee - The employee object to be deleted.
@@ -120,6 +122,9 @@ const Software = () => {
       searchCategory,
       searchStatus,
       assignedDate,
+      byStatus,
+      by_assets_type,
+      order
     ],
     queryFn: () =>
       getAssetsData(
@@ -128,7 +133,10 @@ const Software = () => {
         pageNumber,
         searchCategory,
         searchStatus,
-        assignedDate
+        assignedDate,
+        byStatus,
+        by_assets_type,
+        order
       ),
     staleTime: 10000,
   });
