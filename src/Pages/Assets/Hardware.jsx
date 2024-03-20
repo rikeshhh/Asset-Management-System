@@ -157,12 +157,17 @@ const Hardware = () => {
   if (HardwareData) {
     totalData = HardwareData.totalData;
   }
+  const filterOptions = ["None", "active", "inactive"];
+
   const roundUp = Math.ceil(totalData / 7);
   const [pageNumberForEllipsis, setPageNumberForEllipsis] = useState(null);
   return (
     <>
       {filterShow ? (
-        <Filter handleClick={() => onFilterClick(!filterShow)} />
+        <Filter
+          filterOptions={filterOptions}
+          handleClick={() => onFilterClick(!filterShow)}
+        />
       ) : (
         <></>
       )}

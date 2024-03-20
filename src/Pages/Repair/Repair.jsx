@@ -6,6 +6,7 @@ import RepairDataTable from "./RepairDataTable";
 import Filter from "../../Component/Filter/Filter";
 import { Link, useSearchParams } from "react-router-dom";
 import ReplaceDataTable from "./ReplaceDataTable";
+import FilterRepairReplace from "./FilterRepairReplace";
 
 const Repair = () => {
   const [isCompActive, setIsCompActive] = useState("Repair");
@@ -24,12 +25,18 @@ const Repair = () => {
   const onFilterClick = (showHide) => {
     setFilterShow(showHide);
   };
+
+  const filterOptions = ["None", "sent", "pending"];
+
   return (
     <>
       {filterShow ? (
-        <Filter
+        <FilterRepairReplace
           handleClick={() => onFilterClick(!filterShow)}
           filterShow={filterShow}
+          filterOptions={filterOptions}
+          setPageNumber={setPageNumber}
+          setSearchParams={setSearchParams}
         />
       ) : (
         <></>

@@ -56,6 +56,7 @@ const EditAssets = () => {
   });
 
   const submitData = (data) => {
+    console.log(data);
     EditAssets.mutate(data);
   };
   const [isActive, setIsActive] = useState(assetsData.status === "active");

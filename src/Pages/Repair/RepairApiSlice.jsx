@@ -7,11 +7,14 @@ export const getRepairTableData = async (
   searchData,
   sortData,
   sortOrder,
-  pageNumber
+  pageNumber,
+  category,
+  status,
+  assigned_date
 ) => {
   try {
     const response = await instance.get(
-      `/repairreplace?searchKeyword=${searchData}&orderby=${sortData}&sortorder=${sortOrder}&pageNumber=${pageNumber}`,
+      `/repairreplace?searchKeyword=${searchData}&orderby=${sortData}&sortorder=${sortOrder}&pageNumber=${pageNumber}&filterbyCategory=${category}&filterbyStatus=${status}&filterbyAssignedDate=${assigned_date}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -27,11 +30,14 @@ export const getReplaceTableData = async (
   searchData,
   sortData,
   sortOrder,
-  pageNumber
+  pageNumber,
+  category,
+  status,
+  assigned_date
 ) => {
   try {
     const response = await instance.get(
-      `/repairreplace?type=Replace&searchKeyword=${searchData}&orderby=${sortData}&sortorder=${sortOrder}&pageNumber=${pageNumber}`,
+      `/repairreplace?type=Replace&searchKeyword=${searchData}&orderby=${sortData}&sortorder=${sortOrder}&pageNumber=${pageNumber}&filterbyCategory=${category}&filterbyStatus=${status}&filterbyAssignedDate=${assigned_date}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }

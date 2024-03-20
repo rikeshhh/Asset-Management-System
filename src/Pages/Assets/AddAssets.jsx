@@ -18,13 +18,7 @@ import SelectSubCat from "../Categories/SelectSubCat";
 import SelectInputUser from "./SelectInputUser";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import { SelectAssetType } from "./SelectAssetType";
-const AssetsForm = ({
-  formHeading,
-  formType,
-  buttonText,
-  buttonCancelText,
-  assetsData,
-}) => {
+const AssetsForm = () => {
   const formMethod = useForm();
   const {
     register,
@@ -182,7 +176,7 @@ const AssetsForm = ({
               <SelectInputUser name="assigned_to" register={register} />
             </div>
             <div className="assets__form--input ">
-              <Label text="Status" sup={"*"} />
+              <Label text="Status" />
               <label className={`switch ${isActive ? "active" : "inactive"}`}>
                 <input
                   {...register("status")}
