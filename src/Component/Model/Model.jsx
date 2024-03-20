@@ -198,8 +198,8 @@ const Model = {
       message: "Product name must be at least 2 characters long",
     },
     maxLength: {
-      value: 16,
-      message: "Product name should be less than 16 characters",
+      value: 64,
+      message: "Product name should be less than 64 characters",
     },
     pattern: {
       value: /^[a-zA-Z0-9 ]+$/,
