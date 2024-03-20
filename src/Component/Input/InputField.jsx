@@ -1,6 +1,7 @@
 import { ErrorMessage } from "@hookform/error-message";
 import "./input.css";
 import { useState } from "react";
+import Model from "../Model/Model";
 
 export const InputField = ({
   placeholder,
@@ -27,12 +28,12 @@ export const InputField = ({
   isEditable,
 }) => {
   const hasError = errors[name];
-  const [inputValu, setInputValu] = useState(defaultValue); // <-- State to manage the input value
+  const [inputValu, setInputValu] = useState(defaultValue);
   // Handle change event
   const handleChange = (e) => {
-    setInputValu(e.target.value);
+    const inputValue = e.target.value;
+    setInputValu(inputValue);
   };
-
   return (
     <div className={type == "radio" ? "input__field--radio" : "input__field"}>
       <div className="toggle__showHide--container">

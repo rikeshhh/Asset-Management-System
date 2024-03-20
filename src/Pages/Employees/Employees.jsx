@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { InputField } from "../../Component/Input/InputField";
 import "./Employee.css";
@@ -41,8 +41,11 @@ const Employees = () => {
   const [designationData, setDesignationData] = useState("");
   const [departmentData, setDepartmentData] = useState("");
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [searchParams, setSearchParams] = useState();
   const itemsPerPage = 7;
+
+  const params = new URLSearchParams(searchParams);
+  const searchUser = params.get("Search") || "";
 
   const {
     isPending,
@@ -51,7 +54,7 @@ const Employees = () => {
   } = useQuery({
     queryKey: [
       "searchedData",
-      searchData,
+      searchUser,
       sortOrder,
       orderByData,
       designationData,
@@ -60,7 +63,7 @@ const Employees = () => {
     ],
     queryFn: () =>
       getEmployeeTableData(
-        searchData,
+        searchUser,
         sortOrder,
         orderByData,
         designationData,
@@ -91,20 +94,15 @@ const Employees = () => {
     }
   };
 
-  let totalItems;
-  if (tableData && typeof tableData.total_data === "string") {
-    const totalEntries = parseInt(tableData.total_data, 10);
-    if (!isNaN(totalEntries)) {
-      totalItems = Math.ceil(totalEntries / itemsPerPage);
-    }
-  }
-
   const DeleteEmployee = useMutation({
     mutationFn: (employeeId) => {
       return employeeDelete(employeeId);
     },
     onSuccess: () => {
       notifySuccess("Employee Deleted Successfully");
+      if (tableData && tableData.data.length === 1) {
+        setPage((prevPage) => Math.max(prevPage - 1, 1));
+      }
       queryClient.invalidateQueries("EmployeeData");
     },
     onError: (error) => {
@@ -114,8 +112,6 @@ const Employees = () => {
       }
     },
   });
-
-  console.log("departmentData", tableData);
 
   const [filterShow, setFilterShow] = useState(false); //State to manage the visibility of the filter component.
 
@@ -169,17 +165,26 @@ const Employees = () => {
       state: { viewEmployeeData: viewEmployeeData },
     });
   };
-  const submitSearch = (data) => {
-    setSearchData(data.Search);
-  };
+  // const submitSearch = (data) => {
+  //   setSearchData(data.Search);
+  // };
 
   const designationSubmit = (data) => {
     setDesignationData(data.designation);
     setDepartmentData(data.department);
   };
+  // useEffect(() => {
+  let totalItems;
+  if (tableData && typeof tableData.total_data === "string") {
+    const totalEntries = parseInt(tableData.total_data, 10);
+    if (!isNaN(totalEntries)) {
+      totalItems = Math.ceil(totalEntries / itemsPerPage);
+    }
+  }
+  // }, [tableData, itemsPerPage]);
+
   const handlePageClick = (pageNumber) => {
-    setPage(pageNumber); // Set the new page number
-    // Perform any necessary actions to fetch data for the new page
+    setPage(pageNumber);
   };
 
   return (
@@ -216,7 +221,7 @@ const Employees = () => {
           </div>
           <div className="employees__table">
             <div className="ams__filter">
-              <SearchInput submitSearch={submitSearch} />
+              <SearchInput setSearchParams={setSearchParams} />
               <Button
                 handleClick={() => onFilterClick(!filterShow)}
                 text="Filter"

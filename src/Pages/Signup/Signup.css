@@ -31,6 +31,9 @@
   border: none;
   background: none;
 }
+.password-input__input--padding {
+  padding-right: 2rem !important;
+}
 
 @media screen and (max-width: 720px) {
   .user__auth {
@@ -57,6 +60,6 @@
     font-weight: 700;
   }
   .user__auth__content {
-    padding: 0 20px !important;
+    padding: 20px !important;
   }
 }

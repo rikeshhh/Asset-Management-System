@@ -39,7 +39,7 @@ export const Signup = () => {
     },
     // On error during login
     onError: (error) => {
-      notifyError(error.response.data.message.message.username);
+      notifyError(error.response.data.message.message.signup);
     },
   });
 
@@ -153,6 +153,7 @@ export const Signup = () => {
                   <Label text="Password" />
                   <InputField
                     name="password"
+                    className="password-input__input--padding"
                     register={register}
                     value={Model.Password.pattern.value}
                     message={Model.Password.pattern.message}
@@ -176,7 +177,7 @@ export const Signup = () => {
                   <Label text="Retype Password" />
                   <div className="repassword-toggle--button">
                     <input
-                      className="retype-password"
+                      className="retype-password password-input__input--padding"
                       name="retype_password"
                       type={showResetPassword ? "text" : "password"}
                       placeholder="Enter your password again"

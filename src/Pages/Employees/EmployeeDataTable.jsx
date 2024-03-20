@@ -28,7 +28,6 @@ const EmployeeDataTable = ({
    * Handles deleting an employee.
    * @param {number} employeeId - The ID of the employee to be deleted.
    */
-
   const handleDeleteEmployee = (employeeId) => {
     handleDeleteClick(employeeId);
   };
