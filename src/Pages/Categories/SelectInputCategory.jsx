@@ -54,7 +54,7 @@ const SelectInputCategory = ({
       {/* Map over the CategoryData array and render each category option */}
       {CategoryData && (
         <>
-          <option value={null}>None</option>
+          {/* <option value={null}>None</option> */}
           {CategoryData.map((option) => (
             <option
               className="select__option"

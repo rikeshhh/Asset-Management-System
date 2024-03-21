@@ -201,7 +201,7 @@ const AssetsForm = ({
                 />
                 <span className="slider"></span>
                 <span className="status">
-                  {isActive ? "active" : "inactive"}
+                  {isActive ? "Active" : "Inactive"}
                 </span>
               </label>
             </div>

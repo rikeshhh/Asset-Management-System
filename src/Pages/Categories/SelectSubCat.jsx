@@ -13,12 +13,21 @@ const SelectSubCat = ({
     queryKey: ["selectSubCategory"],
     queryFn: () => selectSubCategoryData(categoryName),
   });
+  console.log(subCategoryData);
+
+  // Checking if any child array is empty
+  const isEmptyChildArray =
+    subCategoryData &&
+    subCategoryData.some((category) => category.child.length === 0);
+
   return (
     <select
       {...register(name)}
-      disabled={isDisabled}
+      disabled={isDisabled} // Keep original isDisabled prop
       style={{ color: "#999" }}
-      className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
+      className={`${
+        isDisabled || isEmptyChildArray ? "input-disabled" : "input-enabled"
+      }`} // Disable if either isDisabled or isEmptyChildArray is true
     >
       {defaultValue ? null : (
         <option value="" disabled selected>
@@ -33,9 +42,8 @@ const SelectSubCat = ({
       )}
 
       {/* Map over the subCategoryData array and render each subcategory option */}
-      {subCategoryData && (
+      {subCategoryData && subCategoryData.length > 0 && (
         <>
-          <option value={null}>None</option>
           {subCategoryData.map((category) =>
             category.child.map((child) => (
               <option
