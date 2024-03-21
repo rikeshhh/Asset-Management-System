@@ -73,7 +73,9 @@ const Tablerow = ({ tableItem }) => {
             {tableItem.name}
           </p>
         </td>
-        <td data-cell="category">{tableItem.category.name}</td>
+        <td data-cell="category">
+          {tableItem.category.name ? tableItem.category.name : "N/A"}
+        </td>
         <td data-cell="status">{tableItem.status}</td>
         <td data-cell="assigned_to">{tableItem.assigned_to.name}</td>
         <td data-cell="assigned_date">{tableItem.assigned_date}</td>

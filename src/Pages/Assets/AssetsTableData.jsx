@@ -42,15 +42,14 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
   ];
   const [searchParams, setSearchParams] = useSearchParams();
   const [assetTableData, setAssetTableData] = useState(null);
-  
 
   /**
    * Handles click event for sorting table data by status.
    * @param {string} stats - Status to sort by
    */
   const handleStatusClick = async (stats) => {
-    const assetTableDataOrder = searchParams.get("order") || "asc"
-    console.log(stats, "status")
+    const assetTableDataOrder = searchParams.get("order") || "asc";
+    console.log(stats, "status");
     setSearchParams({
       sortBy: stats,
       order: assetTableDataOrder === "asc" ? "desc" : "asc",

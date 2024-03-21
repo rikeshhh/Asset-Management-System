@@ -38,7 +38,6 @@ const SelectInputLocation = ({
       {/* Map over the LocationData array and render each location option */}
       {LocationData && (
         <>
-          <option value={null}>None</option>
           {LocationData.map((option) => (
             <option
               className="select__option"
