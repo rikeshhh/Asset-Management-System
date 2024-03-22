@@ -42,8 +42,8 @@ select {
   border: 1px solid var(--primary-grey);
   background: var(--secondary-color);
   font-size: 14px;
-  /* color: var(--text-color) !important; */
-  color: #999 !important;
+  color: var(--text-color) !important;
+  /* color: #999 !important; */
   /* outline: none; */
 }
 
