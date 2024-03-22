@@ -174,8 +174,13 @@ const Departments = () => {
                   <Button
                     text="Add Department"
                     type="submit"
-                    className={"category--button button__blue"}
+                    className={
+                      disabledButton
+                        ? "category__button--disabled"
+                        : " button__blue "
+                    }
                     icon={<IoMdAdd />}
+                    isDisabled={disabledButton ? true : false}
                   />
                 </div>
               </form>

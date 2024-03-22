@@ -175,18 +175,16 @@ const LocationDataTable = ({
                     </form>
                   </td>
                 ) : (
-                  <>
-                    <td
-                      className={
-                        options.location.length > 20 ? "hoverEffect" : ""
-                      }
-                      data-name={`${options.location}`}
-                    >
-                      {options.location.length > 20
-                        ? `${options.location.substring(0, 20)}...`
-                        : options.location}
-                    </td>
-                  </>
+                  <td
+                    className={
+                      options.location.length > 20 ? "hoverEffect" : ""
+                    }
+                    data-name={`${options.location}`}
+                  >
+                    {options.location.length > 20
+                      ? `${options.location.substring(0, 20)}...`
+                      : options.location}
+                  </td>
                 )}
                 <td className="button-gap">
                   <Button

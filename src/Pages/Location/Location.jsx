@@ -157,8 +157,13 @@ const Location = () => {
                   <Button
                     text="Add Location"
                     type="submit"
-                    className={"category--button button__blue"}
+                    className={
+                      disableButtons
+                        ? "category__button--disabled"
+                        : " button__blue "
+                    }
                     icon={<IoMdAdd />}
+                    isDisabled={disableButtons ? true : false}
                   />
                 </div>
               </form>
