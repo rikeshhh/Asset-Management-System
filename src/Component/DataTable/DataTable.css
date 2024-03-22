@@ -1,7 +1,8 @@
 .cateogries table {
   color: #21252b;
   border-collapse: collapse;
-  width: 100%;
+  /* width: 100%; */
+  width: 500px;
   font-size: 14px;
 }
 th {
@@ -134,41 +135,3 @@ ol li {
   align-items: center !important;
   justify-content: center;
 }
-
-/* .hoverEffect {
-  position: relative;
-  font-family: sans-serif;
-  width: 200px;
-  color: #000;
-  cursor: pointer; Set cursor to pointer 
-  font-size: 14px;
-}
-
-.hoverEffect::before {
-  content: "";
-  position: absolute;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 10px solid var(--blue);
-  bottom: 42px;
-  left: 25%;
-  transform: translateX(-50%);
-  display: none;
-}
-.hoverEffect::after {
-  content: attr(data-name);
-  position: absolute;
-  background-color: var(--blue);
-  color: white;
-  padding: 8px 15px;
-  border-radius: 8px;
-  bottom: 50px;
-  left: 25px;
-  z-index: 1;
-  display: none; 
-}
-
-.hoverEffect:hover::before,
-.hoverEffect:hover::after {
-  display: block; 
-} */

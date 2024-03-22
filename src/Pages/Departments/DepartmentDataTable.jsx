@@ -1,3 +1,4 @@
+import "../../Component/DataTable/DataTable.css";
 import { useMutation } from "@tanstack/react-query";
 import { InputField } from "../../Component/Input/InputField";
 import { LuArrowDownUp, LuArrowUpDown } from "react-icons/lu";
@@ -15,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { notifySuccess, notifyError } from "../../Component/Toast/Toast";
 import SmallTablePendingHead from "../../Component/PendingTableSmall/SmallTablePendingHead";
 import SmallTablePendingBody from "../../Component/PendingTableSmall/SmallTablePendingBody";
+
 import {
   sortByStatusDepartment,
   updateDepartmentData,
@@ -170,25 +172,25 @@ const DepartmentDataTable = ({
                         onSubmit={handleSubmit(onUpdateData)}
                         className="universal__update--form"
                       >
-                        <div className="universal__input--container">
-                          <InputField
-                            name="department"
-                            defaultValue={options.department}
-                            register={register}
-                            errors={errors}
-                            type={Model.department.type}
-                            value={Model.department.pattern.value}
-                            message={Model.department.pattern.message}
-                            placeholder={options.department}
-                            minLength={Model.department.minLength.value}
-                            minMessage={Model.department.minLength.message}
-                            maxLength={Model.department.maxLength.value}
-                            required={"Please enter a department name"}
-                            maxMessage={Model.department.maxLength.message}
-                            autoComplete={"off"}
-                            className={show ? "universal__table--input" : ""}
-                          />
-                        </div>
+                        {/* <div className="universal__input--container"> */}
+                        <InputField
+                          name="department"
+                          defaultValue={options.department}
+                          register={register}
+                          errors={errors}
+                          type={Model.department.type}
+                          value={Model.department.pattern.value}
+                          message={Model.department.pattern.message}
+                          placeholder={options.department}
+                          minLength={Model.department.minLength.value}
+                          minMessage={Model.department.minLength.message}
+                          maxLength={Model.department.maxLength.value}
+                          required={"Please enter a department name"}
+                          maxMessage={Model.department.maxLength.message}
+                          // autoComplete={"off"}
+                          className={show ? "universal__table--input" : ""}
+                        ></InputField>
+                        {/* </div> */}
                         <div className="universal__FormButton">
                           <Button className="" text={<FaCheck />} />
                           <Button
@@ -201,20 +203,17 @@ const DepartmentDataTable = ({
                       </form>
                     </td>
                   ) : (
-                    <>
-                      <td
-                        className={
-                          options.department.length > 20 ? "hoverEffect" : ""
-                        }
-                        data-name={`${options.department}`}
-                      >
-                        {options.department.length > 20
-                          ? `${options.department.substring(0, 20)}...`
-                          : options.department}
-                      </td>
-                    </>
+                    <td
+                      className={
+                        options.department.length > 20 ? "hoverEffect" : ""
+                      }
+                      data-name={`${options.department}`}
+                    >
+                      {options.department.length > 20
+                        ? `${options.department.substring(0, 20)}...`
+                        : options.department}
+                    </td>
                   )}
-
                   <td className="button-gap">
                     <Button
                       className={
