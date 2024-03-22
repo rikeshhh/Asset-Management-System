@@ -1,5 +1,5 @@
 import "../../Component/Table/Table.css";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -90,7 +90,7 @@ const RepairDataTable = ({
       console.log(error);
     },
   });
-
+  const navigate = useNavigate();
   const totalData = repairTableData?.total_data;
   const roundUp = Math.ceil(totalData / 7);
 
@@ -123,7 +123,7 @@ const RepairDataTable = ({
       setSortData(tableHead);
     }
   };
-
+ 
   // if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: ";
@@ -195,7 +195,7 @@ const RepairDataTable = ({
                     <Button
                       type={"button"}
                       className="view__button"
-                      // handleClick={() => viewEmployeeProfile(tableItem)}
+                      handleClick={() => viewEmployeeProfile(tableItem)}
                       text={<EyeSvg />}
                     />
                     <Link to="/editRepairReplace" state={tableItem}>

@@ -24,7 +24,7 @@ const UserTab = () => {
   const userImage = userData ? userData.user_image : "Loading...";
 
   const gotToEmployeeView = () => {
-    navigate("/viewEmployee", {
+    navigate("/employees/viewEmployee", {
       state: { viewEmployeeData: userData },
     });
   };
