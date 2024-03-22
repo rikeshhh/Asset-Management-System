@@ -57,14 +57,13 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
       order: assetTableDataOrder === "asc" ? "desc" : "asc",
     });
   };
-  const dataToRender = assetTableData || tableData;
-  if (!dataToRender || dataToRender.length === 0) {
-    return (
-      <tr>
-        <td colSpan={options.length + 1}>No DATA TO SHOW</td>
-      </tr>
-    );
-  }
+  // if (!dataToRender || dataToRender.length === 0) {
+  //   return (
+  //     <tr>
+  //       <td colSpan={options.length + 1}>No DATA TO SHOW</td>
+  //     </tr>
+  //   );
+  // }
 
   return (
     <>
@@ -90,8 +89,8 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
           <tbody>
             {isPending ? (
               <PendingTableBody />
-            ) : dataToRender && dataToRender.length > 0 ? (
-              dataToRender.map((tableItem, index) => (
+            ) : tableData && tableData.length > 0 ? (
+              tableData.map((tableItem, index) => (
                 <Tablerow key={index} tableItem={tableItem} />
               ))
             ) : (
