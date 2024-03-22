@@ -136,11 +136,13 @@ const ProcurementDataTable = ({
             ) : (
               procurementTableData?.data.map((tableItem, index) => (
                 <tr key={index}>
-                  <td>{tableItem.user.requested_by}</td>
-                  <td>{tableItem.number_of_items}</td>
-                  <td>{tableItem.status}</td>
-                  <td>{tableItem.approved_by}</td>
-                  <td>2024-02-21 07:31:19</td>
+                  <td data-cell="Requested By">
+                    {tableItem.user.requested_by}
+                  </td>
+                  <td data-cell="No. of Items">{tableItem.number_of_items}</td>
+                  <td data-cell="Status">{tableItem.status}</td>
+                  <td data-cell="Verified By">{tableItem.approved_by_name}</td>
+                  <td data-cell="Verified Date">2024-02-21 07:31:19</td>
                   <td className="button-gap">
                     <Button
                       type={"button"}

@@ -34,6 +34,7 @@ const EditRepairReplace = () => {
   const navigate = useNavigate();
 
   const { state: tableData } = useLocation();
+  console.log(tableData);
   /**
    * Handles the update of the profile picture.
    * @param {Object} e - The event object.
@@ -77,7 +78,7 @@ const EditRepairReplace = () => {
   const handleRadioChange = (e) => {
     setSelectedType(e.target.value);
   };
-  
+
   /**
    * Handles the submission of the repair and replace form.
    * @param {Object} data - Form data submitted.
