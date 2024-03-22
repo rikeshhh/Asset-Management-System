@@ -39,12 +39,12 @@ const Tablerow = ({ tableItem }) => {
     setDeleteConfirationShow(false);
   };
   const handleTableEdit = (tableData) => {
-    navigate("/editAssets", {
+    navigate("/assets/editAssets", {
       state: { tableData: tableData },
     });
   };
   const handleTableView = (tableData) => {
-    navigate("/viewAssets", {
+    navigate("/assets/viewAssets", {
       state: { tableData: tableData },
     });
   };
@@ -53,6 +53,7 @@ const Tablerow = ({ tableItem }) => {
   const handleDeleteConfirmationModel = () => {
     setDeleteConfirationShow(true);
   };
+
   return (
     <>
       {deleteConfirationShow && (

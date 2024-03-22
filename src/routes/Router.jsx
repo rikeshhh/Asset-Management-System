@@ -29,6 +29,7 @@ import ViewAssets from "../Pages/Assets/ViewAssets";
 import AddRepair from "../Pages/Repair/AddRepair";
 import EditProcurement from "../Pages/Procurement/EditProcurement";
 import EditRepairReplace from "../Pages/Repair/EditRepairReplace";
+import AssetsHead from "../Pages/Assets/AssetsHead";
 
 export const router = createBrowserRouter([
   {
@@ -44,20 +45,43 @@ export const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "/assets",
+        path: "/assets/*",
         element: <Assets />,
         children: [
           {
-            index: true,
-            path: "*",
-            element: <Hardware />,
+            path: "", // Relative path for AssetsHead
+            element: <AssetsHead />,
+            children: [
+              {
+                index: true,
+                element: <Hardware />, // Render the Hardware component by default
+              },
+              {
+                path: "hardware",
+                element: <Hardware />,
+              },
+              
+              {
+                path: "software",
+                element: <Software />,
+              },
+            ],
           },
           {
-            path: "/assets/software",
-            element: <Software />,
+            path: "viewAssets",
+            element: <ViewAssets />,
+          },
+          {
+            path: "addAssets",
+            element: <AddAssets />,
+          },
+          {
+            path: "editAssets",
+            element: <EditAssets />,
           },
         ],
       },
+
       {
         path: "/viewProfile",
         element: <ViewProfile />,
@@ -122,18 +146,18 @@ export const router = createBrowserRouter([
         path: "/success",
         element: <PaymentSuccess />,
       },
-      {
-        path: "/addAssets",
-        element: <AddAssets />,
-      },
-      {
-        path: "/editAssets",
-        element: <EditAssets />,
-      },
-      {
-        path: "/viewAssets",
-        element: <ViewAssets />,
-      },
+      // {
+      //   path: "/addAssets",
+      //   element: <AddAssets />,
+      // },
+      // {
+      //   path: "/editAssets",
+      //   element: <EditAssets />,
+      // },
+      // {
+      //   path: "/viewAssets",
+      //   element: <ViewAssets />,
+      // },
       {
         path: "/procurementForm",
         element: <ProcurementForm />,

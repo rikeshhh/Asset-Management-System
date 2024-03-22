@@ -77,46 +77,7 @@ const Assets = () => {
       )}
 
       <section className="content-wrapper">
-        <div className="assets content-radius">
-          <div className="content__header assets__header">
-            <h2>Assets</h2>
-            <Link to="/addAssets" className="link">
-              <Button
-                text="Add an Asset"
-                className={"button__blue"}
-                icon={<IoMdAdd />}
-              />
-            </Link>
-          </div>
-
-          <div className="assets__content">
-            <div className="assets__navigation">
-              <NavLink
-                to="/assets/*"
-                className={({ isActive }) =>
-                  isActive ? "assets__active" : "assets__inactive"
-                }
-              >
-                <Button
-                  text="Hardware"
-                  handleClick={handleHardwareClick}
-                  className="assets__btn"
-                />
-              </NavLink>
-              <NavLink
-                to="/assets/software"
-                className={({ isActive }) =>
-                  isActive ? "assets__active" : "assets__inactive"
-                }
-              >
-                <Button
-                  text="Software"
-                  handleClick={handleSoftwareClick}
-                  className="assets__btn"
-                />
-              </NavLink>
-            </div>
-
+       
             <>
               {/* {searchAssets ? (
                 <AssetsTableData
@@ -133,8 +94,6 @@ const Assets = () => {
 
               {/* )} */}
             </>
-          </div>
-        </div>
         <CustomToastContainer />
       </section>
     </>

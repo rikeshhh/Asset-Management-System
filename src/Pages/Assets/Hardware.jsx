@@ -25,6 +25,7 @@ import { InputField } from "../../Component/Input/InputField";
 import Model from "../../Component/Model/Model";
 import { notifyError } from "../../Component/Toast/Toast";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+import Pagination from "../../Component/Pagination/Pagination";
 /**
  * Hardware component for managing hardware assets.
  *
@@ -46,7 +47,8 @@ const Hardware = () => {
   );
   // Extracting search parameters from the URL
   // Search keyword
-  const searchHardware = searchParams.get("search");
+  const searchHardware = searchParams.get("Search") || "";
+
   // Category filter
   const searchCategory = searchParams.get("category");
   // Start date filter
@@ -114,6 +116,7 @@ const Hardware = () => {
       ),
     staleTime: 10000,
   });
+
   /**
    * Handles the click event for canceling the employee deletion.
    */
@@ -161,6 +164,9 @@ const Hardware = () => {
 
   const roundUp = Math.ceil(totalData / 7);
   const [pageNumberForEllipsis, setPageNumberForEllipsis] = useState(null);
+  const [pageNum, setPageNum] = useState(1);
+  if (error) return "An error has occurred: ";
+
   return (
     <>
       {filterShow ? (
@@ -172,23 +178,11 @@ const Hardware = () => {
         <></>
       )}
       <div className="ams__filter ">
-        <form className="search__form" onSubmit={handleSubmit(submitSearch)}>
-          <SearchSvg className="icons" />
-          <InputField
-            name="search"
-            register={register}
-            placeholder="Search"
-            className="search-input"
-            // value={Model.assetSearch.pattern.value}
-            message={Model.assetSearch.pattern.message}
-            errors={errors}
-            type={Model.assetSearch.type}
-            // minLength={Model.assetSearch.minLength.value}
-            // minMessage={Model.assetSearch.minLength.message}
-            // maxLength={Model.assetSearch.maxLength.value}
-            // maxMessage={Model.assetSearch.maxLength.message}
-          />
-        </form>
+        <SearchInput
+          defaultValue={""}
+          setPageNumber={setPageNumber}
+          setSearchParams={setSearchParams}
+        />
         <Button
           text="Filter"
           icon={<BsFunnel />}
@@ -204,51 +198,15 @@ const Hardware = () => {
         assets_type="hardware"
       />
       <div className="pagination">
-        <Button
-          className="inactivePage"
-          icon={<FaAngleLeft />}
-          handleClick={() =>
-            updatePageNumber(pageNumber > 1 ? pageNumber - 1 : 1)
-          }
-        />
-        {HardwareData &&
-          [...Array(roundUp)].map((_, index) => (
-            <>
-              {index === roundUp - 2 && pageNumber > 2 ? (
-                <Button
-                  key={index}
-                  text={
-                    pageNumberForEllipsis !== null
-                      ? pageNumberForEllipsis.toString()
-                      : "..."
-                  }
-                  className={
-                    pageNumber === index + 1 ? "activePage" : "inactivePage"
-                  }
-                  handleClick={() => {
-                    updatePageNumber(index + 1);
-                    setPageNumberForEllipsis(index + 1);
-                  }}
-                />
-              ) : (
-                <Button
-                  key={index}
-                  text={index + 1}
-                  className={
-                    pageNumber === index + 1 ? "activePage" : "inactivePage"
-                  }
-                  handleClick={() => updatePageNumber(index + 1)}
-                />
-              )}
-            </>
-          ))}
-        <Button
-          className="inactivePage"
-          handleClick={() =>
-            updatePageNumber(pageNumber < roundUp ? pageNumber + 1 : pageNumber)
-          }
-          icon={<FaAngleRight />}
-        />
+        {roundUp > 1 && (
+          <Pagination
+            setSearchParams={setSearchParams}
+            data={HardwareData}
+            roundUp={roundUp}
+            setPageNumber={setPageNumber}
+            pageNumber={pageNumber}
+          />
+        )}
       </div>
     </>
   );

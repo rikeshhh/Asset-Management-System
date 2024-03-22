@@ -1,14 +1,8 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { selectInputCategory } from "./CategoryApiSice";
-/**
- * React component representing a select input for categories.
- * @param {Object} props - Component props.
- * @param {Function} props.register - Function from react-hook-form for registering the input.
- * @returns {JSX.Element} JSX element representing the SelectInputCategory component.
- */
-
-const SelectInputCategory = ({
+import { selectInputCategory } from "../Categories/CategoryApiSice";
+import "./Assets.css";
+const SelectAssetCategory = ({
   name,
   register,
   setCategoryName,
@@ -32,9 +26,7 @@ const SelectInputCategory = ({
       {...register(name, { required: true })}
       disabled={isDisabled || !isEditable}
       onChange={addCategoryId}
-      className={`${isDisabled ? "input-disabled" : "input-enabled"}
-      ${isEditable ? "input-enabled" : "select-not-editable"}
-      `}
+      className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
     >
       {defaultValue ? (
         <>
@@ -79,4 +71,4 @@ const SelectInputCategory = ({
   );
 };
 
-export default SelectInputCategory;
+export default SelectAssetCategory;

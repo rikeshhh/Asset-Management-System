@@ -7,14 +7,23 @@ import { UploadSvg } from "../svg/UploadSvg";
 import ImagePath from "../Images/ImagePath";
 
 const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
+  console.log(defaultValue);
   const [importedImage, setImportedImage] = useState(defaultValue || null);
-
   const [newImage, setNewImage] = useState();
+  useEffect(() => {
+    // Set default value if it's provided
+    if (defaultValue) {
+      setImportedImage(defaultValue);
+      setNewImage(defaultValue);
+      setValue(name, defaultValue); // Set form value using setValue
+    }
+  }, [defaultValue, setValue, name]); // Include setValue and name in dependencies array
+
   const onDrop = (acceptedFiles) => {
     // Handle dropped files
     const file = acceptedFiles[0];
-    setValue(name, file);
     if (file) {
+      setValue(name, file);
       const imageUrl = URL.createObjectURL(file);
       setImportedImage(imageUrl);
       setNewImage(imageUrl);
@@ -65,9 +74,9 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
               <div className="image__display">
                 <figure>
                   {newImage ? (
-                    <img src={newImage} alt="" />
+                    <img src={newImage} />
                   ) : (
-                    <ImagePath file={importedImage?importedImage:""} />
+                    <ImagePath file={importedImage} />
                   )}
                 </figure>
                 {/* Render other elements conditionally here */}

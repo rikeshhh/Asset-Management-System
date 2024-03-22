@@ -81,17 +81,20 @@ const Sidebar = () => {
                 </li>
               </NavLink>
               <NavLink
-                to="/assets/*"
+                to="/assets/"
                 onClick={() =>
                   toggleNavbar ? setToggleNavbar(!toggleNavbar) : null
                 }
                 className={({ isActive }) =>
                   isActive ? "navbar__link--active" : "link"
                 }
+                isActive={(match, location) =>
+                  location.pathname === "/assets" ||
+                  location.pathname === "/assets/hardware"
+                }
               >
                 <li className={toggleNavbar ? "" : "navbar__list--toggle"}>
                   <span title="Assets">
-                    {/* <PiDesktopTower /> */}
                     <AssetsSvg />
                   </span>
                   <p>Assets</p>

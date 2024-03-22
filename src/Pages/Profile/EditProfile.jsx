@@ -118,7 +118,6 @@ const EditProfile = () => {
     };
     EditEmployeeData.mutate(employeeEditInfo);
   };
-
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">

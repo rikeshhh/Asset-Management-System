@@ -20,6 +20,7 @@ import SelectInputCategory from "../Categories/SelectInputCategory";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import { SelectAssetType } from "./SelectAssetType";
 import ImagePath from "../../Component/Images/ImagePath";
+import SelectAssetCategory from "./SelectAssetCategory";
 /**
  * View component for displaying asset details.
  * @returns {JSX.Element} ViewAssets component.
@@ -77,7 +78,7 @@ const ViewAssets = () => {
 
   // Define state to hold the category name
   const [categoryName, setCategoryName] = useState();
-
+  console.log(assetsData.image_name);
   return (
     <section className="assets__add">
       <div className="content-wrapper">
@@ -143,7 +144,7 @@ const ViewAssets = () => {
               </div>
               <div className="assets__form--input">
                 <Label text="Category" sup={"*"} />
-                <SelectInputCategory
+                <SelectAssetCategory
                   setCategoryName={setCategoryName}
                   name="category"
                   defaultValue={assetsData.category}
@@ -218,12 +219,12 @@ const ViewAssets = () => {
               <div className="assets__form--input">
                 <figure className="image__display">
                   <ImagePath
-                    file={assetsData.image_name ? assetsData.image_name : ""}
+                    file={assetsData.image_name}
                   />
                 </figure>
               </div>
               <div className="assets__form--btn">
-                <Link to="/assets/*" className="link">
+                <Link to="/assets/hardware" className="link">
                   <Button text="Close" className={"button__red"} />
                 </Link>
               </div>
