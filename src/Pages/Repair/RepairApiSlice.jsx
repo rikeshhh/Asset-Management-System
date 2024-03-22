@@ -54,7 +54,7 @@ export const repairReplaceAdd = async (repairReplaceData, selectedJobType) => {
   repairFormData.append("Product_Code", repairReplaceData.Product_Code);
   repairFormData.append("Product_Name", repairReplaceData.Product_Name);
   repairFormData.append("Assigned_to", repairReplaceData.Assigned_to);
-  repairFormData.append("product_image", repairReplaceData.product_image.path);
+  repairFormData.append("product_image", repairReplaceData.product_image);
   repairFormData.append("reason", repairReplaceData.reason);
   repairFormData.append("status", "Pending");
   repairFormData.append("repairreplace_type", selectedJobType);

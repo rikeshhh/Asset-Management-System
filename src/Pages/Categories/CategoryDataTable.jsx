@@ -193,7 +193,7 @@ const CategoryDataTable = ({
 
   const handleCategorySort = () => {
     const newOrder = categoryDataOrder === "ASC" ? "DESC" : "ASC";
-    const newSort = categoryDataSort === "id" ? "category_name" : "id";
+    const newSort = "category_name";
     setCategoryDataSort(newSort);
     setCategoryDataOrder(newOrder);
   };

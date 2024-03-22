@@ -87,6 +87,9 @@
 } */
 
 @media (max-width: 650px) {
+  .main__table {
+    width: 100%;
+  }
   .main__table th {
     display: none;
   }

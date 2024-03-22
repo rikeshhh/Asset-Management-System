@@ -6,11 +6,7 @@ import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
 import { IoMdAdd, IoMdOptions } from "react-icons/io";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import {
-  departmentAdd,
-  departmentDelete,
-  getDepartmentData,
-} from "../../Api/Department/DepartmentApiSlice";
+
 import { queryClient } from "../../Component/Query/Query";
 import DepartmentDataTable from "./DepartmentDataTable";
 import {
@@ -22,6 +18,11 @@ import { useState } from "react";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 import ToastContainer from "../../Component/Toast/ToastContainer";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import {
+  departmentAdd,
+  departmentDelete,
+  getDepartmentData,
+} from "./DepartmentApiSlice";
 /**
  * Department component responsible for rendering department UI .
  * @returns {JSX.Element} JSX element representing the Department component.
@@ -83,8 +84,8 @@ const Departments = () => {
   const deleteMessage = "Department has been deleted";
 
   const DeleteDepartment = useMutation({
-    mutationFn: (department) => {
-      return departmentDelete(department);
+    mutationFn: () => {
+      return departmentDelete(departmentId);
     },
     onSuccess: () => {
       queryClient.invalidateQueries("DepartmentData");
@@ -103,7 +104,7 @@ const Departments = () => {
   };
 
   const handleProceedClick = () => {
-    DeleteDepartment.mutate(departmentId);
+    DeleteDepartment.mutate();
     setDeleteConfirationShow(false);
   };
   const handleDeleteClick = (departmentId) => {

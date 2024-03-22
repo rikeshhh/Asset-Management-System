@@ -54,8 +54,8 @@ export const departmentAdd = async (department) => {
 export const departmentDelete = async (department) => {
   try {
     const response = await instance.delete("/department", {
-      data: {
-        department: department,
+      params: {
+        id: department,
       },
       headers: {
         Authorization: `Bearer ${token}`,

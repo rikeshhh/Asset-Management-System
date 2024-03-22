@@ -178,17 +178,21 @@ const RepairDataTable = ({
             ) : (
               repairTableData?.data.map((tableItem, index) => (
                 <tr key={index}>
-                  <td>ITJ-DA-{tableItem.Product_Code.id}</td>
-                  <td>
+                  <td data-cell="Product Code">
+                    ITJ-DA-{tableItem.Product_Code.id}
+                  </td>
+                  <td data-cell="Verified Date">
                     {tableItem.Product_Code.name
                       ? tableItem.Product_Code.name
                       : "N/A"}
                   </td>
-                  <td>
-                    {tableItem.Category ? tableItem.Category.name : "N/A"}
+                  <td data-cell="Name">
+                    {tableItem?.Category.name === null
+                      ? "N/A"
+                      : tableItem.Category.name}
                   </td>
-                  <td>{tableItem.Status}</td>
-                  <td>{tableItem.Assigned_Date}</td>
+                  <td data-cell="Category">{tableItem.Status}</td>
+                  <td data-cell="Assigned Date">{tableItem.Assigned_Date}</td>
                   <td className="button-gap">
                     {/* <Link  to={{ pathname: '/profile', state: false }}>
                        </Link> */}

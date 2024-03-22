@@ -74,10 +74,7 @@ const EmployeeDataTable = ({
               <tr key={index}>
                 <td data-cell="id">{tableItem.id}</td>
 
-                <td
-                  className={tableItem.name.length > 12 ? "hoverEffect" : ""}
-                  data-name={`${tableItem.name}`}
-                >
+                <td data-cell="User">
                   {tableItem.name.length > 12
                     ? `${tableItem.name.substring(0, 12)}...`
                     : tableItem.name}
