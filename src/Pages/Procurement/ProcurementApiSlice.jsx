@@ -42,3 +42,11 @@ export const productDelete = async (productId) => {
     console.log(error);
   }
 };
+
+export const deleteProcurement = async (id) => {
+  const procurementDelete = await instance.delete(`/procurement?id=${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
