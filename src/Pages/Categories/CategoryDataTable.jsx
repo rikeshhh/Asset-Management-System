@@ -217,7 +217,7 @@ const CategoryDataTable = ({
             <SmallTablePendingHead />
           ) : (
             <tr>
-              <th>SN</th>
+              <th>S.N.</th>
               <th>
                 Category <LuArrowDownUp onClick={handleCategorySort} />
               </th>
@@ -275,7 +275,16 @@ const CategoryDataTable = ({
                     </td>
                   ) : (
                     <>
-                      <td>{options.parent}</td>
+                      <td
+                        className={
+                          options.parent.length > 20 ? "hoverEffect" : ""
+                        }
+                        data-name={`${options.parent}`}
+                      >
+                        {options.parent.length > 20
+                          ? `${options.parent.substring(0, 20)}...`
+                          : options.parent}
+                      </td>
                     </>
                   )}
                   <td className="button-gap">
@@ -369,7 +378,23 @@ const CategoryDataTable = ({
                             </form>
                           </td>
                         ) : (
-                          <td>{subCategory.category_name}</td>
+                          <>
+                            <td
+                              className={
+                                subCategory.category_name.length > 20
+                                  ? "hoverEffect"
+                                  : ""
+                              }
+                              data-name={`${subCategory.category_name}`}
+                            >
+                              {subCategory.category_name.length > 20
+                                ? `${subCategory.category_name.substring(
+                                    0,
+                                    20
+                                  )}...`
+                                : subCategory.category_name}
+                            </td>
+                          </>
                         )}
                         <td className="subcategory__button button-gap">
                           <Button

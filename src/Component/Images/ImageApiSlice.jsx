@@ -11,11 +11,8 @@ const getImage = async (file) => {
     });
 
     const data = response.data;
-    console.log("here", data);
-    // If you need to handle the image data, you can return it
     return data;
   } catch (error) {
-    // Handle errors appropriately
     console.error("Error fetching image:", error);
     throw error;
   }

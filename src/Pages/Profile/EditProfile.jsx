@@ -13,9 +13,10 @@ import SelectInputDepartment from "../Departments/SelectInputDepartment";
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../Component/Query/Query";
 import { employeeEdit } from "./ProfileApiSlicee";
-import { notifySuccess } from "../../Component/Toast/Toast";
 import ImagePath from "../../Component/Images/ImagePath";
 import DateComponent from "../../Component/FormatDate/Date";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
 
 /**
  * Functional component for editing an existing employee profile.
@@ -92,14 +93,13 @@ const EditProfile = () => {
     },
     onSuccess: () => {
       notifySuccess("Employee Edited Successfully");
-      navigate("/employees");
-      queryClient.invalidateQueries("EmployeeData");
+      setTimeout(() => {
+        navigate("/employees");
+        queryClient.invalidateQueries("EmployeeData");
+      }, 1000);
     },
     onError: (error) => {
-      notifyError(error.message);
-      if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
-      }
+      notifyError(error.response.data.message.message.edit_user);
     },
   });
 
@@ -315,6 +315,8 @@ const EditProfile = () => {
           </form>
         </div>
       </div>
+
+      <CustomToastContainer />
     </section>
   );
 };

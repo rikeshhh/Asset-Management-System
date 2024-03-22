@@ -65,9 +65,7 @@ const AddProfile = () => {
       }, 1000);
     },
     onError: (error) => {
-      if (error.request.status === 409) {
-        notifyError("Error adding employee");
-      }
+      notifyError(error.response.data.message.message.user);
     },
   });
 

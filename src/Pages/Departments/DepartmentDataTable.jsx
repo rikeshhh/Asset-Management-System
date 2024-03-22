@@ -201,7 +201,18 @@ const DepartmentDataTable = ({
                       </form>
                     </td>
                   ) : (
-                    <td>{options.department}</td>
+                    <>
+                      <td
+                        className={
+                          options.department.length > 20 ? "hoverEffect" : ""
+                        }
+                        data-name={`${options.department}`}
+                      >
+                        {options.department.length > 20
+                          ? `${options.department.substring(0, 20)}...`
+                          : options.department}
+                      </td>
+                    </>
                   )}
 
                   <td className="button-gap">

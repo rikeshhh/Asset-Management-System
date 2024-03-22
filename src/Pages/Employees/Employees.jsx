@@ -7,7 +7,13 @@ import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import Button from "../../Component/Button/Button";
 import { IoMdAdd } from "react-icons/io";
 import { BsFunnel } from "react-icons/bs";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 // import "../../Component/Pagination/Pagination.css";
 import Filter from "../../Component/Filter/Filter";
 import EmployeeDataTable from "./EmployeeDataTable";
@@ -53,7 +59,8 @@ const Employees = () => {
     data: tableData,
   } = useQuery({
     queryKey: [
-      "searchedData",
+      "EmployeeData",
+      // "searchedData",
       searchUser,
       sortOrder,
       orderByData,
@@ -120,6 +127,7 @@ const Employees = () => {
   const [employeeId, setEmployeeId] = useState("");
 
   const [pageNumber, setPageNumber] = useState(1);
+  const location = useLocation();
 
   /**
    * Toggles the visibility of the filter component.
@@ -158,12 +166,12 @@ const Employees = () => {
    * @param {Object} employeeData - The employee data to be edited.
    */
   const handleTableEdit = (employeeData) => {
-    navigate("/editProfile", {
+    navigate("/employees/editProfile", {
       state: { employeeData: employeeData },
     });
   };
   const handleViewEmployee = (viewEmployeeData) => {
-    navigate("/viewEmployee", {
+    navigate("/employees/viewEmployee", {
       state: { viewEmployeeData: viewEmployeeData },
     });
   };
@@ -191,95 +199,103 @@ const Employees = () => {
 
   return (
     <>
-      {deleteConfirationShow ? (
-        <DeleteConfirmation
-          deleteName="employee"
-          handleCancelClick={handleCancelClick}
-          handleProceedClick={handleProceedClick}
-        />
-      ) : (
-        <></>
-      )}
-      {filterShow ? (
-        <FilterEmployee
-          handleClick={() => onFilterClick(!filterShow)}
-          // filterShow={filterShow}
-          designationSubmit={designationSubmit}
-        />
-      ) : (
-        <></>
-      )}
-      <section className="content-wrapper">
-        <div className="content-radius employees">
-          <div className="content__header employees__top">
-            <h2>Employees</h2>
-            <Link to="/addProfile" className="link">
-              <Button
-                text={"Add A Profile"}
-                className={" button__blue"}
-                icon={<IoMdAdd />}
-              />
-            </Link>
-          </div>
-          <div className="employees__table">
-            <div className="ams__filter">
-              <SearchInput
-                setPageNumber={setPageNumber}
-                setSearchParams={setSearchParams}
-                defaultValue={""}
-              />
-              <Button
-                handleClick={() => onFilterClick(!filterShow)}
-                text="Filter"
-                icon={<BsFunnel />}
-                className="filter--button"
-              />
-            </div>
-            <EmployeeDataTable
-              handleDeleteClick={handleDeleteClick}
+      {location.pathname === "/employees" ? (
+        <>
+          {deleteConfirationShow ? (
+            <DeleteConfirmation
+              deleteName="employee"
+              handleCancelClick={handleCancelClick}
               handleProceedClick={handleProceedClick}
-              handleTableEdit={handleTableEdit}
-              handleViewEmployee={handleViewEmployee}
-              // searchedData={searchEmployeeData}
-              tableData={tableData}
-              isPending={isPending}
-              error={error}
-              handleSort={handleSort}
             />
-            {isPending ? (
-              <PendingPagination />
-            ) : (
-              <div className="pagination">
-                <Button
-                  className="inactivePage"
-                  icon={<FaAngleLeft />}
-                  handleClick={handlePrevClick}
-                  isDisabled={page === 1 ? true : false}
-                />
-                {tableData &&
-                  [...Array(totalItems)].map((_, index) => (
-                    <Button
-                      key={index}
-                      className={
-                        page === index + 1 ? "activePage" : "inactivePage"
-                      }
-                      text={index + 1}
-                      handleClick={() => handlePageClick(index + 1)}
-                      isDisabled={index + 1 === page ? true : false}
-                    />
-                  ))}
-                <Button
-                  className="inactivePage"
-                  icon={<FaAngleRight />}
-                  handleClick={handleNextClick}
-                  isDisabled={page === totalItems ? true : false}
-                />
+          ) : (
+            <></>
+          )}
+          {filterShow ? (
+            <FilterEmployee
+              handleClick={() => onFilterClick(!filterShow)}
+              // filterShow={filterShow}
+              designationSubmit={designationSubmit}
+            />
+          ) : (
+            <></>
+          )}
+          <section className="content-wrapper">
+            <div className="content-radius employees">
+              <div className="content__header employees__top">
+                <h2>Employees</h2>
+                <Link to="/employees/addProfile" className="link">
+                  <Button
+                    text={"Add A Profile"}
+                    className={" button__blue"}
+                    icon={<IoMdAdd />}
+                  />
+                </Link>
               </div>
-            )}
-          </div>
+              <div className="employees__table">
+                <div className="ams__filter">
+                  <SearchInput
+                    setPageNumber={setPageNumber}
+                    setSearchParams={setSearchParams}
+                    defaultValue={""}
+                  />
+                  <Button
+                    handleClick={() => onFilterClick(!filterShow)}
+                    text="Filter"
+                    icon={<BsFunnel />}
+                    className="filter--button"
+                  />
+                </div>
+                <EmployeeDataTable
+                  handleDeleteClick={handleDeleteClick}
+                  handleProceedClick={handleProceedClick}
+                  handleTableEdit={handleTableEdit}
+                  handleViewEmployee={handleViewEmployee}
+                  // searchedData={searchEmployeeData}
+                  tableData={tableData}
+                  isPending={isPending}
+                  error={error}
+                  handleSort={handleSort}
+                />
+                {isPending ? (
+                  <PendingPagination />
+                ) : (
+                  <div className="pagination">
+                    <Button
+                      className="inactivePage"
+                      icon={<FaAngleLeft />}
+                      handleClick={handlePrevClick}
+                      isDisabled={page === 1 ? true : false}
+                    />
+                    {tableData &&
+                      [...Array(totalItems)].map((_, index) => (
+                        <Button
+                          key={index}
+                          className={
+                            page === index + 1 ? "activePage" : "inactivePage"
+                          }
+                          text={index + 1}
+                          handleClick={() => handlePageClick(index + 1)}
+                          isDisabled={index + 1 === page ? true : false}
+                        />
+                      ))}
+                    <Button
+                      className="inactivePage"
+                      icon={<FaAngleRight />}
+                      handleClick={handleNextClick}
+                      isDisabled={page === totalItems ? true : false}
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+          <CustomToastContainer />
+        </>
+      ) : (
+        <div>
+          <Outlet />
         </div>
-      </section>
-      <CustomToastContainer />
+      )}
     </>
   );
 };

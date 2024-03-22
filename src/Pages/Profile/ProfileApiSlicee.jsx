@@ -33,6 +33,9 @@ export const employeeEdit = async (
       },
     }
   );
+  return employeeEditRequest.data.updatedData;
+  // return resp;
+  // console.log(resp, "resp");
 };
 /**
  * Adds a new employee profile using a POST request.
@@ -45,7 +48,6 @@ export const employeeProfile = async (
   employeeDataImage,
   jobType
 ) => {
-  console.log(jobType);
   let formData = new FormData();
   formData.append("user_image", employeeDataImage);
   formData.append("name", employeeData.username);
@@ -60,6 +62,7 @@ export const employeeProfile = async (
       "Content-Type": "multipart/form-data",
     },
   });
-  const resp = await employeeAddRequest.data;
+  const resp = await employeeAddRequest.data.data;
   return resp;
+  // console.log("first", resp);
 };

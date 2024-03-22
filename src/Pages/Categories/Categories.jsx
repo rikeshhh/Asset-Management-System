@@ -18,6 +18,7 @@ import { queryClient } from "../../Component/Query/Query";
 import SelectInputCategory from "./SelectInputCategory";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 import { useState } from "react";
+import SelectCategory from "./SelectCategory";
 
 /**
  * Component for managing and displaying categories and subcategories.
@@ -69,7 +70,7 @@ const Categories = () => {
       reset();
     },
     onError: (error) => {
-      notifyError(error.response.data.message);
+      notifyError(error.response.data.message.message.category);
       setHasErrors(true);
     },
   });
@@ -168,7 +169,7 @@ const Categories = () => {
               inputDisabled={inputDisabled}
               setInputDisabled={setInputDisabled}
               hasErrors={hasErrors}
-            setHasErrors={setHasErrors}
+              setHasErrors={setHasErrors}
             />
 
             <div className="add__category">
@@ -201,7 +202,7 @@ const Categories = () => {
                 </div>
                 <div className="add__category--select">
                   <Label sup={"*"} text="Parent Category" />
-                  <SelectInputCategory
+                  <SelectCategory
                     name={"select_category"}
                     register={register}
                     defaultValue={""}
