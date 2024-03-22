@@ -41,23 +41,27 @@ const EditAssets = () => {
   const navigate = useNavigate();
   const EditAssets = useMutation({
     mutationFn: (assetsInfo) => {
-      return assetsEdit(assetsInfo, assetsData.id);
+      return assetsEdit(assetsInfo.data, assetsData.id, assetsInfo.editImage);
     },
     onSuccess: () => {
       notifySuccess("Assets has been updated");
       queryClient.invalidateQueries("AssetsData");
       setTimeout(() => {
-        navigate("/assets/*");
+        navigate("/assets/hardware");
       }, 1000);
     },
     onError: (error) => {
       notifyError("Something went wrong");
     },
   });
-
   const submitData = (data) => {
-    console.log(data);
-    EditAssets.mutate(data);
+    const editAssetsData = {
+      data: data,
+      editImage: data.assets_image || assetsData.assets_image,
+    };
+    console.log("editAssetsData", editAssetsData); // Add this line for debugging
+
+    EditAssets.mutate(editAssetsData);
   };
   const [isActive, setIsActive] = useState(assetsData.status === "active");
 
@@ -65,6 +69,7 @@ const EditAssets = () => {
     setIsActive((prev) => !prev);
   };
   const [categoryName, setCategoryName] = useState();
+  console.log(assetsData);
   return (
     <section className="assets__add">
       <div className="content-wrapper">
@@ -196,6 +201,8 @@ const EditAssets = () => {
                 </label>
               </div>
               <div className="assets__form--input">
+                <Label text="Upload asset image" />
+
                 <DropzoneArea
                   setValue={setValue}
                   name="assets_image"
@@ -208,7 +215,7 @@ const EditAssets = () => {
                   text="Save Changes"
                   className={"button__blue"}
                 />
-                <Link to="/assets/*" className="link">
+                <Link to="/assets/hardware" className="link">
                   <Button text="Cancel" className={"button__red"} />
                 </Link>
               </div>

@@ -23,6 +23,8 @@ import { useState } from "react";
 import { FaRegEye } from "react-icons/fa6";
 import Tablerow from "./Tablerow";
 import { LuArrowUpDown } from "react-icons/lu";
+import "./Assets.css";
+import { notifyError } from "../../Component/Toast/Toast";
 /**
  * Component to display assets data in a table format.
  * @param {object} props - Component props
@@ -56,6 +58,14 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
     });
   };
   const dataToRender = assetTableData || tableData;
+  if (!dataToRender || dataToRender.length === 0) {
+    return (
+      <tr>
+        <td colSpan={options.length + 1}>No DATA TO SHOW</td>
+      </tr>
+    );
+  }
+
   return (
     <>
       <div className="table__container">
@@ -80,10 +90,19 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
           <tbody>
             {isPending ? (
               <PendingTableBody />
-            ) : (
+            ) : dataToRender && dataToRender.length > 0 ? (
               dataToRender.map((tableItem, index) => (
-                <Tablerow tableItem={tableItem} />
+                <Tablerow key={index} tableItem={tableItem} />
               ))
+            ) : (
+              <tr>
+                <td colSpan="1" className="empty-table-cell">
+                  <div className="empty-table-message">
+                    <p>No data available</p>
+                    <p>Please try again later or refresh the page</p>
+                  </div>
+                </td>
+              </tr>
             )}
           </tbody>
         </table>

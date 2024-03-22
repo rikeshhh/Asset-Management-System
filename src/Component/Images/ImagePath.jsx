@@ -29,7 +29,7 @@ const ImagePath = ({ file, state }) => {
     return <p>No image data available</p>;
   }
 
-  const blob = new Blob([imageData], { type: "image/jpeg/png" }); // Adjust the type based on your image format
+  const blob = new Blob([imageData], { type: "image/jpeg/png/jpg" }); // Adjust the type based on your image format
   const imageUrl = URL.createObjectURL(blob);
 
   // state.setProfileImage = { imageUrl };

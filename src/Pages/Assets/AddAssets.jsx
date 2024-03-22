@@ -18,6 +18,7 @@ import SelectSubCat from "../Categories/SelectSubCat";
 import SelectInputUser from "./SelectInputUser";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import { SelectAssetType } from "./SelectAssetType";
+import SelectAssetCategory from "./SelectAssetCategory";
 const AssetsForm = () => {
   const formMethod = useForm();
   const {
@@ -61,7 +62,7 @@ const AssetsForm = () => {
 
       // Redirect the user to the assets page after a delay
       setTimeout(() => {
-        navigate("/assets/*");
+        navigate("/assets/hardware");
       }, 1000);
     },
     // Function to handle errors during mutation
@@ -135,7 +136,7 @@ const AssetsForm = () => {
             </div>
             <div className="assets__form--input">
               <Label text="Category" sup={"*"} />
-              <SelectInputCategory
+              <SelectAssetCategory
                 setCategoryName={setCategoryName}
                 name="category"
                 register={register}
@@ -176,7 +177,7 @@ const AssetsForm = () => {
               <SelectInputUser name="assigned_to" register={register} />
             </div>
             <div className="assets__form--input ">
-              <Label text="Status" />
+              <Label text="Status" sup={"*"} />
               <label className={`switch ${isActive ? "active" : "inactive"}`}>
                 <input
                   {...register("status")}
@@ -193,6 +194,8 @@ const AssetsForm = () => {
             </div>
 
             <div className="assets__form--input">
+              <Label text="Upload asset image" />
+
               <DropzoneArea setValue={setValue} name="assets_image" />
             </div>
             <div className="assets__form--btn">
@@ -201,7 +204,7 @@ const AssetsForm = () => {
                 text="Add an Asset"
                 className={"button__blue"}
               />
-              <Link to="/assets" className="link">
+              <Link to="/assets/hardware" className="link">
                 <Button text="Cancel" className={"button__red"} />
               </Link>
             </div>

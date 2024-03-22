@@ -33,6 +33,7 @@ import AddProfile from "../Pages/Profile/AddProfile";
 import EmployeeView from "../Pages/Employees/EmployeeView";
 import EditProfile from "../Pages/Profile/EditProfile";
 import EmployeeDataTable from "../Pages/Employees/EmployeeDataTable";
+import AssetsHead from "../Pages/Assets/AssetsHead";
 
 export const router = createBrowserRouter([
   {
@@ -48,32 +49,55 @@ export const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "/assets",
+        path: "/assets/*",
         element: <Assets />,
         children: [
           {
-            index: true,
-            path: "*",
-            element: <Hardware />,
+            path: "", // Relative path for AssetsHead
+            element: <AssetsHead />,
+            children: [
+              {
+                index: true,
+                element: <Hardware />, // Render the Hardware component by default
+              },
+              {
+                path: "hardware",
+                element: <Hardware />,
+              },
+              
+              {
+                path: "software",
+                element: <Software />,
+              },
+            ],
           },
           {
-            path: "/assets/software",
-            element: <Software />,
+            path: "viewAssets",
+            element: <ViewAssets />,
+          },
+          {
+            path: "addAssets",
+            element: <AddAssets />,
+          },
+          {
+            path: "editAssets",
+            element: <EditAssets />,
           },
         ],
       },
-      // {
-      //   path: "/viewProfile",
-      //   element: <ViewProfile />,
-      // },
-      // {
-      //   path: "/addProfile",
-      //   element: <AddProfile />,
-      // },
-      // {
-      //   path: "/editProfile",
-      //   element: <EditProfile />,
-      // },
+
+      {
+        path: "/viewProfile",
+        element: <ViewProfile />,
+      },
+      {
+        path: "/addProfile",
+        element: <AddProfile />,
+      },
+      {
+        path: "/editProfile",
+        element: <EditProfile />,
+      },
       {
         path: "/procurement",
         element: <Procurement />,
@@ -140,18 +164,18 @@ export const router = createBrowserRouter([
         path: "/success",
         element: <PaymentSuccess />,
       },
-      {
-        path: "/addAssets",
-        element: <AddAssets />,
-      },
-      {
-        path: "/editAssets",
-        element: <EditAssets />,
-      },
-      {
-        path: "/viewAssets",
-        element: <ViewAssets />,
-      },
+      // {
+      //   path: "/addAssets",
+      //   element: <AddAssets />,
+      // },
+      // {
+      //   path: "/editAssets",
+      //   element: <EditAssets />,
+      // },
+      // {
+      //   path: "/viewAssets",
+      //   element: <ViewAssets />,
+      // },
       {
         path: "/procurementForm",
         element: <ProcurementForm />,

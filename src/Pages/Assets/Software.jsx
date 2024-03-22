@@ -27,6 +27,7 @@ import Model from "../../Component/Model/Model";
 import { notifyError } from "../../Component/Toast/Toast";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import Pagination from "../../Component/Pagination/Pagination";
 
 /**
  * Software component displays and manages software assets.
@@ -50,7 +51,7 @@ const Software = () => {
   const [pageNumber, setPageNumber] = useState(
     parseInt(searchParams.get("page")) || 1
   );
-  const searchSoftware = searchParams.get("search");
+  const searchSoftware = searchParams.get("Search") || "";
   const searchCategory = searchParams.get("category");
   const fromDate = searchParams.get("fromDate");
   const assets_type = searchParams.get("assets_type");
@@ -171,6 +172,7 @@ const Software = () => {
   const roundUp = Math.ceil(totalData / 7);
   const [pageNumberForEllipsis, setPageNumberForEllipsis] = useState(null);
   const filterOptions = ["None", "active", "inactive"];
+  if (error) return "An error has occurred: ";
 
   return (
     <>
@@ -184,22 +186,11 @@ const Software = () => {
         <></>
       )}
       <div className="ams__filter ">
-        <form className="search__form" onSubmit={handleSubmit(submitSearch)}>
-          <SearchSvg className="icons" />
-          <InputField
-            name="search"
-            register={register}
-            placeholder="search"
-            className="search-input"
-            message={"hii"}
-            errors={errors}
-            type={Model.assetSearch.type}
-            minLength={Model.assetSearch.minLength.value}
-            minMessage={Model.assetSearch.minLength.message}
-            maxLength={Model.assetSearch.maxLength.value}
-            maxMessage={Model.assetSearch.maxLength.message}
-          />
-        </form>
+        <SearchInput
+          defaultValue={""}
+          setPageNumber={setPageNumber}
+          setSearchParams={setSearchParams}
+        />
         <Button
           text="Filter"
           icon={<BsFunnel />}
@@ -215,51 +206,15 @@ const Software = () => {
         assets_type="software"
       />
       <div className="pagination">
-        <Button
-          className="inactivePage"
-          icon={<FaAngleLeft />}
-          handleClick={() =>
-            updatePageNumber(pageNumber > 1 ? pageNumber - 1 : 1)
-          }
-        />
-        {softwareData &&
-          [...Array(roundUp)].map((_, index) => (
-            <>
-              {index === roundUp - 2 && pageNumber > 2 ? (
-                <Button
-                  key={index}
-                  text={
-                    pageNumberForEllipsis !== null
-                      ? pageNumberForEllipsis.toString()
-                      : "..."
-                  }
-                  className={
-                    pageNumber === index + 1 ? "activePage" : "inactivePage"
-                  }
-                  handleClick={() => {
-                    updatePageNumber(index);
-                    setPageNumberForEllipsis(index + 1);
-                  }}
-                />
-              ) : (
-                <Button
-                  key={index}
-                  text={index + 1}
-                  className={
-                    pageNumber === index + 1 ? "activePage" : "inactivePage"
-                  }
-                  handleClick={() => updatePageNumber(index + 1)}
-                />
-              )}
-            </>
-          ))}
-        <Button
-          className="inactivePage"
-          handleClick={() =>
-            updatePageNumber(pageNumber < roundUp ? pageNumber + 1 : pageNumber)
-          }
-          icon={<FaAngleRight />}
-        />
+        {roundUp > 1 && (
+          <Pagination
+            setSearchParams={setSearchParams}
+            data={softwareData}
+            roundUp={roundUp}
+            setPageNumber={setPageNumber}
+            pageNumber={pageNumber}
+          />
+        )}
       </div>
       <CustomToastContainer />
     </>

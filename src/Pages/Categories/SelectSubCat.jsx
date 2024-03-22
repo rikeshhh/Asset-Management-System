@@ -23,11 +23,7 @@ const SelectSubCat = ({
   return (
     <select
       {...register(name)}
-      disabled={isDisabled} // Keep original isDisabled prop
-      style={{ color: "#999" }}
-      className={`${
-        isDisabled || isEmptyChildArray ? "input-disabled" : "input-enabled"
-      }`} // Disable if either isDisabled or isEmptyChildArray is true
+      className={`${isDisabled ? "input-disabled" : "input-enabled"}`}// Disable if either isDisabled or isEmptyChildArray is true
     >
       {defaultValue ? null : (
         <option value="" disabled selected>

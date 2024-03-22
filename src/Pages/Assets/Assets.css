@@ -24,8 +24,11 @@
 
 .assets__btn {
   color: var(--text-color) !important;
-  padding: 0.62rem !important;
   background-color: transparent !important;
+  border: none;
+  padding: 1rem 0 !important;
+  border: none;
+
 }
 
 .assets__form--content {
@@ -154,8 +157,29 @@ input:checked + .slider:before {
   text-decoration: none;
   border-bottom: 2px solid var(--blue);
 }
+.empty-table-cell {
+  text-align: center;
+}
+
+.empty-table-message {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  color: #555;
+}
+
+.empty-table-message p {
+  margin: 5px 0;
+}
 
 .assets__active .assets__btn {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0.005rem;
   color: var(--blue) !important;
 }
 

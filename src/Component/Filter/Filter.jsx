@@ -26,9 +26,10 @@ import {
 import { useSearchParams } from "react-router-dom";
 import SelectFilter from "./SelectFilter";
 
-const Filter = ({ handleClick, filterShow, filterOptions }) => {
+const Filter = ({ handleClick, filterShow, filterOptions  }) => {
   const {
     register,
+    reset,
     formState: { errors },
     handleSubmit,
   } = useForm();
@@ -71,8 +72,15 @@ const Filter = ({ handleClick, filterShow, filterOptions }) => {
         assigned_date: assignedDate,
       });
     }
+    setTimeout(() => {
+      handleClick();
+    }, 1000);
   };
 
+  const clearInputFields = () => {
+    reset();
+    reset({ fromDate: "", toDate: "" });
+  };
   return (
     <>
       <div className="filter__container" onClick={handleClick}></div>
@@ -139,12 +147,17 @@ const Filter = ({ handleClick, filterShow, filterOptions }) => {
           </div>
           <div className="filter__button">
             <div className="filter__button--flex">
-              <Button className="button__red" text="Clear All Filter" />
+              <Button
+                className="button__red"
+                text="Clear All Filter"
+                handleClick={clearInputFields}
+              />
               {/* <Link to="/payment" state={receivedFeature} className="link"> */}
               <Button
                 type="submit"
                 className="button__blue"
                 text="Apply Filter"
+                // handleClick={hideFilterBox}
               />
               {/* </Link> */}
             </div>
