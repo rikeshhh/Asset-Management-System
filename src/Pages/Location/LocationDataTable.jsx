@@ -25,6 +25,8 @@ const LocationDataTable = ({
   handleDeleteClick,
   setDisableButtons,
   disableButtons,
+  setLocationTableDataOrder,
+  locationTableDataOrder,
 }) => {
   const [show, setShow] = useState(false);
   // func:Mutation hook for editing location
@@ -48,7 +50,6 @@ const LocationDataTable = ({
   const [previousLocationId, setPreviousLocationId] = useState("");
   const [previousLocation, setPreviousLocation] = useState("");
   const [locationTableData, setLocationTableData] = useState(null);
-  const [locationTableDataOrder, setLocationTableDataOrder] = useState("ASC");
 
   const handleEditButtonClick = (options) => {
     setDisableButtons(true);
@@ -94,18 +95,10 @@ const LocationDataTable = ({
     handleDeleteClick(locationId);
   };
 
-  const handleStatusClick = async () => {
-    try {
-      const newOrder = locationTableDataOrder === "ASC" ? "DESC" : "ASC";
-      const response = await sortByStatusLocation(newOrder, "location");
-      setLocationTableData(response);
-      setLocationTableDataOrder(newOrder);
-    } catch (error) {
-      console.log(error);
-    }
+  const handleStatusClick = () => {
+    const newOrder = locationTableDataOrder === "ASC" ? "DESC" : "ASC";
+    setLocationTableDataOrder(newOrder);
   };
-
-  const locationDataToRender = locationTableData || LocationData;
 
   return (
     <section className="cateogries table__container">
@@ -130,7 +123,7 @@ const LocationDataTable = ({
           {isPending ? (
             <SmallTablePendingBody />
           ) : (
-            locationDataToRender.map((options, index) => (
+            LocationData.map((options, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 {options.id === previousLocationId && show ? (

@@ -21,7 +21,6 @@ const ReplaceDataTable = ({
   setPageNumber,
   pageNumber,
   params,
-  searchParams,
   setSearchParams,
 }) => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
@@ -117,7 +116,7 @@ const ReplaceDataTable = ({
     <>
       {deleteConfirationShow && (
         <DeleteConfirmation
-          deleteName="Repair"
+          deleteName="Replace"
           handleCancelClick={handleCancelClick}
           handleProceedClick={handleProceedClick}
         />

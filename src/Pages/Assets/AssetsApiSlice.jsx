@@ -116,11 +116,10 @@ export const getAssetsData = async (
   searchAssets,
   pageNumber,
   searchCategory,
-  searchStatus,
   assignedDate,
   byStatus,
   by_assets_type,
-  order,
+  order
 ) => {
   try {
     const response = await instance({
@@ -131,10 +130,9 @@ export const getAssetsData = async (
         search: searchAssets,
         page: pageNumber,
         category: searchCategory,
-        status: searchStatus,
         assigned_date: assignedDate,
         status: byStatus,
-        order:order,
+        order: order,
         sortBy: by_assets_type,
       },
       headers: {
@@ -175,12 +173,14 @@ export const getFilterData = async (categoryName, status, searchDate) => {
 export const selectUser = async () => {
   try {
     const response = await instance.get("/user", {
+      params: {
+        _getall: true,
+      },
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
     const userData = response.data.data.data;
-    console.log(userData);
     return userData;
   } catch (error) {
     throw error;

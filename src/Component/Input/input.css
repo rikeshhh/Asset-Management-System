@@ -84,3 +84,8 @@ select {
   color: var(--red) !important;
   font-size: 14px;
 }
+
+.input__notEditable {
+  border: none !important;
+  padding: 0 !important;
+}

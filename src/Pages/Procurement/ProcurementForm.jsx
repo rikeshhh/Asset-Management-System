@@ -9,6 +9,7 @@ import { GrStatusGoodSmall } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import AddProcurementTable from "./AddProcurementTable";
 import { useState } from "react";
+import SelectUser from "./SelectUser";
 
 const ProcurementForm = () => {
   const {
@@ -18,26 +19,10 @@ const ProcurementForm = () => {
     reset,
   } = useForm();
 
-  const selectOptions = ["Urgent", "High", "Medium", "Low"];
+  const selectOptions = ["urgent", "high", "medium", "low"];
 
   const [procurementTableLine, setProcurementTableLine] = useState(false);
   const [newProcurement, setNewProcurement] = useState([]);
-  const [isEditable, setIsEditable] = useState(false);
-
-  const handleAddProcurement = () => {
-    setIsEditable(true);
-    setProcurementTableLine(true);
-    setNewProcurement([
-      ...newProcurement,
-      {
-        product_name: "",
-        category_id: "None",
-        brand: "",
-        estimated_price: "",
-        link: "",
-      },
-    ]);
-  };
 
   const submitProcurement = () => {};
 
@@ -58,17 +43,10 @@ const ProcurementForm = () => {
           <div className="procurement__employee--dets">
             <div className="user__auth--input procurement__form--input">
               <Label sup={"*"} text="Requested By" />
-              <InputField
-                name="username"
+              <SelectUser
+                name="requested_by"
                 register={register}
-                pattern={Model.Name.pattern}
-                required={Model.Name.required}
-                errorMessage={Model.Name.errorMessage}
                 errors={errors}
-                type={Model.Name.type}
-                placeholder={Model.Name.placeholder}
-                minLength={Model.Name.minLength}
-                maxLength={Model.Name.maxLength}
               />
             </div>
             <div className="user__auth--input procurement__form--input">
@@ -95,28 +73,12 @@ const ProcurementForm = () => {
             </div>
           </div>
         </form>
-        <div className="procurement__product--list">
-          <h3>Product List</h3>
-          <Button
-            type={"button"}
-            text="Add a table line"
-            className={
-              procurementTableLine
-                ? "procurement--button procurement--button-not__allowed"
-                : "procurement--button"
-            }
-            handleClick={handleAddProcurement}
-            icon={<IoMdAdd />}
-            // isDisabled={editProcurementLine ? true : false}
-          />
-        </div>
+
         <AddProcurementTable
           procurementTableLine={procurementTableLine}
           setProcurementTableLine={setProcurementTableLine}
           setNewProcurement={setNewProcurement}
           newProcurement={newProcurement}
-          setIsEditable={setIsEditable}
-          isEditable={isEditable}
         />
       </div>
     </section>

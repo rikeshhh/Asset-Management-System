@@ -75,9 +75,9 @@ const EditRepairReplace = () => {
   const [selectedType, setSelectedType] = useState(tableData.Type || "Repair");
 
   const handleRadioChange = (e) => {
-    console.log(selectedType);
     setSelectedType(e.target.value);
   };
+  
   /**
    * Handles the submission of the repair and replace form.
    * @param {Object} data - Form data submitted.
@@ -89,7 +89,6 @@ const EditRepairReplace = () => {
     };
     EditRepairReplace.mutate(repairData);
   };
-  console.log(tableData);
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -186,7 +185,7 @@ const EditRepairReplace = () => {
                       name="Repair"
                       value="Repair"
                       onChange={handleRadioChange}
-                      checked={selectedType  === "Repair"}
+                      checked={selectedType === "Repair"}
                     />
                   </div>
                   <Label text="Repair" />

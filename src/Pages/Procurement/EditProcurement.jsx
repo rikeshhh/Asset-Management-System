@@ -18,6 +18,7 @@ import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import { getProductList, productDelete } from "./ProcurementApiSlice";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
 import { queryClient } from "../../Component/Query/Query";
+import ProductListTableItem from "./ProductList";
 
 const EditProcurement = () => {
   const [procurementTableLine, setProcurementTableLine] = useState(false);
@@ -26,12 +27,14 @@ const EditProcurement = () => {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [productId, setProductId] = useState("");
   const [categoryName, setCategoryName] = useState("");
+  const [isEditable, setIsEditable] = useState(false);
 
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
+    getValues,
   } = useForm();
   // console.log(errors);
   const location = useLocation();
@@ -41,7 +44,6 @@ const EditProcurement = () => {
   const { isPending, data: ProductList } = useQuery({
     queryKey: ["productList"],
     queryFn: () => getProductList(procurementData.id),
-    staleTime: 10000,
   });
   //   if (error) {
   //     return "An error has occurred: " + error.message;
@@ -66,7 +68,7 @@ const EditProcurement = () => {
   };
   const submitProcurement = () => {};
 
-  const selectOptions = ["Urgent", "High", "Medium", "Low"];
+  const selectOptions = ["urgent", "high", "medium", "low"];
 
   const handleCancelTableLine = () => {
     setProcurementTableLine(false);
@@ -75,10 +77,25 @@ const EditProcurement = () => {
   };
 
   const handleProcurementTableEdit = (index, productId) => {
-    setSelectedIndex(index);
-    setProductId(productId);
-    setEditProcurementLine(true);
-    setProcurementTableLine(false);
+    const values = getValues();
+
+    // Update the item at the specified index with the new values
+    const updatedItem = {
+      product_name: values.product_name,
+      category_id: values.category_id,
+      brand: values.brand,
+      estimated_price: values.estimated_price,
+      link: values.link,
+    };
+
+    // Update the newProcurement state with the updated item
+    const updatedProcurement = [...newProcurement];
+    updatedProcurement[index] = updatedItem;
+    setNewProcurement(updatedProcurement);
+
+    // Reset state and form after editing
+    setIsEditable(false);
+    setProcurementTableLine(null);
     reset();
   };
 
@@ -89,38 +106,7 @@ const EditProcurement = () => {
     // reset();
   };
 
-  const submitProcurementEdit = (data) => {
-    console.log(data);
-    const newItem = {
-      product_id: productId,
-      product_name: data.product_name,
-      category_id: data.category_id,
-      brand: data.brand,
-      estimated_price: data.estimated_price,
-      link: data.link,
-    };
-    // Check if the product with the same ID exists in newProcurement
-    const existingIndex = newProcurement.findIndex(
-      (item) => item.product_id === productId
-    );
-
-    // If the product exists, update its values
-    if (existingIndex !== -1) {
-      setNewProcurement((prevProcurement) => {
-        const updatedProcurement = [...prevProcurement];
-        updatedProcurement[existingIndex] = newItem;
-        return updatedProcurement;
-      });
-      setEditProcurementLine(false);
-    } else {
-      // If the product doesn't exist, add it to newProcurement
-      setNewProcurement((prevProcurement) => {
-        return [...prevProcurement, newItem];
-      });
-      setEditProcurementLine(false);
-    }
-  };
-  console.log(newProcurement);
+  const submitProcurementEdit = (data) => {};
 
   return (
     <section className="content-wrapper">
@@ -142,14 +128,8 @@ const EditProcurement = () => {
               <InputField
                 name="requestedBy"
                 register={register}
-                pattern={Model.Name.pattern}
-                required={Model.Name.required}
-                errorMessage={Model.Name.errorMessage}
                 errors={errors}
                 type={Model.Name.type}
-                placeholder={Model.Name.placeholder}
-                minLength={Model.Name.minLength}
-                maxLength={Model.Name.maxLength}
                 defaultValue={procurementData.user.requested_by}
                 isDisabled={true}
               />
@@ -203,141 +183,76 @@ const EditProcurement = () => {
                 {isPending ? (
                   <PendingTableBody />
                 ) : ProductList.length !== 0 ? (
-                  ProductList?.data.map((tableItem, index) => (
-                    <tr key={index}>
+                  ProductList?.data.map((procurement, index) => (
+                     <tr>
                       <td>
-                        {editProcurementLine && index === selectedIndex ? (
-                          <InputField
-                            name="product_name"
-                            register={register}
-                            errors={errors}
-                            defaultValue={
-                              newProcurement[index]
-                                ? newProcurement[index].product_name
-                                : tableItem.product_name
-                            }
-                          />
-                        ) : newProcurement[index] ? (
-                          newProcurement[index].product_name
-                        ) : (
-                          tableItem.product_name
-                        )}
+                        <InputField
+                          name="product_name"
+                          register={register}
+                          errors={errors}
+                          defaultValue={procurement.product_name}
+                          isEditable={isEditable}
+                        />
                       </td>
                       <td>
-                        {editProcurementLine && index === selectedIndex ? (
-                          <SelectInputCategory
-                            name="category_id"
-                            register={register}
-                            errors={errors}
-                            setCategoryName={setCategoryName}
-                            defaultValue={tableItem.category.name}
-                          />
-                        ) : newProcurement[index] ? (
-                          newProcurement[index].category_id
-                        ) : (
-                          tableItem.category.name
-                        )}
+                        <SelectInputCategory
+                          name="category_id"
+                          register={register}
+                          errors={errors}
+                          defaultValue={procurement.category}
+                          isEditable={isEditable}
+                        />
                       </td>
                       <td>
-                        {editProcurementLine && index === selectedIndex ? (
-                          <InputField
-                            name="brand"
-                            register={register}
-                            errors={errors}
-                            defaultValue={
-                              newProcurement[index]
-                                ? newProcurement[index].brand
-                                : tableItem.brand
-                            }
-                          />
-                        ) : newProcurement[index] ? (
-                          newProcurement[index].brand
-                        ) : (
-                          tableItem.brand
-                        )}
+                        <InputField
+                          name="brand"
+                          register={register}
+                          errors={errors}
+                          defaultValue={procurement.brand}
+                          isEditable={isEditable}
+                        />
                       </td>
                       <td>
-                        {editProcurementLine && index === selectedIndex ? (
-                          <InputField
-                            name="estimated_price"
-                            register={register}
-                            errors={errors}
-                            defaultValue={
-                              newProcurement[index]
-                                ? newProcurement[index].estimated_price
-                                : tableItem.estimated_price
-                            }
-                          />
-                        ) : newProcurement[index] ? (
-                          newProcurement[index].estimated_price
-                        ) : (
-                          tableItem.estimated_price
-                        )}
+                        <InputField
+                          name="estimated_price"
+                          register={register}
+                          errors={errors}
+                          defaultValue={procurement.estimated_price}
+                          isEditable={isEditable}
+                        />
                       </td>
                       <td>
-                        {editProcurementLine && index === selectedIndex ? (
-                          <InputField
-                            name="link"
-                            register={register}
-                            errors={errors}
-                            defaultValue={
-                              newProcurement[index]
-                                ? newProcurement[index].link
-                                : tableItem.link
-                            }
-                          />
-                        ) : newProcurement[index] ? (
-                          newProcurement[index].link
-                        ) : (
-                          tableItem.link
-                        )}
+                        <InputField
+                          name="link"
+                          register={register}
+                          errors={errors}
+                          defaultValue={procurement.link}
+                          isEditable={isEditable}
+                        />
                       </td>
                       <td className="button-gap">
-                        {editProcurementLine && index === selectedIndex ? (
-                          <button
-                            className="edit__button"
-                            onClick={() => handleSubmit(submitProcurementEdit)}
-                          >
-                            <FaCheck />
-                          </button>
-                        ) : (
-                          <Button
-                            type={"button"}
-                            className={
-                              procurementTableLine && index !== selectedIndex
-                                ? "edit__button edit__not--allowed"
-                                : "edit__button"
-                            }
-                            handleClick={() =>
-                              handleProcurementTableEdit(
-                                index,
-                                tableItem.products_id
-                              )
-                            }
-                            text={<CiEdit />}
-                            isDisabled={procurementTableLine ? true : false}
-                          />
-                        )}
-                        {editProcurementLine && index === selectedIndex ? (
-                          <Button
-                            type={"button"}
-                            className="delete__button"
-                            text={<RxCross1 />}
-                            handleClick={() => {
-                              setEditProcurementLine(false);
-                              reset();
-                            }}
-                          />
-                        ) : (
-                          <Button
-                            type={"button"}
-                            className="delete__button"
-                            text={<GoTrash />}
-                            handleClick={() =>
-                              handleDeleteProcurementLine(tableItem.products_id)
-                            }
-                          />
-                        )}
+                        <Button
+                          type="button"
+                          className="edit__button"
+                          text={<FaCheck />}
+                          handleClick={() => handleProcurementTableEdit(index)}
+                        />
+                        {/* <Button
+                          type={"button"}
+                          className={
+                            procurementTableLine && index !== selectedIndex
+                              ? "edit__button edit__not--allowed"
+                              : "edit__button"
+                          }
+                          handleClick={() => handleProcurementTableEdit(index)}
+                          text={<CiEdit />}
+                        /> */}
+                        <Button
+                          type={"button"}
+                          className="delete__button"
+                          text={<GoTrash />}
+                          handleClick={() => handleDeleteProcurementLine(index)}
+                        />
                       </td>
                     </tr>
                   ))

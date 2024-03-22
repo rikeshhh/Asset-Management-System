@@ -9,14 +9,21 @@ export const SelectInput = ({
   value,
 }) => {
   return (
-    <select {...register(name, { required: true })}>
-      {defaultValue ? (
+    <select
+      style={{ textTransform: "capitalize" }}
+      {...register(name, { required: true })}
+    >
+      {/* {defaultValue ? (
         <option value={defaultValue}>{defaultValue}</option>
       ) : (
         <></>
-      )}
+      )} */}
       {option.map((option, index) => (
-        <option key={index} value={option}>
+        <option
+          selected={option === defaultValue ? true : false}
+          key={index}
+          value={option}
+        >
           {option}
         </option>
       ))}
