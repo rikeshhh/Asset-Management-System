@@ -22,6 +22,8 @@ import CustomToastContainer from "../../Component/Toast/ToastContainer";
  * @returns {JSX.Element} JSX element representing the Location component.
  */
 const Location = () => {
+  const [locationTableDataOrder, setLocationTableDataOrder] = useState("ASC");
+
   const {
     register,
     formState: { errors },
@@ -44,8 +46,8 @@ const Location = () => {
     error,
     data: LocationData,
   } = useQuery({
-    queryKey: ["LocationData"],
-    queryFn: getLocationData,
+    queryKey: ["LocationData", locationTableDataOrder],
+    queryFn: () => getLocationData(locationTableDataOrder),
   });
   const successMessage = "Location has been added";
   //func: Mutation hook for adding a location
@@ -124,6 +126,8 @@ const Location = () => {
               handleProceedClick={handleProceedClick}
               setDisableButtons={setDisableButtons}
               disableButtons={disableButtons}
+              setLocationTableDataOrder={setLocationTableDataOrder}
+              locationTableDataOrder={locationTableDataOrder}
             />
             {/* Add location form */}
 

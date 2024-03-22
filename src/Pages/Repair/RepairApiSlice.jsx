@@ -56,11 +56,10 @@ export const repairReplaceAdd = async (repairReplaceData, selectedJobType) => {
   repairFormData.append("Assigned_to", repairReplaceData.Assigned_to);
   repairFormData.append("product_image", repairReplaceData.product_image.path);
   repairFormData.append("reason", repairReplaceData.reason);
-  repairFormData.append("status", "Sent");
+  repairFormData.append("status", "Pending");
   repairFormData.append("repairreplace_type", selectedJobType);
   repairFormData.append("Category", repairReplaceData.Category);
 
-  console.log(repairFormData);
   try {
     const response = await instance.post("/repairreplace", repairFormData, {
       headers: {
@@ -90,7 +89,6 @@ export const repairReplaceEdit = async (
   repairFormData.append("Category", repairReplaceData.Category);
   repairFormData.append("_method", "PUT");
 
-  console.log(repairFormData);
   try {
     const response = await instance.post(
       `/repairreplace?id=${productId}`,

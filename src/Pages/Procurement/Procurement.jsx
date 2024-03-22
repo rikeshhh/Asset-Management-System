@@ -2,14 +2,21 @@ import Button from "../../Component/Button/Button";
 import { IoMdAdd } from "react-icons/io";
 import "./Procurement.css";
 import { BsFunnel } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { SearchInput } from "../../Component/SearchInput/SearchInput";
 import ProcurementDataTable from "./ProcurementDataTable";
 import { useState } from "react";
 import Filter from "../../Component/Filter/Filter";
+import FilterProcurement from "./FIlterProcurement";
 
 const Procurement = () => {
   const [filterShow, setFilterShow] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+
+  const [pageNumber, setPageNumber] = useState(
+    parseInt(params.get("page")) || 1
+  );
 
   const onFilterClick = (showHide) => {
     setFilterShow(showHide);
@@ -19,7 +26,7 @@ const Procurement = () => {
   return (
     <>
       {filterShow ? (
-        <Filter
+        <FilterProcurement
           handleClick={() => onFilterClick(!filterShow)}
           filterShow={filterShow}
           filterOptions={filterOptions}
@@ -40,7 +47,11 @@ const Procurement = () => {
             </Link>
           </div>
           <div className="ams__filter ">
-            <SearchInput />
+            <SearchInput
+              defaultValue={""}
+              setSearchParams={setSearchParams}
+              setPageNumber={setPageNumber}
+            />
 
             <Button
               text="Filter"
@@ -49,7 +60,13 @@ const Procurement = () => {
               handleClick={() => onFilterClick(!filterShow)}
             />
           </div>
-          <ProcurementDataTable />
+          <ProcurementDataTable
+            setPageNumber={setPageNumber}
+            pageNumber={pageNumber}
+            params={params}
+            searchParams={searchParams}
+            setSearchParams={setSearchParams}
+          />
         </div>
       </section>
     </>

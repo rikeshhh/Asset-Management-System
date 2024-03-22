@@ -54,7 +54,7 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
             </div>
             <input {...getInputProps()} disabled={isDisabled} />
             <div className="upload__para">
-              <p>Max File Size: 3MB</p>
+              <p>Max File Size: 5MB</p>
               <p>Supported File Type: JPG, PNG</p>
             </div>
           </>
@@ -67,7 +67,7 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
                   {newImage ? (
                     <img src={newImage} alt="" />
                   ) : (
-                    <ImagePath file={importedImage?importedImage:""} />
+                    <ImagePath file={importedImage ? importedImage : ""} />
                   )}
                 </figure>
                 {/* Render other elements conditionally here */}

@@ -25,7 +25,7 @@ export const InputField = ({
   defaultValue,
   handleclick,
   checked,
-  isEditable,
+  isEditable = true,
 }) => {
   const hasError = errors[name];
   const [inputValu, setInputValu] = useState(defaultValue);
@@ -41,7 +41,7 @@ export const InputField = ({
           onClick={handleclick}
           className={`${isDisabled ? "input-disabled" : "input-enabled"} ${
             hasError ? "input__error" : ""
-          } ${hasError && type == "radio" ? "input__radio" : ""} ${className}`}
+          } ${hasError && type == "radio" ? "input__radio" : ""} ${className} `}
           name={name}
           placeholder={placeholder}
           autoComplete={autoComplete}
@@ -64,6 +64,7 @@ export const InputField = ({
             },
           })}
           disabled={isDisabled}
+          readOnly={!isEditable}
           checked={checked}
         />
         {children && (

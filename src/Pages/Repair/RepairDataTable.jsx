@@ -77,6 +77,14 @@ const RepairDataTable = ({
     onSuccess: () => {
       queryClient.invalidateQueries("RepairTableData");
       notifySuccess("Repair Data has been deleted successfully");
+
+      if (
+        pageNumber > 1 &&
+        totalData <= pageNumber * 7 &&
+        totalData % 7 === 1
+      ) {
+        setPageNumber(pageNumber - 1); // Navigate to previous page
+      }
     },
     onError: (error) => {
       console.log(error);
@@ -124,7 +132,7 @@ const RepairDataTable = ({
     <>
       {deleteConfirationShow && (
         <DeleteConfirmation
-          deleteName="Replace"
+          deleteName="Repair"
           handleCancelClick={handleCancelClick}
           handleProceedClick={handleProceedClick}
         />

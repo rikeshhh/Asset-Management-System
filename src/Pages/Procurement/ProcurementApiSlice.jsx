@@ -2,12 +2,18 @@ import instance from "../../axios/Axios";
 import { getTokenFromLocalStorage } from "../../utils/StorageUtils";
 
 const token = getTokenFromLocalStorage();
-export const getProcurementTableData = async () => {
+export const getProcurementTableData = async (
+  pageNumber,
+  searchProcurement
+) => {
   try {
-    const response = await instance.get("/procurement", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    return response.data.data.data;
+    const response = await instance.get(
+      `/procurement?page=${pageNumber}&search=${searchProcurement}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    return response.data.data;
   } catch (error) {
     throw error;
   }

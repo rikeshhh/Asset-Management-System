@@ -70,7 +70,6 @@ const AddRepair = () => {
       }, 1000);
     },
     onError: (error) => {
-      console.log(error);
       notifyError(error.response.data.message.message.repairreplace);
     },
   });
