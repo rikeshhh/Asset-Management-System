@@ -92,10 +92,10 @@ const Login = () => {
                       errors={errors}
                       type={Model.Username.type}
                       placeholder={Model.Username.placeholder}
-                      minLength={Model.Username.minLength.value}
-                      minMessage={Model.Username.minLength.message}
-                      maxLength={Model.Username.maxLength.value}
-                      maxMessage={Model.Username.maxLength.message}
+                      // minLength={Model.Username.minLength.value}
+                      // minMessage={Model.Username.minLength.message}
+                      // maxLength={Model.Username.maxLength.value}
+                      // maxMessage={Model.Username.maxLength.message}
                     />
                   </div>
                   <div className="form__input--section form__input--section__password">

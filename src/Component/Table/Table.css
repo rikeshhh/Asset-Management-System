@@ -1,8 +1,9 @@
 .main__table {
   color: #21252b;
   border-collapse: collapse;
-  width: 100%;
+  /* width: 100%; */
   font-size: 14px;
+  width: 1120px;
 }
 
 .main__table th,
@@ -28,6 +29,9 @@
   line-height: 150%;
   letter-spacing: 0.07px;
   text-transform: capitalize;
+}
+.table__container {
+  overflow-x: scroll;
 }
 
 .loader {
@@ -76,11 +80,11 @@
   display: block; /* Show on hover */
 }
 
-@media (width <= 1110px) {
+/* @media (width <= 1110px) {
   .table__container {
     overflow-x: scroll;
   }
-}
+} */
 
 @media (max-width: 650px) {
   .main__table th {

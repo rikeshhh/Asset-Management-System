@@ -1,4 +1,5 @@
 import "../../Component/DataTable/DataTable.css";
+
 import { useMutation } from "@tanstack/react-query";
 import { InputField } from "../../Component/Input/InputField";
 import { LuArrowDownUp, LuArrowUpDown } from "react-icons/lu";
@@ -167,7 +168,18 @@ const LocationDataTable = ({
                     </form>
                   </td>
                 ) : (
-                  <td>{options.location}</td>
+                  <>
+                    <td
+                      className={
+                        options.location.length > 20 ? "hoverEffect" : ""
+                      }
+                      data-name={`${options.location}`}
+                    >
+                      {options.location.length > 20
+                        ? `${options.location.substring(0, 20)}...`
+                        : options.location}
+                    </td>
+                  </>
                 )}
                 <td className="button-gap">
                   <Button

@@ -73,7 +73,17 @@ const EmployeeDataTable = ({
             tableData?.data.map((tableItem, index) => (
               <tr key={index}>
                 <td data-cell="id">{tableItem.id}</td>
-                <td data-cell="name">{tableItem.name}</td>
+
+                <td
+                  className={tableItem.name.length > 12 ? "hoverEffect" : ""}
+                  data-name={`${tableItem.name}`}
+                >
+                  {tableItem.name.length > 12
+                    ? `${tableItem.name.substring(0, 12)}...`
+                    : tableItem.name}
+                </td>
+                {/* </> */}
+                {/* <td data-cell="name">{tableItem.name}</td> */}
                 <td data-cell="designation">
                   {tableItem.designation ? tableItem.designation : "N/A"}
                 </td>

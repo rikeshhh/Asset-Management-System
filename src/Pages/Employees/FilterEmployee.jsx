@@ -15,10 +15,20 @@ const FilterEmployee = ({ handleClick, filterShow, designationSubmit }) => {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+    reset,
+  } = useForm({
+    defaultValues: {
+      designation: "",
+      department: "",
+    },
+  });
 
   const designationFilterSubmit = (data) => {
     designationSubmit(data);
+  };
+  const handleResetForm = () => {
+    console.log("cleared");
+    reset();
   };
 
   return (
@@ -62,7 +72,12 @@ const FilterEmployee = ({ handleClick, filterShow, designationSubmit }) => {
           </div>
           <div className="filter__button">
             <div className="filter__button--flex">
-              <Button className="button__red" text="Clear All Filter" />
+              <Button
+                type="button"
+                className="button__red"
+                text="Clear All Filter"
+                handleClick={handleResetForm}
+              />
               <Button
                 type="submit"
                 className="button__blue"
