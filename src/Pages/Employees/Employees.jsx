@@ -107,9 +107,6 @@ const Employees = () => {
     },
     onError: (error) => {
       notifyError(error.message);
-      if (error.response.status === 401) {
-        notifyError("Unauthorized: Please log in with valid id.");
-      }
     },
   });
 
