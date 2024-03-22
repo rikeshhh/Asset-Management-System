@@ -139,6 +139,7 @@ const Employees = () => {
    * @param {Object} employee - The employee object to be deleted.
    */
   const handleDeleteClick = (employee) => {
+    console.log(employee);
     setDeleteConfirationShow(true);
     setEmployeeId(employee);
   };

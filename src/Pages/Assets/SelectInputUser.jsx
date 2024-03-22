@@ -17,11 +17,9 @@ const SelectInputUser = ({ name, register, defaultValue, isDisabled }) => {
     queryFn: selectUser,
   });
   return (
-    
     <select
       {...register(name, { required: true })}
       disabled={isDisabled}
-      style={{ color: "#999" }}
       className={isDisabled ? "select__disabled" : "select__enabled"}
     >
       {defaultValue ? null : (
