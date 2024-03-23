@@ -14,7 +14,6 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
     // Set default value if it's provided
     if (defaultValue) {
       setImportedImage(defaultValue);
-      setNewImage(defaultValue);
       setValue(name, defaultValue); // Set form value using setValue
     }
   }, [defaultValue, setValue, name]); // Include setValue and name in dependencies array
@@ -75,8 +74,8 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
                 <figure>
                   {newImage ? (
                     <img src={newImage} />
-                  ) : (
-                    <ImagePath file={importedImage} />
+                    ) : (
+                    <ImagePath file={importedImage || newImage} />
                   )}
                 </figure>
                 {/* Render other elements conditionally here */}

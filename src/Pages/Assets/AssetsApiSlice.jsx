@@ -44,6 +44,7 @@ export const deleteAssetsTableData = async (assetsId) => {
  */
 export const assetsEdit = async (assetsInfo, productID, assetsImage) => {
   var formdata = new FormData();
+  console.log(assetsImage, "assetImages");
   formdata.append("id", productID);
   formdata.append("name", assetsInfo.productName);
   formdata.append("assets_type", assetsInfo.assets_type.toLowerCase());
@@ -107,7 +108,6 @@ export const assetsAdd = async (assetsData) => {
  * @param {string} searchAssets - The search query for assets.
  * @param {number} pageNumber - The page number of the assets data.
  * @param {string} searchCategory - The category to search within.
- * @param {string} searchStatus - The status to filter by.
  * @param {string} assignedDate - The assigned date to filter by.
  * @returns {Promise} A promise that resolves with the filtered assets data.
  */
@@ -117,7 +117,6 @@ export const getAssetsData = async (
   pageNumber,
   searchCategory,
   assignedDate,
-  byStatus,
   by_assets_type,
   order
 ) => {
@@ -131,7 +130,6 @@ export const getAssetsData = async (
         page: pageNumber,
         category: searchCategory,
         assigned_date: assignedDate,
-        status: byStatus,
         order: order,
         sortBy: by_assets_type,
       },

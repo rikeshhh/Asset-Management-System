@@ -37,14 +37,16 @@ export const selectInputCategory = async () => {
     headers: { Authorization: `Bearer ${token}` },
   });
   const resp = await categoryData.data.data;
+  console.log(resp);
   return resp;
 };
 
 export const selectSubCategoryData = async (categoryName) => {
-  const categoryData = await instance.get(`/category?name=${categoryName}`, {
+  const categoryData = await instance.get(`category=${categoryName}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
-  const resp = await categoryData.data.data;
+  const resp = await categoryData.data.data.data;
+  console.log(resp);
   return resp;
 };
 

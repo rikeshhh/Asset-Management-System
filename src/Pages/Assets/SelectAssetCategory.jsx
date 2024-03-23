@@ -20,6 +20,7 @@ const SelectAssetCategory = ({
       (category) => category.id === selectedCategoryId
     );
     setCategoryName(selectedCategory.parent);
+    console.log(selectedCategory.parent)
   };
   return (
     <select

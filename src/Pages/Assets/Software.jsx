@@ -57,7 +57,6 @@ const Software = () => {
   const assets_type = searchParams.get("assets_type");
   const toDate = searchParams.get("toDate");
   const searchDate = `${fromDate} to ${toDate}`;
-  const searchStatus = searchParams.get("status");
   const assignedDate = searchParams.get("assigned_date");
   const by_assets_type = searchParams.get("sortBy");
   const byStatus = searchParams.get("assets_type");
@@ -121,9 +120,7 @@ const Software = () => {
       searchSoftware,
       pageNumber,
       searchCategory,
-      searchStatus,
       assignedDate,
-      byStatus,
       by_assets_type,
       order,
     ],
@@ -133,21 +130,14 @@ const Software = () => {
         searchSoftware,
         pageNumber,
         searchCategory,
-        searchStatus,
         assignedDate,
-        byStatus,
         by_assets_type,
         order
       ),
     staleTime: 10000,
   });
   // if (isPending) return "Loading...";
-  const handleSoftwareClick = () => {
-    console.log("software");
-  };
-  const handleHardwareClick = () => {
-    console.log("hardware");
-  };
+  console.log(softwareData , "softwaredataaaaaa")
   const updatePageNumber = (newPageNumber) => {
     setPageNumber(newPageNumber);
     setSearchParams({ page: newPageNumber });

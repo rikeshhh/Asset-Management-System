@@ -28,6 +28,7 @@ const SelectInputCategory = ({
     );
     setCategoryName(selectedCategory.parent);
   };
+
   return (
     <select
       {...register(name, { required: true })}

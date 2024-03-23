@@ -10,11 +10,10 @@ const SelectSubCat = ({
   isDisabled,
 }) => {
   const { data: subCategoryData } = useQuery({
-    queryKey: ["selectSubCategory"],
+    queryKey: ["selectSubCategory" , categoryName],
     queryFn: () => selectSubCategoryData(categoryName),
   });
-  console.log(subCategoryData);
-
+  console.log(categoryName);
   // Checking if any child array is empty
   const isEmptyChildArray =
     subCategoryData &&
@@ -23,7 +22,7 @@ const SelectSubCat = ({
   return (
     <select
       {...register(name)}
-      className={`${isDisabled ? "input-disabled" : "input-enabled"}`}// Disable if either isDisabled or isEmptyChildArray is true
+      className={`${isDisabled ? "input-disabled" : "input-enabled"}`} // Disable if either isDisabled or isEmptyChildArray is true
     >
       {defaultValue ? null : (
         <option value="" disabled selected>

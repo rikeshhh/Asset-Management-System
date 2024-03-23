@@ -35,12 +35,30 @@ import { notifyError } from "../../Component/Toast/Toast";
  */
 const AssetsTableData = ({ isPending, tableData, assets_type }) => {
   const options = [
-    "ID",
-    "Name",
-    "Category",
-    "Status",
-    "Assigned to",
-    "Assigned Date",
+    {
+      value: "id",
+      label: "ID",
+    },
+    {
+      value: "name",
+      label: "Name",
+    },
+    {
+      value: "category",
+      label: "Category",
+    },
+    {
+      value: "status",
+      label: "Status",
+    },
+    {
+      value: "assigned_to",
+      label: "Assigned to",
+    },
+    {
+      value: "assigned_date",
+      label: "Assigned Date",
+    },
   ];
   const [searchParams, setSearchParams] = useSearchParams();
   const [assetTableData, setAssetTableData] = useState(null);
@@ -65,6 +83,8 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
   //   );
   // }
 
+  console.log(tableData, "tabledataaaaaaaaaaaaaaaaa");
+
   return (
     <>
       <div className="table__container">
@@ -75,8 +95,11 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
             ) : (
               <>
                 {options.map((tableHead, index) => (
-                  <th key={index} onClick={() => handleStatusClick(tableHead)}>
-                    {tableHead}
+                  <th
+                    key={index}
+                    onClick={() => handleStatusClick(tableHead.value)}
+                  >
+                    {tableHead.label}
                     <span>
                       <LuArrowUpDown />
                     </span>
@@ -89,8 +112,8 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
           <tbody>
             {isPending ? (
               <PendingTableBody />
-            ) : tableData && tableData.length > 0 ? (
-              tableData.map((tableItem, index) => (
+            ) : tableData?.length > 0 ? (
+              tableData?.map((tableItem, index) => (
                 <Tablerow key={index} tableItem={tableItem} />
               ))
             ) : (
