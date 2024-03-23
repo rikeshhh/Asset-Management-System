@@ -169,6 +169,9 @@ const Hardware = () => {
         <Filter
           filterOptions={filterOptions}
           handleClick={() => onFilterClick(!filterShow)}
+          filterShow={filterShow}
+          setPageNumber={setPageNumber}
+          setSearchParams={setSearchParams}
         />
       ) : (
         <></>

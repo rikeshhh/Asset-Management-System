@@ -57,7 +57,7 @@ const EditAssets = () => {
   const submitData = (data) => {
     const editAssetsData = {
       data: data,
-      editImage: data.assets_image || assetsData.assets_image,
+      editImage: data.assets_image?data.assets_image:assetsData.assets_image,
     };
     console.log("editAssetsData", editAssetsData); // Add this line for debugging
 
@@ -69,7 +69,6 @@ const EditAssets = () => {
     setIsActive((prev) => !prev);
   };
   const [categoryName, setCategoryName] = useState();
-  console.log(assetsData);
   return (
     <section className="assets__add">
       <div className="content-wrapper">

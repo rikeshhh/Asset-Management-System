@@ -26,17 +26,23 @@ import {
 import { useSearchParams } from "react-router-dom";
 import SelectFilter from "./SelectFilter";
 
-const Filter = ({ handleClick, filterShow, filterOptions  }) => {
+const Filter = ({
+  handleClick,
+  filterShow,
+  filterOptions,
+  setPageNumber,
+  setSearchParams,
+}) => {
   const {
     register,
     reset,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const [searchParams, setSearchParams] = useSearchParams();
 
   //function to filter assets data
   const filterSubmit = (data) => {
+    setPageNumber(1);
     const fromDate = data.fromDate.replace(/\+/g, " ");
     const toDate = data.toDate.replace(/\+/g, " ");
     const assignedDate = `${fromDate} to ${toDate}`;
