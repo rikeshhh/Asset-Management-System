@@ -25,11 +25,16 @@ const ProcurementDataTable = ({
   setSearchParams,
 }) => {
   const [sortOrder, setSortOrder] = useState("asc");
-  const [sortData, setSortData] = useState("approved_date");
   const [procurementId, setProcurementId] = useState();
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
 
   const searchProcurement = params.get("Search") || "";
+  const sortData = params.get("sortBy") || "approved_date";
+  const newSortOrder = params.get("sortOrder") || "asc";
+  const filterByApprovedDate = params.get("assigned_date") || "";
+  const filterByStatus = params.get("status") || "";
+  const filterByUser = params.get("requested_by") || "";
+  const filterByApproved = params.get("verified_by") || "";
 
   const {
     isPending,
@@ -40,10 +45,24 @@ const ProcurementDataTable = ({
       "procurementTableData",
       pageNumber,
       searchProcurement,
-      sortOrder,
+      newSortOrder,
+      sortData,
+      filterByApprovedDate,
+      filterByStatus,
+      filterByUser,
+      filterByApproved,
     ],
-    queryFn: () => getProcurementTableData(pageNumber, searchProcurement),
-    staleTime: 10000,
+    queryFn: () =>
+      getProcurementTableData(
+        pageNumber,
+        searchProcurement,
+        newSortOrder,
+        sortData,
+        filterByApprovedDate,
+        filterByStatus,
+        filterByUser,
+        filterByApproved
+      ),
   });
   const totalData = procurementTableData?.totalData;
   const roundUp = Math.ceil(totalData / 7);
@@ -72,21 +91,29 @@ const ProcurementDataTable = ({
     "No. of Items",
     "Status",
     "Verified By",
-    "Verified Data",
+    "Verified Date",
   ];
 
   const handleStatusClick = (tableHead) => {
-    const newOrder = sortOrder === "ASC" ? "DESC" : "ASC";
-    setSortOrder(newOrder);
+    let newOrder = sortOrder === "asc" ? "desc" : "asc";
+    let sortBy = "approved_date";
     if (tableHead === "No. of Items") {
-      setSortData("number_of_items");
+      sortBy = "number_of_items";
     } else if (tableHead === "Requested By") {
-      setSortData("Product_Code");
-    } else if (tableHead === "Name") {
-      setSortData("assets_name");
+      sortBy = "requested_by_id";
+    } else if (tableHead === "Verified Date") {
+      sortBy = "approved_date";
+    } else if (tableHead === "Verified By") {
+      sortBy = "approved_by_id";
     } else {
-      setSortData(tableHead);
+      sortBy = "status";
     }
+    setSearchParams({
+      ...params,
+      sortOrder: newOrder,
+      sortBy: sortBy,
+    });
+    setSortOrder(newOrder);
   };
 
   const handleProcurementDelete = (procurementID) => {
@@ -123,7 +150,11 @@ const ProcurementDataTable = ({
               <tr>
                 {tableHeadOptions.map((tableHead, index) => (
                   <th>
-                    {tableHead} <LuArrowUpDown onClick={handleStatusClick} />
+                    {tableHead}{" "}
+                    <LuArrowUpDown
+                      className="sort__icon"
+                      onClick={() => handleStatusClick(tableHead)}
+                    />
                   </th>
                 ))}
                 <th>Action</th>

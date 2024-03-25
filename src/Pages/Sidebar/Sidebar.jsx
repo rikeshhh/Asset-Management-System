@@ -44,12 +44,14 @@ const Sidebar = () => {
           />
         </div>
         <div className="sidebar__title">
-          <div>
-            <h3 className="sidebar__heading">AMS</h3>
-            <div className="sidebar__subheading">
-              <p>Assets management system</p>
+          <Link to="/" className="link">
+            <div>
+              <h3 className="sidebar__heading">AMS</h3>
+              <div className="sidebar__subheading">
+                <p>Assets management system</p>
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
         <nav className="navbar">
           <div className="top__list">
