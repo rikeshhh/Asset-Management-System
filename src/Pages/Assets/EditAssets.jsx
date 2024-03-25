@@ -20,6 +20,7 @@ import SelectInputCategory from "../Categories/SelectInputCategory";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import { SelectAssetType } from "./SelectAssetType";
 import ImagePath from "../../Component/Images/ImagePath";
+import SelectAssetCategory from "./SelectAssetCategory";
 /**
  * EditAssets component for editing asset details.
  *
@@ -57,7 +58,9 @@ const EditAssets = () => {
   const submitData = (data) => {
     const editAssetsData = {
       data: data,
-      editImage: data.assets_image?data.assets_image:assetsData.assets_image,
+      editImage: data.assets_image
+        ? data.assets_image
+        : assetsData.assets_image,
     };
     console.log("editAssetsData", editAssetsData); // Add this line for debugging
 
@@ -132,7 +135,7 @@ const EditAssets = () => {
               </div>
               <div className="assets__form--input">
                 <Label text="Category" sup={"*"} />
-                <SelectInputCategory
+                <SelectAssetCategory
                   setCategoryName={setCategoryName}
                   name="category"
                   defaultValue={assetsData.category}
