@@ -9,16 +9,21 @@ const SelectSubCat = ({
   defaultValue,
   isDisabled,
 }) => {
-  const { data: subCategoryData } = useQuery({
-    queryKey: ["selectSubCategory" , categoryName],
+  const {
+    data: subCategoryData,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["selectSubCategory", categoryName],
     queryFn: () => selectSubCategoryData(categoryName),
   });
-  console.log(categoryName);
+  console.log(subCategoryData);
   // Checking if any child array is empty
   const isEmptyChildArray =
     subCategoryData &&
     subCategoryData.some((category) => category.child.length === 0);
-
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error fetching data</div>;
   return (
     <select
       {...register(name)}

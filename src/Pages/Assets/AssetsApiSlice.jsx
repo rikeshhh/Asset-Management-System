@@ -44,7 +44,6 @@ export const deleteAssetsTableData = async (assetsId) => {
  */
 export const assetsEdit = async (assetsInfo, productID, assetsImage) => {
   var formdata = new FormData();
-  console.log(assetsImage, "assetImages");
   formdata.append("id", productID);
   formdata.append("name", assetsInfo.productName);
   formdata.append("assets_type", assetsInfo.assets_type.toLowerCase());

@@ -19,8 +19,8 @@ const SelectAssetCategory = ({
     const selectedCategory = CategoryData.find(
       (category) => category.id === selectedCategoryId
     );
-    setCategoryName(selectedCategory.parent);
-    console.log(selectedCategory.parent)
+    setCategoryName(selectedCategory.id);
+    console.log(selectedCategory.id)
   };
   return (
     <select

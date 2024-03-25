@@ -42,12 +42,15 @@ export const selectInputCategory = async () => {
 };
 
 export const selectSubCategoryData = async (categoryName) => {
-  const categoryData = await instance.get(`category=${categoryName}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  const resp = await categoryData.data.data.data;
-  console.log(resp);
-  return resp;
+  try {
+    const categoryData = await instance.get(`/category?id=${categoryName}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return categoryData.data.data; // Return the entire data object
+  } catch (error) {
+    console.error("Error fetching subcategory data:", error);
+    return []; // Return an empty array in case of an error
+  }
 };
 
 /**
