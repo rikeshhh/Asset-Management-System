@@ -50,7 +50,7 @@ const LocationDataTable = ({
 
   const [previousLocationId, setPreviousLocationId] = useState("");
   const [previousLocation, setPreviousLocation] = useState("");
-  const [locationTableData, setLocationTableData] = useState(null);
+  const [locationTableData, setLocationTableData] = useState("id");
 
   const handleEditButtonClick = (options) => {
     setDisableButtons(true);
@@ -98,6 +98,7 @@ const LocationDataTable = ({
 
   const handleStatusClick = () => {
     const newOrder = locationTableDataOrder === "ASC" ? "DESC" : "ASC";
+    setLocationTableData("location");
     setLocationTableDataOrder(newOrder);
   };
 

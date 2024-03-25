@@ -42,21 +42,29 @@ const FilterProcurement = ({
 
     // Check if all three parameters are selected
     if (
-      data.category !== "None" &&
+      data.user !== "None" &&
       data.status !== "None" &&
+      data.verifiedBy !== "None" &&
       data.fromDate &&
       data.toDate
     ) {
       setSearchParams({
-        category: data.category,
+        requested_by: data.user,
         status: data.status,
         assigned_date: assignedDate,
+        verified_by: data.verifiedBy,
       });
     }
-    // Check if only category is selected
-    else if (data.category !== "None") {
+    // Check if only user is selected
+    else if (data.user !== "None") {
       setSearchParams({
-        category: data.category,
+        requested_by: data.user,
+      });
+    }
+    // Check if only verified by is selected
+    else if (data.verifieBy !== "None") {
+      setSearchParams({
+        verified_by: data.verifiedBy,
       });
     }
     // Check if only status is selected
@@ -89,10 +97,10 @@ const FilterProcurement = ({
               <Label text={"Requested By"} />
               <SelectUser register={register} name="user" />
             </div>
-            {/* <div className="form__input--section ">
-              <Label text={"Status"} />
-              <SelectInput option={option} register={register} name="status" />
-            </div> */}
+            <div className="form__input--section ">
+              <Label text={"Verified By"} />
+              <SelectUser register={register} name="verifiedBy" />
+            </div>
             <div className="form__input--section ">
               <Label text={"Status"} />
               <SelectInput
@@ -125,16 +133,6 @@ const FilterProcurement = ({
                 errors={errors}
                 type={Model.Date.type}
               />
-              {/* <input
-                type="date"
-                {...register("startDate")}
-                pattern="\d{4}-\d{2}-\d{2}"
-              />
-              <input
-                type="date"
-                {...register("endDate")}
-                pattern="\d{4}-\d{2}-\d{2}"
-              /> */}
             </div>
           </div>
           <div className="filter__button">
@@ -147,13 +145,12 @@ const FilterProcurement = ({
                   setSearchParams("");
                 }}
               />
-              {/* <Link to="/payment" state={receivedFeature} className="link"> */}
+
               <Button
                 type="submit"
                 className="button__blue"
                 text="Apply Filter"
               />
-              {/* </Link> */}
             </div>
           </div>
         </form>

@@ -82,16 +82,15 @@ export const repairReplaceEdit = async (
   repairFormData.append("Product_Code", repairReplaceData.Product_Code);
   repairFormData.append("Product_Name", repairReplaceData.Product_Name);
   repairFormData.append("Assigned_to", repairReplaceData.Assigned_to);
-  repairFormData.append("product_image", repairReplaceData.product_image.path);
+  repairFormData.append("product_image", repairReplaceData.product_image);
   repairFormData.append("reason", repairReplaceData.reason);
   repairFormData.append("status", "Sent");
   repairFormData.append("repairreplace_type", selectedJobType);
   repairFormData.append("Category", repairReplaceData.Category);
-  repairFormData.append("_method", "PUT");
 
   try {
     const response = await instance.post(
-      `/repairreplace?id=${productId}`,
+      `/repairreplace?id=${productId}&_method=PUT`,
       repairFormData,
       {
         headers: {

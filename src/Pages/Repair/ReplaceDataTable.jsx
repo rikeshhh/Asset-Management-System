@@ -25,18 +25,20 @@ const ReplaceDataTable = ({
 }) => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const [replaceId, setReplaceId] = useState();
-  const [sortData, setSortData] = useState("Assigned_date");
-  const [sortOrder, setSortOrder] = useState("ASC");
+
+  const [sortOrder, setSortOrder] = useState("DESC");
 
   const tableHeads = [
     "Product code",
-    "Name",
+    "name",
     "Category",
     "Status",
     "Assigned date",
   ];
 
   const searchReplace = params.get("Search") || "";
+  const newOrder = params.get("sortOrder") || "DESC";
+  const sortData = params.get("sortBy") || "Assigned_Date";
   const category = params.get("category") || "";
   const status = params.get("status") || "";
 
@@ -71,17 +73,23 @@ const ReplaceDataTable = ({
   });
 
   const handleStatusClick = (tableHead) => {
-    const newOrder = sortOrder === "ASC" ? "DESC" : "ASC";
-    setSortOrder(newOrder);
+    let newOrder = sortOrder === "ASC" ? "DESC" : "ASC";
+    let sortBy = "Assigned_date";
     if (tableHead === "Assigned date") {
-      setSortData("Assigned_date");
+      sortBy = "Assigned_date";
     } else if (tableHead === "Product code") {
-      setSortData("Product_Code");
-    } else if (tableHead === "Name") {
-      setSortData("assets_name");
+      sortBy = "Product_Code";
+    } else if (tableHead === "name") {
+      sortBy = "assets_name";
     } else {
-      setSortData(tableHead);
+      sortBy = tableHead;
     }
+    setSearchParams({
+      ...params,
+      sortOrder: newOrder,
+      sortBy: sortBy,
+    });
+    setSortOrder(newOrder);
   };
 
   const totalData = replaceTableData?.total_data;
