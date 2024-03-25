@@ -71,6 +71,7 @@ const Filter = ({
       setSearchParams({
         status: data.status,
       });
+      console.log(data.status);
     }
     // Check if only fromDate and toDate are selected
     else if (data.fromDate && data.toDate) {

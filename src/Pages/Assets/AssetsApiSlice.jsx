@@ -117,6 +117,7 @@ export const getAssetsData = async (
   searchCategory,
   assignedDate,
   by_assets_type,
+  searchStatus,
   order
 ) => {
   try {
@@ -130,6 +131,7 @@ export const getAssetsData = async (
         category: searchCategory,
         assigned_date: assignedDate,
         order: order,
+        status: searchStatus,
         sortBy: by_assets_type,
       },
       headers: {

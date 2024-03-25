@@ -98,6 +98,7 @@ const Hardware = () => {
       searchCategory,
       assignedDate,
       by_assets_type,
+      searchStatus,
       order,
     ],
     queryFn: () =>
@@ -108,6 +109,7 @@ const Hardware = () => {
         searchCategory,
         assignedDate,
         by_assets_type,
+        searchStatus,
         order
       ),
     staleTime: 10000,
