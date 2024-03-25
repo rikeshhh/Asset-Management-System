@@ -84,7 +84,11 @@ const ViewAssets = () => {
       <div className="content-wrapper">
         <div className="content-radius">
           <div className="content__header form--header">
-            <h2>{assetsData.id}</h2>
+            {assetsData.assets_type === "hardware" ? (
+              <h2>ITJ-HW-{assetsData.id}</h2>
+            ) : (
+              <h2>ITJ-SW-{assetsData.id}</h2>
+            )}
             <p>
               <span>Assets /</span>{" "}
               <GrStatusGoodSmall className="form__circle" /> Assets Detail
@@ -218,9 +222,7 @@ const ViewAssets = () => {
               </div>
               <div className="assets__form--input">
                 <figure className="image__display">
-                  <ImagePath
-                    file={assetsData.image_name}
-                  />
+                  <ImagePath file={assetsData.image_name} />
                 </figure>
               </div>
               <div className="assets__form--btn">

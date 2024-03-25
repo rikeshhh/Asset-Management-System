@@ -53,7 +53,7 @@ const Tablerow = ({ tableItem }) => {
   const handleDeleteConfirmationModel = () => {
     setDeleteConfirationShow(true);
   };
-
+  console.log(tableItem);
   return (
     <>
       {deleteConfirationShow && (
@@ -64,7 +64,11 @@ const Tablerow = ({ tableItem }) => {
         />
       )}
       <tr>
-        <td data-cell="id">ITJ-HW-{tableItem.id}</td>
+        {tableItem.assets_type === "hardware" ? (
+          <td data-cell="id">ITJ-HW-{tableItem.id}</td>
+        ) : (
+          <td data-cell="id">ITJ-SW-{tableItem.id}</td>
+        )}
         <td data-cell="name">
           <p
             className={`${tableItem.name}`.length >= 12 ? "hoverEffect" : ""}
