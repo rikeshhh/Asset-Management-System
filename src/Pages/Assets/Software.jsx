@@ -137,7 +137,7 @@ const Software = () => {
     staleTime: 10000,
   });
   // if (isPending) return "Loading...";
-  console.log(softwareData , "softwaredataaaaaa")
+  console.log(softwareData, "softwaredataaaaaa");
   const updatePageNumber = (newPageNumber) => {
     setPageNumber(newPageNumber);
     setSearchParams({ page: newPageNumber });
@@ -168,9 +168,11 @@ const Software = () => {
     <>
       {filterShow ? (
         <Filter
-          assetsType="software"
-          handleClick={() => onFilterClick(!filterShow)}
           filterOptions={filterOptions}
+          handleClick={() => onFilterClick(!filterShow)}
+          filterShow={filterShow}
+          setPageNumber={setPageNumber}
+          setSearchParams={setSearchParams}
         />
       ) : (
         <></>
