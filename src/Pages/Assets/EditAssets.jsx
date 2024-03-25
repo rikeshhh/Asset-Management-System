@@ -193,6 +193,7 @@ const EditAssets = () => {
                   <input
                     {...register("status")}
                     type="checkbox"
+                    required
                     defaultChecked={isActive}
                     onChange={toggleSwitch}
                   />

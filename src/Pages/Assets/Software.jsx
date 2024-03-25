@@ -61,6 +61,8 @@ const Software = () => {
   const by_assets_type = searchParams.get("sortBy");
   const byStatus = searchParams.get("assets_type");
   const order = searchParams.get("order") || "asc";
+  const searchStatus = searchParams.get("status"); // Status filter
+
   /**
    * Handles the click event for deleting an employee.
    * @param {Object} employee - The employee object to be deleted.
@@ -122,6 +124,7 @@ const Software = () => {
       searchCategory,
       assignedDate,
       by_assets_type,
+      searchStatus,
       order,
     ],
     queryFn: () =>
@@ -132,6 +135,7 @@ const Software = () => {
         searchCategory,
         assignedDate,
         by_assets_type,
+        searchStatus,
         order
       ),
     staleTime: 10000,

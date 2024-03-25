@@ -19,9 +19,7 @@ const AssetsHead = () => {
   /**
    * Handles the click to navigate to software.
    */
-  const handleSoftwareClick = () => {
-    navigate(`/assets/software/${pageNumber}`);
-  };
+  
 
   /**
    * Handles the click to navigate to hardware.
@@ -69,7 +67,6 @@ const AssetsHead = () => {
             >
               <Button
                 text="Software"
-                handleClick={handleSoftwareClick}
                 className="assets__btn"
               />
             </NavLink>
