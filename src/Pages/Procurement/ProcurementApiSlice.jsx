@@ -4,11 +4,18 @@ import { getTokenFromLocalStorage } from "../../utils/StorageUtils";
 const token = getTokenFromLocalStorage();
 export const getProcurementTableData = async (
   pageNumber,
-  searchProcurement
+  searchProcurement,
+  newOrder,
+  sortData,
+  filterByApprovedDate,
+  filterByStatus,
+  filterByUser,
+  filterByApproved
 ) => {
   try {
     const response = await instance.get(
-      `/procurement?page=${pageNumber}&search=${searchProcurement}`,
+      `/procurement?page=${pageNumber}&search=${searchProcurement}&sortBy=${sortData}&order=${newOrder}&requestedBy=${filterByUser}&status=${filterByStatus}&approvedBy=${filterByApproved}`,
+
       {
         headers: { Authorization: `Bearer ${token}` },
       }

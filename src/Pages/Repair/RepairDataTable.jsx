@@ -28,10 +28,11 @@ const RepairDataTable = ({
 }) => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const [repairId, setRepairId] = useState();
-  const [sortData, setSortData] = useState("Assigned_date");
-  const [sortOrder, setSortOrder] = useState("ASC");
+  const [sortOrder, setSortOrder] = useState("DESC");
 
   const searchRepair = params.get("Search") || "";
+  const newOrder = params.get("sortOrder") || "DESC";
+  const sortData = params.get("sortBy") || "Assigned_Date";
   const category = params.get("category") || "";
   const status = params.get("status") || "";
   const assigned_date = params.get("assigned_date") || "";
@@ -53,7 +54,7 @@ const RepairDataTable = ({
       "RepairTableData",
       searchRepair,
       sortData,
-      sortOrder,
+      newOrder,
       pageNumber,
       category,
       status,
@@ -63,7 +64,7 @@ const RepairDataTable = ({
       getRepairTableData(
         searchRepair,
         sortData,
-        sortOrder,
+        newOrder,
         pageNumber,
         category,
         status,
@@ -111,19 +112,25 @@ const RepairDataTable = ({
   };
 
   const handleStatusClick = (tableHead) => {
-    const newOrder = sortOrder === "ASC" ? "DESC" : "ASC";
-    setSortOrder(newOrder);
+    let newOrder = sortOrder === "ASC" ? "DESC" : "ASC";
+    let sortBy = "Assigned_date";
     if (tableHead === "Assigned date") {
-      setSortData("Assigned_date");
+      sortBy = "Assigned_date";
     } else if (tableHead === "Product code") {
-      setSortData("Product_Code");
+      sortBy = "Product_Code";
     } else if (tableHead === "name") {
-      setSortData("assets_name");
+      sortBy = "assets_name";
     } else {
-      setSortData(tableHead);
+      sortBy = tableHead;
     }
+    setSearchParams({
+      ...params,
+      sortOrder: newOrder,
+      sortBy: sortBy,
+    });
+    setSortOrder(newOrder);
   };
- 
+
   // if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: ";
@@ -160,11 +167,10 @@ const RepairDataTable = ({
                 {tableHeads.map((tableHead, index) => (
                   <th key={index}>
                     {tableHead}
-                    <span className="sort__icon">
-                      <LuArrowUpDown
-                        onClick={() => handleStatusClick(tableHead)}
-                      />
-                    </span>
+                    <LuArrowUpDown
+                      className="sort__icon"
+                      onClick={() => handleStatusClick(tableHead)}
+                    />
                   </th>
                 ))}
 

@@ -30,6 +30,8 @@ const Procurement = () => {
           handleClick={() => onFilterClick(!filterShow)}
           filterShow={filterShow}
           filterOptions={filterOptions}
+          setPageNumber={setPageNumber}
+          setSearchParams={setSearchParams}
         />
       ) : (
         <></>

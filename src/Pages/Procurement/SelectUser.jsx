@@ -18,11 +18,7 @@ const SelectUser = ({ name, register, defaultValue, isDisabled }) => {
   });
   return (
     <select {...register(name, { required: true })}>
-      {defaultValue ? null : (
-        <option value="None" selected disabled>
-          Select the Employee
-        </option>
-      )}
+      {defaultValue ? null : <option value="None">None</option>}
 
       {defaultValue && (
         <option className="select__option" value={defaultValue.id}>
