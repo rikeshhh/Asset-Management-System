@@ -18,7 +18,7 @@ export const DeleteConfirmation = ({
         <h4>Delete {deleteName}? </h4>
 
         <div className="delete__confirmation--info">
-          <p>Are you sure you want to delete this {deleteName} permanently?</p>
+          <p>Are you sure you want to delete this {deleteName.toLowerCase()} permanently?</p>
           <p>This action cannot be undone.</p>
         </div>
         <div className="delete__confirmation--button">

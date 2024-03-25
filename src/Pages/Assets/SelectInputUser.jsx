@@ -11,35 +11,42 @@ import { selectUser } from "./AssetsApiSlice";
  * @param {boolean} props.isDisabled - Boolean indicating if the select input field is disabled
  * @returns {JSX.Element} JSX representation of the SelectInputUser component
  */
-const SelectInputUser = ({ name, register, defaultValue, isDisabled }) => {
+const SelectInputUser = ({ name, register, defaultValue, isDisabled,errors }) => {
   const { data: userData } = useQuery({
     queryKey: ["selectUserData"],
     queryFn: selectUser,
   });
   return (
-    <select
-      {...register(name, { required: true })}
-      disabled={isDisabled}
-      className={isDisabled ? "select__disabled" : "select__enabled"}
-    >
-      {defaultValue ? null : (
-        <option value="" disabled selected>
-          Select the Assigned Employee
-        </option>
-      )}
-
-      {defaultValue && (
-        <option className="select__option" value={defaultValue.id}>
-          {defaultValue.name}
-        </option>
-      )}
-      {Array.isArray(userData) &&
-        userData.map((user) => (
-          <option className="select__option" key={user.id} value={user.id}>
-            {user.name}
+    <>
+      <select
+        {...register(name, { required: true })}
+        disabled={isDisabled}
+        className={isDisabled ? "select__disabled" : "select__enabled"}
+      >
+        {defaultValue ? null : (
+          <option value="" disabled selected>
+            Select the Assigned Employee
           </option>
-        ))}
-    </select>
+        )}
+
+        {defaultValue && (
+          <option className="select__option" value={defaultValue.id}>
+            {defaultValue.name}
+          </option>
+        )}
+        {Array.isArray(userData) &&
+          userData.map((user) => (
+            <option className="select__option" key={user.id} value={user.id}>
+              {user.name}
+            </option>
+          ))}
+      </select>
+      {errors[name] && (
+        <span className="error-message">
+          "Please select an assigned employee"
+        </span>
+      )}    
+    </>
   );
 };
 export default SelectInputUser;

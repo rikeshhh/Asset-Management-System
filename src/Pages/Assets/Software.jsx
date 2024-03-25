@@ -90,7 +90,7 @@ const Software = () => {
       return deleteAssetsTableData(assetsid);
     },
     onSuccess: () => {
-      notifySuccess("Asset Deleted Successfully");
+      // notifySuccess("Asset Deleted Successfully");
       queryClient.invalidateQueries("softwareData");
     },
     onError: (error) => {
@@ -212,7 +212,6 @@ const Software = () => {
           />
         )}
       </div>
-      <CustomToastContainer />
     </>
   );
 };

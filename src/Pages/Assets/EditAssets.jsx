@@ -131,6 +131,7 @@ const EditAssets = () => {
                   defaultValue={assetsData.assets_type}
                   name="assets_type"
                   register={register}
+                  errors={errors}
                 />
               </div>
               <div className="assets__form--input">
@@ -140,6 +141,7 @@ const EditAssets = () => {
                   name="category"
                   defaultValue={assetsData.category}
                   register={register}
+                  errors={errors}
                 />
               </div>
               <div className="assets__form--input">
@@ -149,6 +151,7 @@ const EditAssets = () => {
                   defaultValue={assetsData.subcategory}
                   name="sub_category"
                   register={register}
+                  errors={errors}
                 />{" "}
               </div>
             </div>
@@ -177,6 +180,7 @@ const EditAssets = () => {
                   defaultValue={assetsData.location}
                   name="location"
                   register={register}
+                  errors={errors}
                 />
               </div>
               <div className="assets__form--input">
@@ -185,6 +189,7 @@ const EditAssets = () => {
                   name="assigned_to"
                   register={register}
                   defaultValue={assetsData.assigned_to}
+                  errors={errors}
                 />
               </div>
               <div className="assets__form--input">
@@ -193,13 +198,12 @@ const EditAssets = () => {
                   <input
                     {...register("status")}
                     type="checkbox"
-                    required
                     defaultChecked={isActive}
                     onChange={toggleSwitch}
                   />
                   <span className="slider"></span>
                   <span className="status">
-                    {isActive ? "active" : "inactive"}
+                    {isActive ? "Active" : "Inactive"}
                   </span>
                 </label>
               </div>

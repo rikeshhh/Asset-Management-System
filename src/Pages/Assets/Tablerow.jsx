@@ -58,7 +58,7 @@ const Tablerow = ({ tableItem }) => {
     <>
       {deleteConfirationShow && (
         <DeleteConfirmation
-          deleteName="assetsId"
+          deleteName="Asset"
           handleCancelClick={() => setDeleteConfirationShow(false)}
           handleProceedClick={handleDeleteAssets}
         />
@@ -108,7 +108,6 @@ const Tablerow = ({ tableItem }) => {
           />
         </td>
       </tr>
-      <CustomToastContainer />
     </>
   );
 };

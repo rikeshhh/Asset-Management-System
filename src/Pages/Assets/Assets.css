@@ -12,7 +12,25 @@
 .assets__content {
   padding: 0 1.38rem 1.25rem;
 }
+.select__enabled {
+  padding: 1.09rem 1rem;
+  width: 100%;
+  gap: 1rem;
+  border-radius: 0.3125rem;
+  border: 1px solid var(--primary-grey);
+  background: var(--secondary-color);
+  font-size: 14px;
+  color: var(--text-color) !important;
+}
 
+.select__disabled {
+  padding: 1.09rem 1rem;
+  width: 100%;
+  gap: 1rem;
+  border-radius: 0.3125rem;
+  border: 1px solid var(--primary-grey);
+  background: var(--disabled-input);
+}
 .assets__navigation {
   display: flex;
   justify-content: start;
@@ -28,14 +46,13 @@
   border: none;
   padding: 1rem 0 !important;
   border: none;
-
 }
 
 .assets__form--content {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 3rem;
-  padding: 0 1.38rem 1.25rem;
+  padding: 0 1.38rem 1.38rem;
 }
 
 .form--content__right,
@@ -200,12 +217,12 @@ input:checked + .slider:before {
 /* Text color adjustments for active and inactive states */
 .switch.active .status {
   color: #fff; /* Text color when active */
-  left: 8px;
+  left: 0px;
 }
 
 .switch.inactive .status {
   color: white;
-  right: 8px;
+  right: 0px;
 }
 
 .navlink {

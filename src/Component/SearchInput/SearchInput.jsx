@@ -13,8 +13,8 @@ export const SearchInput = ({
     register,
     formState: { errors },
   } = useForm();
-  const [inputValue, setInputValue] = useState(defaultValue);
-  const debouncedSearch = useDebounce(inputValue);
+  const [inputValue, setInputValue] = useState(defaultValue.trim());
+  const debouncedSearch = useDebounce(inputValue.trim());
 
   useEffect(() => {
     setPageNumber(1);

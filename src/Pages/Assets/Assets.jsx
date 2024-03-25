@@ -66,16 +66,7 @@ const Assets = () => {
 
   return (
     <>
-      {deleteConfirationShow ? (
-        <DeleteConfirmation
-          deleteName="assetsId"
-          handleCancelClick={handleCancelClick}
-          handleProceedClick={handleProceedClick}
-        />
-      ) : (
-        <></>
-      )}
-
+    
       <section className="content-wrapper">
        
             <>

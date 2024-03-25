@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { selectSubCategoryData } from "./CategoryApiSice";
-
+import "../Assets/Assets.css";
 const SelectSubCat = ({
   name,
   register,
@@ -27,7 +27,8 @@ const SelectSubCat = ({
   return (
     <select
       {...register(name)}
-      className={`${isDisabled ? "input-disabled" : "input-enabled"}`} // Disable if either isDisabled or isEmptyChildArray is true
+      disabled={isDisabled}
+      className={`${isDisabled ? "select__disabled" : "select__enabled"}`} // Disable if either isDisabled or isEmptyChildArray is true
     >
       {defaultValue ? null : (
         <option value="" disabled selected>

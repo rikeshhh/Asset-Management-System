@@ -144,6 +144,8 @@ const ViewAssets = () => {
                   name="assets_type"
                   register={register}
                   isDisabled={true}
+                  errors={errors}
+
                 />
               </div>
               <div className="assets__form--input">
@@ -154,6 +156,8 @@ const ViewAssets = () => {
                   defaultValue={assetsData.category}
                   register={register}
                   isDisabled={true}
+                  errors={errors}
+
                 />
               </div>
               <div className="assets__form--input">
@@ -185,6 +189,7 @@ const ViewAssets = () => {
                   maxLength={Model.Group.maxLength.value}
                   maxMessage={Model.Group.maxLength.message}
                   isDisabled={true}
+                  
                 />
               </div>
               <div className="assets__form--input">
@@ -194,6 +199,8 @@ const ViewAssets = () => {
                   name="location"
                   register={register}
                   isDisabled={true}
+                  errors={errors}
+
                 />
               </div>
               <div className="assets__form--input">
@@ -203,6 +210,7 @@ const ViewAssets = () => {
                   register={register}
                   defaultValue={assetsData.assigned_to}
                   isDisabled={true}
+                  errors={errors}
                 />
               </div>
               <div className="assets__form--input">
@@ -216,11 +224,13 @@ const ViewAssets = () => {
                   />
                   <span className="slider"></span>
                   <span className="status">
-                    {isActive ? "active" : "inactive"}
+                    {isActive ? "Active" : "Inactive"}
                   </span>
                 </label>
               </div>
               <div className="assets__form--input">
+                <Label text="Upload asset image" />
+
                 <figure className="image__display">
                   <ImagePath file={assetsData.image_name} />
                 </figure>

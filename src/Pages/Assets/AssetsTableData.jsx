@@ -25,6 +25,7 @@ import Tablerow from "./Tablerow";
 import { LuArrowUpDown } from "react-icons/lu";
 import "./Assets.css";
 import { notifyError } from "../../Component/Toast/Toast";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
 /**
  * Component to display assets data in a table format.
  * @param {object} props - Component props
@@ -129,6 +130,7 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
           </tbody>
         </table>
       </div>
+      <CustomToastContainer />
     </>
   );
 };

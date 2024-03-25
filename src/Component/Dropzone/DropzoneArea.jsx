@@ -7,8 +7,8 @@ import { UploadSvg } from "../svg/UploadSvg";
 import ImagePath from "../Images/ImagePath";
 
 const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
-  console.log(defaultValue);
   const [importedImage, setImportedImage] = useState(defaultValue || null);
+  console.log(defaultValue);
   const [newImage, setNewImage] = useState();
   useEffect(() => {
     // Set default value if it's provided
@@ -74,7 +74,7 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
                 <figure>
                   {newImage ? (
                     <img src={newImage} />
-                    ) : (
+                  ) : (
                     <ImagePath file={importedImage || newImage} />
                   )}
                 </figure>

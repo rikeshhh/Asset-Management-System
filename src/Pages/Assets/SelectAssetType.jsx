@@ -14,34 +14,39 @@ import "./Assets.css";
 export const SelectAssetType = ({
   register,
   name,
+  errors,
   defaultValue,
   isDisabled,
 }) => {
   const assetType = ["hardware", "software"];
   return (
-    <select
-      {...register(name, { required: true })}
-      disabled={isDisabled}
-      style={{ color: "#999" }}
-      className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
-    >
-      {defaultValue ? null : (
-        <option value="" disabled selected>
-          Select the Asset type
-        </option>
-      )}
-      {defaultValue && (
-        <option className="select__option" value={defaultValue.toLowerCase()}>
-          {defaultValue.toLowerCase()}
-        </option>
-      )}
-      {assetType.map((option, index) => (
-        <>
-          <option key={index} value={option}>
-            {option.toLowerCase()}
+    <>
+      <select
+        {...register(name, { required: true })}
+        disabled={isDisabled}
+        className={isDisabled ? "select__disabled" : "select__enabled"}
+      >
+        {defaultValue ? null : (
+          <option value="" disabled selected>
+            Select the Asset type
           </option>
-        </>
-      ))}
-    </select>
+        )}
+        {defaultValue && (
+          <option className="select__option" value={defaultValue.toLowerCase()}>
+            {defaultValue.toLowerCase()}
+          </option>
+        )}
+        {assetType.map((option, index) => (
+          <>
+            <option key={index} value={option}>
+              {option.toLowerCase()}
+            </option>
+          </>
+        ))}
+      </select>
+      {errors[name] && (
+        <span className="error-message">"Please choose an asset type"</span>
+      )}
+    </>
   );
 };

@@ -95,23 +95,7 @@ const AssetsForm = () => {
           className="assets__form--content"
         >
           <div className="form--content__right">
-            <div className="assets__form--input">
-              {/* <Label text="ID / Product Code" sup={"*"} />
-              <InputField
-                name="productID"
-                register={register}
-                required={Model.ProductCode.required}
-                value={Model.ProductCode.pattern.value}
-                message={Model.ProductCode.pattern.message}
-                errors={errors}
-                type={Model.ProductCode.type}
-                placeholder={Model.ProductCode.placeholder}
-                minLength={Model.ProductCode.value}
-                minMessage={Model.ProductCode.minLength.message}
-                maxLength={Model.ProductCode.maxLength.value}
-                maxMessage={Model.ProductCode.maxLength.message}
-              /> */}
-            </div>
+           
 
             <div className="assets__form--input">
               <Label text="Name / Title" sup={"*"} />
@@ -132,7 +116,11 @@ const AssetsForm = () => {
             </div>
             <div className="assets__form--input">
               <Label text="Asset Type" sup={"*"} />
-              <SelectAssetType name="assets_type" register={register} />
+              <SelectAssetType
+                name="assets_type"
+                register={register}
+                errors={errors}
+              />
             </div>
             <div className="assets__form--input">
               <Label text="Category" sup={"*"} />
@@ -140,6 +128,7 @@ const AssetsForm = () => {
                 setCategoryName={setCategoryName}
                 name="category"
                 register={register}
+                errors={errors}
               />
             </div>
             <div className="assets__form--input">
@@ -170,11 +159,11 @@ const AssetsForm = () => {
             </div>
             <div className="assets__form--input">
               <Label text="Location" sup={"*"} />
-              <SelectInputLocation register={register} name="location" />
+              <SelectInputLocation register={register} name="location" errors={errors}/>
             </div>
             <div className="assets__form--input">
               <Label text="Assigned to" sup={"*"} />
-              <SelectInputUser name="assigned_to" register={register} />
+              <SelectInputUser name="assigned_to" register={register} errors={errors}/>
             </div>
             <div className="assets__form--input ">
               <Label text="Status" sup={"*"} />

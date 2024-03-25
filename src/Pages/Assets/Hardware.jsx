@@ -127,7 +127,7 @@ const Hardware = () => {
       return deleteAssetsTableData(assetsid);
     },
     onSuccess: () => {
-      notifySuccess("Asset Deleted Successfully");
+      // notifySuccess("Asset Deleted Successfully");
       queryClient.invalidateQueries("AssetsData");
     },
     onError: (error) => {
