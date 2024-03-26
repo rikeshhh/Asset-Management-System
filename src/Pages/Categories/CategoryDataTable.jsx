@@ -277,7 +277,9 @@ const CategoryDataTable = ({
                     <>
                       <td
                         className={
-                          options.parent.length > 20 ? "hoverEffect" : ""
+                          options.parent.length > 20
+                            ? "hoverEffect  universal-input__container--editable-padding"
+                            : ""
                         }
                         data-name={`${options.parent}`}
                       >
@@ -382,7 +384,7 @@ const CategoryDataTable = ({
                             <td
                               className={
                                 subCategory.category_name.length > 20
-                                  ? "hoverEffect"
+                                  ? "hoverEffect  universal-input__container--editable-padding"
                                   : ""
                               }
                               data-name={`${subCategory.category_name}`}

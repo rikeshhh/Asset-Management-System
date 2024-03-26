@@ -10,6 +10,7 @@ import { useSearchParams } from "react-router-dom";
 import SelectFilter from "../../Component/Filter/SelectFilter";
 import SelectInputDepartment from "../Departments/SelectInputDepartment";
 import { SearchInput } from "../../Component/SearchInput/SearchInput";
+import SelectInputDesignation from "./SelectDesignation";
 const FilterEmployee = ({ handleClick, filterShow, designationSubmit }) => {
   const {
     register,
@@ -24,10 +25,10 @@ const FilterEmployee = ({ handleClick, filterShow, designationSubmit }) => {
   });
 
   const designationFilterSubmit = (data) => {
+    console.log("first", data);
     designationSubmit(data);
   };
   const handleResetForm = () => {
-    console.log("cleared");
     reset();
   };
 
@@ -54,7 +55,7 @@ const FilterEmployee = ({ handleClick, filterShow, designationSubmit }) => {
               />
             </div>
             <div>
-              <div className="form__input--section">
+              {/* <div className="form__input--section">
                 <Label text="Designation" />
                 <InputField
                   name="designation"
@@ -67,7 +68,12 @@ const FilterEmployee = ({ handleClick, filterShow, designationSubmit }) => {
                   placeholder={Model.Designation.placeholder}
                   isDisabled={false}
                 />
-              </div>
+              </div> */}
+              <SelectInputDesignation
+                register={register}
+                isRequired={false}
+                name="designation"
+              />
             </div>
           </div>
           <div className="filter__button">
