@@ -495,16 +495,21 @@ th:last-child {
   gap: 4px;
 }
 .pagination button {
-  color: black;
+  padding: 2px;
+  border: 1px solid var(--primary-grey);
   padding: 0.645rem;
   width: 32px;
   height: 32px;
 }
+.pagination button:hover{
+  background-color: var(--primary-grey);
+}
+
 .paginationNext {
   background-color: var(--secondary-color) !important;
 }
 .activePage {
-  background-color: var(--blue);
+  background-color: var(--blue)!important;
   color: white !important;
 }
 .inactivePage {

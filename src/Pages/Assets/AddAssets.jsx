@@ -137,6 +137,7 @@ const AssetsForm = () => {
                 categoryName={categoryName}
                 name="sub_category"
                 register={register}
+                isDisabled={!categoryName || categoryName.trim() === ''}
               />
             </div>
           </div>
@@ -184,7 +185,6 @@ const AssetsForm = () => {
 
             <div className="assets__form--input">
               <Label text="Upload asset image" />
-
               <DropzoneArea setValue={setValue} name="assets_image" />
             </div>
             <div className="assets__form--btn">
