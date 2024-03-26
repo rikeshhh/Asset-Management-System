@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../Component/Button/Button";
 import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
@@ -22,14 +22,13 @@ const AddProcurementTable = ({
     getValues,
     reset,
   } = useForm();
-  // const [newProcurement, setNewProcurement] = useState([]);
   const [isEditable, setIsEditable] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleAddProcurement = () => {
     reset();
-    setIsEditable(true);
     setProcurementTableLine(true);
+    setIsEditable(true);
     setNewProcurement([
       ...newProcurement,
       {

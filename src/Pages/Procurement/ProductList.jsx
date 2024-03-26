@@ -28,8 +28,10 @@ const ProductListTableItem = ({
     reset,
   } = useForm();
 
+  const [categoryName, setCategoryName] = useState("");
   const handleProcurementTableAdd = (index) => {
     const values = getValues();
+    console.log(values);
 
     // Update the item at the specified index with the new values
     const updatedItem = {
@@ -47,17 +49,23 @@ const ProductListTableItem = ({
 
     // Reset state and form after editing
     setIsEditable(false);
+    setSelectedIndex("");
     setProcurementTableLine(false);
     reset();
   };
 
   const handleProcurementTableEdit = (index) => {
-    setSelectedIndex(index);
-    setIsEditable(true);
     setProcurementTableLine(true);
+    setSelectedIndex(index);
   };
 
-  console.log("Item =>", index, tableItem);
+  const handleCancelProcurementLine = () => {
+    setSelectedIndex("");
+    setIsEditable(false);
+    setProcurementTableLine(false);
+    reset();
+  };
+
   return (
     <tr>
       <td>
@@ -66,8 +74,16 @@ const ProductListTableItem = ({
           register={register}
           errors={errors}
           defaultValue={tableItem.product_name}
-          isEditable={isEditable}
-          className={`${isEditable ? "input__editable" : "input__notEditable"}`}
+          isEditable={
+            (isEditable && index === newProcurement.length - 1) ||
+            selectedIndex === index
+          }
+          className={`${
+            (isEditable && index === newProcurement.length - 1) ||
+            selectedIndex === index
+              ? "input__editable"
+              : "input__notEditable"
+          }`}
         />
       </td>
       <td>
@@ -75,11 +91,18 @@ const ProductListTableItem = ({
           name="category_id"
           register={register}
           errors={errors}
-          defaultValue={
-            tableItem.category_id === "" ? "" : tableItem?.category_id
+          setCategoryName={setCategoryName}
+          defaultValue={categoryName}
+          isEditable={
+            (index === newProcurement.length - 1 && isEditable) ||
+            selectedIndex === index
           }
-          isEditable={isEditable}
-          className={` ${isEditable ? "input-enabled" : "select-not-editable"}`}
+          className={` ${
+            (isEditable && index === newProcurement.length - 1) ||
+            selectedIndex === index
+              ? "input-enabled"
+              : "select-not-editable"
+          }`}
         />
       </td>
       <td>
@@ -88,8 +111,16 @@ const ProductListTableItem = ({
           register={register}
           errors={errors}
           defaultValue={tableItem.brand}
-          isEditable={isEditable}
-          className={`${isEditable ? "input__editable" : "input__notEditable"}`}
+          isEditable={
+            (isEditable && index === newProcurement.length - 1) ||
+            selectedIndex === index
+          }
+          className={`${
+            (isEditable && index === newProcurement.length - 1) ||
+            selectedIndex === index
+              ? "input__editable"
+              : "input__notEditable"
+          }`}
         />
       </td>
       <td>
@@ -98,8 +129,16 @@ const ProductListTableItem = ({
           register={register}
           errors={errors}
           defaultValue={tableItem.estimated_price}
-          isEditable={isEditable}
-          className={`${isEditable ? "input__editable" : "input__notEditable"}`}
+          isEditable={
+            (isEditable && index === newProcurement.length - 1) ||
+            selectedIndex === index
+          }
+          className={`${
+            (isEditable && index === newProcurement.length - 1) ||
+            selectedIndex === index
+              ? "input__editable"
+              : "input__notEditable"
+          }`}
         />
       </td>
       <td>
@@ -108,12 +147,21 @@ const ProductListTableItem = ({
           register={register}
           errors={errors}
           defaultValue={tableItem.link}
-          isEditable={isEditable}
-          className={`${isEditable ? "input__editable" : "input__notEditable"}`}
+          isEditable={
+            (isEditable && index === newProcurement.length - 1) ||
+            selectedIndex === index
+          }
+          className={`${
+            (isEditable && index === newProcurement.length - 1) ||
+            selectedIndex === index
+              ? "input__editable"
+              : "input__notEditable"
+          }`}
         />
       </td>
       <td className="button-gap">
-        {procurementTableLine ? (
+        {(procurementTableLine && index === newProcurement.length - 1) ||
+        selectedIndex === index ? (
           <Button
             type="button"
             className="edit__button"
@@ -128,16 +176,25 @@ const ProductListTableItem = ({
                 ? "edit__button edit__not--allowed"
                 : "edit__button"
             }
-            handleClick={() => handleProcurementTableEdit()}
+            handleClick={() => handleProcurementTableEdit(index)}
             text={<CiEdit />}
           />
         )}
-        <Button
-          type={"button"}
-          className="delete__button"
-          text={<GoTrash />}
-          handleClick={() => handleDeleteProcurementLine(index)}
-        />
+        {selectedIndex === index ? (
+          <Button
+            type={"button"}
+            className="delete__button"
+            text={<RxCross1 />}
+            handleClick={handleCancelProcurementLine}
+          />
+        ) : (
+          <Button
+            type={"button"}
+            className="delete__button"
+            text={<GoTrash />}
+            handleClick={() => handleDeleteProcurementLine(index)}
+          />
+        )}
       </td>
     </tr>
   );

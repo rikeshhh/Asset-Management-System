@@ -208,7 +208,7 @@ const RepairDataTable = ({
                       handleClick={() => viewEmployeeProfile(tableItem)}
                       text={<EyeSvg />}
                     />
-                    <Link to="/editRepairReplace" state={tableItem}>
+                    <Link to="/repair/editRepairReplace" state={tableItem}>
                       <Button
                         type={"button"}
                         className="edit__button"
