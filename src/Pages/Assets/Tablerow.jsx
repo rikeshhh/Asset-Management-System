@@ -58,6 +58,11 @@ const Tablerow = ({ tableItem }) => {
   const handleTextClick = () => {
     setIsFullTextVisible(!isFullTextVisible);
   };
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  const toggleTooltip = () => {
+    setShowTooltip(!showTooltip);
+  };
   console.log(tableItem);
   return (
     <>
@@ -76,11 +81,14 @@ const Tablerow = ({ tableItem }) => {
         )}
         <td data-cell="name">
           <p
-            className={`${tableItem.name}`.length >= 12 ? "hoverEffect" : ""}
+            className={`${tableItem.name.length >= 12 ? "hoverEffect" : ""}`}
             data-name={`${tableItem.name}`}
+            onClick={toggleTooltip}
           >
             {" "}
-            {tableItem.name}
+            {tableItem.name.length >= 12
+              ? `${tableItem.name.slice(0, 12)}...`
+              : tableItem.name}
           </p>
         </td>
         <td data-cell="category">

@@ -50,6 +50,16 @@
   cursor: pointer; /* Set cursor to pointer */
   font-size: 14px;
 }
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .hoverEffect::before {
   content: "";
