@@ -36,6 +36,8 @@ import EmployeeDataTable from "../Pages/Employees/EmployeeDataTable";
 import AssetsHead from "../Pages/Assets/AssetsHead";
 import RepairReplace from "../Pages/Repair/RepairReplace";
 import ViewRepairReplace from "../Pages/Repair/ViewRepairReplace";
+import ViewRepair from "../Pages/Repair/ViewRepair";
+import ViewProcurement from "../Pages/Procurement/ViewProcurement";
 
 export const router = createBrowserRouter([
   {
@@ -66,7 +68,7 @@ export const router = createBrowserRouter([
                 path: "hardware",
                 element: <Hardware />,
               },
-              
+
               {
                 path: "software",
                 element: <Software />,
@@ -115,7 +117,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "viewRepair",
-            element: <ViewRepairReplace />,
+            element: <ViewRepair />,
           },
           {
             path: "addRepair",
