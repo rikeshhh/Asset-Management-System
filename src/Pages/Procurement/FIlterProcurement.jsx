@@ -18,6 +18,7 @@ import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
 import SelectInputUser from "../Assets/SelectInputUser";
 import SelectUser from "./SelectUser";
+import SelectFilterUser from "./SelectFilterUser";
 
 const FilterProcurement = ({
   handleClick,
@@ -38,7 +39,7 @@ const FilterProcurement = ({
     setPageNumber(1);
     const fromDate = data.fromDate.replace(/\+/g, " ");
     const toDate = data.toDate.replace(/\+/g, " ");
-    const assignedDate = `${fromDate} AND ${toDate}`;
+    const assignedDate = `${fromDate} to ${toDate}`;
 
     // Check if all three parameters are selected
     if (
@@ -62,7 +63,7 @@ const FilterProcurement = ({
       });
     }
     // Check if only verified by is selected
-    else if (data.verifieBy !== "None") {
+    else if (data.verifiedBy !== "None") {
       setSearchParams({
         verified_by: data.verifiedBy,
       });
@@ -95,11 +96,11 @@ const FilterProcurement = ({
           <div className="group__form filter__gap ">
             <div className="form__input--section ">
               <Label text={"Requested By"} />
-              <SelectUser register={register} name="user" />
+              <SelectFilterUser register={register} name="user" />
             </div>
             <div className="form__input--section ">
               <Label text={"Verified By"} />
-              <SelectUser register={register} name="verifiedBy" />
+              <SelectFilterUser register={register} name="verifiedBy" />
             </div>
             <div className="form__input--section ">
               <Label text={"Status"} />

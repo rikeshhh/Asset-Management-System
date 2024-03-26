@@ -211,13 +211,15 @@ const ProcurementDataTable = ({
           </tbody>
         </table>
 
-        <Pagination
-          setPageNumber={setPageNumber}
-          data={procurementTableData}
-          pageNumber={pageNumber}
-          setSearchParams={setSearchParams}
-          roundUp={roundUp}
-        />
+        {roundUp > 1 && (
+          <Pagination
+            setSearchParams={setSearchParams}
+            data={procurementTableData}
+            roundUp={roundUp}
+            setPageNumber={setPageNumber}
+            pageNumber={pageNumber}
+          />
+        )}
       </div>
     </>
   );

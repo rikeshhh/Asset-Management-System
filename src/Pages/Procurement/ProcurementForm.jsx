@@ -6,10 +6,15 @@ import Model from "../../Component/Model/Model";
 import { SelectInput } from "../../Component/Input/SelectInput";
 import { IoMdAdd } from "react-icons/io";
 import { GrStatusGoodSmall } from "react-icons/gr";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AddProcurementTable from "./AddProcurementTable";
 import { useState } from "react";
 import SelectUser from "./SelectUser";
+import { procurementAdd } from "./ProcurementApiSlice";
+import { useMutation } from "@tanstack/react-query";
+import { queryClient } from "../../Component/Query/Query";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
 
 const ProcurementForm = () => {
   const {
@@ -18,13 +23,35 @@ const ProcurementForm = () => {
     handleSubmit,
     reset,
   } = useForm();
-
+  const navigate = useNavigate();
   const selectOptions = ["urgent", "high", "medium", "low"];
+
+  const AddProcurement = useMutation({
+    mutationFn: (procurementForm) => {
+      return procurementAdd(procurementForm);
+    },
+    onSuccess: () => {
+      notifySuccess("Procurement has been added");
+      setTimeout(() => {
+        navigate("/procurement");
+        queryClient.invalidateQueries("procurementTableData");
+      }, 1000);
+    },
+    onError: (error) => {
+      notifyError("Error adding procurement");
+    },
+  });
 
   const [procurementTableLine, setProcurementTableLine] = useState(false);
   const [newProcurement, setNewProcurement] = useState([]);
 
-  const submitProcurement = () => {};
+  const submitProcurement = (formData) => {
+    const procurementForm = {
+      formData: formData,
+      tableData: newProcurement,
+    };
+    AddProcurement.mutate(procurementForm);
+  };
 
   return (
     <section className="content-wrapper">
@@ -81,6 +108,7 @@ const ProcurementForm = () => {
           newProcurement={newProcurement}
         />
       </div>
+      <CustomToastContainer />
     </section>
   );
 };

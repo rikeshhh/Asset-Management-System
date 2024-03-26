@@ -26,7 +26,7 @@ const SelectInputCategory = ({
     const selectedCategory = CategoryData.find(
       (category) => category.id === selectedCategoryId
     );
-    setCategoryName(selectedCategory.parent);
+    setCategoryName(selectedCategory);
   };
 
   return (
@@ -52,7 +52,6 @@ const SelectInputCategory = ({
         <option
           value="None"
           disabled
-          selected
           className="option__disabled"
           style={{ color: "#999" }}
         >

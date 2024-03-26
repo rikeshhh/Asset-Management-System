@@ -37,7 +37,6 @@ export const selectInputCategory = async () => {
     headers: { Authorization: `Bearer ${token}` },
   });
   const resp = await categoryData.data.data;
-  console.log(resp);
   return resp;
 };
 

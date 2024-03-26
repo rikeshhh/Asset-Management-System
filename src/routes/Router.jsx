@@ -34,8 +34,8 @@ import EmployeeView from "../Pages/Employees/EmployeeView";
 import EditProfile from "../Pages/Profile/EditProfile";
 import EmployeeDataTable from "../Pages/Employees/EmployeeDataTable";
 import AssetsHead from "../Pages/Assets/AssetsHead";
-import ViewRepair from "../Pages/Repair/ViewRepair";
-import ViewProcurement from "../Pages/Procurement/ViewProcurement";
+import RepairReplace from "../Pages/Repair/RepairReplace";
+import ViewRepairReplace from "../Pages/Repair/ViewRepairReplace";
 
 export const router = createBrowserRouter([
   {
@@ -66,7 +66,7 @@ export const router = createBrowserRouter([
                 path: "hardware",
                 element: <Hardware />,
               },
-
+              
               {
                 path: "software",
                 element: <Software />,
@@ -105,21 +105,29 @@ export const router = createBrowserRouter([
         element: <Procurement />,
       },
       {
-        path: "/repair",
+        path: "/repair/",
         element: <Repair />,
+        children: [
+          {
+            index: true,
+            path: "",
+            element: <RepairReplace />,
+          },
+          {
+            path: "viewRepair",
+            element: <ViewRepairReplace />,
+          },
+          {
+            path: "addRepair",
+            element: <AddRepair />,
+          },
+          {
+            path: "editRepairReplace",
+            element: <EditRepairReplace />,
+          },
+        ],
       },
-      {
-        path: "/viewRepair",
-        element: <ViewRepair />,
-      },
-      {
-        path: "/addRepair",
-        element: <AddRepair />,
-      },
-      {
-        path: "/editRepairReplace",
-        element: <EditRepairReplace />,
-      },
+
       {
         path: "/employees",
         element: <Employees />,

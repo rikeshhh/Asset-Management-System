@@ -102,7 +102,7 @@ const EditRepairReplace = () => {
             <DropzoneArea
               name="product_image"
               setValue={setValue}
-              defaultValue={tableData.product_image}
+              defaultValue={tableData?.product_image}
             />
           </div>
 
@@ -126,7 +126,7 @@ const EditRepairReplace = () => {
                 maxLength={Model.Name.maxLength.value}
                 maxMessage={Model.Name.maxLength.message}
                 isDisabled={receivedState}
-                defaultValue={tableData.Assigned_to.name}
+                defaultValue={tableData?.Assigned_to.name}
               />
             </div>
 
@@ -146,7 +146,7 @@ const EditRepairReplace = () => {
                 // maxLength={Model.ProductCode.maxLength.value}
                 // maxMessage={Model.ProductCode.maxLength.message}
                 isDisabled={receivedState}
-                defaultValue={`${tableData.Product_Code.id}`}
+                defaultValue={`${tableData?.Product_Code.id}`}
               />
             </div>
 
@@ -164,7 +164,7 @@ const EditRepairReplace = () => {
                 maxLength={Model.ProductName.maxLength.value}
                 maxMessage={Model.ProductName.maxLength.message}
                 isDisabled={receivedState}
-                defaultValue={tableData.Product_Code.name}
+                defaultValue={tableData?.Product_Code.name}
               />
             </div>
             <div className="form__input--section">
@@ -172,7 +172,7 @@ const EditRepairReplace = () => {
               <SelectInputCategory
                 name="Category"
                 register={register}
-                defaultValue={tableData.category}
+                defaultValue={tableData?.category}
               />
             </div>
 
@@ -220,7 +220,7 @@ const EditRepairReplace = () => {
                 maxLength={Model.location.maxLength.value}
                 maxMessage={Model.location.maxLength.message}
                 isDisabled={receivedState}
-                defaultValue={tableData.reason}
+                defaultValue={tableData?.reason}
               />
             </div>
 
