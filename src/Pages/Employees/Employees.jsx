@@ -28,6 +28,7 @@ import { SearchSvg } from "../../Component/svg/SearchSvg";
 import FilterEmployee from "./FilterEmployee";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import PendingPagination from "../../Component/Pagination/PendingPagination";
+import Pagination from "../../Component/Pagination/Pagination";
 /**
  * Functional component representing the Employees page.
  */
@@ -41,17 +42,18 @@ const Employees = () => {
   /**
    * React Query hook for handling employee deletion mutation.
    */
-  const [sortOrder, setSortOrder] = useState("ASC");
-  const [orderByData, setOrderByData] = useState("id");
-  const [searchData, setSearchData] = useState("");
-  const [designationData, setDesignationData] = useState("");
-  const [departmentData, setDepartmentData] = useState("");
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+
+  const [page, setPage] = useState(parseInt(params.get("page")) || 1);
   const itemsPerPage = 7;
 
-  const params = new URLSearchParams(searchParams);
   const searchUser = params.get("Search") || "";
+  const order = params.get("orderby") || "ASC";
+  const sortData = params.get("sortBy") || "id";
+  const selectedDepartment = params.get("department") || "";
+  const searchedDesignation = params.get("designation") || "";
 
   const {
     isPending,
@@ -60,45 +62,39 @@ const Employees = () => {
   } = useQuery({
     queryKey: [
       "EmployeeData",
-      // "searchedData",
       searchUser,
-      sortOrder,
-      orderByData,
-      designationData,
-      departmentData,
+      order,
+      sortData,
+      searchedDesignation,
+      selectedDepartment,
       page,
     ],
     queryFn: () =>
       getEmployeeTableData(
         searchUser,
-        sortOrder,
-        orderByData,
-        designationData,
-        departmentData,
+        order,
+        sortData,
+        searchedDesignation,
+        selectedDepartment,
         page
       ),
     staleTime: 10000,
     keepPreviousData: true,
   });
 
-  const handlePrevClick = () => {
-    setPage((prevPage) => Math.max(prevPage - 1, 1));
-  };
-
-  const handleNextClick = () => {
-    setPage((prevPage) => prevPage + 1);
-  };
-
   const handleSort = (thead) => {
-    setSortOrder((sortOrder) => (sortOrder === "ASC" ? "DESC" : "ASC"));
-
+    let newOrderByData;
     if (thead === "User") {
-      setOrderByData("name");
+      newOrderByData = "name";
     } else if (thead === "Phone") {
-      setOrderByData("phone_number");
+      newOrderByData = "phone_number";
     } else {
-      setOrderByData(thead.toLowerCase());
+      newOrderByData = thead.toLowerCase();
     }
+    setSearchParams({
+      sortBy: newOrderByData,
+      orderby: order === "ASC" ? "DESC" : "ASC",
+    });
   };
 
   const DeleteEmployee = useMutation({
@@ -123,7 +119,6 @@ const Employees = () => {
 
   const [employeeId, setEmployeeId] = useState("");
 
-  const [pageNumber, setPageNumber] = useState(1);
   const location = useLocation();
 
   /**
@@ -173,27 +168,19 @@ const Employees = () => {
       state: { viewEmployeeData: viewEmployeeData },
     });
   };
-  // const submitSearch = (data) => {
-  //   setSearchData(data.Search);
-  // };
 
-  const designationSubmit = (data) => {
-    setDesignationData(data.designation);
-    setDepartmentData(data.department);
+  const filterSubmit = (data) => {
+    setSearchParams({
+      designation: data.designation,
+      department: data.department,
+    });
   };
   // useEffect(() => {
-  let totalItems;
-  if (tableData && typeof tableData.total_data === "string") {
-    const totalEntries = parseInt(tableData.total_data, 10);
-    if (!isNaN(totalEntries)) {
-      totalItems = Math.ceil(totalEntries / itemsPerPage);
-    }
-  }
-  // }, [tableData, itemsPerPage]);
+  let roundUp;
 
-  const handlePageClick = (pageNumber) => {
-    setPage(pageNumber);
-  };
+  if (tableData?.total_data) {
+    roundUp = Math.ceil(tableData?.total_data / itemsPerPage);
+  }
 
   return (
     <>
@@ -212,7 +199,7 @@ const Employees = () => {
             <FilterEmployee
               handleClick={() => onFilterClick(!filterShow)}
               // filterShow={filterShow}
-              designationSubmit={designationSubmit}
+              designationSubmit={filterSubmit}
             />
           ) : (
             <></>
@@ -232,9 +219,9 @@ const Employees = () => {
               <div className="employees__table">
                 <div className="ams__filter">
                   <SearchInput
-                    setPageNumber={setPageNumber}
-                    setSearchParams={setSearchParams}
                     defaultValue={""}
+                    setPageNumber={setPage}
+                    setSearchParams={setSearchParams}
                   />
                   <Button
                     handleClick={() => onFilterClick(!filterShow)}
@@ -248,7 +235,6 @@ const Employees = () => {
                   handleProceedClick={handleProceedClick}
                   handleTableEdit={handleTableEdit}
                   handleViewEmployee={handleViewEmployee}
-                  // searchedData={searchEmployeeData}
                   tableData={tableData}
                   isPending={isPending}
                   error={error}
@@ -258,30 +244,15 @@ const Employees = () => {
                   <PendingPagination />
                 ) : (
                   <div className="pagination">
-                    <Button
-                      className="inactivePage"
-                      icon={<FaAngleLeft />}
-                      handleClick={handlePrevClick}
-                      isDisabled={page === 1 ? true : false}
-                    />
-                    {tableData &&
-                      [...Array(totalItems)].map((_, index) => (
-                        <Button
-                          key={index}
-                          className={
-                            page === index + 1 ? "activePage" : "inactivePage"
-                          }
-                          text={index + 1}
-                          handleClick={() => handlePageClick(index + 1)}
-                          isDisabled={index + 1 === page ? true : false}
-                        />
-                      ))}
-                    <Button
-                      className="inactivePage"
-                      icon={<FaAngleRight />}
-                      handleClick={handleNextClick}
-                      isDisabled={page === totalItems ? true : false}
-                    />
+                    {roundUp > 1 && (
+                      <Pagination
+                        setSearchParams={setSearchParams}
+                        data={tableData?.data}
+                        roundUp={roundUp}
+                        setPageNumber={setPage}
+                        pageNumber={page}
+                      />
+                    )}
                   </div>
                 )}
               </div>
