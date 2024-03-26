@@ -138,25 +138,27 @@ const LocationDataTable = ({
                   >
                     <form
                       onSubmit={handleSubmit(onLocationEditSubmit)}
-                      className="universal__update--form"
+                      className="universal__update--form "
                     >
-                      <InputField
-                        name="location"
-                        register={register}
-                        errors={errors}
-                        defaultValue={options.location}
-                        pattern={Model.location.pattern}
-                        message={Model.location.pattern.message}
-                        value={Model.location.pattern.value}
-                        type={Model.location.type}
-                        placeholder={options.location}
-                        minLength={Model.location.minLength.value}
-                        maxLength={Model.location.maxLength.value}
-                        minMessage={Model.location.minLength.message}
-                        maxMessage={Model.location.maxLength.message}
-                        required={"Please enter a location name"}
-                        className={show ? "universal__table--input" : ""}
-                      ></InputField>
+                      <div className=" universal__input--container ">
+                        <InputField
+                          name="location"
+                          register={register}
+                          errors={errors}
+                          defaultValue={options.location}
+                          pattern={Model.location.pattern}
+                          message={Model.location.pattern.message}
+                          value={Model.location.pattern.value}
+                          type={Model.location.type}
+                          placeholder={options.location}
+                          minLength={Model.location.minLength.value}
+                          maxLength={Model.location.maxLength.value}
+                          minMessage={Model.location.minLength.message}
+                          maxMessage={Model.location.maxLength.message}
+                          required={"Please enter a location name"}
+                          className={show ? "universal__table--input " : ""}
+                        ></InputField>
+                      </div>
                       <div className="universal__FormButton">
                         <Button className="" text={<FaCheck />} />
                         <Button
@@ -171,7 +173,9 @@ const LocationDataTable = ({
                 ) : (
                   <td
                     className={
-                      options.location.length > 20 ? "hoverEffect" : ""
+                      options.location.length > 20
+                        ? "hoverEffect  universal-input__container--editable-padding"
+                        : ""
                     }
                     data-name={`${options.location}`}
                   >

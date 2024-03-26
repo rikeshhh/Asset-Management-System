@@ -172,25 +172,27 @@ const DepartmentDataTable = ({
                         onSubmit={handleSubmit(onUpdateData)}
                         className="universal__update--form"
                       >
-                        {/* <div className="universal__input--container"> */}
-                        <InputField
-                          name="department"
-                          defaultValue={options.department}
-                          register={register}
-                          errors={errors}
-                          type={Model.department.type}
-                          value={Model.department.pattern.value}
-                          message={Model.department.pattern.message}
-                          placeholder={options.department}
-                          minLength={Model.department.minLength.value}
-                          minMessage={Model.department.minLength.message}
-                          maxLength={Model.department.maxLength.value}
-                          required={"Please enter a department name"}
-                          maxMessage={Model.department.maxLength.message}
-                          // autoComplete={"off"}
-                          className={show ? "universal__table--input" : ""}
-                        ></InputField>
-                        {/* </div> */}
+                        <div className="universal__input--container">
+                          <InputField
+                            name="department"
+                            defaultValue={options.department}
+                            register={register}
+                            errors={errors}
+                            type={Model.department.type}
+                            value={Model.department.pattern.value}
+                            message={Model.department.pattern.message}
+                            placeholder={options.department}
+                            minLength={Model.department.minLength.value}
+                            minMessage={Model.department.minLength.message}
+                            maxLength={Model.department.maxLength.value}
+                            required={"Please enter a department name"}
+                            maxMessage={Model.department.maxLength.message}
+                            // autoComplete={"off"}
+                            className={
+                              show ? "universal__table--input || universal" : ""
+                            }
+                          ></InputField>
+                        </div>
                         <div className="universal__FormButton">
                           <Button className="" text={<FaCheck />} />
                           <Button
@@ -204,9 +206,11 @@ const DepartmentDataTable = ({
                     </td>
                   ) : (
                     <td
-                      className={
-                        options.department.length > 20 ? "hoverEffect" : ""
-                      }
+                    className={
+                      options.department.length > 20
+                        ? "hoverEffect  universal-input__container--editable-padding"
+                        : ""
+                    }
                       data-name={`${options.department}`}
                     >
                       {options.department.length > 20
