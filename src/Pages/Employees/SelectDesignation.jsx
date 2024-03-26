@@ -10,7 +10,6 @@ const SelectInputDesignation = ({
   name,
   register,
   defaultValue,
-  // errors,
 }) => {
   const { data: designationData } = useQuery({
     queryKey: ["userData"],
@@ -34,7 +33,7 @@ const SelectInputDesignation = ({
       >
         {defaultValue ? null : (
           <option value="" disabled selected>
-            Select the location of the assets
+            Select the Designation
           </option>
         )}
         {/* Render the default option outside of the map function */}
@@ -56,9 +55,6 @@ const SelectInputDesignation = ({
           </>
         )}
       </select>
-      {/* {errors[name] && (
-        <span className="error-message">"Please select an location"</span>
-      )} */}
     </>
   );
 };
