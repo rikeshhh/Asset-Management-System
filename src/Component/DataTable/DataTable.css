@@ -1,7 +1,7 @@
 .cateogries table {
   color: #21252b;
   border-collapse: collapse;
-  /* width: 100%; */
+  width: 100%;
   width: 500px;
   font-size: 14px;
 }
@@ -135,3 +135,9 @@ ol li {
   align-items: center !important;
   justify-content: center;
 }
+
+/* @media screen and (min-width: 850px) {
+  .cateogries table {
+    width: 100%;
+  }
+} */
