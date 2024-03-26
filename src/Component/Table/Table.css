@@ -77,7 +77,7 @@
 
 .hoverEffect:hover::before,
 .hoverEffect:hover::after {
-  display: block; /* Show on hover */
+  display: block;
 }
 
 /* @media (width <= 1110px) {

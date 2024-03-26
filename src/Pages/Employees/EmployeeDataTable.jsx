@@ -28,6 +28,7 @@ const EmployeeDataTable = ({
    * Handles deleting an employee.
    * @param {number} employeeId - The ID of the employee to be deleted.
    */
+
   const handleDeleteEmployee = (employeeId) => {
     handleDeleteClick(employeeId);
   };
@@ -76,7 +77,8 @@ const EmployeeDataTable = ({
 
                 <td
                   className={tableItem.name.length > 12 ? "hoverEffect" : ""}
-                  data-name={`${tableItem.name}`}
+                  data-cell="User"
+                  data-name={tableItem.name}
                 >
                   {tableItem.name.length > 12
                     ? `${tableItem.name.substring(0, 12)}...`
@@ -87,7 +89,11 @@ const EmployeeDataTable = ({
                 <td data-cell="designation">
                   {tableItem.designation ? tableItem.designation : "N/A"}
                 </td>
-                <td data-cell="department">{tableItem.department?.name}</td>
+                <td data-cell="department">
+                  {tableItem.department.name
+                    ? tableItem.department.name
+                    : "N/A"}
+                </td>
                 <td data-cell="email">{tableItem.email}</td>
                 <td data-cell="phone">
                   {tableItem.phone_number ? tableItem.phone_number : "N/A"}
