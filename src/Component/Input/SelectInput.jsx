@@ -12,6 +12,8 @@ export const SelectInput = ({
     <select
       style={{ textTransform: "capitalize" }}
       {...register(name, { required: true })}
+      className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
+      disabled={isDisabled}
     >
       {/* {defaultValue ? (
         <option value={defaultValue}>{defaultValue}</option>

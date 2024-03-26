@@ -175,12 +175,18 @@ const ProcurementDataTable = ({
                   <td data-cell="Verified By">{tableItem.approved_by_name}</td>
                   <td data-cell="Verified Date">2024-02-21 07:31:19</td>
                   <td className="button-gap">
-                    <Button
-                      type={"button"}
-                      className=" view__button"
-                      // handleClick={() => viewEmployeeProfile(tableItem)}
-                      text={<EyeSvg />}
-                    />
+                    <Link
+                      to={"/viewProcurement"}
+                      state={{ data: tableItem }}
+                      className="link"
+                    >
+                      <Button
+                        type={"button"}
+                        className=" view__button"
+                        // handleClick={() => viewEmployeeProfile(tableItem)}
+                        text={<EyeSvg />}
+                      />
+                    </Link>
                     <Link
                       to={"/editProcurement"}
                       state={{ data: tableItem }}

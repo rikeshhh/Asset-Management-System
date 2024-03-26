@@ -84,7 +84,6 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
   //   );
   // }
 
-  console.log(tableData, "tabledataaaaaaaaaaaaaaaaa");
 
   return (
     <>

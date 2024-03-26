@@ -53,6 +53,11 @@ const Tablerow = ({ tableItem }) => {
   const handleDeleteConfirmationModel = () => {
     setDeleteConfirationShow(true);
   };
+  const [isFullTextVisible, setIsFullTextVisible] = useState(false);
+
+  const handleTextClick = () => {
+    setIsFullTextVisible(!isFullTextVisible);
+  };
   console.log(tableItem);
   return (
     <>

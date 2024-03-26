@@ -20,7 +20,7 @@ import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
 import { queryClient } from "../../Component/Query/Query";
 import ProductListTableItem from "./ProductList";
 
-const EditProcurement = () => {
+const ViewProcurement = () => {
   const [procurementTableLine, setProcurementTableLine] = useState(false);
   const [editProcurementLine, setEditProcurementLine] = useState(false);
   const [newProcurement, setNewProcurement] = useState([]);
@@ -131,6 +131,7 @@ const EditProcurement = () => {
                 errors={errors}
                 type={Model.Name.type}
                 defaultValue={procurementData.user.requested_by}
+                isDisabled={true}
               />
             </div>
             <div className="user__auth--input procurement__form--input">
@@ -140,21 +141,20 @@ const EditProcurement = () => {
                 register={register}
                 option={selectOptions}
                 defaultValue={ProductList && ProductList.urgency}
+                isDisabled={true}
               />
             </div>
           </div>
           <div className="procurement__product">
             <div className="procurement__bottom--buttons">
               <Button
-                text="Fill Procurement"
-                className={"procurement--button"}
+                type={"button"}
+                text="Add a table line"
+                className="procurement--button procurement--button-not__allowed"
+                // handleClick={handleAddProcurement}
+                icon={<IoMdAdd />}
+                isDisabled={procurementTableLine ? true : false}
               />
-              <Link to={"/procurement"} className="link">
-                <Button
-                  text="Cancel"
-                  className={"procurement__error--button"}
-                />
-              </Link>
             </div>
           </div>
         </form>
@@ -183,7 +183,7 @@ const EditProcurement = () => {
                   <PendingTableBody />
                 ) : ProductList.length !== 0 ? (
                   ProductList?.data.map((procurement, index) => (
-                     <tr>
+                    <tr>
                       <td>
                         <InputField
                           name="product_name"
@@ -232,9 +232,10 @@ const EditProcurement = () => {
                       <td className="button-gap">
                         <Button
                           type="button"
-                          className="edit__button"
-                          text={<FaCheck />}
+                          className="procurement--button-not__allowed"
+                          text={<CiEdit />}
                           handleClick={() => handleProcurementTableEdit(index)}
+                          isDisabled={true}
                         />
                         {/* <Button
                           type={"button"}
@@ -248,9 +249,10 @@ const EditProcurement = () => {
                         /> */}
                         <Button
                           type={"button"}
-                          className="delete__button"
+                          className="procurement--button-not__allowed"
                           text={<GoTrash />}
                           handleClick={() => handleDeleteProcurementLine(index)}
+                          isDisabled={true}
                         />
                       </td>
                     </tr>
@@ -267,4 +269,4 @@ const EditProcurement = () => {
   );
 };
 
-export default EditProcurement;
+export default ViewProcurement;

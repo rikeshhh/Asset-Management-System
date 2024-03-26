@@ -30,6 +30,7 @@ const AddProcurementTable = ({
     reset();
     setIsEditable(true);
     setProcurementTableLine(true);
+    const newIndex = newProcurement.length;
     setNewProcurement([
       ...newProcurement,
       {
@@ -40,6 +41,9 @@ const AddProcurementTable = ({
         link: "",
       },
     ]);
+    if (newProcurement.product_name === '') {
+      
+    }
   };
 
   const handleDeleteProcurementLine = (index) => {

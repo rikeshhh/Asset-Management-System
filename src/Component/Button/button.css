@@ -26,3 +26,6 @@
 .button__blue {
   background-color: var(--blue);
 }
+.button_grey{
+color: var(--light-text);
+}

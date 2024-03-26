@@ -501,7 +501,7 @@ th:last-child {
   width: 32px;
   height: 32px;
 }
-.pagination button:hover{
+.paginationbutton:hover{
   background-color: var(--primary-grey);
 }
 

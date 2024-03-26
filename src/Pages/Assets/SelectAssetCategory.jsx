@@ -21,7 +21,6 @@ const SelectAssetCategory = ({
       (category) => category.id === selectedCategoryId
     );
     setCategoryName(selectedCategory.id);
-    console.log(selectedCategory.id);
   };
   return (
     <>

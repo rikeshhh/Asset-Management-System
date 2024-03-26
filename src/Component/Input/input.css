@@ -52,7 +52,8 @@ select {
 }
 
 .select__disabled {
-  background-color: var(--disabled-input);
+  cursor: not-allowed;
+  background-color: var(--primary-grey) !important;
   color: var(--text-color);
 }
 
