@@ -145,7 +145,6 @@ const ViewAssets = () => {
                   register={register}
                   isDisabled={true}
                   errors={errors}
-
                 />
               </div>
               <div className="assets__form--input">
@@ -157,7 +156,6 @@ const ViewAssets = () => {
                   register={register}
                   isDisabled={true}
                   errors={errors}
-
                 />
               </div>
               <div className="assets__form--input">
@@ -189,7 +187,6 @@ const ViewAssets = () => {
                   maxLength={Model.Group.maxLength.value}
                   maxMessage={Model.Group.maxLength.message}
                   isDisabled={true}
-                  
                 />
               </div>
               <div className="assets__form--input">
@@ -200,7 +197,6 @@ const ViewAssets = () => {
                   register={register}
                   isDisabled={true}
                   errors={errors}
-
                 />
               </div>
               <div className="assets__form--input">
@@ -214,7 +210,7 @@ const ViewAssets = () => {
                 />
               </div>
               <div className="assets__form--input">
-                <Label text="Status" />
+                <Label text="Status" sup={'*'}/>
                 <label className={`switch ${isActive ? "active" : "inactive"}`}>
                   <input
                     type="checkbox"

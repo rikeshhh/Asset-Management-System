@@ -8,6 +8,8 @@ import ImagePath from "../Images/ImagePath";
 
 const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
   const [importedImage, setImportedImage] = useState(defaultValue || null);
+  const [errorMessage, setErrorMessage] = useState(null);
+
   console.log(defaultValue);
   const [newImage, setNewImage] = useState();
   useEffect(() => {
@@ -22,10 +24,19 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
     // Handle dropped files
     const file = acceptedFiles[0];
     if (file) {
-      setValue(name, file);
-      const imageUrl = URL.createObjectURL(file);
-      setImportedImage(imageUrl);
-      setNewImage(imageUrl);
+      if (file.size > 5 * 1024 * 1024) {
+        // Check if file size exceeds 5MB
+        setErrorMessage("File size exceeds 5MB");
+      } else if (!["image/jpeg", "image/png"].includes(file.type)) {
+        // Check if file type is not JPEG or PNG
+        setErrorMessage("Unsupported file type. Only JPEG and PNG are allowed");
+      } else {
+        setValue(name, file);
+        const imageUrl = URL.createObjectURL(file);
+        setImportedImage(imageUrl);
+        setNewImage(imageUrl);
+        setErrorMessage(null); // Clear error message if file is valid
+      }
     }
   };
   const deleteImage = () => {
@@ -39,6 +50,7 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
+    accept: "image/png, image/jpeg", // Accept only PNG and JPEG files
   });
   return (
     <div className="assets__form--input">
@@ -60,7 +72,11 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
                 className={"button__blue upload__drag--btn"}
               />
             </div>
-            <input {...getInputProps()} disabled={isDisabled} />
+            <input
+              {...getInputProps()}
+              disabled={isDisabled}
+              accept="image/png, image/jpeg"
+            />
             <div className="upload__para">
               <p>Max File Size: 5MB</p>
               <p>Supported File Type: JPG, PNG</p>
