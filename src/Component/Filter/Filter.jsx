@@ -46,39 +46,21 @@ const Filter = ({
     const fromDate = data.fromDate.replace(/\+/g, " ");
     const toDate = data.toDate.replace(/\+/g, " ");
     const assignedDate = `${fromDate} to ${toDate}`;
+    const updatedParams = {};
 
-    // Check if all three parameters are selected
-    if (
-      data.category !== "None" &&
-      data.status !== "None" &&
-      data.fromDate &&
-      data.toDate
-    ) {
-      setSearchParams({
-        category: data.category,
-        status: data.status,
-        assigned_date: assignedDate,
-      });
+    // Check each parameter and add it to the updatedParams object if it's not null
+    if (data.category !== "None") {
+      updatedParams.category = data.category;
     }
-    // Check if only category is selected
-    else if (data.category !== "None") {
-      setSearchParams({
-        category: data.category,
-      });
+    if (data.status !== "None") {
+      updatedParams.status = data.status;
     }
-    // Check if only status is selected
-    else if (data.status !== "None") {
-      setSearchParams({
-        status: data.status,
-      });
-      console.log(data.status);
+    if (data.fromDate && data.toDate) {
+      updatedParams.assigned_date = assignedDate;
     }
-    // Check if only fromDate and toDate are selected
-    else if (data.fromDate && data.toDate) {
-      setSearchParams({
-        assigned_date: assignedDate,
-      });
-    }
+
+    // Update searchParams only with non-null values from updatedParams
+    setSearchParams(updatedParams);
     setTimeout(() => {
       handleClick();
     }, 1000);
