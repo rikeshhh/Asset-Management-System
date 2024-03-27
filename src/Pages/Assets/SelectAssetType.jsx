@@ -18,34 +18,35 @@ export const SelectAssetType = ({
   defaultValue,
   isDisabled,
 }) => {
+  const hasError = errors[name];
+
   const assetType = ["hardware", "software"];
   return (
     <>
       <select
         {...register(name, { required: true })}
         disabled={isDisabled}
-        className={isDisabled ? "select__disabled" : "select__enabled"}
+        className={`${isDisabled ? "select__disabled" : "select__enabled"} ${
+          hasError ? "input__error" : ""
+        }`}
+        defaultValue={defaultValue ? defaultValue : ""}
       >
-        {defaultValue ? null : (
+        {!defaultValue && (
           <option value="" disabled selected>
-            Select the Asset type
+            Select the asset type
           </option>
         )}
-        {defaultValue && (
-          <option className="select__option" value={defaultValue.toLowerCase()}>
-            {defaultValue.toLowerCase()}
-          </option>
-        )}
+      
         {assetType.map((option, index) => (
           <>
             <option key={index} value={option}>
-              {option.toLowerCase()}
+              {option}
             </option>
           </>
         ))}
       </select>
       {errors[name] && (
-        <span className="error-message">"Please choose an asset type"</span>
+        <span className="error-message">Please choose an asset type</span>
       )}
     </>
   );

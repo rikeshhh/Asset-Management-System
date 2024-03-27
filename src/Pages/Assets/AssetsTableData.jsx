@@ -84,7 +84,6 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
   //   );
   // }
 
-
   return (
     <>
       <div className="table__container">
@@ -118,9 +117,9 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
               ))
             ) : (
               <tr>
-                <td colSpan="1" className="empty-table-cell">
+                <td colSpan="8" className="empty-table-cell">
                   <div className="empty-table-message">
-                    <p>No data available</p>
+                    <p className="">No data available</p>
                     <p>Please try again later or refresh the page</p>
                   </div>
                 </td>

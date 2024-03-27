@@ -210,7 +210,7 @@ const ViewAssets = () => {
                 />
               </div>
               <div className="assets__form--input">
-                <Label text="Status" sup={'*'}/>
+                <Label text="Status"/>
                 <label className={`switch ${isActive ? "active" : "inactive"}`}>
                   <input
                     type="checkbox"

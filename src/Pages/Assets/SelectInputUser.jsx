@@ -11,7 +11,14 @@ import { selectUser } from "./AssetsApiSlice";
  * @param {boolean} props.isDisabled - Boolean indicating if the select input field is disabled
  * @returns {JSX.Element} JSX representation of the SelectInputUser component
  */
-const SelectInputUser = ({ name, register, defaultValue, isDisabled,errors }) => {
+const SelectInputUser = ({
+  name,
+  register,
+  defaultValue,
+  isDisabled,
+  errors,
+}) => {
+  const hasError = errors[name];
   const { data: userData } = useQuery({
     queryKey: ["selectUserData"],
     queryFn: selectUser,
@@ -21,11 +28,14 @@ const SelectInputUser = ({ name, register, defaultValue, isDisabled,errors }) =>
       <select
         {...register(name, { required: true })}
         disabled={isDisabled}
-        className={isDisabled ? "select__disabled" : "select__enabled"}
+        className={`${isDisabled ? "select__disabled" : "select__enabled"} ${
+          hasError ? "input__error" : ""
+        }`}
+        defaultValue={defaultValue ? defaultValue.name : ""}
       >
-        {defaultValue ? null : (
+        {!defaultValue && (
           <option value="" disabled selected>
-            Select the Assigned Employee
+            Select the assigned employee
           </option>
         )}
 
@@ -43,9 +53,9 @@ const SelectInputUser = ({ name, register, defaultValue, isDisabled,errors }) =>
       </select>
       {errors[name] && (
         <span className="error-message">
-          "Please select an assigned employee"
+          Please select an assigned employee
         </span>
-      )}    
+      )}
     </>
   );
 };

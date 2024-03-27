@@ -81,7 +81,7 @@ const AssetsForm = () => {
   const [categoryName, setCategoryName] = useState();
 
   return (
-    <div className="content-wrapper">
+    <div className="">
       <div className="content-radius">
         <div className="content__header form--header">
           <h2>Enter an Asset</h2>
@@ -167,7 +167,7 @@ const AssetsForm = () => {
               <SelectInputUser name="assigned_to" register={register} errors={errors}/>
             </div>
             <div className="assets__form--input ">
-              <Label text="Status" sup={"*"} />
+              <Label text="Status"  />
               <label className={`switch ${isActive ? "active" : "inactive"}`}>
                 <input
                   {...register("status")}

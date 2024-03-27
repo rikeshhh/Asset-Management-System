@@ -15,25 +15,26 @@ const SelectInputLocation = ({
     queryKey: ["selectInputLocationData"],
     queryFn: selectInputLocation,
   });
+  const hasError = errors[name];
+
   return (
     <>
       <select
         {...register(name, { required: true })}
         disabled={isDisabled}
-        className={isDisabled ? "select__disabled" : "select__enabled"}
-        onChange={onChange}
+        className={`${isDisabled ? "select__disabled" : "select__enabled"} ${
+          hasError ? "input__error" : ""
+        }`}
+        onInput={onChange}
+        defaultValue={defaultValue ? defaultValue.name : ""}
       >
-        {defaultValue ? null : (
+        {!defaultValue && (
           <option value="" disabled selected>
             Select the location of the assets
           </option>
         )}
         {/* Render the default option outside of the map function */}
-        {defaultValue && (
-          <option className="select__option" value={defaultValue.id}>
-            {defaultValue.name}
-          </option>
-        )}
+       
 
         {/* Map over the LocationData array and render each location option */}
         {LocationData && (
@@ -51,7 +52,7 @@ const SelectInputLocation = ({
         )}
       </select>
       {errors[name] && (
-        <span className="error-message">"Please select an location"</span>
+        <span className="error-message">Please select an location</span>
       )}
     </>
   );

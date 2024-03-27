@@ -13,12 +13,9 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
   console.log(defaultValue);
   const [newImage, setNewImage] = useState();
   useEffect(() => {
-    // Set default value if it's provided
-    if (defaultValue) {
-      setImportedImage(defaultValue);
-      setValue(name, defaultValue); // Set form value using setValue
-    }
-  }, [defaultValue, setValue, name]); // Include setValue and name in dependencies array
+    setValue(name, defaultValue);
+    console.log("it run");
+  }, [defaultValue]);
 
   const onDrop = (acceptedFiles) => {
     // Handle dropped files
@@ -27,9 +24,13 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
       if (file.size > 5 * 1024 * 1024) {
         // Check if file size exceeds 5MB
         setErrorMessage("File size exceeds 5MB");
-      } else if (!["image/jpeg", "image/png"].includes(file.type)) {
+      } else if (
+        !["image/jpeg", "image/png", "image/webp"].includes(file.type)
+      ) {
         // Check if file type is not JPEG or PNG
-        setErrorMessage("Unsupported file type. Only JPEG and PNG are allowed");
+        setErrorMessage(
+          "Unsupported file type. Only JPEG, WEBP and PNG are allowed"
+        ); 
       } else {
         setValue(name, file);
         const imageUrl = URL.createObjectURL(file);
@@ -79,7 +80,7 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
             />
             <div className="upload__para">
               <p>Max File Size: 5MB</p>
-              <p>Supported File Type: JPG, PNG</p>
+              <p>Supported File Type: JPG, PNG,WEBP</p>
             </div>
           </>
         ) : (
@@ -91,7 +92,7 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
                   {newImage ? (
                     <img src={newImage} />
                   ) : (
-                    <ImagePath file={importedImage || newImage} />
+                    <ImagePath file={importedImage} />
                   )}
                 </figure>
                 {/* Render other elements conditionally here */}

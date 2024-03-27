@@ -79,6 +79,7 @@
 .assets__switch {
   display: flex;
   align-items: center;
+  
 }
 /* 
 .switch {
@@ -121,8 +122,8 @@ input:checked + .slider {
   position: relative;
   display: inline-block;
   width: 100px;
-  height: 40px;
-  border-radius: 34px;
+  height: 30px;
+  border-radius: 30px;
   cursor: pointer;
 }
 
@@ -148,8 +149,8 @@ input:checked + .slider {
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
+  height: 22px;
+  width: 22px;
   left: 4px;
   bottom: 4px;
   background-color: white;
@@ -188,7 +189,8 @@ input:checked + .slider:before {
 }
 
 .empty-table-message p {
-  margin: 5px 0;
+  color: var(--red);
+  font-weight: 300;
 }
 
 .assets__active .assets__btn {

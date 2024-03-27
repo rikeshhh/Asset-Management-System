@@ -22,25 +22,20 @@ const SelectAssetCategory = ({
     );
     setCategoryName(selectedCategory.id);
   };
+  const hasError = errors[name];
+
   return (
     <>
       <select
         {...register(name, { required: true })}
+        onInput={addCategoryId}
         disabled={isDisabled || !isEditable}
-        onChange={addCategoryId}
-        className={`${isDisabled ? "select__disabled" : "select__enabled"}`}
+        className={`${isDisabled ? "select__disabled" : "select__enabled"} ${
+          hasError ? "input__error" : ""
+        }`}
+        defaultValue={defaultValue?defaultValue.parent:""}
       >
-        {defaultValue ? (
-          <>
-            <option
-              className="select__option"
-              value={defaultValue.id}
-              style={{ color: "#999" }}
-            >
-              {defaultValue.name}
-            </option>
-          </>
-        ) : (
+        {!defaultValue && (
           <option
             value=""
             disabled

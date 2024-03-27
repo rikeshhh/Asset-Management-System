@@ -59,8 +59,8 @@ const EditAssets = () => {
     const editAssetsData = {
       data: data,
       editImage: data.assets_image
-        ? data.assets_image
-        : assetsData.assets_image,
+        ? assetsData.image_name
+        : assetsData.image_name,
     };
     console.log("editAssetsData", editAssetsData); // Add this line for debugging
 
@@ -74,7 +74,7 @@ const EditAssets = () => {
   const [categoryName, setCategoryName] = useState();
   return (
     <section className="assets__add">
-      <div className="content-wrapper">
+      <div className="">
         <div className="content-radius">
           <div className="content__header form--header">
             <h2>Edit Assets Detail</h2>
@@ -193,7 +193,7 @@ const EditAssets = () => {
                 />
               </div>
               <div className="assets__form--input">
-                <Label text="Status" sup={"*"} />
+                <Label text="Status"  />
                 <label className={`switch ${isActive ? "active" : "inactive"}`}>
                   <input
                     {...register("status")}

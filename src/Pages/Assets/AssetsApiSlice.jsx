@@ -43,6 +43,7 @@ export const deleteAssetsTableData = async (assetsId) => {
  * @returns {Promise} A promise that resolves if the update is successful.
  */
 export const assetsEdit = async (assetsInfo, productID, assetsImage) => {
+  console.log(assetsImage);
   var formdata = new FormData();
   formdata.append("id", productID);
   formdata.append("name", assetsInfo.productName);
@@ -52,7 +53,7 @@ export const assetsEdit = async (assetsInfo, productID, assetsImage) => {
   formdata.append("brand", assetsInfo.brandCompany);
   formdata.append("location", assetsInfo.location);
   formdata.append("assigned_to", assetsInfo.assigned_to);
-  formdata.append("assets_image", assetsImage);
+    formdata.append("assets_image", assetsInfo.assets_image);
   if (assetsInfo.status === true) {
     formdata.append("status", "active");
   } else {
