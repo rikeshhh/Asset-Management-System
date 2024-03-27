@@ -1,9 +1,8 @@
 .main__table {
   color: #21252b;
   border-collapse: collapse;
-  /* width: 100%; */
+  width: 100%;
   font-size: 14px;
-  width: 1120px;
 }
 
 .main__table th,
@@ -45,7 +44,6 @@
 .hoverEffect {
   position: relative;
   font-family: sans-serif;
-  width: 200px;
   color: #000;
   cursor: pointer; /* Set cursor to pointer */
   font-size: 14px;
@@ -67,6 +65,7 @@
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-top: 10px solid var(--blue);
+
   bottom: 42px;
   left: 25%;
   transform: translateX(-50%);
@@ -83,6 +82,7 @@
   left: 25px;
   z-index: 1;
   display: none; /* Initially hidden */
+  /* width: 200px; */
 }
 
 .hoverEffect:hover::before,
@@ -95,6 +95,12 @@
     overflow-x: scroll;
   }
 } */
+
+@media (max-width: 1440px) {
+  .main__table {
+    width: 1120px;
+  }
+}
 
 @media (max-width: 650px) {
   .main__table {

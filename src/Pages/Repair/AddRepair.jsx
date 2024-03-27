@@ -17,6 +17,7 @@ import { useMutation } from "@tanstack/react-query";
 import { repairReplaceAdd } from "./RepairApiSlice";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
+import SelectFilterUser from "../Procurement/SelectFilterUser";
 
 /**
  * Functional component for adding a new employee profile.
@@ -31,7 +32,7 @@ const AddRepair = () => {
   } = useForm();
 
   const receivedState = false;
-  const [selectedType, setSelectedType] = useState("");
+  const [selectedType, setSelectedType] = useState("Repair");
 
   const navigate = useNavigate();
 
@@ -107,19 +108,11 @@ const AddRepair = () => {
           >
             <div className="form__input--section">
               <Label sup={"*"} text="Device Owner" />
-              <InputField
+              <SelectFilterUser
                 name="Assigned_to"
                 register={register}
-                value={Model.Name.pattern.value}
-                message={Model.Name.pattern.message}
                 required={Model.Name.required}
                 errors={errors}
-                type={Model.Name.type}
-                placeholder="Enter your name"
-                minLength={Model.Name.minLength.value}
-                minMessage={Model.Name.minLength.message}
-                maxLength={Model.Name.maxLength.value}
-                maxMessage={Model.Name.maxLength.message}
                 isDisabled={receivedState}
               />
             </div>

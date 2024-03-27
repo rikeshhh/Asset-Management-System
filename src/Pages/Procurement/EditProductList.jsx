@@ -1,35 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 import { InputField } from "../../Component/Input/InputField";
-import Button from "../../Component/Button/Button";
-import { FaCheck } from "react-icons/fa6";
-import { CiEdit } from "react-icons/ci";
-import { RxCross1 } from "react-icons/rx";
-import { GoTrash } from "react-icons/go";
-import { useForm } from "react-hook-form";
 import SelectInputCategory from "../Categories/SelectInputCategory";
+import { useForm } from "react-hook-form";
+import Button from "../../Component/Button/Button";
+import { CiEdit } from "react-icons/ci";
+import { FaCheck } from "react-icons/fa6";
+import { GoTrash } from "react-icons/go";
+import { RxCross1 } from "react-icons/rx";
 
-const ProductListTableItem = ({
-  tableItem,
+const EditProductList = ({
+  procurement,
   index,
-  handleDeleteProcurementLine,
-  setProcurementTableLine,
   isEditable,
   setIsEditable,
-  setNewProcurement,
-  newProcurement,
-  procurementTableLine,
-  selectedIndex,
   setSelectedIndex,
+  selectedIndex,
+  newProcurement,
+  setNewProcurement,
+  setCategoryName,
+  categoryName,
+  handleDeleteProcurementLine,
 }) => {
   const {
     register,
     formState: { errors },
-    getValues,
     reset,
+    getValues,
   } = useForm();
 
-  const [categoryName, setCategoryName] = useState("");
-  const handleProcurementTableAdd = (index) => {
+  console.log(`procurement ${index}`, procurement);
+
+  const handleProcurementTableAdd = (index, product_id) => {
     const values = getValues();
 
     // Update the item at the specified index with the new values
@@ -39,6 +40,7 @@ const ProductListTableItem = ({
       brand: values.brand,
       estimated_price: values.estimated_price,
       link: values.link,
+      product_id: product_id,
     };
 
     // Update the newProcurement state with the updated item
@@ -49,22 +51,22 @@ const ProductListTableItem = ({
     // Reset state and form after editing
     setIsEditable(false);
     setSelectedIndex("");
-    setProcurementTableLine(false);
     reset();
   };
 
   const handleProcurementTableEdit = (index) => {
-    setProcurementTableLine(true);
+    if (procurement.product_id !== newProcurement.product_id) {
+      setNewProcurement([...newProcurement, procurement]);
+    }
     setSelectedIndex(index);
   };
 
   const handleCancelProcurementLine = () => {
     setSelectedIndex("");
     setIsEditable(false);
-    setProcurementTableLine(false);
     reset();
   };
-
+  console.log("here=>", newProcurement);
   return (
     <tr>
       <td>
@@ -72,16 +74,10 @@ const ProductListTableItem = ({
           name="product_name"
           register={register}
           errors={errors}
-          defaultValue={tableItem.product_name}
-          isEditable={
-            (isEditable && index === newProcurement.length - 1) ||
-            selectedIndex === index
-          }
+          defaultValue={procurement.product_name}
+          isEditable={selectedIndex === index}
           className={`${
-            (isEditable && index === newProcurement.length - 1) ||
-            selectedIndex === index
-              ? "input__editable"
-              : "input__notEditable"
+            selectedIndex === index ? "input__editable" : "input__notEditable"
           }`}
         />
       </td>
@@ -92,15 +88,9 @@ const ProductListTableItem = ({
           errors={errors}
           setCategoryName={setCategoryName}
           defaultValue={categoryName}
-          isEditable={
-            (index === newProcurement.length - 1 && isEditable) ||
-            selectedIndex === index
-          }
+          isEditable={selectedIndex === index}
           className={` ${
-            (isEditable && index === newProcurement.length - 1) ||
-            selectedIndex === index
-              ? "input-enabled"
-              : "select-not-editable"
+            selectedIndex === index ? "input-enabled" : "select-not-editable"
           }`}
         />
       </td>
@@ -109,16 +99,10 @@ const ProductListTableItem = ({
           name="brand"
           register={register}
           errors={errors}
-          defaultValue={tableItem.brand}
-          isEditable={
-            (isEditable && index === newProcurement.length - 1) ||
-            selectedIndex === index
-          }
+          defaultValue={procurement.brand}
+          isEditable={selectedIndex === index}
           className={`${
-            (isEditable && index === newProcurement.length - 1) ||
-            selectedIndex === index
-              ? "input__editable"
-              : "input__notEditable"
+            selectedIndex === index ? "input__editable" : "input__notEditable"
           }`}
         />
       </td>
@@ -127,16 +111,10 @@ const ProductListTableItem = ({
           name="estimated_price"
           register={register}
           errors={errors}
-          defaultValue={tableItem.estimated_price}
-          isEditable={
-            (isEditable && index === newProcurement.length - 1) ||
-            selectedIndex === index
-          }
+          defaultValue={procurement.estimated_price}
+          isEditable={selectedIndex === index}
           className={`${
-            (isEditable && index === newProcurement.length - 1) ||
-            selectedIndex === index
-              ? "input__editable"
-              : "input__notEditable"
+            selectedIndex === index ? "input__editable" : "input__notEditable"
           }`}
         />
       </td>
@@ -145,33 +123,28 @@ const ProductListTableItem = ({
           name="link"
           register={register}
           errors={errors}
-          defaultValue={tableItem.link}
-          isEditable={
-            (isEditable && index === newProcurement.length - 1) ||
-            selectedIndex === index
-          }
+          defaultValue={procurement.link}
+          isEditable={selectedIndex === index}
           className={`${
-            (isEditable && index === newProcurement.length - 1) ||
-            selectedIndex === index
-              ? "input__editable"
-              : "input__notEditable"
+            selectedIndex === index ? "input__editable" : "input__notEditable"
           }`}
         />
       </td>
       <td className="button-gap">
-        {(procurementTableLine && index === newProcurement.length - 1) ||
-        selectedIndex === index ? (
+        {selectedIndex === index ? (
           <Button
             type="button"
             className="edit__button"
             text={<FaCheck />}
-            handleClick={() => handleProcurementTableAdd(index)}
+            handleClick={() =>
+              handleProcurementTableAdd(index, procurement.products_id)
+            }
           />
         ) : (
           <Button
             type={"button"}
             className={
-              procurementTableLine && index !== selectedIndex
+              index !== selectedIndex
                 ? "edit__button edit__not--allowed"
                 : "edit__button"
             }
@@ -191,7 +164,9 @@ const ProductListTableItem = ({
             type={"button"}
             className="delete__button"
             text={<GoTrash />}
-            handleClick={() => handleDeleteProcurementLine(index)}
+            handleClick={() =>
+              handleDeleteProcurementLine(procurement.products_id)
+            }
           />
         )}
       </td>
@@ -199,4 +174,4 @@ const ProductListTableItem = ({
   );
 };
 
-export default ProductListTableItem;
+export default EditProductList;

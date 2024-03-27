@@ -70,7 +70,6 @@ const RepairDataTable = ({
         status,
         assigned_date
       ),
-    staleTime: 10000,
   });
 
   const DeleteRepair = useMutation({
@@ -200,15 +199,15 @@ const RepairDataTable = ({
                   <td data-cell="Category">{tableItem.Status}</td>
                   <td data-cell="Assigned Date">{tableItem.Assigned_Date}</td>
                   <td className="button-gap">
-                    <Link to="/viewRepair" state={tableItem}>
+                    <Link to="/repair/viewRepair" state={tableItem}>
                       <Button
                         type={"button"}
                         className="view__button"
                         text={<EyeSvg />}
                       />
                     </Link>
-                  
-                    <Link to="/editRepairReplace" state={tableItem}>
+
+                    <Link to="/repair/editRepairReplace" state={tableItem}>
                       <Button
                         type={"button"}
                         className="edit__button"

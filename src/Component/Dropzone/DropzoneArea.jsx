@@ -5,10 +5,11 @@ import Button from "../Button/Button";
 import { GoTrash } from "react-icons/go";
 import { UploadSvg } from "../svg/UploadSvg";
 import ImagePath from "../Images/ImagePath";
+import { notifyError } from "../Toast/Toast";
+import CustomToastContainer from "../Toast/ToastContainer";
 
 const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
   const [importedImage, setImportedImage] = useState(defaultValue || null);
-  const [errorMessage, setErrorMessage] = useState(null);
 
   console.log(defaultValue);
   const [newImage, setNewImage] = useState();
@@ -23,14 +24,12 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
         // Check if file size exceeds 5MB
-        setErrorMessage("File size exceeds 5MB");
+        notifyError("File size exceeds 5MB");
       } else if (
         !["image/jpeg", "image/png", "image/webp"].includes(file.type)
       ) {
         // Check if file type is not JPEG or PNG
-        setErrorMessage(
-          "Unsupported file type. Only JPEG, WEBP and PNG are allowed"
-        ); 
+        notifyError("Unsupported file type. Only JPEG and PNG are allowed");
       } else {
         setValue(name, file);
         const imageUrl = URL.createObjectURL(file);
@@ -108,6 +107,7 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
           </>
         )}
       </div>
+      <CustomToastContainer />
     </div>
   );
 };
