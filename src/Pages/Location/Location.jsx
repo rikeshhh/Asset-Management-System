@@ -23,6 +23,7 @@ import CustomToastContainer from "../../Component/Toast/ToastContainer";
  */
 const Location = () => {
   const [locationTableDataOrder, setLocationTableDataOrder] = useState("ASC");
+  const [locationTableData, setLocationTableData] = useState("id");
 
   const {
     register,
@@ -46,8 +47,8 @@ const Location = () => {
     error,
     data: LocationData,
   } = useQuery({
-    queryKey: ["LocationData", locationTableDataOrder],
-    queryFn: () => getLocationData(locationTableDataOrder),
+    queryKey: ["LocationData", locationTableDataOrder,locationTableData],
+    queryFn: () => getLocationData(locationTableDataOrder,locationTableData),
   });
   const successMessage = "Location has been added";
   //func: Mutation hook for adding a location
@@ -128,6 +129,7 @@ const Location = () => {
               disableButtons={disableButtons}
               setLocationTableDataOrder={setLocationTableDataOrder}
               locationTableDataOrder={locationTableDataOrder}
+              setLocationTableData={setLocationTableData}
             />
             {/* Add location form */}
 

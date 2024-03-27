@@ -10,8 +10,8 @@ import CustomToastContainer from "../Toast/ToastContainer";
 
 const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
   const [importedImage, setImportedImage] = useState(defaultValue || null);
+  const [imageFlag, setImageFlag] = useState(false);
 
-  console.log(defaultValue);
   const [newImage, setNewImage] = useState();
   useEffect(() => {
     setValue(name, defaultValue);
@@ -91,18 +91,25 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
                   {newImage ? (
                     <img src={newImage} />
                   ) : (
-                    <ImagePath file={importedImage} />
+                    <ImagePath
+                      file={importedImage || newImage}
+                      setImageFlag={setImageFlag}
+                    />
                   )}
                 </figure>
                 {/* Render other elements conditionally here */}
               </div>
-              <Button
-                type={"button"}
-                icon={<GoTrash />}
-                className={"button__red drag__button"}
-                handleClick={deleteImage}
-                disabled={isDisabled}
-              />
+              {imageFlag ? (
+                ""
+              ) : (
+                <Button
+                  type={"button"}
+                  icon={<GoTrash />}
+                  className={"button__red drag__button"}
+                  handleClick={deleteImage}
+                  disabled={isDisabled}
+                />
+              )}
             </div>
           </>
         )}

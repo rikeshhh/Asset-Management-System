@@ -28,6 +28,7 @@ const LocationDataTable = ({
   disableButtons,
   setLocationTableDataOrder,
   locationTableDataOrder,
+  setLocationTableData,
 }) => {
   const [show, setShow] = useState(false);
   // func:Mutation hook for editing location
@@ -50,7 +51,6 @@ const LocationDataTable = ({
 
   const [previousLocationId, setPreviousLocationId] = useState("");
   const [previousLocation, setPreviousLocation] = useState("");
-  const [locationTableData, setLocationTableData] = useState("id");
 
   const handleEditButtonClick = (options) => {
     setDisableButtons(true);
