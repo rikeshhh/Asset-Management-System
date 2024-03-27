@@ -5,7 +5,6 @@ import { GoTrash } from "react-icons/go";
 // import { queryClient } from "../../Component/Query/Query";
 // import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
-import SelectInputDepartment from "../Departments/SelectInputDepartment";
 import { Label } from "../../Component/Label/Label";
 import { InputField } from "../../Component/Input/InputField";
 import Button from "../../Component/Button/Button";

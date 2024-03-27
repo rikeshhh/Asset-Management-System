@@ -1,31 +1,27 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Button from "../../Component/Button/Button";
-import { GoTrash } from "react-icons/go";
-import { CiEdit } from "react-icons/ci";
 import { Label } from "../../Component/Label/Label";
 import Model from "../../Component/Model/Model";
 import { SelectInput } from "../../Component/Input/SelectInput";
 import { InputField } from "../../Component/Input/InputField";
 import { useForm } from "react-hook-form";
-import { FaCheck } from "react-icons/fa6";
 import SelectInputCategory from "../Categories/SelectInputCategory";
 import { RxCross1 } from "react-icons/rx";
-import { IoMdAdd } from "react-icons/io";
+import { CiEdit } from "react-icons/ci";
 import { GrStatusGoodSmall } from "react-icons/gr";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import { getProductList, productDelete } from "./ProcurementApiSlice";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
 import { queryClient } from "../../Component/Query/Query";
-import ProductListTableItem from "./ProductList";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
+import EditProductList from "./EditProductList";
 
 const EditProcurement = () => {
-  const [procurementTableLine, setProcurementTableLine] = useState(false);
-  const [editProcurementLine, setEditProcurementLine] = useState(false);
   const [newProcurement, setNewProcurement] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(null);
-  const [productId, setProductId] = useState("");
   const [categoryName, setCategoryName] = useState("");
   const [isEditable, setIsEditable] = useState(false);
 
@@ -34,12 +30,11 @@ const EditProcurement = () => {
     formState: { errors },
     handleSubmit,
     reset,
-    getValues,
   } = useForm();
-  // console.log(errors);
   const location = useLocation();
   const receivedData = location.state;
   const procurementData = receivedData.data;
+  const navigate = useNavigate();
 
   const { isPending, data: ProductList } = useQuery({
     queryKey: ["productList"],
@@ -62,51 +57,22 @@ const EditProcurement = () => {
     },
   });
 
-  const handleAddProcurement = () => {
-    setEditProcurementLine(false);
-    setProcurementTableLine(true);
-  };
   const submitProcurement = () => {};
 
   const selectOptions = ["urgent", "high", "medium", "low"];
 
-  const handleCancelTableLine = () => {
-    setProcurementTableLine(false);
-    setSelectedIndex(null);
-    reset();
-  };
-
-  const handleProcurementTableEdit = (index, productId) => {
-    const values = getValues();
-
-    // Update the item at the specified index with the new values
-    const updatedItem = {
-      product_name: values.product_name,
-      category_id: values.category_id,
-      brand: values.brand,
-      estimated_price: values.estimated_price,
-      link: values.link,
-    };
-
-    // Update the newProcurement state with the updated item
-    const updatedProcurement = [...newProcurement];
-    updatedProcurement[index] = updatedItem;
-    setNewProcurement(updatedProcurement);
-
-    // Reset state and form after editing
-    setIsEditable(false);
-    setProcurementTableLine(null);
-    reset();
-  };
-
   const handleDeleteProcurementLine = (productId) => {
     setSelectedIndex(null);
-    setEditProcurementLine(false);
     DeleteProduct.mutate(productId);
+    setNewProcurement([...newProcurement]);
     // reset();
   };
 
-  const submitProcurementEdit = (data) => {};
+  const submitProcurementEdit = (data) => {
+    if (newProcurement.length === 0) {
+      navigate("/procurement");
+    }
+  };
 
   return (
     <section className="content-wrapper">
@@ -146,7 +112,7 @@ const EditProcurement = () => {
           <div className="procurement__product">
             <div className="procurement__bottom--buttons">
               <Button
-                text="Fill Procurement"
+                text="Update Procurement"
                 className={"procurement--button"}
               />
               <Link to={"/procurement"} className="link">
@@ -162,107 +128,48 @@ const EditProcurement = () => {
           <h3>Product List</h3>
         </div>
         <div className="table__container">
-          <form onSubmit={handleSubmit(submitProcurementEdit)}>
-            <table className="main__table">
-              <thead>
-                {isPending ? (
-                  <PendingTableHead />
-                ) : (
-                  <tr>
-                    <th>Product Name</th>
-                    <th>Catagory</th>
-                    <th>Brand</th>
-                    <th>Estimated Price</th>
-                    <th>Link</th>
-                    <th>Action</th>
-                  </tr>
-                )}
-              </thead>
-              <tbody>
-                {isPending ? (
-                  <PendingTableBody />
-                ) : ProductList.length !== 0 ? (
-                  ProductList?.data.map((procurement, index) => (
-                     <tr>
-                      <td>
-                        <InputField
-                          name="product_name"
-                          register={register}
-                          errors={errors}
-                          defaultValue={procurement.product_name}
-                          isEditable={isEditable}
-                        />
-                      </td>
-                      <td>
-                        <SelectInputCategory
-                          name="category_id"
-                          register={register}
-                          errors={errors}
-                          defaultValue={procurement.category}
-                          isEditable={isEditable}
-                        />
-                      </td>
-                      <td>
-                        <InputField
-                          name="brand"
-                          register={register}
-                          errors={errors}
-                          defaultValue={procurement.brand}
-                          isEditable={isEditable}
-                        />
-                      </td>
-                      <td>
-                        <InputField
-                          name="estimated_price"
-                          register={register}
-                          errors={errors}
-                          defaultValue={procurement.estimated_price}
-                          isEditable={isEditable}
-                        />
-                      </td>
-                      <td>
-                        <InputField
-                          name="link"
-                          register={register}
-                          errors={errors}
-                          defaultValue={procurement.link}
-                          isEditable={isEditable}
-                        />
-                      </td>
-                      <td className="button-gap">
-                        <Button
-                          type="button"
-                          className="edit__button"
-                          text={<FaCheck />}
-                          handleClick={() => handleProcurementTableEdit(index)}
-                        />
-                        {/* <Button
-                          type={"button"}
-                          className={
-                            procurementTableLine && index !== selectedIndex
-                              ? "edit__button edit__not--allowed"
-                              : "edit__button"
-                          }
-                          handleClick={() => handleProcurementTableEdit(index)}
-                          text={<CiEdit />}
-                        /> */}
-                        <Button
-                          type={"button"}
-                          className="delete__button"
-                          text={<GoTrash />}
-                          handleClick={() => handleDeleteProcurementLine(index)}
-                        />
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <></>
-                )}
-              </tbody>
-            </table>
-          </form>
+          <table className="main__table">
+            <thead>
+              {isPending ? (
+                <PendingTableHead />
+              ) : (
+                <tr>
+                  <th>Product Name</th>
+                  <th>Catagory</th>
+                  <th>Brand</th>
+                  <th>Estimated Price</th>
+                  <th>Link</th>
+                  <th>Action</th>
+                </tr>
+              )}
+            </thead>
+            <tbody>
+              {isPending ? (
+                <PendingTableBody />
+              ) : ProductList.length !== 0 ? (
+                ProductList?.data.map((procurement, index) => (
+                  <EditProductList
+                    procurement={procurement}
+                    index={index}
+                    setSelectedIndex={setSelectedIndex}
+                    selectedIndex={selectedIndex}
+                    setIsEditable={setIsEditable}
+                    isEditable={isEditable}
+                    newProcurement={newProcurement}
+                    setNewProcurement={setNewProcurement}
+                    categoryName={categoryName}
+                    setCategoryName={setCategoryName}
+                    handleDeleteProcurementLine={handleDeleteProcurementLine}
+                  />
+                ))
+              ) : (
+                <></>
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
+      <CustomToastContainer />
     </section>
   );
 };
