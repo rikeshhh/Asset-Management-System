@@ -18,6 +18,7 @@ import { repairReplaceAdd } from "./RepairApiSlice";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
 import SelectFilterUser from "../Procurement/SelectFilterUser";
+import SelectUserRepair from "./SelectUserRepair";
 
 /**
  * Functional component for adding a new employee profile.
@@ -108,10 +109,10 @@ const AddRepair = () => {
           >
             <div className="form__input--section">
               <Label sup={"*"} text="Device Owner" />
-              <SelectFilterUser
+              <SelectUserRepair
                 name="Assigned_to"
                 register={register}
-                required={Model.Name.required}
+                required={true}
                 errors={errors}
                 isDisabled={receivedState}
               />

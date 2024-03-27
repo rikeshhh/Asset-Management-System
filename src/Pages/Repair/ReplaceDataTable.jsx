@@ -15,6 +15,8 @@ import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteCon
 import { useState } from "react";
 import { queryClient } from "../../Component/Query/Query";
 import Pagination from "../../Component/Pagination/Pagination";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
 
 const ReplaceDataTable = ({
   onFilterClick,
@@ -98,6 +100,18 @@ const ReplaceDataTable = ({
     mutationFn: () => deleteRepairReplace(replaceId),
     onSuccess: () => {
       queryClient.invalidateQueries("ReplaceTableData");
+      notifySuccess("Replace Data has been deleted successfully");
+
+      if (
+        pageNumber > 1 &&
+        totalData <= pageNumber * 7 &&
+        totalData % 7 === 1
+      ) {
+        setPageNumber(pageNumber - 1); // Navigate to previous page
+      }
+    },
+    onError: (error) => {
+      notifyError("Error deleting repair data");
     },
   });
 
@@ -185,14 +199,14 @@ const ReplaceDataTable = ({
                   <td data-cell="Status">{tableItem.Status}</td>
                   <td data-cell="Assigned Date">{tableItem.Assigned_Date}</td>
                   <td className="button-gap">
-                    <Link to="/viewRepair" state={tableItem}>
+                    <Link to="/repair/viewRepair" state={tableItem}>
                       <Button
                         type={"button"}
                         className="view__button"
                         text={<EyeSvg />}
                       />
                     </Link>
-                    <Link to="/editRepairReplace" state={tableItem}>
+                    <Link to="/repair/editRepairReplace" state={tableItem}>
                       <Button
                         type={"button"}
                         className="edit__button"
@@ -221,6 +235,7 @@ const ReplaceDataTable = ({
           pageNumber={pageNumber}
         />
       )}
+      <CustomToastContainer />
     </>
   );
 };

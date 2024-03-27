@@ -14,9 +14,10 @@ import { BsFunnel } from "react-icons/bs";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 import { useEffect, useState } from "react";
 import { queryClient } from "../../Component/Query/Query";
-import { notifySuccess } from "../../Component/Toast/Toast";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import Pagination from "../../Component/Pagination/Pagination";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
 
 const RepairDataTable = ({
   onFilterClick,
@@ -87,14 +88,12 @@ const RepairDataTable = ({
       }
     },
     onError: (error) => {
-      console.log(error);
+      notifyError("Error deleting repair data");
     },
   });
   const navigate = useNavigate();
   const totalData = repairTableData?.total_data;
   const roundUp = Math.ceil(totalData / 7);
-
-  const handleRepairEdit = () => {};
 
   const handleRepairDelete = (repairID) => {
     setDeleteConfirationShow(true);
@@ -236,6 +235,7 @@ const RepairDataTable = ({
           pageNumber={pageNumber}
         />
       )}
+      <CustomToastContainer />
     </>
   );
 };

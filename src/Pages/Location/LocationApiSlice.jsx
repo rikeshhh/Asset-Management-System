@@ -6,9 +6,9 @@ const token = getTokenFromLocalStorage();
 /**
  * Function to fetch location data from the server.
  */
-export const getLocationData = async (sortorder) => {
+export const getLocationData = async (sortorder, locationTableData) => {
   const locationData = await instance.get(
-    `/location?sortorder=${sortorder}&orderby=location`,
+    `/location?sortorder=${sortorder}&orderby=${locationTableData}`,
     {
       headers: { Authorization: `Bearer ${token}` },
     }

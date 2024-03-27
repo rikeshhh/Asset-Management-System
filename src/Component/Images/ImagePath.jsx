@@ -3,7 +3,7 @@ import getImage from "./ImageApiSlice";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const ImagePath = ({ file, state }) => {
+const ImagePath = ({ file, setImageFlag }) => {
   const {
     isFetching,
     error,
@@ -22,11 +22,17 @@ const ImagePath = ({ file, state }) => {
   }
 
   if (error) {
-    return <p>Error: {error.message}</p>;
+    setImageFlag(true);
+    return <p>No image data available</p>;
   }
 
   if (!imageData) {
+    setImageFlag(true);
     return <p>No image data available</p>;
+  }
+
+  if (imageData) {
+    setImageFlag(false);
   }
 
   const blob = new Blob([imageData], { type: "image/jpeg/png/jpg" }); // Adjust the type based on your image format
