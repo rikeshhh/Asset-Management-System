@@ -1,9 +1,8 @@
 .main__table {
   color: #21252b;
   border-collapse: collapse;
-  /* width: 100%; */
+  width: 100%;
   font-size: 14px;
-  width: 1120px;
 }
 
 .main__table th,
@@ -96,6 +95,12 @@
     overflow-x: scroll;
   }
 } */
+
+@media (max-width: 1440px) {
+  .main__table {
+    width: 1120px;
+  }
+}
 
 @media (max-width: 650px) {
   .main__table {

@@ -31,7 +31,6 @@ const ProductListTableItem = ({
   const [categoryName, setCategoryName] = useState("");
   const handleProcurementTableAdd = (index) => {
     const values = getValues();
-    console.log(values);
 
     // Update the item at the specified index with the new values
     const updatedItem = {
