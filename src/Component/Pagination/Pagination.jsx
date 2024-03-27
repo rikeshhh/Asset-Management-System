@@ -52,7 +52,7 @@ const Pagination = ({
           <Button
             text={"..."}
             className="inactivePage"
-            handleClick={() => handleEllipsisClick(pageNumber - 1)}
+            handleClick={() => updatePageNumber(1)}
           />
         </>
       )}
