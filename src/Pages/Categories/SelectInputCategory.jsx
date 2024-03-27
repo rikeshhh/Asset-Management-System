@@ -16,6 +16,7 @@ const SelectInputCategory = ({
   isDisabled,
   className,
   isEditable = true,
+  errors,
 }) => {
   const { data: CategoryData } = useQuery({
     queryKey: ["selectInputCategory"],
@@ -30,53 +31,45 @@ const SelectInputCategory = ({
   };
 
   return (
-    <select
-      {...register(name, { required: true })}
-      disabled={isDisabled || !isEditable}
-      onChange={addCategoryId}
-      className={`${isDisabled ? "input-disabled" : "input-enabled"}
-     ${className}
+    <>
+      <select
+        {...register(name, { required: true })}
+        onInput={addCategoryId}
+        disabled={isDisabled || !isEditable}
+        className={`${isDisabled ? "input-disabled" : "input-enabled"}
+      ${className}
+      ${errors[name] ? "select__border" : ""}
       `}
-    >
-      {defaultValue ? (
-        <>
-          <option
-            className="select__option"
-            value={defaultValue.id}
-            style={{ color: "#999" }}
-          >
-            {defaultValue.name}
+        defaultValue={defaultValue ? defaultValue.id || defaultValue : ""}
+      >
+        {!defaultValue && (
+          <option value="" disabled selected style={{ color: "#999" }}>
+            Select the Category of the asset
           </option>
-        </>
-      ) : (
-        <option
-          value="None"
-          disabled
-          className="option__disabled"
-          style={{ color: "#999" }}
-        >
-          Select the Category of the asset
-        </option>
-      )}
+        )}
 
-      {/* Render the default option only once outside of the map function */}
+        {/* Render the default option only once outside of the map function */}
 
-      {/* Map over the CategoryData array and render each category option */}
-      {CategoryData && (
-        <>
-          {/* <option value={null}>None</option> */}
-          {CategoryData.map((option) => (
-            <option
-              className="select__option"
-              key={option.id}
-              value={option.id}
-            >
-              {option.parent}
-            </option>
-          ))}
-        </>
+        {/* Map over the CategoryData array and render each category option */}
+        {CategoryData && (
+          <>
+            {/* <option value={null}>None</option> */}
+            {CategoryData.map((option) => (
+              <option
+                className="select__option"
+                key={option.id}
+                value={option.id}
+              >
+                {option.parent}
+              </option>
+            ))}
+          </>
+        )}
+      </select>
+      {errors[name] && (
+        <p className="error-message">Please select a category</p>
       )}
-    </select>
+    </>
   );
 };
 

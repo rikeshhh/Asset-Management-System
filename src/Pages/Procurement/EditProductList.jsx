@@ -28,8 +28,6 @@ const EditProductList = ({
     getValues,
   } = useForm();
 
-  console.log(`procurement ${index}`, procurement);
-
   const handleProcurementTableAdd = (index, product_id) => {
     const values = getValues();
 
@@ -66,7 +64,6 @@ const EditProductList = ({
     setIsEditable(false);
     reset();
   };
-  console.log("here=>", newProcurement);
   return (
     <tr>
       <td>
@@ -87,7 +84,7 @@ const EditProductList = ({
           register={register}
           errors={errors}
           setCategoryName={setCategoryName}
-          defaultValue={categoryName}
+          defaultValue={procurement.category || categoryName}
           isEditable={selectedIndex === index}
           className={` ${
             selectedIndex === index ? "input-enabled" : "select-not-editable"

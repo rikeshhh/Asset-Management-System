@@ -65,6 +65,7 @@ const ProductListTableItem = ({
     reset();
   };
 
+  console.log("here", tableItem.category_id);
   return (
     <tr>
       <td>
@@ -91,7 +92,7 @@ const ProductListTableItem = ({
           register={register}
           errors={errors}
           setCategoryName={setCategoryName}
-          defaultValue={categoryName}
+          defaultValue={tableItem.category_id || categoryName}
           isEditable={
             (index === newProcurement.length - 1 && isEditable) ||
             selectedIndex === index

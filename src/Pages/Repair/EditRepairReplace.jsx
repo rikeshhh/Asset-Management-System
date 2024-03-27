@@ -164,7 +164,8 @@ const EditRepairReplace = () => {
               <SelectInputCategory
                 name="Category"
                 register={register}
-                defaultValue={tableData?.category}
+                errors={errors}
+                defaultValue={tableData?.Category}
               />
             </div>
 

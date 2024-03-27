@@ -1,7 +1,7 @@
 import React from "react";
+import "../../App.css";
 import { useQuery } from "@tanstack/react-query";
 import { selectUser } from "../Assets/AssetsApiSlice";
-import { ErrorMessage } from "@hookform/error-message";
 /**
  * SelectInputUser component for selecting an assigned user.
  *
@@ -18,12 +18,12 @@ const SelectUserRepair = ({ name, register, defaultValue, errors }) => {
     queryFn: selectUser,
   });
 
-  const errorMessage = "Please select device owner";
   return (
     <>
       <select
         {...register(name, { required: true })}
         defaultValue={defaultValue ? defaultValue.name : ""}
+        className={`${errors[name] ? "select__border" : ""}`}
       >
         {!defaultValue && (
           <option value="" disabled selected>

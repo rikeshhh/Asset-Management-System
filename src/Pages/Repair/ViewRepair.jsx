@@ -175,6 +175,7 @@ const ViewRepair = () => {
                 register={register}
                 defaultValue={tableData.Category}
                 isDisabled={receivedState}
+                errors={errors}
               />
             </div>
 

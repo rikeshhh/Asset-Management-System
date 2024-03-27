@@ -159,6 +159,7 @@ const AddRepair = () => {
                 name="Category"
                 register={register}
                 isDisabled={receivedState}
+                errors={errors}
               />
             </div>
 

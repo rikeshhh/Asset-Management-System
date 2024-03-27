@@ -212,7 +212,9 @@ label {
   cursor: pointer;
 }
 
-
+.select__border {
+  outline: 1px solid var(--red) !important;
+}
 
 .delete__button {
   color: var(--red) !important;

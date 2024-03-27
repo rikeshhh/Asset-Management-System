@@ -8,11 +8,11 @@
 }
 
 .input__error {
-  outline: 1px solid var(--red);
+  outline: 1px solid var(--red) !important;
 }
 
 .input__error:focus {
-  outline: 1px solid var(--red);
+  outline: 1px solid var(--red) !important;
 }
 
 .input__radio {

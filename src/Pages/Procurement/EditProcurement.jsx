@@ -22,8 +22,8 @@ import EditProductList from "./EditProductList";
 const EditProcurement = () => {
   const [newProcurement, setNewProcurement] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(null);
-  const [categoryName, setCategoryName] = useState("");
   const [isEditable, setIsEditable] = useState(false);
+  const [categoryName, setCategoryName] = useState("");
 
   const {
     register,
