@@ -47,8 +47,8 @@ const Location = () => {
     error,
     data: LocationData,
   } = useQuery({
-    queryKey: ["LocationData", locationTableDataOrder,locationTableData],
-    queryFn: () => getLocationData(locationTableDataOrder,locationTableData),
+    queryKey: ["LocationData", locationTableDataOrder, locationTableData],
+    queryFn: () => getLocationData(locationTableDataOrder, locationTableData),
   });
   const successMessage = "Location has been added";
   //func: Mutation hook for adding a location
@@ -63,8 +63,7 @@ const Location = () => {
       reset();
     },
     onError: (error) => {
-      console.log(error);
-      notifyError(error.response.data.message);
+      notifyError(error.response.data.message.message.location);
     },
   });
   //func: Mutation hook for deleting a location
