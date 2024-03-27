@@ -35,7 +35,6 @@ import EditProfile from "../Pages/Profile/EditProfile";
 import EmployeeDataTable from "../Pages/Employees/EmployeeDataTable";
 import AssetsHead from "../Pages/Assets/AssetsHead";
 import RepairReplace from "../Pages/Repair/RepairReplace";
-import ViewRepairReplace from "../Pages/Repair/ViewRepairReplace";
 import ViewRepair from "../Pages/Repair/ViewRepair";
 import ViewProcurement from "../Pages/Procurement/ViewProcurement";
 

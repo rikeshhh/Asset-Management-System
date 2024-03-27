@@ -7,6 +7,7 @@ import { UploadSvg } from "../svg/UploadSvg";
 import ImagePath from "../Images/ImagePath";
 import { notifyError } from "../Toast/Toast";
 import CustomToastContainer from "../Toast/ToastContainer";
+import "./Dropzone.css";
 
 const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
   const [importedImage, setImportedImage] = useState(defaultValue || null);
@@ -105,9 +106,11 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
                 <Button
                   type={"button"}
                   icon={<GoTrash />}
-                  className={"button__red drag__button"}
+                  className={`button__red drag__button ${
+                    isDisabled ? "dropzone_btn-none" : ""
+                  }`}
                   handleClick={deleteImage}
-                  disabled={isDisabled}
+                  isDisabled={isDisabled}
                 />
               )}
             </div>

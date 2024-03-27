@@ -212,6 +212,8 @@ label {
   cursor: pointer;
 }
 
+
+
 .delete__button {
   color: var(--red) !important;
   background-color: var(--delete-background) !important;
