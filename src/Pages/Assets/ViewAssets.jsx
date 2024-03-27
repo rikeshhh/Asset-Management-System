@@ -33,7 +33,7 @@ const ViewAssets = () => {
     formState: { errors },
     handleSubmit,
   } = formMethod;
-
+  const [imageFlag, setImageFlag] = useState(false);
   // Extracting location and received state from the React Router's useLocation hook
   const location = useLocation();
   const receivedState = location.state;
@@ -210,7 +210,7 @@ const ViewAssets = () => {
                 />
               </div>
               <div className="assets__form--input">
-                <Label text="Status"/>
+                <Label text="Status" />
                 <label className={`switch ${isActive ? "active" : "inactive"}`}>
                   <input
                     type="checkbox"
@@ -228,7 +228,10 @@ const ViewAssets = () => {
                 <Label text="Upload asset image" />
 
                 <figure className="image__display">
-                  <ImagePath file={assetsData.image_name} />
+                  <ImagePath
+                    file={assetsData.image_name}
+                    setImageFlag={setImageFlag}
+                  />
                 </figure>
               </div>
               <div className="assets__form--btn">
