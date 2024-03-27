@@ -36,6 +36,7 @@ const EditProfile = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const [imageFlag, setImageFlag] = useState(false);
 
   const receivedState = false;
 
@@ -132,7 +133,10 @@ const EditProfile = () => {
                 {profileImage ? (
                   <img src={profileImage} alt="Profile Picture" />
                 ) : (
-                  <ImagePath file={employeeData.user_image} />
+                  <ImagePath
+                    setImageFlag={setImageFlag}
+                    file={employeeData.user_image}
+                  />
                 )}
                 <div className="profile__button--container">
                   <Button

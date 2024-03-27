@@ -30,6 +30,7 @@ const EmployeeView = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const [imageFlag, setImageFlag] = useState(false);
 
   const receivedState = true;
   // const image = {<ImagePath file = {viewEmployeeData.user_image} />}
@@ -70,6 +71,7 @@ const EmployeeView = () => {
               <figure>
                 {/* <img src={profileImage} alt="Profile Image" /> */}
                 <ImagePath
+                  setImageFlag={setImageFlag}
                   file={
                     viewEmployeeData.user_image
                       ? viewEmployeeData.user_image
@@ -78,12 +80,16 @@ const EmployeeView = () => {
                   state={{ profileImage, setProfileImage }}
                 />
                 <div className="profile__button--container">
-                  <Button
-                    type={"button"}
-                    icon={<GoTrash />}
-                    className={"button__red profile__delete--button"}
-                    isDisabled={receivedState}
-                  />
+                  {imageFlag ? (
+                    <></>
+                  ) : (
+                    <Button
+                      type={"button"}
+                      icon={<GoTrash />}
+                      className={"button__red profile__delete--button"}
+                      isDisabled={receivedState}
+                    />
+                  )}
                 </div>
               </figure>
 
