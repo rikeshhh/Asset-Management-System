@@ -213,7 +213,7 @@ const EditAssets = () => {
                 <DropzoneArea
                   setValue={setValue}
                   name="assets_image"
-                  defaultValue={assetsData.image_name || ""}
+                  defaultValue={assetsData?.image_name}
                 />
               </div>
               <div className="assets__form--btn">
