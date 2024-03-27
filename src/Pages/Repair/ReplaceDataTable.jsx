@@ -69,7 +69,6 @@ const ReplaceDataTable = ({
         status,
         assigned_date
       ),
-    staleTime: 10000,
   });
 
   const handleStatusClick = (tableHead) => {

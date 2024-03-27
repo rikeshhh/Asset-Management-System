@@ -70,7 +70,6 @@ const RepairDataTable = ({
         status,
         assigned_date
       ),
-    staleTime: 10000,
   });
 
   const DeleteRepair = useMutation({

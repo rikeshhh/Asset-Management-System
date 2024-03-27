@@ -26,6 +26,7 @@ const FilterRepairReplace = ({
   filterOptions,
   setPageNumber,
   setSearchParams,
+  pageNumber,
 }) => {
   const {
     register,
@@ -145,7 +146,9 @@ const FilterRepairReplace = ({
                 text="Clear All Filter"
                 handleClick={() => {
                   reset();
-                  setSearchParams("");
+                  setSearchParams({
+                    page: pageNumber,
+                  });
                 }}
               />
               {/* <Link to="/payment" state={receivedFeature} className="link"> */}

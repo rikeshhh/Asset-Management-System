@@ -36,6 +36,7 @@ const RepairReplace = () => {
           filterOptions={filterOptions}
           setPageNumber={setPageNumber}
           setSearchParams={setSearchParams}
+          pageNumber={pageNumber}
         />
       ) : (
         <></>
