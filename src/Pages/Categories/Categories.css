@@ -68,6 +68,7 @@
   -webkit-appearance: none;
   appearance: none;
   color: var(--text-color) !important;
+  background-color: transparent !important;
 }
 .data__empty {
   font-size: 40px;

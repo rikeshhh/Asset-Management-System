@@ -139,6 +139,7 @@ const FilterProcurement = ({
           <div className="filter__button">
             <div className="filter__button--flex">
               <Button
+                type="button"
                 className="button__red"
                 text="Clear All Filter"
                 handleClick={() => {

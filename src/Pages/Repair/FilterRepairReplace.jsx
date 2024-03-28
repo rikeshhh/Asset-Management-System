@@ -120,9 +120,7 @@ const FilterRepairReplace = ({
                 text="Clear All Filter"
                 handleClick={() => {
                   reset();
-                  setSearchParams({
-                    page: pageNumber,
-                  });
+                  setSearchParams("");
                 }}
               />
 
