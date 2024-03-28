@@ -57,20 +57,7 @@ const EmployeeView = () => {
                       ? viewEmployeeData.user_image
                       : " "
                   }
-                  state={{ profileImage, setProfileImage }}
                 />
-                <div className="profile__button--container">
-                  {imageFlag ? (
-                    <></>
-                  ) : (
-                    <Button
-                      type={"button"}
-                      icon={<GoTrash />}
-                      className={"button__red profile__delete--button"}
-                      isDisabled={receivedState}
-                    />
-                  )}
-                </div>
               </figure>
 
               <Button

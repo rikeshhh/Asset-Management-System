@@ -76,7 +76,7 @@ const EditProfile = () => {
    * Deletes the current profile picture.
    */
   const deleteProfile = () => {
-    setProfileImage(profileCover || null);
+    setProfileImage();
     setUserProfileImage(null);
     setImageReceived(null);
     setDeleteButtonDisabled(true);

@@ -87,7 +87,7 @@
 }
 
 .user__profile--image p {
-  padding: 5.81rem 0 0 0;
+  /* padding: 5.81rem 0 0 0; */
   margin-bottom: 1.37rem;
   display: flex;
   gap: 4px;
