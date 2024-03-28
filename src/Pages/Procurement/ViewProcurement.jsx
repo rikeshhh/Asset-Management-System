@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Button from "../../Component/Button/Button";
 import { GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
@@ -7,36 +6,19 @@ import Model from "../../Component/Model/Model";
 import { SelectInput } from "../../Component/Input/SelectInput";
 import { InputField } from "../../Component/Input/InputField";
 import { useForm } from "react-hook-form";
-import { FaCheck } from "react-icons/fa6";
-import SelectInputCategory from "../Categories/SelectInputCategory";
-import { RxCross1 } from "react-icons/rx";
 import { IoMdAdd } from "react-icons/io";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { Link, useLocation } from "react-router-dom";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
-import { getProductList, productDelete } from "./ProcurementApiSlice";
+import { getProductList } from "./ProcurementApiSlice";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
-import { queryClient } from "../../Component/Query/Query";
-import ProductListTableItem from "./ProductList";
 
 const ViewProcurement = () => {
-  const [procurementTableLine, setProcurementTableLine] = useState(false);
-  const [editProcurementLine, setEditProcurementLine] = useState(false);
-  const [newProcurement, setNewProcurement] = useState([]);
-  const [selectedIndex, setSelectedIndex] = useState(null);
-  const [productId, setProductId] = useState("");
-  const [categoryName, setCategoryName] = useState("");
-  const [isEditable, setIsEditable] = useState(false);
-
   const {
     register,
     formState: { errors },
-    handleSubmit,
-    reset,
-    getValues,
   } = useForm();
-  // console.log(errors);
   const location = useLocation();
   const receivedData = location.state;
   const procurementData = receivedData.data;
@@ -45,68 +27,8 @@ const ViewProcurement = () => {
     queryKey: ["productList"],
     queryFn: () => getProductList(procurementData.id),
   });
-  //   if (error) {
-  //     return "An error has occurred: " + error.message;
-  //   }
-
-  const DeleteProduct = useMutation({
-    mutationFn: (productId) => {
-      return productDelete(productId);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries("productList");
-      notifySuccess("Product has been deleted");
-    },
-    onError: (error) => {
-      notifyError("Error deleting product");
-    },
-  });
-
-  const handleAddProcurement = () => {
-    setEditProcurementLine(false);
-    setProcurementTableLine(true);
-  };
-  const submitProcurement = () => {};
 
   const selectOptions = ["urgent", "high", "medium", "low"];
-
-  const handleCancelTableLine = () => {
-    setProcurementTableLine(false);
-    setSelectedIndex(null);
-    reset();
-  };
-
-  const handleProcurementTableEdit = (index, productId) => {
-    const values = getValues();
-
-    // Update the item at the specified index with the new values
-    const updatedItem = {
-      product_name: values.product_name,
-      category_id: values.category_id,
-      brand: values.brand,
-      estimated_price: values.estimated_price,
-      link: values.link,
-    };
-
-    // Update the newProcurement state with the updated item
-    const updatedProcurement = [...newProcurement];
-    updatedProcurement[index] = updatedItem;
-    setNewProcurement(updatedProcurement);
-
-    // Reset state and form after editing
-    setIsEditable(false);
-    setProcurementTableLine(null);
-    reset();
-  };
-
-  const handleDeleteProcurementLine = (productId) => {
-    setSelectedIndex(null);
-    setEditProcurementLine(false);
-    DeleteProduct.mutate(productId);
-    // reset();
-  };
-
-  const submitProcurementEdit = (data) => {};
 
   return (
     <section className="content-wrapper">
@@ -118,10 +40,7 @@ const ViewProcurement = () => {
             <GrStatusGoodSmall className="form__circle" /> Request an asset
           </p>
         </div>
-        <form
-          onSubmit={handleSubmit(submitProcurement)}
-          className="procurement__request"
-        >
+        <div className="procurement__request">
           <div className="procurement__employee--dets">
             <div className="user__auth--input procurement__form--input">
               <Label sup={"*"} text="Requested By" />
@@ -151,118 +70,78 @@ const ViewProcurement = () => {
                 type={"button"}
                 text="Add a table line"
                 className="procurement--button procurement--button-not__allowed"
-                // handleClick={handleAddProcurement}
                 icon={<IoMdAdd />}
-                isDisabled={procurementTableLine ? true : false}
+                isDisabled={true}
               />
             </div>
           </div>
-        </form>
+        </div>
         <div className="procurement__product--list">
           <h3>Product List</h3>
         </div>
         <div className="table__container">
-          <form onSubmit={handleSubmit(submitProcurementEdit)}>
-            <table className="main__table">
-              <thead>
-                {isPending ? (
-                  <PendingTableHead />
-                ) : (
+          <table className="main__table">
+            <thead>
+              {isPending ? (
+                <PendingTableHead />
+              ) : (
+                <tr>
+                  <th>Product Name</th>
+                  <th>Catagory</th>
+                  <th>Brand</th>
+                  <th>Estimated Price</th>
+                  <th>Link</th>
+                  <th>Action</th>
+                </tr>
+              )}
+            </thead>
+            <tbody>
+              {isPending ? (
+                <PendingTableBody />
+              ) : ProductList.length !== 0 ? (
+                ProductList?.data.map((procurement, index) => (
                   <tr>
-                    <th>Product Name</th>
-                    <th>Catagory</th>
-                    <th>Brand</th>
-                    <th>Estimated Price</th>
-                    <th>Link</th>
-                    <th>Action</th>
+                    <td>{procurement.product_name}</td>
+                    <td>
+                      {procurement.category.name
+                        ? procurement.category.name
+                        : "N/A"}
+                    </td>
+                    <td>{procurement.brand}</td>
+                    <td>{`$${procurement.estimated_price}`}</td>
+                    <td>{procurement.link}</td>
+                    <td className="button-gap">
+                      <Button
+                        type="button"
+                        className="procurement--button-not__allowed small-button__disabled"
+                        text={<CiEdit />}
+                        isDisabled={true}
+                      />
+                      <Button
+                        type={"button"}
+                        className="procurement--button-not__allowed small-button__disabled"
+                        text={<GoTrash />}
+                        isDisabled={true}
+                      />
+                    </td>
                   </tr>
-                )}
-              </thead>
-              <tbody>
-                {isPending ? (
-                  <PendingTableBody />
-                ) : ProductList.length !== 0 ? (
-                  ProductList?.data.map((procurement, index) => (
-                    <tr>
-                      <td>
-                        <InputField
-                          name="product_name"
-                          register={register}
-                          errors={errors}
-                          defaultValue={procurement.product_name}
-                          isEditable={isEditable}
-                        />
-                      </td>
-                      <td>
-                        <SelectInputCategory
-                          name="category_id"
-                          register={register}
-                          errors={errors}
-                          defaultValue={procurement.category}
-                          isEditable={isEditable}
-                        />
-                      </td>
-                      <td>
-                        <InputField
-                          name="brand"
-                          register={register}
-                          errors={errors}
-                          defaultValue={procurement.brand}
-                          isEditable={isEditable}
-                        />
-                      </td>
-                      <td>
-                        <InputField
-                          name="estimated_price"
-                          register={register}
-                          errors={errors}
-                          defaultValue={procurement.estimated_price}
-                          isEditable={isEditable}
-                        />
-                      </td>
-                      <td>
-                        <InputField
-                          name="link"
-                          register={register}
-                          errors={errors}
-                          defaultValue={procurement.link}
-                          isEditable={isEditable}
-                        />
-                      </td>
-                      <td className="button-gap">
-                        <Button
-                          type="button"
-                          className="procurement--button-not__allowed"
-                          text={<CiEdit />}
-                          handleClick={() => handleProcurementTableEdit(index)}
-                          isDisabled={true}
-                        />
-                        {/* <Button
-                          type={"button"}
-                          className={
-                            procurementTableLine && index !== selectedIndex
-                              ? "edit__button edit__not--allowed"
-                              : "edit__button"
-                          }
-                          handleClick={() => handleProcurementTableEdit(index)}
-                          text={<CiEdit />}
-                        /> */}
-                        <Button
-                          type={"button"}
-                          className="procurement--button-not__allowed"
-                          text={<GoTrash />}
-                          handleClick={() => handleDeleteProcurementLine(index)}
-                          isDisabled={true}
-                        />
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <></>
-                )}
-              </tbody>
-            </table>
-          </form>
+                ))
+              ) : (
+                <></>
+              )}
+            </tbody>
+          </table>
+        </div>
+        <div className="procurement__product">
+          <div className="procurement__bottom--buttons">
+            <Button
+              text="Fill Procurement"
+              className={"procurement--button procurement--button-not__allowed"}
+            />
+            <Link to={"/procurement"} className="link">
+              <Button text="Close" className={"procurement__error--button"} />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

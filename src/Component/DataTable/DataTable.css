@@ -1,8 +1,7 @@
 .cateogries table {
   color: #21252b;
   border-collapse: collapse;
-  /* width: 100%; */
-  width: 500px;
+  width: 100%;
   font-size: 14px;
 }
 th {
@@ -145,6 +144,12 @@ ol li {
   display: flex !important;
   align-items: center !important;
   justify-content: center;
+}
+
+@media (max-width: 1440px) {
+  .main__table {
+    width: 500px;
+  }
 }
 
 /* @media screen and (min-width: 850px) {

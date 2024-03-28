@@ -128,7 +128,7 @@
 .procurement--button-not__allowed {
   cursor: not-allowed;
   background-color: var(--primary-grey) !important;
-  color: var(--text-color);
+  color: var(--button-disabled-text);
 }
 
 @media (width<=500px) {

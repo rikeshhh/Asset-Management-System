@@ -10,6 +10,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { LuArrowUpDown } from "react-icons/lu";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { EyeSvg } from "../../Component/svg/EyeSvg";
 
 /**
  * Employee data table component that displays a table of employee information.
@@ -97,9 +98,9 @@ const EmployeeDataTable = ({
                 <td className="button-gap">
                   <Button
                     type={"button"}
-                    className="edit__button"
+                    className="view__button"
                     handleClick={() => viewEmployeeProfile(tableItem)}
-                    text={<MdOutlineRemoveRedEye />}
+                    text={<EyeSvg />}
                   />
                   <Button
                     type={"button"}
