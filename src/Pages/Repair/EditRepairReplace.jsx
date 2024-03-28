@@ -63,7 +63,7 @@ const EditRepairReplace = () => {
       );
     },
     onSuccess: () => {
-      notifySuccess("Repair/Replace has been added");
+      notifySuccess("Repair/Replace has been updated");
       setTimeout(() => {
         navigate("/repair");
         queryClient.invalidateQueries("RepairTableData", "ReplaceTableData");
@@ -218,7 +218,10 @@ const EditRepairReplace = () => {
             </div>
 
             <div className={"user__profile--btn-right user__profile--btn"}>
-              <Button text="Send for Repair" className={"button__blue"} />
+              <Button
+                text={`Send for ${selectedType}`}
+                className={"button__blue"}
+              />
               <Link to="/repair" className="link">
                 <Button
                   className={"button__red"}
