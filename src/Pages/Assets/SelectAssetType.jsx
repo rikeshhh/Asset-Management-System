@@ -20,7 +20,7 @@ export const SelectAssetType = ({
 }) => {
   const hasError = errors[name];
 
-  const assetType = ["hardware", "software"];
+  const assetType = ["Hardware", "Software"];
   return (
     <>
       <select

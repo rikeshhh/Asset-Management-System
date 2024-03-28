@@ -34,7 +34,14 @@
 .password-input__input--padding {
   padding-right: 2rem !important;
 }
-
+.signup__toggle_icons{
+  outline: none;
+  border: none;
+  background: none;
+  color: #383e47;
+  font-size: 1.2rem;
+  padding: 0.09rem 0.09rem;
+}
 @media screen and (max-width: 720px) {
   .user__auth {
     width: 100%;

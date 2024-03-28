@@ -85,7 +85,6 @@ const Assets = () => {
 
               {/* )} */}
             </>
-        <CustomToastContainer />
       </section>
     </>
   );

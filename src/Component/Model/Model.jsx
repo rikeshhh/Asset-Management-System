@@ -224,6 +224,38 @@ const Model = {
       message: "Please enter a valid alphanumeric string.",
     },
   },
+  reason: {
+    type: "string",
+    required: "Please enter a reason",
+    minLength: {
+      value: 1,
+      message: "Reason should be more than 1 character",
+    },
+    maxLength: {
+      value: 64,
+      message: "Reason should be less than 64 characters",
+    },
+    pattern: {
+      value: /^[a-zA-Z0-9\s]+$/,
+      message: "Please enter a valid alphanumeric string",
+    },
+  },
+  brandCompanyName: {
+    type: "string",
+    required: "Please enter a brand company name",
+    minLength: {
+      value: 1,
+      message: "Brand company name should be more than 1 character",
+    },
+    maxLength: {
+      value: 64,
+      message: "Brand company name should be less than 64 characters",
+    },
+    pattern: {
+      value: /^[a-zA-Z0-9\s]+$/,
+      message: "Please enter a valid brand name",
+    },
+  },
   department: {
     type: "string",
     required: "Please enter a Department name",

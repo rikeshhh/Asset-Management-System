@@ -15,6 +15,10 @@ import {
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { showHide } from "../../Component/Images/Image";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import { IoIosAdd, IoMdEye } from "react-icons/io";
+import { AiOutlineEyeInvisible } from "react-icons/ai";
+import { AiOutlineEye } from "react-icons/ai";
+
 /**
  * Login component responsible for rendering the login form and handling user authentication.
  * @returns {JSX.Element} JSX element representing the Login component.
@@ -116,8 +120,13 @@ const Login = () => {
                       showPassword={showPassword}
                       visiblePasswordFn={visiblePasswordFn}
                     >
-                      <button className="toggleBtn__login" type="button">
-                        <img src={showHide} alt="show-hide" />
+                      <button className="toggleBtn__-icon__login" type="button">
+                        {/* <img src={showHide} alt="show-hide" /> */}
+                        {!showPassword ? (
+                          <AiOutlineEyeInvisible />
+                        ) : (
+                          <AiOutlineEye />
+                        )}
                       </button>
                     </InputField>
                   </div>
