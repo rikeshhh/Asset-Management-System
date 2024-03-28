@@ -29,20 +29,23 @@ const AddProfile = () => {
   const fileInputRef = useRef(null);
 
   const [profileImage, setProfileImage] = useState(profileCover);
-  const [userProfileImage, setUserProfileImage] = useState();
+  const [userProfileImage, setUserProfileImage] = useState(null);
   const [selectedJobType, setSelectedJobType] = useState("Permanent");
-
+  const [deleteButtonDisabled, setDeleteButtonDisabled] = useState(true);
   const handleProfileUpdate = (e) => {
     const file = e.target.files[0];
     setUserProfileImage(file);
     if (file) {
       const profileUrl = URL.createObjectURL(file);
       setProfileImage(profileUrl);
+      setDeleteButtonDisabled(false);
     }
   };
 
   const deleteProfile = () => {
     setProfileImage(profileCover);
+    setUserProfileImage(null);
+    setDeleteButtonDisabled(true);
   };
 
   const handleButtonClick = () => {
@@ -82,23 +85,25 @@ const AddProfile = () => {
     setSelectedJobType(e.target.value);
   };
 
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const formattedDate = new Date();
 
-  useEffect(() => {
-    const timerID = setInterval(() => tick(), 1000);
-    return function cleanup() {
-      clearInterval(timerID);
-    };
-  });
+  // const [currentDate, setCurrentDate] = useState(new Date());
 
-  const tick = () => {
-    setCurrentDate(new Date());
-  };
+  // useEffect(() => {
+  //   const timerID = setInterval(() => tick(), 1000);
+  //   return function cleanup() {
+  //     clearInterval(timerID);
+  //   };
+  // });
 
-  const formattedDate = `${currentDate.getDate()} ${currentDate.toLocaleString(
-    "default",
-    { month: "long" }
-  )} ${currentDate.getFullYear()}`;
+  // const tick = () => {
+  //   setCurrentDate(new Date());
+  // };
+
+  // const formattedDate = `${currentDate.getDate()} ${currentDate.toLocaleString(
+  //   "default",
+  //   { month: "long" }
+  // )} ${currentDate.getFullYear()}`;
 
   return (
     <section className="content-wrapper">
@@ -111,22 +116,31 @@ const AddProfile = () => {
           <div className="user__profile--left">
             <div className="user__profile--image">
               <figure>
-                <img src={profileImage} alt="Profile Picture" />
+                <img src={profileImage} alt="Add Picture" />
+
                 <div className="profile__button--container">
                   <Button
                     type={"button"}
                     icon={<GoTrash />}
-                    className={"button__red profile__delete--button"}
+                    className={
+                      deleteButtonDisabled
+                        ? "dropzone_btn-none"
+                        : "button__red profile__delete--button"
+                    }
                     handleClick={deleteProfile}
-                    isDisabled={receivedState}
+                    isDisabled={deleteButtonDisabled}
                   />
                 </div>
               </figure>
+              {fileInputRef.current?.files.length === 0 && (
+                <span className="error-message">User image is required</span>
+              )}
               <input
                 type="file"
                 className="user__profile--none"
                 ref={fileInputRef}
                 accept=".jpg,.png"
+                required
                 onChange={handleProfileUpdate}
               />
               <Button
@@ -139,6 +153,7 @@ const AddProfile = () => {
                     : "button__blue upload__btn"
                 }
               />
+
               <span>
                 Max file size: 5MB <br /> Larger image will be resized
                 automatically. <br />
@@ -188,7 +203,14 @@ const AddProfile = () => {
                       checked={selectedJobType === "Permanent" ? true : false}
                     />
                   </div>
-                  <Label text="Permanent" />
+                  <Label
+                    text="Permanent"
+                    className={
+                      selectedJobType === "Permanent"
+                        ? "radio__label--checked"
+                        : ""
+                    }
+                  />
                 </div>
                 <div className="radio__label">
                   <div className="checkbox__input--label">
@@ -200,7 +222,14 @@ const AddProfile = () => {
                       checked={selectedJobType === "Temporary" ? true : false}
                     />
                   </div>
-                  <Label text="Temporary" />
+                  <Label
+                    text="Temporary"
+                    className={
+                      selectedJobType === "Temporary"
+                        ? "radio__label--checked"
+                        : ""
+                    }
+                  />
                 </div>
               </div>
             </div>
@@ -229,6 +258,7 @@ const AddProfile = () => {
                 isDisabled={receivedState}
                 isRequired={true}
                 name="department"
+                errors={errors}
               />
             </div>
             <div className="form__input--section">

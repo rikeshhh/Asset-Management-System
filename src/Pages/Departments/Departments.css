@@ -1,3 +1,6 @@
 .error__validation__outline {
   border: 1px solid var(--red);
 }
+/* select option[disabled] {
+  color: red !important;
+} */

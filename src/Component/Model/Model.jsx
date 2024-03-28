@@ -14,7 +14,7 @@ const Model = {
     pattern: {
       value:
         /^(?![^._-]*[-._][^._-]*[-._])[A-Za-z][A-Za-z0-9]*[-._]?[A-Za-z0-9]*$/,
-      message: "Please enter a valid username",
+      message: "Username must contain alphabet in the start",
     },
   },
   Name: {
@@ -43,7 +43,7 @@ const Model = {
       message: "Email must be less than 64 characters",
     },
     pattern: {
-      value: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+      value: /^[\w-]+(?:\.[\w-]+)*@(?!.*(?:\.[^.]+){2,})[\w-]+(?:\.[\w-]+)+$/,
       message: "Invalid Email. Please provide a valid email",
     },
   },
@@ -80,17 +80,18 @@ const Model = {
     type: "text",
     required: "Please enter a valid phone number",
     minLength: {
-      value: 6,
-      message: "Phone number must have 6 characters.",
+      value: 10,
+      message: "Phone number must have 10 characters.",
     },
     maxLength: {
-      value: 15,
-      message: "Phone number must be not more than 15 characters.",
+      value: 10,
+      message: "Phone number must be exactly of 10 characters.",
     },
     placeholder: "Enter your phone number",
     pattern: {
-      value: /^[0-9]+(\+)?$/,
-      message: "Phone number should only contain numbers",
+      value: /^(97|98)[0-9]*$/,
+      message:
+        "Phone number should only contain numbers and must start with 97/98",
     },
   },
   Designation: {

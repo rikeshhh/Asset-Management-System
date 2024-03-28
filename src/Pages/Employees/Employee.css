@@ -53,3 +53,18 @@
   line-height: 150%;
   letter-spacing: 0.00438rem;
 }
+
+.upload__btn--removed__margin {
+  margin: 0 !important;
+}
+
+/* .text--color--select {
+  color: var(--text-color) !important;
+ opacity: 0.8; 
+} */
+
+select:disabled {
+  color: var(--text-color) !important;
+  opacity: 0.8;
+  background: var(--disabled-input);
+}

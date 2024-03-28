@@ -1,15 +1,14 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getEmployeeTableData } from "./EmployeeApiSlice";
 import { selectUser } from "../Assets/AssetsApiSlice";
 
 const SelectInputDesignation = ({
-  // onChange,
-  // value,
   isDisabled,
   name,
   register,
   defaultValue,
+  isRequired,
+  errors,
 }) => {
   const { data: designationData } = useQuery({
     queryKey: ["userData"],
@@ -27,7 +26,7 @@ const SelectInputDesignation = ({
   return (
     <>
       <select
-        {...register(name, { required: true })}
+        {...register(name, { required: isRequired })}
         disabled={isDisabled}
         className={isDisabled ? "select__disabled" : "select__enabled"}
       >
@@ -55,6 +54,9 @@ const SelectInputDesignation = ({
           </>
         )}
       </select>
+      {errors[name] && (
+        <span className="error-message">"Please select designation"</span>
+      )}
     </>
   );
 };

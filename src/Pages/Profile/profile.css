@@ -102,6 +102,11 @@
   gap: 0.5rem;
 }
 
+.error-message {
+  color: var(--red) !important;
+  font-size: 14px !important;
+}
+
 /* .user__profile--form input {
   display: flex;
   padding: 1.09rem 1rem;
@@ -154,7 +159,12 @@
 .profile-btn-none {
   display: none;
 }
-
+.radio__label--checked {
+  color: var(--blue) !important;
+}
+.dropzone_btn-none {
+  display: none;
+}
 @media (width>1600px) {
   .user__profile--image {
     width: auto;
