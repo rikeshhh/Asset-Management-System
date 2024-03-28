@@ -67,7 +67,7 @@
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  color: var(--text-color);
+  color: var(--text-color) !important;
 }
 .data__empty {
   font-size: 40px;

@@ -11,8 +11,6 @@
 import { useForm } from "react-hook-form";
 import "../../Component/Filter/Filter.css";
 import { RxCross1 } from "react-icons/rx";
-import { useQuery } from "@tanstack/react-query";
-import { useSearchParams } from "react-router-dom";
 import { Label } from "../../Component/Label/Label";
 import SelectFilter from "../../Component/Filter/SelectFilter";
 import { SelectInput } from "../../Component/Input/SelectInput";
@@ -79,10 +77,7 @@ const FilterRepairReplace = ({
               <Label text={"Categories"} />
               <SelectFilter register={register} name="category" />
             </div>
-            {/* <div className="form__input--section ">
-              <Label text={"Status"} />
-              <SelectInput option={option} register={register} name="status" />
-            </div> */}
+
             <div className="form__input--section ">
               <Label text={"Status"} />
               <SelectInput
@@ -115,21 +110,12 @@ const FilterRepairReplace = ({
                 errors={errors}
                 type={Model.Date.type}
               />
-              {/* <input
-                type="date"
-                {...register("startDate")}
-                pattern="\d{4}-\d{2}-\d{2}"
-              />
-              <input
-                type="date"
-                {...register("endDate")}
-                pattern="\d{4}-\d{2}-\d{2}"
-              /> */}
             </div>
           </div>
           <div className="filter__button">
             <div className="filter__button--flex">
               <Button
+                type={"button"}
                 className="button__red"
                 text="Clear All Filter"
                 handleClick={() => {
@@ -139,7 +125,7 @@ const FilterRepairReplace = ({
                   });
                 }}
               />
-              {/* <Link to="/payment" state={receivedFeature} className="link"> */}
+
               <Button
                 type="submit"
                 className="button__blue"
