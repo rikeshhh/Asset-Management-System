@@ -52,7 +52,7 @@ export const Signup = () => {
       username: "",
       email: "",
       password: "",
-      RetypePassword: "",
+      retype_password: "",
     },
   });
   const {
@@ -177,11 +177,13 @@ export const Signup = () => {
                   <Label text="Retype Password" />
                   <div className="repassword-toggle--button">
                     <input
-                      className="retype-password password-input__input--padding"
+                      className={`retype-password password-input__input--padding ${
+                        errors["retype_password"] ? "input__error" : ""
+                      }`}
                       name="retype_password"
                       type={showResetPassword ? "text" : "password"}
                       placeholder="Enter your password again"
-                      {...register("RetypePassword", {
+                      {...register("retype_password", {
                         required: "Please retype your password",
                         validate: (value) =>
                           value === watch("password") ||
@@ -198,9 +200,9 @@ export const Signup = () => {
                       </button>
                     </div>
                   </div>
-                  {errors.RetypePassword && (
-                    <p className="retype__error">
-                      {errors.RetypePassword.message}
+                  {errors.retype_password && (
+                    <p className="retype__error error-message">
+                      {errors.retype_password.message}
                     </p>
                   )}
 
