@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../Component/Button/Button";
-import { GoTrash } from "react-icons/go";
-import { CiEdit } from "react-icons/ci";
-import { InputField } from "../../Component/Input/InputField";
-import { useForm } from "react-hook-form";
-import { FaCheck } from "react-icons/fa6";
-import SelectInputCategory from "../Categories/SelectInputCategory";
-import { RxCross1 } from "react-icons/rx";
+
 import ProductListTableItem from "./ProductList";
 import { IoMdAdd } from "react-icons/io";
 
@@ -16,17 +10,10 @@ const AddProcurementTable = ({
   setNewProcurement,
   newProcurement,
 }) => {
-  const {
-    register,
-    formState: { errors },
-    getValues,
-    reset,
-  } = useForm();
   const [isEditable, setIsEditable] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleAddProcurement = () => {
-    reset();
     setProcurementTableLine(true);
     setIsEditable(true);
     setNewProcurement([
@@ -46,8 +33,6 @@ const AddProcurementTable = ({
     setIsEditable(false);
     setNewProcurement(newProcurement.filter((_, idx) => idx !== index));
   };
-
-  console.log(newProcurement);
 
   return (
     <>
