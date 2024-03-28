@@ -235,7 +235,6 @@ const ReplaceDataTable = ({
           pageNumber={pageNumber}
         />
       )}
-      <CustomToastContainer />
     </>
   );
 };

@@ -24,67 +24,15 @@ import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import Model from "../../Component/Model/Model";
 
 const Assets = () => {
-  // Define state to manage the active state of a component
-  const [isActive, setIsActive] = useState(true);
-
-  // Extracting the pageNumber parameter from the URL using useParams hook
-  const { pageNumber } = useParams();
-
-  // Function to handle button click events and toggle the isActive state
-  const handleButtonClick = () => {
-    setIsActive((prev) => !prev);
-  };
-
-  // Define state to manage the visibility of the delete confirmation modal
-  const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
-
-  // Define state to store the ID of the assets to be deleted
-  const [assetsId, setAssetsId] = useState();
-
-  // Define state to manage the visibility of search items
-  const [showSearchItem, setShowSearchItem] = useState(true);
-
-  // Define state to manage the active button (e.g., hardware, software, etc.)
-  const [activeButton, setActiveButton] = useState("hardware");
-
-  // Access the navigate function from the react-router-dom package to handle navigation
-  const navigate = useNavigate();
-
-  /**
-   * Handles the click to navigate to software.
-   */
-  const handleSoftwareClick = () => {
-    navigate(`/assets/software/${pageNumber}`);
-  };
-
-  /**
-   * Handles the click to navigate to hardware.
-   */
-  const handleHardwareClick = () => {
-    navigate("/assets/*");
-  };
-
+ 
   return (
     <>
-    
       <section className="content-wrapper">
-       
-            <>
-              {/* {searchAssets ? (
-                <AssetsTableData
-                  handleDeleteClick={handleDeleteClick}
-                  handleProceedClick={handleProceedClick}
-                  tableData={searchAssets}
-                  isPending={isPending}
-                  assets_type='hardware'
-                />
-              ) : ( */}
-              <div className="">
-                <Outlet />
-              </div>
-
-              {/* )} */}
-            </>
+        <>
+          <div className="">
+            <Outlet />
+          </div>
+        </>
       </section>
     </>
   );

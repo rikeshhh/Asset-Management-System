@@ -230,7 +230,6 @@ const EditRepairReplace = () => {
           </form>
         </div>
       </div>
-      <CustomToastContainer />
     </section>
   );
 };

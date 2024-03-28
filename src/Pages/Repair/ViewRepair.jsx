@@ -238,7 +238,6 @@ const ViewRepair = () => {
           </form>
         </div>
       </div>
-      <CustomToastContainer />
     </section>
   );
 };

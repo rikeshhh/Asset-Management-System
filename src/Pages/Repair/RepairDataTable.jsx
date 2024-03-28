@@ -235,7 +235,6 @@ const RepairDataTable = ({
           pageNumber={pageNumber}
         />
       )}
-      <CustomToastContainer />
     </>
   );
 };

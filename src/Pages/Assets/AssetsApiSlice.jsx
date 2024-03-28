@@ -147,27 +147,6 @@ export const getAssetsData = async (
   }
 };
 
-export const getFilterData = async (categoryName, status, searchDate) => {
-  try {
-    const response = await instance({
-      method: "get",
-      url: "/assets",
-      params: {
-        name: categoryName,
-        status: status,
-        date: searchDate,
-      },
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
-    const filterData = response.data.data.data;
-    return filterData;
-  } catch (error) {
-    throw error;
-  }
-};
 
 //select user
 export const selectUser = async () => {
@@ -182,24 +161,6 @@ export const selectUser = async () => {
     });
     const userData = response.data.data.data;
     return userData;
-  } catch (error) {
-    throw error;
-  }
-};
-//sorting
-export const sortByStatus = async (status, assets_type, newOrder) => {
-  try {
-    const response = await instance.get(
-      `/assets?assets_type=${assets_type}&sortBy=${status}&order=${newOrder}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const searchData = response.data.data.data;
-    return searchData;
   } catch (error) {
     throw error;
   }

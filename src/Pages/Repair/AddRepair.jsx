@@ -201,7 +201,6 @@ const AddRepair = () => {
             </div>
           </form>
         </div>
-        <CustomToastContainer />
       </div>
     </section>
   );

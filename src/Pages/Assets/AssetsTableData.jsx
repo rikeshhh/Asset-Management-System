@@ -5,26 +5,14 @@ import {
   useNavigation,
   useSearchParams,
 } from "react-router-dom";
-import { GoTrash } from "react-icons/go";
-import { CiEdit } from "react-icons/ci";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import Button from "../../Component/Button/Button";
-import {
-  deleteAssetsTableData,
-  getAssetsTableData,
-  sortByStatus,
-} from "./AssetsApiSlice";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 import { useState } from "react";
-import { FaRegEye } from "react-icons/fa6";
 import Tablerow from "./Tablerow";
 import { LuArrowUpDown } from "react-icons/lu";
 import "./Assets.css";
-import { notifyError } from "../../Component/Toast/Toast";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 /**
  * Component to display assets data in a table format.
@@ -76,14 +64,6 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
       order: assetTableDataOrder === "asc" ? "desc" : "asc",
     });
   };
-  // if (!dataToRender || dataToRender.length === 0) {
-  //   return (
-  //     <tr>
-  //       <td colSpan={options.length + 1}>No DATA TO SHOW</td>
-  //     </tr>
-  //   );
-  // }
-
   return (
     <>
       <div className="table__container">

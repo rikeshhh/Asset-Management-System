@@ -19,10 +19,7 @@ import { InputField } from "../Input/InputField";
 import Model from "../Model/Model";
 import SelectInputCategory from "../../Pages/Categories/SelectInputCategory";
 import { useQuery } from "@tanstack/react-query";
-import {
-  getAssetsData,
-  getFilterData,
-} from "../../Pages/Assets/AssetsApiSlice";
+
 import { useSearchParams } from "react-router-dom";
 import SelectFilter from "./SelectFilter";
 

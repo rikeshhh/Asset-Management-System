@@ -88,25 +88,6 @@ const EditAssets = () => {
             className="assets__form--content"
           >
             <div className="form--content__right">
-              {/* <div className="assets__form--input">
-                <Label text="ID / Product Code" sup={"*"} />
-                <InputField
-                  name="productID"
-                  defaultValue={assetsData.id}
-                  register={register}
-                  required={Model.ProductCode.required}
-                  value={Model.ProductCode.pattern.value}
-                  message={Model.ProductCode.pattern.message}
-                  errors={errors}
-                  type={Model.ProductCode.type}
-                  placeholder={Model.ProductCode.placeholder}
-                  minLength={Model.ProductCode.value}
-                  minMessage={Model.ProductCode.minLength.message}
-                  maxLength={Model.ProductCode.maxLength.value}
-                  maxMessage={Model.ProductCode.maxLength.message}
-                />
-              </div> */}
-
               <div className="assets__form--input">
                 <Label text="Name / Title" sup={"*"} />
                 <InputField
