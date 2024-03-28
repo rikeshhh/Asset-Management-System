@@ -1,11 +1,6 @@
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { GoTrash } from "react-icons/go";
-// import { useMutation } from "@tanstack/react-query";
-// import { queryClient } from "../../Component/Query/Query";
-// import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
-import SelectInputDepartment from "../Departments/SelectInputDepartment";
 import { Label } from "../../Component/Label/Label";
 import { InputField } from "../../Component/Input/InputField";
 import Button from "../../Component/Button/Button";
@@ -17,7 +12,6 @@ import { useMutation } from "@tanstack/react-query";
 import { repairReplaceAdd } from "./RepairApiSlice";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
-import SelectFilterUser from "../Procurement/SelectFilterUser";
 import SelectUserRepair from "./SelectUserRepair";
 
 /**
@@ -41,21 +35,6 @@ const AddRepair = () => {
    * Handles the update of the profile picture.
    * @param {Object} e - The event object.
    */
-
-  /**
-   * Deletes the current profile picture.
-   */
-  // const deleteProfile = () => {
-  //   setProfileImage(profileCover);
-  // };
-
-  /**
-   * Handles the click event of the upload button.
-   */
-
-  // const handleButtonClick = () => {
-  //   fileInputRef.current.click();
-  // };
 
   const AddRepairReplace = useMutation({
     mutationFn: (repairReplaceData) => {
@@ -222,8 +201,8 @@ const AddRepair = () => {
             </div>
           </form>
         </div>
+        <CustomToastContainer />
       </div>
-      <CustomToastContainer />
     </section>
   );
 };

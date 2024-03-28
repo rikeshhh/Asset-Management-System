@@ -70,7 +70,7 @@ const EditRepairReplace = () => {
       }, 1000);
     },
     onError: (error) => {
-      notifyError(error.message);
+      notifyError(error.response.data.message.message.repairreplace);
     },
   });
   const [selectedType, setSelectedType] = useState(tableData.Type || "Repair");

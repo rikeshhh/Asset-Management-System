@@ -30,6 +30,9 @@ const FilterEmployee = ({
     if (data.designation || data.department) {
       setPage(1);
       designationSubmit(data);
+      setTimeout(() => {
+        handleClick();
+      }, 1000);
     } else {
       handleClick(); // Hide filter
     }

@@ -102,7 +102,7 @@ export const repairReplaceEdit = async (
     return response.data.data;
   } catch (error) {
     console.error("Axios error:", error);
-    throw { message: error.response.data.message.message.repairreplace };
+    throw error;
   }
 };
 
