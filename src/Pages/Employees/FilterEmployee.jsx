@@ -11,30 +11,38 @@ import SelectFilter from "../../Component/Filter/SelectFilter";
 import SelectInputDepartment from "../Departments/SelectInputDepartment";
 import { SearchInput } from "../../Component/SearchInput/SearchInput";
 import SelectInputDesignation from "./SelectDesignation";
-const FilterEmployee = ({ handleClick, filterShow, designationSubmit }) => {
+const FilterEmployee = ({
+  handleClick,
+  filterShow,
+  designationSubmit,
+  setPage,
+  setSearchParams,
+}) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm({
-    defaultValues: {
-      designation: "",
-      department: "",
-    },
-  });
+    watch,
+  } = useForm();
 
   const designationFilterSubmit = (data) => {
-    console.log("first", data);
-    designationSubmit(data);
+    if (data.designation || data.department) {
+      setPage(1);
+      designationSubmit(data);
+    } else {
+      handleClick(); // Hide filter
+    }
   };
   const handleResetForm = () => {
+    setSearchParams("");
     reset();
   };
 
   return (
     <>
-      <div className={`filter ${filterShow ? "open" : ""}`}>
+      <div className="filter__container" onClick={handleClick}></div>
+      <div className={`filter ${filterShow ? "open" : ""} `}>
         <div className="filter__heading">
           <h3>Filter</h3>
           <div className="filter__hide" onClick={handleClick}>
@@ -52,27 +60,15 @@ const FilterEmployee = ({ handleClick, filterShow, designationSubmit }) => {
                 register={register}
                 isRequired={false}
                 name="department"
+                errors={errors}
               />
             </div>
             <div>
-              {/* <div className="form__input--section">
-                <Label text="Designation" />
-                <InputField
-                  name="designation"
-                  register={register}
-                  value={Model.Designation.pattern.value}
-                  message={Model.Designation.pattern.message}
-                  required={false}
-                  errors={errors}
-                  type={Model.Designation.type}
-                  placeholder={Model.Designation.placeholder}
-                  isDisabled={false}
-                />
-              </div> */}
               <SelectInputDesignation
                 register={register}
                 isRequired={false}
                 name="designation"
+                errors={errors}
               />
             </div>
           </div>
@@ -80,14 +76,27 @@ const FilterEmployee = ({ handleClick, filterShow, designationSubmit }) => {
             <div className="filter__button--flex">
               <Button
                 type="button"
+                // className={
+                //   watch("department") || watch("designation")
+                //     ? "button__red"
+                //     : "user__profile--file-disabled"
+                // }
+                // isDisabled={!watch("department") && !watch("designation")}
+
                 className="button__red"
                 text="Clear All Filter"
                 handleClick={handleResetForm}
               />
               <Button
                 type="submit"
+                // className={
+                //   watch("department") || watch("designation")
+                //     ? "button__blue"
+                //     : "user__profile--file-disabled"
+                // }
                 className="button__blue"
                 text="Apply Filter"
+                // isDisabled={!watch("department") && !watch("designation")}
               />
             </div>
           </div>

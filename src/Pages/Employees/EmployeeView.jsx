@@ -14,6 +14,7 @@ import DateComponent from "../../Component/FormatDate/Date";
 import { useQuery } from "@tanstack/react-query";
 import { getEmployeeTableData } from "./EmployeeApiSlice";
 import ImagePath from "../../Component/Images/ImagePath";
+import SelectInputDepartment from "../Departments/SelectInputDepartment";
 /**
  * Functional component for viewing user profile information.
  * @returns {JSX.Element} The JSX representation of the component.
@@ -32,28 +33,8 @@ const EmployeeView = () => {
   } = useForm();
 
   const receivedState = true;
-  // const image = {<ImagePath file = {viewEmployeeData.user_image} />}
-  // console.log(viewEmployeeData.user_image);
-  /**
-   * Handles the update of the profile image when a new file is selected.
-   * @param {React.ChangeEvent<HTMLInputElement>} e - The change event from the file input.
-   */
 
   const date = viewEmployeeData.created_at;
-  const [profileImage, setProfileImage] = useState(profileCover);
-
-  const [selectedJobType, setSelectedJobType] = useState(
-    viewEmployeeData.job_type || ""
-  );
-
-  // const [profileImage, setProfileImage] = useState(profileCover);
-  // const file = viewEmployeeData.user_image ? viewEmployeeData.user_image : "";
-  // const backendUrl = import.meta.env.VITE_APP_AMS_API;
-  // const userProfile = `${backendUrl}/image?image_path=${file}`;
-  // console.log("userProfile", userProfile);
-
-  // console.log("profileImage", profileImage.user_image);
-  console.log(viewEmployeeData);
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -68,23 +49,13 @@ const EmployeeView = () => {
           <div className="user__profile--left">
             <div className="user__profile--image">
               <figure>
-                {/* <img src={profileImage} alt="Profile Image" /> */}
                 <ImagePath
                   file={
                     viewEmployeeData.user_image
                       ? viewEmployeeData.user_image
                       : " "
                   }
-                  state={{ profileImage, setProfileImage }}
                 />
-                <div className="profile__button--container">
-                  <Button
-                    type={"button"}
-                    icon={<GoTrash />}
-                    className={"button__red profile__delete--button"}
-                    isDisabled={receivedState}
-                  />
-                </div>
               </figure>
 
               <Button
@@ -92,7 +63,7 @@ const EmployeeView = () => {
                 isDisabled={receivedState}
                 className={
                   receivedState
-                    ? "user__profile--file-disabled"
+                    ? "user__profile--file-disabled upload__btn--removed__margin"
                     : "button__blue upload__btn"
                 }
               />
@@ -196,12 +167,19 @@ const EmployeeView = () => {
 
             <div className="form__input--section">
               <Label sup={"*"} text="Department" />
-              <select name="" id="" disabled className="view-profile__select">
+              <select name="" id="" disabled className="input-disabled ">
                 <option>{viewEmployeeData.department.name}</option>
               </select>
+              {/* <SelectInputDepartment
+                isDisabled={receivedState}
+                register={register}
+                defaultValue={viewEmployeeData.department}
+                errors={errors}
+                name="department"
+              /> */}
             </div>
 
-            <div className="form__input--section toggleBtn__email__parent">
+            <div className="form__input--section">
               <Label sup={"*"} text="Email" />
               <InputField
                 name="email"

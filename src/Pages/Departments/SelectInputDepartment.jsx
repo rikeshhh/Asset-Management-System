@@ -12,7 +12,8 @@ const SelectInputDepartment = ({
   defaultValue,
   name,
   isRequired,
-  // onChange
+  errors,
+  onChange,
 }) => {
   const { data: DepartmentData } = useQuery({
     queryKey: ["selectInputDepartmentData"],
@@ -20,31 +21,44 @@ const SelectInputDepartment = ({
   });
 
   return (
-    <select
-      {...register(name)}
-      disabled={isDisabled}
-      className={`${isDisabled ? "input-disabled" : "input-enabled"}`}
-      required={isRequired}
-    >
-      {defaultValue ? null : (
-        <option value="" disabled selected>
-          Select the Department
-        </option>
-      )}
-
-      {defaultValue && (
-        <option className="select__option" value={defaultValue.id}>
-          {defaultValue.name}
-        </option>
-      )}
-
-      {DepartmentData &&
-        DepartmentData.map((option) => (
-          <option className="select__option" key={option.id} value={option.id}>
-            {option.department}
+    <>
+      <select
+        {...register(name, { required: isRequired })}
+        disabled={isDisabled}
+        className={`${isDisabled ? "input-disabled" : "input-enabled"} ${
+          errors[name] ? "error__validation__outline" : ""
+        }`}
+      >
+        {defaultValue ? null : (
+          <option value="" disabled selected>
+            Select the Department
           </option>
-        ))}
-    </select>
+        )}
+
+        {defaultValue && (
+          <option className="select__option" value={defaultValue.id}>
+            {defaultValue.name}
+          </option>
+        )}
+
+        {DepartmentData && (
+          <>
+            {DepartmentData.map((option) => (
+              <option
+                className="select__option"
+                key={option.id}
+                value={option.id}
+              >
+                {option.department}
+              </option>
+            ))}
+          </>
+        )}
+      </select>
+      {errors[name] && (
+        <span className="error-message">Please select department</span>
+      )}
+    </>
   );
 };
 

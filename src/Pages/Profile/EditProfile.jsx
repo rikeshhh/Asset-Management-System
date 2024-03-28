@@ -43,10 +43,12 @@ const EditProfile = () => {
 
   const [profileImage, setProfileImage] = useState();
   const [userProfileImage, setUserProfileImage] = useState();
+  const [imageReceived, setImageReceived] = useState(employeeData.user_image);
 
   const [selectedJobType, setSelectedJobType] = useState(
     employeeData.job_type || ""
   );
+  const [deleteButtonDisabled, setDeleteButtonDisabled] = useState(true);
 
   /**
    * Handles the update of the profile picture.
@@ -59,6 +61,7 @@ const EditProfile = () => {
       setUserProfileImage(file);
       const profileUrl = URL.createObjectURL(file);
       setProfileImage(profileUrl);
+      setDeleteButtonDisabled(false);
     }
   };
   const date = employeeData.created_at;
@@ -73,6 +76,9 @@ const EditProfile = () => {
    */
   const deleteProfile = () => {
     setProfileImage(profileCover || null);
+    setUserProfileImage(null);
+    setImageReceived(null);
+    setDeleteButtonDisabled(true);
   };
 
   /**
@@ -99,7 +105,7 @@ const EditProfile = () => {
       }, 1000);
     },
     onError: (error) => {
-      notifyError(error.response.data.message.message.edit_user);
+      notifyError(error.response.data.message.message.user);
     },
   });
 
@@ -111,9 +117,7 @@ const EditProfile = () => {
     const employeeEditInfo = {
       id: employeePrevId,
       employeeData: data,
-      employeeImage: userProfileImage
-        ? userProfileImage
-        : employeeData.user_image,
+      employeeImage: userProfileImage ? userProfileImage : imageReceived,
       jobType: selectedJobType,
     };
     EditEmployeeData.mutate(employeeEditInfo);
@@ -132,7 +136,7 @@ const EditProfile = () => {
                 {profileImage ? (
                   <img src={profileImage} alt="Profile Picture" />
                 ) : (
-                  <ImagePath file={employeeData.user_image} />
+                  <ImagePath file={imageReceived} />
                 )}
                 <div className="profile__button--container">
                   <Button
@@ -253,6 +257,7 @@ const EditProfile = () => {
                 defaultValue={employeeData.department}
                 name="department"
                 isRequired={true}
+                errors={errors}
               />
             </div>
             <div className="form__input--section">

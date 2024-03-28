@@ -43,6 +43,7 @@ const Employees = () => {
    * React Query hook for handling employee deletion mutation.
    */
   // const [page, setPage] = useState(1);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const params = new URLSearchParams(searchParams);
 
@@ -50,7 +51,7 @@ const Employees = () => {
   const itemsPerPage = 7;
 
   const searchUser = params.get("Search") || "";
-  const order = params.get("orderby") || "ASC";
+  const order = params.get("orderby") || "DESC";
   const sortData = params.get("sortBy") || "id";
   const selectedDepartment = params.get("department") || "";
   const searchedDesignation = params.get("designation") || "";
@@ -109,7 +110,7 @@ const Employees = () => {
       queryClient.invalidateQueries("EmployeeData");
     },
     onError: (error) => {
-      notifyError(error.message);
+      notifyError(error.response.data.message.message.user);
     },
   });
 
@@ -200,6 +201,8 @@ const Employees = () => {
               handleClick={() => onFilterClick(!filterShow)}
               // filterShow={filterShow}
               designationSubmit={filterSubmit}
+              setPage={setPage}
+              setSearchParams={setSearchParams}
             />
           ) : (
             <></>
