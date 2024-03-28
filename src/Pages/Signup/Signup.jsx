@@ -11,6 +11,8 @@ import { useMutation } from "@tanstack/react-query";
 import { postData } from "./SignupApiSlice";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
+import { AiOutlineEyeInvisible } from "react-icons/ai";
+import { AiOutlineEye } from "react-icons/ai";
 /**
  * Signup component for user registration.
 
@@ -168,8 +170,15 @@ export const Signup = () => {
                     showPassword={showPassword}
                     visiblePasswordFn={visiblePasswordFn}
                   >
-                    <button className="toggleBtn__signUp" type="button">
-                      <img src={showHide} alt="show-hide" />
+                    <button
+                      className="toggleBtn__signUp signup__toggle_icons"
+                      type="button"
+                    >
+                      {!showPassword ? (
+                        <AiOutlineEyeInvisible />
+                      ) : (
+                        <AiOutlineEye />
+                      )}
                     </button>
                   </InputField>
                 </div>
@@ -193,10 +202,14 @@ export const Signup = () => {
                     <div className="retype-password--showHide--btn">
                       <button
                         onClick={visibleResetPasswordFn}
-                        className="toggleBtn__signUp__retype__password"
+                        className="toggleBtn__signUp__retype__password signup__toggle_icons"
                         type="button"
                       >
-                        <img src={showHide} alt="show-hide" />
+                        {!showPassword ? (
+                          <AiOutlineEyeInvisible />
+                        ) : (
+                          <AiOutlineEye />
+                        )}
                       </button>
                     </div>
                   </div>

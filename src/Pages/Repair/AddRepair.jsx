@@ -177,14 +177,14 @@ const AddRepair = () => {
               <InputField
                 name="reason"
                 register={register}
-                value={Model.location.pattern.value}
-                message={Model.location.pattern.message}
+                value={Model.reason.pattern.value}
+                message={Model.reason.pattern.message}
                 required={"Reason for Repair/Replace is required"}
                 errors={errors}
-                type={Model.location.type}
+                type={Model.reason.type}
                 placeholder={"Enter what happened to this device"}
-                maxLength={Model.location.maxLength.value}
-                maxMessage={Model.location.maxLength.message}
+                maxLength={Model.reason.maxLength.value}
+                maxMessage={Model.reason.maxLength.message}
                 isDisabled={receivedState}
               />
             </div>

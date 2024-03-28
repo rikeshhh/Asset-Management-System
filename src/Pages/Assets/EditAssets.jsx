@@ -163,15 +163,15 @@ const EditAssets = () => {
                   register={register}
                   // required="Please enter Brand/Company "
                   defaultValue={assetsData.brand}
-                  value="^[a-zA-Z0-9]+$"
-                  message="Name should be alphaNumeric"
+                  value={Model.brandCompanyName.pattern.value}
+                  message={Model.brandCompanyName.pattern.message}
                   errors={errors}
-                  type="text"
+                  type={Model.brandCompanyName.type}
                   placeholder="Enter the brand / company of the assets"
-                  minLength="1"
-                  minMessage="Minimum length should be 1"
-                  maxLength="10"
-                  maxMessage="Maximum length is 10"
+                  minLength={Model.brandCompanyName.minLength.value}
+                  minMessage={Model.brandCompanyName.minLength.message}
+                  maxLength={Model.brandCompanyName.maxLength.value}
+                  maxMessage={Model.brandCompanyName.maxLength.message}
                 />
               </div>
               <div className="assets__form--input">
@@ -193,7 +193,7 @@ const EditAssets = () => {
                 />
               </div>
               <div className="assets__form--input">
-                <Label text="Status"  />
+                <Label text="Status" />
                 <label className={`switch ${isActive ? "active" : "inactive"}`}>
                   <input
                     {...register("status")}

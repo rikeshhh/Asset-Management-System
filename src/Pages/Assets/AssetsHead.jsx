@@ -1,9 +1,22 @@
 import React, { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
-import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import Button from "../../Component/Button/Button";
 
 const AssetsHead = () => {
+  const location = useLocation();
+
+  // Define state to manage the active button (e.g., hardware, software, etc.)
+  const [isCompActive, setIsCompActive] = useState(
+    location.pathname.includes("software") ? "Software" : "Hardware"
+  );
+
   // Define state to store the ID of the assets to be deleted
   const [assetsId, setAssetsId] = useState();
 
@@ -19,7 +32,6 @@ const AssetsHead = () => {
   /**
    * Handles the click to navigate to software.
    */
-  
 
   /**
    * Handles the click to navigate to hardware.
@@ -27,7 +39,6 @@ const AssetsHead = () => {
   const handleHardwareClick = () => {
     navigate("/assets/*");
   };
-  const [isCompActive, setIsCompActive] = useState("Hardware");
 
   return (
     <section>
@@ -47,28 +58,29 @@ const AssetsHead = () => {
           <div className="assets__navigation">
             <NavLink
               to="/assets/hardware"
-              onClick={()=>{setIsCompActive("Hardware")}}
+              onClick={() => {
+                setIsCompActive("Hardware");
+              }}
               className={
-              isCompActive ==="Hardware" ? "assets__active" : "assets__inactive"
+                isCompActive === "Hardware"
+                  ? "assets__active"
+                  : "assets__inactive"
               }
             >
-              <Button
-                text="Hardware"
-                handleClick={handleHardwareClick}
-                className="assets__btn"
-              />
+              <Button text="Hardware" className="assets__btn" />
             </NavLink>
             <NavLink
               to="/assets/software"
-              onClick={()=>{setIsCompActive("Software")}}
+              onClick={() => {
+                setIsCompActive("Software");
+              }}
               className={
-              isCompActive ==="Software" ? "assets__active" : "assets__inactive"
+                isCompActive === "Software"
+                  ? "assets__active"
+                  : "assets__inactive"
               }
             >
-              <Button
-                text="Software"
-                className="assets__btn"
-              />
+              <Button text="Software" className="assets__btn" />
             </NavLink>
           </div>
           <div>

@@ -219,9 +219,7 @@ const ViewAssets = () => {
                     disabled={true}
                   />
                   <span className="slider"></span>
-                  <span className="status">
-                    {isActive ? "Active" : "Inactive"}
-                  </span>
+                  <span className="status">{assetsData.status}</span>
                 </label>
               </div>
               <div className="assets__form--input">

@@ -95,8 +95,6 @@ const AssetsForm = () => {
           className="assets__form--content"
         >
           <div className="form--content__right">
-           
-
             <div className="assets__form--input">
               <Label text="Name / Title" sup={"*"} />
               <InputField
@@ -137,7 +135,7 @@ const AssetsForm = () => {
                 categoryName={categoryName}
                 name="sub_category"
                 register={register}
-                isDisabled={!categoryName || categoryName.trim() === ''}
+                isDisabled={!categoryName || categoryName.trim() === ""}
               />
             </div>
           </div>
@@ -147,27 +145,35 @@ const AssetsForm = () => {
               <InputField
                 name="brandCompany"
                 register={register}
-                value={Model.Group.pattern.value}
-                message={Model.Group.pattern.message}
+                value={Model.brandCompanyName.pattern.value}
+                message={Model.brandCompanyName.pattern.message}
                 errors={errors}
-                type={Model.Group.type}
+                type={Model.brandCompanyName.type}
                 placeholder="Enter the brand / company of the assets"
-                minLength={Model.Group.minLength.value}
-                minMessage={Model.Group.minLength.message}
-                maxLength={Model.Group.maxLength.value}
-                maxMessage={Model.Group.maxLength.message}
+                minLength={Model.brandCompanyName.minLength.value}
+                minMessage={Model.brandCompanyName.minLength.message}
+                maxLength={Model.brandCompanyName.maxLength.value}
+                maxMessage={Model.brandCompanyName.maxLength.message}
               />
             </div>
             <div className="assets__form--input">
               <Label text="Location" sup={"*"} />
-              <SelectInputLocation register={register} name="location" errors={errors}/>
+              <SelectInputLocation
+                register={register}
+                name="location"
+                errors={errors}
+              />
             </div>
             <div className="assets__form--input">
               <Label text="Assigned to" sup={"*"} />
-              <SelectInputUser name="assigned_to" register={register} errors={errors}/>
+              <SelectInputUser
+                name="assigned_to"
+                register={register}
+                errors={errors}
+              />
             </div>
             <div className="assets__form--input ">
-              <Label text="Status"  />
+              <Label text="Status" />
               <label className={`switch ${isActive ? "active" : "inactive"}`}>
                 <input
                   {...register("status")}
