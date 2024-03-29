@@ -27,6 +27,7 @@ const FilterEmployee = ({
   } = useForm();
 
   const designationFilterSubmit = (data) => {
+    console.log("data", "data", data);
     if (data.designation || data.department) {
       setPage(1);
       designationSubmit(data);
@@ -67,6 +68,8 @@ const FilterEmployee = ({
               />
             </div>
             <div>
+              <Label text={"Designation"} />
+
               <SelectInputDesignation
                 register={register}
                 isRequired={false}
@@ -79,27 +82,14 @@ const FilterEmployee = ({
             <div className="filter__button--flex">
               <Button
                 type="button"
-                // className={
-                //   watch("department") || watch("designation")
-                //     ? "button__red"
-                //     : "user__profile--file-disabled"
-                // }
-                // isDisabled={!watch("department") && !watch("designation")}
-
                 className="button__red"
                 text="Clear All Filter"
                 handleClick={handleResetForm}
               />
               <Button
                 type="submit"
-                // className={
-                //   watch("department") || watch("designation")
-                //     ? "button__blue"
-                //     : "user__profile--file-disabled"
-                // }
                 className="button__blue"
                 text="Apply Filter"
-                // isDisabled={!watch("department") && !watch("designation")}
               />
             </div>
           </div>

@@ -80,18 +80,18 @@ const Model = {
     type: "text",
     required: "Please enter a valid phone number",
     minLength: {
-      value: 10,
-      message: "Phone number must have 10 characters.",
+      value: 14,
+      message: "Phone number must have +977 and 10 numbers.",
     },
     maxLength: {
-      value: 10,
-      message: "Phone number must be exactly of 10 characters.",
+      value: 14,
+      message: "Phone number must have +977 and 10 numbers.",
     },
     placeholder: "Enter your phone number",
     pattern: {
-      value: /^(97|98)[0-9]*$/,
+      value: /^\+977(97|98)[0-9]*$/,
       message:
-        "Phone number should only contain numbers and must start with 97/98",
+        "Phone number should only contain numbers and must start with +977 followed by 97/98",
     },
   },
   Designation: {
@@ -99,16 +99,17 @@ const Model = {
     required: "Please enter your designation",
     placeholder: "Enter your designation",
     minLength: {
-      value: 4,
-      message: "Designation must be at least 4 characters",
+      value: 1,
+      message: "Designation must have at least 1 characters",
     },
     maxLength: {
       value: 20,
-      message: "Designation should be less than 20 characters",
+      message: "Designation should be less than 64 characters",
     },
     pattern: {
-      value: "^[a-zA-Z0-9 ]+$",
-      message: "Please enter a valid designation",
+      value: "^[a-zA-Z ]+$",
+      message:
+        "Please enter a valid designation and only alphabets are allowed",
     },
   },
   Group: {

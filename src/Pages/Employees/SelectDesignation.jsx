@@ -31,18 +31,11 @@ const SelectInputDesignation = ({
         className={isDisabled ? "select__disabled" : "select__enabled"}
       >
         {defaultValue ? null : (
-          <option value="" disabled selected>
-            Select the Designation
+          <option value="" selected>
+            None
           </option>
         )}
-        {/* Render the default option outside of the map function */}
-        {/* {defaultValue && (
-          <option className="select__option" value={defaultValue.id}>
-            {defaultValue.name}
-          </option>
-        )} */}
 
-        {/* Map over the LocationData array and render each location option */}
 
         {designationFilter && (
           <>

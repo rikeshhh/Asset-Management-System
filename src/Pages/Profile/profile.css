@@ -165,6 +165,9 @@
 .dropzone_btn-none {
   display: none;
 }
+.user__profile--remove-margin {
+  margin-top: 0 !important;
+}
 @media (width>1600px) {
   .user__profile--image {
     width: auto;
