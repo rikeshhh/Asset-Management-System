@@ -13,7 +13,6 @@ const SelectInputDepartment = ({
   name,
   isRequired,
   errors,
-  onChange,
 }) => {
   const { data: DepartmentData } = useQuery({
     queryKey: ["selectInputDepartmentData"],
@@ -28,16 +27,11 @@ const SelectInputDepartment = ({
         className={`${isDisabled ? "input-disabled" : "input-enabled"} ${
           errors[name] ? "error__validation__outline" : ""
         }`}
+        defaultValue={(defaultValue && defaultValue.id) || defaultValue}
       >
-        {defaultValue ? null : (
-          <option value="" selected>
+        {!defaultValue && (
+          <option value="" selected disabled>
             None
-          </option>
-        )}
-
-        {defaultValue && (
-          <option className="select__option" value={defaultValue.id}>
-            {defaultValue.name}
           </option>
         )}
 
