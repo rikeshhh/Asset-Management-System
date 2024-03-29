@@ -192,6 +192,7 @@ const EditRepairReplace = () => {
                       value="Replace"
                       onChange={handleRadioChange}
                       checked={selectedType === "Replace"}
+
                     />
                   </div>
                   <Label text="Replace" />

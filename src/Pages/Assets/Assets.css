@@ -22,7 +22,10 @@
   font-size: 14px;
   color: var(--text-color) !important;
 }
-
+.boldy {
+  color: var(--blue);
+  font-weight: 600;
+}
 .select__disabled {
   padding: 1.09rem 1rem;
   width: 100%;
@@ -79,7 +82,6 @@
 .assets__switch {
   display: flex;
   align-items: center;
-  
 }
 /* 
 .switch {
