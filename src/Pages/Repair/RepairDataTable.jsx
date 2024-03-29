@@ -137,7 +137,7 @@ const RepairDataTable = ({
     <>
       {deleteConfirationShow && (
         <DeleteConfirmation
-          deleteName="Repair"
+          deleteName="Repair Request"
           handleCancelClick={handleCancelClick}
           handleProceedClick={handleProceedClick}
         />

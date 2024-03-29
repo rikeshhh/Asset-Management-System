@@ -137,7 +137,7 @@ const ReplaceDataTable = ({
     <>
       {deleteConfirationShow && (
         <DeleteConfirmation
-          deleteName="Replace"
+          deleteName="Replace Request"
           handleCancelClick={handleCancelClick}
           handleProceedClick={handleProceedClick}
         />

@@ -79,6 +79,8 @@ const AddRepair = () => {
         </div>
         <div className="user__profile--body">
           <div className="user__profile--left">
+            <Label text="Upload current asset image" />
+
             <DropzoneArea name="product_image" setValue={setValue} />
           </div>
 
@@ -153,7 +155,6 @@ const AddRepair = () => {
                       value="Repair"
                       onChange={handleRadioChange}
                       checked={selectedType === "Repair"}
-
                     />
                   </div>
                   <Label text="Repair" />
@@ -191,7 +192,10 @@ const AddRepair = () => {
             </div>
 
             <div className={"user__profile--btn-right user__profile--btn"}>
-              <Button text={`Send for ${selectedType}`} className={"button__blue"} />
+              <Button
+                text={`Send for ${selectedType}`}
+                className={"button__blue"}
+              />
               <Link to="/repair" className="link">
                 <Button
                   className={"button__red"}
