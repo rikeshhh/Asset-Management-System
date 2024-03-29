@@ -42,8 +42,16 @@ const ProcurementForm = () => {
     },
   });
 
-  const [procurementTableLine, setProcurementTableLine] = useState(false);
-  const [newProcurement, setNewProcurement] = useState([]);
+  const [procurementTableLine, setProcurementTableLine] = useState(true);
+  const [newProcurement, setNewProcurement] = useState([
+    {
+      product_name: "",
+      category_id: "None",
+      brand: "",
+      estimated_price: "",
+      link: "",
+    },
+  ]);
 
   const submitProcurement = (formData) => {
     const procurementForm = {

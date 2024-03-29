@@ -14,6 +14,7 @@ import Tablerow from "./Tablerow";
 import { LuArrowUpDown } from "react-icons/lu";
 import "./Assets.css";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import { EmptyData } from "../../Component/EmptyData/EmptyData";
 /**
  * Component to display assets data in a table format.
  * @param {object} props - Component props
@@ -101,14 +102,7 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
                 <Tablerow key={index} tableItem={tableItem} />
               ))
             ) : (
-              <tr>
-                <td colSpan="8" className="empty-table-cell">
-                  <div className="empty-table-message">
-                    <p className="">No data available</p>
-                    <p>Please try again later or refresh the page</p>
-                  </div>
-                </td>
-              </tr>
+              <EmptyData />
             )}
           </tbody>
         </table>

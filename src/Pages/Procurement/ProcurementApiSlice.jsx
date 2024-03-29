@@ -62,9 +62,10 @@ export const procurementAdd = async (procurementForm) => {
 };
 
 export const procurementEdit = async (editProcurementData) => {
+  console.log("api", editProcurementData.deletedId);
   try {
     const response = await instance.put(
-      `/procurement?id=${editProcurementData.id}&deleteId=${deleteParams}`,
+      `/procurement?id=${editProcurementData.id}&deleteId=${editProcurementData.deletedId}`,
       {
         requested_by_id: editProcurementData.formData.requested_by,
         status: "pending",
