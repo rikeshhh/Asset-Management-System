@@ -43,13 +43,14 @@ const EditProfile = () => {
   const fileInputRef = useRef(null);
 
   const [profileImage, setProfileImage] = useState();
-  const [userProfileImage, setUserProfileImage] = useState();
-  const [imageReceived, setImageReceived] = useState(employeeData.user_image);
+  const [userProfileImage, setUserProfileImage] = useState(null);
+  const [imageReceived, setImageReceived] = useState(
+    employeeData.user_image || null
+  );
 
   const [selectedJobType, setSelectedJobType] = useState(
     employeeData.job_type || ""
   );
-  const [deleteButtonDisabled, setDeleteButtonDisabled] = useState(true);
 
   /**
    * Handles the update of the profile picture.
@@ -57,18 +58,17 @@ const EditProfile = () => {
    */
 
   const handleProfileUpdate = (e) => {
+    setImageFlag(false);
     const file = e.target.files[0];
+    console.log(file);
     if (file) {
       setUserProfileImage(file);
       const profileUrl = URL.createObjectURL(file);
       setProfileImage(profileUrl);
-      setDeleteButtonDisabled(false);
     }
   };
   const date = employeeData.created_at;
 
-  // console.log("userProfileImage", userProfileImage);
-  // console.log("user  ProfileImage", employeeData.user_image);
   const handleRadioChange = (e) => {
     setSelectedJobType(e.target.value);
   };
@@ -76,10 +76,13 @@ const EditProfile = () => {
    * Deletes the current profile picture.
    */
   const deleteProfile = () => {
-    setProfileImage();
+    setImageFlag(true);
+    setProfileImage(null);
     setUserProfileImage(null);
     setImageReceived(null);
-    setDeleteButtonDisabled(true);
+    // if (typeof imageReceived === "string") {
+    //   setImageReceived(null);
+    // }
   };
 
   /**
@@ -123,6 +126,7 @@ const EditProfile = () => {
     };
     EditEmployeeData.mutate(employeeEditInfo);
   };
+  console.log("userProfileImage", typeof userProfileImage);
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -137,42 +141,52 @@ const EditProfile = () => {
                 {profileImage ? (
                   <img src={profileImage} alt="Profile Picture" />
                 ) : (
-                  <ImagePath
-                    setImageFlag={setImageFlag}
-                    file={imageReceived}
-                  />
+                  <ImagePath setImageFlag={setImageFlag} file={imageReceived} />
                 )}
-                <div className="profile__button--container">
-                  <Button
-                    type={"button"}
-                    icon={<GoTrash />}
-                    className={"button__red profile__delete--button"}
-                    handleClick={deleteProfile}
-                    isDisabled={receivedState}
-                  />
-                </div>
+                {imageFlag ? (
+                  <></>
+                ) : (
+                  <div className="profile__button--container">
+                    <Button
+                      type={"button"}
+                      icon={<GoTrash />}
+                      className={
+                        userProfileImage || imageReceived
+                          ? "button__red profile__delete--button"
+                          : "dropzone_btn-none"
+                      }
+                      handleClick={deleteProfile}
+                    />
+                  </div>
+                )}
               </figure>
-              <input
-                type="file"
-                className="user__profile--none"
-                ref={fileInputRef}
-                accept=".jpg,.png"
-                onChange={handleProfileUpdate}
-              />
+              {imageFlag ? (
+                <input
+                  type="file"
+                  className="user__profile--none"
+                  ref={fileInputRef}
+                  accept=".jpg,.png,.webp"
+                  onChange={handleProfileUpdate}
+                />
+              ) : (
+                <></>
+              )}
+
               <Button
                 text={"Upload new photo"}
                 handleClick={handleButtonClick}
-                isDisabled={receivedState}
+                isDisabled={imageFlag ? false : true}
                 className={
-                  receivedState
-                    ? "user__profile--file-disabled"
+                  !imageFlag
+                    ? "user__profile--file-disabled user__profile--remove-margin"
                     : "button__blue upload__btn"
                 }
               />
+
               <span>
-                Max file size: 3MB <br /> Larger image will be resized
+                Max file size: 5MB <br /> Larger image will be resized
                 automatically. <br />
-                Supported File Type: JPG, PNG
+                Supported File Type: JPG, PNG,WEBP
               </span>
               <p>
                 <span style={{ fontSize: "0.875rem" }}>Created on: </span>{" "}
@@ -218,7 +232,14 @@ const EditProfile = () => {
                       checked={selectedJobType === "Permanent"}
                     />
                   </div>
-                  <Label text="Permanent" />
+                  <Label
+                    text="Permanent"
+                    className={
+                      selectedJobType === "Permanent"
+                        ? "radio__label--checked"
+                        : ""
+                    }
+                  />
                 </div>
                 <div className="radio__label">
                   <div className="checkbox__input--label">
@@ -230,7 +251,14 @@ const EditProfile = () => {
                       checked={selectedJobType === "Temporary"}
                     />
                   </div>
-                  <Label text="Temporary" />
+                  <Label
+                    text="Temporary"
+                    className={
+                      selectedJobType === "Temporary"
+                        ? "radio__label--checked"
+                        : ""
+                    }
+                  />
                 </div>
               </div>
             </div>

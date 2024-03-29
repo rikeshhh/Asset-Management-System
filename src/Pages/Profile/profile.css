@@ -161,9 +161,13 @@
 }
 .radio__label--checked {
   color: var(--blue) !important;
+  font-weight: 600 !important;
 }
 .dropzone_btn-none {
   display: none;
+}
+.user__profile--remove-margin {
+  margin-top: 0 !important;
 }
 @media (width>1600px) {
   .user__profile--image {

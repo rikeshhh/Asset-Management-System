@@ -24,6 +24,7 @@ const EmployeeDataTable = ({
   error,
   isPending,
   handleSort,
+  selectedColumn,
 }) => {
   /**
    * Handles deleting an employee.
@@ -47,7 +48,7 @@ const EmployeeDataTable = ({
   };
   // If an error occurs during data fetching, display an error message.
   if (error) return "An error has occurred: " + error.message;
-  const option = ["ID", "User", "Designation", "Department", "Email", "Phone"];
+  const option = ["ID", "User", "Designation", "Department", "Email"];
   return (
     <div className="table__container">
       <table className="main__table">
@@ -57,13 +58,20 @@ const EmployeeDataTable = ({
           ) : (
             <>
               {option.map((tableHead, index) => (
-                <th key={index} onClick={() => handleSort(tableHead)}>
+                <th
+                  key={index}
+                  onClick={() => handleSort(tableHead, index)}
+                  className={
+                    selectedColumn === index ? "selected-tablehead" : ""
+                  }
+                >
                   {tableHead}
                   <span>
                     <LuArrowUpDown />
                   </span>
                 </th>
               ))}
+              <th>Phone</th>
               <th>Action</th>
             </>
           )}
@@ -71,15 +79,13 @@ const EmployeeDataTable = ({
         <tbody>
           {isPending ? (
             <PendingTableBody />
-          ) : (
+          ) : tableData.data.length > 0 ? (
             tableData?.data.map((tableItem, index) => (
               <tr key={index}>
-                <td data-cell="id">{tableItem.id}</td>
+                <td data-cell="id">ITJ-{tableItem.id}</td>
 
                 <td data-cell="User">
-                  {tableItem.name.length > 12
-                    ? `${tableItem.name.substring(0, 12)}...`
-                    : tableItem.name}
+                  {tableItem.name ? tableItem.name : "N/A"}
                 </td>
                 {/* </> */}
                 {/* <td data-cell="name">{tableItem.name}</td> */}
@@ -91,7 +97,13 @@ const EmployeeDataTable = ({
                     ? tableItem.department.name
                     : "N/A"}
                 </td>
-                <td data-cell="email">{tableItem.email}</td>
+                <td data-cell="email">
+                  {tableItem.email
+                    ? tableItem.email.length > 12
+                      ? `${tableItem.email.substring(0, 12)}...`
+                      : tableItem.email
+                    : "N/A"}
+                </td>
                 <td data-cell="phone">
                   {tableItem.phone_number ? tableItem.phone_number : "N/A"}
                 </td>
@@ -117,6 +129,15 @@ const EmployeeDataTable = ({
                 </td>
               </tr>
             ))
+          ) : (
+            <tr>
+              <td colSpan="8" className="empty-table-cell">
+                <div className="empty-table-message">
+                  <p className="">No data available</p>
+                  <p>Please try again later or refresh the page</p>
+                </div>
+              </td>
+            </tr>
           )}
         </tbody>
       </table>

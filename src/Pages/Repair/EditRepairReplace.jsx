@@ -98,6 +98,7 @@ const EditRepairReplace = () => {
         </div>
         <div className="user__profile--body">
           <div className="user__profile--left">
+          <Label  text="Upload current asset image" />
             <DropzoneArea
               name="product_image"
               setValue={setValue}
@@ -191,6 +192,7 @@ const EditRepairReplace = () => {
                       value="Replace"
                       onChange={handleRadioChange}
                       checked={selectedType === "Replace"}
+
                     />
                   </div>
                   <Label text="Replace" />

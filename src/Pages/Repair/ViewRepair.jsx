@@ -99,6 +99,7 @@ const ViewRepair = () => {
         </div>
         <div className="user__profile--body">
           <div className="user__profile--left">
+            <Label text="Upload current asset image" />
             <DropzoneArea
               name="product_image"
               defaultValue={tableData.product_image}
@@ -228,11 +229,11 @@ const ViewRepair = () => {
             </div>
 
             <div className={"user__profile--btn-right user__profile--btn"}>
-              <button disabled className="button__style button_grey">
+              {/* <button disabled className="button__style button_grey">
                 Send for repair
-              </button>
+              </button> */}
               <Link to="/repair" className="link">
-                <Button className={"button__red"} text="Cancel" />
+                <Button className={"button__red"} text="Close" />
               </Link>
             </div>
           </form>

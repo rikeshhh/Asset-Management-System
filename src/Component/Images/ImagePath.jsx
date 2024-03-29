@@ -23,12 +23,11 @@ const ImagePath = ({ file, setImageFlag }) => {
 
   if (error) {
     setImageFlag(true);
-    return <p>No image data available</p>;
+    return <p>No image data found</p>;
   }
 
   if (!imageData) {
     setImageFlag(true);
-    return <p>No image data available</p>;
   }
 
   if (imageData) {

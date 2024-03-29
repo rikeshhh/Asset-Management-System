@@ -65,6 +65,24 @@
 
 select:disabled {
   color: var(--text-color) !important;
-  opacity: 0.8;
-  background: var(--disabled-input);
+  opacity: 0.8 !important;
+  background: var(--disabled-input) !important;
+}
+.empty-table-message {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  color: #555;
+}
+
+.empty-table-message p {
+  color: var(--red);
+  font-weight: 300;
+}
+
+.selected-tablehead {
+  color: var(--blue) !important;
+  z-index: 1;
 }

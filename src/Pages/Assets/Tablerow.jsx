@@ -63,7 +63,6 @@ const Tablerow = ({ tableItem }) => {
   const toggleTooltip = () => {
     setShowTooltip(!showTooltip);
   };
-  console.log(tableItem);
   return (
     <>
       {deleteConfirationShow && (
@@ -74,7 +73,7 @@ const Tablerow = ({ tableItem }) => {
         />
       )}
       <tr>
-        {tableItem.assets_type === "hardware" ? (
+        {tableItem.assets_type === "Hardware" ? (
           <td data-cell="id">ITJ-HW-{tableItem.id}</td>
         ) : (
           <td data-cell="id">ITJ-SW-{tableItem.id}</td>

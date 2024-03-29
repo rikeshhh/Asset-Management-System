@@ -35,7 +35,7 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
     },
     {
       value: "category",
-      label: "Category",
+      label: "category",
     },
     {
       value: "status",
@@ -57,12 +57,14 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
    * Handles click event for sorting table data by status.
    * @param {string} stats - Status to sort by
    */
+  const [tableHeadColor, setTableHeadColor] = useState();
   const handleStatusClick = async (stats) => {
-    const assetTableDataOrder = searchParams.get("order") || "asc";
+    setTableHeadColor(stats);
+    const assetTableDataOrder = searchParams.get("order") || "desc";
     console.log(stats, "status");
     setSearchParams({
       sortBy: stats,
-      order: assetTableDataOrder === "asc" ? "desc" : "asc",
+      order: assetTableDataOrder === "desc" ? "asc" : "desc",
     });
   };
   return (
@@ -79,9 +81,12 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
                     key={index}
                     onClick={() => handleStatusClick(tableHead.value)}
                   >
-                    {tableHead.label}
-                    <span>
-                      <LuArrowUpDown />
+                    <span
+                      className={`${
+                        tableHead.value === tableHeadColor ? "boldy" : ""
+                      }`}
+                    >
+                      {tableHead.label} <LuArrowUpDown />
                     </span>
                   </th>
                 ))}

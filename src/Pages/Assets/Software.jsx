@@ -60,7 +60,7 @@ const Software = () => {
   const assignedDate = searchParams.get("assigned_date");
   const by_assets_type = searchParams.get("sortBy");
   const byStatus = searchParams.get("assets_type");
-  const order = searchParams.get("order") || "asc";
+  const order = searchParams.get("order") || "desc";
   const searchStatus = searchParams.get("status"); // Status filter
 
   /**
