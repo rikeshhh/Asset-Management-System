@@ -153,6 +153,7 @@ const AddRepair = () => {
                       value="Repair"
                       onChange={handleRadioChange}
                       checked={selectedType === "Repair"}
+
                     />
                   </div>
                   <Label text="Repair" />
