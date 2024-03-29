@@ -70,9 +70,9 @@ const EmployeeView = () => {
                 }
               />
               <span>
-                Max file size: 3MB <br /> Larger image will be resized
+                Max file size: 5MB <br /> Larger image will be resized
                 automatically. <br />
-                Supported File Type: JPG, PNG
+                Supported File Type: JPG, PNG,WEBP
               </span>
               <div className="date__created">
                 <span style={{ fontSize: "0.875rem" }}>Created on: </span>

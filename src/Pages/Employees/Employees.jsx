@@ -49,6 +49,7 @@ const Employees = () => {
 
   const [page, setPage] = useState(parseInt(params.get("page")) || 1);
   const itemsPerPage = 7;
+  const [selectedColumn, setSelectedColumn] = useState(null);
 
   const searchUser = params.get("Search") || "";
   const order = params.get("orderby") || "DESC";
@@ -83,12 +84,10 @@ const Employees = () => {
     keepPreviousData: true,
   });
 
-  const handleSort = (thead) => {
+  const handleSort = (thead, index) => {
     let newOrderByData;
     if (thead === "User") {
       newOrderByData = "name";
-    } else if (thead === "Phone") {
-      newOrderByData = "phone_number";
     } else {
       newOrderByData = thead.toLowerCase();
     }
@@ -96,6 +95,7 @@ const Employees = () => {
       sortBy: newOrderByData,
       orderby: order === "ASC" ? "DESC" : "ASC",
     });
+    setSelectedColumn(index);
   };
 
   const DeleteEmployee = useMutation({
@@ -242,6 +242,7 @@ const Employees = () => {
                   isPending={isPending}
                   error={error}
                   handleSort={handleSort}
+                  selectedColumn={selectedColumn}
                 />
                 {isPending ? (
                   <PendingPagination />
