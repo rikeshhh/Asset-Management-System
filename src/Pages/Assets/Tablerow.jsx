@@ -63,7 +63,6 @@ const Tablerow = ({ tableItem }) => {
   const toggleTooltip = () => {
     setShowTooltip(!showTooltip);
   };
-  console.log(tableItem);
   return (
     <>
       {deleteConfirationShow && (

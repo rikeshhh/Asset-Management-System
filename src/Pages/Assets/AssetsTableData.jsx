@@ -59,11 +59,11 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
   const [tableHeadColor, setTableHeadColor] = useState();
   const handleStatusClick = async (stats) => {
     setTableHeadColor(stats);
-    const assetTableDataOrder = searchParams.get("order") || "asc";
+    const assetTableDataOrder = searchParams.get("order") || "desc";
     console.log(stats, "status");
     setSearchParams({
       sortBy: stats,
-      order: assetTableDataOrder === "asc" ? "desc" : "asc",
+      order: assetTableDataOrder === "desc" ? "asc" : "desc",
     });
   };
   return (

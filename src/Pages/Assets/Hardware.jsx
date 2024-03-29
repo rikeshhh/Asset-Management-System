@@ -65,7 +65,7 @@ const Hardware = () => {
   const [filterShow, setFilterShow] = useState(false);
   const by_assets_type = searchParams.get("sortBy");
   const byStatus = searchParams.get("assets_type");
-  const order = searchParams.get("order") || "asc";
+  const order = searchParams.get("order") || "desc";
 
   // Function to update the page number and update the URL with the new page number
   const updatePageNumber = (newPageNumber) => {
