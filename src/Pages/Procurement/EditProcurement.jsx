@@ -78,7 +78,8 @@ const EditProcurementData = () => {
   };
 
   const submitProcurement = (procurementEditData) => {
-    const joinedDeletedId = Array.isArray(deletedId) ? deletedId.join("_") : "";
+    console.log("here DeletedId", deletedId);
+    const joinedDeletedId = deletedId.join("_");
     const editProcurementData = {
       id: procurementData.id,
       formData: procurementEditData,
@@ -92,10 +93,10 @@ const EditProcurementData = () => {
 
   const handleDeleteProcurementLine = (index) => {
     setSelectedIndex(null);
-    setDeletedId([...deletedId, newProcurement[index].products_id]);
+    setDeletedId([...deletedId, newProcurement[index].product_id]);
     setNewProcurement(newProcurement.filter((_, idx) => idx !== index));
   };
-
+  console.log(deletedId);
   return (
     <section className="content-wrapper">
       <div className="content-radius procurement">
@@ -171,11 +172,13 @@ const EditProcurementData = () => {
             <tbody>
               {isPending || isFetching ? (
                 <PendingTableBody />
-              ) : newProcurement === "" || newProcurement?.length === 0 ? (
+              ) : !ProductList?.product_id ? (
                 <tr>
-                  <div className="no_data">
-                    <p>No products found</p>
-                  </div>
+                  <td colSpan="8" className="empty-table-cell">
+                    <div className="empty-table-message">
+                      <p className="">No data available</p>
+                    </div>
+                  </td>
                 </tr>
               ) : (
                 ProductList &&

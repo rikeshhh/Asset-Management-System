@@ -3,6 +3,7 @@ import Button from "../../Component/Button/Button";
 
 import ProductListTableItem from "./ProductList";
 import { IoMdAdd } from "react-icons/io";
+import { EmptyData } from "../../Component/EmptyData/EmptyData";
 
 const AddProcurementTable = ({
   procurementTableLine,
@@ -10,7 +11,7 @@ const AddProcurementTable = ({
   setNewProcurement,
   newProcurement,
 }) => {
-  const [isEditable, setIsEditable] = useState(false);
+  const [isEditable, setIsEditable] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleAddProcurement = () => {
@@ -65,22 +66,28 @@ const AddProcurementTable = ({
           </thead>
           <tbody>
             <>
-              {newProcurement?.map((procurement, index) => (
-                <ProductListTableItem
-                  key={procurement?.product_name}
-                  index={index}
-                  tableItem={procurement}
-                  setNewProcurement={setNewProcurement}
-                  setProcurementTableLine={setProcurementTableLine}
-                  procurementTableLine={procurementTableLine}
-                  handleDeleteProcurementLine={handleDeleteProcurementLine}
-                  isEditable={isEditable}
-                  setIsEditable={setIsEditable}
-                  newProcurement={newProcurement}
-                  setSelectedIndex={setSelectedIndex}
-                  selectedIndex={selectedIndex}
-                />
-              ))}
+              {newProcurement.length > 0 ? (
+                <>
+                  {newProcurement?.map((procurement, index) => (
+                    <ProductListTableItem
+                      key={procurement?.product_name}
+                      index={index}
+                      tableItem={procurement}
+                      setNewProcurement={setNewProcurement}
+                      setProcurementTableLine={setProcurementTableLine}
+                      procurementTableLine={procurementTableLine}
+                      handleDeleteProcurementLine={handleDeleteProcurementLine}
+                      isEditable={isEditable}
+                      setIsEditable={setIsEditable}
+                      newProcurement={newProcurement}
+                      setSelectedIndex={setSelectedIndex}
+                      selectedIndex={selectedIndex}
+                    />
+                  ))}
+                </>
+              ) : (
+                <EmptyData />
+              )}
             </>
           </tbody>
         </table>

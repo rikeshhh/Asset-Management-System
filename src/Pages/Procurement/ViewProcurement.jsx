@@ -13,6 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
 import { getProductList } from "./ProcurementApiSlice";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
+import { EmptyData } from "../../Component/EmptyData/EmptyData";
 
 const ViewProcurement = () => {
   const {
@@ -98,7 +99,9 @@ const ViewProcurement = () => {
             <tbody>
               {isPending ? (
                 <PendingTableBody />
-              ) : ProductList.length !== 0 ? (
+              ) : !ProductList?.product_id ? (
+                <EmptyData />
+              ) : (
                 ProductList?.data.map((procurement, index) => (
                   <tr>
                     <td>{procurement.product_name}</td>
@@ -126,8 +129,6 @@ const ViewProcurement = () => {
                     </td>
                   </tr>
                 ))
-              ) : (
-                <></>
               )}
             </tbody>
           </table>

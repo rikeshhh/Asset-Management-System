@@ -27,7 +27,7 @@ const EditProductList = ({
     reset,
     getValues,
   } = useForm();
-  const handleProcurementTableAdd = (index, product_id) => {
+  const handleProcurementTableAdd = (index) => {
     const values = getValues();
     // Update the item at the specified index with the new values
     const updatedItem = {
@@ -36,7 +36,7 @@ const EditProductList = ({
       brand: values.brand,
       estimated_price: values.estimated_price,
       link: values.link,
-      products_id: procurement.products_id,
+      product_id: procurement.product_id,
     };
 
     // Update the newProcurement state with the updated item
@@ -129,7 +129,7 @@ const EditProductList = ({
             className="edit__button"
             text={<FaCheck />}
             handleClick={() =>
-              handleProcurementTableAdd(index, procurement.products_id)
+              handleProcurementTableAdd(index)
             }
           />
         ) : (

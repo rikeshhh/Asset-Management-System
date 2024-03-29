@@ -16,6 +16,7 @@
   display: flex;
   justify-content: start;
   padding: 0.625rem;
+  padding-bottom: 0;
   gap: 1.12rem;
   border-bottom: 1px solid var(--primary-grey);
 }

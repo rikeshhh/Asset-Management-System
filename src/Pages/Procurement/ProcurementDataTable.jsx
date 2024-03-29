@@ -25,13 +25,13 @@ const ProcurementDataTable = ({
   params,
   setSearchParams,
 }) => {
-  const [sortOrder, setSortOrder] = useState("asc");
+  const [sortOrder, setSortOrder] = useState("desc");
   const [procurementId, setProcurementId] = useState();
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
 
   const searchProcurement = params.get("Search") || "";
   const sortData = params.get("sortBy") || "approved_date";
-  const newSortOrder = params.get("sortOrder") || "asc";
+  const newSortOrder = params.get("sortOrder") || "desc";
   const filterByApprovedDate = params.get("assigned_date") || "";
   const filterByStatus = params.get("status") || "";
   const filterByUser = params.get("requested_by") || "";
