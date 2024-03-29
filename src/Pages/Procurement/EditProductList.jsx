@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { InputField } from "../../Component/Input/InputField";
 import SelectInputCategory from "../Categories/SelectInputCategory";
 import { useForm } from "react-hook-form";
@@ -17,28 +17,26 @@ const EditProductList = ({
   selectedIndex,
   newProcurement,
   setNewProcurement,
-  setCategoryName,
-  categoryName,
   handleDeleteProcurementLine,
 }) => {
+  const [categoryName, setCategoryName] = useState(procurement.category);
+
   const {
     register,
     formState: { errors },
     reset,
     getValues,
   } = useForm();
-
   const handleProcurementTableAdd = (index, product_id) => {
     const values = getValues();
-
     // Update the item at the specified index with the new values
     const updatedItem = {
       product_name: values.product_name,
-      category_id: values.category_id,
+      category: categoryName,
       brand: values.brand,
       estimated_price: values.estimated_price,
       link: values.link,
-      product_id: product_id,
+      products_id: procurement.products_id,
     };
 
     // Update the newProcurement state with the updated item
@@ -53,9 +51,6 @@ const EditProductList = ({
   };
 
   const handleProcurementTableEdit = (index) => {
-    if (procurement.product_id !== newProcurement.product_id) {
-      setNewProcurement([...newProcurement, procurement]);
-    }
     setSelectedIndex(index);
   };
 
@@ -84,7 +79,7 @@ const EditProductList = ({
           register={register}
           errors={errors}
           setCategoryName={setCategoryName}
-          defaultValue={procurement.category || categoryName}
+          defaultValue={procurement.category}
           isEditable={selectedIndex === index}
           className={` ${
             selectedIndex === index ? "input-enabled" : "select-not-editable"
@@ -161,9 +156,7 @@ const EditProductList = ({
             type={"button"}
             className="delete__button"
             text={<GoTrash />}
-            handleClick={() =>
-              handleDeleteProcurementLine(procurement.products_id)
-            }
+            handleClick={() => handleDeleteProcurementLine(index)}
           />
         )}
       </td>

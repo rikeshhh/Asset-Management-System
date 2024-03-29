@@ -38,13 +38,12 @@ export const getProductList = async (productId) => {
 };
 
 export const procurementAdd = async (procurementForm) => {
-  console.log("tabledata => ", procurementForm.tableData);
   try {
     const response = await instance.post(
       "/procurement",
       {
         requested_by_id: procurementForm.formData.requested_by,
-        status: "approved",
+        status: "pending",
         request_urgency: procurementForm.formData.request_urgency,
         approved_by_id: procurementForm.formData.requested_by,
         products: procurementForm.tableData,
@@ -58,21 +57,31 @@ export const procurementAdd = async (procurementForm) => {
     );
     return response.data.data;
   } catch (error) {
-    console.error("Axios error:", error);
     throw error;
   }
 };
 
-export const productDelete = async (productId) => {
+export const procurementEdit = async (editProcurementData) => {
   try {
-    const response = await instance.delete(
-      `/procurement?product_id=${productId}`,
+    const response = await instance.put(
+      `/procurement?id=${editProcurementData.id}&deleteId=${deleteParams}`,
       {
-        headers: { Authorization: `Bearer ${token}` },
+        requested_by_id: editProcurementData.formData.requested_by,
+        status: "pending",
+        request_urgency: editProcurementData.formData.request_urgency,
+        approved_by_id: editProcurementData.formData.requested_by,
+        products: editProcurementData.products,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       }
     );
+    return response.data.data;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
