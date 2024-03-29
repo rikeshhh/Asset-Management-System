@@ -66,6 +66,7 @@ const Filter = ({
   const clearInputFields = () => {
     reset();
     reset({ fromDate: "", toDate: "" });
+    setSearchParams("");
   };
   return (
     <>
@@ -136,7 +137,7 @@ const Filter = ({
               <Button
                 className="button__red"
                 text="Clear All Filter"
-                type='button'
+                type="button"
                 handleClick={clearInputFields}
               />
               {/* <Link to="/payment" state={receivedFeature} className="link"> */}

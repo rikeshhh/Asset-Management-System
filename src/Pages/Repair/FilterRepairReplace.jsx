@@ -120,6 +120,7 @@ const FilterRepairReplace = ({
                 text="Clear All Filter"
                 handleClick={() => {
                   reset();
+                  reset({ fromDate: "", toDate: "" });
                   setSearchParams("");
                 }}
               />

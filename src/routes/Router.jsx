@@ -104,6 +104,21 @@ export const router = createBrowserRouter([
       {
         path: "/procurement",
         element: <Procurement />,
+        children: [
+          {
+            index: true,
+            path: "procurementForm",
+            element: <ProcurementForm />,
+          },
+          {
+            path: "editProcurement",
+            element: <EditProcurement />,
+          },
+          {
+            path: "viewProcurement",
+            element: <ViewProcurement />,
+          },
+        ],
       },
       {
         path: "/repair/",
@@ -199,18 +214,6 @@ export const router = createBrowserRouter([
       //   path: "/viewAssets",
       //   element: <ViewAssets />,
       // },
-      {
-        path: "/procurementForm",
-        element: <ProcurementForm />,
-      },
-      {
-        path: "/editProcurement",
-        element: <EditProcurement />,
-      },
-      {
-        path: "/viewProcurement",
-        element: <ViewProcurement />,
-      },
     ],
   },
   {

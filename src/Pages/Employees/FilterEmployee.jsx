@@ -27,7 +27,6 @@ const FilterEmployee = ({
   } = useForm();
 
   const designationFilterSubmit = (data) => {
-    console.log("data", "data", data);
     if (data.designation || data.department) {
       setPage(1);
       designationSubmit(data);
@@ -41,6 +40,7 @@ const FilterEmployee = ({
   const handleResetForm = () => {
     setSearchParams("");
     reset();
+    reset({ fromDate: "", toDate: "" });
   };
 
   return (

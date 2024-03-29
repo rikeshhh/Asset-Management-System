@@ -33,7 +33,7 @@ const SelectAssetCategory = ({
         className={`${isDisabled ? "select__disabled" : "select__enabled"} ${
           hasError ? "input__error" : ""
         }`}
-        defaultValue={defaultValue?defaultValue.parent:""}
+        defaultValue={defaultValue ? defaultValue.parent : ""}
       >
         {!defaultValue && (
           <option
@@ -66,7 +66,7 @@ const SelectAssetCategory = ({
         )}
       </select>
       {errors[name] && (
-        <span className="error-message">"Please select an category"</span>
+        <span className="error-message">Please select an category</span>
       )}
     </>
   );

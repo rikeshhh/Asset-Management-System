@@ -26,10 +26,14 @@ const ProductListTableItem = ({
     formState: { errors },
     getValues,
     reset,
+    trigger,
   } = useForm();
 
+  console.log(errors);
+
   const [categoryName, setCategoryName] = useState("");
-  const handleProcurementTableAdd = (index) => {
+  const handleProcurementTableAdd = async (index) => {
+    await trigger();
     const values = getValues();
 
     // Update the item at the specified index with the new values
@@ -65,13 +69,13 @@ const ProductListTableItem = ({
     reset();
   };
 
-  console.log("here", tableItem.category_id);
   return (
     <tr>
       <td>
         <InputField
           name="product_name"
           register={register}
+          required={"Please enter a product name"}
           errors={errors}
           defaultValue={tableItem.product_name}
           isEditable={
@@ -91,8 +95,9 @@ const ProductListTableItem = ({
           name="category_id"
           register={register}
           errors={errors}
+          required={"Please select category"}
           setCategoryName={setCategoryName}
-          defaultValue={tableItem.category_id || categoryName}
+          defaultValue={categoryName || tableItem.category_id}
           isEditable={
             (index === newProcurement.length - 1 && isEditable) ||
             selectedIndex === index
@@ -109,6 +114,7 @@ const ProductListTableItem = ({
         <InputField
           name="brand"
           register={register}
+          required={"Please enter a brand name"}
           errors={errors}
           defaultValue={tableItem.brand}
           isEditable={
@@ -127,6 +133,7 @@ const ProductListTableItem = ({
         <InputField
           name="estimated_price"
           register={register}
+          required={"Please enter estimated price"}
           errors={errors}
           defaultValue={tableItem.estimated_price}
           isEditable={
@@ -145,6 +152,7 @@ const ProductListTableItem = ({
         <InputField
           name="link"
           register={register}
+          required={"Please enter a product link"}
           errors={errors}
           defaultValue={tableItem.link}
           isEditable={
