@@ -30,8 +30,8 @@ const SelectInputDepartment = ({
         }`}
       >
         {defaultValue ? null : (
-          <option value="" disabled selected>
-            Select the Department
+          <option value="" selected>
+            None
           </option>
         )}
 

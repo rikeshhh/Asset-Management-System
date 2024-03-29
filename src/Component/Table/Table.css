@@ -28,6 +28,7 @@
   line-height: 150%;
   letter-spacing: 0.07px;
   text-transform: capitalize;
+  cursor: pointer;
 }
 .table__container {
   overflow-x: scroll;

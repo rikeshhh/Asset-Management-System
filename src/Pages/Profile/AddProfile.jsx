@@ -132,24 +132,21 @@ const AddProfile = () => {
                   />
                 </div>
               </figure>
-              {fileInputRef.current?.files.length === 0 && (
-                <span className="error-message">User image is required</span>
-              )}
+
               <input
                 type="file"
                 className="user__profile--none"
                 ref={fileInputRef}
                 accept=".jpg,.png"
-                required
                 onChange={handleProfileUpdate}
               />
               <Button
                 text={"Upload new photo"}
                 handleClick={handleButtonClick}
-                isDisabled={receivedState}
+                isDisabled={userProfileImage ? true : false}
                 className={
-                  receivedState
-                    ? "user__profile--file-disabled"
+                  userProfileImage
+                    ? "user__profile--file-disabled user__profile--remove-margin"
                     : "button__blue upload__btn"
                 }
               />
@@ -157,7 +154,7 @@ const AddProfile = () => {
               <span>
                 Max file size: 5MB <br /> Larger image will be resized
                 automatically. <br />
-                Supported File Type: JPG, PNG
+                Supported File Type: JPG, PNG,WEBP
               </span>
               <div className="date__created">
                 <span style={{ fontSize: "0.875rem" }}>Created on: </span>
@@ -293,6 +290,7 @@ const AddProfile = () => {
                 maxLength={Model.PhoneNumber.maxLength.value}
                 maxMessage={Model.PhoneNumber.maxLength.message}
                 isDisabled={receivedState}
+                defaultValue="+977"
               />
             </div>
             <div
