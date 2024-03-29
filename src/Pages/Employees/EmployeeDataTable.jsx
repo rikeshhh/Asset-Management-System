@@ -11,6 +11,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { LuArrowUpDown } from "react-icons/lu";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { EyeSvg } from "../../Component/svg/EyeSvg";
+import { EmptyData } from "../../Component/EmptyData/EmptyData";
 
 /**
  * Employee data table component that displays a table of employee information.
@@ -130,14 +131,7 @@ const EmployeeDataTable = ({
               </tr>
             ))
           ) : (
-            <tr>
-              <td colSpan="8" className="empty-table-cell">
-                <div className="empty-table-message">
-                  <p className="">No data available</p>
-                  <p>Please try again later or refresh the page</p>
-                </div>
-              </td>
-            </tr>
+            <EmptyData />
           )}
         </tbody>
       </table>

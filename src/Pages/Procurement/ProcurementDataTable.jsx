@@ -177,7 +177,7 @@ const ProcurementDataTable = ({
                   <td data-cell="Verified Date">2024-02-21 07:31:19</td>
                   <td className="button-gap">
                     <Link
-                      to={"/viewProcurement"}
+                      to={"/procurement/viewProcurement"}
                       state={{ data: tableItem }}
                       className="link"
                     >
@@ -188,7 +188,7 @@ const ProcurementDataTable = ({
                       />
                     </Link>
                     <Link
-                      to={"/editProcurement"}
+                      to={"/procurement/editProcurement"}
                       state={{ data: tableItem }}
                       className="link"
                     >

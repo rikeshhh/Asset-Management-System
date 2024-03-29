@@ -17,6 +17,7 @@ const SelectInputCategory = ({
   className,
   isEditable = true,
   errors,
+  required = true,
 }) => {
   const { data: CategoryData } = useQuery({
     queryKey: ["selectInputCategory"],
@@ -33,7 +34,7 @@ const SelectInputCategory = ({
   return (
     <>
       <select
-        {...register(name, { required: true })}
+        {...register(name, { required: required })}
         onInput={addCategoryId}
         disabled={isDisabled || !isEditable}
         className={`${isDisabled ? "input-disabled" : "input-enabled"}

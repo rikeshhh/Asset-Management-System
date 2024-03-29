@@ -16,6 +16,7 @@ import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import EditProductList from "./EditProductList";
 import SelectUser from "./SelectUser";
 import { queryClient } from "../../Component/Query/Query";
+import { EmptyData } from "../../Component/EmptyData/EmptyData";
 
 const EditProcurementData = () => {
   const [newProcurement, setNewProcurement] = useState();
@@ -172,14 +173,8 @@ const EditProcurementData = () => {
             <tbody>
               {isPending || isFetching ? (
                 <PendingTableBody />
-              ) : !ProductList?.product_id ? (
-                <tr>
-                  <td colSpan="8" className="empty-table-cell">
-                    <div className="empty-table-message">
-                      <p className="">No data available</p>
-                    </div>
-                  </td>
-                </tr>
+              ) : newProcurement.length === 0 ? (
+                <EmptyData />
               ) : (
                 ProductList &&
                 newProcurement?.map((procurement, index) => (

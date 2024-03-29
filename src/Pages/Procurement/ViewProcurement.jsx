@@ -23,6 +23,7 @@ const ViewProcurement = () => {
   const location = useLocation();
   const receivedData = location.state;
   const procurementData = receivedData.data;
+  console.log(procurementData.number_of_items);
 
   const { isPending, data: ProductList } = useQuery({
     queryKey: ["productList"],
@@ -99,19 +100,19 @@ const ViewProcurement = () => {
             <tbody>
               {isPending ? (
                 <PendingTableBody />
-              ) : !ProductList?.product_id ? (
+              ) : procurementData.number_of_items < 1 ? (
                 <EmptyData />
               ) : (
                 ProductList?.data.map((procurement, index) => (
                   <tr>
                     <td>{procurement.product_name}</td>
                     <td>
-                      {procurement.category.name
-                        ? procurement.category.name
+                      {procurement.category.parent
+                        ? procurement.category.parent
                         : "N/A"}
                     </td>
                     <td>{procurement.brand}</td>
-                    <td>{`$${procurement.estimated_price}`}</td>
+                    <td>{procurement.estimated_price}</td>
                     <td>{procurement.link}</td>
                     <td className="button-gap">
                       <Button

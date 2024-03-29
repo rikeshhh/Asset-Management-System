@@ -73,7 +73,6 @@ export const InputField = ({
           </div>
         )}
       </div>
-
       {!isDisabled && (
         <ErrorMessage
           errors={errors}
