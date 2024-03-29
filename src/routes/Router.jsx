@@ -115,6 +115,14 @@ export const router = createBrowserRouter([
             element: <RepairReplace />,
           },
           {
+            path: "/repair/replace",
+            element: <RepairReplace />,
+          },
+          {
+            path: "/repair/repair",
+            element: <RepairReplace />,
+          },
+          {
             path: "viewRepair",
             element: <ViewRepair />,
           },

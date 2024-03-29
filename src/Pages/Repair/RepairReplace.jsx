@@ -4,12 +4,22 @@ import "./Repair.css";
 import { useState } from "react";
 import RepairDataTable from "./RepairDataTable";
 import Filter from "../../Component/Filter/Filter";
-import { Link, Outlet, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useSearchParams,
+} from "react-router-dom";
 import ReplaceDataTable from "./ReplaceDataTable";
 import FilterRepairReplace from "./FilterRepairReplace";
 
 const RepairReplace = () => {
-  const [isCompActive, setIsCompActive] = useState("Repair");
+  const location = useLocation();
+
+  const [isCompActive, setIsCompActive] = useState(
+    location.pathname.includes("replace") ? "Replace" : "Repair"
+  );
   const [filterShow, setFilterShow] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const params = new URLSearchParams(searchParams);
@@ -17,6 +27,8 @@ const RepairReplace = () => {
   const [pageNumber, setPageNumber] = useState(
     parseInt(params.get("page")) || 1
   );
+
+  // Define state to manage the active button (e.g., hardware, software, etc.)
 
   const onFilterClick = (showHide) => {
     setFilterShow(showHide);
@@ -52,36 +64,39 @@ const RepairReplace = () => {
 
           <div className="repair__content">
             <div className="repair__navigation">
-              <h6
+              <NavLink
+                to="/repair/repair"
                 onClick={() => {
                   setIsCompActive("Repair");
                   setPageNumber(1);
-                  const newParam = params.delete("Search");
-                  setSearchParams(newParam);
                 }}
                 className={
                   isCompActive === "Repair"
-                    ? "repair-replace__comp active__repair"
-                    : "repair-replace__comp"
+                    ? "repairReplace__active"
+                    : "repairReplace__inactive"
                 }
               >
-                Repair
-              </h6>
-              <h6
+                <Button text="Repair" className="assets__btn" />
+              </NavLink>
+              <NavLink
+                to="/repair/replace"
                 onClick={() => {
                   setIsCompActive("Replace");
                   setPageNumber(1);
-                  const newParam = params.delete("Search");
-                  setSearchParams(newParam);
                 }}
+                // className={
+                //   isCompActive === "Replace"
+                //     ? "repair-replace__comp active__repair"
+                //     : "repair-replace__comp "
+                // }
                 className={
                   isCompActive === "Replace"
-                    ? "repair-replace__comp active__repair"
-                    : "repair-replace__comp "
+                    ? "repairReplace__active"
+                    : "repairReplace__inactive"
                 }
               >
-                Replace
-              </h6>
+                <Button text="Replace" className="assets__btn" />
+              </NavLink>
             </div>
 
             {isCompActive === "Repair" ? (

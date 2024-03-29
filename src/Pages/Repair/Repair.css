@@ -48,7 +48,22 @@
 .assets__navigation--btn {
   border-bottom: 2px solid #527dd0;
 }
+.repairReplace__active {
+  text-decoration: none;
+  border-bottom: 2px solid var(--blue);
+}
+.repairReplace__active .assets__btn {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0.005rem;
+  color: var(--blue) !important;
+}
 
+.repairReplace__inactive {
+  text-decoration: none;
+}
 @media (width<=350px) {
   .repair__header button {
     font-size: 0.85rem;
