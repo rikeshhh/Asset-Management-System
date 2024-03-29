@@ -40,7 +40,7 @@ const SelectInputCategory = ({
       ${className}
       ${errors[name] ? "select__border" : ""}
       `}
-        defaultValue={defaultValue ? defaultValue.id || defaultValue : ""}
+        defaultValue={(defaultValue && defaultValue.id) || defaultValue}
       >
         {!defaultValue && (
           <option value="" disabled selected style={{ color: "#999" }}>

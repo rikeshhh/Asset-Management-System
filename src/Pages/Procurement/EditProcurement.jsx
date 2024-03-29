@@ -1,29 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../Component/Button/Button";
 import { Label } from "../../Component/Label/Label";
 import Model from "../../Component/Model/Model";
 import { SelectInput } from "../../Component/Input/SelectInput";
 import { InputField } from "../../Component/Input/InputField";
 import { useForm } from "react-hook-form";
-import SelectInputCategory from "../Categories/SelectInputCategory";
-import { RxCross1 } from "react-icons/rx";
-import { CiEdit } from "react-icons/ci";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import PendingTableHead from "../../Component/PendingTable/PendingTableHead";
-import { getProductList, productDelete } from "./ProcurementApiSlice";
+import { getProductList, procurementEdit } from "./ProcurementApiSlice";
 import PendingTableBody from "../../Component/PendingTable/PendingTableBody";
-import { queryClient } from "../../Component/Query/Query";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import EditProductList from "./EditProductList";
+import SelectUser from "./SelectUser";
+import { queryClient } from "../../Component/Query/Query";
 
-const EditProcurement = () => {
-  const [newProcurement, setNewProcurement] = useState([]);
+const EditProcurementData = () => {
+  const [newProcurement, setNewProcurement] = useState();
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
-  const [categoryName, setCategoryName] = useState("");
+  const [deletedId, setDeletedId] = useState([]);
 
   const {
     register,
@@ -36,7 +34,11 @@ const EditProcurement = () => {
   const procurementData = receivedData.data;
   const navigate = useNavigate();
 
-  const { isPending, data: ProductList } = useQuery({
+  const {
+    isPending,
+    isFetching,
+    data: ProductList,
+  } = useQuery({
     queryKey: ["productList"],
     queryFn: () => getProductList(procurementData.id),
   });
@@ -44,34 +46,54 @@ const EditProcurement = () => {
   //     return "An error has occurred: " + error.message;
   //   }
 
-  const DeleteProduct = useMutation({
-    mutationFn: (productId) => {
-      return productDelete(productId);
+  const EditProcurementData = useMutation({
+    mutationFn: (editProcurementData) => {
+      return procurementEdit(editProcurementData);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("productList");
-      notifySuccess("Product has been deleted");
+      notifySuccess("Procurement has been Updated");
+      setTimeout(() => {
+        navigate("/procurement");
+        queryClient.invalidateQueries("procurementTableData");
+      }, 1000);
     },
     onError: (error) => {
-      notifyError("Error deleting product");
+      notifyError("Error editing procurement");
     },
   });
 
-  const submitProcurement = () => {};
+  useEffect(() => {
+    if (procurementData.number_of_items > 0) {
+      setNewProcurement(ProductList?.data);
+      queryClient.invalidateQueries("productList");
+    } else {
+      setNewProcurement([]);
+    }
+  }, [ProductList]);
+
+  console.log("herer", newProcurement);
+  const defaultValue = {
+    id: ProductList?.requested_by_id,
+    name: ProductList?.requested_by_name,
+  };
+
+  const submitProcurement = (procurementEditData) => {
+    const joinedDeletedId = Array.isArray(deletedId) ? deletedId.join("_") : "";
+    const editProcurementData = {
+      id: procurementData.id,
+      formData: procurementEditData,
+      products: newProcurement,
+      deletedId: joinedDeletedId,
+    };
+    EditProcurementData.mutate(editProcurementData);
+  };
 
   const selectOptions = ["urgent", "high", "medium", "low"];
 
-  const handleDeleteProcurementLine = (productId) => {
+  const handleDeleteProcurementLine = (index) => {
     setSelectedIndex(null);
-    DeleteProduct.mutate(productId);
-    setNewProcurement([...newProcurement]);
-    // reset();
-  };
-
-  const submitProcurementEdit = (data) => {
-    if (newProcurement.length === 0) {
-      navigate("/procurement");
-    }
+    setDeletedId([...deletedId, newProcurement[index].products_id]);
+    setNewProcurement(newProcurement.filter((_, idx) => idx !== index));
   };
 
   return (
@@ -91,12 +113,11 @@ const EditProcurement = () => {
           <div className="procurement__employee--dets">
             <div className="user__auth--input procurement__form--input">
               <Label sup={"*"} text="Requested By" />
-              <InputField
-                name="requestedBy"
+              <SelectUser
+                name="requested_by"
                 register={register}
                 errors={errors}
-                type={Model.Name.type}
-                defaultValue={procurementData.user.requested_by}
+                defaultValue={defaultValue}
               />
             </div>
             <div className="user__auth--input procurement__form--input">
@@ -119,6 +140,10 @@ const EditProcurement = () => {
                 <Button
                   text="Cancel"
                   className={"procurement__error--button"}
+                  handleClick={() => {
+                    setNewProcurement([]);
+                    setDeletedId([]);
+                  }}
                 />
               </Link>
             </div>
@@ -130,7 +155,7 @@ const EditProcurement = () => {
         <div className="table__container">
           <table className="main__table">
             <thead>
-              {isPending ? (
+              {isPending || isFetching ? (
                 <PendingTableHead />
               ) : (
                 <tr>
@@ -144,10 +169,17 @@ const EditProcurement = () => {
               )}
             </thead>
             <tbody>
-              {isPending ? (
+              {isPending || isFetching ? (
                 <PendingTableBody />
-              ) : ProductList.length !== 0 ? (
-                ProductList?.data.map((procurement, index) => (
+              ) : newProcurement === "" || newProcurement?.length === 0 ? (
+                <tr>
+                  <div className="no_data">
+                    <p>No products found</p>
+                  </div>
+                </tr>
+              ) : (
+                ProductList &&
+                newProcurement?.map((procurement, index) => (
                   <EditProductList
                     procurement={procurement}
                     index={index}
@@ -157,13 +189,9 @@ const EditProcurement = () => {
                     isEditable={isEditable}
                     newProcurement={newProcurement}
                     setNewProcurement={setNewProcurement}
-                    categoryName={categoryName}
-                    setCategoryName={setCategoryName}
                     handleDeleteProcurementLine={handleDeleteProcurementLine}
                   />
                 ))
-              ) : (
-                <></>
               )}
             </tbody>
           </table>
@@ -174,4 +202,4 @@ const EditProcurement = () => {
   );
 };
 
-export default EditProcurement;
+export default EditProcurementData;

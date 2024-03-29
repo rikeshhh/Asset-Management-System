@@ -4,7 +4,6 @@ import { InputField } from "../../Component/Input/InputField";
 import { useForm } from "react-hook-form";
 import { Label } from "../../Component/Label/Label";
 import Model from "../../Component/Model/Model";
-import { SelectInput } from "../../Component/Input/SelectInput";
 import Button from "../../Component/Button/Button";
 import DropzoneArea from "../../Component/Dropzone/DropzoneArea";
 import { Link, useNavigate } from "react-router-dom";
@@ -62,7 +61,6 @@ const EditAssets = () => {
         ? assetsData.image_name
         : assetsData.image_name,
     };
-    console.log("editAssetsData", editAssetsData); // Add this line for debugging
 
     EditAssets.mutate(editAssetsData);
   };
@@ -193,7 +191,7 @@ const EditAssets = () => {
                 />
               </div>
               <div className="assets__form--input">
-                <Label text="Status"  />
+                <Label text="Status" />
                 <label className={`switch ${isActive ? "active" : "inactive"}`}>
                   <input
                     {...register("status")}

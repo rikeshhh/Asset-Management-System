@@ -16,7 +16,6 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
   const [newImage, setNewImage] = useState();
   useEffect(() => {
     setValue(name, defaultValue);
-    console.log("it run");
   }, [defaultValue]);
 
   const onDrop = (acceptedFiles) => {
@@ -51,7 +50,7 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: "image/png, image/jpeg", // Accept only PNG and JPEG files
+    accept: "image/png, image/jpeg, image/webp", // Accept only PNG and JPEG files
   });
   return (
     <div className="assets__form--input">

@@ -18,10 +18,6 @@ const RepairReplace = () => {
     parseInt(params.get("page")) || 1
   );
 
-  const handleButtonClick = () => {
-    setIsCompActive((prev) => !prev);
-  };
-
   const onFilterClick = (showHide) => {
     setFilterShow(showHide);
   };

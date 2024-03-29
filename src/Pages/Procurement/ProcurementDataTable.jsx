@@ -17,6 +17,7 @@ import { useState } from "react";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 import { queryClient } from "../../Component/Query/Query";
 import { notifySuccess } from "../../Component/Toast/Toast";
+import CustomToastContainer from "../../Component/Toast/ToastContainer";
 
 const ProcurementDataTable = ({
   setPageNumber,
@@ -183,7 +184,6 @@ const ProcurementDataTable = ({
                       <Button
                         type={"button"}
                         className=" view__button"
-                        // handleClick={() => viewEmployeeProfile(tableItem)}
                         text={<EyeSvg />}
                       />
                     </Link>
@@ -220,6 +220,7 @@ const ProcurementDataTable = ({
             pageNumber={pageNumber}
           />
         )}
+        <CustomToastContainer />
       </div>
     </>
   );

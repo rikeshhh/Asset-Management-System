@@ -147,7 +147,7 @@ ol li {
 }
 
 @media (max-width: 1440px) {
-  .main__table {
+  .cateogries table {
     width: 500px;
   }
 }

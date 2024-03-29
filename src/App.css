@@ -321,6 +321,14 @@ label {
   float: right;
 }
 
+.no_data {
+  padding: 5rem !important;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .add__category--select {
   display: flex;
   flex-direction: column;
