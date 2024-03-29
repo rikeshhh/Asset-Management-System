@@ -232,7 +232,14 @@ const EditProfile = () => {
                       checked={selectedJobType === "Permanent"}
                     />
                   </div>
-                  <Label text="Permanent" />
+                  <Label
+                    text="Permanent"
+                    className={
+                      selectedJobType === "Permanent"
+                        ? "radio__label--checked"
+                        : ""
+                    }
+                  />
                 </div>
                 <div className="radio__label">
                   <div className="checkbox__input--label">
@@ -244,7 +251,14 @@ const EditProfile = () => {
                       checked={selectedJobType === "Temporary"}
                     />
                   </div>
-                  <Label text="Temporary" />
+                  <Label
+                    text="Temporary"
+                    className={
+                      selectedJobType === "Temporary"
+                        ? "radio__label--checked"
+                        : ""
+                    }
+                  />
                 </div>
               </div>
             </div>
