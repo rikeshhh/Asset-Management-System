@@ -9,11 +9,23 @@
   align-items: center;
   justify-content: space-between;
 } */
-
+.subCato {
+  padding-left: 40px !important;
+}
 .universal2 {
   padding: 1.09rem 0rem !important;
 }
-
+.categorySubs {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+}
+.tableBottomBorder {
+  border-bottom: 1px solid var(--primary-grey);
+}
+.tableNoBorder{
+  border: none;
+}
 /* .flex__category {
   display: flex !important;
   align-items: center !important;

@@ -114,14 +114,16 @@ const CategoryDataTable = ({
    * Handles the click event for the subcategory button.
    * @param {Object} options - Options for the category.
    */
-const [onShowSub,setOnShowSub]=useState(false);
+  const [onShowSub, setOnShowSub] = useState();
   const handleSubCategoryClick = (options) => {
-    setOnShowSub(true)
+    setOnShowSub(options.id);
     setShowSubCategory((prev) => {
       if (prev && options.id === showSubCategoryDrop) {
+        setOnShowSub("");
         return false;
       } else {
         setshowSubCategoryDrop(options.id);
+
         return true;
       }
     });
@@ -158,6 +160,7 @@ const [onShowSub,setOnShowSub]=useState(false);
   const handleEditCancel = () => {
     setDisableButtons(false);
     setShow(false);
+
     reset();
   };
 
@@ -178,6 +181,8 @@ const [onShowSub,setOnShowSub]=useState(false);
   };
 
   const handleSubCategoryCancel = () => {
+    setOnShowSub('');
+
     setDisableButtons(false);
     setShowSubCategoryEdit(false);
     reset();
@@ -237,7 +242,16 @@ const [onShowSub,setOnShowSub]=useState(false);
           ) : (
             CategoryData.map((options, index) => (
               <>
-                <tr key={index}>
+                <tr
+                  key={index}
+                  className={
+                  `${  onShowSub === options.id
+                    ? "tableNoBorder"
+                    : "tableBottomBorder"}
+                   
+                    `
+                  }
+                >
                   <td>{index + 1}</td>
                   {options.id === previousCategoryId && show ? (
                     <td className={show ? "universal__td--border" : ""}>
@@ -333,7 +347,7 @@ const [onShowSub,setOnShowSub]=useState(false);
                         }`}
                         key={index}
                       >
-                        <td>{getLetterFromIndex(index)}</td>
+                        <td className="subCato">{getLetterFromIndex(index)}</td>
                         {subCategory.id === previousSubCategoryId &&
                         showSubCategoryEdit ? (
                           <td

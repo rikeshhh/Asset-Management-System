@@ -62,11 +62,11 @@ const EditRepairReplace = () => {
       );
     },
     onSuccess: () => {
-      notifySuccess("Repair/Replace has been updated");
       setTimeout(() => {
         navigate("/repair");
         queryClient.invalidateQueries("RepairTableData", "ReplaceTableData");
-      }, 1000);
+      }, 2000);
+      notifySuccess(`${selectedType} has been updated`);
     },
     onError: (error) => {
       notifyError(error.response.data.message.message.repairreplace);
@@ -191,7 +191,6 @@ const EditRepairReplace = () => {
                       value="Replace"
                       onChange={handleRadioChange}
                       checked={selectedType === "Replace"}
-
                     />
                   </div>
                   <Label text="Replace" />
@@ -204,14 +203,13 @@ const EditRepairReplace = () => {
               <InputField
                 name="reason"
                 register={register}
-                value={Model.location.pattern.value}
-                message={Model.location.pattern.message}
+                message={Model.reason.pattern.message}
                 required={"Reason for Repair/Replace is required"}
                 errors={errors}
-                type={Model.location.type}
+                type={Model.reason.type}
                 placeholder={"Enter what happened to this device"}
-                maxLength={Model.location.maxLength.value}
-                maxMessage={Model.location.maxLength.message}
+                maxLength={Model.reason.maxLength.value}
+                maxMessage={Model.reason.maxLength.message}
                 isDisabled={receivedState}
                 defaultValue={tableData?.reason}
               />

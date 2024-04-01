@@ -55,6 +55,7 @@ const EditAssets = () => {
     },
   });
   const submitData = (data) => {
+  console.log(data)
     const editAssetsData = {
       data: data,
       editImage: data.assets_image
@@ -70,6 +71,8 @@ const EditAssets = () => {
     setIsActive((prev) => !prev);
   };
   const [categoryName, setCategoryName] = useState();
+  console.log("ddd");
+  console.log(assetsData);
   return (
     <section className="assets__add">
       <div className="">

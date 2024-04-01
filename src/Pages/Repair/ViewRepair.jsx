@@ -17,6 +17,7 @@ import { useMutation } from "@tanstack/react-query";
 import { repairReplaceAdd } from "./RepairApiSlice";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
+import ImagePath from "../../Component/Images/ImagePath";
 
 /**
  * Functional component for adding a new employee profile.
@@ -29,6 +30,7 @@ const ViewRepair = () => {
     setValue,
     handleSubmit,
   } = useForm();
+  const [imageFlag, setImageFlag] = useState(false);
 
   const receivedState = true;
 
@@ -99,13 +101,17 @@ const ViewRepair = () => {
         </div>
         <div className="user__profile--body">
           <div className="user__profile--left">
-            <Label text="Upload current asset image" />
-            <DropzoneArea
+            <Label text="View current asset image" />
+            <ImagePath 
+            file={tableData.product_image}
+            setImageFlag={setImageFlag}
+            />
+            {/* <DropzoneArea
               name="product_image"
               defaultValue={tableData.product_image}
               setValue={setValue}
               isDisabled={true}
-            />
+            /> */}
           </div>
 
           <form
