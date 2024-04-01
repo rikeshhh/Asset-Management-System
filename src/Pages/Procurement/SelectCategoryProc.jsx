@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { selectInputCategory } from "./CategoryApiSice";
+import { selectInputCategory } from "../Categories/CategoryApiSice";
 /**
  * React component representing a select input for categories.
  * @param {Object} props - Component props.
@@ -43,6 +43,9 @@ const SelectCategoryProc = ({
       `}
         defaultValue={(defaultValue && defaultValue.id) || defaultValue}
       >
+        <option value="" defaultChecked disabled>
+          Category
+        </option>
         {/* Render the default option only once outside of the map function */}
 
         {/* Map over the CategoryData array and render each category option */}

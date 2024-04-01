@@ -18,6 +18,7 @@ import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteCon
 import { queryClient } from "../../Component/Query/Query";
 import { notifySuccess } from "../../Component/Toast/Toast";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import { EmptyData } from "../../Component/EmptyData/EmptyData";
 
 const ProcurementDataTable = ({
   setPageNumber,
@@ -165,6 +166,8 @@ const ProcurementDataTable = ({
           <tbody>
             {isPending ? (
               <PendingTableBody />
+            ) : procurementTableData?.data.length < 1 ? (
+              <EmptyData />
             ) : (
               procurementTableData?.data.map((tableItem, index) => (
                 <tr key={index}>

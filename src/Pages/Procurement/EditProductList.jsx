@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { InputField } from "../../Component/Input/InputField";
-import SelectInputCategory from "../Categories/SelectInputCategory";
 import { useForm } from "react-hook-form";
 import Button from "../../Component/Button/Button";
 import { CiEdit } from "react-icons/ci";
 import { FaCheck } from "react-icons/fa6";
 import { GoTrash } from "react-icons/go";
 import { RxCross1 } from "react-icons/rx";
+import SelectCategoryProc from "./SelectCategoryProc";
 
 const EditProductList = ({
   procurement,
@@ -60,7 +60,7 @@ const EditProductList = ({
     reset();
   };
   return (
-    <tr>
+    <tr className={`procurement__tablerow   `}>
       <td>
         <InputField
           name="product_name"
@@ -74,7 +74,7 @@ const EditProductList = ({
         />
       </td>
       <td>
-        <SelectInputCategory
+        <SelectCategoryProc
           name="category_id"
           register={register}
           errors={errors}
@@ -82,7 +82,9 @@ const EditProductList = ({
           defaultValue={procurement.category}
           isEditable={selectedIndex === index}
           className={` ${
-            selectedIndex === index ? "input-enabled" : "select-not-editable"
+            selectedIndex === index
+              ? "input-enabled input__editable "
+              : "select-not-editable"
           }`}
         />
       </td>
@@ -128,9 +130,7 @@ const EditProductList = ({
             type="button"
             className="edit__button"
             text={<FaCheck />}
-            handleClick={() =>
-              handleProcurementTableAdd(index)
-            }
+            handleClick={() => handleProcurementTableAdd(index)}
           />
         ) : (
           <Button
