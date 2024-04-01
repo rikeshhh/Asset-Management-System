@@ -101,7 +101,7 @@ const ProcurementForm = () => {
               />
             </div>
           </div>
-          <div className="procurement__product">
+          <div className="procurement__product procurement__form--float">
             <div className="procurement__bottom--buttons">
               <Button
                 text="Fill Procurement"
