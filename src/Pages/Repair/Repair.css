@@ -68,6 +68,11 @@
 .repairReplace__inactive {
   text-decoration: none;
 }
+.user__profile--with-gaps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 .user__profile--with-gap {
   display: flex;
   /* flex-direction: column; */
