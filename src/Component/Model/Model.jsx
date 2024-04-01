@@ -177,18 +177,17 @@ const Model = {
     required: "Please enter a product code",
     placeholder: "Enter the product code of the assets",
     minLength: {
-      value: 8,
-      message:
-        "Product key must be start with 'ITJ' followed by dash,capital letter 'DA' dash and numbers",
+      value: 1,
+      message: "Product code must only contain at least one number",
     },
     maxLength: {
       value: 20,
-      message: "Product key should be less than 20 characters",
+      message: "Product code should be less than 20 characters",
     },
     pattern: {
-      // value: /^ITJ-DA-[0-9]+$/,
+      value: /^[0-9 ]+$/,
       message:
-        "Please enter a valid Product Code. It should start with 'ITJ' followed by dash,capital letter 'DA' dash and numbers",
+        "Please enter a valid Product Code. It must contain numbers only",
     },
   },
   ProductName: {
@@ -197,16 +196,18 @@ const Model = {
     placeholder: "Enter the product name of the assets",
     minLength: {
       value: 2,
-      message: "Product name must be at least 2 characters long",
+      message:
+        "Product name must be at least 2 characters long and must contain at least one alphabet",
     },
     maxLength: {
       value: 64,
-      message: "Product name should be less than 64 characters",
+      message:
+        "Product name should be less than 64 characters and must contain at least one alphabet",
     },
     pattern: {
-      value: /^[a-zA-Z0-9 -]+$/,
+      value: /^(?=.*[a-zA-Z])[a-zA-Z0-9 -]+$/,
       message:
-        "Please enter a valid product name. It can include capital letters, small letters, numbers, and spaces.",
+        "Please enter a valid product name. It can include capital letters, small letters, numbers,dash and spaces.",
     },
   },
   location: {
@@ -238,7 +239,7 @@ const Model = {
       message: "Reason should be less than 64 characters",
     },
     pattern: {
-      value: /^[a-zA-Z0-9\s]+$/,
+      // value: /^[a-zA-Z0-9\s]+$/,
       message: "Please enter a valid alphanumeric string",
     },
   },
