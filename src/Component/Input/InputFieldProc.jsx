@@ -2,7 +2,11 @@ import { ErrorMessage } from "@hookform/error-message";
 import "./input.css";
 import { useState } from "react";
 
-export const InputField = ({
+// The InputFieldProc component is created to handle input fields specifically for procurement table items.
+// It includes functionality to clear errors on change, ensuring that errors are not carried over between input fields.
+// Separating this functionality into a separate component prevents unintended interactions with other input fields.
+
+export const InputFieldProc = ({
   placeholder,
   name,
   type,
@@ -17,14 +21,11 @@ export const InputField = ({
   isDisabled,
   register,
   className,
-  showPassword,
-  visiblePasswordFn,
-  autoComplete,
-  children,
   defaultValue,
   handleclick,
   checked,
   isEditable = true,
+  clearErrors,
 }) => {
   const hasError = errors[name];
   const [inputValu, setInputValu] = useState(defaultValue);
@@ -32,19 +33,19 @@ export const InputField = ({
   const handleChange = (e) => {
     const inputValue = e.target.value;
     setInputValu(inputValue);
+    clearErrors(name);
   };
   return (
-    <div className={type == "radio" ? "input__field--radio" : "input__field"}>
+    <div className={"input__field"}>
       <div className="toggle__showHide--container">
         <input
           onClick={handleclick}
           className={`${isDisabled ? "input-disabled" : "input-enabled"} ${
             hasError ? "input__error" : ""
-          } ${hasError && type == "radio" ? "input__radio" : ""} ${className} `}
+          } ${className} `}
           name={name}
           placeholder={placeholder}
-          autoComplete={autoComplete}
-          type={showPassword ? "text" : type}
+          type={type}
           {...register(name, {
             value: inputValu,
             onChange: handleChange,
@@ -66,11 +67,6 @@ export const InputField = ({
           readOnly={!isEditable}
           checked={checked}
         />
-        {children && (
-          <div className="password-toggle-button" onClick={visiblePasswordFn}>
-            {children}
-          </div>
-        )}
       </div>
       {!isDisabled && (
         <ErrorMessage
@@ -78,7 +74,7 @@ export const InputField = ({
           name={name}
           render={({ message }) =>
             message && (
-              <p className="error-message" key={type}>
+              <p className="error-message proc__error" key={type}>
                 {message}
               </p>
             )
@@ -91,7 +87,7 @@ export const InputField = ({
           name={name}
           render={({ minMessage }) =>
             minMessage && (
-              <p className="error-message" key={type}>
+              <p className="error-message proc__error" key={type}>
                 {minMessage}
               </p>
             )
@@ -104,7 +100,7 @@ export const InputField = ({
           name={name}
           render={({ maxMessage }) =>
             maxMessage && (
-              <p className="error-message" key={type}>
+              <p className="error-message proc__error" key={type}>
                 {maxMessage}
               </p>
             )

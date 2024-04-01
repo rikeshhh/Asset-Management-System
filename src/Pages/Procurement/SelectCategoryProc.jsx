@@ -18,6 +18,7 @@ const SelectCategoryProc = ({
   isEditable = true,
   errors,
   required = true,
+  clearErrors,
 }) => {
   const { data: CategoryData } = useQuery({
     queryKey: ["selectInputCategory"],
@@ -29,10 +30,11 @@ const SelectCategoryProc = ({
       (category) => category.id === selectedCategoryId
     );
     setCategoryName(selectedCategory);
+    clearErrors(name);
   };
 
   return (
-    <>
+    <div>
       <select
         {...register(name, { required: required })}
         onInput={addCategoryId}
@@ -65,9 +67,11 @@ const SelectCategoryProc = ({
         )}
       </select>
       {errors[name] && (
-        <p className="error-message">Please select a category</p>
+        <p className="error-message proc__error category__error">
+          Please select a category
+        </p>
       )}
-    </>
+    </div>
   );
 };
 
