@@ -165,10 +165,10 @@ const Model = {
   },
   Date: {
     type: "date",
-    placeholder: "MM-DD-YYYY",  
+    placeholder: "YYYY-MM-DD",
     pattern: {
-      value: "^d{4}-d{2}-d{2}$/",
-      message: "Date should be in MM-DD-YYYY format",
+      value: "\\d{4}-\\d{2}-\\d{2}",
+      message: "Date should be in YYYY-MM-DD format",
     },
   },
 

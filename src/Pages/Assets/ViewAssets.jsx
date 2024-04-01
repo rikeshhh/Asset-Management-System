@@ -223,7 +223,7 @@ const ViewAssets = () => {
                 </label>
               </div>
               <div className="assets__form--input">
-                <Label text="Upload asset image" />
+                <Label text="View asset image" />
 
                 <figure className="image__display">
                   <ImagePath
