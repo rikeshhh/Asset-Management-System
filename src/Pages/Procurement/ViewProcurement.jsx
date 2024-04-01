@@ -23,7 +23,6 @@ const ViewProcurement = () => {
   const location = useLocation();
   const receivedData = location.state;
   const procurementData = receivedData.data;
-  console.log(procurementData.number_of_items);
 
   const { isPending, data: ProductList } = useQuery({
     queryKey: ["productList"],
@@ -66,20 +65,18 @@ const ViewProcurement = () => {
               />
             </div>
           </div>
-          <div className="procurement__product">
-            <div className="procurement__bottom--buttons">
-              <Button
-                type={"button"}
-                text="Add a table line"
-                className="procurement--button procurement--button-not__allowed"
-                icon={<IoMdAdd />}
-                isDisabled={true}
-              />
-            </div>
-          </div>
         </div>
         <div className="procurement__product--list">
           <h3>Product List</h3>
+          <div className="procurement__bottom--buttons">
+            <Button
+              type={"button"}
+              text="Add a table line"
+              className="procurement--button procurement--button-not__allowed"
+              icon={<IoMdAdd />}
+              isDisabled={true}
+            />
+          </div>
         </div>
         <div className="table__container">
           <table className="main__table">

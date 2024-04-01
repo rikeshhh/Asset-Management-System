@@ -36,6 +36,7 @@ const AddProcurementTable = ({
   };
 
   return (
+    
     <>
       <div className="procurement__product--list">
         <h3>Product List</h3>

@@ -7,6 +7,7 @@ import { RxCross1 } from "react-icons/rx";
 import { GoTrash } from "react-icons/go";
 import { useForm } from "react-hook-form";
 import SelectInputCategory from "../Categories/SelectInputCategory";
+import SelectCategoryProc from "./SelectCategoryProc";
 
 const ProductListTableItem = ({
   tableItem,
@@ -35,7 +36,7 @@ const ProductListTableItem = ({
   const handleProcurementTableAdd = async (index) => {
     await trigger();
     const isValid = Object.keys(errors).length === 0;
-    
+
     if (isValid) {
       const values = getValues();
 
@@ -76,12 +77,13 @@ const ProductListTableItem = ({
   };
 
   return (
-    <tr>
+    <tr className="procurement__tablerow">
       <td>
         <InputField
           name="product_name"
           register={register}
           required={"Please enter a product name"}
+          placeholder={"Enter Product Name"}
           errors={errors}
           defaultValue={tableItem.product_name}
           isEditable={
@@ -97,7 +99,7 @@ const ProductListTableItem = ({
         />
       </td>
       <td>
-        <SelectInputCategory
+        <SelectCategoryProc
           name="category_id"
           register={register}
           errors={errors}
@@ -111,9 +113,9 @@ const ProductListTableItem = ({
           className={` ${
             (isEditable && index === newProcurement.length - 1) ||
             selectedIndex === index
-              ? "input-enabled"
+              ? "input-enabled input__editable "
               : "select-not-editable"
-          }`}
+          } ${errors["category_id"] ? "select__procurement" : ""}`}
         />
       </td>
       <td>
@@ -121,6 +123,7 @@ const ProductListTableItem = ({
           name="brand"
           register={register}
           required={"Please enter a brand name"}
+          placeholder={"Enter Brand"}
           errors={errors}
           defaultValue={tableItem.brand}
           isEditable={
@@ -140,6 +143,7 @@ const ProductListTableItem = ({
           name="estimated_price"
           register={register}
           required={"Please enter estimated price"}
+          placeholder={"Estimation"}
           errors={errors}
           defaultValue={tableItem.estimated_price}
           isEditable={
@@ -159,6 +163,7 @@ const ProductListTableItem = ({
           name="link"
           register={register}
           required={"Please enter a product link"}
+          placeholder={"Product Link"}
           errors={errors}
           defaultValue={tableItem.link}
           isEditable={

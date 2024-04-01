@@ -41,45 +41,27 @@ const FilterProcurement = ({
     const toDate = data.toDate.replace(/\+/g, " ");
     const assignedDate = `${fromDate} to ${toDate}`;
 
-    // Check if all three parameters are selected
-    if (
-      data.user !== "None" &&
-      data.status !== "None" &&
-      data.verifiedBy !== "None" &&
-      data.fromDate &&
-      data.toDate
-    ) {
-      setSearchParams({
-        requested_by: data.user,
-        status: data.status,
-        assigned_date: assignedDate,
-        verified_by: data.verifiedBy,
-      });
+    const updatedParams = {};
+
+    // Check each parameter and add it to the updatedParams object if it's not null
+    if (data.user !== "None") {
+      updatedParams.requested_by = data.user;
     }
-    // Check if only user is selected
-    else if (data.user !== "None") {
-      setSearchParams({
-        requested_by: data.user,
-      });
+    if (data.status !== "None") {
+      updatedParams.status = data.status;
     }
-    // Check if only verified by is selected
-    else if (data.verifiedBy !== "None") {
-      setSearchParams({
-        verified_by: data.verifiedBy,
-      });
+    if (data.verifiedBy !== "None") {
+      updatedParams.verified_by = data.verifiedBy;
     }
-    // Check if only status is selected
-    else if (data.status !== "None") {
-      setSearchParams({
-        status: data.status,
-      });
+    if (data.fromDate && data.toDate) {
+      updatedParams.assigned_date = assignedDate;
     }
-    // Check if only fromDate and toDate are selected
-    else if (data.fromDate && data.toDate) {
-      setSearchParams({
-        assigned_date: assignedDate,
-      });
-    }
+
+    // Update searchParams only with non-null values from updatedParams
+    setSearchParams(updatedParams);
+    setTimeout(() => {
+      handleClick();
+    }, 1000);
   };
 
   return (

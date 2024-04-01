@@ -89,5 +89,9 @@ select {
 
 .input__notEditable {
   border: none !important;
-  padding: 0 !important;
+  padding: 0 0 0 5px !important;
+}
+
+.input__editable {
+  padding: 8px;
 }

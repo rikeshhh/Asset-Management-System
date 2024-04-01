@@ -131,6 +131,18 @@
   color: var(--button-disabled-text);
 }
 
+.procurement__tablerow td {
+  padding: 9.5px 11px !important;
+}
+
+.select__procurement {
+  margin-bottom: 0.6rem;
+}
+
+.procurement__tablerow {
+  padding: 0rem 1rem !important;
+}
+
 @media (width<=500px) {
   .procurement__employee--dets {
     display: flex;
