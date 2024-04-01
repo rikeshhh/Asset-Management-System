@@ -18,6 +18,7 @@ import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteCon
 import { queryClient } from "../../Component/Query/Query";
 import { notifySuccess } from "../../Component/Toast/Toast";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import { EmptyData } from "../../Component/EmptyData/EmptyData";
 
 const ProcurementDataTable = ({
   setPageNumber,
@@ -165,6 +166,8 @@ const ProcurementDataTable = ({
           <tbody>
             {isPending ? (
               <PendingTableBody />
+            ) : procurementTableData?.data.length < 1 ? (
+              <EmptyData />
             ) : (
               procurementTableData?.data.map((tableItem, index) => (
                 <tr key={index}>
@@ -174,7 +177,7 @@ const ProcurementDataTable = ({
                   <td data-cell="No. of Items">{tableItem.number_of_items}</td>
                   <td data-cell="Status">{tableItem.status}</td>
                   <td data-cell="Verified By">{tableItem.approved_by_name}</td>
-                  <td data-cell="Verified Date">2024-02-21 07:31:19</td>
+                  <td data-cell="Verified Date">{tableItem.approved_date}</td>
                   <td className="button-gap">
                     <Link
                       to={"/procurement/viewProcurement"}

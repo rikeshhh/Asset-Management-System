@@ -46,7 +46,7 @@ const ProcurementForm = () => {
   const [newProcurement, setNewProcurement] = useState([
     {
       product_name: "",
-      category_id: "None",
+      category_id: "",
       brand: "",
       estimated_price: "",
       link: "",
@@ -58,6 +58,14 @@ const ProcurementForm = () => {
       formData: formData,
       tableData: newProcurement,
     };
+    if (newProcurement.length === 0) {
+      notifyError("Add any product to the table before submitting the form");
+      return;
+    }
+    if (procurementTableLine) {
+      notifyError("Save table line before filling the form");
+      return;
+    }
     AddProcurement.mutate(procurementForm);
   };
 
@@ -93,7 +101,7 @@ const ProcurementForm = () => {
               />
             </div>
           </div>
-          <div className="procurement__product">
+          <div className="procurement__product procurement__form--float">
             <div className="procurement__bottom--buttons">
               <Button
                 text="Fill Procurement"

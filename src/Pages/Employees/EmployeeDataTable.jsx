@@ -99,11 +99,7 @@ const EmployeeDataTable = ({
                     : "N/A"}
                 </td>
                 <td data-cell="email">
-                  {tableItem.email
-                    ? tableItem.email.length > 12
-                      ? `${tableItem.email.substring(0, 12)}...`
-                      : tableItem.email
-                    : "N/A"}
+                  {tableItem.email ? tableItem.email : "N/A"}
                 </td>
                 <td data-cell="phone">
                   {tableItem.phone_number ? tableItem.phone_number : "N/A"}

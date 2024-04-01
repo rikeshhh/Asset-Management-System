@@ -113,7 +113,8 @@ const AddProfile = () => {
           <span>Add a profile with valid details</span>
         </div>
         <div className="user__profile--body">
-          <div className="user__profile--left">
+          <div className="user__profile--left user__profile--with-gap">
+            <Label sup={"*"} text="Upload User Image" />
             <div className="user__profile--image">
               <figure>
                 <img src={profileImage} alt="Add Picture" />
@@ -132,7 +133,6 @@ const AddProfile = () => {
                   />
                 </div>
               </figure>
-
               <input
                 type="file"
                 className="user__profile--none"

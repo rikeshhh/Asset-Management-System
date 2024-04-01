@@ -4,6 +4,7 @@ import Button from "../../Component/Button/Button";
 import ProductListTableItem from "./ProductList";
 import { IoMdAdd } from "react-icons/io";
 import { EmptyData } from "../../Component/EmptyData/EmptyData";
+import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
 
 const AddProcurementTable = ({
   procurementTableLine,
@@ -13,6 +14,8 @@ const AddProcurementTable = ({
 }) => {
   const [isEditable, setIsEditable] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
+  const [productDeleteId, setProductDeleteId] = useState("");
 
   const handleAddProcurement = () => {
     setProcurementTableLine(true);
@@ -30,13 +33,32 @@ const AddProcurementTable = ({
   };
 
   const handleDeleteProcurementLine = (index) => {
+    setDeleteConfirationShow(true);
+    setProductDeleteId(index);
+  };
+
+  const handleCancelClick = () => {
+    setDeleteConfirationShow(false);
+  };
+
+  const handleProceedClick = () => {
     setProcurementTableLine(false);
     setIsEditable(false);
-    setNewProcurement(newProcurement.filter((_, idx) => idx !== index));
+    setDeleteConfirationShow(false);
+    setNewProcurement(
+      newProcurement.filter((_, idx) => idx !== productDeleteId)
+    );
   };
 
   return (
     <>
+      {deleteConfirationShow && (
+        <DeleteConfirmation
+          deleteName="Product Line"
+          handleCancelClick={handleCancelClick}
+          handleProceedClick={handleProceedClick}
+        />
+      )}
       <div className="procurement__product--list">
         <h3>Product List</h3>
         <Button
@@ -52,7 +74,7 @@ const AddProcurementTable = ({
           isDisabled={procurementTableLine ? true : false}
         />
       </div>
-      <div className="table__container">
+      <div className="table__container procurement__table">
         <table className="main__table">
           <thead>
             <tr>

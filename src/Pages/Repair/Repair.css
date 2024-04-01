@@ -61,12 +61,34 @@
   letter-spacing: 0.005rem;
   color: var(--blue) !important;
 }
-
+.radio__label--checked {
+  color: var(--blue) !important;
+  font-weight: 600 !important;
+}
 .repairReplace__inactive {
   text-decoration: none;
+}
+.user__profile--with-gaps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.user__profile--with-gap {
+  display: flex;
+  /* flex-direction: column; */
+  gap: 1rem;
 }
 @media (width<=350px) {
   .repair__header button {
     font-size: 0.85rem;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .user__profile--with-gaps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: initial !important;
   }
 }
