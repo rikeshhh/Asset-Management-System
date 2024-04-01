@@ -31,14 +31,14 @@ const ProcurementForm = () => {
       return procurementAdd(procurementForm);
     },
     onSuccess: () => {
-      notifySuccess("Procurement has been added");
+      notifySuccess("Procurement email has been sent to admin");
       setTimeout(() => {
         navigate("/procurement");
         queryClient.invalidateQueries("procurementTableData");
       }, 1000);
     },
     onError: (error) => {
-      notifyError("Error adding procurement");
+      notifyError("Error sending procurement email to admin");
     },
   });
 

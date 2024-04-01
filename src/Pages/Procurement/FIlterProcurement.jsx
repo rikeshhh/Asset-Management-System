@@ -16,8 +16,6 @@ import { SelectInput } from "../../Component/Input/SelectInput";
 import { InputField } from "../../Component/Input/InputField";
 import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
-import SelectInputUser from "../Assets/SelectInputUser";
-import SelectUser from "./SelectUser";
 import SelectFilterUser from "./SelectFilterUser";
 
 const FilterProcurement = ({

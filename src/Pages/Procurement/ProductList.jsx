@@ -6,8 +6,8 @@ import { CiEdit } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 import { GoTrash } from "react-icons/go";
 import { useForm } from "react-hook-form";
-import SelectInputCategory from "../Categories/SelectInputCategory";
 import SelectCategoryProc from "./SelectCategoryProc";
+import { InputFieldProc } from "../../Component/Input/InputFieldProc";
 
 const ProductListTableItem = ({
   tableItem,
@@ -28,15 +28,12 @@ const ProductListTableItem = ({
     getValues,
     reset,
     trigger,
+    clearErrors,
   } = useForm();
-
-  console.log(errors);
 
   const [categoryName, setCategoryName] = useState("");
   const handleProcurementTableAdd = async (index) => {
-    await trigger();
-    const isValid = Object.keys(errors).length === 0;
-
+    const isValid = await trigger();
     if (isValid) {
       const values = getValues();
 
@@ -78,13 +75,14 @@ const ProductListTableItem = ({
 
   return (
     <tr className="procurement__tablerow">
-      <td>
-        <InputField
+      <td data-cell="Product Name">
+        <InputFieldProc
           name="product_name"
           register={register}
           required={"Please enter a product name"}
           placeholder={"Enter Product Name"}
           errors={errors}
+          clearErrors={clearErrors}
           defaultValue={tableItem.product_name}
           isEditable={
             (isEditable && index === newProcurement.length - 1) ||
@@ -93,18 +91,19 @@ const ProductListTableItem = ({
           className={`${
             (isEditable && index === newProcurement.length - 1) ||
             selectedIndex === index
-              ? "input__editable"
+              ? " input__editable"
               : "input__notEditable"
           }`}
         />
       </td>
-      <td>
+      <td data-cell="Category">
         <SelectCategoryProc
           name="category_id"
           register={register}
           errors={errors}
           required={"Please select category"}
           setCategoryName={setCategoryName}
+          clearErrors={clearErrors}
           defaultValue={categoryName || tableItem.category_id}
           isEditable={
             (index === newProcurement.length - 1 && isEditable) ||
@@ -113,19 +112,20 @@ const ProductListTableItem = ({
           className={` ${
             (isEditable && index === newProcurement.length - 1) ||
             selectedIndex === index
-              ? "input-enabled input__editable "
+              ? " input-enabled input__editable "
               : "select-not-editable"
           } ${errors["category_id"] ? "select__procurement" : ""}`}
         />
       </td>
-      <td>
-        <InputField
+      <td data-cell="Brand">
+        <InputFieldProc
           name="brand"
           register={register}
           required={"Please enter a brand name"}
           placeholder={"Enter Brand"}
           errors={errors}
           defaultValue={tableItem.brand}
+          clearErrors={clearErrors}
           isEditable={
             (isEditable && index === newProcurement.length - 1) ||
             selectedIndex === index
@@ -133,18 +133,19 @@ const ProductListTableItem = ({
           className={`${
             (isEditable && index === newProcurement.length - 1) ||
             selectedIndex === index
-              ? "input__editable"
+              ? " input__editable"
               : "input__notEditable"
           }`}
         />
       </td>
-      <td>
-        <InputField
+      <td data-cell="Estimated Price">
+        <InputFieldProc
           name="estimated_price"
           register={register}
           required={"Please enter estimated price"}
           placeholder={"Estimation"}
           errors={errors}
+          clearErrors={clearErrors}
           defaultValue={tableItem.estimated_price}
           isEditable={
             (isEditable && index === newProcurement.length - 1) ||
@@ -153,18 +154,19 @@ const ProductListTableItem = ({
           className={`${
             (isEditable && index === newProcurement.length - 1) ||
             selectedIndex === index
-              ? "input__editable"
+              ? " input__editable"
               : "input__notEditable"
           }`}
         />
       </td>
-      <td>
-        <InputField
+      <td data-cell="Link">
+        <InputFieldProc
           name="link"
           register={register}
           required={"Please enter a product link"}
           placeholder={"Product Link"}
           errors={errors}
+          clearErrors={clearErrors}
           defaultValue={tableItem.link}
           isEditable={
             (isEditable && index === newProcurement.length - 1) ||
@@ -173,12 +175,12 @@ const ProductListTableItem = ({
           className={`${
             (isEditable && index === newProcurement.length - 1) ||
             selectedIndex === index
-              ? "input__editable"
+              ? " input__editable"
               : "input__notEditable"
           }`}
         />
       </td>
-      <td className="button-gap">
+      <td data-cell="Action" className="button-gap">
         {(procurementTableLine && index === newProcurement.length - 1) ||
         selectedIndex === index ? (
           <Button
