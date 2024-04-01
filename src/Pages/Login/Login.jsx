@@ -130,15 +130,6 @@ const Login = () => {
                       </button>
                     </InputField>
                   </div>
-                  <div className="form__input--secion login__remember">
-                    <InputField
-                      name="Checkbox"
-                      register={register}
-                      errors={errors}
-                      type={Model.Checkbox.type}
-                    />
-                    <Label text="Remember Me" />
-                  </div>
 
                   <div className="login__btn">
                     <Button

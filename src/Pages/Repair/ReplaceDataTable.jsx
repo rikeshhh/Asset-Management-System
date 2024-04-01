@@ -17,6 +17,7 @@ import { queryClient } from "../../Component/Query/Query";
 import Pagination from "../../Component/Pagination/Pagination";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import { EmptyData } from "../../Component/EmptyData/EmptyData";
 
 const ReplaceDataTable = ({
   onFilterClick,
@@ -180,6 +181,8 @@ const ReplaceDataTable = ({
           <tbody>
             {isPending ? (
               <PendingTableBody />
+            ) : replaceTableData?.data.length < 1 ? (
+              <EmptyData />
             ) : (
               replaceTableData?.data.map((tableItem, index) => (
                 <tr key={index}>
