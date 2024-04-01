@@ -38,9 +38,6 @@ const SelectAssetCategory = ({
         }`}
         defaultValue={(defaultValue && defaultValue.id) || defaultValue}
       >
-        {defaultValue && (
-          <option value={defaultValue.id}>{defaultValue.name}</option>
-        )}
         {!defaultValue && (
           <option
             value=""

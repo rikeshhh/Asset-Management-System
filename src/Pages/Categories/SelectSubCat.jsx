@@ -29,18 +29,15 @@ const SelectSubCat = ({
       {...register(name)}
       disabled={isDisabled}
       className={`${isDisabled ? "select__disabled" : "select__enabled"}`} // Disable if either isDisabled or isEmptyChildArray is true
+      defaultValue={(defaultValue && defaultValue.id) || defaultValue}
+
     >
-      {defaultValue ? null : (
+      {!defaultValue &&(
         <option value="" disabled selected>
-          Select the category of the asset
+          Select the sub category 
         </option>
       )}
-      {/* Render the default option only once outside of the map function */}
-      {defaultValue && (
-        <option className="select__option" value={defaultValue.id}>
-          {defaultValue.name}
-        </option>
-      )}
+     
 
       {/* Map over the subCategoryData array and render each subcategory option */}
       {subCategoryData && subCategoryData.length > 0 && (
