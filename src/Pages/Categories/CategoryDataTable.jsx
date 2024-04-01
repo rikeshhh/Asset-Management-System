@@ -114,8 +114,9 @@ const CategoryDataTable = ({
    * Handles the click event for the subcategory button.
    * @param {Object} options - Options for the category.
    */
-
+const [onShowSub,setOnShowSub]=useState(false);
   const handleSubCategoryClick = (options) => {
+    setOnShowSub(true)
     setShowSubCategory((prev) => {
       if (prev && options.id === showSubCategoryDrop) {
         return false;

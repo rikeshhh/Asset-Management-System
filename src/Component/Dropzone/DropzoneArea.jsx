@@ -100,7 +100,29 @@ const DropzoneArea = ({ setValue, name, defaultValue, isDisabled }) => {
                 {/* Render other elements conditionally here */}
               </div>
               {imageFlag ? (
-                ""
+                <>
+                  <div className="upload__svg">
+                    <UploadSvg />
+                  </div>
+                  <div className="upload__image--file">
+                    <Label text="Drag files to upload" />
+                    <p>or</p>
+                    <Button
+                      type={"button"}
+                      text={"Browse File"}
+                      className={"button__blue upload__drag--btn"}
+                    />
+                  </div>
+                  <input
+                    {...getInputProps()}
+                    disabled={isDisabled}
+                    accept="image/png, image/jpeg"
+                  />
+                  <div className="upload__para">
+                    <p>Max File Size: 5MB</p>
+                    <p>Supported File Type: JPG, PNG,WEBP</p>
+                  </div>
+                </>
               ) : (
                 <Button
                   type={"button"}
