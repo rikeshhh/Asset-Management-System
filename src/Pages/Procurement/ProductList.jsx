@@ -8,6 +8,7 @@ import { GoTrash } from "react-icons/go";
 import { useForm } from "react-hook-form";
 import SelectCategoryProc from "./SelectCategoryProc";
 import { InputFieldProc } from "../../Component/Input/InputFieldProc";
+import Model from "../../Component/Model/Model";
 
 const ProductListTableItem = ({
   tableItem,
@@ -83,6 +84,12 @@ const ProductListTableItem = ({
           placeholder={"Enter Product Name"}
           errors={errors}
           clearErrors={clearErrors}
+          value={Model.ProductName.pattern.value}
+          message={"Includes letters, numbers, and periods."}
+          minLength={Model.ProductName.minLength.value}
+          minMessage={Model.ProductName.minLength.message}
+          maxLength={Model.ProductName.maxLength.value}
+          maxMessage={Model.ProductName.maxLength.message}
           defaultValue={tableItem.product_name}
           isEditable={
             (isEditable && index === newProcurement.length - 1) ||
@@ -123,6 +130,12 @@ const ProductListTableItem = ({
           register={register}
           required={"Please enter a brand name"}
           placeholder={"Enter Brand"}
+          value={Model.brandCompanyName.pattern.value}
+          message={Model.brandCompanyName.pattern.message}
+          minLength={Model.brandCompanyName.minLength.value}
+          minMessage={Model.brandCompanyName.minLength.message}
+          maxLength={Model.brandCompanyName.maxLength.value}
+          maxMessage={Model.brandCompanyName.maxLength.message}
           errors={errors}
           defaultValue={tableItem.brand}
           clearErrors={clearErrors}
@@ -145,8 +158,12 @@ const ProductListTableItem = ({
           required={"Please enter estimated price"}
           placeholder={"Estimation"}
           errors={errors}
+          value={Model.EstimatedPrice.pattern.value}
+          message={Model.EstimatedPrice.pattern.message}
+          minLength={Model.EstimatedPrice.minLength.value}
+          minMessage={Model.EstimatedPrice.minLength.message}
           clearErrors={clearErrors}
-          defaultValue={tableItem.estimated_price}
+          defaultValue={`${tableItem.estimated_price}`}
           isEditable={
             (isEditable && index === newProcurement.length - 1) ||
             selectedIndex === index
@@ -168,6 +185,10 @@ const ProductListTableItem = ({
           errors={errors}
           clearErrors={clearErrors}
           defaultValue={tableItem.link}
+          value={Model.Link.pattern.value}
+          message={Model.Link.pattern.message}
+          maxLength={Model.Link.maxLength.value}
+          maxMessage={Model.Link.maxLength.message}
           isEditable={
             (isEditable && index === newProcurement.length - 1) ||
             selectedIndex === index

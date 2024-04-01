@@ -66,6 +66,10 @@ const ProcurementForm = () => {
       notifyError("Save table line before filling the form");
       return;
     }
+    if (formData.requested_by === "None") {
+      notifyError("Select an employee");
+      return;
+    }
     AddProcurement.mutate(procurementForm);
   };
 
