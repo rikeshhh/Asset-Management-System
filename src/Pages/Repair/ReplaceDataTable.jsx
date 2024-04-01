@@ -99,8 +99,8 @@ const ReplaceDataTable = ({
   const DeleteReplace = useMutation({
     mutationFn: () => deleteRepairReplace(replaceId),
     onSuccess: () => {
-      queryClient.invalidateQueries("ReplaceTableData");
       notifySuccess("Replace Data has been deleted successfully");
+      queryClient.invalidateQueries("ReplaceTableData");
 
       if (
         pageNumber > 1 &&

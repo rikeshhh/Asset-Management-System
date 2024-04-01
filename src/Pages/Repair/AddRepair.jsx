@@ -13,6 +13,7 @@ import { repairReplaceAdd } from "./RepairApiSlice";
 import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { queryClient } from "../../Component/Query/Query";
 import SelectUserRepair from "./SelectUserRepair";
+import "./Repair.css";
 
 /**
  * Functional component for adding a new employee profile.
@@ -44,11 +45,11 @@ const AddRepair = () => {
       );
     },
     onSuccess: () => {
-      notifySuccess("Repair/Replace has been added");
+      notifySuccess(`Device has been listed to ${selectedType}`);
       setTimeout(() => {
         navigate("/repair");
         queryClient.invalidateQueries("RepairTableData", "ReplaceTableData");
-      }, 1000);
+      }, 2000);
     },
     onError: (error) => {
       notifyError(error.response.data.message.message.repairreplace);
@@ -78,9 +79,8 @@ const AddRepair = () => {
           <span>Fill this form for repair or replace of your device</span>
         </div>
         <div className="user__profile--body">
-          <div className="user__profile--left">
+          <div className="user__profile--left user__profile--with-gaps">
             <Label text="Upload current asset image" />
-
             <DropzoneArea name="product_image" setValue={setValue} />
           </div>
 
@@ -104,16 +104,16 @@ const AddRepair = () => {
               <InputField
                 name="Product_Code"
                 register={register}
-                // value={Model.ProductCode.pattern.value}
-                // message={Model.ProductCode.pattern.message}
+                value={Model.ProductCode.pattern.value}
+                message={Model.ProductCode.pattern.message}
                 required={Model.ProductCode.required}
                 errors={errors}
                 type={Model.ProductCode.type}
                 placeholder={Model.ProductCode.placeholder}
-                // minLength={Model.ProductCode.minLength.value}
-                // minMessage={Model.ProductCode.minLength.message}
-                // maxLength={Model.ProductCode.maxLength.value}
-                // maxMessage={Model.ProductCode.maxLength.message}
+                minLength={Model.ProductCode.minLength.value}
+                minMessage={Model.ProductCode.minLength.message}
+                maxLength={Model.ProductCode.maxLength.value}
+                maxMessage={Model.ProductCode.maxLength.message}
                 isDisabled={receivedState}
               />
             </div>
@@ -128,6 +128,8 @@ const AddRepair = () => {
                 required={Model.ProductName.required}
                 errors={errors}
                 type={Model.ProductName.type}
+                minLength={Model.ProductName.minLength.value}
+                minMessage={Model.ProductName.minLength.message}
                 placeholder={Model.ProductName.placeholder}
                 maxLength={Model.ProductName.maxLength.value}
                 maxMessage={Model.ProductName.maxLength.message}
@@ -157,7 +159,12 @@ const AddRepair = () => {
                       checked={selectedType === "Repair"}
                     />
                   </div>
-                  <Label text="Repair" />
+                  <Label
+                    text="Repair"
+                    className={
+                      selectedType === "Repair" ? "radio__label--checked" : ""
+                    }
+                  />
                 </div>
                 <div className="radio__label">
                   <div className="checkbox__input--label">
@@ -169,7 +176,12 @@ const AddRepair = () => {
                       checked={selectedType === "Replace"}
                     />
                   </div>
-                  <Label text="Replace" />
+                  <Label
+                    text="Replace"
+                    className={
+                      selectedType === "Replace" ? "radio__label--checked" : ""
+                    }
+                  />
                 </div>
               </div>
             </div>

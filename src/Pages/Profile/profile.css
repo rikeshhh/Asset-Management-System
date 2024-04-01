@@ -201,6 +201,14 @@
     padding: 2rem;
   }
 }
+@media screen and (max-width: 850px) {
+  .user__profile--with-gap {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* align-items: center; */
+  }
+}
 
 @media (width<= 500px) {
   .user__profile--body {
