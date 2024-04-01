@@ -171,7 +171,19 @@ const Model = {
       message: "Date should be in mm-dd-yyyy format",
     },
   },
-
+  EstimatedPrice: {
+    type: "string",
+    required: "Please enter estimated price",
+    placeholder: "Enter estimated price",
+    pattern: {
+      value: /^\$[0-9]+$/,
+      message: "Must be numeric and start with $",
+    },
+    minLength: {
+      value: 1,
+      message: "Price must be at least 1 unit",
+    },
+  },
   ProductCode: {
     type: "string",
     required: "Please enter a product code",
@@ -206,7 +218,7 @@ const Model = {
     pattern: {
       value: /^[a-zA-Z0-9 -]+$/,
       message:
-        "Please enter a valid product name. It can include capital letters, small letters, numbers, and spaces.",
+        "Please enter a valid product name. It can include capital letters, small letters, numbers,dash, spaces and numbers.",
     },
   },
   location: {
@@ -224,6 +236,19 @@ const Model = {
     pattern: {
       value: /^[a-zA-Z0-9\s]+$/,
       message: "Please enter a valid alphanumeric string.",
+    },
+  },
+  Link: {
+    type: "string",
+    required: "Please enter a product link",
+    placeholder: "Enter product link",
+    pattern: {
+      value: /^www\..{1,}[^a-zA-Z0-9]?[a-zA-Z]{0,4}$/,
+      message: "Includes link staring with www.",
+    },
+    maxLength: {
+      value: 64,
+      message: "Must be less than 64 characters",
     },
   },
   reason: {

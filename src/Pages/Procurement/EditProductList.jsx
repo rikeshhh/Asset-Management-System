@@ -7,6 +7,7 @@ import { GoTrash } from "react-icons/go";
 import { RxCross1 } from "react-icons/rx";
 import SelectCategoryProc from "./SelectCategoryProc";
 import { InputFieldProc } from "../../Component/Input/InputFieldProc";
+import Model from "../../Component/Model/Model";
 
 const EditProductList = ({
   procurement,
@@ -77,6 +78,12 @@ const EditProductList = ({
           clearErrors={clearErrors}
           defaultValue={procurement.product_name}
           required={"Please enter a product name"}
+          value={Model.ProductName.pattern.value}
+          message={"Includes letters, numbers, and periods."}
+          minLength={Model.ProductName.minLength.value}
+          minMessage={Model.ProductName.minLength.message}
+          maxLength={Model.ProductName.maxLength.value}
+          maxMessage={Model.ProductName.maxLength.message}
           placeholder={"Enter Product Name"}
           isEditable={selectedIndex === index}
           className={`${
@@ -108,6 +115,12 @@ const EditProductList = ({
           clearErrors={clearErrors}
           errors={errors}
           defaultValue={procurement.brand}
+          value={Model.brandCompanyName.pattern.value}
+          message={Model.brandCompanyName.pattern.message}
+          minLength={Model.brandCompanyName.minLength.value}
+          minMessage={Model.brandCompanyName.minLength.message}
+          maxLength={Model.brandCompanyName.maxLength.value}
+          maxMessage={Model.brandCompanyName.maxLength.message}
           required={"Please enter a brand name"}
           placeholder={"Enter Brand"}
           isEditable={selectedIndex === index}
@@ -122,6 +135,10 @@ const EditProductList = ({
           register={register}
           clearErrors={clearErrors}
           errors={errors}
+          value={Model.EstimatedPrice.pattern.value}
+          message={Model.EstimatedPrice.pattern.message}
+          minLength={Model.EstimatedPrice.minLength.value}
+          minMessage={Model.EstimatedPrice.minLength.message}
           required={"Please enter estimated price"}
           placeholder={"Estimation"}
           defaultValue={procurement.estimated_price}
@@ -139,6 +156,10 @@ const EditProductList = ({
           required={"Please enter a product link"}
           placeholder={"Product Link"}
           errors={errors}
+          value={Model.Link.pattern.value}
+          message={Model.Link.pattern.message}
+          maxLength={Model.Link.maxLength.value}
+          maxMessage={Model.Link.maxLength.message}
           defaultValue={procurement.link}
           isEditable={selectedIndex === index}
           className={`${
