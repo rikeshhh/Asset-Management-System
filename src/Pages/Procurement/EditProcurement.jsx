@@ -173,7 +173,7 @@ const EditProcurementData = () => {
             <tbody>
               {isPending || isFetching ? (
                 <PendingTableBody />
-              ) : newProcurement.length === 0 ? (
+              ) : newProcurement?.length === 0 ? (
                 <EmptyData />
               ) : (
                 ProductList &&

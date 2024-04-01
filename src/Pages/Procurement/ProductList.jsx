@@ -34,30 +34,37 @@ const ProductListTableItem = ({
   const [categoryName, setCategoryName] = useState("");
   const handleProcurementTableAdd = async (index) => {
     await trigger();
-    const values = getValues();
+    const isValid = Object.keys(errors).length === 0;
+    
 
-    // Update the item at the specified index with the new values
-    const updatedItem = {
-      product_name: values.product_name,
-      category_id: values.category_id,
-      brand: values.brand,
-      estimated_price: values.estimated_price,
-      link: values.link,
-    };
+    if (isValid) {
+      const values = getValues();
 
-    // Update the newProcurement state with the updated item
-    const updatedProcurement = [...newProcurement];
-    updatedProcurement[index] = updatedItem;
-    setNewProcurement(updatedProcurement);
+      // Update the item at the specified index with the new values
+      const updatedItem = {
+        product_name: values.product_name,
+        category_id: values.category_id,
+        brand: values.brand,
+        estimated_price: values.estimated_price,
+        link: values.link,
+      };
 
-    // Reset state and form after editing
-    setIsEditable(false);
-    setSelectedIndex("");
-    setProcurementTableLine(false);
-    reset();
+      // Update the newProcurement state with the updated item
+      const updatedProcurement = [...newProcurement];
+      updatedProcurement[index] = updatedItem;
+      setNewProcurement(updatedProcurement);
+
+      // Reset state and form after editing
+      setIsEditable(false);
+      setSelectedIndex("");
+      setProcurementTableLine(false);
+      reset();
+    } else {
+      return;
+    }
   };
 
-  const handleProcurementTableEdit = (index) => {
+  const handleProcurementTableEdit = async (index) => {
     setProcurementTableLine(true);
     setSelectedIndex(index);
   };
