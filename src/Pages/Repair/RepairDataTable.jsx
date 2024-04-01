@@ -18,6 +18,7 @@ import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import Pagination from "../../Component/Pagination/Pagination";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
+import { EmptyData } from "../../Component/EmptyData/EmptyData";
 
 const RepairDataTable = ({
   onFilterClick,
@@ -179,6 +180,8 @@ const RepairDataTable = ({
           <tbody>
             {isPending ? (
               <PendingTableBody />
+            ) : repairTableData?.data.length < 1 ? (
+              <EmptyData />
             ) : (
               repairTableData?.data.map((tableItem, index) => (
                 <tr key={index}>
