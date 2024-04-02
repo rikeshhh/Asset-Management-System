@@ -176,7 +176,7 @@ const Model = {
     required: "Please enter estimated price",
     placeholder: "Enter estimated price",
     pattern: {
-      value: /^\$[0-9]+$/,
+      value: /^\$[0-9.]+$/,
       message: "Must be numeric and start with $",
     },
     minLength: {

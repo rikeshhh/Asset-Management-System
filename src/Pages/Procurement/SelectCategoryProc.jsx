@@ -45,7 +45,7 @@ const SelectCategoryProc = ({
       `}
         defaultValue={(defaultValue && defaultValue.id) || defaultValue}
       >
-        <option value="" defaultChecked disabled>
+        <option value="" selected disabled>
           Category
         </option>
         {/* Render the default option only once outside of the map function */}
