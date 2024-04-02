@@ -234,8 +234,9 @@ const Model = {
       message: "Location name should be less than 64 characters",
     },
     pattern: {
-      value: /^[a-zA-Z0-9\s]+$/,
-      message: "Please enter a valid alphanumeric string.",
+      value: /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d\s]+$/,
+      message:
+        "Please enter a valid alphanumeric string containing at least one letter and one number.",
     },
   },
   Link: {
