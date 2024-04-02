@@ -37,6 +37,10 @@ const DepartmentDataTable = ({
   handleDeleteClick,
   disabledButton,
   setDisabledButton,
+  departmentTableData,
+  departmentTableDataOrder,
+  setDepartmentTableDataOrder,
+  setDepartmentTableData,
 }) => {
   const successMessage = "Department has been updated successfully";
 
@@ -80,9 +84,6 @@ const DepartmentDataTable = ({
   };
   const [previousDepartment, setPreviousDepartment] = useState("");
   const [departmentId, setDepartmentId] = useState("");
-  const [departmentTableData, setDepartmentTableData] = useState(null);
-  const [departmentTableDataOrder, setDeparmentTableDataOrder] =
-    useState("ASC");
 
   /**
    * Handles the click event for the edit button.
@@ -121,18 +122,11 @@ const DepartmentDataTable = ({
   };
 
   const handleStatusClick = async () => {
-    try {
-      const newOrder = departmentTableDataOrder === "ASC" ? "DESC" : "ASC";
-      const response = await sortByStatusDepartment(newOrder, "department");
-      setDepartmentTableData(response);
-      setDeparmentTableDataOrder(newOrder);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
+    const newOrder = departmentTableDataOrder === "ASC" ? "DESC" : "ASC";
+    setDepartmentTableData("department");
+    setDepartmentTableDataOrder(newOrder);
   };
 
-  const departmentDataToRender = departmentTableData || DepartmentData;
   return (
     <>
       <section className="cateogries department table__container">
@@ -143,9 +137,15 @@ const DepartmentDataTable = ({
             ) : (
               <tr>
                 <th>S.N.</th>
-                <th>
-                  Department
-                  <span>
+                <th
+                  className={
+                    departmentTableData === "department"
+                      ? "selected-tablehead"
+                      : ""
+                  }
+                >
+                  Department{" "}
+                  <span className="sort__icon">
                     <LuArrowUpDown onClick={handleStatusClick} />
                   </span>
                 </th>
@@ -157,7 +157,7 @@ const DepartmentDataTable = ({
             {isPending ? (
               <SmallTablePendingBody />
             ) : (
-              departmentDataToRender.map((options, index) => (
+              DepartmentData.map((options, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
                   {departmentId === options.id && show ? (
@@ -206,11 +206,11 @@ const DepartmentDataTable = ({
                     </td>
                   ) : (
                     <td
-                    className={
-                      options.department.length > 20
-                        ? "hoverEffect  universal-input__container--editable-padding"
-                        : ""
-                    }
+                      className={
+                        options.department.length > 20
+                          ? "hoverEffect  universal-input__container--editable-padding"
+                          : ""
+                      }
                       data-name={`${options.department}`}
                     >
                       {options.department.length > 20

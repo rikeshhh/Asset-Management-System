@@ -7,10 +7,16 @@ const token = getTokenFromLocalStorage();
 /**
  * Retrieves department data from the server.
  */
-export const getDepartmentData = async () => {
-  const departmentData = await instance.get("/department", {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+export const getDepartmentData = async (
+  departmentTableData,
+  departmentTableDataOrder
+) => {
+  const departmentData = await instance.get(
+    `/department?sortorder=${departmentTableDataOrder}&orderby=${departmentTableData}`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
   const resp = await departmentData.data.data;
   return resp;
 };

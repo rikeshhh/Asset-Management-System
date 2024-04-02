@@ -27,6 +27,7 @@ const LocationDataTable = ({
   setDisableButtons,
   disableButtons,
   setLocationTableDataOrder,
+  locationTableData,
   locationTableDataOrder,
   setLocationTableData,
 }) => {
@@ -111,9 +112,13 @@ const LocationDataTable = ({
           ) : (
             <tr>
               <th>S.N.</th>
-              <th>
-                Location
-                <span>
+              <th
+                className={
+                  locationTableData === "location" ? "selected-tablehead" : ""
+                }
+              >
+                Location{" "}
+                <span className="sort__icon">
                   <LuArrowUpDown onClick={handleStatusClick} />
                 </span>
               </th>

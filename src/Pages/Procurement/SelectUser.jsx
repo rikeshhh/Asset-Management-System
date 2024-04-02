@@ -11,27 +11,40 @@ import { selectUser } from "../Assets/AssetsApiSlice";
  * @param {boolean} props.isDisabled - Boolean indicating if the select input field is disabled
  * @returns {JSX.Element} JSX representation of the SelectInputUser component
  */
-const SelectUser = ({ name, register, defaultValue, isDisabled }) => {
+const SelectUser = ({ name, register, defaultValue, errors, required }) => {
   const { data: userData } = useQuery({
     queryKey: ["selectUserData"],
     queryFn: selectUser,
   });
-  return (
-    <select {...register(name, { required: true })}>
-      {defaultValue ? null : <option value="None">None</option>}
 
-      {defaultValue && (
-        <option className="select__option" value={defaultValue.id}>
-          {defaultValue.name}
-        </option>
-      )}
-      {Array.isArray(userData) &&
-        userData.map((user) => (
-          <option className="select__option" key={user.id} value={user.id}>
-            {user.name}
+  return (
+    <>
+      <select
+        {...register(name, { required: required })}
+        className={`${errors[name] ? "select__border" : ""}`}
+      >
+        {defaultValue ? null : (
+          <option disabled selected value="">
+            Select an Employee
           </option>
-        ))}
-    </select>
+        )}
+
+        {defaultValue && (
+          <option className="select__option" value={defaultValue.id}>
+            {defaultValue.name}
+          </option>
+        )}
+        {Array.isArray(userData) &&
+          userData.map((user) => (
+            <option className="select__option" key={user.id} value={user.id}>
+              {user.name}
+            </option>
+          ))}
+      </select>
+      {errors[name] && (
+        <p className="error-message">Please select an employee</p>
+      )}
+    </>
   );
 };
 export default SelectUser;

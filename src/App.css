@@ -212,6 +212,11 @@ label {
   cursor: pointer;
 }
 
+.selected-tablehead {
+  color: var(--blue) !important;
+  z-index: 1;
+}
+
 .select__border {
   outline: 1px solid var(--red) !important;
 }

@@ -244,21 +244,18 @@ const Employees = () => {
                   handleSort={handleSort}
                   selectedColumn={selectedColumn}
                 />
-                {isPending ? (
-                  <PendingPagination />
-                ) : (
-                  <div className="pagination">
-                    {roundUp > 1 && (
-                      <Pagination
-                        setSearchParams={setSearchParams}
-                        data={tableData?.data}
-                        roundUp={roundUp}
-                        setPageNumber={setPage}
-                        pageNumber={page}
-                      />
-                    )}
-                  </div>
-                )}
+
+                <div className="pagination">
+                  {roundUp > 1 && (
+                    <Pagination
+                      setSearchParams={setSearchParams}
+                      data={tableData?.data}
+                      roundUp={roundUp}
+                      setPageNumber={setPage}
+                      pageNumber={page}
+                    />
+                  )}
+                </div>
               </div>
             </div>
           </section>

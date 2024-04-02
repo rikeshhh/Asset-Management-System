@@ -4,19 +4,13 @@ import { InputField } from "../../Component/Input/InputField";
 import { Label } from "../../Component/Label/Label";
 import Button from "../../Component/Button/Button";
 import Model from "../../Component/Model/Model";
-import { IoMdAdd, IoMdOptions } from "react-icons/io";
+import { IoMdAdd } from "react-icons/io";
 import { useMutation, useQuery } from "@tanstack/react-query";
-
 import { queryClient } from "../../Component/Query/Query";
 import DepartmentDataTable from "./DepartmentDataTable";
-import {
-  notifyDelete,
-  notifyError,
-  notifySuccess,
-} from "../../Component/Toast/Toast";
+import { notifyError, notifySuccess } from "../../Component/Toast/Toast";
 import { useState } from "react";
 import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteConfirmation";
-import ToastContainer from "../../Component/Toast/ToastContainer";
 import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import {
   departmentAdd,
@@ -38,6 +32,12 @@ const Departments = () => {
       department: "",
     },
   });
+  const [departmentName, setDepartmentName] = useState();
+  const [departmentId, setDepartmentId] = useState();
+  const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
+  const [departmentTableData, setDepartmentTableData] = useState("id");
+  const [departmentTableDataOrder, setDepartmentTableDataOrder] =
+    useState("ASC");
   const [disabledButton, setDisabledButton] = useState(false);
   const addDepartment = useMutation({
     //Function that performs the mutation, adding a new department.
@@ -77,8 +77,8 @@ const Departments = () => {
     error,
     data: DepartmentData,
   } = useQuery({
-    queryKey: ["DepartmentData"],
-    queryFn: getDepartmentData,
+    queryKey: ["DepartmentData",departmentTableData,departmentTableDataOrder],
+    queryFn: () => getDepartmentData(departmentTableData,departmentTableDataOrder),
   });
 
   const deleteMessage = "Department has been deleted";
@@ -95,9 +95,7 @@ const Departments = () => {
       notifyError("Error deleting department");
     },
   });
-  const [departmentName, setDepartmentName] = useState();
-  const [departmentId, setDepartmentId] = useState();
-  const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
+  
 
   const handleCancelClick = () => {
     setDeleteConfirationShow(false);
@@ -141,6 +139,10 @@ const Departments = () => {
               handleProceedClick={handleProceedClick}
               disabledButton={disabledButton}
               setDisabledButton={setDisabledButton}
+              setDepartmentTableDataOrder={setDepartmentTableDataOrder}
+              departmentTableDataOrder={departmentTableDataOrder}
+              setDepartmentTableData={setDepartmentTableData}
+              departmentTableData={departmentTableData}
             />
 
             <div className="add__category">
