@@ -17,7 +17,7 @@ const SelectSubCat = ({
     queryKey: ["selectSubCategory", categoryName],
     queryFn: () => selectSubCategoryData(categoryName),
   });
-  console.log(subCategoryData);
+  console.log("ugugyug", categoryName);
   // Checking if any child array is empty
   const isEmptyChildArray =
     subCategoryData &&
@@ -30,14 +30,12 @@ const SelectSubCat = ({
       disabled={isDisabled}
       className={`${isDisabled ? "select__disabled" : "select__enabled"}`} // Disable if either isDisabled or isEmptyChildArray is true
       defaultValue={(defaultValue && defaultValue.id) || defaultValue}
-
     >
-      {!defaultValue &&(
+      {!defaultValue && (
         <option value="" disabled selected>
-          Select the sub category 
+          Select the category of the asset
         </option>
       )}
-     
 
       {/* Map over the subCategoryData array and render each subcategory option */}
       {subCategoryData && subCategoryData.length > 0 && (

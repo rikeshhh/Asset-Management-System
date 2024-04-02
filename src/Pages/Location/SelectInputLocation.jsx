@@ -16,7 +16,7 @@ const SelectInputLocation = ({
     queryFn: selectInputLocation,
   });
   const hasError = errors[name];
-
+  console.log(defaultValue);
   return (
     <>
       <select
@@ -26,7 +26,7 @@ const SelectInputLocation = ({
           hasError ? "input__error" : ""
         }`}
         onInput={onChange}
-        defaultValue={defaultValue ? defaultValue.name : ""}
+        defaultValue={defaultValue ? defaultValue.id : ""}
       >
         {!defaultValue && (
           <option value="" disabled selected>
@@ -34,7 +34,6 @@ const SelectInputLocation = ({
           </option>
         )}
         {/* Render the default option outside of the map function */}
-       
 
         {/* Map over the LocationData array and render each location option */}
         {LocationData && (

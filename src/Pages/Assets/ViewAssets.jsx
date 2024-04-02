@@ -78,7 +78,6 @@ const ViewAssets = () => {
 
   // Define state to hold the category name
   const [categoryName, setCategoryName] = useState();
-  console.log(assetsData.image_name);
   return (
     <section className="assets__add">
       <div className="content-wrapper">

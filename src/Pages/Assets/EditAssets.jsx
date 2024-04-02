@@ -38,6 +38,7 @@ const EditAssets = () => {
   const location = useLocation();
   const receivedState = location.state;
   const assetsData = receivedState.tableData;
+  console.log(assetsData);
   const navigate = useNavigate();
   const EditAssets = useMutation({
     mutationFn: (assetsInfo) => {
@@ -70,9 +71,8 @@ const EditAssets = () => {
   const toggleSwitch = () => {
     setIsActive((prev) => !prev);
   };
-  const [categoryName, setCategoryName] = useState();
-  console.log("ddd");
-  console.log(assetsData);
+  const [categoryName, setCategoryName] = useState(assetsData.category.id);
+
   return (
     <section className="assets__add">
       <div className="">

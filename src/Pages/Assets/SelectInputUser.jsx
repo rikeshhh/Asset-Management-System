@@ -31,7 +31,7 @@ const SelectInputUser = ({
         className={`${isDisabled ? "select__disabled" : "select__enabled"} ${
           hasError ? "input__error" : ""
         }`}
-        defaultValue={defaultValue ? defaultValue.name : ""}
+        defaultValue={defaultValue ? defaultValue.id : ""}
       >
         {!defaultValue && (
           <option value="" disabled selected>
