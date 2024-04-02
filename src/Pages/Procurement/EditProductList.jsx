@@ -60,6 +60,7 @@ const EditProductList = ({
   };
 
   const handleProcurementTableEdit = (index) => {
+    setIsEditable(true);
     setSelectedIndex(index);
   };
 
@@ -98,7 +99,7 @@ const EditProductList = ({
           errors={errors}
           required={"Please select category"}
           setCategoryName={setCategoryName}
-          defaultValue={procurement.category}
+          defaultValue={procurement.category || categoryName}
           isEditable={selectedIndex === index}
           clearErrors={clearErrors}
           className={` ${

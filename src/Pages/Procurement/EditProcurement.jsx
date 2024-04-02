@@ -87,7 +87,10 @@ const EditProcurementData = () => {
       products: newProcurement,
       deletedId: joinedDeletedId,
     };
-
+    if (isEditable) {
+      notifyError("Save the product line before submitting the form");
+      return;
+    }
     EditProcurementData.mutate(editProcurementData);
   };
 
@@ -95,7 +98,6 @@ const EditProcurementData = () => {
 
   const handleDeleteProcurementLine = (index) => {
     setDeleteConfirationShow(true);
-
     setProductDeleteId(index);
   };
 
