@@ -212,7 +212,7 @@ const Model = {
       message: "Product name must be at least 2 characters long",
     },
     maxLength: {
-      value: 64,
+      value: 32,
       message: "Product name should be less than 64 characters",
     },
     pattern: {
@@ -269,14 +269,14 @@ const Model = {
   },
   brandCompanyName: {
     type: "string",
-    required: "Please enter a brand company name",
+    required: "Please enter a brand",
     minLength: {
-      value: 1,
-      message: "Brand company name should be more than 1 character",
+      value: 2,
+      message: "Brand should be more than 1 character",
     },
     maxLength: {
       value: 64,
-      message: "Brand company name should be less than 64 characters",
+      message: "Brand should be less than 64 characters",
     },
     pattern: {
       value: /^[a-zA-Z0-9\s]+$/,

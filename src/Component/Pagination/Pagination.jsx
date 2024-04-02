@@ -41,7 +41,7 @@ const Pagination = ({
           updatePageNumber(pageNumber > 1 ? pageNumber - 1 : 1)
         }
       />
-      {pageNumber > 4 && !showPages && (
+      {pageNumber > 2 && !showPages && (
         <>
           <Button
             key={1}
@@ -49,18 +49,17 @@ const Pagination = ({
             className={pageNumber === 1 ? "activePage" : "inactivePage"}
             handleClick={() => updatePageNumber(1)}
           />
-          <Button
-            text={"..."}
-            className="inactivePage"
-            handleClick={() => updatePageNumber(1)}
-          />
+          {pageNumber > 3 && !showPages && (
+            <Button
+              text={"..."}
+              className="inactivePage"
+              handleClick={() => updatePageNumber(1)}
+            />
+          )}
         </>
       )}
       {[...Array(roundUp)].map((_, index) => {
-        if (
-          (index === 0 || index === 1) &&
-          (pageNumber > 3 || showPages)
-        ) {
+        if ((index === 0 || index === 1) && (pageNumber > 3 || showPages)) {
           return null;
         }
         if (
@@ -69,11 +68,7 @@ const Pagination = ({
         ) {
           return null;
         }
-        if (
-          !showPages &&
-          index >= pageNumber - 2 &&
-          index <= pageNumber + 2
-        ) {
+        if (!showPages && index >= pageNumber - 2 && index <= pageNumber + 2) {
           return (
             <Button
               key={index}
@@ -131,5 +126,3 @@ const Pagination = ({
 };
 
 export default Pagination;
-
-

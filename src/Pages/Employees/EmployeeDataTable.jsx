@@ -66,7 +66,7 @@ const EmployeeDataTable = ({
                     selectedColumn === index ? "selected-tablehead" : ""
                   }
                 >
-                  {tableHead}
+                  {tableHead}{" "}
                   <span>
                     <LuArrowUpDown />
                   </span>

@@ -69,7 +69,3 @@ select:disabled {
   background: var(--disabled-input);
 }
 
-.selected-tablehead {
-  color: var(--blue) !important;
-  z-index: 1;
-}

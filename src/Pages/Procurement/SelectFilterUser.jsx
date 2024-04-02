@@ -16,8 +16,6 @@ const SelectFilterUser = ({ name, register, defaultValue, isDisabled }) => {
     queryKey: ["selectFilterUserData"],
     queryFn: selectUser,
   });
-  console.log('userData')
-  console.log(userData)
   return (
     <select {...register(name, { required: true })}>
       {defaultValue ? null : <option value="None">None</option>}

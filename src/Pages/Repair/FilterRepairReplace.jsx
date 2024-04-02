@@ -88,10 +88,7 @@ const FilterRepairReplace = ({
             </div>
 
             <div className="form__input--section ">
-              <div style={{ paddingBottom: "10px" }}>
-                <Label text={"Assigned Dates:"} />
-              </div>
-              <Label text={"From"} />
+              <Label text={"Assigned Date: From"} />
               <InputField
                 name="fromDate"
                 register={register}
@@ -101,7 +98,9 @@ const FilterRepairReplace = ({
                 type={Model.Date.type}
                 placeholder={Model.Date.placeholder}
               />
-              <Label text="To" />
+            </div>
+            <div className="form__input--section">
+              <Label text="Assigned Date: To" />
               <InputField
                 name="toDate"
                 register={register}

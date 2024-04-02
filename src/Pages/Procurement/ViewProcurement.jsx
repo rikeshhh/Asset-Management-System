@@ -29,8 +29,6 @@ const ViewProcurement = () => {
     queryFn: () => getProductList(procurementData.id),
   });
 
-  const selectOptions = ["urgent", "high", "medium", "low"];
-
   return (
     <section className="content-wrapper">
       <div className="content-radius procurement">
@@ -56,11 +54,11 @@ const ViewProcurement = () => {
             </div>
             <div className="user__auth--input procurement__form--input">
               <Label sup={"*"} text="Request Urgency" />
-              <SelectInput
+              <InputField
                 name={"request_urgency"}
                 register={register}
-                option={selectOptions}
-                defaultValue={ProductList && ProductList.urgency}
+                errors={errors}
+                defaultValue={ProductList?.urgency}
                 isDisabled={true}
               />
             </div>

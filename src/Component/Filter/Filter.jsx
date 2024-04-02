@@ -98,10 +98,7 @@ const Filter = ({
             </div>
 
             <div className="form__input--section ">
-              <div style={{ paddingBottom: "10px" }}>
-                <Label text={"Assigned Dates:"} />
-              </div>
-              <Label text={"From"} />
+              <Label text={"Assigned Date: From"} />
               <InputField
                 name="fromDate"
                 register={register}
@@ -111,7 +108,9 @@ const Filter = ({
                 type={Model.Date.type}
                 placeholder={Model.Date.placeholder}
               />
-              <Label text="To" />
+            </div>
+            <div className="form__input--section">
+              <Label text="Assigned Date: To" />
               <InputField
                 name="toDate"
                 register={register}
@@ -120,16 +119,6 @@ const Filter = ({
                 errors={errors}
                 type={Model.Date.type}
               />
-              {/* <input
-                type="date"
-                {...register("startDate")}
-                pattern="\d{4}-\d{2}-\d{2}"
-              />
-              <input
-                type="date"
-                {...register("endDate")}
-                pattern="\d{4}-\d{2}-\d{2}"
-              /> */}
             </div>
           </div>
           <div className="filter__button">

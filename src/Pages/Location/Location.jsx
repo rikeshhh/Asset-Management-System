@@ -128,6 +128,7 @@ const Location = () => {
               disableButtons={disableButtons}
               setLocationTableDataOrder={setLocationTableDataOrder}
               locationTableDataOrder={locationTableDataOrder}
+              locationTableData={locationTableData}
               setLocationTableData={setLocationTableData}
             />
             {/* Add location form */}

@@ -21,7 +21,6 @@ const ProcurementForm = () => {
     register,
     formState: { errors },
     handleSubmit,
-    reset,
   } = useForm();
   const navigate = useNavigate();
   const selectOptions = ["urgent", "high", "medium", "low"];
@@ -94,6 +93,7 @@ const ProcurementForm = () => {
                 name="requested_by"
                 register={register}
                 errors={errors}
+                required={"Please select an employee"}
               />
             </div>
             <div className="user__auth--input procurement__form--input">

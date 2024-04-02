@@ -181,7 +181,7 @@ const CategoryDataTable = ({
   };
 
   const handleSubCategoryCancel = () => {
-    setOnShowSub('');
+    setOnShowSub("");
 
     setDisableButtons(false);
     setShowSubCategoryEdit(false);
@@ -224,8 +224,18 @@ const CategoryDataTable = ({
           ) : (
             <tr>
               <th>S.N.</th>
-              <th>
-                Category <LuArrowDownUp onClick={handleCategorySort} />
+              <th
+                className={
+                  categoryDataSort === "category_name"
+                    ? "selected-tablehead"
+                    : ""
+                }
+              >
+                Category{" "}
+                <LuArrowDownUp
+                  className="sort__icon"
+                  onClick={handleCategorySort}
+                />
               </th>
               <th>Action</th>
             </tr>
@@ -244,13 +254,13 @@ const CategoryDataTable = ({
               <>
                 <tr
                   key={index}
-                  className={
-                  `${  onShowSub === options.id
-                    ? "tableNoBorder"
-                    : "tableBottomBorder"}
-                   
-                    `
+                  className={`${
+                    onShowSub === options.id
+                      ? "tableNoBorder"
+                      : "tableBottomBorder"
                   }
+                   
+                    `}
                 >
                   <td>{index + 1}</td>
                   {options.id === previousCategoryId && show ? (
