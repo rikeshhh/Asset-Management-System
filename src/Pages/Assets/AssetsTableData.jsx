@@ -86,7 +86,7 @@ const AssetsTableData = ({ isPending, tableData, assets_type }) => {
                         tableHead.value === tableHeadColor ? "boldy" : ""
                       }`}
                     >
-                      {tableHead.label} <LuArrowUpDown />
+                      {tableHead.label} <LuArrowUpDown className="sort__icon" />
                     </span>
                   </th>
                 ))}

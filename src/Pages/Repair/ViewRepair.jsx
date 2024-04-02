@@ -27,71 +27,16 @@ const ViewRepair = () => {
   const {
     register,
     formState: { errors },
-    setValue,
-    handleSubmit,
   } = useForm();
   const [imageFlag, setImageFlag] = useState(false);
-
   const receivedState = true;
-
-  const navigate = useNavigate();
   const { state: tableData } = useLocation();
-  /**
-   * Handles the update of the profile picture.
-   * @param {Object} e - The event object.
-   */
 
-  /**
-   * Deletes the current profile picture.
-   */
-  // const deleteProfile = () => {
-  //   setProfileImage(profileCover);
-  // };
-
-  /**
-   * Handles the click event of the upload button.
-   */
-
-  // const handleButtonClick = () => {
-  //   fileInputRef.current.click();
-  // };
-
-  const AddRepairReplace = useMutation({
-    mutationFn: (repairReplaceData) => {
-      return repairReplaceAdd(
-        repairReplaceData.data,
-        repairReplaceData.selectedType
-      );
-    },
-    onSuccess: () => {
-      notifySuccess("Repair/Replace has been added");
-      setTimeout(() => {
-        navigate("/repair");
-        queryClient.invalidateQueries("RepairTableData", "ReplaceTableData");
-      }, 1000);
-    },
-    onError: (error) => {
-      notifyError(error.response.data.message.message.repairreplace);
-    },
-  });
-
-  const handleRadioChange = (e) => {
-    setSelectedType(tableData.Type);
-  };
   /**
    * Handles the submission of the repair and replace form.
    * @param {Object} data - Form data submitted.
    */
-
-  const onRepairAddSubmit = (deviceData) => {
-    const repairData = {
-      selectedType: selectedType,
-      data: deviceData,
-    };
-    AddRepairReplace.mutate(repairData);
-  };
   const [selectedType, setSelectedType] = useState(tableData.Type);
-  console.log(tableData.product_image);
   return (
     <section className="content-wrapper">
       <div className="user__profile content-radius">
@@ -102,37 +47,20 @@ const ViewRepair = () => {
         <div className="user__profile--body">
           <div className="user__repair--left ">
             <Label text="View current asset image" />
-            <ImagePath 
-            file={tableData.product_image}
-            setImageFlag={setImageFlag}
+            <ImagePath
+              file={tableData.product_image}
+              setImageFlag={setImageFlag}
             />
-            {/* <DropzoneArea
-              name="product_image"
-              defaultValue={tableData.product_image}
-              setValue={setValue}
-              isDisabled={true}
-            /> */}
           </div>
 
-          <form
-            onSubmit={handleSubmit(onRepairAddSubmit)}
-            className="group__form profile__form"
-          >
+          <form className="group__form profile__form">
             <div className="form__input--section">
               <Label sup={"*"} text="Device Owner" />
               <InputField
                 name="Assigned_to"
                 register={register}
-                value={Model.Name.pattern.value}
-                message={Model.Name.pattern.message}
-                required={Model.Name.required}
                 errors={errors}
-                type={Model.Name.type}
                 placeholder="Enter your name"
-                minLength={Model.Name.minLength.value}
-                minMessage={Model.Name.minLength.message}
-                maxLength={Model.Name.maxLength.value}
-                maxMessage={Model.Name.maxLength.message}
                 isDisabled={receivedState}
                 defaultValue={tableData.Assigned_to.name}
               />
@@ -143,16 +71,7 @@ const ViewRepair = () => {
               <InputField
                 name="Product_Code"
                 register={register}
-                // value={Model.ProductCode.pattern.value}
-                // message={Model.ProductCode.pattern.message}
-                required={Model.ProductCode.required}
                 errors={errors}
-                type={Model.ProductCode.type}
-                placeholder={Model.ProductCode.placeholder}
-                // minLength={Model.ProductCode.minLength.value}
-                // minMessage={Model.ProductCode.minLength.message}
-                // maxLength={Model.ProductCode.maxLength.value}
-                // maxMessage={Model.ProductCode.maxLength.message}
                 defaultValue={tableData.Product_Code.id}
                 isDisabled={receivedState}
               />
@@ -163,14 +82,7 @@ const ViewRepair = () => {
               <InputField
                 name="Product_Name"
                 register={register}
-                value={Model.ProductName.pattern.value}
-                message={Model.ProductName.pattern.message}
-                required={Model.ProductName.required}
                 errors={errors}
-                type={Model.ProductName.type}
-                placeholder={Model.ProductName.placeholder}
-                maxLength={Model.ProductName.maxLength.value}
-                maxMessage={Model.ProductName.maxLength.message}
                 isDisabled={receivedState}
                 defaultValue={tableData.Product_Code.name}
               />
@@ -221,23 +133,14 @@ const ViewRepair = () => {
               <InputField
                 name="reason"
                 register={register}
-                value={Model.location.pattern.value}
-                message={Model.location.pattern.message}
-                required={"Reason for Repair/Replace is required"}
                 errors={errors}
-                type={Model.location.type}
                 placeholder={"Enter what happened to this device"}
-                maxLength={Model.location.maxLength.value}
-                maxMessage={Model.location.maxLength.message}
                 defaultValue={tableData.reason}
                 isDisabled={receivedState}
               />
             </div>
 
             <div className={"user__profile--btn-right user__profile--btn"}>
-              {/* <button disabled className="button__style button_grey">
-                Send for repair
-              </button> */}
               <Link to="/repair" className="link">
                 <Button className={"button__red"} text="Close" />
               </Link>

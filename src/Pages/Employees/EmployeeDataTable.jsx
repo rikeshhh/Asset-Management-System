@@ -67,7 +67,7 @@ const EmployeeDataTable = ({
                   }
                 >
                   {tableHead}{" "}
-                  <span>
+                  <span className="sort__icon">
                     <LuArrowUpDown />
                   </span>
                 </th>
