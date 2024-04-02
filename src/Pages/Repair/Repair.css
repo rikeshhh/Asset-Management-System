@@ -11,7 +11,13 @@
 .repair__content {
   padding: 0 1.38rem 1.25rem;
 }
-
+.user__repair--left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
+  padding: 2.59rem 1.5rem 0;
+}
 .repair__navigation {
   display: flex;
   justify-content: start;

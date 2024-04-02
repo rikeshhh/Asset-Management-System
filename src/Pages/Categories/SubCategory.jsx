@@ -6,9 +6,15 @@ import { DeleteConfirmation } from "../../Component/DeleteConfirmation/DeleteCon
  * @param {Array} props.SubCategoryData - Array of subcategory data.
  * @returns {JSX.Element} JSX element representing the SubCategory component.
  */
-const SubCategory = ({ SubCategoryData }) => {
+const SubCategory = ({ SubCategoryData,defaultValue }) => {
   return (
     <>
+    {defaultValue && (
+        <option value="" disabled selected>
+          {defaultValue.name}
+        </option>
+      
+    )}
       {SubCategoryData.map((subcategory, index) => (
         <td>{subcategory.category_name}</td>
       ))}

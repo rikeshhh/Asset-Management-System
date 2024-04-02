@@ -21,6 +21,7 @@ import CustomToastContainer from "../../Component/Toast/ToastContainer";
 import { SelectAssetType } from "./SelectAssetType";
 import ImagePath from "../../Component/Images/ImagePath";
 import SelectAssetCategory from "./SelectAssetCategory";
+import ViewSelect from "./ViewSelect";
 /**
  * View component for displaying asset details.
  * @returns {JSX.Element} ViewAssets component.
@@ -75,7 +76,7 @@ const ViewAssets = () => {
     // Trigger the mutation with the edited data
     EditAssets.mutate(data);
   };
-
+  console.log(assetsData);
   // Define state to hold the category name
   const [categoryName, setCategoryName] = useState();
   return (
@@ -159,13 +160,17 @@ const ViewAssets = () => {
               </div>
               <div className="assets__form--input">
                 <Label text="Sub-Category" />
-                <SelectSubCat
+                <ViewSelect
+                  isDisabled={true}
+                  defaultValue={assetsData.subcategory.name}
+                />
+                {/* <SelectSubCat
                   categoryName={categoryName}
-                  defaultValue={assetsData.subcategory}
+                  defaultValue={assetsData.subcategory.name}
                   name="sub_category"
                   register={register}
-                  isDisabled={true}
-                />{" "}
+                  isDisabled={!categoryName || categoryName.trim() === ""}
+                />{" "} */}
               </div>
             </div>
             <div className="form--content__left">
