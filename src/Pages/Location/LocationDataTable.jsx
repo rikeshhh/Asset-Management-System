@@ -103,7 +103,7 @@ const LocationDataTable = ({
   };
 
   return (
-    <section className="cateogries table__container">
+    <section className="cateogries location table__container">
       <table>
         <thead>
           {isPending ? (

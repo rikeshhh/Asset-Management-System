@@ -13,8 +13,12 @@ th {
   background-color: var(--secondary-color);
   padding: 1.09rem 0rem;
 }
-
-
+.location  tr {
+  border-bottom: 1px solid var(--primary-grey);
+}
+.department tr {
+  border-bottom: 1px solid var(--primary-grey);
+}
 .cateogries thead tr {
   border-bottom: none;
 }

@@ -135,7 +135,7 @@ const DepartmentDataTable = ({
   const departmentDataToRender = departmentTableData || DepartmentData;
   return (
     <>
-      <section className="cateogries table__container">
+      <section className="cateogries department table__container">
         <table>
           <thead>
             {isPending ? (
