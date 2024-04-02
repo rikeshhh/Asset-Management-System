@@ -60,6 +60,7 @@ const EditProductList = ({
   };
 
   const handleProcurementTableEdit = (index) => {
+    setIsEditable(true);
     setSelectedIndex(index);
   };
 
