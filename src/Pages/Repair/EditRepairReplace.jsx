@@ -97,7 +97,8 @@ const EditRepairReplace = () => {
           <span>Fill this form for repair or replace of your device</span>
         </div>
         <div className="user__profile--body">
-          <div className="user__profile--left">
+          <div className="user__profile--left user__profile--with-gaps">
+            <Label text={"Edit current asset image"} />
             <DropzoneArea
               name="product_image"
               setValue={setValue}
@@ -126,16 +127,16 @@ const EditRepairReplace = () => {
               <InputField
                 name="Product_Code"
                 register={register}
-                // value={Model.ProductCode.pattern.value}
-                // message={Model.ProductCode.pattern.message}
+                value={Model.ProductCode.pattern.value}
+                message={Model.ProductCode.pattern.message}
                 required={Model.ProductCode.required}
                 errors={errors}
                 type={Model.ProductCode.type}
                 placeholder={Model.ProductCode.placeholder}
-                // minLength={Model.ProductCode.minLength.value}
-                // minMessage={Model.ProductCode.minLength.message}
-                // maxLength={Model.ProductCode.maxLength.value}
-                // maxMessage={Model.ProductCode.maxLength.message}
+                minLength={Model.ProductCode.minLength.value}
+                minMessage={Model.ProductCode.minLength.message}
+                maxLength={Model.ProductCode.maxLength.value}
+                maxMessage={Model.ProductCode.maxLength.message}
                 isDisabled={receivedState}
                 defaultValue={`${tableData?.Product_Code.id}`}
               />
@@ -181,7 +182,12 @@ const EditRepairReplace = () => {
                       checked={selectedType === "Repair"}
                     />
                   </div>
-                  <Label text="Repair" />
+                  <Label
+                    text="Repair"
+                    className={
+                      selectedType === "Repair" ? "radio__label--checked" : ""
+                    }
+                  />
                 </div>
                 <div className="radio__label">
                   <div className="checkbox__input--label">
@@ -191,10 +197,14 @@ const EditRepairReplace = () => {
                       value="Replace"
                       onChange={handleRadioChange}
                       checked={selectedType === "Replace"}
-
                     />
                   </div>
-                  <Label text="Replace" />
+                  <Label
+                    text="Replace"
+                    className={
+                      selectedType === "Replace" ? "radio__label--checked" : ""
+                    }
+                  />
                 </div>
               </div>
             </div>
