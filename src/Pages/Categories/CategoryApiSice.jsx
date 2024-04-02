@@ -57,6 +57,7 @@ export const selectSubCategoryData = async (categoryName) => {
  *  * @param {string} category_name - The name of the new parent category.
  */
 export const parentCategoryAdd = async (category) => {
+  
   const categoryDataAdd = await instance.post(
     "/category",
     {

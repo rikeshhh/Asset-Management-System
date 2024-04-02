@@ -88,7 +88,7 @@ const Categories = () => {
     },
     onError: (error) => {
       // notifyError(error.response.data.message.message.category_name[0]);
-      notifyError(error.response.data.message);
+      notifyError(error.response.data.message.message.category);
       setHasErrors(true);
     },
   });
@@ -99,6 +99,7 @@ const Categories = () => {
    */
 
   const onCategorySubmit = (data) => {
+    console.log(data.category_name.trim(), "data");
     if (data.select_category === "None") {
       addParentCategory.mutate(data);
     } else {
@@ -188,7 +189,9 @@ const Categories = () => {
                     register={register}
                     required={Model.Category.required}
                     errors={errors}
+                    message={Model.Category.pattern.message}
                     type={Model.Category.type}
+                    value={Model.Category.pattern.value}
                     placeholder={Model.Category.placeholder}
                     minLength={Model.Category.minLength}
                     maxLength={Model.Category.maxLength}

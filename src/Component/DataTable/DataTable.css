@@ -11,10 +11,8 @@ th {
 
 .cateogries tr {
   background-color: var(--secondary-color);
-  border-bottom: 1px solid var(--primary-grey);
   padding: 1.09rem 0rem;
 }
-
 
 
 .cateogries thead tr {

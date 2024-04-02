@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { selectInputCategory } from "../Categories/CategoryApiSice";
 import "./Assets.css";
+import { queryClient } from "../../Component/Query/Query";
 const SelectAssetCategory = ({
   name,
   register,
@@ -11,6 +12,8 @@ const SelectAssetCategory = ({
   isDisabled,
   isEditable = true,
 }) => {
+  console.log("jo");
+  console.log(defaultValue);
   const { data: CategoryData } = useQuery({
     queryKey: ["selectInputCategory"],
     queryFn: selectInputCategory,
@@ -33,7 +36,7 @@ const SelectAssetCategory = ({
         className={`${isDisabled ? "select__disabled" : "select__enabled"} ${
           hasError ? "input__error" : ""
         }`}
-        defaultValue={defaultValue ? defaultValue.parent : ""}
+        defaultValue={(defaultValue && defaultValue.id) || defaultValue}
       >
         {!defaultValue && (
           <option

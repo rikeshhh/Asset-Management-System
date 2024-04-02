@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "../../Component/Button/Button";
-
 import ProductListTableItem from "./ProductList";
 import { IoMdAdd } from "react-icons/io";
 import { EmptyData } from "../../Component/EmptyData/EmptyData";
@@ -24,7 +23,7 @@ const AddProcurementTable = ({
       ...newProcurement,
       {
         product_name: "",
-        category_id: "None",
+        category_id: "",
         brand: "",
         estimated_price: "",
         link: "",

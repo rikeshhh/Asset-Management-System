@@ -95,3 +95,7 @@ select {
 .input__editable {
   padding: 8px;
 }
+
+.proc__error {
+  height: 35px;
+}
