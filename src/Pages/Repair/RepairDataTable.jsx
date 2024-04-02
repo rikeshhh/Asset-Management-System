@@ -31,7 +31,7 @@ const RepairDataTable = ({
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const [repairId, setRepairId] = useState();
   const [sortOrder, setSortOrder] = useState("DESC");
-
+  const [sortedTableHead, setSortedTableHead] = useState("");
   const searchRepair = params.get("Search") || "";
   const newOrder = params.get("sortOrder") || "DESC";
   const sortData = params.get("sortBy") || "Assigned_Date";
@@ -110,7 +110,8 @@ const RepairDataTable = ({
     setDeleteConfirationShow(false);
   };
 
-  const handleStatusClick = (tableHead) => {
+  const handleStatusClick = (tableHead, index) => {
+    setSortedTableHead(index);
     let newOrder = sortOrder === "ASC" ? "DESC" : "ASC";
     let sortBy = "Assigned_date";
     if (tableHead === "Assigned date") {
@@ -164,11 +165,16 @@ const RepairDataTable = ({
             ) : (
               <tr>
                 {tableHeads.map((tableHead, index) => (
-                  <th key={index}>
-                    {tableHead}
+                  <th
+                    key={index}
+                    className={
+                      sortedTableHead === index ? "selected-tablehead" : ""
+                    }
+                  >
+                    {tableHead}{" "}
                     <LuArrowUpDown
                       className="sort__icon"
-                      onClick={() => handleStatusClick(tableHead)}
+                      onClick={() => handleStatusClick(tableHead, index)}
                     />
                   </th>
                 ))}

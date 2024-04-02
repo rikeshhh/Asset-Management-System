@@ -29,7 +29,7 @@ const ProcurementDataTable = ({
   const [sortOrder, setSortOrder] = useState("desc");
   const [procurementId, setProcurementId] = useState();
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
-
+  const [sortedTableHead, setSortedTableHead] = useState("");
   const searchProcurement = params.get("Search") || "";
   const sortData = params.get("sortBy") || "approved_date";
   const newSortOrder = params.get("sortOrder") || "desc";
@@ -84,7 +84,7 @@ const ProcurementDataTable = ({
       }
     },
     onError: (error) => {
-      console.log(error);
+      console.log("Error deleting procurement data");
     },
   });
 
@@ -96,7 +96,8 @@ const ProcurementDataTable = ({
     "Verified Date",
   ];
 
-  const handleStatusClick = (tableHead) => {
+  const handleStatusClick = (tableHead, index) => {
+    setSortedTableHead(index);
     let newOrder = sortOrder === "asc" ? "desc" : "asc";
     let sortBy = "approved_date";
     if (tableHead === "No. of Items") {
@@ -151,11 +152,16 @@ const ProcurementDataTable = ({
             ) : (
               <tr>
                 {tableHeadOptions.map((tableHead, index) => (
-                  <th>
+                  <th
+                    key={tableHead}
+                    className={
+                      sortedTableHead === index ? "selected-tablehead" : ""
+                    }
+                  >
                     {tableHead}{" "}
                     <LuArrowUpDown
                       className="sort__icon"
-                      onClick={() => handleStatusClick(tableHead)}
+                      onClick={() => handleStatusClick(tableHead, index)}
                     />
                   </th>
                 ))}

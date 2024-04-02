@@ -28,7 +28,7 @@ const ReplaceDataTable = ({
 }) => {
   const [deleteConfirationShow, setDeleteConfirationShow] = useState(false);
   const [replaceId, setReplaceId] = useState();
-
+  const [sortedTableHead, setSortedTableHead] = useState("");
   const [sortOrder, setSortOrder] = useState("DESC");
 
   const tableHeads = [
@@ -74,7 +74,8 @@ const ReplaceDataTable = ({
       ),
   });
 
-  const handleStatusClick = (tableHead) => {
+  const handleStatusClick = (tableHead, index) => {
+    setSortedTableHead(index);
     let newOrder = sortOrder === "ASC" ? "DESC" : "ASC";
     let sortBy = "Assigned_date";
     if (tableHead === "Assigned date") {
@@ -164,11 +165,16 @@ const ReplaceDataTable = ({
             ) : (
               <tr>
                 {tableHeads.map((tableHead, index) => (
-                  <th key={index}>
-                    {tableHead}
+                  <th
+                    key={index}
+                    className={
+                      sortedTableHead === index ? "selected-tablehead" : ""
+                    }
+                  >
+                    {tableHead}{" "}
                     <span className="sort__icon">
                       <LuArrowUpDown
-                        onClick={() => handleStatusClick(tableHead)}
+                        onClick={() => handleStatusClick(tableHead, index)}
                       />
                     </span>
                   </th>
