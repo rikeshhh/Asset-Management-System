@@ -189,7 +189,9 @@ const Categories = () => {
                     register={register}
                     required={Model.Category.required}
                     errors={errors}
+                    message={Model.Category.pattern.message}
                     type={Model.Category.type}
+                    value={Model.Category.pattern.value}
                     placeholder={Model.Category.placeholder}
                     minLength={Model.Category.minLength}
                     maxLength={Model.Category.maxLength}

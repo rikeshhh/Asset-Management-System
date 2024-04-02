@@ -313,7 +313,7 @@ const Model = {
       message: "Category name should be less than 64 characters",
     },
     pattern: {
-      value: /^[a-zA-Z0-9\s]+$/,
+      value: /^(?=.*[a-zA-Z])[a-zA-Z0-9\s]+$/,
       message: "Please enter valid alphanumeric string.",
     },
   },
