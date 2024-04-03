@@ -110,7 +110,7 @@ const ProcurementDataTable = ({
       sortBy = "approved_by_id";
     } else {
       sortBy = "status";
-    } 
+    }
     setSearchParams({
       ...params,
       sortOrder: newOrder,
@@ -178,7 +178,9 @@ const ProcurementDataTable = ({
               procurementTableData?.data.map((tableItem, index) => (
                 <tr key={index}>
                   <td data-cell="Requested By">
-                    {tableItem.user.requested_by}
+                    {tableItem.user.requested_by
+                      ? tableItem.user.requested_by
+                      : "N/A"}
                   </td>
                   <td data-cell="No. of Items">{tableItem.number_of_items}</td>
                   <td data-cell="Status">{tableItem.status}</td>
