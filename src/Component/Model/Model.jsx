@@ -189,18 +189,17 @@ const Model = {
     required: "Please enter a product code",
     placeholder: "Enter the product code of the assets",
     minLength: {
-      value: 8,
-      message:
-        "Product key must be start with 'ITJ' followed by dash,capital letter 'DA' dash and numbers",
+      value: 1,
+      message: "Product key should contain at least one number",
     },
     maxLength: {
       value: 20,
       message: "Product key should be less than 20 characters",
     },
     pattern: {
-      // value: /^ITJ-DA-[0-9]+$/,
+      value: /^[0-9]+$/,
       message:
-        "Please enter a valid Product Code. It should start with 'ITJ' followed by dash,capital letter 'DA' dash and numbers",
+        "Please enter a valid Product Code. It should only contain numbers",
     },
   },
   ProductName: {
