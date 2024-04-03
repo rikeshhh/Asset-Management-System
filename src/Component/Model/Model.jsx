@@ -213,7 +213,7 @@ const Model = {
     },
     maxLength: {
       value: 32,
-      message: "Product name should be less than 64 characters",
+      message: "Product name should be less than 32 characters",
     },
     pattern: {
       value: /^[a-zA-Z0-9 -]+$/,
