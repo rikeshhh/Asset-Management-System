@@ -191,7 +191,6 @@ const AddRepair = () => {
               <InputField
                 name="reason"
                 register={register}
-                message={Model.reason.pattern.message}
                 required={"Reason for Repair/Replace is required"}
                 errors={errors}
                 type={Model.reason.type}

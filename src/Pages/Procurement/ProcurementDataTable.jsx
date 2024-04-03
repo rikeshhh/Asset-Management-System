@@ -110,7 +110,7 @@ const ProcurementDataTable = ({
       sortBy = "approved_by_id";
     } else {
       sortBy = "status";
-    }
+    } 
     setSearchParams({
       ...params,
       sortOrder: newOrder,
