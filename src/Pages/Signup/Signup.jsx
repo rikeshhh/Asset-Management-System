@@ -27,7 +27,7 @@ export const Signup = () => {
         data.username,
         data.email,
         data.password,
-        data.RetypePassword
+        data.retype_password
       );
     },
     // On successful login
@@ -65,6 +65,7 @@ export const Signup = () => {
     reset,
   } = formMethod;
   const submitData = (data) => {
+    console.log(data);
     userRegisterMutation.mutate(data);
   };
   // password showing features
