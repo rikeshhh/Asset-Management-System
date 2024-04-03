@@ -45,7 +45,7 @@ const ViewRepair = () => {
           <span>Fill this form for repair or replace of your device</span>
         </div>
         <div className="user__profile--body">
-          <div className="user__repair--left ">
+          <div className="user__profile--image repair__view--image ">
             <Label text="View current asset image" />
             <ImagePath
               file={tableData.product_image}

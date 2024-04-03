@@ -11,6 +11,12 @@
 .repair__content {
   padding: 0 1.38rem 1.25rem;
 }
+
+.repair__view--image {
+  margin-top: 10px;
+  border: none !important;
+  justify-content: start !important;
+}
 .user__repair--left {
   display: flex;
   flex-direction: column;
