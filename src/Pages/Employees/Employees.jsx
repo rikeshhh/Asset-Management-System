@@ -29,6 +29,7 @@ import FilterEmployee from "./FilterEmployee";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import PendingPagination from "../../Component/Pagination/PendingPagination";
 import Pagination from "../../Component/Pagination/Pagination";
+import { getUserIdFromLocalStorage } from "../../utils/StorageUtils";
 /**
  * Functional component representing the Employees page.
  */
@@ -134,8 +135,8 @@ const Employees = () => {
    * Handles the click event for deleting an employee.
    * @param {Object} employee - The employee object to be deleted.
    */
+
   const handleDeleteClick = (employee) => {
-    console.log(employee);
     setDeleteConfirationShow(true);
     setEmployeeId(employee);
   };
@@ -150,7 +151,12 @@ const Employees = () => {
   /**
    * Handles the click event for proceeding with the employee deletion.
    */
+  const userId = getUserIdFromLocalStorage();
   const handleProceedClick = () => {
+    if (userId === employeeId) {
+      notifyError("You cannot delete yourself");
+      return;
+    }
     DeleteEmployee.mutate(employeeId);
     setDeleteConfirationShow(false);
   };
