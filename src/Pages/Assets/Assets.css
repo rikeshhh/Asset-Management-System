@@ -201,7 +201,15 @@ input:checked + .slider:before {
   color: white;
   padding: 0 8px;
 }
+.moveLeft {
+  left: 0;
+  transition: 0.4s;
+}
 
+.moveRight {
+  right: 0;
+  transition: 0.4s;
+}
 /* Text color adjustments for active and inactive states */
 .switch.active .status {
   color: #fff; /* Text color when active */

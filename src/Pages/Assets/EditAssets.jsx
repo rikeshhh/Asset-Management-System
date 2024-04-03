@@ -38,7 +38,7 @@ const EditAssets = () => {
   const location = useLocation();
   const receivedState = location.state;
   const assetsData = receivedState.tableData;
-  console.log(assetsData);
+
   const navigate = useNavigate();
   const EditAssets = useMutation({
     mutationFn: (assetsInfo) => {
@@ -66,7 +66,9 @@ const EditAssets = () => {
 
     EditAssets.mutate(editAssetsData);
   };
-  const [isActive, setIsActive] = useState(assetsData.status === "active");
+  const [isActive, setIsActive] = useState(
+    assetsData.status === "Active" || assetsData.status === "active"
+  );
 
   const toggleSwitch = () => {
     setIsActive((prev) => !prev);
@@ -177,7 +179,13 @@ const EditAssets = () => {
               </div>
               <div className="assets__form--input">
                 <Label text="Status" />
-                <label className={`switch ${isActive ? "active" : "inactive"}`}>
+                <label
+                  className={`switch ${
+                    assetsData.status === "Active"
+                      ? "active moveLeft"
+                      : "inactive"
+                  }`}
+                >
                   <input
                     {...register("status")}
                     type="checkbox"
@@ -185,7 +193,9 @@ const EditAssets = () => {
                     onChange={toggleSwitch}
                   />
                   <span className="slider"></span>
-                  <span className="status">
+                  <span
+                    className={`status ${isActive ? "moveLeft" : "moveRight"}`}
+                  >
                     {isActive ? "Active" : "Inactive"}
                   </span>
                 </label>
